@@ -23,6 +23,7 @@ public class Reminders.ListView : Gtk.Grid {
 
     construct {
         var label = new Gtk.Label ("");
+        label.get_style_context ().add_class (Granite.STYLE_CLASS_H1_LABEL);
 
         add (label);
 

@@ -31,6 +31,8 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
 
     construct {
         listbox = new Gtk.ListBox ();
+        listbox.set_header_func (header_update_func);
+        listbox.set_sort_func (sort_function);
 
         var scrolledwindow = new Gtk.ScrolledWindow (null, null);
         scrolledwindow.add (listbox);
@@ -50,13 +52,37 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
         });
     }
 
+    private void header_update_func (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
+        var row = (Reminders.ListRow) lbrow;
+        if (lbbefore != null) {
+            var before = (Reminders.ListRow) lbbefore;
+            if (row.source.parent == before.source.parent) {
+                return;
+            }
+        }
+
+        var header_label = new Granite.HeaderLabel (row.source.parent);
+
+        row.set_header (header_label);
+    }
+
+    [CCode (instance_pos = -1)]
+    private int sort_function (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow lbbefore) {
+        var row = (Reminders.ListRow) lbrow;
+        var before = (Reminders.ListRow) lbbefore;
+        if (row.source.parent == before.source.parent) {
+            return row.source.display_name.collate (before.source.display_name);
+        } else {
+            return row.source.parent.collate (before.source.parent);
+        }
+    }
+
     private async void load_sources () {
         try {
             var registry = yield new E.SourceRegistry (null);
 
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
                 var list_row = new Reminders.ListRow (source);
-
                 listbox.add (list_row);
             });
 
