@@ -35,6 +35,7 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
         listbox.set_sort_func (sort_function);
 
         var scrolledwindow = new Gtk.ScrolledWindow (null, null);
+        scrolledwindow.hscrollbar_policy = Gtk.PolicyType.NEVER;
         scrolledwindow.add (listbox);
 
         var listview = new Reminders.ListView ();
@@ -62,6 +63,7 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
         }
 
         var header_label = new Granite.HeaderLabel (row.source.parent);
+        header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
 
         row.set_header (header_label);
     }
