@@ -19,11 +19,17 @@
 */
 
 public class Reminders.Application : Gtk.Application {
+    public static GLib.Settings settings;
+
     public Application () {
         Object (
             application_id: "io.elementary.reminders",
             flags: ApplicationFlags.FLAGS_NONE
         );
+    }
+
+    static construct {
+        settings = new Settings ("io.elementary.reminders");
     }
 
     protected override void activate () {
@@ -33,6 +39,23 @@ public class Reminders.Application : Gtk.Application {
         }
 
         var main_window = new MainWindow (this);
+
+        int window_x, window_y;
+        var rect = Gtk.Allocation ();
+
+        settings.get ("window-position", "(ii)", out window_x, out window_y);
+        settings.get ("window-size", "(ii)", out rect.width, out rect.height);
+
+        if (window_x != -1 ||  window_y != -1) {
+            main_window.move (window_x, window_y);
+        }
+
+        main_window.set_allocation (rect);
+
+        if (settings.get_boolean ("window-maximized")) {
+            main_window.maximize ();
+        }
+
         main_window.show_all ();
 
         var quit_action = new SimpleAction ("quit", null);
