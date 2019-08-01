@@ -29,8 +29,38 @@ public class Reminders.ListView : Gtk.Grid {
 
         notify["source"].connect (() => {
             label.label = source.display_name;
+            load_source (source);
 
             show_all ();
         });
+    }
+
+    private void load_source (E.Source source) {
+        var iso_last = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().to_unix ());
+        var iso_first = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().add_years (-1).to_unix ());
+        var query = @"(occur-in-time-range? (make-time \"$iso_first\") (make-time \"$iso_last\"))";
+
+        try {
+            var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
+
+            client.get_view.begin (query, null, (obj, results) => {
+                try {
+                    ECal.ClientView view;
+                    client.get_view.end (results, out view);
+
+                    view.objects_added.connect ((objects) => on_objects_added (source, client, objects));
+
+                    view.start ();
+                } catch (Error e) {
+                    critical ("Error loading client-view from source '%s': %s", source.dup_display_name (), e.message);
+                }
+            });
+        } catch (Error e) {
+            critical (e.message);
+        }
+    }
+
+    private void on_objects_added (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
+        critical ("Object added!");
     }
 }
