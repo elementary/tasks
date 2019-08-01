@@ -21,5 +21,10 @@
       <summary>Most recent pane position</summary>
       <description>Most recent pane position</description>
     </key>
+    <key name="selected-list" type="s">
+      <default>""</default>
+      <summary>The UID of the last selected list</summary>
+      <description>The UID of the last selected list</description>
+    </key>
   </schema>
 </schemalist>

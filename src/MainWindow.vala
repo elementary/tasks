@@ -52,7 +52,9 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
         Reminders.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
 
         listbox.row_selected.connect (() => {
-            listview.source = ((Reminders.ListRow) listbox.get_selected_row ()).source;
+            var source = ((Reminders.ListRow) listbox.get_selected_row ()).source;
+            listview.source = source;
+            Reminders.Application.settings.set_string ("selected-list", source.uid);
         });
     }
 
@@ -84,11 +86,16 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
 
     private async void load_sources () {
         try {
-            var registry = yield new E.SourceRegistry (null);
+            var last_selected_list = Reminders.Application.settings.get_string ("selected-list");
 
+            var registry = yield new E.SourceRegistry (null);
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
                 var list_row = new Reminders.ListRow (source);
                 listbox.add (list_row);
+
+                if (last_selected_list == source.uid) {
+                    listbox.select_row (list_row);
+                }
             });
 
             listbox.show_all ();
