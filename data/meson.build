@@ -29,7 +29,7 @@ i18n.merge_file(
 )
 
 i18n.merge_file(
-    input: 'appdata.xml.in',
+    input: 'reminders.appdata.xml.in',
     output: meson.project_name() + '.appdata.xml',
     po_dir: join_paths(meson.source_root(), 'po', 'extra'),
     type: 'xml',

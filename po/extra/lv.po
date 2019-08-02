@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-02 13:43-0700\n"
+"POT-Creation-Date: 2019-08-02 13:47-0700\n"
 "PO-Revision-Date: 2019-08-02 13:43-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -18,8 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
-#: data/reminders.desktop.in:3
+#: data/reminders.appdata.xml.in:7 data/reminders.desktop.in:3
 msgid "Reminders"
+msgstr ""
+
+#: data/reminders.appdata.xml.in:45
+msgid "elementary, Inc."
 msgstr ""
 
 #: data/reminders.desktop.in:4
