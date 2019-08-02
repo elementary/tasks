@@ -147,7 +147,9 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
                 var list_row = new Reminders.ListRow (source);
                 listbox.add (list_row);
 
-                if (last_selected_list == source.uid) {
+                if (last_selected_list == "" && registry.default_task_list == source) {
+                    listbox.select_row (list_row);
+                } else if (last_selected_list == source.uid) {
                     listbox.select_row (list_row);
                 }
             });
