@@ -21,8 +21,11 @@
 public class Reminders.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
+    private ulong? source_handler;
+    private Gtk.Label label;
+
     construct {
-        var label = new Gtk.Label ("");
+        label = new Gtk.Label ("");
 
         unowned Gtk.StyleContext label_style_context = label.get_style_context ();
         label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
@@ -31,10 +34,19 @@ public class Reminders.ListView : Gtk.Grid {
         add (label);
 
         notify["source"].connect (() => {
-            label.label = source.display_name;
-            Reminders.Application.set_task_color (source, label);
+            if (source_handler != null) {
+                source_handler = null;
+            }
+            update_source ();
+
+            source_handler = source.changed.connect (() => update_source);
 
             show_all ();
         });
+    }
+
+    private void update_source () {
+        label.label = source.display_name;
+        Reminders.Application.set_task_color (source, label);
     }
 }
