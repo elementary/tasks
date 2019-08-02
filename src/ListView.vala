@@ -21,11 +21,8 @@
 public class Reminders.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
-    private ulong? source_handler;
-    private Gtk.Label label;
-
     construct {
-        label = new Gtk.Label ("");
+        var label = new Gtk.Label ("");
         label.halign = Gtk.Align.START;
         label.hexpand = true;
 
@@ -62,19 +59,10 @@ public class Reminders.ListView : Gtk.Grid {
         });
 
         notify["source"].connect (() => {
-            if (source_handler != null) {
-                source_handler = null;
-            }
-            update_source ();
-
-            source_handler = source.changed.connect (() => update_source);
+            label.label = source.dup_display_name ();
+            Reminders.Application.set_task_color (source, label);
 
             show_all ();
         });
-    }
-
-    private void update_source () {
-        label.label = source.display_name;
-        Reminders.Application.set_task_color (source, label);
     }
 }
