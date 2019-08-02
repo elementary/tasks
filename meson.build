@@ -6,8 +6,15 @@ i18n = import('i18n')
 add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()), language:'c')
 add_project_arguments(['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala')
 
+gresource = gnome.compile_resources(
+    'gresource',
+    join_paths('data', 'gresource.xml'),
+    source_dir: 'data'
+)
+
 executable(
     meson.project_name(),
+    gresource,
     'src/Application.vala',
     'src/ListView.vala',
     'src/MainWindow.vala',
@@ -25,5 +32,6 @@ executable(
 )
 
 subdir('data')
+subdir('po')
 
 meson.add_install_script('meson/post_install.py')

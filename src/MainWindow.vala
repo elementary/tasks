@@ -25,30 +25,82 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
     public MainWindow (Gtk.Application application) {
         Object (
             application: application,
-            icon_name: "application-default-icon",
+            icon_name: "io.elementary.reminders",
             title: _("Reminders")
         );
     }
 
     construct {
+        var header_provider = new Gtk.CssProvider ();
+        header_provider.load_from_resource ("io/elementary/reminders/HeaderBar.css");
+
+        var sidebar_header = new Gtk.HeaderBar ();
+        sidebar_header.decoration_layout = "close:";
+        sidebar_header.has_subtitle = false;
+        sidebar_header.show_close_button = true;
+
+        unowned Gtk.StyleContext sidebar_header_context = sidebar_header.get_style_context ();
+        sidebar_header_context.add_class ("sidebar-header");
+        sidebar_header_context.add_class ("titlebar");
+        sidebar_header_context.add_class ("default-decoration");
+        sidebar_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
+        sidebar_header_context.add_provider (header_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        var listview_header = new Gtk.HeaderBar ();
+        listview_header.has_subtitle = false;
+        listview_header.decoration_layout = ":maximize";
+        listview_header.show_close_button = true;
+
+        unowned Gtk.StyleContext listview_header_context = listview_header.get_style_context ();
+        listview_header_context.add_class ("listview-header");
+        listview_header_context.add_class ("titlebar");
+        listview_header_context.add_class ("default-decoration");
+        listview_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
+        listview_header_context.add_provider (header_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        var header_paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
+        header_paned.pack1 (sidebar_header, false, false);
+        header_paned.pack2 (listview_header, true, false);
+
         listbox = new Gtk.ListBox ();
         listbox.set_header_func (header_update_func);
         listbox.set_sort_func (sort_function);
 
         var scrolledwindow = new Gtk.ScrolledWindow (null, null);
+        scrolledwindow.expand = true;
+        scrolledwindow.margin_bottom = 3;
         scrolledwindow.hscrollbar_policy = Gtk.PolicyType.NEVER;
         scrolledwindow.add (listbox);
+
+        var sidebar = new Gtk.Grid ();
+        sidebar.add (scrolledwindow);
+
+        var sidebar_provider = new Gtk.CssProvider ();
+        sidebar_provider.load_from_resource ("io/elementary/reminders/Sidebar.css");
+
+        unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
+        sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);
+        sidebar_style_context.add_provider (sidebar_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var listview = new Reminders.ListView ();
 
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
-        paned.pack1 (scrolledwindow, false, false);
+        paned.pack1 (sidebar, false, false);
         paned.pack2 (listview, true, false);
 
+        set_titlebar (header_paned);
         add (paned);
+
+        // This must come after setting header_paned as the titlebar
+        unowned Gtk.StyleContext header_paned_context = header_paned.get_style_context ();
+        header_paned_context.remove_class ("titlebar");
+        header_paned_context.add_provider (header_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        get_style_context ().add_class ("rounded");
 
         load_sources.begin ();
 
+        Reminders.Application.settings.bind ("pane-position", header_paned, "position", GLib.SettingsBindFlags.DEFAULT);
         Reminders.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
 
         listbox.row_selected.connect (() => {
@@ -67,7 +119,9 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
             }
         }
 
-        var header_label = new Granite.HeaderLabel (row.source.parent);
+        var task_list = (E.SourceTaskList?) row.source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+        var header_label = new Granite.HeaderLabel (task_list.backend_name);
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
 
         row.set_header (header_label);

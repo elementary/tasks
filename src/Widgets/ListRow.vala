@@ -21,18 +21,35 @@
 public class Reminders.ListRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
 
+    private static Gtk.CssProvider color_provider;
+
     public ListRow (E.Source source) {
         Object (source: source);
     }
 
+    static construct {
+        color_provider = new Gtk.CssProvider ();
+        color_provider.load_from_resource ("io/elementary/reminders/ListRow.css");
+    }
+
     construct {
+        var source_color = new Gtk.Grid ();
+        source_color.valign = Gtk.Align.CENTER;
+
+        unowned Gtk.StyleContext source_color_context = source_color.get_style_context ();
+        source_color_context.add_class ("source-color");
+        source_color_context.add_provider (color_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        Reminders.Application.set_task_color (source, source_color);
+
         var label = new Gtk.Label (source.display_name);
         label.halign = Gtk.Align.START;
 
         var grid = new Gtk.Grid ();
-        grid.margin = 3;
+        grid.column_spacing = 3;
         grid.margin_start = 12;
         grid.margin_end = 6;
+        grid.add (source_color);
         grid.add (label);
 
         add (grid);
