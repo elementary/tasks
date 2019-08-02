@@ -21,17 +21,18 @@
 public class Reminders.ListRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
 
+    private Gtk.Image image;
+    private Gtk.Label label;
+
     public ListRow (E.Source source) {
         Object (source: source);
     }
 
     construct {
-        var image = new Gtk.Image.from_icon_name ("checkbox-checked-symbolic", Gtk.IconSize.MENU);
+        image = new Gtk.Image.from_icon_name ("checkbox-checked-symbolic", Gtk.IconSize.MENU);
         image.get_style_context ().add_class (Granite.STYLE_CLASS_ACCENT);
 
-        Reminders.Application.set_task_color (source, image);
-
-        var label = new Gtk.Label (source.display_name);
+        label = new Gtk.Label ("");
         label.halign = Gtk.Align.START;
 
         var grid = new Gtk.Grid ();
@@ -42,5 +43,13 @@ public class Reminders.ListRow : Gtk.ListBoxRow {
         grid.add (label);
 
         add (grid);
+
+        update_source ();
+        source.changed.connect (() => update_source);
+    }
+
+    private void update_source () {
+        label.label = source.display_name;
+        Reminders.Application.set_task_color (source, image);
     }
 }
