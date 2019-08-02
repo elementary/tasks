@@ -18,27 +18,29 @@
 *
 */
 
-public class Reminders.ListView : Gtk.Grid {
-    public E.Source? source { get; set; }
+.sidebar-header {
+    background-color: shade (@bg_color, 0.92);
+    color: mix (@bg_color, @text_color, 0.77);
+}
 
-    construct {
-        var label = new Gtk.Label ("");
-        label.halign = Gtk.Align.START;
-        label.hexpand = true;
+.sidebar-header:dir(ltr) {
+    border-top-right-radius: 0;
+}
 
-        unowned Gtk.StyleContext label_style_context = label.get_style_context ();
-        label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
-        label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
+.sidebar-header:dir(rtl) {
+    border-top-left-radius: 0;
+}
 
-        margin = 24;
-        margin_top = 0;
-        add (label);
+.listview-header:dir(ltr) {
+    border-top-left-radius: 0;
+}
 
-        notify["source"].connect (() => {
-            label.label = source.display_name;
-            Reminders.Application.set_task_color (source, label);
+.listview-header:dir(rtl) {
+    border-top-right-radius: 0;
+}
 
-            show_all ();
-        });
-    }
+paned {
+    background-color: @bg_color;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
