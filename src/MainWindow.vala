@@ -81,7 +81,9 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
             }
         }
 
-        var header_label = new Granite.HeaderLabel (row.source.parent);
+        var task_list = (E.SourceTaskList?) row.source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+        var header_label = new Granite.HeaderLabel (task_list.backend_name);
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
 
         row.set_header (header_label);
