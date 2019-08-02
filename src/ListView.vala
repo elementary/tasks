@@ -26,11 +26,15 @@ public class Reminders.ListView : Gtk.Grid {
 
     construct {
         label = new Gtk.Label ("");
+        label.halign = Gtk.Align.START;
+        label.hexpand = true;
 
         unowned Gtk.StyleContext label_style_context = label.get_style_context ();
         label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
         label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
+        margin = 24;
+        margin_top = 0;
         add (label);
 
         notify["source"].connect (() => {
