@@ -126,7 +126,23 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
         if (ancestor != null) {
             display_name = ancestor.display_name;
         } else {
-            display_name = ((E.SourceTaskList?) row.source.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name;
+            var backend_name = ((E.SourceTaskList?) row.source.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name;
+            switch (backend_name) {
+                case "caldav":
+                    var caldav = (E.SourceWebdav?) row.source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+                    if ("icloud" in caldav.soup_uri.to_string (false)) {
+                        display_name = _("iCloud");
+                    } else {
+                        display_name = _("CalDAV");
+                    }
+                    break;
+                case "local":
+                    display_name = _("Local");
+                    break;
+                default:
+                    display_name = _("Other");
+                    break;
+            }
         }
 
         var header_label = new Granite.HeaderLabel (display_name);
