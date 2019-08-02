@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Reminders
+Comment=Create and track the progress of tasks
+Exec=io.elementary.reminders
+Icon=io.elementary.reminders
+Keywords=Tasks;Todo;Reminders;
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Office;ProjectManagement;

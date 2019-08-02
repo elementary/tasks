@@ -25,7 +25,7 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
     public MainWindow (Gtk.Application application) {
         Object (
             application: application,
-            icon_name: "application-default-icon",
+            icon_name: "io.elementary.reminders",
             title: _("Reminders")
         );
     }
