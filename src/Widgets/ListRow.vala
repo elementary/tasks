@@ -29,7 +29,7 @@ public class Reminders.ListRow : Gtk.ListBoxRow {
         var image = new Gtk.Image.from_icon_name ("checkbox-checked-symbolic", Gtk.IconSize.MENU);
         image.get_style_context ().add_class (Granite.STYLE_CLASS_ACCENT);
 
-        set_event_calendar_color (source, image);
+        Reminders.Application.set_task_color (source, image);
 
         var label = new Gtk.Label (source.display_name);
         label.halign = Gtk.Align.START;
@@ -42,31 +42,5 @@ public class Reminders.ListRow : Gtk.ListBoxRow {
         grid.add (label);
 
         add (grid);
-    }
-
-    private Gee.HashMap<string, Gtk.CssProvider>? providers;
-    private void set_event_calendar_color (E.Source source, Gtk.Widget widget) {
-        if (providers == null) {
-            providers = new Gee.HashMap<string, Gtk.CssProvider> ();
-        }
-        var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-        var color = task_list.dup_color ();
-        if (!providers.has_key (color)) {
-            string style = """
-                @define-color colorAccent %s;
-            """.printf (color);
-
-            try {
-                var style_provider = new Gtk.CssProvider ();
-                style_provider.load_from_data (style, style.length);
-
-                providers[color] = style_provider;
-            } catch (Error e) {
-                critical ("Unable to set calendar color: %s", e.message);
-            }
-        }
-
-        unowned Gtk.StyleContext style_context = widget.get_style_context ();
-        style_context.add_provider (providers[color], Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 }

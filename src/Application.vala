@@ -70,6 +70,32 @@ public class Reminders.Application : Gtk.Application {
         });
     }
 
+    private static Gee.HashMap<string, Gtk.CssProvider>? providers;
+    public static void set_task_color (E.Source source, Gtk.Widget widget) {
+        if (providers == null) {
+            providers = new Gee.HashMap<string, Gtk.CssProvider> ();
+        }
+        var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        var color = task_list.dup_color ();
+        if (!providers.has_key (color)) {
+            string style = """
+                @define-color colorAccent %s;
+            """.printf (color);
+
+            try {
+                var style_provider = new Gtk.CssProvider ();
+                style_provider.load_from_data (style, style.length);
+
+                providers[color] = style_provider;
+            } catch (Error e) {
+                critical ("Unable to set color: %s", e.message);
+            }
+        }
+
+        unowned Gtk.StyleContext style_context = widget.get_style_context ();
+        style_context.add_provider (providers[color], Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
+
     public static int main (string[] args) {
         var app = new Application ();
         return app.run (args);
