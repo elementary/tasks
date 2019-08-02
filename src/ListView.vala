@@ -21,20 +21,60 @@
 public class Reminders.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
+    private ulong? source_handler;
+    private Gtk.Label label;
+
     construct {
-        var label = new Gtk.Label ("");
+        label = new Gtk.Label ("");
+        label.halign = Gtk.Align.START;
+        label.hexpand = true;
 
         unowned Gtk.StyleContext label_style_context = label.get_style_context ();
         label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
         label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
+        var settings_button = new Gtk.Button.from_icon_name ("view-more-horizontal-symbolic", Gtk.IconSize.MENU);
+        settings_button.tooltip_text = _("Edit Name and Appearance");
+        settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+
+        column_spacing = 12;
+        margin = 24;
         add (label);
+        add (settings_button);
+
+        settings_button.clicked.connect (() => {
+            var name_entry = new Gtk.Entry ();
+            name_entry.text = source.dup_display_name ();
+            name_entry.sensitive = source.writable;
+
+            var settings_dialog = new Gtk.Dialog ();
+            settings_dialog.modal = true;
+            settings_dialog.transient_for = ((Gtk.Application) GLib.Application.get_default ()).get_active_window ();
+
+            settings_dialog.get_content_area ().add (name_entry);
+
+            settings_dialog.show_all ();
+
+            settings_dialog.response.connect (() => {
+                source.display_name = name_entry.text;
+            });
+        });
 
         notify["source"].connect (() => {
-            label.label = source.display_name;
-            Reminders.Application.set_task_color (source, label);
+            if (source_handler != null) {
+                source_handler = null;
+            }
+            update_source ();
+
+            source_handler = source.changed.connect (() => update_source);
 
             show_all ();
         });
+    }
+
+    private void update_source () {
+        label.label = source.display_name;
+        Reminders.Application.set_task_color (source, label);
     }
 }
