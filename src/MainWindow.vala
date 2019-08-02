@@ -22,6 +22,8 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
     private uint configure_id;
     private Gtk.ListBox listbox;
 
+    private E.SourceRegistry registry;
+
     public MainWindow (Gtk.Application application) {
         Object (
             application: application,
@@ -119,9 +121,15 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
             }
         }
 
-        var task_list = (E.SourceTaskList?) row.source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        string display_name;
+        var ancestor = registry.find_extension (row.source, E.SOURCE_EXTENSION_COLLECTION);
+        if (ancestor != null) {
+            display_name = ancestor.display_name;
+        } else {
+            display_name = ((E.SourceTaskList?) row.source.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name;
+        }
 
-        var header_label = new Granite.HeaderLabel (task_list.backend_name);
+        var header_label = new Granite.HeaderLabel (display_name);
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
 
         row.set_header (header_label);
@@ -142,7 +150,7 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
         try {
             var last_selected_list = Reminders.Application.settings.get_string ("selected-list");
 
-            var registry = yield new E.SourceRegistry (null);
+            registry = yield new E.SourceRegistry (null);
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
                 var list_row = new Reminders.ListRow (source);
                 listbox.add (list_row);
