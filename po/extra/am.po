@@ -1,0 +1,33 @@
+# Amharic translations for extra package.
+# Copyright (C) 2019 THE extra'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# Automatically generated, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-02 13:43-0700\n"
+"PO-Revision-Date: 2019-08-02 13:43-0700\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: am\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/reminders.desktop.in:3
+msgid "Reminders"
+msgstr ""
+
+#: data/reminders.desktop.in:4
+msgid "Create and track the progress of tasks"
+msgstr ""
+
+#: data/reminders.desktop.in:6
+msgid "io.elementary.reminders"
+msgstr ""
+
+#: data/reminders.desktop.in:7
+msgid "Tasks;Todo;Reminders;"
+msgstr ""
