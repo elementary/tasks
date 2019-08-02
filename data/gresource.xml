@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/io/elementary/reminders">
     <file compressed="true">HeaderBar.css</file>
+    <file compressed="true">ListRow.css</file>
     <file compressed="true">Sidebar.css</file>
   </gresource>
 </gresources>
