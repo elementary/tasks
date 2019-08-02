@@ -37,6 +37,7 @@ public class Reminders.ListView : Gtk.Grid {
 
         column_spacing = 12;
         margin = 24;
+        margin_top = 0;
         add (label);
         add (settings_button);
 
