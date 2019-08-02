@@ -36,16 +36,30 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
         listbox.set_sort_func (sort_function);
 
         var scrolledwindow = new Gtk.ScrolledWindow (null, null);
+        scrolledwindow.expand = true;
+        scrolledwindow.margin_bottom = 3;
         scrolledwindow.hscrollbar_policy = Gtk.PolicyType.NEVER;
         scrolledwindow.add (listbox);
+
+        var sidebar = new Gtk.Grid ();
+        sidebar.add (scrolledwindow);
+
+        var sidebar_provider = new Gtk.CssProvider ();
+        sidebar_provider.load_from_resource ("io/elementary/reminders/Sidebar.css");
+
+        unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
+        sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);
+        sidebar_style_context.add_provider (sidebar_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var listview = new Reminders.ListView ();
 
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
-        paned.pack1 (scrolledwindow, false, false);
+        paned.pack1 (sidebar, false, false);
         paned.pack2 (listview, true, false);
 
         add (paned);
+
+        get_style_context ().add_class ("rounded");
 
         load_sources.begin ();
 

@@ -36,7 +36,6 @@ public class Reminders.ListRow : Gtk.ListBoxRow {
 
         var grid = new Gtk.Grid ();
         grid.column_spacing = 6;
-        grid.margin = 3;
         grid.margin_start = 12;
         grid.margin_end = 6;
         grid.add (image);
