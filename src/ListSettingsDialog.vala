@@ -38,6 +38,7 @@ public class Tasks.ListSettingsDialog : Gtk.Dialog {
         grid.column_spacing = 12;
         grid.margin_start = grid.margin_end = 6;
         grid.margin_bottom = 18;
+        grid.add (name_label);
         grid.add (name_entry);
 
         get_content_area ().add (grid);
