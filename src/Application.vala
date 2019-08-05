@@ -18,18 +18,18 @@
 *
 */
 
-public class Reminders.Application : Gtk.Application {
+public class Tasks.Application : Gtk.Application {
     public static GLib.Settings settings;
 
     public Application () {
         Object (
-            application_id: "io.elementary.reminders",
+            application_id: "io.elementary.tasks",
             flags: ApplicationFlags.FLAGS_NONE
         );
     }
 
     static construct {
-        settings = new Settings ("io.elementary.reminders");
+        settings = new Settings ("io.elementary.tasks");
     }
 
     protected override void activate () {

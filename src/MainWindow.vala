@@ -18,21 +18,23 @@
 *
 */
 
-public class Reminders.MainWindow : Gtk.ApplicationWindow {
+public class Tasks.MainWindow : Gtk.ApplicationWindow {
     private uint configure_id;
     private Gtk.ListBox listbox;
+
+    private E.SourceRegistry registry;
 
     public MainWindow (Gtk.Application application) {
         Object (
             application: application,
-            icon_name: "io.elementary.reminders",
-            title: _("Reminders")
+            icon_name: "io.elementary.tasks",
+            title: _("Tasks")
         );
     }
 
     construct {
         var header_provider = new Gtk.CssProvider ();
-        header_provider.load_from_resource ("io/elementary/reminders/HeaderBar.css");
+        header_provider.load_from_resource ("io/elementary/tasks/HeaderBar.css");
 
         var sidebar_header = new Gtk.HeaderBar ();
         sidebar_header.decoration_layout = "close:";
@@ -76,13 +78,13 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
         sidebar.add (scrolledwindow);
 
         var sidebar_provider = new Gtk.CssProvider ();
-        sidebar_provider.load_from_resource ("io/elementary/reminders/Sidebar.css");
+        sidebar_provider.load_from_resource ("io/elementary/tasks/Sidebar.css");
 
         unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
         sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);
         sidebar_style_context.add_provider (sidebar_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        var listview = new Reminders.ListView ();
+        var listview = new Tasks.ListView ();
 
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
         paned.pack1 (sidebar, false, false);
@@ -100,28 +102,34 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
 
         load_sources.begin ();
 
-        Reminders.Application.settings.bind ("pane-position", header_paned, "position", GLib.SettingsBindFlags.DEFAULT);
-        Reminders.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
+        Tasks.Application.settings.bind ("pane-position", header_paned, "position", GLib.SettingsBindFlags.DEFAULT);
+        Tasks.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
 
         listbox.row_selected.connect (() => {
-            var source = ((Reminders.ListRow) listbox.get_selected_row ()).source;
+            var source = ((Tasks.ListRow) listbox.get_selected_row ()).source;
             listview.source = source;
-            Reminders.Application.settings.set_string ("selected-list", source.uid);
+            Tasks.Application.settings.set_string ("selected-list", source.uid);
         });
     }
 
     private void header_update_func (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
-        var row = (Reminders.ListRow) lbrow;
+        var row = (Tasks.ListRow) lbrow;
         if (lbbefore != null) {
-            var before = (Reminders.ListRow) lbbefore;
+            var before = (Tasks.ListRow) lbbefore;
             if (row.source.parent == before.source.parent) {
                 return;
             }
         }
 
-        var task_list = (E.SourceTaskList?) row.source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        string display_name;
+        var ancestor = registry.find_extension (row.source, E.SOURCE_EXTENSION_COLLECTION);
+        if (ancestor != null) {
+            display_name = ancestor.display_name;
+        } else {
+            display_name = ((E.SourceTaskList?) row.source.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name;
+        }
 
-        var header_label = new Granite.HeaderLabel (task_list.backend_name);
+        var header_label = new Granite.HeaderLabel (display_name);
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
 
         row.set_header (header_label);
@@ -129,8 +137,8 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
 
     [CCode (instance_pos = -1)]
     private int sort_function (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow lbbefore) {
-        var row = (Reminders.ListRow) lbrow;
-        var before = (Reminders.ListRow) lbbefore;
+        var row = (Tasks.ListRow) lbrow;
+        var before = (Tasks.ListRow) lbbefore;
         if (row.source.parent == before.source.parent) {
             return row.source.display_name.collate (before.source.display_name);
         } else {
@@ -140,14 +148,16 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
 
     private async void load_sources () {
         try {
-            var last_selected_list = Reminders.Application.settings.get_string ("selected-list");
+            var last_selected_list = Tasks.Application.settings.get_string ("selected-list");
 
-            var registry = yield new E.SourceRegistry (null);
+            registry = yield new E.SourceRegistry (null);
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
-                var list_row = new Reminders.ListRow (source);
+                var list_row = new Tasks.ListRow (source);
                 listbox.add (list_row);
 
-                if (last_selected_list == source.uid) {
+                if (last_selected_list == "" && registry.default_task_list == source) {
+                    listbox.select_row (list_row);
+                } else if (last_selected_list == source.uid) {
                     listbox.select_row (list_row);
                 }
             });
@@ -167,17 +177,17 @@ public class Reminders.MainWindow : Gtk.ApplicationWindow {
             configure_id = 0;
 
             if (is_maximized) {
-                Reminders.Application.settings.set_boolean ("window-maximized", true);
+                Tasks.Application.settings.set_boolean ("window-maximized", true);
             } else {
-                Reminders.Application.settings.set_boolean ("window-maximized", false);
+                Tasks.Application.settings.set_boolean ("window-maximized", false);
 
                 Gdk.Rectangle rect;
                 get_allocation (out rect);
-                Reminders.Application.settings.set ("window-size", "(ii)", rect.width, rect.height);
+                Tasks.Application.settings.set ("window-size", "(ii)", rect.width, rect.height);
 
                 int root_x, root_y;
                 get_position (out root_x, out root_y);
-                Reminders.Application.settings.set ("window-position", "(ii)", root_x, root_y);
+                Tasks.Application.settings.set ("window-position", "(ii)", root_x, root_y);
             }
 
             return false;

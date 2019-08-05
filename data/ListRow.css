@@ -29,3 +29,8 @@
     min-width: 12px;
     background: @colorAccent;
 }
+
+.sidebar image {
+    -gtk-icon-style: symbolic;
+    color: @text_color;
+}

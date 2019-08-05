@@ -18,7 +18,7 @@
 *
 */
 
-public class Reminders.ListView : Gtk.Grid {
+public class Tasks.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
     construct {
@@ -61,7 +61,7 @@ public class Reminders.ListView : Gtk.Grid {
 
         notify["source"].connect (() => {
             label.label = source.dup_display_name ();
-            Reminders.Application.set_task_color (source, label);
+            Tasks.Application.set_task_color (source, label);
 
             show_all ();
         });
