@@ -42,26 +42,8 @@ public class Tasks.ListView : Gtk.Grid {
         add (settings_button);
 
         settings_button.clicked.connect (() => {
-            var name_entry = new Gtk.Entry ();
-            name_entry.text = source.dup_display_name ();
-            name_entry.sensitive = source.writable;
-
-            var settings_dialog = new Gtk.Dialog ();
-            settings_dialog.modal = true;
-            settings_dialog.transient_for = ((Gtk.Application) GLib.Application.get_default ()).get_active_window ();
-
-            settings_dialog.get_content_area ().add (name_entry);
-
-            settings_dialog.show_all ();
-
-            settings_dialog.response.connect (() => {
-                source.display_name = name_entry.text;
-                try {
-                    source.write (null);
-                } catch (Error e) {
-                    critical (e.message);
-                }
-            });
+            var list_settings_dialog = new Tasks.ListSettingsDialog (source);
+            list_settings_dialog.show_all ();
         });
 
         notify["source"].connect (() => {

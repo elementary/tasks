@@ -17,6 +17,7 @@ executable(
     gresource,
     'src/Application.vala',
     'src/ListView.vala',
+    'src/ListSettingsDialog.vala',
     'src/MainWindow.vala',
     'src/Widgets/ListRow.vala',
     dependencies: [
