@@ -100,7 +100,7 @@ public class Tasks.ListSettingsDialog : Gtk.Dialog {
 
         var task_list = ((E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST));
         switch (task_list.dup_color ()) {
-            case "#da3d41":
+            case "#c6262e":
                 color_button_red.active = true;
                 break;
             case "#f37329":
@@ -109,7 +109,7 @@ public class Tasks.ListSettingsDialog : Gtk.Dialog {
             case "#e6a92a":
                 color_button_yellow.active = true;
                 break;
-            case "#81c837":
+            case "#68b723":
                 color_button_green.active = true;
                 break;
             case "#3689e6":
@@ -161,7 +161,7 @@ public class Tasks.ListSettingsDialog : Gtk.Dialog {
         close_button.has_default = true;
 
         color_button_red.toggled.connect (() => {
-            task_list.color = "#da3d41";
+            task_list.color = "#c6262e";
         });
 
         color_button_orange.toggled.connect (() => {
@@ -173,7 +173,7 @@ public class Tasks.ListSettingsDialog : Gtk.Dialog {
         });
 
         color_button_green.toggled.connect (() => {
-            task_list.color = "#81c837";
+            task_list.color = "#68b723";
         });
 
         color_button_blue.toggled.connect (() => {
