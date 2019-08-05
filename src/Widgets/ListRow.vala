@@ -18,7 +18,7 @@
 *
 */
 
-public class Reminders.ListRow : Gtk.ListBoxRow {
+public class Tasks.ListRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
 
     private static Gtk.CssProvider color_provider;
@@ -29,7 +29,7 @@ public class Reminders.ListRow : Gtk.ListBoxRow {
 
     static construct {
         color_provider = new Gtk.CssProvider ();
-        color_provider.load_from_resource ("io/elementary/reminders/ListRow.css");
+        color_provider.load_from_resource ("io/elementary/tasks/ListRow.css");
     }
 
     construct {
@@ -40,7 +40,7 @@ public class Reminders.ListRow : Gtk.ListBoxRow {
         source_color_context.add_class ("source-color");
         source_color_context.add_provider (color_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        Reminders.Application.set_task_color (source, source_color);
+        Tasks.Application.set_task_color (source, source_color);
 
         var label = new Gtk.Label (source.display_name);
         label.halign = Gtk.Align.START;
