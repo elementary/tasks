@@ -18,7 +18,7 @@
 *
 */
 
-public class Reminders.ListView : Gtk.Grid {
+public class Tasks.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
     private ulong? source_handler;
@@ -42,6 +42,9 @@ public class Reminders.ListView : Gtk.Grid {
                 source_handler = null;
             }
             update_source ();
+
+            label.label = source.display_name;
+            Tasks.Application.set_task_color (source, label);
 
             source_handler = source.changed.connect (() => update_source);
 

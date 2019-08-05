@@ -20,7 +20,7 @@ install_data(
 )
 
 i18n.merge_file(
-    input: 'reminders.desktop.in',
+    input: 'tasks.desktop.in',
     output: meson.project_name() + '.desktop',
     po_dir: join_paths(meson.source_root(), 'po', 'extra'),
     type: 'desktop',
@@ -29,7 +29,7 @@ i18n.merge_file(
 )
 
 i18n.merge_file(
-    input: 'reminders.appdata.xml.in',
+    input: 'tasks.appdata.xml.in',
     output: meson.project_name() + '.appdata.xml',
     po_dir: join_paths(meson.source_root(), 'po', 'extra'),
     type: 'xml',

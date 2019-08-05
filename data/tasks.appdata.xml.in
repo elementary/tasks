@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2019 elementary, Inc. <contact@elementary.io> -->
 <component type="desktop-application">
-  <id>io.elementary.reminders</id>
+  <id>io.elementary.tasks</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
-  <name>Reminders</name>
+  <name>Tasks</name>
   <summary></summary>
   <description>
     <p></p>
   </description>
   <provides>
-    <binary>io.elementary.reminders</binary>
+    <binary>io.elementary.tasks</binary>
   </provides>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>
@@ -41,8 +41,8 @@
     <content_attribute id="money-purchasing">none</content_attribute>
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
-  <translation type="gettext">io.elementary.reminders</translation>
+  <translation type="gettext">io.elementary.tasks</translation>
   <developer_name>elementary, Inc.</developer_name>
   <url type="homepage">http://elementary.io</url>
-  <url type="bugtracker">https://github.com/elementary/reminders/issues</url>
+  <url type="bugtracker">https://github.com/elementary/tasks/issues</url>
 </component>

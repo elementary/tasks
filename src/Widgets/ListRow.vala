@@ -18,10 +18,13 @@
 *
 */
 
-public class Reminders.ListRow : Gtk.ListBoxRow {
+public class Tasks.ListRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
 
-    private static Gtk.CssProvider color_provider;
+    private static Gtk.CssProvider listrow_provider;
+
+    private Gtk.Image status_image;
+    private Gtk.Stack status_stack;
 
     private Gtk.Grid source_color;
     private Gtk.Label label;
@@ -31,8 +34,8 @@ public class Reminders.ListRow : Gtk.ListBoxRow {
     }
 
     static construct {
-        color_provider = new Gtk.CssProvider ();
-        color_provider.load_from_resource ("io/elementary/reminders/ListRow.css");
+        listrow_provider = new Gtk.CssProvider ();
+        listrow_provider.load_from_resource ("io/elementary/tasks/ListRow.css");
     }
 
     construct {
@@ -41,12 +44,26 @@ public class Reminders.ListRow : Gtk.ListBoxRow {
 
         unowned Gtk.StyleContext source_color_context = source_color.get_style_context ();
         source_color_context.add_class ("source-color");
-        source_color_context.add_provider (color_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        source_color_context.add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        Reminders.Application.set_task_color (source, source_color);
+        Tasks.Application.set_task_color (source, source_color);
 
         label = new Gtk.Label ("");
         label.halign = Gtk.Align.START;
+        label.hexpand = true;
+        label.margin_end = 9;
+
+        status_image = new Gtk.Image ();
+        status_image.pixel_size = 16;
+        status_image.get_style_context ().add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        var spinner = new Gtk.Spinner ();
+        spinner.active = true;
+        spinner.tooltip_text = _("Connecting…");
+
+        status_stack = new Gtk.Stack ();
+        status_stack.add_named (status_image, "image");
+        status_stack.add_named (spinner, "spinner");
 
         var grid = new Gtk.Grid ();
         grid.column_spacing = 3;
@@ -54,15 +71,46 @@ public class Reminders.ListRow : Gtk.ListBoxRow {
         grid.margin_end = 6;
         grid.add (source_color);
         grid.add (label);
+        grid.add (status_stack);
 
         add (grid);
 
         update_source ();
+        update_status_image ();
+
         source.changed.connect (() => update_source);
+        source.notify["connection-status"].connect (() => update_status_image);
     }
 
     private void update_source () {
         label.label = source.display_name;
         Reminders.Application.set_task_color (source, source_color);
+    }
+
+    private void update_status_image () {
+        if (source.connection_status == E.SourceConnectionStatus.CONNECTING) {
+            status_stack.visible_child_name = "spinner";
+        } else {
+            status_stack.visible_child_name = "image";
+
+            switch (source.connection_status) {
+                case E.SourceConnectionStatus.AWAITING_CREDENTIALS:
+                    status_image.icon_name = "dialog-password-symbolic";
+                    status_image.tooltip_text = _("Waiting for login credentials");
+                    break;
+                case E.SourceConnectionStatus.DISCONNECTED:
+                    status_image.icon_name = "network-offline-symbolic";
+                    status_image.tooltip_text = _("Currently disconnected from the (possibly remote) data store");
+                    break;
+                case E.SourceConnectionStatus.SSL_FAILED:
+                    status_image.icon_name = "security-low-symbolic";
+                    status_image.tooltip_text = _("SSL certificate trust was rejected for the connection");
+                    break;
+                default:
+                    status_image.gicon = null;
+                    status_image.tooltip_text = null;
+                    break;
+            }
+        }
     }
 }
