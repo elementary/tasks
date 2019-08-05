@@ -27,14 +27,14 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     public MainWindow (Gtk.Application application) {
         Object (
             application: application,
-            icon_name: "io.elementary.reminders",
+            icon_name: "io.elementary.tasks",
             title: _("Tasks")
         );
     }
 
     construct {
         var header_provider = new Gtk.CssProvider ();
-        header_provider.load_from_resource ("io/elementary/reminders/HeaderBar.css");
+        header_provider.load_from_resource ("io/elementary/tasks/HeaderBar.css");
 
         var sidebar_header = new Gtk.HeaderBar ();
         sidebar_header.decoration_layout = "close:";
@@ -78,7 +78,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         sidebar.add (scrolledwindow);
 
         var sidebar_provider = new Gtk.CssProvider ();
-        sidebar_provider.load_from_resource ("io/elementary/reminders/Sidebar.css");
+        sidebar_provider.load_from_resource ("io/elementary/tasks/Sidebar.css");
 
         unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
         sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);
