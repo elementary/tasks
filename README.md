@@ -1,4 +1,4 @@
-# Reminders
+# Tasks
 
 ## Building and Installation
 
@@ -21,9 +21,9 @@ cd build
 ninja
 ```
 
-To install, use `ninja install`, then execute with `io.elementary.reminders`
+To install, use `ninja install`, then execute with `io.elementary.tasks`
 
 ```bash
 ninja install
-io.elementary.reminders
+io.elementary.tasks
 ```

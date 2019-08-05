@@ -1,4 +1,4 @@
-project('io.elementary.reminders', 'vala', 'c')
+project('io.elementary.tasks', 'vala', 'c')
 
 gnome = import('gnome')
 i18n = import('i18n')

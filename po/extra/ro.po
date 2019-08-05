@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-02 13:47-0700\n"
+"POT-Creation-Date: 2019-08-05 09:41-0700\n"
 "PO-Revision-Date: 2019-08-02 13:43-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -18,22 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
 
-#: data/reminders.appdata.xml.in:7 data/reminders.desktop.in:3
-msgid "Reminders"
+#: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
+msgid "Tasks"
 msgstr ""
 
-#: data/reminders.appdata.xml.in:45
+#: data/tasks.appdata.xml.in:45
 msgid "elementary, Inc."
 msgstr ""
 
-#: data/reminders.desktop.in:4
+#: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
 msgstr ""
 
-#: data/reminders.desktop.in:6
-msgid "io.elementary.reminders"
+#: data/tasks.desktop.in:6
+msgid "io.elementary.tasks"
 msgstr ""
 
-#: data/reminders.desktop.in:7
-msgid "Tasks;Todo;Reminders;"
+#: data/tasks.desktop.in:7
+msgid "Todo;Reminders;"
 msgstr ""
