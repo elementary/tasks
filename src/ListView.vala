@@ -56,6 +56,11 @@ public class Tasks.ListView : Gtk.Grid {
 
             settings_dialog.response.connect (() => {
                 source.display_name = name_entry.text;
+                try {
+                    source.write (null);
+                } catch (Error e) {
+                    critical (e.message);
+                }
             });
         });
 
