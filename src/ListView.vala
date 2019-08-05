@@ -30,12 +30,24 @@ public class Tasks.ListView : Gtk.Grid {
         label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
         label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
+        var settings_button = new Gtk.Button.from_icon_name ("view-more-horizontal-symbolic", Gtk.IconSize.MENU);
+        settings_button.tooltip_text = _("Edit Name and Appearance");
+        settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+
+        column_spacing = 12;
         margin = 24;
         margin_top = 0;
         add (label);
+        add (settings_button);
+
+        settings_button.clicked.connect (() => {
+            var list_settings_dialog = new Tasks.ListSettingsDialog (source);
+            list_settings_dialog.show_all ();
+        });
 
         notify["source"].connect (() => {
-            label.label = source.display_name;
+            label.label = source.dup_display_name ();
             Tasks.Application.set_task_color (source, label);
 
             show_all ();
