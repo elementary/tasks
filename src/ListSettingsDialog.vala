@@ -26,23 +26,39 @@ public class Tasks.ListSettingsDialog : Gtk.Dialog {
     }
 
     construct {
+        var name_label = new Gtk.Label (_("Name:"));
+        name_label.halign = Gtk.Align.END;
+
         var name_entry = new Gtk.Entry ();
+        name_entry.activates_default = true;
         name_entry.text = source.dup_display_name ();
         name_entry.sensitive = source.writable;
 
-        get_content_area ().add (name_entry);
+        var grid = new Gtk.Grid ();
+        grid.column_spacing = 12;
+        grid.margin_start = grid.margin_end = 6;
+        grid.margin_bottom = 18;
+        grid.add (name_entry);
 
+        get_content_area ().add (grid);
+
+        border_width = 6;
+        deletable = false;
         modal = true;
+        resizable = false;
         transient_for = ((Gtk.Application) GLib.Application.get_default ()).get_active_window ();
 
+        var close_button = add_button (_("Close"), Gtk.ResponseType.CLOSE);
+        close_button.has_default = true;
 
         response.connect (() => {
             source.display_name = name_entry.text;
             try {
-                source.write (null);
+                source.write.begin (null);
             } catch (Error e) {
                 critical (e.message);
             }
+            destroy ();
         });
     }
 }
