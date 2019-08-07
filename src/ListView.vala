@@ -47,8 +47,12 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         notify["source"].connect (() => {
-            label.label = source.dup_display_name ();
-            Tasks.Application.set_task_color (source, label);
+            if (source != null) {
+                label.label = source.dup_display_name ();
+                Tasks.Application.set_task_color (source, label);
+            } else {
+                label.label = "";
+            }
 
             show_all ();
         });

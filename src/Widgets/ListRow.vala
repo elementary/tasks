@@ -25,6 +25,7 @@ public class Tasks.ListRow : Gtk.ListBoxRow {
 
     private Gtk.Image status_image;
     private Gtk.Stack status_stack;
+    private Gtk.Revealer revealer;
 
     public ListRow (E.Source source) {
         Object (source: source);
@@ -70,10 +71,22 @@ public class Tasks.ListRow : Gtk.ListBoxRow {
         grid.add (label);
         grid.add (status_stack);
 
-        add (grid);
+        revealer = new Gtk.Revealer ();
+        revealer.reveal_child = true;
+        revealer.add (grid);
+
+        add (revealer);
 
         update_status_image ();
         source.notify["connection-status"].connect (() => update_status_image);
+    }
+
+    public void remove_request () {
+        revealer.reveal_child = false;
+        GLib.Timeout.add (revealer.transition_duration, () => {
+            destroy ();
+            return GLib.Source.REMOVE;
+        });
     }
 
     private void update_status_image () {
