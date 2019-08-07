@@ -74,11 +74,23 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         scrolledwindow.hscrollbar_policy = Gtk.PolicyType.NEVER;
         scrolledwindow.add (listbox);
 
-        var sidebar = new Gtk.Grid ();
-        sidebar.add (scrolledwindow);
-
         var sidebar_provider = new Gtk.CssProvider ();
         sidebar_provider.load_from_resource ("io/elementary/tasks/Sidebar.css");
+
+        var add_tasklist_button = new Gtk.Button.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+        add_tasklist_button.tooltip_text = _("Add Task List");
+        add_tasklist_button.get_style_context ().add_provider (sidebar_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        var actionbar = new Gtk.ActionBar ();
+        actionbar.add (add_tasklist_button);
+
+        unowned Gtk.StyleContext actionbar_style_context = actionbar.get_style_context ();
+        actionbar_style_context.add_class (Gtk.STYLE_CLASS_INLINE_TOOLBAR);
+        actionbar_style_context.add_provider (sidebar_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        var sidebar = new Gtk.Grid ();
+        sidebar.attach (scrolledwindow, 0, 0);
+        sidebar.attach (actionbar, 0, 1);
 
         unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
         sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);

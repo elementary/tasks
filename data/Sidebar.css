@@ -25,3 +25,12 @@
 .sidebar:dir(rtl) {
     border-bottom-right-radius: 4px;
 }
+
+.sidebar .inline-toolbar {
+    background-color: shade (@bg_color, 0.9);
+    -gtk-icon-style: symbolic;
+}
+
+.sidebar .inline-toolbar button {
+    padding: 6px;
+}
