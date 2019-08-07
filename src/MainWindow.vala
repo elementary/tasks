@@ -142,6 +142,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         if (source.removable) {
             source.remove.begin (null, (obj, results) => {
                 list_row.destroy ();
+                list_row = listbox.get_row_at_index (0);
+                if (list_row != null) {
+                    listbox.select_row (list_row);
+                }
             });
         } else {
             Gdk.beep ();
