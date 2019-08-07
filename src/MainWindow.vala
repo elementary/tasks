@@ -145,10 +145,28 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         var list_row = ((Tasks.ListRow) listbox.get_selected_row ());
         var source = list_row.source;
         if (source.removable) {
-            source.remove.begin (null, (obj, results) => {
-                listbox.unselect_row (list_row);
-                list_row.remove_request ();
-            });
+            var delete_button = new Gtk.Button.with_label ("Delete Anyways");
+            delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+
+            var dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                _("Are You Sure You Want to Delete “%s”?").printf (source.dup_display_name ()),
+                _("This will delete all of this list's tasks. If you've shared this list, other people will no longer have access."),
+                "edit-delete",
+                Gtk.ButtonsType.CANCEL
+            );
+            dialog.badge_icon = new ThemedIcon ("dialog-question");
+            dialog.transient_for = this;
+            dialog.add_action_widget (delete_button, Gtk.ResponseType.ACCEPT);
+            dialog.show_all ();
+
+            if (dialog.run () == Gtk.ResponseType.ACCEPT) {
+                source.remove.begin (null, (obj, results) => {
+                    listbox.unselect_row (list_row);
+                    list_row.remove_request ();
+                });
+            }
+
+            dialog.destroy ();
         } else {
             Gdk.beep ();
         }
