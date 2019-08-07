@@ -142,11 +142,12 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void action_delete_selected_list () {
-        var list_row = listbox.get_selected_row ();
-        var source = ((Tasks.ListRow) list_row).source;
+        var list_row = ((Tasks.ListRow) listbox.get_selected_row ());
+        var source = list_row.source;
         if (source.removable) {
             source.remove.begin (null, (obj, results) => {
-                list_row.destroy ();
+                listbox.unselect_row (list_row);
+                list_row.remove_request ();
             });
         } else {
             Gdk.beep ();
