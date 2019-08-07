@@ -131,7 +131,12 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 listview.source = source;
                 Tasks.Application.settings.set_string ("selected-list", source.uid);
             } else {
-                listview.source = null;
+                var first_row = listbox.get_row_at_index (0);
+                if (first_row != null) {
+                    listbox.select_row (first_row);
+                } else {
+                    listview.source = null;
+                }
             }
         });
     }
@@ -142,10 +147,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         if (source.removable) {
             source.remove.begin (null, (obj, results) => {
                 list_row.destroy ();
-                list_row = listbox.get_row_at_index (0);
-                if (list_row != null) {
-                    listbox.select_row (list_row);
-                }
             });
         } else {
             Gdk.beep ();
