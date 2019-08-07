@@ -19,6 +19,15 @@
 */
 
 public class Tasks.MainWindow : Gtk.ApplicationWindow {
+    public const string ACTION_PREFIX = "win.";
+    public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
+
+    private const ActionEntry[] action_entries = {
+        { ACTION_DELETE_SELECTED_LIST, action_delete_selected_list }
+    };
+
+    private static Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
+
     private uint configure_id;
     private Gtk.ListBox listbox;
 
@@ -32,7 +41,18 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         );
     }
 
+    static construct {
+        action_accelerators[ACTION_DELETE_SELECTED_LIST] = "<Control>BackSpace";
+        action_accelerators[ACTION_DELETE_SELECTED_LIST] = "Delete";
+    }
+
     construct {
+        add_action_entries (action_entries, this);
+
+        foreach (var action in action_accelerators.get_keys ()) {
+            ((Gtk.Application) GLib.Application.get_default ()).set_accels_for_action (ACTION_PREFIX + action, action_accelerators[action].to_array ());
+        }
+
         var header_provider = new Gtk.CssProvider ();
         header_provider.load_from_resource ("io/elementary/tasks/HeaderBar.css");
 
@@ -105,11 +125,27 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         Tasks.Application.settings.bind ("pane-position", header_paned, "position", GLib.SettingsBindFlags.DEFAULT);
         Tasks.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
 
-        listbox.row_selected.connect (() => {
-            var source = ((Tasks.ListRow) listbox.get_selected_row ()).source;
-            listview.source = source;
-            Tasks.Application.settings.set_string ("selected-list", source.uid);
+        listbox.row_selected.connect ((row) => {
+            if (row != null) {
+                var source = ((Tasks.ListRow) row).source;
+                listview.source = source;
+                Tasks.Application.settings.set_string ("selected-list", source.uid);
+            } else {
+                listview.source = null;
+            }
         });
+    }
+
+    private void action_delete_selected_list () {
+        var list_row = listbox.get_selected_row ();
+        var source = ((Tasks.ListRow) list_row).source;
+        if (source.removable) {
+            source.remove.begin (null, (obj, results) => {
+                list_row.destroy ();
+            });
+        } else {
+            Gdk.beep ();
+        }
     }
 
     private void header_update_func (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
