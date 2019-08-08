@@ -58,9 +58,8 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         }
     }
 
-    public ListSettingsPopover (Gtk.Widget relative) {
+    public ListSettingsPopover () {
         Object (
-            relative_to: relative,
             modal: true,
             position: Gtk.PositionType.BOTTOM
         );
@@ -156,6 +155,7 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         grid.add (color_grid);
         
         add (grid);
+        grid.show_all ();
 
         color_button_red.toggled.connect (() => {
             task_list.color = "#c6262e";
@@ -202,10 +202,6 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
 
     private void save () {
         _source.display_name = name_entry.text;
-        try {
-            _source.write.begin (null);
-        } catch (Error e) {
-            critical (e.message);
-        }
+        _source.write.begin (null);
     }
 }
