@@ -30,10 +30,14 @@ public class Tasks.ListView : Gtk.Grid {
         label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
         label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
-        var settings_button = new Gtk.Button.from_icon_name ("view-more-horizontal-symbolic", Gtk.IconSize.MENU);
+        var settings_button = new Gtk.ToggleButton ();
+        settings_button.valign = Gtk.Align.CENTER;
+        settings_button.add (new Gtk.Image.from_icon_name ("view-more-horizontal-symbolic", Gtk.IconSize.MENU));
         settings_button.tooltip_text = _("Edit Name and Appearance");
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+
+        var list_settings_popover = new Tasks.ListSettingsPopover (settings_button);
 
         column_spacing = 12;
         margin = 24;
@@ -41,9 +45,15 @@ public class Tasks.ListView : Gtk.Grid {
         add (label);
         add (settings_button);
 
-        settings_button.clicked.connect (() => {
-            var list_settings_dialog = new Tasks.ListSettingsDialog (source);
-            list_settings_dialog.show_all ();
+        settings_button.toggled.connect (() => {
+            if (settings_button.active) {
+                list_settings_popover.source = source;
+                list_settings_popover.show_all ();
+            }
+        });
+
+        list_settings_popover.closed.connect (() => {
+            settings_button.active = false;
         });
 
         notify["source"].connect (() => {

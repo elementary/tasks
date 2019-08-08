@@ -17,9 +17,9 @@ executable(
     gresource,
     'src/Application.vala',
     'src/ListView.vala',
-    'src/ListSettingsDialog.vala',
     'src/MainWindow.vala',
     'src/Widgets/ListRow.vala',
+    'src/Widgets/ListSettingsPopover.vala',
     dependencies: [
         dependency('glib-2.0'),
         dependency('gobject-2.0'),
