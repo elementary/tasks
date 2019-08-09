@@ -20,6 +20,7 @@
 
 .sidebar {
     border-bottom-left-radius: 4px;
+    border-right: 1px solid alpha (@fg_color, 0.27);
 }
 
 .sidebar:dir(rtl) {

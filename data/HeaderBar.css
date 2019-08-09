@@ -19,6 +19,7 @@
 */
 
 .sidebar-header {
+    border-right: 1px solid alpha (@fg_color, 0.27);
     background-color: shade (@bg_color, 0.92);
     color: mix (@bg_color, @text_color, 0.77);
 }

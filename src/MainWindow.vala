@@ -81,6 +81,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         listview_header_context.add_provider (header_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var header_paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
+        header_paned.get_style_context ().remove_class ("horizontal");
         header_paned.pack1 (sidebar_header, false, false);
         header_paned.pack2 (listview_header, true, false);
 
@@ -107,6 +108,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         var listview = new Tasks.ListView ();
 
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
+        paned.get_style_context ().remove_class ("horizontal");
         paned.pack1 (sidebar, false, false);
         paned.pack2 (listview, true, false);
 
