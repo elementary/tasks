@@ -130,7 +130,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 var source = ((Tasks.ListRow) row).source;
                 listview.source = source;
                 Tasks.Application.settings.set_string ("selected-list", source.uid);
+
+                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
             } else {
+                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
                 var first_row = listbox.get_row_at_index (0);
                 if (first_row != null) {
                     listbox.select_row (first_row);
@@ -143,15 +146,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
     private void action_delete_selected_list () {
         var list_row = ((Tasks.ListRow) listbox.get_selected_row ());
-        var source = list_row.source;
-        if (source.removable) {
-            source.remove.begin (null, (obj, results) => {
-                listbox.unselect_row (list_row);
-                list_row.remove_request ();
-            });
-        } else {
-            Gdk.beep ();
-        }
+        list_row.source.remove.begin (null, (obj, results) => {
+            listbox.unselect_row (list_row);
+            list_row.remove_request ();
+        });
     }
 
     private void header_update_func (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
