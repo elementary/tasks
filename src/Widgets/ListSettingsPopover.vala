@@ -58,14 +58,12 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         }
     }
 
-    public ListSettingsPopover () {
-        Object (
-            modal: true,
-            position: Gtk.PositionType.BOTTOM
-        );
-    }
+    public ListSettingsPopover () {}
 
     construct {
+        modal = true;
+        position = Gtk.PositionType.BOTTOM;
+        
         var name_label = new Granite.HeaderLabel (_("Name:"));
 
         name_entry = new Gtk.Entry ();
