@@ -9,5 +9,3 @@ jobs:
     
     steps:
     - uses: elementary/actions/vala-lint@master
-    - name: Lint
-      run: io.elementary.vala-lint -d .
