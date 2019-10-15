@@ -1,4 +1,4 @@
-project('io.elementary.reminders', 'vala', 'c')
+project('io.elementary.tasks', 'vala', 'c')
 
 gnome = import('gnome')
 i18n = import('i18n')
@@ -19,6 +19,7 @@ executable(
     'src/ListView.vala',
     'src/MainWindow.vala',
     'src/Widgets/ListRow.vala',
+    'src/Widgets/ListSettingsPopover.vala',
     dependencies: [
         dependency('glib-2.0'),
         dependency('gobject-2.0'),

@@ -18,7 +18,7 @@
 *
 */
 
-public class Reminders.ListView : Gtk.Grid {
+public class Tasks.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
     construct {
@@ -30,13 +30,35 @@ public class Reminders.ListView : Gtk.Grid {
         label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
         label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
+        var list_settings_popover = new Tasks.ListSettingsPopover ();
+        
+        var settings_button = new Gtk.MenuButton ();
+        settings_button.valign = Gtk.Align.CENTER;
+        settings_button.tooltip_text = _("Edit Name and Appearance");
+        settings_button.popover = list_settings_popover;
+        settings_button.image = new Gtk.Image.from_icon_name ("view-more-horizontal-symbolic", Gtk.IconSize.MENU);
+        settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+
+        column_spacing = 12;
         margin = 24;
         margin_top = 0;
         add (label);
+        add (settings_button);
+
+        settings_button.toggled.connect (() => {
+            if (settings_button.active) {
+                list_settings_popover.source = source;
+            }
+        });
 
         notify["source"].connect (() => {
-            label.label = source.display_name;
-            Reminders.Application.set_task_color (source, label);
+            if (source != null) {
+                label.label = source.dup_display_name ();
+                Tasks.Application.set_task_color (source, label);
+            } else {
+                label.label = "";
+            }
 
             show_all ();
         });
