@@ -20,6 +20,7 @@
 
 public class Tasks.ListRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
+    private ECal.ClientView view;
 
     private static Gtk.CssProvider listrow_provider;
 
@@ -79,6 +80,24 @@ public class Tasks.ListRow : Gtk.ListBoxRow {
 
         update_status_image ();
         source.notify["connection-status"].connect (() => update_status_image);
+
+        try {
+            var iso_last = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().to_unix ());
+            var iso_first = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().add_years (-1).to_unix ());
+            var query = @"(occur-in-time-range? (make-time \"$iso_first\") (make-time \"$iso_last\"))";
+
+            var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
+            client.get_view_sync (query, out view, null);
+
+            view.objects_added.connect ((objects) => on_objects_added (source, client, objects));
+            view.objects_modified.connect ((objects) => on_objects_modified (source, client, objects));
+            view.objects_removed.connect ((uids) => on_objects_removed (source, client, uids));
+
+            view.start ();
+
+        } catch (Error e) {
+            critical (e.message);
+        }
     }
 
     public void remove_request () {
@@ -114,5 +133,17 @@ public class Tasks.ListRow : Gtk.ListBoxRow {
                     break;
             }
         }
+    }
+
+    private void on_objects_added (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
+        stdout.printf("on_objects_added");
+    }
+
+    private void on_objects_modified (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
+        stdout.printf("on_objects_modified");
+    }
+
+    private void on_objects_removed (E.Source source, ECal.Client client, SList<unowned ECal.ComponentId> uids) {
+        stdout.printf("on_objects_removed");
     }
 }
