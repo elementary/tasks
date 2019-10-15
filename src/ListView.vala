@@ -31,7 +31,7 @@ public class Tasks.ListView : Gtk.Grid {
         label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
         var list_settings_popover = new Tasks.ListSettingsPopover ();
-        
+
         var settings_button = new Gtk.MenuButton ();
         settings_button.valign = Gtk.Align.CENTER;
         settings_button.tooltip_text = _("Edit Name and Appearance");
