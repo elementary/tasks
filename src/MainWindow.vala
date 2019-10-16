@@ -127,7 +127,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         listbox.row_selected.connect ((row) => {
             if (row != null) {
-                var source = ((Tasks.ListRow) row).source;
+                var source = ((Tasks.SourceRow) row).source;
                 listview.source = source;
                 Tasks.Application.settings.set_string ("selected-list", source.uid);
             } else {
@@ -142,7 +142,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void action_delete_selected_list () {
-        var list_row = ((Tasks.ListRow) listbox.get_selected_row ());
+        var list_row = ((Tasks.SourceRow) listbox.get_selected_row ());
         var source = list_row.source;
         if (source.removable) {
             source.remove.begin (null, (obj, results) => {
@@ -155,9 +155,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void header_update_func (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
-        var row = (Tasks.ListRow) lbrow;
+        var row = (Tasks.SourceRow) lbrow;
         if (lbbefore != null) {
-            var before = (Tasks.ListRow) lbbefore;
+            var before = (Tasks.SourceRow) lbbefore;
             if (row.source.parent == before.source.parent) {
                 return;
             }
@@ -179,8 +179,8 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
     [CCode (instance_pos = -1)]
     private int sort_function (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow lbbefore) {
-        var row = (Tasks.ListRow) lbrow;
-        var before = (Tasks.ListRow) lbbefore;
+        var row = (Tasks.SourceRow) lbrow;
+        var before = (Tasks.SourceRow) lbbefore;
         if (row.source.parent == before.source.parent) {
             return row.source.display_name.collate (before.source.display_name);
         } else {
@@ -204,16 +204,16 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void add_source (E.SourceRegistry registry, E.Source source) {
-        var list_row = new Tasks.ListRow (source);
+        var source_row = new Tasks.SourceRow (source);
 
-        listbox.add (list_row);
+        listbox.add (source_row);
         listbox.show_all ();
 
         var last_selected_list = Application.settings.get_string ("selected-list");
         if (last_selected_list == "" && registry.default_task_list == source) {
-            listbox.select_row (list_row);
+            listbox.select_row (source_row);
         } else if (last_selected_list == source.uid) {
-            listbox.select_row (list_row);
+            listbox.select_row (source_row);
         }
     }
 
