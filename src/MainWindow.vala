@@ -120,7 +120,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         get_style_context ().add_class ("rounded");
 
-        load_sources.begin ();
+        init_registry.begin ();
 
         Tasks.Application.settings.bind ("pane-position", header_paned, "position", GLib.SettingsBindFlags.DEFAULT);
         Tasks.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
@@ -188,25 +188,32 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private async void load_sources () {
+    private async void init_registry () {
         try {
-            var last_selected_list = Tasks.Application.settings.get_string ("selected-list");
-
             registry = yield new E.SourceRegistry (null);
-            registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
-                var list_row = new Tasks.SourceRow (source);
-                listbox.add (list_row);
-
-                if (last_selected_list == "" && registry.default_task_list == source) {
-                    listbox.select_row (list_row);
-                } else if (last_selected_list == source.uid) {
-                    listbox.select_row (list_row);
-                }
+            registry.source_added.connect ((registry, source) => {
+                add_source (registry, source);
             });
 
-            listbox.show_all ();
+            registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
+                add_source (registry, source);
+            });
         } catch (GLib.Error error) {
             critical (error.message);
+        }
+    }
+
+    private void add_source (E.SourceRegistry registry, E.Source source) {
+        var source_row = new Tasks.SourceRow (source);
+
+        listbox.add (source_row);
+        listbox.show_all ();
+
+        var last_selected_list = Application.settings.get_string ("selected-list");
+        if (last_selected_list == "" && registry.default_task_list == source) {
+            listbox.select_row (source_row);
+        } else if (last_selected_list == source.uid) {
+            listbox.select_row (source_row);
         }
     }
 
