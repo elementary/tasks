@@ -143,7 +143,7 @@ public class Tasks.ListRow : Gtk.ListBoxRow {
         stdout.printf("on_objects_modified");
     }
 
-    private void on_objects_removed (E.Source source, ECal.Client client, SList<unowned ECal.ComponentId> uids) {
+    private void on_objects_removed (E.Source source, ECal.Client client, SList<unowned ECal.ComponentId?> uids) {
         stdout.printf("on_objects_removed");
     }
 }
