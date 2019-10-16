@@ -136,14 +136,20 @@ public class Tasks.ListRow : Gtk.ListBoxRow {
     }
 
     private void on_objects_added (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
-        stdout.printf("on_objects_added");
+        objects.foreach ((component) => {
+            critical (component.get_summary ());
+        });
     }
 
     private void on_objects_modified (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
-        stdout.printf("on_objects_modified");
+        objects.foreach ((component) => {
+            critical (component.get_summary ());
+        });
     }
 
     private void on_objects_removed (E.Source source, ECal.Client client, SList<unowned ECal.ComponentId?> uids) {
-        stdout.printf("on_objects_removed");
+        uids.foreach ((uid) => {
+            critical((string) uid);
+        });
     }
 }

@@ -38,6 +38,9 @@ public class Tasks.Application : Gtk.Application {
             return;
         }
 
+        var task_list_model = Tasks.TaskListModel.get_default ();
+        task_list_model.load_all_sources ();
+
         var main_window = new MainWindow (this);
 
         int window_x, window_y;
