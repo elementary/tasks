@@ -26,13 +26,19 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
+        var completed = component.get_status () == ICal.PropertyStatus.COMPLETED;
+
         var check = new Gtk.CheckButton ();
-        check.active = component.get_status () == ICal.PropertyStatus.COMPLETED;
+        check.active = completed;
         check.sensitive = false;
 
         var label = new Gtk.Label (component.get_summary ());
+        label.hexpand = true;
         label.wrap = true;
         label.xalign = 0;
+
+        var today = ICal.Time.today ();
+        var due_date = component.get_due ();
 
         var grid = new Gtk.Grid ();
         grid.margin = 3;
@@ -40,6 +46,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.column_spacing = 6;
         grid.add (check);
         grid.add (label);
+
+        if (today.compare (due_date) > 0 && !completed) {
+            var due_image = new Gtk.Image.from_icon_name ("task-past-due-symbolic", Gtk.IconSize.MENU);
+            grid.add (due_image);
+        }
 
         add (grid);
     }
