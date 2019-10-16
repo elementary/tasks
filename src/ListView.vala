@@ -98,11 +98,8 @@ public class Tasks.ListView : Gtk.Grid {
 
     private void on_objects_added (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
         objects.foreach ((component) => {
-            var label = new Gtk.Label (component.get_summary ());
-            label.wrap = true;
-            label.xalign = 0;
-
-            task_list.add (label);
+            var task_row = new Tasks.TaskRow (component);
+            task_list.add (task_row);
         });
 
         task_list.show_all ();
