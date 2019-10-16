@@ -30,7 +30,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
     private uint configure_id;
     private Gtk.ListBox listbox;
-
+    private Gee.HashMap<E.Source, Tasks.SourceRow>? source_rows;
     private E.SourceRegistry registry;
 
     public MainWindow (Gtk.Application application) {
@@ -145,10 +145,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         var list_row = ((Tasks.SourceRow) listbox.get_selected_row ());
         var source = list_row.source;
         if (source.removable) {
-            source.remove.begin (null, (obj, results) => {
-                listbox.unselect_row (list_row);
-                list_row.remove_request ();
-            });
+            source.remove.begin (null);
         } else {
             Gdk.beep ();
         }
@@ -191,8 +188,13 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     private async void init_registry () {
         try {
             registry = yield new E.SourceRegistry (null);
+
             registry.source_added.connect ((registry, source) => {
                 add_source (registry, source);
+            });
+
+            registry.source_removed.connect ((registry, source) => {
+                remove_source (registry, source);
             });
 
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
@@ -204,17 +206,28 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void add_source (E.SourceRegistry registry, E.Source source) {
-        var source_row = new Tasks.SourceRow (source);
-
-        listbox.add (source_row);
-        listbox.show_all ();
-
-        var last_selected_list = Application.settings.get_string ("selected-list");
-        if (last_selected_list == "" && registry.default_task_list == source) {
-            listbox.select_row (source_row);
-        } else if (last_selected_list == source.uid) {
-            listbox.select_row (source_row);
+        if (source_rows == null) {
+            source_rows = new Gee.HashMap<E.Source, Tasks.SourceRow> ();
         }
+
+        if (!source_rows.has_key (source)) {
+            source_rows[source] = new Tasks.SourceRow (source);
+
+            listbox.add (source_rows[source]);
+            listbox.show_all ();
+
+            var last_selected_list = Application.settings.get_string ("selected-list");
+            if (last_selected_list == "" && registry.default_task_list == source) {
+                listbox.select_row (source_rows[source]);
+            } else if (last_selected_list == source.uid) {
+                listbox.select_row (source_rows[source]);
+            }
+        }
+    }
+
+    private void remove_source (E.SourceRegistry registry, E.Source source) {
+        listbox.unselect_row (source_rows[source]);
+        source_rows[source].remove_request ();
     }
 
     public override bool configure_event (Gdk.EventConfigure event) {
