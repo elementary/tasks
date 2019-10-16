@@ -20,7 +20,6 @@
 
 public class Tasks.ListRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
-    private ECal.ClientView view;
 
     private static Gtk.CssProvider listrow_provider;
 
@@ -81,23 +80,27 @@ public class Tasks.ListRow : Gtk.ListBoxRow {
         update_status_image ();
         source.notify["connection-status"].connect (() => update_status_image);
 
-        try {
-            var iso_last = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().to_unix ());
-            var iso_first = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().add_years (-1).to_unix ());
-            var query = @"(occur-in-time-range? (make-time \"$iso_first\") (make-time \"$iso_last\"))";
+        var task_list_model = TaskListModel.get_default ();
+        task_list_model.tasks_added.connect ((source, tasks) => {
+            if( source != this.source ){
+                return;
+            }
+            on_tasks_added (tasks);
+        });
 
-            var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
-            client.get_view_sync (query, out view, null);
+        task_list_model.tasks_updated.connect ((source, tasks) => {
+            if( source != this.source ){
+                return;
+            }
+            on_tasks_updated (tasks);
+        });
 
-            view.objects_added.connect ((objects) => on_objects_added (source, client, objects));
-            view.objects_modified.connect ((objects) => on_objects_modified (source, client, objects));
-            view.objects_removed.connect ((uids) => on_objects_removed (source, client, uids));
-
-            view.start ();
-
-        } catch (Error e) {
-            critical (e.message);
-        }
+        task_list_model.tasks_removed.connect ((source, tasks) => {
+            if( source != this.source ){
+                return;
+            }
+            on_tasks_removed (tasks);
+        });
     }
 
     public void remove_request () {
@@ -135,21 +138,27 @@ public class Tasks.ListRow : Gtk.ListBoxRow {
         }
     }
 
-    private void on_objects_added (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
-        objects.foreach ((component) => {
-            critical (component.get_summary ());
-        });
+    private void on_tasks_added (Gee.Collection<ECal.Component> tasks) {
+        foreach (var task in tasks) {
+            ECal.ComponentText task_summary;
+            task.get_summary (out task_summary);
+            critical("on_tasks_added.task: %s", task_summary.value);
+        }
     }
 
-    private void on_objects_modified (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
-        objects.foreach ((component) => {
-            critical (component.get_summary ());
-        });
+    private void on_tasks_updated (Gee.Collection<ECal.Component> tasks) {
+        foreach (var task in tasks) {
+            ECal.ComponentText task_summary;
+            task.get_summary (out task_summary);
+            critical("on_tasks_updated.task: %s", task_summary.value);
+        }
     }
 
-    private void on_objects_removed (E.Source source, ECal.Client client, SList<unowned ECal.ComponentId?> uids) {
-        uids.foreach ((uid) => {
-            critical((string) uid);
-        });
+    private void on_tasks_removed (Gee.Collection<ECal.Component> tasks) {
+        foreach (var task in tasks) {
+            ECal.ComponentText task_summary;
+            task.get_summary (out task_summary);
+            critical("on_tasks_removed.task: %s", task_summary.value);
+        }
     }
 }

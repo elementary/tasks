@@ -189,25 +189,21 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private async void load_sources () {
-        try {
-            var last_selected_list = Tasks.Application.settings.get_string ("selected-list");
+        var last_selected_list = Tasks.Application.settings.get_string ("selected-list");
 
-            registry = yield new E.SourceRegistry (null);
-            registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
-                var list_row = new Tasks.ListRow (source);
-                listbox.add (list_row);
+        var task_list_model = TaskListModel.get_default ();
+        task_list_model.connected.connect ((source) => {
+            var list_row = new Tasks.ListRow (source);
+            listbox.add (list_row);
 
-                if (last_selected_list == "" && registry.default_task_list == source) {
-                    listbox.select_row (list_row);
-                } else if (last_selected_list == source.uid) {
-                    listbox.select_row (list_row);
-                }
-            });
+            if (last_selected_list == "" && task_list_model.registry.default_task_list == source) {
+                listbox.select_row (list_row);
+            } else if (last_selected_list == source.uid) {
+                listbox.select_row (list_row);
+            }
 
             listbox.show_all ();
-        } catch (GLib.Error error) {
-            critical (error.message);
-        }
+        });
     }
 
     public override bool configure_event (Gdk.EventConfigure event) {

@@ -192,23 +192,16 @@ public class Tasks.TaskListModel : Object {
             var unix_first = (time_t) new GLib.DateTime.now ().add_years (-1).to_unix ();
 
 #if E_CAL_2_0
-            //client.generate_instances_for_object_sync (comp, (time_t) data_range.first_dt.to_unix (), (time_t) data_range.last_dt.to_unix (), null, (comp, start, end) => {
             client.generate_instances_for_object_sync (comp, unix_first, unix_last, null, (comp, start, end) => {
                 var task = new ECal.Component.from_icalcomponent (comp);
-                debug_task (source, task);
+#else
+             client.generate_instances_for_object_sync (comp, unix_first, unix_last, (task, start, end) => {
+#endif
+            debug_task (source, task);
                 tasks.set (uid, task);
                 added_tasks.add (task);
                 return true;
             });
-#else
-            //client.generate_instances_for_object_sync (comp, (time_t) data_range.first_dt.to_unix (), (time_t) data_range.last_dt.to_unix (), (task, start, end) => {
-            //client.generate_instances_for_object_sync (comp, unix_first, unix_last, (task, start, end) => {
-#endif
-             //   debug_task (source, task);
-              //  tasks.set (uid, task);
-               // added_tasks.add (task);
-               // return true;
-            //});
         });
 
         tasks_added (source, added_tasks.read_only_view);
