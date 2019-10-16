@@ -228,6 +228,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     private void remove_source (E.SourceRegistry registry, E.Source source) {
         listbox.unselect_row (source_rows[source]);
         source_rows[source].remove_request ();
+        source_rows.unset (source);
     }
 
     public override bool configure_event (Gdk.EventConfigure event) {
