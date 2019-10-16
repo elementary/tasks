@@ -30,8 +30,7 @@ namespace Tasks.Util {
 
     /* Returns true if 'a' and 'b' are the same ECal.Component */
     public bool calcomponent_equal_func (ECal.Component a, ECal.Component b) {
-        return false;
-        //return a.get_id ().equal (b.get_id ());
+        return a.get_id ().equal (b.get_id ());
     }
 
     public int calcomponent_compare_func (ECal.Component? a, ECal.Component? b) {
@@ -43,16 +42,14 @@ namespace Tasks.Util {
             return 0;
         }
 
-        return 0;
+        var a_id = a.get_id ();
+        var b_id = b.get_id ();
+        int res = GLib.strcmp (a_id.get_uid (), b_id.get_uid ());
+        if (res == 0) {
+            return GLib.strcmp (a_id.get_rid (), b_id.get_rid ());
+        }
 
-        //var a_id = a.get_id ();
-        //var b_id = b.get_id ();
-        //int res = GLib.strcmp (a_id.get_uid (), b_id.get_uid ());
-        //if (res == 0) {
-            //return GLib.strcmp (a_id.get_rid (), b_id.get_rid ());
-        //}
-
-        //return res;
+        return res;
     }
 }
 
