@@ -38,7 +38,7 @@ namespace ECal {
 		public Client.from_uri (string uri, ECal.ClientSourceType source_type) throws GLib.Error;
 		public void generate_instances (ulong start, ulong end, GLib.Cancellable? cancellable, ECal.RecurInstanceFn cb, void* cb_data, owned GLib.DestroyNotify? destroy_cb_data);
 		public void generate_instances_for_object (ICal.Component icalcomp, ulong start, ulong end, GLib.Cancellable? cancellable, ECal.RecurInstanceFn cb, void* cb_data, owned GLib.DestroyNotify? destroy_cb_data);
-		public void generate_instances_for_object_sync (ICal.Component icalcomp, ulong start, ulong end, ECal.RecurInstanceFn cb, void* cb_data);
+		public void generate_instances_for_object_sync (ICal.Component icalcomp, ulong start, ulong end, ECal.RecurInstanceFn cb);
 		public void generate_instances_sync (ulong start, ulong end, ECal.RecurInstanceFn cb, void* cb_data);
 		public async bool get_attachment_uris (string uid, string rid, GLib.Cancellable? cancellable, out GLib.SList attachment_uris) throws GLib.Error;
 		public bool get_attachment_uris_sync (string uid, string rid, GLib.SList attachment_uris, GLib.Cancellable? cancellable) throws GLib.Error;
