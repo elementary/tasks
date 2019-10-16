@@ -26,10 +26,20 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
+        var check = new Gtk.CheckButton ();
+        check.active = component.get_status () == ICal.PropertyStatus.COMPLETED;
+        check.sensitive = false;
+
         var label = new Gtk.Label (component.get_summary ());
         label.wrap = true;
         label.xalign = 0;
 
-        add (label);
+        var grid = new Gtk.Grid ();
+        grid.margin = 3;
+        grid.column_spacing = 6;
+        grid.add (check);
+        grid.add (label);
+
+        add (grid);
     }
 }
