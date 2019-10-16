@@ -197,8 +197,15 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 remove_source (registry, source);
             });
 
+            var last_selected_list = Application.settings.get_string ("selected-list");
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
                 add_source (registry, source);
+
+                if (last_selected_list == "" && registry.default_task_list == source) {
+                    listbox.select_row (source_rows[source]);
+                } else if (last_selected_list == source.uid) {
+                    listbox.select_row (source_rows[source]);
+                }
             });
         } catch (GLib.Error error) {
             critical (error.message);
@@ -215,13 +222,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
             listbox.add (source_rows[source]);
             listbox.show_all ();
-
-            var last_selected_list = Application.settings.get_string ("selected-list");
-            if (last_selected_list == "" && registry.default_task_list == source) {
-                listbox.select_row (source_rows[source]);
-            } else if (last_selected_list == source.uid) {
-                listbox.select_row (source_rows[source]);
-            }
         }
     }
 
