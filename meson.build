@@ -18,7 +18,7 @@ executable(
     'src/Application.vala',
     'src/ListView.vala',
     'src/MainWindow.vala',
-    'src/Widgets/ListRow.vala',
+    'src/Widgets/SourceRow.vala',
     'src/Widgets/ListSettingsPopover.vala',
     dependencies: [
         dependency('glib-2.0'),

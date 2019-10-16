@@ -3,7 +3,7 @@
   <gresource prefix="/io/elementary/tasks">
     <file compressed="true">ColorButton.css</file>
     <file compressed="true">HeaderBar.css</file>
-    <file compressed="true">ListRow.css</file>
+    <file compressed="true">SourceRow.css</file>
     <file compressed="true">Sidebar.css</file>
   </gresource>
 </gresources>
