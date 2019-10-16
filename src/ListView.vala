@@ -28,6 +28,7 @@ public class Tasks.ListView : Gtk.Grid {
         var label = new Gtk.Label ("");
         label.halign = Gtk.Align.START;
         label.hexpand = true;
+        label.margin_start = 24;
 
         unowned Gtk.StyleContext label_style_context = label.get_style_context ();
         label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
@@ -36,6 +37,7 @@ public class Tasks.ListView : Gtk.Grid {
         var list_settings_popover = new Tasks.ListSettingsPopover ();
 
         var settings_button = new Gtk.MenuButton ();
+        settings_button.margin_end = 24;
         settings_button.valign = Gtk.Align.CENTER;
         settings_button.tooltip_text = _("Edit Name and Appearance");
         settings_button.popover = list_settings_popover;
@@ -50,10 +52,9 @@ public class Tasks.ListView : Gtk.Grid {
         scrolled_window.expand = true;
         scrolled_window.add (task_list);
 
+        margin_bottom = 3;
         column_spacing = 12;
         row_spacing = 24;
-        margin = 24;
-        margin_top = 0;
         attach (label, 0, 0);
         attach (settings_button, 1, 0);
         attach (scrolled_window, 0, 1, 2);

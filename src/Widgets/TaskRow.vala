@@ -36,6 +36,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         var grid = new Gtk.Grid ();
         grid.margin = 3;
+        grid.margin_start = grid.margin_end = 24;
         grid.column_spacing = 6;
         grid.add (check);
         grid.add (label);
