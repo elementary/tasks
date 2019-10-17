@@ -21,12 +21,14 @@
 public class Tasks.TaskRow : Gtk.ListBoxRow {
     public unowned ICal.Component component { get; construct; }
 
+    public bool completed { get; private set; }
+
     public TaskRow (ICal.Component component) {
         Object (component: component);
     }
 
     construct {
-        var completed = component.get_status () == ICal.PropertyStatus.COMPLETED;
+        completed = component.get_status () == ICal.PropertyStatus.COMPLETED;
 
         var check = new Gtk.CheckButton ();
         check.active = completed;

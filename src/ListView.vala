@@ -47,6 +47,8 @@ public class Tasks.ListView : Gtk.Grid {
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
         task_list = new Gtk.ListBox ();
+        task_list.set_filter_func (filter_function);
+        task_list.set_sort_func (sort_function);
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow (null, null);
@@ -59,6 +61,10 @@ public class Tasks.ListView : Gtk.Grid {
         attach (summary_label, 0, 0);
         attach (settings_button, 1, 0);
         attach (scrolled_window, 0, 1, 2);
+
+        Application.settings.changed["show-completed"].connect (() => {
+            task_list.invalidate_filter ();
+        });
 
         settings_button.toggled.connect (() => {
             if (settings_button.active) {
@@ -75,9 +81,7 @@ public class Tasks.ListView : Gtk.Grid {
                 update_request ();
 
                 try {
-                     var iso_last = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().to_unix ());
-                     var iso_first = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().add_years (-1).to_unix ());
-                     var query = @"(occur-in-time-range? (make-time \"$iso_first\") (make-time \"$iso_last\"))";
+                     var query = "OR (is-completed?) (has-alarms?)";
 
                      var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
                      client.get_view_sync (query, out view, null);
@@ -102,6 +106,18 @@ public class Tasks.ListView : Gtk.Grid {
         Tasks.Application.set_task_color (source, summary_label);
     }
 
+    [CCode (instance_pos = -1)]
+    private bool filter_function (Gtk.ListBoxRow row) {
+        if (
+            Application.settings.get_boolean ("show-completed") == false &&
+            ((TaskRow) row).completed
+        ) {
+            return false;
+        }
+
+        return true;
+    }
+
     private void on_objects_added (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
         objects.foreach ((component) => {
             var task_row = new Tasks.TaskRow (component);
@@ -110,4 +126,18 @@ public class Tasks.ListView : Gtk.Grid {
 
         task_list.show_all ();
      }
+
+    [CCode (instance_pos = -1)]
+    private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {
+        var row1_completed = ((Tasks.TaskRow) row1).completed;
+        var row2_completed = ((Tasks.TaskRow) row2).completed;
+
+        if (row1_completed && !row2_completed) {
+            return 1;
+        } else if (row2_completed && !row1_completed) {
+            return -1;
+        }
+
+        return 0;
+    }
 }
