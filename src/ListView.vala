@@ -22,17 +22,18 @@ public class Tasks.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
     private ECal.ClientView view;
+    private Gtk.Label summary_label;
     private Gtk.ListBox task_list;
 
     construct {
-        var label = new Gtk.Label ("");
-        label.halign = Gtk.Align.START;
-        label.hexpand = true;
-        label.margin_start = 24;
+        summary_label = new Gtk.Label ("");
+        summary_label.halign = Gtk.Align.START;
+        summary_label.hexpand = true;
+        summary_label.margin_start = 24;
 
-        unowned Gtk.StyleContext label_style_context = label.get_style_context ();
-        label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
-        label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
+        unowned Gtk.StyleContext summary_label_style_context = summary_label.get_style_context ();
+        summary_label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
+        summary_label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
         var list_settings_popover = new Tasks.ListSettingsPopover ();
 
@@ -46,6 +47,7 @@ public class Tasks.ListView : Gtk.Grid {
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
         task_list = new Gtk.ListBox ();
+        task_list.set_filter_func (filter_function);
         task_list.set_sort_func (sort_function);
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
@@ -56,9 +58,13 @@ public class Tasks.ListView : Gtk.Grid {
         margin_bottom = 3;
         column_spacing = 12;
         row_spacing = 24;
-        attach (label, 0, 0);
+        attach (summary_label, 0, 0);
         attach (settings_button, 1, 0);
         attach (scrolled_window, 0, 1, 2);
+
+        Application.settings.changed["show-completed"].connect (() => {
+            task_list.invalidate_filter ();
+        });
 
         settings_button.toggled.connect (() => {
             if (settings_button.active) {
@@ -72,13 +78,10 @@ public class Tasks.ListView : Gtk.Grid {
             }
 
             if (source != null) {
-                label.label = source.dup_display_name ();
-                Tasks.Application.set_task_color (source, label);
+                update_request ();
 
                 try {
-                     var iso_last = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().to_unix ());
-                     var iso_first = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().add_years (-1).to_unix ());
-                     var query = @"(occur-in-time-range? (make-time \"$iso_first\") (make-time \"$iso_last\"))";
+                     var query = "OR (is-completed?) (has-alarms?)";
 
                      var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
                      client.get_view_sync (query, out view, null);
@@ -91,11 +94,28 @@ public class Tasks.ListView : Gtk.Grid {
                      critical (e.message);
                  }
             } else {
-                label.label = "";
+                summary_label.label = "";
             }
 
             show_all ();
         });
+    }
+
+    public void update_request () {
+        summary_label.label = source.dup_display_name ();
+        Tasks.Application.set_task_color (source, summary_label);
+    }
+
+    [CCode (instance_pos = -1)]
+    private bool filter_function (Gtk.ListBoxRow row) {
+        if (
+            Application.settings.get_boolean ("show-completed") == false &&
+            ((TaskRow) row).completed
+        ) {
+            return false;
+        }
+
+        return true;
     }
 
     private void on_objects_added (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
@@ -109,13 +129,13 @@ public class Tasks.ListView : Gtk.Grid {
 
     [CCode (instance_pos = -1)]
     private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {
-        var row1_status = ((Tasks.TaskRow) row1).component.get_status ();
-        var row2_status = ((Tasks.TaskRow) row2).component.get_status ();
+        var row1_completed = ((Tasks.TaskRow) row1).completed;
+        var row2_completed = ((Tasks.TaskRow) row2).completed;
 
-        if (row1_status == ICal.PropertyStatus.NEEDSACTION && row2_status != ICal.PropertyStatus.NEEDSACTION) {
-            return -1;
-        } else if (row2_status == ICal.PropertyStatus.NEEDSACTION && row1_status != ICal.PropertyStatus.NEEDSACTION) {
+        if (row1_completed && !row2_completed) {
             return 1;
+        } else if (row2_completed && !row1_completed) {
+            return -1;
         }
 
         return 0;

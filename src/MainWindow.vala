@@ -32,6 +32,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     private Gtk.ListBox listbox;
     private Gee.HashMap<E.Source, Tasks.SourceRow>? source_rows;
     private E.SourceRegistry registry;
+    private Tasks.ListView listview;
 
     public MainWindow (Gtk.Application application) {
         Object (
@@ -104,7 +105,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);
         sidebar_style_context.add_provider (sidebar_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        var listview = new Tasks.ListView ();
+        listview = new Tasks.ListView ();
 
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
         paned.pack1 (sidebar, false, false);
@@ -130,7 +131,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 var source = ((Tasks.SourceRow) row).source;
                 listview.source = source;
                 Tasks.Application.settings.set_string ("selected-list", source.uid);
+
+                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
             } else {
+                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
                 var first_row = listbox.get_row_at_index (0);
                 if (first_row != null) {
                     listbox.select_row (first_row);
@@ -193,6 +197,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 add_source (registry, source);
             });
 
+            registry.source_changed.connect ((registry, source) => {
+                update_source (registry, source);
+            });
+
             registry.source_removed.connect ((registry, source) => {
                 remove_source (registry, source);
             });
@@ -223,6 +231,11 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             listbox.add (source_rows[source]);
             listbox.show_all ();
         }
+    }
+
+    private void update_source (E.SourceRegistry registry, E.Source source) {
+        source_rows[source].update_request ();
+        listview.update_request ();
     }
 
     private void remove_source (E.SourceRegistry registry, E.Source source) {

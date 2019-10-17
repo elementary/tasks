@@ -26,13 +26,13 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
 
     construct {
         var name_label = new Granite.HeaderLabel (_("Name:"));
+        name_label.margin_start = name_label.margin_end = 12;
 
         name_entry = new Gtk.Entry ();
+        name_entry.margin_start = name_entry.margin_end = 12;
 
         var css_provider = new Gtk.CssProvider ();
         css_provider.load_from_resource ("/io/elementary/tasks/ColorButton.css");
-
-        var color_label = new Granite.HeaderLabel (_("Color:"));
 
         var color_button_red = new Gtk.RadioButton (null);
 
@@ -94,6 +94,7 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
 
         var color_grid = new Gtk.Grid ();
         color_grid.column_spacing = 6;
+        color_grid.margin = 12;
         color_grid.add (color_button_red);
         color_grid.add (color_button_orange);
         color_grid.add (color_button_yellow);
@@ -103,14 +104,36 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         color_grid.add (color_button_brown);
         color_grid.add (color_button_slate);
 
+        var show_completed_label = new Gtk.Label (_("Show Completed"));
+        show_completed_label.hexpand = true;
+        show_completed_label.xalign = 0;
+
+        var show_completed_switch = new Gtk.Switch ();
+
+        var show_completed_grid = new Gtk.Grid ();
+        show_completed_grid.column_spacing = 6;
+        show_completed_grid.add (show_completed_label);
+        show_completed_grid.add (show_completed_switch);
+
+        var show_completed_button = new Gtk.ModelButton ();
+        show_completed_button.margin_top = 3;
+        show_completed_button.get_child ().destroy ();
+        show_completed_button.add (show_completed_grid);
+
+        var delete_button = new Gtk.ModelButton ();
+        delete_button.action_name = MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST;
+        delete_button.text = _("Delete List");
+        delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+
         var grid = new Gtk.Grid ();
         grid.orientation = Gtk.Orientation.VERTICAL;
-        grid.margin = 12;
-        grid.margin_top = 3;
+        grid.margin_top = grid.margin_bottom = 3;
         grid.add (name_label);
         grid.add (name_entry);
-        grid.add (color_label);
         grid.add (color_grid);
+        grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        grid.add (show_completed_button);
+        grid.add (delete_button);
         grid.show_all ();
 
         add (grid);
@@ -192,6 +215,13 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
                     break;
             }
         });
+
+        show_completed_button.button_release_event.connect (() => {
+            show_completed_switch.activate ();
+            return Gdk.EVENT_STOP;
+        });
+
+        Application.settings.bind ("show-completed", show_completed_switch, "active", GLib.SettingsBindFlags.DEFAULT);
     }
 
     private void save () {
