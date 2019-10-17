@@ -31,6 +31,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     private static Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
 
     private uint configure_id;
+    private Gtk.MenuButton add_tasklist_button;
     private Gtk.ListBox listbox;
     private Gee.HashMap<E.Source, Tasks.SourceRow>? source_rows;
     private E.SourceRegistry registry;
@@ -102,10 +103,22 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         var sidebar_provider = new Gtk.CssProvider ();
         sidebar_provider.load_from_resource ("io/elementary/tasks/Sidebar.css");
 
-        var add_tasklist_button = new Gtk.Button.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
-        add_tasklist_button.action_name = ACTION_PREFIX + ACTION_ADD_NEW_LIST;
+        var offline_tasklist_modelbutton = new Gtk.ModelButton ();
+        offline_tasklist_modelbutton.text = _("Local Task List");
+
+        var modelbutton_grid = new Gtk.Grid ();
+        modelbutton_grid.orientation = Gtk.Orientation.VERTICAL;
+        modelbutton_grid.add (offline_tasklist_modelbutton);
+        modelbutton_grid.show_all ();
+
+        var add_tasklist_popover = new Gtk.Popover (add_tasklist_button);
+        add_tasklist_popover.add (modelbutton_grid);
+
+        add_tasklist_button = new Gtk.MenuButton ();
+        add_tasklist_button.image = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+        add_tasklist_button.popover = add_tasklist_popover;
         add_tasklist_button.tooltip_markup = Granite.markup_accel_tooltip (
-            application_instance.get_accels_for_action (add_tasklist_button.action_name),
+            application_instance.get_accels_for_action (ACTION_PREFIX + ACTION_ADD_NEW_LIST),
             _("Add Task List")
         );
         add_tasklist_button.get_style_context ().add_provider (sidebar_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -163,10 +176,14 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 }
             }
         });
+
+        offline_tasklist_modelbutton.clicked.connect (() => {
+            critical ("YATTA");
+        });
     }
 
     private void action_add_new_list () {
-        critical ("YATTA");
+        add_tasklist_button.activate ();
     }
 
     private void action_delete_selected_list () {
