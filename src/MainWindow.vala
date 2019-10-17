@@ -193,10 +193,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 add_source (registry, source);
             });
 
-            registry.source_changed.connect ((registry, source) => {
-                update_source (registry, source);
-            });
-
             registry.source_removed.connect ((registry, source) => {
                 remove_source (registry, source);
             });
@@ -227,10 +223,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             listbox.add (source_rows[source]);
             listbox.show_all ();
         }
-    }
-
-    private void update_source (E.SourceRegistry registry, E.Source source) {
-
     }
 
     private void remove_source (E.SourceRegistry registry, E.Source source) {
