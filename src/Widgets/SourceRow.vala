@@ -18,37 +18,38 @@
 *
 */
 
-public class Tasks.ListRow : Gtk.ListBoxRow {
+public class Tasks.SourceRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
 
     private static Gtk.CssProvider listrow_provider;
 
+    private Gtk.Grid source_color;
     private Gtk.Image status_image;
+    private Gtk.Label display_name_label;
     private Gtk.Stack status_stack;
+    private Gtk.Revealer revealer;
 
-    public ListRow (E.Source source) {
+    public SourceRow (E.Source source) {
         Object (source: source);
     }
 
     static construct {
         listrow_provider = new Gtk.CssProvider ();
-        listrow_provider.load_from_resource ("io/elementary/tasks/ListRow.css");
+        listrow_provider.load_from_resource ("io/elementary/tasks/SourceRow.css");
     }
 
     construct {
-        var source_color = new Gtk.Grid ();
+        source_color = new Gtk.Grid ();
         source_color.valign = Gtk.Align.CENTER;
 
         unowned Gtk.StyleContext source_color_context = source_color.get_style_context ();
         source_color_context.add_class ("source-color");
         source_color_context.add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        Tasks.Application.set_task_color (source, source_color);
-
-        var label = new Gtk.Label (source.display_name);
-        label.halign = Gtk.Align.START;
-        label.hexpand = true;
-        label.margin_end = 9;
+        display_name_label = new Gtk.Label (source.display_name);
+        display_name_label.halign = Gtk.Align.START;
+        display_name_label.hexpand = true;
+        display_name_label.margin_end = 9;
 
         status_image = new Gtk.Image ();
         status_image.pixel_size = 16;
@@ -67,16 +68,23 @@ public class Tasks.ListRow : Gtk.ListBoxRow {
         grid.margin_start = 12;
         grid.margin_end = 6;
         grid.add (source_color);
-        grid.add (label);
+        grid.add (display_name_label);
         grid.add (status_stack);
 
-        add (grid);
+        revealer = new Gtk.Revealer ();
+        revealer.reveal_child = true;
+        revealer.add (grid);
 
-        update_status_image ();
-        source.notify["connection-status"].connect (() => update_status_image);
+        add (revealer);
+
+        update_request ();
     }
 
-    private void update_status_image () {
+    public void update_request () {
+        Tasks.Application.set_task_color (source, source_color);
+
+        display_name_label.label = source.display_name;
+
         if (source.connection_status == E.SourceConnectionStatus.CONNECTING) {
             status_stack.visible_child_name = "spinner";
         } else {
@@ -101,5 +109,13 @@ public class Tasks.ListRow : Gtk.ListBoxRow {
                     break;
             }
         }
+    }
+
+    public void remove_request () {
+        revealer.reveal_child = false;
+        GLib.Timeout.add (revealer.transition_duration, () => {
+            destroy ();
+            return GLib.Source.REMOVE;
+        });
     }
 }

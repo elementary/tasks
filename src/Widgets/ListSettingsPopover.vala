@@ -18,27 +18,21 @@
 *
 */
 
-public class Tasks.ListSettingsDialog : Gtk.Dialog {
-    public E.Source source { get; construct; }
+public class Tasks.ListSettingsPopover : Gtk.Popover {
+    public E.Source source { get; set; }
 
-    public ListSettingsDialog (E.Source source) {
-        Object (source: source);
-    }
+    private E.SourceTaskList task_list;
+    private Gtk.Entry name_entry;
 
     construct {
-        var name_label = new Gtk.Label (_("Name:"));
-        name_label.halign = Gtk.Align.END;
+        var name_label = new Granite.HeaderLabel (_("Name:"));
+        name_label.margin_start = name_label.margin_end = 12;
 
-        var name_entry = new Gtk.Entry ();
-        name_entry.activates_default = true;
-        name_entry.text = source.dup_display_name ();
-        name_entry.sensitive = source.writable;
+        name_entry = new Gtk.Entry ();
+        name_entry.margin_start = name_entry.margin_end = 12;
 
         var css_provider = new Gtk.CssProvider ();
         css_provider.load_from_resource ("/io/elementary/tasks/ColorButton.css");
-
-        var color_label = new Gtk.Label (_("Color:"));
-        color_label.xalign = 1;
 
         var color_button_red = new Gtk.RadioButton (null);
 
@@ -98,39 +92,9 @@ public class Tasks.ListSettingsDialog : Gtk.Dialog {
 
         var color_button_none = new Gtk.RadioButton.from_widget (color_button_red);
 
-        var task_list = ((E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST));
-        switch (task_list.dup_color ()) {
-            case "#c6262e":
-                color_button_red.active = true;
-                break;
-            case "#f37329":
-                color_button_orange.active = true;
-                break;
-            case "#e6a92a":
-                color_button_yellow.active = true;
-                break;
-            case "#68b723":
-                color_button_green.active = true;
-                break;
-            case "#3689e6":
-                color_button_blue.active = true;
-                break;
-            case "#a56de2":
-                color_button_purple.active = true;
-                break;
-            case "#8a715e":
-                color_button_brown.active = true;
-                break;
-            case "#667885":
-                color_button_slate.active = true;
-                break;
-            default:
-                color_button_none.active = true;
-                break;
-        }
-
         var color_grid = new Gtk.Grid ();
         color_grid.column_spacing = 6;
+        color_grid.margin = 12;
         color_grid.add (color_button_red);
         color_grid.add (color_button_orange);
         color_grid.add (color_button_yellow);
@@ -140,66 +104,105 @@ public class Tasks.ListSettingsDialog : Gtk.Dialog {
         color_grid.add (color_button_brown);
         color_grid.add (color_button_slate);
 
+        var delete_button = new Gtk.ModelButton ();
+        delete_button.margin_top = 3;
+        delete_button.action_name = MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST;
+        delete_button.text = _("Delete List");
+        delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+
         var grid = new Gtk.Grid ();
-        grid.column_spacing =  grid.row_spacing = 12;
-        grid.margin_start = grid.margin_end = 6;
-        grid.margin_bottom = 18;
-        grid.attach (name_label, 0, 0);
-        grid.attach (name_entry, 1, 0);
-        grid.attach (color_label, 0, 1);
-        grid.attach (color_grid, 1, 1);
+        grid.orientation = Gtk.Orientation.VERTICAL;
+        grid.margin_top = grid.margin_bottom = 3;
+        grid.add (name_label);
+        grid.add (name_entry);
+        grid.add (color_grid);
+        grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        grid.add (delete_button);
+        grid.show_all ();
 
-        get_content_area ().add (grid);
-
-        border_width = 6;
-        deletable = false;
-        modal = true;
-        resizable = false;
-        transient_for = ((Gtk.Application) GLib.Application.get_default ()).get_active_window ();
-
-        var close_button = add_button (_("Close"), Gtk.ResponseType.CLOSE);
-        close_button.has_default = true;
+        add (grid);
 
         color_button_red.toggled.connect (() => {
             task_list.color = "#c6262e";
+            save ();
         });
 
         color_button_orange.toggled.connect (() => {
             task_list.color = "#f37329";
+            save ();
         });
 
         color_button_yellow.toggled.connect (() => {
             task_list.color = "#e6a92a";
+            save ();
         });
 
         color_button_green.toggled.connect (() => {
             task_list.color = "#68b723";
+            save ();
         });
 
         color_button_blue.toggled.connect (() => {
             task_list.color = "#3689e6";
+            save ();
         });
 
         color_button_purple.toggled.connect (() => {
             task_list.color = "#a56de2";
+            save ();
         });
 
         color_button_brown.toggled.connect (() => {
             task_list.color = "#8a715e";
+            save ();
         });
 
         color_button_slate.toggled.connect (() => {
             task_list.color = "#667885";
+            save ();
         });
 
-        response.connect (() => {
-            source.display_name = name_entry.text;
-            try {
-                source.write.begin (null);
-            } catch (Error e) {
-                critical (e.message);
+        name_entry.changed.connect (save);
+
+        notify["source"].connect (() => {
+            name_entry.text = source.dup_display_name ();
+            name_entry.sensitive = source.writable;
+
+            task_list = ((E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST));
+            switch (task_list.dup_color ()) {
+                case "#c6262e":
+                    color_button_red.active = true;
+                    break;
+                case "#f37329":
+                    color_button_orange.active = true;
+                    break;
+                case "#e6a92a":
+                    color_button_yellow.active = true;
+                    break;
+                case "#68b723":
+                    color_button_green.active = true;
+                    break;
+                case "#3689e6":
+                    color_button_blue.active = true;
+                    break;
+                case "#a56de2":
+                    color_button_purple.active = true;
+                    break;
+                case "#8a715e":
+                    color_button_brown.active = true;
+                    break;
+                case "#667885":
+                    color_button_slate.active = true;
+                    break;
+                default:
+                    color_button_none.active = true;
+                    break;
             }
-            destroy ();
         });
+    }
+
+    private void save () {
+        source.display_name = name_entry.text;
+        source.write.begin (null);
     }
 }
