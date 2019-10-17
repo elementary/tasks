@@ -131,7 +131,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 var source = ((Tasks.SourceRow) row).source;
                 listview.source = source;
                 Tasks.Application.settings.set_string ("selected-list", source.uid);
+
+                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
             } else {
+                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
                 var first_row = listbox.get_row_at_index (0);
                 if (first_row != null) {
                     listbox.select_row (first_row);
