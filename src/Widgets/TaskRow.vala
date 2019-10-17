@@ -33,6 +33,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         var label = new Gtk.Label (component.get_summary ());
         label.wrap = true;
         label.xalign = 0;
+        if( component.get_status () == ICal.PropertyStatus.COMPLETED ){
+            label.set_markup ("<span foreground=\"gray\">" + component.get_summary () + "</span>");
+        }
 
         var grid = new Gtk.Grid ();
         grid.margin = 3;
