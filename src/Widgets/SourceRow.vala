@@ -23,6 +23,7 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
 
     private static Gtk.CssProvider listrow_provider;
 
+    private Gtk.Grid source_color;
     private Gtk.Image status_image;
     private Gtk.Stack status_stack;
     private Gtk.Revealer revealer;
@@ -37,7 +38,7 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
     }
 
     construct {
-        var source_color = new Gtk.Grid ();
+        source_color = new Gtk.Grid ();
         source_color.valign = Gtk.Align.CENTER;
 
         unowned Gtk.StyleContext source_color_context = source_color.get_style_context ();
@@ -79,6 +80,10 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
 
         update_status_image ();
         source.notify["connection-status"].connect (() => update_status_image);
+    }
+
+    public void update_request () {
+        Tasks.Application.set_task_color (source, source_color);
     }
 
     public void remove_request () {
