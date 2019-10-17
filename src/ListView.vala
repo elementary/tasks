@@ -22,17 +22,18 @@ public class Tasks.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
     private ECal.ClientView view;
+    private Gtk.Label summary_label;
     private Gtk.ListBox task_list;
 
     construct {
-        var label = new Gtk.Label ("");
-        label.halign = Gtk.Align.START;
-        label.hexpand = true;
-        label.margin_start = 24;
+        summary_label = new Gtk.Label ("");
+        summary_label.halign = Gtk.Align.START;
+        summary_label.hexpand = true;
+        summary_label.margin_start = 24;
 
-        unowned Gtk.StyleContext label_style_context = label.get_style_context ();
-        label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
-        label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
+        unowned Gtk.StyleContext summary_label_style_context = summary_label.get_style_context ();
+        summary_label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
+        summary_label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
         var list_settings_popover = new Tasks.ListSettingsPopover ();
 
@@ -55,7 +56,7 @@ public class Tasks.ListView : Gtk.Grid {
         margin_bottom = 3;
         column_spacing = 12;
         row_spacing = 24;
-        attach (label, 0, 0);
+        attach (summary_label, 0, 0);
         attach (settings_button, 1, 0);
         attach (scrolled_window, 0, 1, 2);
 
@@ -71,8 +72,8 @@ public class Tasks.ListView : Gtk.Grid {
             }
 
             if (source != null) {
-                label.label = source.dup_display_name ();
-                Tasks.Application.set_task_color (source, label);
+                summary_label.label = source.dup_display_name ();
+                Tasks.Application.set_task_color (source, summary_label);
 
                 source.bind_property ("display-name", label, "label");
 
@@ -92,11 +93,15 @@ public class Tasks.ListView : Gtk.Grid {
                      critical (e.message);
                  }
             } else {
-                label.label = "";
+                summary_label.label = "";
             }
 
             show_all ();
         });
+    }
+
+    public void update_request () {
+        Tasks.Application.set_task_color (source, summary_label);
     }
 
     private void on_objects_added (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
