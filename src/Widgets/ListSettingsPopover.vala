@@ -104,8 +104,23 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         color_grid.add (color_button_brown);
         color_grid.add (color_button_slate);
 
+        var show_completed_label = new Gtk.Label (_("Show Completed"));
+        show_completed_label.hexpand = true;
+        show_completed_label.xalign = 0;
+
+        var show_completed_switch = new Gtk.Switch ();
+
+        var show_completed_grid = new Gtk.Grid ();
+        show_completed_grid.column_spacing = 6;
+        show_completed_grid.add (show_completed_label);
+        show_completed_grid.add (show_completed_switch);
+
+        var show_completed_button = new Gtk.ModelButton ();
+        show_completed_button.margin_top = 3;
+        show_completed_button.get_child ().destroy ();
+        show_completed_button.add (show_completed_grid);
+
         var delete_button = new Gtk.ModelButton ();
-        delete_button.margin_top = 3;
         delete_button.action_name = MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST;
         delete_button.text = _("Delete List");
         delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
@@ -117,6 +132,7 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         grid.add (name_entry);
         grid.add (color_grid);
         grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        grid.add (show_completed_button);
         grid.add (delete_button);
         grid.show_all ();
 
@@ -199,6 +215,13 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
                     break;
             }
         });
+
+        show_completed_button.button_release_event.connect (() => {
+            show_completed_switch.activate ();
+            return Gdk.EVENT_STOP;
+        });
+
+        Application.settings.bind ("show-completed", show_completed_switch, "active", GLib.SettingsBindFlags.DEFAULT);
     }
 
     private void save () {

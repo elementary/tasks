@@ -47,6 +47,7 @@ public class Tasks.ListView : Gtk.Grid {
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
         task_list = new Gtk.ListBox ();
+        task_list.set_filter_func (filter_function);
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow (null, null);
@@ -59,6 +60,10 @@ public class Tasks.ListView : Gtk.Grid {
         attach (summary_label, 0, 0);
         attach (settings_button, 1, 0);
         attach (scrolled_window, 0, 1, 2);
+
+        // Application.settings.changed["show-completed"].connect (() => {
+        //     task_list.invalidate_filter ();
+        // });
 
         settings_button.toggled.connect (() => {
             if (settings_button.active) {
@@ -100,6 +105,18 @@ public class Tasks.ListView : Gtk.Grid {
     public void update_request () {
         summary_label.label = source.dup_display_name ();
         Tasks.Application.set_task_color (source, summary_label);
+    }
+
+    [CCode (instance_pos = -1)]
+    private bool filter_function (Gtk.ListBoxRow row) {
+        if (
+            ((TaskRow) row).component.get_status () == ICal.PropertyStatus.COMPLETED &&
+            Application.settings.get_boolean ("show-completed") == false
+        ) {
+            return false;
+        }
+
+        return true;
     }
 
     private void on_objects_added (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
