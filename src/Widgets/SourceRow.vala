@@ -140,25 +140,19 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
 
     private void on_tasks_added (Gee.Collection<ECal.Component> tasks) {
         foreach (var task in tasks) {
-            ECal.ComponentText task_summary;
-            task.get_summary (out task_summary);
-            critical("on_tasks_added.task: %s", task_summary.value);
+            critical("on_tasks_added.task: %s", task.get_summary ().value);
         }
     }
 
     private void on_tasks_updated (Gee.Collection<ECal.Component> tasks) {
         foreach (var task in tasks) {
-            ECal.ComponentText task_summary;
-            task.get_summary (out task_summary);
-            critical("on_tasks_updated.task: %s", task_summary.value);
+            critical("on_tasks_updated.task: %s", task.get_summary ().value);
         }
     }
 
     private void on_tasks_removed (Gee.Collection<ECal.Component> tasks) {
         foreach (var task in tasks) {
-            ECal.ComponentText task_summary;
-            task.get_summary (out task_summary);
-            critical("on_tasks_removed.task: %s", task_summary.value);
+            critical("on_tasks_removed.task: %s", task.get_summary ().value);
         }
     }
 }
