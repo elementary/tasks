@@ -30,16 +30,33 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.active = component.get_status () == ICal.PropertyStatus.COMPLETED;
         check.sensitive = false;
 
-        var label = new Gtk.Label (component.get_summary ());
-        label.wrap = true;
-        label.xalign = 0;
+        var summary_label = new Gtk.Label (component.get_summary ());
+        summary_label.wrap = true;
+        summary_label.xalign = 0;
 
         var grid = new Gtk.Grid ();
         grid.margin = 3;
         grid.margin_start = grid.margin_end = 24;
         grid.column_spacing = 6;
         grid.add (check);
-        grid.add (label);
+        grid.add (summary_label);
+
+        var description = component.get_description ();
+        if( description != null ) {
+            description = description.replace("\r", "").replace("\n\n", "\n").strip();
+            description = string.joinv(" ", description.split("\n"));
+
+            if( description.length > 0 ){
+                var description_label = new Gtk.Label (description);
+                description_label.wrap = true;
+                description_label.xalign = 0;
+                description_label.lines = 1;
+                description_label.ellipsize = Pango.EllipsizeMode.END;
+                description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+
+                grid.attach_next_to (description_label, summary_label, Gtk.PositionType.BOTTOM);
+            }
+        }
 
         add (grid);
     }
