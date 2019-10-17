@@ -22,7 +22,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     public const string ACTION_PREFIX = "win.";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
 
-    private const ActionEntry[] action_entries = {
+    private const ActionEntry[] ACTION_ENTRIES = {
         { ACTION_DELETE_SELECTED_LIST, action_delete_selected_list }
     };
 
@@ -47,7 +47,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     construct {
-        add_action_entries (action_entries, this);
+        add_action_entries (ACTION_ENTRIES, this);
 
         foreach (var action in action_accelerators.get_keys ()) {
             ((Gtk.Application) GLib.Application.get_default ()).set_accels_for_action (ACTION_PREFIX + action, action_accelerators[action].to_array ());
