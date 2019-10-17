@@ -25,6 +25,7 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
 
     private Gtk.Grid source_color;
     private Gtk.Image status_image;
+    private Gtk.Label display_name_label;
     private Gtk.Stack status_stack;
     private Gtk.Revealer revealer;
 
@@ -45,12 +46,10 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
         source_color_context.add_class ("source-color");
         source_color_context.add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        Tasks.Application.set_task_color (source, source_color);
-
-        var label = new Gtk.Label (source.display_name);
-        label.halign = Gtk.Align.START;
-        label.hexpand = true;
-        label.margin_end = 9;
+        display_name_label = new Gtk.Label (source.display_name);
+        display_name_label.halign = Gtk.Align.START;
+        display_name_label.hexpand = true;
+        display_name_label.margin_end = 9;
 
         status_image = new Gtk.Image ();
         status_image.pixel_size = 16;
@@ -69,7 +68,7 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
         grid.margin_start = 12;
         grid.margin_end = 6;
         grid.add (source_color);
-        grid.add (label);
+        grid.add (display_name_label);
         grid.add (status_stack);
 
         revealer = new Gtk.Revealer ();
@@ -78,23 +77,14 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
 
         add (revealer);
 
-        update_status_image ();
-        source.notify["connection-status"].connect (() => update_status_image);
+        update_request ();
     }
 
     public void update_request () {
         Tasks.Application.set_task_color (source, source_color);
-    }
 
-    public void remove_request () {
-        revealer.reveal_child = false;
-        GLib.Timeout.add (revealer.transition_duration, () => {
-            destroy ();
-            return GLib.Source.REMOVE;
-        });
-    }
+        display_name_label.label = source.display_name;
 
-    private void update_status_image () {
         if (source.connection_status == E.SourceConnectionStatus.CONNECTING) {
             status_stack.visible_child_name = "spinner";
         } else {
@@ -119,5 +109,13 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
                     break;
             }
         }
+    }
+
+    public void remove_request () {
+        revealer.reveal_child = false;
+        GLib.Timeout.add (revealer.transition_duration, () => {
+            destroy ();
+            return GLib.Source.REMOVE;
+        });
     }
 }

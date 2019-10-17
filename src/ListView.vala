@@ -72,8 +72,7 @@ public class Tasks.ListView : Gtk.Grid {
             }
 
             if (source != null) {
-                summary_label.label = source.dup_display_name ();
-                Tasks.Application.set_task_color (source, summary_label);
+                update_request ();
 
                 try {
                      var iso_last = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().to_unix ());
@@ -99,6 +98,7 @@ public class Tasks.ListView : Gtk.Grid {
     }
 
     public void update_request () {
+        summary_label.label = source.dup_display_name ();
         Tasks.Application.set_task_color (source, summary_label);
     }
 
