@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.ListRow : Gtk.ListBoxRow {
+public class Tasks.SourceRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
 
     private static Gtk.CssProvider listrow_provider;
@@ -27,13 +27,13 @@ public class Tasks.ListRow : Gtk.ListBoxRow {
     private Gtk.Stack status_stack;
     private Gtk.Revealer revealer;
 
-    public ListRow (E.Source source) {
+    public SourceRow (E.Source source) {
         Object (source: source);
     }
 
     static construct {
         listrow_provider = new Gtk.CssProvider ();
-        listrow_provider.load_from_resource ("io/elementary/tasks/ListRow.css");
+        listrow_provider.load_from_resource ("io/elementary/tasks/SourceRow.css");
     }
 
     construct {

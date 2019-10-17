@@ -22,7 +22,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     public const string ACTION_PREFIX = "win.";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
 
-    private const ActionEntry[] action_entries = {
+    private const ActionEntry[] ACTION_ENTRIES = {
         { ACTION_DELETE_SELECTED_LIST, action_delete_selected_list }
     };
 
@@ -30,7 +30,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
     private uint configure_id;
     private Gtk.ListBox listbox;
-
+    private Gee.HashMap<E.Source, Tasks.SourceRow>? source_rows;
     private E.SourceRegistry registry;
 
     public MainWindow (Gtk.Application application) {
@@ -47,7 +47,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     construct {
-        add_action_entries (action_entries, this);
+        add_action_entries (ACTION_ENTRIES, this);
 
         foreach (var action in action_accelerators.get_keys ()) {
             ((Gtk.Application) GLib.Application.get_default ()).set_accels_for_action (ACTION_PREFIX + action, action_accelerators[action].to_array ());
@@ -120,14 +120,14 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         get_style_context ().add_class ("rounded");
 
-        load_sources.begin ();
+        init_registry.begin ();
 
         Tasks.Application.settings.bind ("pane-position", header_paned, "position", GLib.SettingsBindFlags.DEFAULT);
         Tasks.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
 
         listbox.row_selected.connect ((row) => {
             if (row != null) {
-                var source = ((Tasks.ListRow) row).source;
+                var source = ((Tasks.SourceRow) row).source;
                 listview.source = source;
                 Tasks.Application.settings.set_string ("selected-list", source.uid);
             } else {
@@ -142,22 +142,19 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void action_delete_selected_list () {
-        var list_row = ((Tasks.ListRow) listbox.get_selected_row ());
+        var list_row = ((Tasks.SourceRow) listbox.get_selected_row ());
         var source = list_row.source;
         if (source.removable) {
-            source.remove.begin (null, (obj, results) => {
-                listbox.unselect_row (list_row);
-                list_row.remove_request ();
-            });
+            source.remove.begin (null);
         } else {
             Gdk.beep ();
         }
     }
 
     private void header_update_func (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
-        var row = (Tasks.ListRow) lbrow;
+        var row = (Tasks.SourceRow) lbrow;
         if (lbbefore != null) {
-            var before = (Tasks.ListRow) lbbefore;
+            var before = (Tasks.SourceRow) lbbefore;
             if (row.source.parent == before.source.parent) {
                 return;
             }
@@ -179,8 +176,8 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
     [CCode (instance_pos = -1)]
     private int sort_function (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow lbbefore) {
-        var row = (Tasks.ListRow) lbrow;
-        var before = (Tasks.ListRow) lbbefore;
+        var row = (Tasks.SourceRow) lbrow;
+        var before = (Tasks.SourceRow) lbbefore;
         if (row.source.parent == before.source.parent) {
             return row.source.display_name.collate (before.source.display_name);
         } else {
@@ -188,22 +185,50 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private async void load_sources () {
-        var last_selected_list = Tasks.Application.settings.get_string ("selected-list");
+    private async void init_registry () {
+        try {
+            registry = yield new E.SourceRegistry (null);
 
-        var task_list_model = TaskListModel.get_default ();
-        task_list_model.connected.connect ((source) => {
-            var list_row = new Tasks.ListRow (source);
-            listbox.add (list_row);
+            registry.source_added.connect ((registry, source) => {
+                add_source (registry, source);
+            });
 
-            if (last_selected_list == "" && task_list_model.registry.default_task_list == source) {
-                listbox.select_row (list_row);
-            } else if (last_selected_list == source.uid) {
-                listbox.select_row (list_row);
-            }
+            registry.source_removed.connect ((registry, source) => {
+                remove_source (registry, source);
+            });
 
+            var last_selected_list = Application.settings.get_string ("selected-list");
+            registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
+                add_source (registry, source);
+
+                if (last_selected_list == "" && registry.default_task_list == source) {
+                    listbox.select_row (source_rows[source]);
+                } else if (last_selected_list == source.uid) {
+                    listbox.select_row (source_rows[source]);
+                }
+            });
+        } catch (GLib.Error error) {
+            critical (error.message);
+        }
+    }
+
+    private void add_source (E.SourceRegistry registry, E.Source source) {
+        if (source_rows == null) {
+            source_rows = new Gee.HashMap<E.Source, Tasks.SourceRow> ();
+        }
+
+        if (!source_rows.has_key (source)) {
+            source_rows[source] = new Tasks.SourceRow (source);
+
+            listbox.add (source_rows[source]);
             listbox.show_all ();
-        });
+        }
+    }
+
+    private void remove_source (E.SourceRegistry registry, E.Source source) {
+        listbox.unselect_row (source_rows[source]);
+        source_rows[source].remove_request ();
+        source_rows.unset (source);
     }
 
     public override bool configure_event (Gdk.EventConfigure event) {
