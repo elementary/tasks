@@ -78,6 +78,7 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
         add (revealer);
 
         update_status_image ();
+        source.bind_property ("display-name", label, "label");
         source.notify["connection-status"].connect (() => update_status_image);
     }
 

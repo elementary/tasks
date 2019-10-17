@@ -74,6 +74,8 @@ public class Tasks.ListView : Gtk.Grid {
                 label.label = source.dup_display_name ();
                 Tasks.Application.set_task_color (source, label);
 
+                source.bind_property ("display-name", label, "label");
+
                 try {
                      var iso_last = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().to_unix ());
                      var iso_first = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().add_years (-1).to_unix ());
