@@ -20,9 +20,11 @@
 
 public class Tasks.MainWindow : Gtk.ApplicationWindow {
     public const string ACTION_PREFIX = "win.";
+    public const string ACTION_ADD_NEW_LIST = "action-add-new-list";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
 
     private const ActionEntry[] ACTION_ENTRIES = {
+        { ACTION_ADD_NEW_LIST, action_add_new_list },
         { ACTION_DELETE_SELECTED_LIST, action_delete_selected_list }
     };
 
@@ -43,6 +45,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     static construct {
+        action_accelerators[ACTION_ADD_NEW_LIST] = "<Control>N";
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "<Control>BackSpace";
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "Delete";
     }
@@ -50,8 +53,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     construct {
         add_action_entries (ACTION_ENTRIES, this);
 
+        var application_instance = (Gtk.Application) GLib.Application.get_default ();
         foreach (var action in action_accelerators.get_keys ()) {
-            ((Gtk.Application) GLib.Application.get_default ()).set_accels_for_action (ACTION_PREFIX + action, action_accelerators[action].to_array ());
+            (application_instance).set_accels_for_action (ACTION_PREFIX + action, action_accelerators[action].to_array ());
         }
 
         var header_provider = new Gtk.CssProvider ();
@@ -99,7 +103,11 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         sidebar_provider.load_from_resource ("io/elementary/tasks/Sidebar.css");
 
         var add_tasklist_button = new Gtk.Button.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
-        add_tasklist_button.tooltip_text = _("Add Task List");
+        add_tasklist_button.action_name = ACTION_PREFIX + ACTION_ADD_NEW_LIST;
+        add_tasklist_button.tooltip_markup = Granite.markup_accel_tooltip (
+            application_instance.get_accels_for_action (add_tasklist_button.action_name),
+            _("Add Task List")
+        );
         add_tasklist_button.get_style_context ().add_provider (sidebar_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var actionbar = new Gtk.ActionBar ();
@@ -155,6 +163,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 }
             }
         });
+    }
+
+    private void action_add_new_list () {
+        critical ("YATTA");
     }
 
     private void action_delete_selected_list () {
