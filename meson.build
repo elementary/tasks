@@ -15,8 +15,6 @@ gresource = gnome.compile_resources(
 executable(
     meson.project_name(),
     gresource,
-    'core/Utils.vala',
-    'core/model/TaskListModel.vala',
     'src/Application.vala',
     'src/ListView.vala',
     'src/MainWindow.vala',

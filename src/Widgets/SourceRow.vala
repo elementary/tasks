@@ -79,28 +79,6 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
 
         update_status_image ();
         source.notify["connection-status"].connect (() => update_status_image);
-
-        var task_list_model = TaskListModel.get_default ();
-        task_list_model.tasks_added.connect ((source, tasks) => {
-            if( source != this.source ){
-                return;
-            }
-            on_tasks_added (tasks);
-        });
-
-        task_list_model.tasks_updated.connect ((source, tasks) => {
-            if( source != this.source ){
-                return;
-            }
-            on_tasks_updated (tasks);
-        });
-
-        task_list_model.tasks_removed.connect ((source, tasks) => {
-            if( source != this.source ){
-                return;
-            }
-            on_tasks_removed (tasks);
-        });
     }
 
     public void remove_request () {
@@ -135,24 +113,6 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
                     status_image.tooltip_text = null;
                     break;
             }
-        }
-    }
-
-    private void on_tasks_added (Gee.Collection<ECal.Component> tasks) {
-        foreach (var task in tasks) {
-            critical("on_tasks_added.task: %s", task.get_summary ().value);
-        }
-    }
-
-    private void on_tasks_updated (Gee.Collection<ECal.Component> tasks) {
-        foreach (var task in tasks) {
-            critical("on_tasks_updated.task: %s", task.get_summary ().value);
-        }
-    }
-
-    private void on_tasks_removed (Gee.Collection<ECal.Component> tasks) {
-        foreach (var task in tasks) {
-            critical("on_tasks_removed.task: %s", task.get_summary ().value);
         }
     }
 }

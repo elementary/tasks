@@ -199,6 +199,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
             var last_selected_list = Application.settings.get_string ("selected-list");
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
+
                 add_source (registry, source);
 
                 if (last_selected_list == "" && registry.default_task_list == source) {
