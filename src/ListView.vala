@@ -46,6 +46,7 @@ public class Tasks.ListView : Gtk.Grid {
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
         task_list = new Gtk.ListBox ();
+        task_list.set_sort_func (sort_function);
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow (null, null);
@@ -105,4 +106,18 @@ public class Tasks.ListView : Gtk.Grid {
 
         task_list.show_all ();
      }
+
+    [CCode (instance_pos = -1)]
+    private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {
+        var row1_status = ((Tasks.TaskRow) row1).component.get_status ();
+        var row2_status = ((Tasks.TaskRow) row2).component.get_status ();
+
+        if (row1_status == ICal.PropertyStatus.NEEDSACTION && row2_status != ICal.PropertyStatus.NEEDSACTION) {
+            return -1;
+        } else if (row2_status == ICal.PropertyStatus.NEEDSACTION && row1_status != ICal.PropertyStatus.NEEDSACTION) {
+            return 1;
+        }
+
+        return 0;
+    }
 }
