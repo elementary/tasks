@@ -61,9 +61,9 @@ public class Tasks.ListView : Gtk.Grid {
         attach (settings_button, 1, 0);
         attach (scrolled_window, 0, 1, 2);
 
-        // Application.settings.changed["show-completed"].connect (() => {
-        //     task_list.invalidate_filter ();
-        // });
+        Application.settings.changed["show-completed"].connect (() => {
+            task_list.invalidate_filter ();
+        });
 
         settings_button.toggled.connect (() => {
             if (settings_button.active) {
@@ -110,8 +110,8 @@ public class Tasks.ListView : Gtk.Grid {
     [CCode (instance_pos = -1)]
     private bool filter_function (Gtk.ListBoxRow row) {
         if (
-            ((TaskRow) row).component.get_status () == ICal.PropertyStatus.COMPLETED &&
-            Application.settings.get_boolean ("show-completed") == false
+            Application.settings.get_boolean ("show-completed") == false &&
+            ((TaskRow) row).completed
         ) {
             return false;
         }
