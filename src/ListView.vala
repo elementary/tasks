@@ -80,9 +80,7 @@ public class Tasks.ListView : Gtk.Grid {
                 update_request ();
 
                 try {
-                     var iso_last = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().to_unix ());
-                     var iso_first = ECal.isodate_from_time_t ((time_t) new GLib.DateTime.now ().add_years (-1).to_unix ());
-                     var query = @"(occur-in-time-range? (make-time \"$iso_first\") (make-time \"$iso_last\"))";
+                     var query = "OR (is-completed?) (has-alarms?)";
 
                      var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
                      client.get_view_sync (query, out view, null);
