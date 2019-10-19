@@ -44,7 +44,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         var description = component.get_description ();
         if( description != null ) {
             description = description.replace("\r", "").replace("\n\n", "\n").strip();
-            description = string.joinv(" ", description.split("\n"));
+            string[] lines = description.split ("\n");
+             string stripped_description = lines[0].strip ();
+             for (int i = 1; i < lines.length; i++) {
+                 stripped_description += " " + lines[i].strip ();
+             }
 
             if( description.length > 0 ){
                 var description_label = new Gtk.Label (description);
