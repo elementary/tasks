@@ -38,6 +38,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         summary_label.wrap = true;
         summary_label.xalign = 0;
 
+        if (completed) {
+            summary_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        }
+
         var grid = new Gtk.Grid ();
         grid.margin = 3;
         grid.margin_start = grid.margin_end = 24;
