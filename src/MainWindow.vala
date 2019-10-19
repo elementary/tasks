@@ -238,8 +238,18 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void update_source (E.SourceRegistry registry, E.Source source) {
-        source_rows[source].update_request ();
-        listview.update_request ();
+        E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+        if (list.selected != true || source.enabled != true) {
+            remove_source (registry, source);
+
+        } else if (!source_rows.has_key (source)) {
+            add_source (registry, source);
+
+        } else {
+            source_rows[source].update_request ();
+            listview.update_request ();
+        }
     }
 
     private void remove_source (E.SourceRegistry registry, E.Source source) {
