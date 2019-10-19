@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <schema path="/io/elementary/reminders/" id="io.elementary.reminders">
+  <schema path="/io/elementary/tasks/" id="io.elementary.tasks">
     <key name="window-maximized" type="b">
       <default>false</default>
       <summary>Whether the window was maximized on last run</summary>
@@ -25,6 +25,11 @@
       <default>""</default>
       <summary>The UID of the last selected list</summary>
       <description>The UID of the last selected list</description>
+    </key>
+    <key name="show-completed" type="b">
+      <default>false</default>
+      <summary>Whether to show completed issues in the main view</summary>
+      <description>Whether to show completed issues in the main view</description>
     </key>
   </schema>
 </schemalist>
