@@ -81,10 +81,8 @@ public class Tasks.ListView : Gtk.Grid {
                 update_request ();
 
                 try {
-                     var query = "OR (is-completed?) (has-alarms?)";
-
                      var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
-                     client.get_view_sync (query, out view, null);
+                     client.get_view_sync ("", out view, null);
 
                      view.objects_added.connect ((objects) => on_objects_added (source, client, objects));
 
