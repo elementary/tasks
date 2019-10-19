@@ -46,8 +46,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.add (summary_label);
 
         var description = component.get_description ();
-        if( description != null ) {
-            description = description.replace("\r", "").strip();
+        if (description != null) {
+            description = description.replace ("\r", "").strip ();
             string[] lines = description.split ("\n");
             string stripped_description = lines[0].strip ();
             for (int i = 1; i < lines.length; i++) {
@@ -58,7 +58,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 }
             }
 
-            if( stripped_description.length > 0 ){
+            if (stripped_description.length > 0) {
                 var description_label = new Gtk.Label (stripped_description);
                 description_label.xalign = 0;
                 description_label.lines = 1;
