@@ -43,15 +43,19 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         var description = component.get_description ();
         if( description != null ) {
-            description = description.replace("\r", "").replace("\n\n", "\n").strip();
+            description = description.replace("\r", "").strip();
             string[] lines = description.split ("\n");
-             string stripped_description = lines[0].strip ();
-             for (int i = 1; i < lines.length; i++) {
-                 stripped_description += " " + lines[i].strip ();
-             }
+            string stripped_description = lines[0].strip ();
+            for (int i = 1; i < lines.length; i++) {
+                string stripped_line = lines[i].strip ();
 
-            if( description.length > 0 ){
-                var description_label = new Gtk.Label (description);
+                if (stripped_line.length > 0 ) {
+                    stripped_description += " " + lines[i].strip ();
+                }
+            }
+
+            if( stripped_description.length > 0 ){
+                var description_label = new Gtk.Label (stripped_description);
                 description_label.xalign = 0;
                 description_label.lines = 1;
                 description_label.ellipsize = Pango.EllipsizeMode.END;
