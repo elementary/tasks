@@ -39,7 +39,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         summary_label.xalign = 0;
 
         if (completed) {
-            label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            summary_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         }
 
         var grid = new Gtk.Grid ();
