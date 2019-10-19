@@ -38,7 +38,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         label.wrap = true;
         label.xalign = 0;
 
-        if (component.get_status () == ICal.PropertyStatus.COMPLETED) {
+        if (completed) {
             label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         }
 
