@@ -34,16 +34,44 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.active = completed;
         check.sensitive = false;
 
-        var label = new Gtk.Label (component.get_summary ());
-        label.wrap = true;
-        label.xalign = 0;
+        var summary_label = new Gtk.Label (component.get_summary ());
+        summary_label.wrap = true;
+        summary_label.xalign = 0;
+
+        if (completed) {
+            summary_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        }
 
         var grid = new Gtk.Grid ();
         grid.margin = 3;
         grid.margin_start = grid.margin_end = 24;
         grid.column_spacing = 6;
         grid.add (check);
-        grid.add (label);
+        grid.add (summary_label);
+
+        var description = component.get_description ();
+        if (description != null) {
+            description = description.replace ("\r", "").strip ();
+            string[] lines = description.split ("\n");
+            string stripped_description = lines[0].strip ();
+            for (int i = 1; i < lines.length; i++) {
+                string stripped_line = lines[i].strip ();
+
+                if (stripped_line.length > 0 ) {
+                    stripped_description += " " + lines[i].strip ();
+                }
+            }
+
+            if (stripped_description.length > 0) {
+                var description_label = new Gtk.Label (stripped_description);
+                description_label.xalign = 0;
+                description_label.lines = 1;
+                description_label.ellipsize = Pango.EllipsizeMode.END;
+                description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+
+                grid.attach_next_to (description_label, summary_label, Gtk.PositionType.BOTTOM);
+            }
+        }
 
         add (grid);
     }
