@@ -52,7 +52,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
             if( description.length > 0 ){
                 var description_label = new Gtk.Label (description);
-                description_label.wrap = true;
                 description_label.xalign = 0;
                 description_label.lines = 1;
                 description_label.ellipsize = Pango.EllipsizeMode.END;
