@@ -58,7 +58,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 string stripped_line = lines[i].strip ();
 
                 if (stripped_line.length > 0 ) {
-                    stripped_description += " " + lines[i].strip ();
+                    stripped_description += " " + stripped_line;
                 }
             }
 
