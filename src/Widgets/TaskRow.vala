@@ -49,6 +49,36 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.add (check);
         grid.add (summary_label);
 
+        Gtk.Widget grid_attach_next_to_ref = summary_label;
+
+        var due = component.get_due ();
+        if (!due.is_null_time ()) {
+            GLib.TimeZone due_timezone = null;
+            if (due.get_tzid () != null) {
+                due_timezone = new GLib.TimeZone (due.get_tzid ());
+            } else {
+                due_timezone = new GLib.TimeZone.local();
+            }
+
+            var due_datetime = new GLib.DateTime (
+                due_timezone,
+                due.year,
+                due.month,
+                due.day,
+                due.hour,
+                due.minute,
+                due.second
+            );
+
+            var due_label = new Gtk.Label (due_datetime.format ("%x %X"));
+            due_label.wrap = true;
+            due_label.xalign = 0;
+            due_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+
+            grid.attach_next_to (due_label, grid_attach_next_to_ref, Gtk.PositionType.BOTTOM);
+            grid_attach_next_to_ref = due_label;
+        }
+
         var description = component.get_description ();
         if (description != null) {
             description = description.replace ("\r", "").strip ();
@@ -69,7 +99,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 description_label.ellipsize = Pango.EllipsizeMode.END;
                 description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-                grid.attach_next_to (description_label, summary_label, Gtk.PositionType.BOTTOM);
+                grid.attach_next_to (description_label, grid_attach_next_to_ref, Gtk.PositionType.BOTTOM);
+                grid_attach_next_to_ref = description_label;
             }
         }
 
