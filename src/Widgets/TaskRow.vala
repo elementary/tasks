@@ -70,7 +70,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 due.second
             );
 
-            var due_label = new Gtk.Label (due_datetime.format ("%x %X"));
+            var due_label = new Gtk.Label (Granite.DateTime.get_relative_datetime (due_datetime));
             due_label.wrap = true;
             due_label.xalign = 0;
             due_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
