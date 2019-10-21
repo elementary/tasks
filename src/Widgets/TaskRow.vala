@@ -19,20 +19,32 @@
 */
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
+    public E.Source source { get; construct; }
     public unowned ICal.Component component { get; construct; }
+
+    private static Gtk.CssProvider taskrow_provider;
+    private Gtk.CheckButton check;
 
     public bool completed { get; private set; }
 
-    public TaskRow (ICal.Component component) {
-        Object (component: component);
+    public TaskRow (E.Source source, ICal.Component component) {
+        Object (source: source, component: component);
+    }
+
+    static construct {
+        taskrow_provider = new Gtk.CssProvider ();
+        taskrow_provider.load_from_resource ("io/elementary/tasks/TaskRow.css");
     }
 
     construct {
         completed = component.get_status () == ICal.PropertyStatus.COMPLETED;
 
-        var check = new Gtk.CheckButton ();
+        check = new Gtk.CheckButton ();
         check.active = completed;
-        check.sensitive = false;
+
+        unowned Gtk.StyleContext check_color_context = check.get_style_context ();
+        check_color_context.add_class ("source-color");
+        check_color_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var summary_label = new Gtk.Label (component.get_summary ());
         summary_label.wrap = true;
@@ -46,6 +58,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.margin = 3;
         grid.margin_start = grid.margin_end = 24;
         grid.column_spacing = 6;
+        grid.get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         grid.add (check);
         grid.add (summary_label);
 
@@ -74,5 +87,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         }
 
         add (grid);
+        update_request ();
+    }
+
+    public void update_request () {
+        Tasks.Application.set_task_color (source, check);
     }
 }
