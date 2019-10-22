@@ -41,7 +41,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         var check = new Gtk.CheckButton ();
         check.active = completed;
         check.margin_top = 2;
-        check.sensitive = false;
         check.valign = Gtk.Align.START;
         Tasks.Application.set_task_color (source, check);
 
