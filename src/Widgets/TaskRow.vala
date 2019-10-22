@@ -106,13 +106,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
             var today = new GLib.DateTime.now_local ();
             if (today.compare (due_datetime) > 0 && !completed) {
-                var due_image = new Gtk.Image.from_icon_name ("task-past-due-symbolic", Gtk.IconSize.MENU);
-                due_image.valign = Gtk.Align.START;
-                due_image.get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-                grid.attach (due_image, 2, 0);
-
-                row_style_context.add_class (Gtk.STYLE_CLASS_ERROR);
+                row_style_context.add_class ("past-due");
             }
         }
 

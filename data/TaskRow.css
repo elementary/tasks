@@ -27,16 +27,12 @@
     padding: 1px 6px;
 }
 
-.error:focus {
-    background: alpha (@error_color, 0.2);
-    color: @error_color;
+row:focus .due-date {
+    background: alpha (@selected_fg_color, 0.2);
+    color: inherit;
 }
 
-.error:focus image {
-    color: @error_color;
-}
-
-.error .due-date {
+.past-due .due-date {
     background: alpha (@error_color, 0.2);
     color: @error_color;
 }
