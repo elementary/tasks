@@ -22,18 +22,16 @@ public class Tasks.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
     private ECal.ClientView view;
-    private Gtk.Label summary_label;
+    private EditableLabel editable_title;
     private Gtk.ListBox task_list;
 
     construct {
-        summary_label = new Gtk.Label ("");
-        summary_label.halign = Gtk.Align.START;
-        summary_label.hexpand = true;
-        summary_label.margin_start = 24;
+        editable_title = new EditableLabel ();
+        editable_title.margin_start = 24;
 
-        unowned Gtk.StyleContext summary_label_style_context = summary_label.get_style_context ();
-        summary_label_style_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
-        summary_label_style_context.add_class (Granite.STYLE_CLASS_ACCENT);
+        unowned Gtk.StyleContext title_context = editable_title.get_style_context ();
+        title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
+        title_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
         var list_settings_popover = new Tasks.ListSettingsPopover ();
 
@@ -58,7 +56,7 @@ public class Tasks.ListView : Gtk.Grid {
         margin_bottom = 3;
         column_spacing = 12;
         row_spacing = 24;
-        attach (summary_label, 0, 0);
+        attach (editable_title, 0, 0);
         attach (settings_button, 1, 0);
         attach (scrolled_window, 0, 1, 2);
 
@@ -92,16 +90,21 @@ public class Tasks.ListView : Gtk.Grid {
                      critical (e.message);
                  }
             } else {
-                summary_label.label = "";
+                editable_title.text = "";
             }
 
             show_all ();
         });
+
+        editable_title.changed.connect (() => {
+            source.display_name = editable_title.text;
+            source.write.begin (null);
+        });
     }
 
     public void update_request () {
-        summary_label.label = source.dup_display_name ();
-        Tasks.Application.set_task_color (source, summary_label);
+        editable_title.text = source.dup_display_name ();
+        Tasks.Application.set_task_color (source, editable_title);
     }
 
     [CCode (instance_pos = -1)]
