@@ -70,7 +70,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             if (due.get_tzid () != null) {
                 due_timezone = new GLib.TimeZone (due.get_tzid ());
             } else {
-                due_timezone = new GLib.TimeZone.local();
+                due_timezone = new GLib.TimeZone.local ();
             }
 
             var due_datetime = new GLib.DateTime (
