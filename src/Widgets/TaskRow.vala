@@ -48,8 +48,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         summary_label.wrap = true;
         summary_label.xalign = 0;
 
+        unowned Gtk.StyleContext summary_label_style_context = summary_label.get_style_context ();
+        summary_label_style_context.add_class ("summary");
+        summary_label_style_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         if (completed) {
-            summary_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            summary_label_style_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         }
 
         var description_grid = new Gtk.Grid ();
@@ -117,7 +120,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 description_label.xalign = 0;
                 description_label.lines = 1;
                 description_label.ellipsize = Pango.EllipsizeMode.END;
-                description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
                 description_grid.add (description_label);
             }

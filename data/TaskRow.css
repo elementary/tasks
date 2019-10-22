@@ -18,6 +18,10 @@
 *
 */
 
+.summary {
+    font-weight: 600;
+}
+
 .due-date {
     border-radius: 3px;
     background: @SILVER_300;
