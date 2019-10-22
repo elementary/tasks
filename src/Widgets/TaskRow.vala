@@ -39,6 +39,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         completed = component.get_status () == ICal.PropertyStatus.COMPLETED;
 
         var check = new Gtk.CheckButton ();
+        check.sensitive = false;
         check.active = completed;
         check.margin_top = 2;
         check.valign = Gtk.Align.START;
