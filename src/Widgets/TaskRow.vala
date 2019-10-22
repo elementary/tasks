@@ -19,14 +19,15 @@
 */
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
+    public E.Source source { get; construct; }
     public unowned ICal.Component component { get; construct; }
 
     private static Gtk.CssProvider taskrow_provider;
 
     public bool completed { get; private set; }
 
-    public TaskRow (ICal.Component component) {
-        Object (component: component);
+    public TaskRow (E.Source source, ICal.Component component) {
+        Object (source: source, component: component);
     }
 
     static construct {
@@ -38,10 +39,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         completed = component.get_status () == ICal.PropertyStatus.COMPLETED;
 
         var check = new Gtk.CheckButton ();
+        check.sensitive = false;
         check.active = completed;
         check.margin_top = 2;
-        check.sensitive = false;
         check.valign = Gtk.Align.START;
+        Tasks.Application.set_task_color (source, check);
 
         var summary_label = new Gtk.Label (component.get_summary ());
         summary_label.justify = Gtk.Justification.LEFT;
