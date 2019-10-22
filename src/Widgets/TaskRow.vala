@@ -39,7 +39,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         var check = new Gtk.CheckButton ();
         check.active = completed;
+        check.margin_top = 2;
         check.sensitive = false;
+        check.valign = Gtk.Align.START;
 
         var summary_label = new Gtk.Label (component.get_summary ());
         summary_label.justify = Gtk.Justification.LEFT;
@@ -50,12 +52,17 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             summary_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         }
 
-        var horizontal_box = new Gtk.HBox (false, 3);
+        var description_grid = new Gtk.Grid ();
+        description_grid.column_spacing = 6;
+
         var grid = new Gtk.Grid ();
-        grid.margin = 3;
+        grid.margin = 6;
         grid.margin_start = grid.margin_end = 24;
         grid.column_spacing = 6;
-        grid.add (check);
+        grid.row_spacing = 3;
+        grid.attach (check, 0, 0);
+        grid.attach (summary_label, 1, 0);
+        grid.attach (description_grid, 1, 1);
 
         var due = component.get_due ();
         if (!due.is_null_time ()) {
@@ -76,26 +83,21 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 due.second
             );
 
+            var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
+            var format = h24_settings.get_string ("clock-format");
+
             var due_label = new Gtk.Label (Granite.DateTime.get_relative_datetime (due_datetime));
-            due_label.wrap = true;
+            due_label.tooltip_text = _("%s at %s").printf (
+                due_datetime.format (Granite.DateTime.get_default_date_format (true)),
+                due_datetime.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+            );
 
-            var due_box = new Gtk.EventBox ();
-            Gdk.Color color;
-            Gdk.Color.parse ("lightgray", out color);
-            due_box.modify_bg (Gtk.StateType.NORMAL, color);
+            unowned Gtk.StyleContext due_label_context = due_label.get_style_context ();
+            due_label_context.add_class ("due-date");
+            due_label_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-            /* does not seem to work:
-            var due_box_style_context = due_box.get_style_context ();
-            due_box_style_context.add_class ("due-date");
-            due_box_style_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-            */
-
-            due_box. add (due_label);
-            horizontal_box.pack_start (due_box, false);
+            description_grid.add (due_label);
         }
-
-        horizontal_box.pack_start (summary_label, false);
-        grid.add (horizontal_box);
 
         var description = component.get_description ();
         if (description != null) {
@@ -117,7 +119,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 description_label.ellipsize = Pango.EllipsizeMode.END;
                 description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-                grid.attach_next_to (description_label, horizontal_box, Gtk.PositionType.BOTTOM);
+                description_grid.add (description_label);
             }
         }
 
