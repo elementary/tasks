@@ -22,10 +22,17 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
     public unowned ICal.Component component { get; construct; }
 
+    private static Gtk.CssProvider taskrow_provider;
+
     public bool completed { get; private set; }
 
     public TaskRow (E.Source source, ICal.Component component) {
         Object (source: source, component: component);
+    }
+
+    static construct {
+        taskrow_provider = new Gtk.CssProvider ();
+        taskrow_provider.load_from_resource ("io/elementary/tasks/TaskRow.css");
     }
 
     construct {
@@ -33,9 +40,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         var check = new Gtk.CheckButton ();
         check.active = completed;
+        check.margin_top = 2;
+        check.sensitive = false;
+        check.valign = Gtk.Align.START;
         Tasks.Application.set_task_color (source, check);
 
         var summary_label = new Gtk.Label (component.get_summary ());
+        summary_label.justify = Gtk.Justification.LEFT;
         summary_label.wrap = true;
         summary_label.xalign = 0;
 
@@ -43,12 +54,52 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             summary_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         }
 
+        var description_grid = new Gtk.Grid ();
+        description_grid.column_spacing = 6;
+
         var grid = new Gtk.Grid ();
-        grid.margin = 3;
+        grid.margin = 6;
         grid.margin_start = grid.margin_end = 24;
         grid.column_spacing = 6;
-        grid.add (check);
-        grid.add (summary_label);
+        grid.row_spacing = 3;
+        grid.attach (check, 0, 0);
+        grid.attach (summary_label, 1, 0);
+        grid.attach (description_grid, 1, 1);
+
+        var due = component.get_due ();
+        if (!due.is_null_time ()) {
+            GLib.TimeZone due_timezone = null;
+            if (due.get_tzid () != null) {
+                due_timezone = new GLib.TimeZone (due.get_tzid ());
+            } else {
+                due_timezone = new GLib.TimeZone.local ();
+            }
+
+            var due_datetime = new GLib.DateTime (
+                due_timezone,
+                due.year,
+                due.month,
+                due.day,
+                due.hour,
+                due.minute,
+                due.second
+            );
+
+            var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
+            var format = h24_settings.get_string ("clock-format");
+
+            var due_label = new Gtk.Label (Granite.DateTime.get_relative_datetime (due_datetime));
+            due_label.tooltip_text = _("%s at %s").printf (
+                due_datetime.format (Granite.DateTime.get_default_date_format (true)),
+                due_datetime.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+            );
+
+            unowned Gtk.StyleContext due_label_context = due_label.get_style_context ();
+            due_label_context.add_class ("due-date");
+            due_label_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+            description_grid.add (due_label);
+        }
 
         var description = component.get_description ();
         if (description != null) {
@@ -70,7 +121,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 description_label.ellipsize = Pango.EllipsizeMode.END;
                 description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-                grid.attach_next_to (description_label, summary_label, Gtk.PositionType.BOTTOM);
+                description_grid.add (description_label);
             }
         }
 
