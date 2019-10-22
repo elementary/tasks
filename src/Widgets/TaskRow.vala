@@ -21,10 +21,17 @@
 public class Tasks.TaskRow : Gtk.ListBoxRow {
     public unowned ICal.Component component { get; construct; }
 
+    private static Gtk.CssProvider taskrow_provider;
+
     public bool completed { get; private set; }
 
     public TaskRow (ICal.Component component) {
         Object (component: component);
+    }
+
+    static construct {
+        taskrow_provider = new Gtk.CssProvider ();
+        taskrow_provider.load_from_resource ("io/elementary/tasks/TaskRow.css");
     }
 
     construct {
@@ -35,6 +42,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.sensitive = false;
 
         var summary_label = new Gtk.Label (component.get_summary ());
+        summary_label.justify = Gtk.Justification.LEFT;
         summary_label.wrap = true;
         summary_label.xalign = 0;
 
@@ -42,14 +50,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             summary_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         }
 
+        var horizontal_box = new Gtk.HBox (false, 3);
         var grid = new Gtk.Grid ();
         grid.margin = 3;
         grid.margin_start = grid.margin_end = 24;
         grid.column_spacing = 6;
         grid.add (check);
-        grid.add (summary_label);
-
-        Gtk.Widget grid_attach_next_to_ref = summary_label;
 
         var due = component.get_due ();
         if (!due.is_null_time ()) {
@@ -72,12 +78,24 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
             var due_label = new Gtk.Label (Granite.DateTime.get_relative_datetime (due_datetime));
             due_label.wrap = true;
-            due_label.xalign = 0;
-            due_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-            grid.attach_next_to (due_label, grid_attach_next_to_ref, Gtk.PositionType.BOTTOM);
-            grid_attach_next_to_ref = due_label;
+            var due_box = new Gtk.EventBox ();
+            Gdk.Color color;
+            Gdk.Color.parse ("lightgray", out color);
+            due_box.modify_bg (Gtk.StateType.NORMAL, color);
+
+            /* does not seem to work:
+            var due_box_style_context = due_box.get_style_context ();
+            due_box_style_context.add_class ("due-date");
+            due_box_style_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            */
+
+            due_box. add (due_label);
+            horizontal_box.pack_start (due_box, false);
         }
+
+        horizontal_box.pack_start (summary_label, false);
+        grid.add (horizontal_box);
 
         var description = component.get_description ();
         if (description != null) {
@@ -99,8 +117,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 description_label.ellipsize = Pango.EllipsizeMode.END;
                 description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-                grid.attach_next_to (description_label, grid_attach_next_to_ref, Gtk.PositionType.BOTTOM);
-                grid_attach_next_to_ref = description_label;
+                grid.attach_next_to (description_label, horizontal_box, Gtk.PositionType.BOTTOM);
             }
         }
 
