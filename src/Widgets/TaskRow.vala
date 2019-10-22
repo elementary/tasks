@@ -47,7 +47,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.valign = Gtk.Align.START;
 
         var summary_label = new Gtk.Label (component.get_summary ());
-        summary_label.hexpand = true;
         summary_label.justify = Gtk.Justification.LEFT;
         summary_label.wrap = true;
         summary_label.xalign = 0;
@@ -58,8 +57,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         var description_grid = new Gtk.Grid ();
         description_grid.column_spacing = 6;
-
-        var due_date = component.get_due ();
 
         var grid = new Gtk.Grid ();
         grid.margin = 6;
