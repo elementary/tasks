@@ -65,7 +65,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.row_spacing = 3;
         grid.attach (check, 0, 0);
         grid.attach (summary_label, 1, 0);
-        grid.attach (description_grid, 1, 1, 2);
+        grid.attach (description_grid, 1, 1);
 
         var due = component.get_due ();
         if (!due.is_null_time ()) {
