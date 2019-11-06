@@ -126,7 +126,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         }
 
         debug ("1: binding event...");
-        grid.button_press_event.connect ((event) => {
+        button_press_event.connect ((event) => {
             if (event.button == 1 && event.type == Gdk.EventType.@2BUTTON_PRESS) {
                 debug ("3: grid.double-left-click!");
             } else {
