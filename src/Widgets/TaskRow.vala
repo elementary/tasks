@@ -125,16 +125,26 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             }
         }
 
-        debug ("1: binding event...");
-        button_press_event.connect ((event) => {
-            if (event.button == 1 && event.type == Gdk.EventType.@2BUTTON_PRESS) {
-                debug ("3: grid.double-left-click!");
-            } else {
-                debug ("2: grid.other key_release");
+        var eventbox = new Gtk.EventBox ();
+        eventbox.expand = true;
+        eventbox.above_child = false;
+        eventbox.add (grid);
+
+        var task_settings_popover = new Tasks.TaskSettingsPopover ();
+        task_settings_popover.position = Gtk.PositionType.BOTTOM;
+
+        eventbox.event.connect ((event) => {
+            if (event.type != Gdk.EventType.@2BUTTON_PRESS) {
+                if (event.type == Gdk.EventType.BUTTON_PRESS) {
+                    activate ();
+                }
+                return true;
             }
-            return true;
+
+            task_settings_popover.set_relative_to (eventbox);
+            task_settings_popover.popup ();
         });
 
-        add (grid);
+        add (eventbox);
     }
 }
