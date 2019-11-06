@@ -130,19 +130,20 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         eventbox.above_child = false;
         eventbox.add (grid);
 
-        var task_settings_popover = new Tasks.TaskSettingsPopover ();
-        task_settings_popover.position = Gtk.PositionType.BOTTOM;
-
         eventbox.event.connect ((event) => {
-            if (event.type != Gdk.EventType.@2BUTTON_PRESS) {
-                if (event.type == Gdk.EventType.BUTTON_PRESS) {
-                    activate ();
-                }
-                return true;
-            }
+            if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
+                var task_popover = new Tasks.TaskSettingsPopover ();
+                task_popover.position = Gtk.PositionType.LEFT;
+                task_popover.set_relative_to (eventbox);
 
-            task_settings_popover.set_relative_to (eventbox);
-            task_settings_popover.popup ();
+                debug ("show popover of: " + summary_label.label);
+
+                task_popover.task = component;
+                task_popover.popup ();
+
+            } else if (!is_selected() && event.type == Gdk.EventType.BUTTON_PRESS) {
+                activate ();
+            }
         });
 
         add (eventbox);

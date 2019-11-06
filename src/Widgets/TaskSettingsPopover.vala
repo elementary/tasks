@@ -19,8 +19,19 @@
 */
 
 public class Tasks.TaskSettingsPopover : Gtk.Popover {
+    public unowned ICal.Component task { get; set; }
+    public string summary { get; set; }
 
     construct {
+        var summary_entry = new Gtk.Entry ();
 
+        var grid = new Gtk.Grid ();
+        grid.add (summary_entry);
+        grid.show_all ();
+        add (grid);
+
+        notify["task"].connect (() => {
+            summary_entry.text = task.get_summary ();
+        });
     }
 }
