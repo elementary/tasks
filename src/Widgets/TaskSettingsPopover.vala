@@ -28,11 +28,69 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
 
     construct {
         var summary_entry = new Gtk.Entry ();
+        summary_entry.margin_start = summary_entry.margin_end = 12;
+        summary_entry.margin_top = summary_entry.margin_bottom = 12;
         summary_entry.text = model.summary;
 
+        var due_label = new Gtk.Label (_("Schedule"));
+        due_label.hexpand = true;
+        due_label.xalign = 0;
+
+        var due_switch = new Gtk.Switch ();
+        due_switch.active = model.due != null;
+
+        var due_grid = new Gtk.Grid ();
+        due_grid.column_spacing = 6;
+        due_grid.add (due_label);
+        due_grid.add (due_switch);
+
+        var due_button = new Gtk.ModelButton ();
+        due_button.margin_top = due_button.margin_bottom = 3;
+        due_button.get_child ().destroy ();
+        due_button.add (due_grid);
+
+        var due_datetimepicker = new Tasks.DateTimePicker ();
+        due_datetimepicker.margin_start = due_datetimepicker.margin_end = 12;
+        due_datetimepicker.margin_bottom = 12;
+        due_datetimepicker.date_picker.date = model.due;
+        due_datetimepicker.time_picker.time = model.due;
+
+        var description_textview = new Gtk.TextView ();
+        description_textview.set_wrap_mode (Gtk.WrapMode.WORD_CHAR);
+        description_textview.accepts_tab = false;
+        description_textview.left_margin = description_textview.right_margin = 12;
+        description_textview.top_margin = description_textview.bottom_margin = 12;
+
+        if (model.description != null) {
+            Gtk.TextBuffer buffer = new Gtk.TextBuffer (null);
+            buffer.text = model.description;
+            description_textview.set_buffer (buffer);
+        }
+
         var grid = new Gtk.Grid ();
+        grid.orientation = Gtk.Orientation.VERTICAL;
+        grid.margin_top = grid.margin_bottom = 3;
         grid.add (summary_entry);
+        grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        grid.add (due_button);
+        grid.add (due_datetimepicker);
+        grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        grid.add (description_textview);
         grid.show_all ();
         add (grid);
+
+        if (model.due == null) {
+            due_datetimepicker.hide ();
+        }
+
+        due_button.button_release_event.connect (() => {
+            due_switch.activate ();
+            if (due_switch.active) {
+                due_datetimepicker.show ();
+            } else {
+                due_datetimepicker.hide ();
+            }
+            return Gdk.EVENT_STOP;
+        });
     }
 }

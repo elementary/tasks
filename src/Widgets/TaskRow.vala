@@ -116,9 +116,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
                 var task_popover = new Tasks.TaskSettingsPopover (model);
                 task_popover.position = Gtk.PositionType.LEFT;
-                task_popover.set_relative_to (eventbox);
+                task_popover.set_relative_to (grid);
 
-                debug ("show popover of: " + summary_label.label);
+
                 task_popover.popup ();
 
             } else if (!is_selected() && event.type == Gdk.EventType.BUTTON_PRESS) {

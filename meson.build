@@ -19,6 +19,7 @@ executable(
     'src/ListView.vala',
     'src/MainWindow.vala',
     'src/TaskModel.vala',
+    'src/Widgets/DateTimePicker.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskRow.vala',
     'src/Widgets/ListSettingsPopover.vala',
