@@ -18,6 +18,7 @@ executable(
     'src/Application.vala',
     'src/ListView.vala',
     'src/MainWindow.vala',
+    'src/TaskModel.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskRow.vala',
     'src/Widgets/ListSettingsPopover.vala',

@@ -20,14 +20,14 @@
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
-    public unowned ICal.Component component { get; construct; }
+    public Tasks.TaskModel model { get; construct; }
 
     private static Gtk.CssProvider taskrow_provider;
 
     public bool completed { get; private set; }
 
-    public TaskRow (E.Source source, ICal.Component component) {
-        Object (source: source, component: component);
+    public TaskRow (E.Source source, Tasks.TaskModel model) {
+        Object (source: source, model: model);
     }
 
     static construct {
@@ -36,7 +36,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
-        completed = component.get_status () == ICal.PropertyStatus.COMPLETED;
+        completed = model.is_completed ();
 
         var check = new Gtk.CheckButton ();
         check.sensitive = false;
@@ -45,7 +45,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.valign = Gtk.Align.START;
         Tasks.Application.set_task_color (source, check);
 
-        var summary_label = new Gtk.Label (component.get_summary ());
+        var summary_label = new Gtk.Label (model.summary);
         summary_label.justify = Gtk.Justification.LEFT;
         summary_label.wrap = true;
         summary_label.xalign = 0;
@@ -66,32 +66,14 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.attach (summary_label, 1, 0);
         grid.attach (description_grid, 1, 1);
 
-        var due = component.get_due ();
-        if (!due.is_null_time ()) {
-            GLib.TimeZone due_timezone = null;
-            if (due.get_tzid () != null) {
-                due_timezone = new GLib.TimeZone (due.get_tzid ());
-            } else {
-                due_timezone = new GLib.TimeZone.local ();
-            }
-
-            var due_datetime = new GLib.DateTime (
-                due_timezone,
-                due.year,
-                due.month,
-                due.day,
-                due.hour,
-                due.minute,
-                due.second
-            );
-
+        if ( model.due != null ) {
             var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
             var format = h24_settings.get_string ("clock-format");
 
-            var due_label = new Gtk.Label (Granite.DateTime.get_relative_datetime (due_datetime));
+            var due_label = new Gtk.Label (Granite.DateTime.get_relative_datetime (model.due));
             due_label.tooltip_text = _("%s at %s").printf (
-                due_datetime.format (Granite.DateTime.get_default_date_format (true)),
-                due_datetime.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                model.due.format (Granite.DateTime.get_default_date_format (true)),
+                model.due.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
             );
 
             unowned Gtk.StyleContext due_label_context = due_label.get_style_context ();
@@ -101,7 +83,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             description_grid.add (due_label);
         }
 
-        var description = component.get_description ();
+        var description = model.description;
         if (description != null) {
             description = description.replace ("\r", "").strip ();
             string[] lines = description.split ("\n");
@@ -132,13 +114,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         eventbox.event.connect ((event) => {
             if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
-                var task_popover = new Tasks.TaskSettingsPopover ();
+                var task_popover = new Tasks.TaskSettingsPopover (model);
                 task_popover.position = Gtk.PositionType.LEFT;
                 task_popover.set_relative_to (eventbox);
 
                 debug ("show popover of: " + summary_label.label);
-
-                task_popover.task = component;
                 task_popover.popup ();
 
             } else if (!is_selected() && event.type == Gdk.EventType.BUTTON_PRESS) {
