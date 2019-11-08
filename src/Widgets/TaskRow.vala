@@ -115,10 +115,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         eventbox.event.connect ((event) => {
             if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
                 var task_popover = new Tasks.TaskSettingsPopover (model);
+                task_popover.constrain_to = Gtk.PopoverConstraint.NONE;
                 task_popover.position = Gtk.PositionType.LEFT;
-                task_popover.set_relative_to (grid);
-
-
+                task_popover.set_relative_to (check);
                 task_popover.popup ();
 
             } else if (!is_selected() && event.type == Gdk.EventType.BUTTON_PRESS) {

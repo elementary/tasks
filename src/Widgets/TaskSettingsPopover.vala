@@ -50,22 +50,35 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         due_button.add (due_grid);
 
         var due_datetimepicker = new Tasks.DateTimePicker ();
+        due_datetimepicker.halign = Gtk.Align.END;
         due_datetimepicker.margin_start = due_datetimepicker.margin_end = 12;
         due_datetimepicker.margin_bottom = 12;
         due_datetimepicker.date_picker.date = model.due;
         due_datetimepicker.time_picker.time = model.due;
 
         var description_textview = new Gtk.TextView ();
-        description_textview.set_wrap_mode (Gtk.WrapMode.WORD_CHAR);
-        description_textview.accepts_tab = false;
         description_textview.left_margin = description_textview.right_margin = 12;
         description_textview.top_margin = description_textview.bottom_margin = 12;
+        description_textview.set_wrap_mode (Gtk.WrapMode.WORD_CHAR);
+        description_textview.accepts_tab = false;
 
         if (model.description != null) {
             Gtk.TextBuffer buffer = new Gtk.TextBuffer (null);
             buffer.text = model.description;
             description_textview.set_buffer (buffer);
         }
+
+        var description_scrolled_window = new Gtk.ScrolledWindow (null, null);
+        description_scrolled_window.hscrollbar_policy = Gtk.PolicyType.NEVER;
+        description_scrolled_window.height_request = 140;
+        description_scrolled_window.add (description_textview);
+
+        var done_button = new Gtk.Button ();
+        done_button.label = _("Done");
+        done_button.halign = Gtk.Align.END;
+        done_button.margin_right = 6;
+        done_button.margin_top = 6;
+        done_button.margin_bottom = 3;
 
         var grid = new Gtk.Grid ();
         grid.orientation = Gtk.Orientation.VERTICAL;
@@ -75,8 +88,12 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         grid.add (due_button);
         grid.add (due_datetimepicker);
         grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
-        grid.add (description_textview);
+        grid.add (description_scrolled_window);
+        grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        grid.add (done_button);
         grid.show_all ();
+
+        width_request = 379;
         add (grid);
 
         if (model.due == null) {
@@ -84,12 +101,21 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         }
 
         due_button.button_release_event.connect (() => {
+            var previous_active = due_switch.active;
             due_switch.activate ();
-            if (due_switch.active) {
-                due_datetimepicker.show ();
-            } else {
+
+            if (previous_active) {
                 due_datetimepicker.hide ();
+            } else {
+                due_datetimepicker.show ();
             }
+
+
+            return Gdk.EVENT_STOP;
+        });
+
+        done_button.button_release_event.connect (() => {
+            popdown ();
             return Gdk.EVENT_STOP;
         });
     }
