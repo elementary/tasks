@@ -120,7 +120,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 task_popover.set_relative_to (check);
                 task_popover.popup ();
 
-            } else if (!is_selected() && event.type == Gdk.EventType.BUTTON_PRESS) {
+            } else if (!is_selected () && event.type == Gdk.EventType.BUTTON_PRESS) {
                 activate ();
             }
         });

@@ -25,12 +25,12 @@ public struct Tasks.TaskModel {
     ICal.PropertyStatus status;
     GLib.DateTime? due;
 
-    public bool is_completed (){
+    public bool is_completed () {
         return status == ICal.PropertyStatus.COMPLETED;
     }
 
-    public static GLib.DateTime? ical_time_to_glib_datetime (ICal.Time ical_time){
-        if (ical_time.is_null_time()) {
+    public static GLib.DateTime? ical_time_to_glib_datetime (ICal.Time ical_time) {
+        if (ical_time.is_null_time ()) {
             return null;
         }
 

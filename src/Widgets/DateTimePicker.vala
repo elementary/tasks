@@ -41,6 +41,4 @@ public class Tasks.DateTimePicker : Gtk.Grid {
         attach (date_picker, 0, 0, 1, 1);
         attach (time_picker, 1, 0, 1, 1);
     }
-
 }
-
