@@ -69,7 +69,7 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         }
 
         var description_scrolled_window = new Gtk.ScrolledWindow (null, null);
-        description_scrolled_window.hscrollbar_policy = Gtk.PolicyType.NEVER;
+        description_scrolled_window.hscrollbar_policy = Gtk.PolicyType.EXTERNAL;
         description_scrolled_window.height_request = 140;
         description_scrolled_window.add (description_textview);
 
