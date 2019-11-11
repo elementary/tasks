@@ -53,8 +53,10 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         due_datetimepicker.halign = Gtk.Align.END;
         due_datetimepicker.margin_start = due_datetimepicker.margin_end = 12;
         due_datetimepicker.margin_bottom = 12;
-        due_datetimepicker.date_picker.date = model.due;
-        due_datetimepicker.time_picker.time = model.due;
+        if (model.due != null) {
+            due_datetimepicker.date_picker.date = model.due;
+            due_datetimepicker.time_picker.time = model.due;
+        }
 
         var description_textview = new Gtk.TextView ();
         description_textview.left_margin = description_textview.right_margin = 12;

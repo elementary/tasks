@@ -19,11 +19,16 @@
 */
 
 public struct Tasks.TaskModel {
-    string uid;
-    string summary;
-    string description;
-    ICal.PropertyStatus status;
-    GLib.DateTime? due;
+    public string? uid { get; private set; }
+
+    public string? summary;
+    public string? description;
+    public ICal.PropertyStatus? status;
+    public GLib.DateTime? due;
+
+    public TaskModel (string? uid) {
+        this.uid = uid;
+    }
 
     public bool is_completed () {
         return status == ICal.PropertyStatus.COMPLETED;
