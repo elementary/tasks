@@ -139,7 +139,7 @@ public class Tasks.ListView : Gtk.Grid {
     }
 
     private void tasks_added (E.Source source, Gee.Collection<ECal.Component> tasks) {
-        tasks.foreach((task) => {
+        tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow (source, task);
             task_list.add (task_row);
             return true;
