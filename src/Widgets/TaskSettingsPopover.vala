@@ -27,21 +27,14 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
     }
 
     construct {
-        ECal.ComponentDateTime task_due;
-        task.get_due (out task_due);
-        //ICal.Time task_due_value = task_due.get_value ();
-
-        string task_summary = task.get_summary ().get_value ();
-
-        SList<ECal.ComponentText?> task_description_list;
-        task.get_description_list (out task_description_list);
+        unowned ICal.Component component = task.get_icalcomponent ();
 
         var summary_entry = new Gtk.Entry ();
         summary_entry.margin_start = summary_entry.margin_end = 12;
         summary_entry.margin_top = summary_entry.margin_bottom = 12;
 
-        if (task_summary != null) {
-            summary_entry.text = task_summary.strip ();
+        if (component.get_summary () != null) {
+            summary_entry.text = component.get_summary ().strip ();
         }
 
         var due_label = new Gtk.Label (_("Schedule"));
@@ -49,7 +42,7 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         due_label.xalign = 0;
 
         var due_switch = new Gtk.Switch ();
-        //due_switch.active = !task_due_value.is_null_time ();
+        due_switch.active = !component.get_due ().is_null_time ();
 
         var due_grid = new Gtk.Grid ();
         due_grid.column_spacing = 6;
@@ -66,10 +59,10 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         due_datetimepicker.margin_start = due_datetimepicker.margin_end = 12;
         due_datetimepicker.margin_bottom = 12;
 
-        /*if (!task_due_value.is_null_time ()) {
-            var due_date_time = Util.ical_to_date_time (task_due_value);
+        if (!component.get_due ().is_null_time ()) {
+            var due_date_time = Util.ical_to_date_time (component.get_due ());
             due_datetimepicker.date_picker.date = due_datetimepicker.time_picker.time = due_date_time;
-        }*/
+        }
 
         var description_textview = new Gtk.TextView ();
         description_textview.left_margin = description_textview.right_margin = 12;
@@ -77,14 +70,10 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         description_textview.set_wrap_mode (Gtk.WrapMode.WORD_CHAR);
         description_textview.accepts_tab = false;
 
-        if (task_description_list != null && task_description_list.length () > 0) {
-            var description = task_description_list.nth_data (0).get_value ();
-
-            if (description != null) {
-                Gtk.TextBuffer buffer = new Gtk.TextBuffer (null);
-                buffer.text = description.strip ();
-                description_textview.set_buffer (buffer);
-            }
+        if (component.get_description () != null) {
+            Gtk.TextBuffer buffer = new Gtk.TextBuffer (null);
+            buffer.text = component.get_description ().strip ();
+            description_textview.set_buffer (buffer);
         }
 
         var description_scrolled_window = new Gtk.ScrolledWindow (null, null);
@@ -115,9 +104,9 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         width_request = 379;
         add (grid);
 
-        /*if (!task_due_value.is_null_time ()) {
+        if (!component.get_due ().is_null_time ()) {
             due_datetimepicker.hide ();
-        }*/
+        }
 
         due_button.button_release_event.connect (() => {
             var previous_active = due_switch.active;
