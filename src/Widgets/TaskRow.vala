@@ -36,8 +36,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
-        unowned ICal.Component component = task.get_icalcomponent ();
-        completed = component.get_status () == ICal.PropertyStatus.COMPLETED;
+        unowned ICal.Component ical_task = task.get_icalcomponent ();
+        completed = ical_task.get_status () == ICal.PropertyStatus.COMPLETED;
 
         var check = new Gtk.CheckButton ();
         check.sensitive = false;
@@ -46,7 +46,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.valign = Gtk.Align.START;
         Tasks.Application.set_task_color (source, check);
 
-        var summary_label = new Gtk.Label (component.get_summary ());
+        var summary_label = new Gtk.Label (ical_task.get_summary ());
         summary_label.justify = Gtk.Justification.LEFT;
         summary_label.wrap = true;
         summary_label.xalign = 0;
@@ -67,8 +67,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.attach (summary_label, 1, 0);
         grid.attach (description_grid, 1, 1);
 
-        if ( !component.get_due ().is_null_time () ) {
-            var due_date_time = Util.ical_to_date_time (component.get_due ());
+        if ( !ical_task.get_due ().is_null_time () ) {
+            var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
             var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
             var format = h24_settings.get_string ("clock-format");
 
@@ -85,8 +85,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             description_grid.add (due_label);
         }
 
-        if (component.get_description () != null) {
-            var description = component.get_description ();
+        if (ical_task.get_description () != null) {
+            var description = ical_task.get_description ();
             description = description.replace ("\r", "").strip ();
             string[] lines = description.split ("\n");
             string stripped_description = lines[0].strip ();

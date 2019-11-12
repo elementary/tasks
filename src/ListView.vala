@@ -123,9 +123,16 @@ public class Tasks.ListView : Gtk.Grid {
 #endif
         debug (@"Received $(objects.length()) added task(s) for source '%s'", source.dup_display_name ());
         var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
-        objects.foreach ((comp) => {
-            var task = new ECal.Component.from_icalcomponent (comp);
-            added_tasks.add (task);
+        objects.foreach ((ical_comp) => {
+            try {
+                SList<ECal.Component> ecal_tasks;
+                client.get_objects_for_uid_sync (ical_comp.get_uid (), out ecal_tasks, null);
+                ecal_tasks.foreach ((ecal_comp) => {
+                    added_tasks.add (ecal_comp);
+                });
+            } catch (Error e) {
+                warning (e.message);
+            }
         });
 
         tasks_added (source, added_tasks.read_only_view);
