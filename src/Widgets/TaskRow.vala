@@ -20,14 +20,14 @@
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
-    public Tasks.TaskModel model { get; construct; }
+    public ECal.Component task { get; construct; }
 
     private static Gtk.CssProvider taskrow_provider;
 
     public bool completed { get; private set; }
 
-    public TaskRow (E.Source source, Tasks.TaskModel model) {
-        Object (source: source, model: model);
+    public TaskRow (E.Source source, ECal.Component task) {
+        Object (source: source, task: task);
     }
 
     static construct {
@@ -36,7 +36,18 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
-        completed = model.is_completed ();
+        ICal.PropertyStatus task_status;
+        task.get_status (out task_status);
+        completed = task_status == ICal.PropertyStatus.COMPLETED;
+
+        ECal.ComponentDateTime task_due;
+        task.get_due (out task_due);
+        //ICal.Time task_due_value = task_due.get_value ();
+
+        string task_summary = task.get_summary ().get_value ().strip ();
+
+        SList<ECal.ComponentText?> task_description_list;
+        task.get_description_list (out task_description_list);
 
         var check = new Gtk.CheckButton ();
         check.sensitive = false;
@@ -45,7 +56,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.valign = Gtk.Align.START;
         Tasks.Application.set_task_color (source, check);
 
-        var summary_label = new Gtk.Label (model.summary);
+        var summary_label = new Gtk.Label (task_summary);
         summary_label.justify = Gtk.Justification.LEFT;
         summary_label.wrap = true;
         summary_label.xalign = 0;
@@ -66,14 +77,15 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.attach (summary_label, 1, 0);
         grid.attach (description_grid, 1, 1);
 
-        if ( model.due != null ) {
+        /*if ( !task_due_value.is_null_time () ) {
+            var due_date_time = Util.ical_to_date_time (task_due_value);
             var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
             var format = h24_settings.get_string ("clock-format");
 
-            var due_label = new Gtk.Label (Granite.DateTime.get_relative_datetime (model.due));
+            var due_label = new Gtk.Label (Granite.DateTime.get_relative_datetime (due_date_time));
             due_label.tooltip_text = _("%s at %s").printf (
-                model.due.format (Granite.DateTime.get_default_date_format (true)),
-                model.due.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                due_date_time.format (Granite.DateTime.get_default_date_format (true)),
+                due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
             );
 
             unowned Gtk.StyleContext due_label_context = due_label.get_style_context ();
@@ -81,10 +93,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             due_label_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
             description_grid.add (due_label);
-        }
+        }*/
 
-        var description = model.description;
-        if (description != null) {
+        if (task_description_list != null && task_description_list.length () > 0) {
+            var description = task_description_list.nth_data (0).get_value ();
             description = description.replace ("\r", "").strip ();
             string[] lines = description.split ("\n");
             string stripped_description = lines[0].strip ();
@@ -114,7 +126,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         eventbox.event.connect ((event) => {
             if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
-                var task_popover = new Tasks.TaskSettingsPopover (model);
+                var task_popover = new Tasks.TaskSettingsPopover (task);
                 task_popover.constrain_to = Gtk.PopoverConstraint.NONE;
                 task_popover.position = Gtk.PositionType.LEFT;
                 task_popover.set_relative_to (check);
