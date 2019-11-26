@@ -30,7 +30,7 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         unowned ICal.Component ical_task = task.get_icalcomponent ();
 
         var summary_entry = new Gtk.Entry ();
-        summary_entry.margin_start = summary_entry.margin_end = 12;
+        summary_entry.margin = 12;
         summary_entry.margin_top = summary_entry.margin_bottom = 12;
 
         if (ical_task.get_summary () != null) {
