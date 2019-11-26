@@ -116,14 +116,36 @@ public class Tasks.ListView : Gtk.Grid {
         return true;
     }
 
-    private void on_objects_added (E.Source source, ECal.Client client, SList<unowned ICal.Component> objects) {
-        objects.foreach ((component) => {
-            var task_row = new Tasks.TaskRow (source, component);
-            task_list.add (task_row);
+#if E_CAL_2_0
+    private void on_objects_added (E.Source source, ECal.Client client, SList<ICal.Component> objects) {
+#else
+    private void on_objects_added (E.Source source, ECal.Client client, SList<weak ICal.Component> objects) {
+#endif
+        debug (@"Received $(objects.length()) added task(s) for source '%s'", source.dup_display_name ());
+        var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
+        objects.foreach ((ical_comp) => {
+            try {
+                SList<ECal.Component> ecal_tasks;
+                client.get_objects_for_uid_sync (ical_comp.get_uid (), out ecal_tasks, null);
+                ecal_tasks.foreach ((ecal_comp) => {
+                    added_tasks.add (ecal_comp);
+                });
+            } catch (Error e) {
+                warning (e.message);
+            }
         });
 
+        tasks_added (source, added_tasks.read_only_view);
+    }
+
+    private void tasks_added (E.Source source, Gee.Collection<ECal.Component> tasks) {
+        tasks.foreach ((task) => {
+            var task_row = new Tasks.TaskRow (source, task);
+            task_list.add (task_row);
+            return true;
+        });
         task_list.show_all ();
-     }
+    }
 
     [CCode (instance_pos = -1)]
     private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {

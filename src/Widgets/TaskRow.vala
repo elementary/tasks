@@ -20,14 +20,14 @@
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
-    public unowned ICal.Component component { get; construct; }
+    public ECal.Component task { get; construct; }
 
     private static Gtk.CssProvider taskrow_provider;
 
     public bool completed { get; private set; }
 
-    public TaskRow (E.Source source, ICal.Component component) {
-        Object (source: source, component: component);
+    public TaskRow (E.Source source, ECal.Component task) {
+        Object (source: source, task: task);
     }
 
     static construct {
@@ -36,7 +36,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
-        completed = component.get_status () == ICal.PropertyStatus.COMPLETED;
+        unowned ICal.Component ical_task = task.get_icalcomponent ();
+        completed = ical_task.get_status () == ICal.PropertyStatus.COMPLETED;
 
         var check = new Gtk.CheckButton ();
         check.sensitive = false;
@@ -45,7 +46,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.valign = Gtk.Align.START;
         Tasks.Application.set_task_color (source, check);
 
-        var summary_label = new Gtk.Label (component.get_summary ());
+        var summary_label = new Gtk.Label (ical_task.get_summary ());
         summary_label.justify = Gtk.Justification.LEFT;
         summary_label.wrap = true;
         summary_label.xalign = 0;
@@ -66,32 +67,15 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.attach (summary_label, 1, 0);
         grid.attach (description_grid, 1, 1);
 
-        var due = component.get_due ();
-        if (!due.is_null_time ()) {
-            GLib.TimeZone due_timezone = null;
-            if (due.get_tzid () != null) {
-                due_timezone = new GLib.TimeZone (due.get_tzid ());
-            } else {
-                due_timezone = new GLib.TimeZone.local ();
-            }
-
-            var due_datetime = new GLib.DateTime (
-                due_timezone,
-                due.year,
-                due.month,
-                due.day,
-                due.hour,
-                due.minute,
-                due.second
-            );
-
+        if ( !ical_task.get_due ().is_null_time () ) {
+            var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
             var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
             var format = h24_settings.get_string ("clock-format");
 
-            var due_label = new Gtk.Label (Granite.DateTime.get_relative_datetime (due_datetime));
+            var due_label = new Gtk.Label (Granite.DateTime.get_relative_datetime (due_date_time));
             due_label.tooltip_text = _("%s at %s").printf (
-                due_datetime.format (Granite.DateTime.get_default_date_format (true)),
-                due_datetime.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                due_date_time.format (Granite.DateTime.get_default_date_format (true)),
+                due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
             );
 
             unowned Gtk.StyleContext due_label_context = due_label.get_style_context ();
@@ -101,8 +85,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             description_grid.add (due_label);
         }
 
-        var description = component.get_description ();
-        if (description != null) {
+        if (ical_task.get_description () != null) {
+            var description = ical_task.get_description ();
             description = description.replace ("\r", "").strip ();
             string[] lines = description.split ("\n");
             string stripped_description = lines[0].strip ();
@@ -125,6 +109,24 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             }
         }
 
-        add (grid);
+        var eventbox = new Gtk.EventBox ();
+        eventbox.expand = true;
+        eventbox.above_child = false;
+        eventbox.add (grid);
+
+        eventbox.event.connect ((event) => {
+            if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
+                var task_popover = new Tasks.TaskSettingsPopover (task);
+                task_popover.constrain_to = Gtk.PopoverConstraint.NONE;
+                task_popover.position = Gtk.PositionType.LEFT;
+                task_popover.set_relative_to (check);
+                task_popover.popup ();
+
+            } else if (!is_selected () && event.type == Gdk.EventType.BUTTON_PRESS) {
+                activate ();
+            }
+        });
+
+        add (eventbox);
     }
 }
