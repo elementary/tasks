@@ -38,7 +38,7 @@ public class Tasks.DateTimePicker : Gtk.Grid {
         column_spacing = 10;
         set_column_homogeneous (false);
 
-        attach (date_picker, 0, 0, 1, 1);
+        add (date_picker);
         attach (time_picker, 1, 0, 1, 1);
     }
 }
