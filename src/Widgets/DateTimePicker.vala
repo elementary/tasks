@@ -35,7 +35,7 @@ public class Tasks.DateTimePicker : Gtk.Grid {
         time_picker = new Granite.Widgets.TimePicker ();
 
         // Grid properties
-        set_column_spacing (10);
+        column_spacing = 10;
         set_column_homogeneous (false);
 
         attach (date_picker, 0, 0, 1, 1);
