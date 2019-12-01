@@ -135,12 +135,15 @@ public class Tasks.ListView : Gtk.Grid {
             }
         });
 
-        tasks_added (source, added_tasks.read_only_view);
+        tasks_added (client, source, added_tasks.read_only_view);
     }
 
-    private void tasks_added (E.Source source, Gee.Collection<ECal.Component> tasks) {
+    private void tasks_added (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow (source, task);
+            task_row.changed_task.connect((task) => {
+                update_task (client, task, ECal.ObjModType.ALL);
+            });
             task_list.add (task_row);
             return true;
         });
@@ -159,5 +162,22 @@ public class Tasks.ListView : Gtk.Grid {
         }
 
         return 0;
+    }
+
+    public void update_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
+        unowned ICal.Component comp = task.get_icalcomponent ();
+        debug (@"Updating task '$(comp.get_uid())' [mod_type=$(mod_type)]");
+
+#if E_CAL_2_0
+        client.modify_object.begin (comp, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
+#else
+        client.modify_object.begin (comp, mod_type, null, (obj, results) => {
+#endif
+            try {
+                client.modify_object.end (results);
+            } catch (Error e) {
+                warning (e.message);
+            }
+        });
     }
 }
