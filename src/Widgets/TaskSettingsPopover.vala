@@ -92,10 +92,24 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         description_textview.set_buffer (buffer);
 
         description_textview.buffer.changed.connect(() => {
-            if (description_textview.buffer.text != null) {
-                task.get_icalcomponent ().set_description (description_textview.buffer.text.strip ());
-            } else {
-                task.get_icalcomponent ().set_description ("");
+            // First, clear the description
+            int count = task.get_icalcomponent ().count_properties (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+            for (int i = 0; i < count; i++) {
+#if E_CAL_2_0
+                ICal.Property remove_prop;
+#else
+                unowned ICal.Property remove_prop;
+#endif
+                remove_prop = task.get_icalcomponent ().get_first_property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+                task.get_icalcomponent ().remove_property (remove_prop);
+            }
+
+            // Then add the new description - if we have any
+            var description = description_textview.get_buffer ().text;
+            if (description != null && description. strip().length > 0) {
+                var property = new ICal.Property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+                property.set_description (description. strip());
+                task.get_icalcomponent ().add_property (property);
             }
         });
 
