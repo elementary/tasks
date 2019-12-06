@@ -27,7 +27,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct; }
-    public signal void changed_task (ECal.Component task);
+    public signal void task_changed (ECal.Component task);
 
     private static Gtk.CssProvider taskrow_provider;
 
@@ -95,7 +95,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 task_popover.set_relative_to (check);
 
                 task_popover.closed.connect(() => {
-                    changed_task (task);
+                    task_changed (task);
                 });
 
                 task_popover.popup ();
@@ -106,7 +106,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
         add (eventbox);
 
-        changed_task.connect ((task) => {
+        task_changed.connect ((task) => {
             update_request ();
         });
         update_request ();

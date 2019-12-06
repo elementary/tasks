@@ -141,7 +141,7 @@ public class Tasks.ListView : Gtk.Grid {
     private void tasks_added (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow (source, task);
-            task_row.changed_task.connect((task) => {
+            task_row.task_changed.connect((task) => {
                 update_task (client, task, ECal.ObjModType.ALL);
             });
             task_list.add (task_row);
