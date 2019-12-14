@@ -130,7 +130,7 @@ public class Tasks.ListView : Gtk.Grid {
                 SList<ECal.Component> ecal_tasks;
                 client.get_objects_for_uid_sync (ical_comp.get_uid (), out ecal_tasks, null);
 
-                ecal_tasks.foreach((task) => {
+                ecal_tasks.foreach ((task) => {
                     debug_task (source, task);
                     added_tasks.add (task);
                 });
@@ -146,7 +146,7 @@ public class Tasks.ListView : Gtk.Grid {
     private void tasks_added (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow (source, task);
-            task_row.task_changed.connect((task) => {
+            task_row.task_changed.connect ((task) => {
                 update_task (client, task, ECal.ObjModType.ALL);
             });
             task_list.add (task_row);
@@ -167,7 +167,7 @@ public class Tasks.ListView : Gtk.Grid {
                 SList<ECal.Component> ecal_tasks;
                 client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
 
-                ecal_tasks.foreach((task) => {
+                ecal_tasks.foreach ((task) => {
                     debug_task (source, task);
                     updated_tasks.add (task);
                 });

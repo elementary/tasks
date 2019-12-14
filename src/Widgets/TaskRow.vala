@@ -93,7 +93,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 task_popover.position = Gtk.PositionType.LEFT;
                 task_popover.set_relative_to (check);
 
-                task_popover.closed.connect(() => {
+                task_popover.closed.connect (() => {
                     task_changed (task);
                 });
 

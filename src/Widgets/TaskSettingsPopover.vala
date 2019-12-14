@@ -37,7 +37,7 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
             summary_entry.text = ical_task.get_summary ().strip ();
         }
 
-        summary_entry.changed.connect(() => {
+        summary_entry.changed.connect (() => {
             if (summary_entry.text != null) {
                 task.get_icalcomponent ().set_summary (summary_entry.text.strip ());
             } else {
@@ -72,10 +72,10 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
             due_datetimepicker.date_picker.date = due_datetimepicker.time_picker.time = due_date_time;
         }
 
-        due_datetimepicker.date_picker.date_changed.connect(() => {
+        due_datetimepicker.date_picker.date_changed.connect (() => {
             ical_task.set_due (Util.date_time_to_ical (due_datetimepicker.date_picker.date, due_datetimepicker.time_picker.time));
         });
-        due_datetimepicker.time_picker.time_changed.connect(() => {
+        due_datetimepicker.time_picker.time_changed.connect (() => {
             ical_task.set_due (Util.date_time_to_ical (due_datetimepicker.date_picker.date, due_datetimepicker.time_picker.time));
         });
 
@@ -91,7 +91,7 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         }
         description_textview.set_buffer (buffer);
 
-        description_textview.buffer.changed.connect(() => {
+        description_textview.buffer.changed.connect (() => {
             // First, clear the description
             int count = task.get_icalcomponent ().count_properties (ICal.PropertyKind.DESCRIPTION_PROPERTY);
             for (int i = 0; i < count; i++) {
@@ -106,9 +106,9 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
 
             // Then add the new description - if we have any
             var description = description_textview.get_buffer ().text;
-            if (description != null && description. strip().length > 0) {
+            if (description != null && description.strip ().length > 0) {
                 var property = new ICal.Property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
-                property.set_description (description. strip());
+                property.set_description (description.strip ());
                 task.get_icalcomponent ().add_property (property);
             }
         });
