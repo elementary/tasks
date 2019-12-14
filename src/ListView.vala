@@ -85,6 +85,8 @@ public class Tasks.ListView : Gtk.Grid {
                      client.get_view_sync ("", out view, null);
 
                      view.objects_added.connect ((objects) => on_objects_added (source, client, objects));
+                     view.objects_removed.connect ((objects) => on_objects_removed (source, client, objects));
+                     view.objects_modified.connect ((objects) => on_objects_modified (source, client, objects));
 
                      view.start ();
 
@@ -127,9 +129,12 @@ public class Tasks.ListView : Gtk.Grid {
             try {
                 SList<ECal.Component> ecal_tasks;
                 client.get_objects_for_uid_sync (ical_comp.get_uid (), out ecal_tasks, null);
-                ecal_tasks.foreach ((ecal_comp) => {
-                    added_tasks.add (ecal_comp);
+
+                ecal_tasks.foreach((task) => {
+                    debug_task (source, task);
+                    added_tasks.add (task);
                 });
+
             } catch (Error e) {
                 warning (e.message);
             }
@@ -149,6 +154,78 @@ public class Tasks.ListView : Gtk.Grid {
         });
         task_list.show_all ();
     }
+
+#if E_CAL_2_0
+    private void on_objects_modified (E.Source source, ECal.Client client, SList<ICal.Component> objects) {
+#else
+    private void on_objects_modified (E.Source source, ECal.Client client, SList<weak ICal.Component> objects) {
+#endif
+        debug (@"Received $(objects.length()) modified task(s) for source '%s'", source.dup_display_name ());
+        var updated_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
+        objects.foreach ((comp) => {
+            try {
+                SList<ECal.Component> ecal_tasks;
+                client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
+
+                ecal_tasks.foreach((task) => {
+                    debug_task (source, task);
+                    updated_tasks.add (task);
+                });
+
+            } catch (Error e) {
+                warning (e.message);
+            }
+        });
+
+        tasks_updated (client, source, updated_tasks.read_only_view);
+    }
+
+
+    private void tasks_updated (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
+        Tasks.TaskRow task_row = null;
+        var row_index = 0;
+
+        do {
+            task_row = (Tasks.TaskRow) task_list.get_row_at_index (row_index);
+
+            if (task_row != null) {
+                foreach (ECal.Component task in tasks) {
+                    if (Util.calcomponent_equal_func (task_row.task, task)) {
+                        task_row.update_request (task);
+                        break;
+                    }
+                }
+            }
+            row_index++;
+        } while (task_row != null);
+    }
+
+    #if E_CAL_2_0
+    private void on_objects_removed (E.Source source, ECal.Client client, SList<ECal.ComponentId?> cids) {
+#else
+    private void on_objects_removed (E.Source source, ECal.Client client, SList<weak ECal.ComponentId?> cids) {
+#endif
+        debug (@"Received $(cids.length()) removed task(s) for source '%s'", source.dup_display_name ());
+
+        Tasks.TaskRow task_row = null;
+        var row_index = 0;
+        do {
+            task_row = (Tasks.TaskRow) task_list.get_row_at_index (row_index);
+
+            if (task_row != null) {
+                foreach (ECal.ComponentId cid in cids) {
+                    if (cid == null) {
+                        continue;
+                    } else if (cid.get_uid () == task_row.task.get_icalcomponent ().get_uid ()) {
+                        task_list.remove (task_row);
+                        break;
+                    }
+                }
+            }
+            row_index++;
+        } while (task_row != null);
+    }
+
 
     [CCode (instance_pos = -1)]
     private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {
@@ -175,9 +252,23 @@ public class Tasks.ListView : Gtk.Grid {
 #endif
             try {
                 client.modify_object.end (results);
+                SList<ECal.Component> ecal_tasks;
+                client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
+
+                var ical_tasks = new SList<unowned ICal.Component> ();
+                foreach (ECal.Component ecal_task in ecal_tasks) {
+                    ical_tasks.append (ecal_task.get_icalcomponent ());
+                }
+                on_objects_modified (source, client, ical_tasks);
+
             } catch (Error e) {
                 warning (e.message);
             }
         });
+    }
+
+    private void debug_task (E.Source source, ECal.Component task) {
+        unowned ICal.Component comp = task.get_icalcomponent ();
+        debug (@"Task ['$(comp.get_summary())', $(source.dup_display_name()), $(comp.get_uid()))]");
     }
 }

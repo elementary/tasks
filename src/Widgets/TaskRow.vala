@@ -26,7 +26,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private Gtk.Label description_label;
 
     public E.Source source { get; construct; }
-    public ECal.Component task { get; construct; }
+    public ECal.Component task { get; private set; }
     public signal void task_changed (ECal.Component task);
 
     private static Gtk.CssProvider taskrow_provider;
@@ -34,7 +34,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     public bool completed { get; private set; }
 
     public TaskRow (E.Source source, ECal.Component task) {
-        Object (source: source, task: task);
+        Object (source: source);
+        update_request (task);
     }
 
     static construct {
@@ -44,7 +45,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     construct {
         check = new Gtk.CheckButton ();
-        check.sensitive = false;
         check.margin_top = 2;
         check.valign = Gtk.Align.START;
         Tasks.Application.set_task_color (source, check);
@@ -55,7 +55,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         summary_label.xalign = 0;
 
         description_grid = new Gtk.Grid ();
-        description_grid.visible = false;
         description_grid.column_spacing = 6;
 
         var grid = new Gtk.Grid ();
@@ -68,14 +67,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.attach (description_grid, 1, 1);
 
         due_label = new Gtk.Label (null);
-        due_label.visible = false;
         unowned Gtk.StyleContext due_label_context = due_label.get_style_context ();
-        due_label_context.add_class ("due-date");
         due_label_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        due_label_context.add_class ("due-date");
         description_grid.add (due_label);
 
         description_label = new Gtk.Label (null);
-        description_label.visible = false;
         description_label.xalign = 0;
         description_label.lines = 1;
         description_label.ellipsize = Pango.EllipsizeMode.END;
@@ -86,6 +83,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         eventbox.expand = true;
         eventbox.above_child = false;
         eventbox.add (grid);
+
+        add (eventbox);
 
         eventbox.event.connect ((event) => {
             if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
@@ -104,25 +103,38 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 activate ();
             }
         });
-        add (eventbox);
 
-        task_changed.connect ((task) => {
-            update_request ();
+        check.toggled.connect (() => {
+            if (task == null) {
+                return;
+            }
+            task.get_icalcomponent ().set_status (check.active ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
+            task_changed (task);
         });
-        update_request ();
+
+        key_release_event.connect ((event) => {
+            // SPACE == 32
+            if (event.keyval == 32) {
+                check.active = !check.active;
+            }
+        });
     }
 
-    private void update_request () {
+    public void update_request (ECal.Component task) {
+        this.task = task;
+
         unowned ICal.Component ical_task = task.get_icalcomponent ();
         completed = ical_task.get_status () == ICal.PropertyStatus.COMPLETED;
-
         check.active = completed;
+
         summary_label.label = ical_task.get_summary ();
 
         if (completed) {
             summary_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            description_grid.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         } else {
             summary_label.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            description_grid.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
         }
 
         if ( ical_task.get_due ().is_null_time () ) {
