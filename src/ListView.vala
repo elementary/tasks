@@ -191,7 +191,7 @@ public class Tasks.ListView : Gtk.Grid {
             if (task_row != null) {
                 foreach (ECal.Component task in tasks) {
                     if (Util.calcomponent_equal_func (task_row.task, task)) {
-                        task_row.update_request (task);
+                        task_row.task = task;
                         break;
                     }
                 }
