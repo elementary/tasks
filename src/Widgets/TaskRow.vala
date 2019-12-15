@@ -114,7 +114,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         key_release_event.connect ((event) => {
             // SPACE == 32
-            if (event.keyval == 32) {
+            if (event.keyval == Gdk.Key.space) {
                 check.active = !check.active;
             }
         });
