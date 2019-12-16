@@ -207,7 +207,7 @@ public class Tasks.ListView : Gtk.Grid {
 #endif
         debug (@"Received $(cids.length()) removed task(s) for source '%s'", source.dup_display_name ());
 
-        Tasks.TaskRow task_row = null;
+        unowned Tasks.TaskRow? task_row = null;
         var row_index = 0;
         do {
             task_row = (Tasks.TaskRow) task_list.get_row_at_index (row_index);
