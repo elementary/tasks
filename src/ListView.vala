@@ -256,7 +256,7 @@ public class Tasks.ListView : Gtk.Grid {
                 client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
 
                 var ical_tasks = new SList<unowned ICal.Component> ();
-                foreach (ECal.Component ecal_task in ecal_tasks) {
+                foreach (unowned ECal.Component ecal_task in ecal_tasks) {
                     ical_tasks.append (ecal_task.get_icalcomponent ());
                 }
                 on_objects_modified (source, client, ical_tasks);
