@@ -213,7 +213,7 @@ public class Tasks.ListView : Gtk.Grid {
             task_row = (Tasks.TaskRow) task_list.get_row_at_index (row_index);
 
             if (task_row != null) {
-                foreach (ECal.ComponentId cid in cids) {
+                foreach (unowned ECal.ComponentId cid in cids) {
                     if (cid == null) {
                         continue;
                     } else if (cid.get_uid () == task_row.task.get_icalcomponent ().get_uid ()) {
