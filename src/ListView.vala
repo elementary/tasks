@@ -200,7 +200,7 @@ public class Tasks.ListView : Gtk.Grid {
         } while (task_row != null);
     }
 
-    #if E_CAL_2_0
+#if E_CAL_2_0
     private void on_objects_removed (E.Source source, ECal.Client client, SList<ECal.ComponentId?> cids) {
 #else
     private void on_objects_removed (E.Source source, ECal.Client client, SList<weak ECal.ComponentId?> cids) {
