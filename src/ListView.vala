@@ -44,8 +44,16 @@ public class Tasks.ListView : Gtk.Grid {
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
+        var placeholder = new Gtk.Label (_("No Tasks"));
+        placeholder.show ();
+
+        unowned Gtk.StyleContext placeholder_context = placeholder.get_style_context ();
+        placeholder_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+
         task_list = new Gtk.ListBox ();
         task_list.set_filter_func (filter_function);
+        task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
