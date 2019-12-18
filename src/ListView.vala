@@ -44,7 +44,7 @@ public class Tasks.ListView : Gtk.Grid {
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-        var placeholder = new Gtk.Label (_("No Reminders"));
+        var placeholder = new Gtk.Label (_("No Tasks"));
         placeholder.show ();
 
         unowned Gtk.StyleContext placeholder_context = placeholder.get_style_context ();
