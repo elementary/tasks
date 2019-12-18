@@ -248,12 +248,16 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
             var last_selected_list = Application.settings.get_string ("selected-list");
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
-                add_source (registry, source);
+                E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
-                if (last_selected_list == "" && registry.default_task_list == source) {
-                    listbox.select_row (source_rows[source]);
-                } else if (last_selected_list == source.uid) {
-                    listbox.select_row (source_rows[source]);
+                if (list.selected == true && source.enabled == true) {
+                    add_source (registry, source);
+
+                    if (last_selected_list == "" && registry.default_task_list == source) {
+                        listbox.select_row (source_rows[source]);
+                    } else if (last_selected_list == source.uid) {
+                        listbox.select_row (source_rows[source]);
+                    }
                 }
             });
         } catch (GLib.Error error) {
@@ -275,8 +279,18 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void update_source (E.SourceRegistry registry, E.Source source) {
-        source_rows[source].update_request ();
-        listview.update_request ();
+        E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+        if (list.selected != true || source.enabled != true) {
+            remove_source (registry, source);
+
+        } else if (!source_rows.has_key (source)) {
+            add_source (registry, source);
+
+        } else {
+            source_rows[source].update_request ();
+            listview.update_request ();
+        }
     }
 
     private void remove_source (E.SourceRegistry registry, E.Source source) {
