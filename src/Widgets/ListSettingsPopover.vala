@@ -22,15 +22,8 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
     public E.Source source { get; set; }
 
     private E.SourceTaskList task_list;
-    private Gtk.Entry name_entry;
 
     construct {
-        var name_label = new Granite.HeaderLabel (_("Name:"));
-        name_label.margin_start = name_label.margin_end = 12;
-
-        name_entry = new Gtk.Entry ();
-        name_entry.margin_start = name_entry.margin_end = 12;
-
         var css_provider = new Gtk.CssProvider ();
         css_provider.load_from_resource ("/io/elementary/tasks/ColorButton.css");
 
@@ -128,8 +121,6 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         var grid = new Gtk.Grid ();
         grid.orientation = Gtk.Orientation.VERTICAL;
         grid.margin_top = grid.margin_bottom = 3;
-        grid.add (name_label);
-        grid.add (name_entry);
         grid.add (color_grid);
         grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
         grid.add (show_completed_button);
@@ -140,50 +131,45 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
 
         color_button_red.toggled.connect (() => {
             task_list.color = "#c6262e";
-            save ();
+            source.write.begin (null);
         });
 
         color_button_orange.toggled.connect (() => {
             task_list.color = "#f37329";
-            save ();
+            source.write.begin (null);
         });
 
         color_button_yellow.toggled.connect (() => {
             task_list.color = "#e6a92a";
-            save ();
+            source.write.begin (null);
         });
 
         color_button_green.toggled.connect (() => {
             task_list.color = "#68b723";
-            save ();
+            source.write.begin (null);
         });
 
         color_button_blue.toggled.connect (() => {
             task_list.color = "#3689e6";
-            save ();
+            source.write.begin (null);
         });
 
         color_button_purple.toggled.connect (() => {
             task_list.color = "#a56de2";
-            save ();
+            source.write.begin (null);
         });
 
         color_button_brown.toggled.connect (() => {
             task_list.color = "#8a715e";
-            save ();
+            source.write.begin (null);
         });
 
         color_button_slate.toggled.connect (() => {
             task_list.color = "#667885";
-            save ();
+            source.write.begin (null);
         });
 
-        name_entry.changed.connect (save);
-
         notify["source"].connect (() => {
-            name_entry.text = source.dup_display_name ();
-            name_entry.sensitive = source.writable;
-
             task_list = ((E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST));
             switch (task_list.dup_color ()) {
                 case "#c6262e":
@@ -222,10 +208,5 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         });
 
         Application.settings.bind ("show-completed", show_completed_switch, "active", GLib.SettingsBindFlags.DEFAULT);
-    }
-
-    private void save () {
-        source.display_name = name_entry.text;
-        source.write.begin (null);
     }
 }
