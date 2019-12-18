@@ -18,10 +18,13 @@ executable(
     'src/Application.vala',
     'src/ListView.vala',
     'src/MainWindow.vala',
+    'src/Util.vala',
+    'src/Widgets/DateTimePicker.vala',
     'src/Widgets/EditableLabel.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskRow.vala',
     'src/Widgets/ListSettingsPopover.vala',
+    'src/Widgets/TaskSettingsPopover.vala',
     dependencies: [
         dependency('glib-2.0'),
         dependency('gobject-2.0'),
