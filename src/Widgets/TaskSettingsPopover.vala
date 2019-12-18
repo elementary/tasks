@@ -37,6 +37,14 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
             summary_entry.text = ical_task.get_summary ().strip ();
         }
 
+        summary_entry.changed.connect (() => {
+            if (summary_entry.text != null) {
+                task.get_icalcomponent ().set_summary (summary_entry.text.strip ());
+            } else {
+                task.get_icalcomponent ().set_summary ("");
+            }
+        });
+
         var due_label = new Gtk.Label (_("Schedule"));
         due_label.hexpand = true;
         due_label.xalign = 0;
@@ -64,17 +72,46 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
             due_datetimepicker.date_picker.date = due_datetimepicker.time_picker.time = due_date_time;
         }
 
+        due_datetimepicker.date_picker.date_changed.connect (() => {
+            ical_task.set_due (Util.date_time_to_ical (due_datetimepicker.date_picker.date, due_datetimepicker.time_picker.time));
+        });
+        due_datetimepicker.time_picker.time_changed.connect (() => {
+            ical_task.set_due (Util.date_time_to_ical (due_datetimepicker.date_picker.date, due_datetimepicker.time_picker.time));
+        });
+
         var description_textview = new Gtk.TextView ();
         description_textview.left_margin = description_textview.right_margin = 12;
         description_textview.top_margin = description_textview.bottom_margin = 12;
         description_textview.set_wrap_mode (Gtk.WrapMode.WORD_CHAR);
         description_textview.accepts_tab = false;
 
+        Gtk.TextBuffer buffer = new Gtk.TextBuffer (null);
         if (ical_task.get_description () != null) {
-            Gtk.TextBuffer buffer = new Gtk.TextBuffer (null);
             buffer.text = ical_task.get_description ().strip ();
-            description_textview.set_buffer (buffer);
         }
+        description_textview.set_buffer (buffer);
+
+        description_textview.buffer.changed.connect (() => {
+            // First, clear the description
+            int count = task.get_icalcomponent ().count_properties (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+            for (int i = 0; i < count; i++) {
+#if E_CAL_2_0
+                ICal.Property remove_prop;
+#else
+                unowned ICal.Property remove_prop;
+#endif
+                remove_prop = task.get_icalcomponent ().get_first_property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+                task.get_icalcomponent ().remove_property (remove_prop);
+            }
+
+            // Then add the new description - if we have any
+            var description = description_textview.get_buffer ().text;
+            if (description != null && description.strip ().length > 0) {
+                var property = new ICal.Property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+                property.set_description (description.strip ());
+                task.get_icalcomponent ().add_property (property);
+            }
+        });
 
         var description_scrolled_window = new Gtk.ScrolledWindow (null, null);
         description_scrolled_window.hscrollbar_policy = Gtk.PolicyType.EXTERNAL;
@@ -114,7 +151,9 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
 
             if (previous_active) {
                 due_datetimepicker.hide ();
+                ical_task.set_due (ICal.Time.null_time ());
             } else {
+                ical_task.set_due (Util.date_time_to_ical (due_datetimepicker.date_picker.date, due_datetimepicker.time_picker.time));
                 due_datetimepicker.show ();
             }
 
