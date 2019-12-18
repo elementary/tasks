@@ -42,7 +42,7 @@ public class Tasks.ListView : Gtk.Grid {
         settings_button.valign = Gtk.Align.CENTER;
         settings_button.tooltip_text = _("Edit Name and Appearance");
         settings_button.popover = list_settings_popover;
-        settings_button.image = new Gtk.Image.from_icon_name ("view-more-horizontal-symbolic", Gtk.IconSize.MENU);
+        settings_button.image = new Gtk.Image.from_icon_name ("view-more-symbolic", Gtk.IconSize.MENU);
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
