@@ -20,6 +20,7 @@ executable(
     'src/MainWindow.vala',
     'src/Util.vala',
     'src/Widgets/DateTimePicker.vala',
+    'src/Widgets/EditableLabel.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskRow.vala',
     'src/Widgets/ListSettingsPopover.vala',
