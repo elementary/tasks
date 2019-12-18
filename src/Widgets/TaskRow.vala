@@ -86,7 +86,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         description_label.xalign = 0;
         description_label.lines = 1;
         description_label.ellipsize = Pango.EllipsizeMode.END;
-        description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        description_label.use_markup = true;
+
+        unowned Gtk.StyleContext description_label_context = description_label.get_style_context ();
+        description_label_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        description_label_context.add_class ("description");
+        description_label_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
         description_label_revealer = new Gtk.Revealer ();
         description_label_revealer.reveal_child = false;
