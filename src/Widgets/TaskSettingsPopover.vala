@@ -104,23 +104,23 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         description_scrolled_window.height_request = 140;
         description_scrolled_window.add (description_textview);
 
+        var description_frame = new Gtk.Frame (null);
+        description_frame.margin = 12;
+        description_frame.margin_bottom = 0;
+        description_frame.add (description_scrolled_window);
+
         var done_button = new Gtk.Button ();
         done_button.label = _("Done");
         done_button.halign = Gtk.Align.END;
-        done_button.margin_end = 6;
-        done_button.margin_top = 6;
-        done_button.margin_bottom = 3;
+        done_button.margin = 12;
 
         var grid = new Gtk.Grid ();
         grid.orientation = Gtk.Orientation.VERTICAL;
-        grid.margin_top = grid.margin_bottom = 3;
+        grid.margin_top = 3;
         grid.add (summary_entry);
-        grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
         grid.add (due_button);
         grid.add (due_datetimepicker_revealer);
-        grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
-        grid.add (description_scrolled_window);
-        grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        grid.add (description_frame);
         grid.add (done_button);
         grid.show_all ();
 
