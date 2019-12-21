@@ -101,6 +101,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         eventbox.add (grid);
 
         add (eventbox);
+        get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         eventbox.event.connect ((event) => {
             if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
@@ -176,6 +177,14 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                     due_date_time.format (Granite.DateTime.get_default_date_format (true)),
                     due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
                 );
+
+                var today = new GLib.DateTime.now_local ();
+                if (today.compare (due_date_time) > 0 && !completed) {
+                    get_style_context ().add_class ("past-due");
+                } else {
+                    get_style_context ().remove_class ("past-due");
+                }
+
                 due_label_revealer.reveal_child = true;
             }
 
