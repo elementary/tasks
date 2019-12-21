@@ -126,6 +126,10 @@ public class Tasks.EditableLabel : Gtk.EventBox {
             editing = false;
         });
 
+        grab_focus.connect (() => {
+            editing = true;
+        });
+
         entry.focus_out_event.connect ((event) => {
             editing = false;
             return Gdk.EVENT_PROPAGATE;

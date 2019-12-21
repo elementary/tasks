@@ -20,7 +20,7 @@
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
     private Gtk.CheckButton check;
-    private Gtk.Label summary_label;
+    private EditableLabel editable_summary;
 
     private Gtk.Label due_label;
     private Gtk.Revealer due_label_revealer;
@@ -52,10 +52,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.valign = Gtk.Align.START;
         Tasks.Application.set_task_color (source, check);
 
-        summary_label = new Gtk.Label (null);
-        summary_label.justify = Gtk.Justification.LEFT;
-        summary_label.wrap = true;
-        summary_label.xalign = 0;
+        editable_summary = new EditableLabel ();
 
         due_label = new Gtk.Label (null);
         due_label.margin_end = 6;
@@ -92,7 +89,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.column_spacing = 6;
         grid.row_spacing = 3;
         grid.attach (check, 0, 0);
-        grid.attach (summary_label, 1, 0);
+        grid.attach (editable_summary, 1, 0);
         grid.attach (description_grid_revealer, 1, 1);
 
         var eventbox = new Gtk.EventBox ();
@@ -103,20 +100,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         add (eventbox);
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        eventbox.event.connect ((event) => {
+        eventbox.button_press_event.connect ((event) => {
             if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
-                var task_popover = new Tasks.TaskSettingsPopover (task);
-                task_popover.constrain_to = Gtk.PopoverConstraint.NONE;
-                task_popover.position = Gtk.PositionType.LEFT;
-                task_popover.set_relative_to (check);
+                show_popover ();
 
-                task_popover.closed.connect (() => {
-                    task_changed (task);
-                });
-
-                task_popover.popup ();
-
-            } else if (!is_selected () && event.type == Gdk.EventType.BUTTON_PRESS) {
+            } else if (!is_selected () ) {
                 activate ();
             }
         });
@@ -130,8 +118,49 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
 
         key_release_event.connect ((event) => {
-            if (event.keyval == Gdk.Key.space) {
-                check.active = !check.active;
+            switch (event.keyval) {
+                case Gdk.Key.space:
+                    if (has_focus) {
+                        check.active = !check.active;
+                    }
+                    break;
+
+                case Gdk.Key.Return:
+                case Gdk.Key.KP_Enter:
+                    if (has_focus) {
+                        show_popover ();
+                    } else {
+                        grab_focus ();
+                    }
+                    break;
+
+                case Gdk.Key.BackSpace:
+                    if (has_focus) {
+                        // TODO: Delete Task
+                    }
+                    break;
+
+                case Gdk.Key.Escape:
+                    grab_focus ();
+                    break;
+            }
+        });
+
+        editable_summary.changed.connect (() => {
+            if (task == null) {
+                return;
+            }
+            task.get_icalcomponent ().set_summary (editable_summary.text);
+            task_changed (task);
+        });
+
+        editable_summary.button_press_event.connect ((event) => {
+            if (event.type != Gdk.EventType.@2BUTTON_PRESS) {
+                if (!is_selected ()) {
+                   activate ();
+                }
+                editable_summary.grab_focus ();
+                return Gdk.EVENT_STOP;
             }
         });
 
@@ -143,8 +172,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         if (task == null) {
             completed = false;
             check.active = completed;
-            summary_label.label = null;
-            summary_label.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            editable_summary.text = null;
+            editable_summary.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
             description_grid.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
             description_grid_revealer.reveal_child = false;
             due_label_revealer.reveal_child = false;
@@ -155,13 +184,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             completed = ical_task.get_status () == ICal.PropertyStatus.COMPLETED;
             check.active = completed;
 
-            summary_label.label = ical_task.get_summary ();
+            editable_summary.text = ical_task.get_summary ();
 
             if (completed) {
-                summary_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+                editable_summary.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
                 description_grid.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
             } else {
-                summary_label.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+                editable_summary.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
                 description_grid.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
             }
 
@@ -218,5 +247,18 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 description_grid_revealer.reveal_child = false;
             }
         }
+    }
+
+    private void show_popover () {
+        var task_popover = new Tasks.TaskSettingsPopover (task);
+        task_popover.constrain_to = Gtk.PopoverConstraint.NONE;
+        task_popover.position = Gtk.PositionType.LEFT;
+        task_popover.set_relative_to (check);
+
+        task_popover.closed.connect (() => {
+            task_changed (task);
+        });
+
+        task_popover.popup ();
     }
 }
