@@ -53,17 +53,33 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         due_button.get_child ().destroy ();
         due_button.add (due_grid);
 
-        var due_datetimepicker = new Tasks.DateTimePicker ();
+        var date_picker = new Granite.Widgets.DatePicker ();
+        date_picker.hexpand = true;
+
+        var time_picker = new Granite.Widgets.TimePicker ();
+        time_picker.hexpand = true;
+
+        var due_datetimepicker = new Gtk.Grid ();
+        due_datetimepicker.column_spacing = 6;
         due_datetimepicker.margin_start = due_datetimepicker.margin_end = 12;
         due_datetimepicker.margin_bottom = 12;
+        due_datetimepicker.add (date_picker);
+        due_datetimepicker.add (time_picker);
 
         var due_datetimepicker_revealer = new Gtk.Revealer ();
         due_datetimepicker_revealer.add (due_datetimepicker);
 
         if (!ical_task.get_due ().is_null_time ()) {
             var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
-            due_datetimepicker.date_picker.date = due_datetimepicker.time_picker.time = due_date_time;
+            date_picker.date = time_picker.time = due_date_time;
         }
+
+        date_picker.date_changed.connect (() => {
+            ical_task.set_due (Util.date_time_to_ical (date_picker.date, time_picker.time));
+        });
+        time_picker.time_changed.connect (() => {
+            ical_task.set_due (Util.date_time_to_ical (date_picker.date, time_picker.time));
+        });
 
         var description_textview = new Gtk.TextView ();
         description_textview.left_margin = description_textview.right_margin = 12;
@@ -138,17 +154,11 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
             if (previous_active) {
                 ical_task.set_due (ICal.Time.null_time ());
             } else {
-                ical_task.set_due (Util.date_time_to_ical (due_datetimepicker.date_picker.date, due_datetimepicker.time_picker.time));
+                ical_task.set_due (Util.date_time_to_ical (date_picker.date, time_picker.time));
+                due_datetimepicker.show ();
             }
 
             return Gdk.EVENT_STOP;
-        });
-
-        due_datetimepicker.date_picker.date_changed.connect (() => {
-            ical_task.set_due (Util.date_time_to_ical (due_datetimepicker.date_picker.date, due_datetimepicker.time_picker.time));
-        });
-        due_datetimepicker.time_picker.time_changed.connect (() => {
-            ical_task.set_due (Util.date_time_to_ical (due_datetimepicker.date_picker.date, due_datetimepicker.time_picker.time));
         });
 
         due_switch.bind_property ("active", due_datetimepicker_revealer, "reveal-child", GLib.BindingFlags.SYNC_CREATE);
