@@ -90,7 +90,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         unowned Gtk.StyleContext description_label_context = description_label.get_style_context ();
         description_label_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        description_label_context.add_class ("description");
+        // NOTE: This should change to using the constant after a release of Granite with elementary/granite#367
+        description_label_context.add_class ("small-label");
         description_label_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
         description_label_revealer = new Gtk.Revealer ();
