@@ -57,29 +57,15 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         summary_label.wrap = true;
         summary_label.xalign = 0;
 
-        description_grid = new Gtk.Grid ();
-        description_grid.column_spacing = 6;
-
-        description_grid_revealer = new Gtk.Revealer ();
-        description_grid_revealer.reveal_child = false;
-        description_grid_revealer.add (description_grid);
-
-        var grid = new Gtk.Grid ();
-        grid.margin = 6;
-        grid.margin_start = grid.margin_end = 24;
-        grid.column_spacing = 6;
-        grid.row_spacing = 3;
-        grid.attach (check, 0, 0);
-        grid.attach (summary_label, 1, 0);
-        grid.attach (description_grid_revealer, 1, 1);
-
         due_label = new Gtk.Label (null);
+        due_label.margin_end = 6;
+
         unowned Gtk.StyleContext due_label_context = due_label.get_style_context ();
         due_label_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         due_label_context.add_class ("due-date");
 
         due_label_revealer = new Gtk.Revealer ();
-        due_label_revealer.reveal_child = false;
+        due_label_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT;
         due_label_revealer.add (due_label);
 
         description_label = new Gtk.Label (null);
@@ -98,8 +84,22 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         description_label_revealer.reveal_child = false;
         description_label_revealer.add (description_label);
 
+        description_grid = new Gtk.Grid ();
         description_grid.add (due_label_revealer);
         description_grid.add (description_label_revealer);
+
+        description_grid_revealer = new Gtk.Revealer ();
+        description_grid_revealer.reveal_child = false;
+        description_grid_revealer.add (description_grid);
+
+        var grid = new Gtk.Grid ();
+        grid.margin = 6;
+        grid.margin_start = grid.margin_end = 24;
+        grid.column_spacing = 6;
+        grid.row_spacing = 3;
+        grid.attach (check, 0, 0);
+        grid.attach (summary_label, 1, 0);
+        grid.attach (description_grid_revealer, 1, 1);
 
         var eventbox = new Gtk.EventBox ();
         eventbox.expand = true;
@@ -107,6 +107,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         eventbox.add (grid);
 
         add (eventbox);
+        get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         eventbox.event.connect ((event) => {
             if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
@@ -172,11 +173,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
             if ( ical_task.get_due ().is_null_time () ) {
                 due_label_revealer.reveal_child = false;
-                GLib.Timeout.add (due_label_revealer.transition_duration, () => {
-                    due_label_revealer.visible = false;
-                    return GLib.Source.REMOVE;
-                });
-
             } else {
                 var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
                 var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
@@ -187,7 +183,14 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                     due_date_time.format (Granite.DateTime.get_default_date_format (true)),
                     due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
                 );
-                due_label_revealer.visible = true;
+
+                var today = new GLib.DateTime.now_local ();
+                if (today.compare (due_date_time) > 0 && !completed) {
+                    get_style_context ().add_class ("past-due");
+                } else {
+                    get_style_context ().remove_class ("past-due");
+                }
+
                 due_label_revealer.reveal_child = true;
             }
 

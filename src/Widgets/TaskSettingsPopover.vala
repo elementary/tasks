@@ -19,7 +19,6 @@
 */
 
 public class Tasks.TaskSettingsPopover : Gtk.Popover {
-
     public ECal.Component task { get; construct; }
 
     public TaskSettingsPopover (ECal.Component task) {
@@ -36,14 +35,6 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         if (ical_task.get_summary () != null) {
             summary_entry.text = ical_task.get_summary ().strip ();
         }
-
-        summary_entry.changed.connect (() => {
-            if (summary_entry.text != null) {
-                task.get_icalcomponent ().set_summary (summary_entry.text.strip ());
-            } else {
-                task.get_icalcomponent ().set_summary ("");
-            }
-        });
 
         var due_label = new Gtk.Label (_("Schedule"));
         due_label.hexpand = true;
@@ -62,21 +53,32 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         due_button.get_child ().destroy ();
         due_button.add (due_grid);
 
-        var due_datetimepicker = new Tasks.DateTimePicker ();
-        due_datetimepicker.halign = Gtk.Align.END;
+        var date_picker = new Granite.Widgets.DatePicker ();
+        date_picker.hexpand = true;
+
+        var time_picker = new Granite.Widgets.TimePicker ();
+        time_picker.hexpand = true;
+
+        var due_datetimepicker = new Gtk.Grid ();
+        due_datetimepicker.column_spacing = 6;
         due_datetimepicker.margin_start = due_datetimepicker.margin_end = 12;
         due_datetimepicker.margin_bottom = 12;
+        due_datetimepicker.add (date_picker);
+        due_datetimepicker.add (time_picker);
+
+        var due_datetimepicker_revealer = new Gtk.Revealer ();
+        due_datetimepicker_revealer.add (due_datetimepicker);
 
         if (!ical_task.get_due ().is_null_time ()) {
             var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
-            due_datetimepicker.date_picker.date = due_datetimepicker.time_picker.time = due_date_time;
+            date_picker.date = time_picker.time = due_date_time;
         }
 
-        due_datetimepicker.date_picker.date_changed.connect (() => {
-            ical_task.set_due (Util.date_time_to_ical (due_datetimepicker.date_picker.date, due_datetimepicker.time_picker.time));
+        date_picker.date_changed.connect (() => {
+            ical_task.set_due (Util.date_time_to_ical (date_picker.date, time_picker.time));
         });
-        due_datetimepicker.time_picker.time_changed.connect (() => {
-            ical_task.set_due (Util.date_time_to_ical (due_datetimepicker.date_picker.date, due_datetimepicker.time_picker.time));
+        time_picker.time_changed.connect (() => {
+            ical_task.set_due (Util.date_time_to_ical (date_picker.date, time_picker.time));
         });
 
         var description_textview = new Gtk.TextView ();
@@ -133,7 +135,7 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         grid.margin_top = 3;
         grid.add (summary_entry);
         grid.add (due_button);
-        grid.add (due_datetimepicker);
+        grid.add (due_datetimepicker_revealer);
         grid.add (description_frame);
         grid.add (done_button);
         grid.show_all ();
@@ -142,7 +144,7 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
         add (grid);
 
         if (ical_task.get_due ().is_null_time ()) {
-            due_datetimepicker.hide ();
+            due_switch.active = false;
         }
 
         due_button.button_release_event.connect (() => {
@@ -150,19 +152,27 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
             due_switch.activate ();
 
             if (previous_active) {
-                due_datetimepicker.hide ();
                 ical_task.set_due (ICal.Time.null_time ());
             } else {
-                ical_task.set_due (Util.date_time_to_ical (due_datetimepicker.date_picker.date, due_datetimepicker.time_picker.time));
+                ical_task.set_due (Util.date_time_to_ical (date_picker.date, time_picker.time));
                 due_datetimepicker.show ();
             }
 
             return Gdk.EVENT_STOP;
         });
 
-        done_button.button_release_event.connect (() => {
+        due_switch.bind_property ("active", due_datetimepicker_revealer, "reveal-child", GLib.BindingFlags.SYNC_CREATE);
+
+        done_button.clicked.connect (() => {
             popdown ();
-            return Gdk.EVENT_STOP;
+        });
+
+        summary_entry.changed.connect (() => {
+            if (summary_entry.text != null) {
+                task.get_icalcomponent ().set_summary (summary_entry.text.strip ());
+            } else {
+                task.get_icalcomponent ().set_summary ("");
+            }
         });
     }
 }
