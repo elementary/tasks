@@ -134,12 +134,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                     }
                     break;
 
-                case Gdk.Key.BackSpace:
-                    if (has_focus) {
-                        // TODO: Delete Task
-                    }
-                    break;
-
                 case Gdk.Key.Escape:
                     grab_focus ();
                     break;
