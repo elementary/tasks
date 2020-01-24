@@ -1,0 +1,18 @@
+Source: io.elementary.tasks
+Section: x11
+Priority: extra
+Maintainer: elementary, Inc. <builds@elementary.io>
+Build-Depends: debhelper (>= 10.5.1),
+               libecal1.2-dev,
+               libedataserver1.2-dev,
+               libgranite-dev,
+               libgtk-3-dev,
+               libical-dev,
+               meson,
+               valac
+Standards-Version: 4.1.1
+
+Package: io.elementary.tasks
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Create and track the progress of tasks
