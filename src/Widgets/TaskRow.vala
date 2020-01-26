@@ -23,6 +23,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private EditableLabel editable_summary;
 
     private Tasks.TaskDetailRevealer task_detail_revealer;
+    private Tasks.TaskFormRevealer task_form_revealer;
 
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
@@ -31,6 +32,19 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private static Gtk.CssProvider taskrow_provider;
 
     public bool completed { get; private set; }
+
+    public bool reveal_child {
+        set {
+            if (value) {
+                expand_request ();
+            } else {
+                collapse_request ();
+            }
+        }
+        get {
+            return task_form_revealer.reveal_child;
+        }
+    }
 
     public TaskRow (E.Source source, ECal.Component task) {
         Object (source: source, task: task);
@@ -42,13 +56,20 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
+        selectable = false;
+        can_focus = false;
+
         check = new Gtk.CheckButton ();
-        check.margin_top = 2;
-        check.valign = Gtk.Align.START;
+        check.valign = Gtk.Align.CENTER;
         Tasks.Application.set_task_color (source, check);
 
         editable_summary = new EditableLabel ();
+
         task_detail_revealer = new Tasks.TaskDetailRevealer (task);
+        task_detail_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
+
+        task_form_revealer = new Tasks.TaskFormRevealer (task);
+        task_form_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
 
         var grid = new Gtk.Grid ();
         grid.margin = 6;
@@ -58,6 +79,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.attach (check, 0, 0);
         grid.attach (editable_summary, 1, 0);
         grid.attach (task_detail_revealer, 1, 1);
+        grid.attach (task_form_revealer, 1, 2);
 
         var eventbox = new Gtk.EventBox ();
         eventbox.expand = true;
@@ -68,12 +90,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         eventbox.button_press_event.connect ((event) => {
-            if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
-                show_popover ();
-
-            } else if (!is_selected () ) {
-                activate ();
-            }
+            expand_request ();
         });
 
         check.toggled.connect (() => {
@@ -83,6 +100,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             task.get_icalcomponent ().set_status (check.active ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
             task_changed (task);
         });
+
+        task_form_revealer.cancel_clicked.connect (collapse_request);
 
         key_release_event.connect ((event) => {
             switch (event.keyval) {
@@ -95,14 +114,14 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 case Gdk.Key.Return:
                 case Gdk.Key.KP_Enter:
                     if (has_focus) {
-                        show_popover ();
+                        expand_request ();
                     } else {
-                        grab_focus ();
+                        collapse_request ();
                     }
                     break;
 
                 case Gdk.Key.Escape:
-                    grab_focus ();
+                    collapse_request ();
                     break;
             }
         });
@@ -116,20 +135,31 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
 
         editable_summary.button_press_event.connect ((event) => {
-            if (event.type != Gdk.EventType.@2BUTTON_PRESS) {
-                if (!is_selected ()) {
-                   activate ();
-                }
-                editable_summary.grab_focus ();
-                return Gdk.EVENT_STOP;
+            if (!is_selected ()) {
+               activate ();
             }
+            editable_summary.grab_focus ();
+            return Gdk.EVENT_STOP;
         });
+
+        activate.connect (expand_request);
 
         notify["task"].connect (() => {
             task_detail_revealer.task = task;
+            task_form_revealer.task = task;
             update_request ();
         });
         update_request ();
+    }
+
+    private void expand_request () {
+        task_detail_revealer.collapse_request ();
+        task_form_revealer.reveal_child = true;
+    }
+
+    private void collapse_request () {
+        task_form_revealer.reveal_child = false;
+        task_detail_revealer.expand_request ();
     }
 
     private void update_request () {
@@ -155,18 +185,5 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
             }
         }
-    }
-
-    private void show_popover () {
-        var task_popover = new Tasks.TaskSettingsPopover (task);
-        task_popover.constrain_to = Gtk.PopoverConstraint.NONE;
-        task_popover.position = Gtk.PositionType.LEFT;
-        task_popover.set_relative_to (check);
-
-        task_popover.closed.connect (() => {
-            task_changed (task);
-        });
-
-        task_popover.popup ();
     }
 }
