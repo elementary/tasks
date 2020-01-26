@@ -105,8 +105,8 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
 
         notify["task"].connect (update_request);
 
-        delete_button.clicked.connect (() => { delete_clicked(task); });
-        cancel_button.clicked.connect (() => { cancel_clicked(); });
+        delete_button.clicked.connect (() => { delete_clicked (task); });
+        cancel_button.clicked.connect (() => { cancel_clicked (); });
         save_button.clicked.connect (() => {
             unowned ICal.Component ical_task = task.get_icalcomponent ();
 
@@ -137,7 +137,7 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
                 ical_task.add_property (property);
             }
 
-            save_clicked(task);
+            save_clicked (task);
         });
 
         due_switch.bind_property ("active", due_datepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
