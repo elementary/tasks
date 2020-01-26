@@ -129,16 +129,12 @@ public class Tasks.TaskDetailRevealer : Gtk.Revealer {
                 }
             }
 
-            expand_request ();
+            reveal_child_request (true);
         }
     }
 
-    public void collapse_request () {
-        reveal_child = false;
-    }
-
-    public void expand_request () {
-        if (due_label_revealer.reveal_child || description_label_revealer.reveal_child) {
+    public void reveal_child_request (bool value) {
+        if (value && (due_label_revealer.reveal_child || description_label_revealer.reveal_child)) {
             reveal_child = true;
         } else {
             reveal_child = false;

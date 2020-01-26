@@ -28,8 +28,8 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
     private Granite.Widgets.TimePicker due_timepicker;
 
     public signal void cancel_clicked ();
-    public signal void save_clicked ();
-    public signal void delete_clicked ();
+    public signal void save_clicked (ECal.Component task);
+    public signal void delete_clicked (ECal.Component task);
 
     public TaskFormRevealer (ECal.Component task) {
         Object (task: task);
@@ -68,6 +68,7 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         description_frame.add (description_scrolled_window);
 
         var delete_button = new Gtk.Button ();
+        delete_button.sensitive = false;
         delete_button.label = _("Delete Task");
         delete_button.halign = Gtk.Align.START;
         delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
@@ -103,28 +104,20 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         reveal_child = false;
 
         notify["task"].connect (update_request);
-        update_request ();
 
-        delete_button.clicked.connect (() => { delete_clicked(); });
+        delete_button.clicked.connect (() => { delete_clicked(task); });
         cancel_button.clicked.connect (() => { cancel_clicked(); });
-        save_button.clicked.connect (() => { save_clicked(); });
-
-        due_switch.bind_property ("active", due_datepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
-        due_switch.bind_property ("active", due_timepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
-
-        due_datepicker.date_changed.connect (() => {
-            unowned ICal.Component ical_task = task.get_icalcomponent ();
-            ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
-        });
-        due_timepicker.time_changed.connect (() => {
-            unowned ICal.Component ical_task = task.get_icalcomponent ();
-            ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
-        });
-
-        description_textview.buffer.changed.connect (() => {
+        save_button.clicked.connect (() => {
             unowned ICal.Component ical_task = task.get_icalcomponent ();
 
-            // First, clear the description
+            if (due_switch.active) {
+                ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
+                ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
+            } else {
+                ical_task.set_due ( ICal.Time.null_time ());
+            }
+
+            // Clear the old description
             int count = ical_task.count_properties (ICal.PropertyKind.DESCRIPTION_PROPERTY);
             for (int i = 0; i < count; i++) {
 #if E_CAL_2_0
@@ -136,14 +129,19 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
                 ical_task.remove_property (remove_prop);
             }
 
-            // Then add the new description - if we have any
+            // Add the new description - if we have any
             var description = description_textview.get_buffer ().text;
             if (description != null && description.strip ().length > 0) {
                 var property = new ICal.Property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
                 property.set_description (description.strip ());
                 ical_task.add_property (property);
             }
+
+            save_clicked(task);
         });
+
+        due_switch.bind_property ("active", due_datepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
+        due_switch.bind_property ("active", due_timepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
     }
 
     private void update_request () {
@@ -162,7 +160,14 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         if (ical_task.get_description () != null) {
             description_textbuffer.text = ical_task.get_description ().strip ();
         } else {
-            description_textbuffer.text = null;
+            description_textbuffer.text = "";
         }
+    }
+
+    public void reveal_child_request (bool value) {
+        if (value) {
+            update_request ();
+        }
+        reveal_child = value;
     }
 }

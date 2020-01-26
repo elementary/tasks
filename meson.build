@@ -24,7 +24,7 @@ executable(
     'src/Widgets/TaskRow.vala',
     'src/Widgets/TaskDetailRevealer.vala',
     'src/Widgets/TaskFormRevealer.vala',
-    'src/Widgets/ListSettingsPopover.vala'
+    'src/Widgets/ListSettingsPopover.vala',
     dependencies: [
         dependency('glib-2.0'),
         dependency('gobject-2.0'),

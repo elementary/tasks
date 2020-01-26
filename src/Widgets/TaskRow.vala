@@ -27,7 +27,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
-    public signal void task_changed (ECal.Component task);
+
+    public signal void task_save (ECal.Component task);
+    public signal void task_delete (ECal.Component task);
 
     private static Gtk.CssProvider taskrow_provider;
 
@@ -35,11 +37,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     public bool reveal_child {
         set {
-            if (value) {
-                expand_request ();
-            } else {
-                collapse_request ();
-            }
+            reveal_child_request (value);
         }
         get {
             return task_form_revealer.reveal_child;
@@ -90,7 +88,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         eventbox.button_press_event.connect ((event) => {
-            expand_request ();
+            reveal_child_request (true);
         });
 
         check.toggled.connect (() => {
@@ -98,10 +96,22 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 return;
             }
             task.get_icalcomponent ().set_status (check.active ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
-            task_changed (task);
+            task_save (task);
         });
 
-        task_form_revealer.cancel_clicked.connect (collapse_request);
+        task_form_revealer.cancel_clicked.connect (() => {
+            reveal_child_request (false);
+            editable_summary.text = task.get_icalcomponent ().get_summary ();
+        });
+
+        task_form_revealer.save_clicked.connect ((task) => {
+            task.get_icalcomponent ().set_summary (editable_summary.text);
+            reveal_child_request (false);
+            task_save (task);
+        });
+        task_form_revealer.delete_clicked.connect ((task) => {
+            task_delete (task);
+        });
 
         key_release_event.connect ((event) => {
             switch (event.keyval) {
@@ -114,35 +124,23 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 case Gdk.Key.Return:
                 case Gdk.Key.KP_Enter:
                     if (has_focus) {
-                        expand_request ();
-                    } else {
-                        collapse_request ();
+                        reveal_child_request (true);
                     }
                     break;
 
                 case Gdk.Key.Escape:
-                    collapse_request ();
+                    reveal_child_request (false);
                     break;
             }
         });
 
-        editable_summary.changed.connect (() => {
-            if (task == null) {
-                return;
-            }
-            task.get_icalcomponent ().set_summary (editable_summary.text);
-            task_changed (task);
-        });
-
         editable_summary.button_press_event.connect ((event) => {
-            if (!is_selected ()) {
-               activate ();
+            if (!reveal_child) {
+               reveal_child_request (true);
             }
             editable_summary.grab_focus ();
             return Gdk.EVENT_STOP;
         });
-
-        activate.connect (expand_request);
 
         notify["task"].connect (() => {
             task_detail_revealer.task = task;
@@ -152,14 +150,15 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         update_request ();
     }
 
-    private void expand_request () {
-        task_detail_revealer.collapse_request ();
-        task_form_revealer.reveal_child = true;
-    }
-
-    private void collapse_request () {
-        task_form_revealer.reveal_child = false;
-        task_detail_revealer.expand_request ();
+    private void reveal_child_request (bool value) {
+        if (value) {
+            task_detail_revealer.reveal_child_request (false);
+            task_form_revealer.reveal_child_request (true);
+        } else {
+            task_form_revealer.reveal_child_request (false);
+            task_detail_revealer.reveal_child_request (true);
+            editable_summary.editing = false;
+        }
     }
 
     private void update_request () {
