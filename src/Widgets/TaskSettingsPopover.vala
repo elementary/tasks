@@ -152,7 +152,11 @@ public class Tasks.TaskSettingsPopover : Gtk.Popover {
             due_switch.activate ();
 
             if (previous_active) {
+#if E_CAL_2_0
+                ical_task.set_due (new ICal.Time.null_time ());
+#else
                 ical_task.set_due (ICal.Time.null_time ());
+#endif
             } else {
                 ical_task.set_due (Util.date_time_to_ical (date_picker.date, time_picker.time));
                 due_datetimepicker.show ();
