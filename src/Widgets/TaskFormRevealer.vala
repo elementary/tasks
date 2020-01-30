@@ -50,7 +50,7 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         due_datetimepicker.add (due_timepicker);
 
         var description_textview = new Gtk.TextView ();
-        description_textview.left_margin = description_textview.right_margin = 12;
+        description_textview.margin = 12;
         description_textview.top_margin = description_textview.bottom_margin = 12;
         description_textview.set_wrap_mode (Gtk.WrapMode.WORD_CHAR);
         description_textview.accepts_tab = false;
