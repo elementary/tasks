@@ -39,7 +39,7 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         due_switch = new Gtk.Switch ();
         due_switch.valign = Gtk.Align.CENTER;
 
-        var due_label = new Gtk.Label (_("Schedule") + ":");
+        var due_label = new Gtk.Label (_("Schedule:"));
         due_datepicker = new Granite.Widgets.DatePicker ();
         due_timepicker = new Granite.Widgets.TimePicker ();
 
