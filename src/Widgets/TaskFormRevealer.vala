@@ -158,7 +158,7 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         }
 
         if (ical_task.get_description () != null) {
-            description_textbuffer.text = ical_task.get_description ().strip ();
+            description_textbuffer.text = ical_task.get_description ();
         } else {
             description_textbuffer.text = "";
         }
