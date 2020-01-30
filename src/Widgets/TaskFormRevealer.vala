@@ -39,7 +39,7 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         due_switch = new Gtk.Switch ();
         due_switch.valign = Gtk.Align.CENTER;
 
-        var due_label = new Gtk.Label (_("Schedule") + ":");
+        var due_label = new Gtk.Label (_("Schedule:"));
         due_datepicker = new Granite.Widgets.DatePicker ();
         due_timepicker = new Granite.Widgets.TimePicker ();
 
@@ -50,7 +50,7 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         due_datetimepicker.add (due_timepicker);
 
         var description_textview = new Gtk.TextView ();
-        description_textview.left_margin = description_textview.right_margin = 12;
+        description_textview.margin = 12;
         description_textview.top_margin = description_textview.bottom_margin = 12;
         description_textview.set_wrap_mode (Gtk.WrapMode.WORD_CHAR);
         description_textview.accepts_tab = false;
@@ -158,7 +158,7 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         }
 
         if (ical_task.get_description () != null) {
-            description_textbuffer.text = ical_task.get_description ().strip ();
+            description_textbuffer.text = ical_task.get_description ();
         } else {
             description_textbuffer.text = "";
         }
