@@ -109,20 +109,10 @@ public class Tasks.TaskDetailRevealer : Gtk.Revealer {
                 description_label_revealer.reveal_child = false;
 
             } else {
-                var description = ical_task.get_description ();
-                description = description.replace ("\r", "").strip ();
-                string[] lines = description.split ("\n");
-                string stripped_description = lines[0].strip ();
-                for (int i = 1; i < lines.length; i++) {
-                    string stripped_line = lines[i].strip ();
+                var description = Tasks.Util.line_break_to_space (ical_task.get_description ());
 
-                    if (stripped_line.length > 0 ) {
-                        stripped_description += " " + stripped_line;
-                    }
-                }
-
-                if (stripped_description.length > 0) {
-                    description_label.label = stripped_description;
+                if (description != null && description.length > 0) {
+                    description_label.label = description;
                     description_label_revealer.reveal_child = true;
                 } else {
                     description_label_revealer.reveal_child = false;
