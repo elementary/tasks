@@ -50,22 +50,16 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         due_datetimepicker.add (due_timepicker);
 
         var description_textview = new Gtk.TextView ();
-        description_textview.margin = 12;
-        description_textview.top_margin = description_textview.bottom_margin = 12;
+        description_textview.border_width = 12;
+        description_textview.height_request = 140;
         description_textview.set_wrap_mode (Gtk.WrapMode.WORD_CHAR);
         description_textview.accepts_tab = false;
 
         description_textbuffer = new Gtk.TextBuffer (null);
         description_textview.set_buffer (description_textbuffer);
 
-        var description_scrolled_window = new Gtk.ScrolledWindow (null, null);
-        description_scrolled_window.hscrollbar_policy = Gtk.PolicyType.EXTERNAL;
-        description_scrolled_window.height_request = 140;
-        description_scrolled_window.add (description_textview);
-
         var description_frame = new Gtk.Frame (null);
-        description_frame.margin_bottom = 0;
-        description_frame.add (description_scrolled_window);
+        description_frame.add (description_textview);
 
         var delete_button = new Gtk.Button ();
         delete_button.sensitive = false;
@@ -88,7 +82,6 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
 
         button_box.add (delete_button);
         button_box.set_child_secondary (delete_button, true);
-        button_box.set_child_non_homogeneous (delete_button, true);
         button_box.add (cancel_button);
         button_box.set_child_non_homogeneous (cancel_button, true);
         button_box.add (save_button);
@@ -149,7 +142,7 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
 
         if (ical_task.get_due ().is_null_time ()) {
             due_switch.active = false;
-            due_datepicker.date = due_timepicker.time = null;
+            due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
         } else {
             var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
             due_datepicker.date = due_timepicker.time = due_date_time;

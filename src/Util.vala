@@ -31,11 +31,17 @@ namespace Tasks.Util {
             try {
                 line_break_to_space_regex = new GLib.Regex ("(^\\s+|\\s+$|\n|\\s\\s+)");
             } catch (GLib.RegexError e) {
-                critical ("Error: %s\n", e.message);
+                critical (e.message);
             }
         }
 
-        return Tasks.Util.line_break_to_space_regex.replace (str, str.length, 0, " ");
+        try {
+            return Tasks.Util.line_break_to_space_regex.replace (str, str.length, 0, " ");
+        } catch (GLib.RegexError e) {
+            warning (e.message);
+        }
+
+        return str;
     }
 
 
