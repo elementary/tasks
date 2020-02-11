@@ -38,15 +38,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     public bool completed { get; private set; }
 
-    public bool reveal_child {
-        set {
-            reveal_child_request (value);
-        }
-        get {
-            return task_form_revealer.reveal_child;
-        }
-    }
-
     public TaskRow (E.Source source, ECal.Component task) {
         Object (source: source, task: task);
     }
@@ -157,7 +148,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
 
         editable_summary.button_press_event.connect ((event) => {
-            if (!reveal_child) {
+            if (!task_form_revealer.reveal_child) {
                reveal_child_request (true);
             }
             editable_summary.grab_focus ();
