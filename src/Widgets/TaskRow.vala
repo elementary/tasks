@@ -25,9 +25,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private Tasks.TaskDetailRevealer task_detail_revealer;
     private Tasks.TaskFormRevealer task_form_revealer;
 
-    private Gtk.Revealer top_separator_revealer;
-    private Gtk.Revealer bottom_separator_revealer;
-
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
 
@@ -73,29 +70,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.attach (task_detail_revealer, 1, 1);
         grid.attach (task_form_revealer, 1, 2);
 
-        var top_separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
-        top_separator.margin_bottom = 6;
-
-        top_separator_revealer = new Gtk.Revealer ();
-        top_separator_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
-        top_separator_revealer.add (top_separator);
-
-        var bottom_separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
-        bottom_separator.margin_top = 6;
-
-        bottom_separator_revealer = new Gtk.Revealer ();
-        bottom_separator_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
-        bottom_separator_revealer.add (bottom_separator);
-
-        var box = new Gtk.Grid ();
-        box.attach (top_separator_revealer, 0, 0);
-        box.attach (grid, 0, 1);
-        box.attach (bottom_separator_revealer, 0, 2);
-
         var eventbox = new Gtk.EventBox ();
         eventbox.expand = true;
         eventbox.above_child = false;
-        eventbox.add (box);
+        eventbox.add (grid);
 
         add (eventbox);
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -164,16 +142,18 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     private void reveal_child_request (bool value) {
-        bottom_separator_revealer.reveal_child = value;
         task_form_revealer.reveal_child_request (value);
-        top_separator_revealer.reveal_child = value;
         task_detail_revealer.reveal_child_request (!value);
 
+        unowned Gtk.StyleContext style_context = get_style_context ();
+
         if (value) {
-            get_style_context ().add_class ("selected");
+            style_context.add_class (Granite.STYLE_CLASS_CARD);
+            style_context.add_class ("collapsed");
         } else {
             editable_summary.editing = false;
-            get_style_context ().remove_class ("selected");
+            style_context.remove_class (Granite.STYLE_CLASS_CARD);
+            style_context.remove_class ("collapsed");
         }
     }
 
