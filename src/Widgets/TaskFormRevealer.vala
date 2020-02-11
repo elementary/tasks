@@ -19,7 +19,6 @@
 */
 
 public class Tasks.TaskFormRevealer : Gtk.Revealer {
-
     public ECal.Component task { get; construct set; }
 
     private Gtk.Switch due_switch;
@@ -40,14 +39,12 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         due_switch.valign = Gtk.Align.CENTER;
 
         var due_label = new Gtk.Label (_("Schedule:"));
-        due_datepicker = new Granite.Widgets.DatePicker ();
-        due_timepicker = new Granite.Widgets.TimePicker ();
 
-        var due_datetimepicker = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12);
-        due_datetimepicker.add (due_label);
-        due_datetimepicker.add (due_switch);
-        due_datetimepicker.add (due_datepicker);
-        due_datetimepicker.add (due_timepicker);
+        due_datepicker = new Granite.Widgets.DatePicker ();
+        due_datepicker.hexpand = true;
+
+        due_timepicker = new Granite.Widgets.TimePicker ();
+        due_timepicker.hexpand = true;
 
         var description_textview = new Gtk.TextView ();
         description_textview.border_width = 12;
@@ -64,36 +61,37 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         var delete_button = new Gtk.Button ();
         delete_button.sensitive = false;
         delete_button.label = _("Delete Task");
-        delete_button.halign = Gtk.Align.START;
         delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
         var cancel_button = new Gtk.Button ();
         cancel_button.label = _("Cancel");
-        cancel_button.halign = Gtk.Align.START;
 
         var save_button = new Gtk.Button ();
         save_button.label = _("Save Changes");
-        save_button.halign = Gtk.Align.END;
         save_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
 
         var button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL);
         button_box.baseline_position = Gtk.BaselinePosition.CENTER;
+        button_box.margin_top = 12;
+        button_box.spacing = 6;
         button_box.set_layout (Gtk.ButtonBoxStyle.END);
-
         button_box.add (delete_button);
         button_box.set_child_secondary (delete_button, true);
         button_box.add (cancel_button);
-        button_box.set_child_non_homogeneous (cancel_button, true);
         button_box.add (save_button);
 
-        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 12);
-        box.margin_top = box.margin_bottom = 6;
-        box.homogeneous = false;
-        box.add (due_datetimepicker);
-        box.add (description_frame);
-        box.add (button_box);
+        var grid = new Gtk.Grid ();
+        grid.column_spacing = 12;
+        grid.row_spacing = 12;
+        grid.margin_bottom = 6;
+        grid.attach (due_label, 0, 0);
+        grid.attach (due_switch, 1, 0);
+        grid.attach (due_datepicker, 2, 0);
+        grid.attach (due_timepicker, 3, 0);
+        grid.attach (description_frame, 0, 1, 4);
+        grid.attach (button_box, 0, 2, 4);
 
-        add (box);
+        add (grid);
         reveal_child = false;
 
         notify["task"].connect (update_request);
@@ -135,6 +133,10 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
 
         due_switch.bind_property ("active", due_datepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
         due_switch.bind_property ("active", due_timepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
+
+        notify["reveal-child"].connect (() => {
+            update_request ();
+        });
     }
 
     private void update_request () {
@@ -155,12 +157,5 @@ public class Tasks.TaskFormRevealer : Gtk.Revealer {
         } else {
             description_textbuffer.text = "";
         }
-    }
-
-    public void reveal_child_request (bool value) {
-        if (value) {
-            update_request ();
-        }
-        reveal_child = value;
     }
 }

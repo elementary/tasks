@@ -142,7 +142,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     private void reveal_child_request (bool value) {
-        task_form_revealer.reveal_child_request (value);
+        task_form_revealer.reveal_child = value;
         task_detail_revealer.reveal_child_request (!value);
 
         unowned Gtk.StyleContext style_context = get_style_context ();
