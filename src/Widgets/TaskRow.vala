@@ -87,10 +87,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         bottom_separator_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
         bottom_separator_revealer.add (bottom_separator);
 
-        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-        box.add (top_separator_revealer);
-        box.add (grid);
-        box.add (bottom_separator_revealer);
+        var box = new Gtk.Grid ();
+        box.attach (top_separator_revealer, 0, 0);
+        box.attach (grid, 0, 1);
+        box.attach (bottom_separator_revealer, 0, 2);
 
         var eventbox = new Gtk.EventBox ();
         eventbox.expand = true;
