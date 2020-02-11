@@ -62,7 +62,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         var grid = new Gtk.Grid ();
         grid.margin = 6;
-        grid.margin_start = grid.margin_end = 24;
+        grid.margin_start = grid.margin_end = 12;
         grid.column_spacing = 6;
         grid.row_spacing = 3;
         grid.attach (check, 0, 0);
@@ -76,6 +76,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         eventbox.add (grid);
 
         add (eventbox);
+        margin_start = margin_end = 12;
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         eventbox.button_press_event.connect ((event) => {
