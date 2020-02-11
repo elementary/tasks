@@ -164,18 +164,15 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     private void reveal_child_request (bool value) {
+        bottom_separator_revealer.reveal_child = value;
+        task_form_revealer.reveal_child_request (value);
+        top_separator_revealer.reveal_child = value;
+        task_detail_revealer.reveal_child_request (!value);
+
         if (value) {
             get_style_context ().add_class ("selected");
-            top_separator_revealer.reveal_child = true;
-            bottom_separator_revealer.reveal_child = true;
-            task_detail_revealer.reveal_child_request (false);
-            task_form_revealer.reveal_child_request (true);
         } else {
-            task_form_revealer.reveal_child_request (false);
-            task_detail_revealer.reveal_child_request (true);
             editable_summary.editing = false;
-            top_separator_revealer.reveal_child = false;
-            bottom_separator_revealer.reveal_child = false;
             get_style_context ().remove_class ("selected");
         }
     }
