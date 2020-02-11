@@ -19,12 +19,10 @@
 */
 
 public class Tasks.TaskDetailRevealer : Gtk.Revealer {
-
     private Gtk.Label due_label;
     private Gtk.Revealer due_label_revealer;
     private Gtk.Label description_label;
     private Gtk.Revealer description_label_revealer;
-    private Gtk.Grid grid;
 
     public ECal.Component task { get; construct set; }
 
@@ -61,7 +59,7 @@ public class Tasks.TaskDetailRevealer : Gtk.Revealer {
         description_label_revealer.reveal_child = false;
         description_label_revealer.add (description_label);
 
-        grid = new Gtk.Grid ();
+        var grid = new Gtk.Grid ();
         grid.add (due_label_revealer);
         grid.add (description_label_revealer);
 
