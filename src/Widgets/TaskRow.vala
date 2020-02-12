@@ -45,9 +45,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
-        selectable = false;
-        can_focus = false;
-
         check = new Gtk.CheckButton ();
         check.valign = Gtk.Align.CENTER;
         Tasks.Application.set_task_color (source, check);

@@ -52,6 +52,7 @@ public class Tasks.ListView : Gtk.Grid {
         placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
 
         task_list = new Gtk.ListBox ();
+        task_list.selection_mode = Gtk.SelectionMode.NONE;
         task_list.set_filter_func (filter_function);
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
