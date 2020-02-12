@@ -38,7 +38,7 @@ public class Tasks.TaskDetailRevealer : Gtk.Revealer {
     }
 
     construct {
-        var due_image = new Gtk.Image.from_icon_name ("alarm-symbolic", Gtk.IconSize.BUTTON);
+        var due_image = new Gtk.Image.from_icon_name ("office-calendar-symbolic", Gtk.IconSize.BUTTON);
 
         due_label = new Gtk.Label (null);
         due_label.margin_start = 3;
