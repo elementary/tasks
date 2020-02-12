@@ -19,6 +19,13 @@
 */
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
+    public signal void task_save (ECal.Component task);
+    public signal void task_delete (ECal.Component task);
+
+    public bool completed { get; private set; }
+    public E.Source source { get; construct; }
+    public ECal.Component task { get; construct set; }
+
     private Granite.Widgets.DatePicker due_datepicker;
     private Granite.Widgets.TimePicker due_timepicker;
 
@@ -30,15 +37,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     private Tasks.TaskDetailRevealer task_detail_revealer;
 
-    public E.Source source { get; construct; }
-    public ECal.Component task { get; construct set; }
-
-    public signal void task_save (ECal.Component task);
-    public signal void task_delete (ECal.Component task);
-
     private static Gtk.CssProvider taskrow_provider;
-
-    public bool completed { get; private set; }
 
     public TaskRow (E.Source source, ECal.Component task) {
         Object (source: source, task: task);
