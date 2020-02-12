@@ -79,6 +79,10 @@ public class Tasks.ListView : Gtk.Grid {
             }
         });
 
+        task_list.row_activated.connect ((row) => {
+            ((Tasks.TaskRow) row).reveal_child_request (true);
+        });
+
         notify["source"].connect (() => {
             foreach (unowned Gtk.Widget child in task_list.get_children ()) {
                 child.destroy ();
