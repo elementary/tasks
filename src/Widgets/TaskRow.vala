@@ -71,18 +71,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.attach (task_detail_revealer, 1, 1);
         grid.attach (task_form_revealer, 1, 2);
 
-        var eventbox = new Gtk.EventBox ();
-        eventbox.expand = true;
-        eventbox.above_child = false;
-        eventbox.add (grid);
-
-        add (eventbox);
+        add (grid);
         margin_start = margin_end = 12;
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-        eventbox.button_press_event.connect ((event) => {
-            reveal_child_request (true);
-        });
 
         check.toggled.connect (() => {
             if (task == null) {
@@ -110,23 +101,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
 
         key_release_event.connect ((event) => {
-            switch (event.keyval) {
-                case Gdk.Key.space:
-                    if (has_focus) {
-                        check.active = !check.active;
-                    }
-                    break;
-
-                case Gdk.Key.Return:
-                case Gdk.Key.KP_Enter:
-                    if (has_focus) {
-                        reveal_child_request (true);
-                    }
-                    break;
-
-                case Gdk.Key.Escape:
-                    cancel_edit ();
-                    break;
+            if (event.keyval == Gdk.Key.Escape) {
+                cancel_edit ();
             }
         });
 
@@ -154,7 +130,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         task_save (task);
     }
 
-    private void reveal_child_request (bool value) {
+    public void reveal_child_request (bool value) {
         task_form_revealer.reveal_child = value;
         task_detail_revealer.reveal_child_request (!value);
 
