@@ -52,3 +52,7 @@ row entry.flat  {
     border: none;
     padding: 0;
 }
+
+row entry.flat:focus {
+    opacity: 1;
+}
