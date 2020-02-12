@@ -38,16 +38,23 @@ public class Tasks.TaskDetailRevealer : Gtk.Revealer {
     }
 
     construct {
-        due_label = new Gtk.Label (null);
-        due_label.margin_end = 6;
+        var due_image = new Gtk.Image.from_icon_name ("alarm-symbolic", Gtk.IconSize.BUTTON);
 
-        unowned Gtk.StyleContext due_label_context = due_label.get_style_context ();
-        due_label_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        due_label_context.add_class ("due-date");
+        due_label = new Gtk.Label (null);
+        due_label.margin_start = 3;
+
+        var due_grid = new Gtk.Grid ();
+        due_grid.margin_end = 6;
+        due_grid.add (due_image);
+        due_grid.add (due_label);
+
+        unowned Gtk.StyleContext due_grid_context = due_grid.get_style_context ();
+        due_grid_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        due_grid_context.add_class ("due-date");
 
         due_label_revealer = new Gtk.Revealer ();
         due_label_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT;
-        due_label_revealer.add (due_label);
+        due_label_revealer.add (due_grid);
 
         description_label = new Gtk.Label (null);
         description_label.xalign = 0;
