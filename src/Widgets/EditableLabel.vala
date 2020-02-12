@@ -31,7 +31,7 @@ public class Tasks.EditableLabel : Gtk.EventBox {
 
     public string text { get; set; }
 
-    private bool editing {
+    public bool editing {
         set {
             if (value) {
                 entry.text = text;

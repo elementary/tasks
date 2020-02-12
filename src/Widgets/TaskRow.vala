@@ -22,16 +22,14 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private Gtk.CheckButton check;
     private EditableLabel editable_summary;
 
-    private Gtk.Label due_label;
-    private Gtk.Revealer due_label_revealer;
-    private Gtk.Label description_label;
-    private Gtk.Revealer description_label_revealer;
-    private Gtk.Grid description_grid;
-    private Gtk.Revealer description_grid_revealer;
+    private Tasks.TaskDetailRevealer task_detail_revealer;
+    private Tasks.TaskFormRevealer task_form_revealer;
 
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
-    public signal void task_changed (ECal.Component task);
+
+    public signal void task_save (ECal.Component task);
+    public signal void task_delete (ECal.Component task);
 
     private static Gtk.CssProvider taskrow_provider;
 
@@ -47,50 +45,30 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
+        selectable = false;
+        can_focus = false;
+
         check = new Gtk.CheckButton ();
-        check.margin_top = 2;
-        check.valign = Gtk.Align.START;
+        check.valign = Gtk.Align.CENTER;
         Tasks.Application.set_task_color (source, check);
 
         editable_summary = new EditableLabel ();
 
-        due_label = new Gtk.Label (null);
-        due_label.margin_end = 6;
+        task_detail_revealer = new Tasks.TaskDetailRevealer (task);
+        task_detail_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
 
-        unowned Gtk.StyleContext due_label_context = due_label.get_style_context ();
-        due_label_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        due_label_context.add_class ("due-date");
-
-        due_label_revealer = new Gtk.Revealer ();
-        due_label_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT;
-        due_label_revealer.add (due_label);
-
-        description_label = new Gtk.Label (null);
-        description_label.xalign = 0;
-        description_label.lines = 1;
-        description_label.ellipsize = Pango.EllipsizeMode.END;
-        description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-
-        description_label_revealer = new Gtk.Revealer ();
-        description_label_revealer.reveal_child = false;
-        description_label_revealer.add (description_label);
-
-        description_grid = new Gtk.Grid ();
-        description_grid.add (due_label_revealer);
-        description_grid.add (description_label_revealer);
-
-        description_grid_revealer = new Gtk.Revealer ();
-        description_grid_revealer.reveal_child = false;
-        description_grid_revealer.add (description_grid);
+        task_form_revealer = new Tasks.TaskFormRevealer (task);
+        task_form_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
 
         var grid = new Gtk.Grid ();
         grid.margin = 6;
-        grid.margin_start = grid.margin_end = 24;
+        grid.margin_start = grid.margin_end = 12;
         grid.column_spacing = 6;
         grid.row_spacing = 3;
         grid.attach (check, 0, 0);
         grid.attach (editable_summary, 1, 0);
-        grid.attach (description_grid_revealer, 1, 1);
+        grid.attach (task_detail_revealer, 1, 1);
+        grid.attach (task_form_revealer, 1, 2);
 
         var eventbox = new Gtk.EventBox ();
         eventbox.expand = true;
@@ -98,15 +76,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         eventbox.add (grid);
 
         add (eventbox);
+        margin_start = margin_end = 12;
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         eventbox.button_press_event.connect ((event) => {
-            if (event.type == Gdk.EventType.@2BUTTON_PRESS) {
-                show_popover ();
-
-            } else if (!is_selected () ) {
-                activate ();
-            }
+            reveal_child_request (true);
         });
 
         check.toggled.connect (() => {
@@ -114,7 +88,21 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 return;
             }
             task.get_icalcomponent ().set_status (check.active ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
-            task_changed (task);
+            task_save (task);
+        });
+
+        task_form_revealer.cancel_clicked.connect (() => {
+            reveal_child_request (false);
+            editable_summary.text = task.get_icalcomponent ().get_summary ();
+        });
+
+        task_form_revealer.save_clicked.connect ((task) => {
+            task.get_icalcomponent ().set_summary (editable_summary.text);
+            reveal_child_request (false);
+            task_save (task);
+        });
+        task_form_revealer.delete_clicked.connect ((task) => {
+            task_delete (task);
         });
 
         key_release_event.connect ((event) => {
@@ -128,38 +116,46 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 case Gdk.Key.Return:
                 case Gdk.Key.KP_Enter:
                     if (has_focus) {
-                        show_popover ();
-                    } else {
-                        grab_focus ();
+                        reveal_child_request (true);
                     }
                     break;
 
                 case Gdk.Key.Escape:
-                    grab_focus ();
+                    reveal_child_request (false);
                     break;
             }
         });
 
-        editable_summary.changed.connect (() => {
-            if (task == null) {
-                return;
-            }
-            task.get_icalcomponent ().set_summary (editable_summary.text);
-            task_changed (task);
-        });
-
         editable_summary.button_press_event.connect ((event) => {
-            if (event.type != Gdk.EventType.@2BUTTON_PRESS) {
-                if (!is_selected ()) {
-                   activate ();
-                }
-                editable_summary.grab_focus ();
-                return Gdk.EVENT_STOP;
+            if (!task_form_revealer.reveal_child) {
+               reveal_child_request (true);
             }
+            editable_summary.grab_focus ();
+            return Gdk.EVENT_STOP;
         });
 
-        notify["task"].connect (update_request);
+        notify["task"].connect (() => {
+            task_detail_revealer.task = task;
+            task_form_revealer.task = task;
+            update_request ();
+        });
         update_request ();
+    }
+
+    private void reveal_child_request (bool value) {
+        task_form_revealer.reveal_child = value;
+        task_detail_revealer.reveal_child_request (!value);
+
+        unowned Gtk.StyleContext style_context = get_style_context ();
+
+        if (value) {
+            style_context.add_class (Granite.STYLE_CLASS_CARD);
+            style_context.add_class ("collapsed");
+        } else {
+            editable_summary.editing = false;
+            style_context.remove_class (Granite.STYLE_CLASS_CARD);
+            style_context.remove_class ("collapsed");
+        }
     }
 
     private void update_request () {
@@ -168,10 +164,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             check.active = completed;
             editable_summary.text = null;
             editable_summary.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
-            description_grid.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
-            description_grid_revealer.reveal_child = false;
-            due_label_revealer.reveal_child = false;
-            description_label_revealer.reveal_child = false;
+            task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
         } else {
             unowned ICal.Component ical_task = task.get_icalcomponent ();
@@ -182,77 +175,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
             if (completed) {
                 editable_summary.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-                description_grid.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+                task_detail_revealer.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
             } else {
                 editable_summary.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
-                description_grid.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
-            }
-
-            if ( ical_task.get_due ().is_null_time () ) {
-                due_label_revealer.reveal_child = false;
-            } else {
-                var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
-                var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
-                var format = h24_settings.get_string ("clock-format");
-
-                due_label.label = Granite.DateTime.get_relative_datetime (due_date_time);
-                due_label.tooltip_text = _("%s at %s").printf (
-                    due_date_time.format (Granite.DateTime.get_default_date_format (true)),
-                    due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
-                );
-
-                var today = new GLib.DateTime.now_local ();
-                if (today.compare (due_date_time) > 0 && !completed) {
-                    get_style_context ().add_class ("past-due");
-                } else {
-                    get_style_context ().remove_class ("past-due");
-                }
-
-                due_label_revealer.reveal_child = true;
-            }
-
-            if (ical_task.get_description () == null) {
-                description_label_revealer.reveal_child = false;
-
-            } else {
-                var description = ical_task.get_description ();
-                description = description.replace ("\r", "").strip ();
-                string[] lines = description.split ("\n");
-                string stripped_description = lines[0].strip ();
-                for (int i = 1; i < lines.length; i++) {
-                    string stripped_line = lines[i].strip ();
-
-                    if (stripped_line.length > 0 ) {
-                        stripped_description += " " + stripped_line;
-                    }
-                }
-
-                if (stripped_description.length > 0) {
-                    description_label.label = stripped_description;
-                    description_label_revealer.reveal_child = true;
-                } else {
-                    description_label_revealer.reveal_child = false;
-                }
-            }
-
-            if (due_label_revealer.reveal_child || description_label_revealer.reveal_child) {
-                description_grid_revealer.reveal_child = true;
-            } else {
-                description_grid_revealer.reveal_child = false;
+                task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
             }
         }
-    }
-
-    private void show_popover () {
-        var task_popover = new Tasks.TaskSettingsPopover (task);
-        task_popover.constrain_to = Gtk.PopoverConstraint.NONE;
-        task_popover.position = Gtk.PositionType.LEFT;
-        task_popover.set_relative_to (check);
-
-        task_popover.closed.connect (() => {
-            task_changed (task);
-        });
-
-        task_popover.popup ();
     }
 }

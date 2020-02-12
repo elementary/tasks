@@ -27,6 +27,11 @@
     padding: 1px 6px;
 }
 
+row {
+    border-radius: 3px;
+    transition: all 250ms ease-in-out;
+}
+
 row:focus .due-date {
     background: alpha (@selected_fg_color, 0.2);
     color: inherit;
@@ -35,4 +40,10 @@ row:focus .due-date {
 .past-due .due-date {
     background: alpha (@error_color, 0.2);
     color: @error_color;
+}
+
+row.card {
+    background-color: @base_color;
+    margin-top: 1px;
+    padding-top: 6px;
 }
