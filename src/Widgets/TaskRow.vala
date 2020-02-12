@@ -19,11 +19,16 @@
 */
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
+    private Granite.Widgets.DatePicker due_datepicker;
+    private Granite.Widgets.TimePicker due_timepicker;
+
     private Gtk.CheckButton check;
     private Gtk.Entry summary_entry;
+    private Gtk.Revealer task_form_revealer;
+    private Gtk.Switch due_switch;
+    private Gtk.TextBuffer description_textbuffer;
 
     private Tasks.TaskDetailRevealer task_detail_revealer;
-    private Tasks.TaskFormRevealer task_form_revealer;
 
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
@@ -58,8 +63,65 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         task_detail_revealer = new Tasks.TaskDetailRevealer (task);
         task_detail_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
 
-        task_form_revealer = new Tasks.TaskFormRevealer (task);
+        due_switch = new Gtk.Switch ();
+        due_switch.valign = Gtk.Align.CENTER;
+
+        var due_label = new Gtk.Label (_("Schedule:"));
+
+        due_datepicker = new Granite.Widgets.DatePicker ();
+        due_datepicker.hexpand = true;
+
+        due_timepicker = new Granite.Widgets.TimePicker ();
+        due_timepicker.hexpand = true;
+
+        var description_textview = new Gtk.TextView ();
+        description_textview.border_width = 12;
+        description_textview.height_request = 140;
+        description_textview.set_wrap_mode (Gtk.WrapMode.WORD_CHAR);
+        description_textview.accepts_tab = false;
+
+        description_textbuffer = new Gtk.TextBuffer (null);
+        description_textview.set_buffer (description_textbuffer);
+
+        var description_frame = new Gtk.Frame (null);
+        description_frame.add (description_textview);
+
+        var delete_button = new Gtk.Button ();
+        delete_button.sensitive = false;
+        delete_button.label = _("Delete Task");
+        delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+
+        var cancel_button = new Gtk.Button ();
+        cancel_button.label = _("Cancel");
+
+        var save_button = new Gtk.Button ();
+        save_button.label = _("Save Changes");
+        save_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+
+        var button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL);
+        button_box.baseline_position = Gtk.BaselinePosition.CENTER;
+        button_box.margin_top = 12;
+        button_box.spacing = 6;
+        button_box.set_layout (Gtk.ButtonBoxStyle.END);
+        button_box.add (delete_button);
+        button_box.set_child_secondary (delete_button, true);
+        button_box.add (cancel_button);
+        button_box.add (save_button);
+
+        var form_grid = new Gtk.Grid ();
+        form_grid.column_spacing = 12;
+        form_grid.row_spacing = 12;
+        form_grid.margin_bottom = 6;
+        form_grid.attach (due_label, 0, 0);
+        form_grid.attach (due_switch, 1, 0);
+        form_grid.attach (due_datepicker, 2, 0);
+        form_grid.attach (due_timepicker, 3, 0);
+        form_grid.attach (description_frame, 0, 1, 4);
+        form_grid.attach (button_box, 0, 2, 4);
+
+        task_form_revealer = new Gtk.Revealer ();
         task_form_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
+        task_form_revealer.add (form_grid);
 
         var grid = new Gtk.Grid ();
         grid.margin = 6;
@@ -88,15 +150,20 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             save_task ();
         });
 
-        task_form_revealer.cancel_clicked.connect (() => {
+        summary_entry.grab_focus.connect (() => {
+            reveal_child_request (true);
+        });
+
+        description_textview.button_press_event.connect (() => {
+            description_textview.grab_focus ();
+            return Gdk.EVENT_STOP;
+        });
+
+        cancel_button.clicked.connect (() => {
             cancel_edit ();
         });
 
-        task_form_revealer.save_clicked.connect (() => {
-            save_task ();
-        });
-
-        task_form_revealer.delete_clicked.connect ((task) => {
+        delete_button.clicked.connect (() => {
             task_delete (task);
         });
 
@@ -106,16 +173,18 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             }
         });
 
-        summary_entry.grab_focus.connect (() => {
-            reveal_child_request (true);
+        save_button.clicked.connect (() => {
+            save_task ();
         });
 
         notify["task"].connect (() => {
             task_detail_revealer.task = task;
-            task_form_revealer.task = task;
             update_request ();
         });
         update_request ();
+
+        due_switch.bind_property ("active", due_datepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
+        due_switch.bind_property ("active", due_timepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
     }
 
     private void cancel_edit () {
@@ -125,6 +194,35 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     private void save_task () {
+        unowned ICal.Component ical_task = task.get_icalcomponent ();
+
+        if (due_switch.active) {
+            ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
+            ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
+        } else {
+            ical_task.set_due ( ICal.Time.null_time ());
+        }
+
+        // Clear the old description
+        int count = ical_task.count_properties (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+        for (int i = 0; i < count; i++) {
+#if E_CAL_2_0
+            ICal.Property remove_prop;
+#else
+            unowned ICal.Property remove_prop;
+#endif
+            remove_prop = ical_task.get_first_property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+            ical_task.remove_property (remove_prop);
+        }
+
+        // Add the new description - if we have any
+        var description = description_textbuffer.text;
+        if (description != null && description.strip ().length > 0) {
+            var property = new ICal.Property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+            property.set_description (description.strip ());
+            ical_task.add_property (property);
+        }
+
         task.get_icalcomponent ().set_summary (summary_entry.text);
         reveal_child_request (false);
         task_save (task);
@@ -157,6 +255,22 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             unowned ICal.Component ical_task = task.get_icalcomponent ();
             completed = ical_task.get_status () == ICal.PropertyStatus.COMPLETED;
             check.active = completed;
+
+            if (ical_task.get_due ().is_null_time ()) {
+                due_switch.active = false;
+                due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
+            } else {
+                var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
+                due_datepicker.date = due_timepicker.time = due_date_time;
+
+                due_switch.active = true;
+            }
+
+            if (ical_task.get_description () != null) {
+                description_textbuffer.text = ical_task.get_description ();
+            } else {
+                description_textbuffer.text = "";
+            }
 
             summary_entry.text = ical_task.get_summary ();
 
