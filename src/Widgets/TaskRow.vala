@@ -20,7 +20,7 @@
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
     private Gtk.CheckButton check;
-    private EditableLabel editable_summary;
+    private Gtk.Entry summary_entry;
 
     private Tasks.TaskDetailRevealer task_detail_revealer;
     private Tasks.TaskFormRevealer task_form_revealer;
@@ -49,7 +49,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.valign = Gtk.Align.CENTER;
         Tasks.Application.set_task_color (source, check);
 
-        editable_summary = new EditableLabel ();
+        summary_entry = new Gtk.Entry ();
+
+        unowned Gtk.StyleContext summary_entry_context = summary_entry.get_style_context ();
+        summary_entry_context.add_class (Gtk.STYLE_CLASS_FLAT);
+        summary_entry_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         task_detail_revealer = new Tasks.TaskDetailRevealer (task);
         task_detail_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
@@ -63,22 +67,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.column_spacing = 6;
         grid.row_spacing = 3;
         grid.attach (check, 0, 0);
-        grid.attach (editable_summary, 1, 0);
+        grid.attach (summary_entry, 1, 0);
         grid.attach (task_detail_revealer, 1, 1);
         grid.attach (task_form_revealer, 1, 2);
 
-        var eventbox = new Gtk.EventBox ();
-        eventbox.expand = true;
-        eventbox.above_child = false;
-        eventbox.add (grid);
-
-        add (eventbox);
+        add (grid);
         margin_start = margin_end = 12;
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-        eventbox.button_press_event.connect ((event) => {
-            reveal_child_request (true);
-        });
 
         check.toggled.connect (() => {
             if (task == null) {
@@ -88,47 +83,31 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             task_save (task);
         });
 
-        task_form_revealer.cancel_clicked.connect (() => {
-            reveal_child_request (false);
-            editable_summary.text = task.get_icalcomponent ().get_summary ();
+        summary_entry.activate.connect (() => {
+            move_focus (Gtk.DirectionType.TAB_BACKWARD);
+            save_task ();
         });
 
-        task_form_revealer.save_clicked.connect ((task) => {
-            task.get_icalcomponent ().set_summary (editable_summary.text);
-            reveal_child_request (false);
-            task_save (task);
+        task_form_revealer.cancel_clicked.connect (() => {
+            cancel_edit ();
         });
+
+        task_form_revealer.save_clicked.connect (() => {
+            save_task ();
+        });
+
         task_form_revealer.delete_clicked.connect ((task) => {
             task_delete (task);
         });
 
         key_release_event.connect ((event) => {
-            switch (event.keyval) {
-                case Gdk.Key.space:
-                    if (has_focus) {
-                        check.active = !check.active;
-                    }
-                    break;
-
-                case Gdk.Key.Return:
-                case Gdk.Key.KP_Enter:
-                    if (has_focus) {
-                        reveal_child_request (true);
-                    }
-                    break;
-
-                case Gdk.Key.Escape:
-                    reveal_child_request (false);
-                    break;
+            if (event.keyval == Gdk.Key.Escape) {
+                cancel_edit ();
             }
         });
 
-        editable_summary.button_press_event.connect ((event) => {
-            if (!task_form_revealer.reveal_child) {
-               reveal_child_request (true);
-            }
-            editable_summary.grab_focus ();
-            return Gdk.EVENT_STOP;
+        summary_entry.grab_focus.connect (() => {
+            reveal_child_request (true);
         });
 
         notify["task"].connect (() => {
@@ -139,7 +118,19 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         update_request ();
     }
 
-    private void reveal_child_request (bool value) {
+    private void cancel_edit () {
+        move_focus (Gtk.DirectionType.TAB_BACKWARD);
+        summary_entry.text = task.get_icalcomponent ().get_summary ();
+        reveal_child_request (false);
+    }
+
+    private void save_task () {
+        task.get_icalcomponent ().set_summary (summary_entry.text);
+        reveal_child_request (false);
+        task_save (task);
+    }
+
+    public void reveal_child_request (bool value) {
         task_form_revealer.reveal_child = value;
         task_detail_revealer.reveal_child_request (!value);
 
@@ -149,7 +140,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             style_context.add_class (Granite.STYLE_CLASS_CARD);
             style_context.add_class ("collapsed");
         } else {
-            editable_summary.editing = false;
             style_context.remove_class (Granite.STYLE_CLASS_CARD);
             style_context.remove_class ("collapsed");
         }
@@ -159,8 +149,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         if (task == null) {
             completed = false;
             check.active = completed;
-            editable_summary.text = null;
-            editable_summary.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            summary_entry.text = null;
+            summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
             task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
         } else {
@@ -168,13 +158,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             completed = ical_task.get_status () == ICal.PropertyStatus.COMPLETED;
             check.active = completed;
 
-            editable_summary.text = ical_task.get_summary ();
+            summary_entry.text = ical_task.get_summary ();
 
             if (completed) {
-                editable_summary.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+                summary_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
                 task_detail_revealer.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
             } else {
-                editable_summary.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+                summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
                 task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
             }
         }

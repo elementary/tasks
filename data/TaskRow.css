@@ -46,3 +46,13 @@ row.card {
     margin-top: 1px;
     padding-top: 6px;
 }
+
+row entry.flat  {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+row entry.flat:focus {
+    opacity: 1;
+}
