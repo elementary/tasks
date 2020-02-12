@@ -20,6 +20,31 @@
 
 namespace Tasks.Util {
 
+    /**
+     * Replaces all line breaks with a space and
+     * replaces multiple spaces with a single one.
+     */
+    private GLib.Regex line_break_to_space_regex = null;
+
+    public string line_break_to_space (string str) {
+        if (line_break_to_space_regex == null) {
+            try {
+                line_break_to_space_regex = new GLib.Regex ("(^\\s+|\\s+$|\n|\\s\\s+)");
+            } catch (GLib.RegexError e) {
+                critical (e.message);
+            }
+        }
+
+        try {
+            return Tasks.Util.line_break_to_space_regex.replace (str, str.length, 0, " ");
+        } catch (GLib.RegexError e) {
+            warning (e.message);
+        }
+
+        return str;
+    }
+
+
     /*
      * Gee Utility Functions
      */
