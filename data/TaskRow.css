@@ -27,6 +27,10 @@
     padding: 3px 6px;
 }
 
+.due-date label {
+    padding: 0;
+}
+
 row {
     border-radius: 3px;
     transition: all 250ms ease-in-out;
