@@ -31,11 +31,14 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     private Gtk.CheckButton check;
     private Gtk.Entry summary_entry;
+    private Gtk.Label description_label;
+    private Gtk.Label due_label;
+    private Gtk.Revealer description_label_revealer;
+    private Gtk.Revealer due_label_revealer;
+    private Gtk.Revealer task_detail_revealer;
     private Gtk.Revealer task_form_revealer;
     private Gtk.Switch due_switch;
     private Gtk.TextBuffer description_textbuffer;
-
-    private Tasks.TaskDetailRevealer task_detail_revealer;
 
     private static Gtk.CssProvider taskrow_provider;
 
@@ -59,8 +62,41 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         summary_entry_context.add_class (Gtk.STYLE_CLASS_FLAT);
         summary_entry_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        task_detail_revealer = new Tasks.TaskDetailRevealer (task);
+        var due_image = new Gtk.Image.from_icon_name ("office-calendar-symbolic", Gtk.IconSize.BUTTON);
+
+        due_label = new Gtk.Label (null);
+        due_label.margin_start = 3;
+
+        var due_grid = new Gtk.Grid ();
+        due_grid.margin_end = 6;
+        due_grid.add (due_image);
+        due_grid.add (due_label);
+
+        unowned Gtk.StyleContext due_grid_context = due_grid.get_style_context ();
+        due_grid_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        due_grid_context.add_class ("due-date");
+
+        due_label_revealer = new Gtk.Revealer ();
+        due_label_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT;
+        due_label_revealer.add (due_grid);
+
+        description_label = new Gtk.Label (null);
+        description_label.xalign = 0;
+        description_label.lines = 1;
+        description_label.ellipsize = Pango.EllipsizeMode.END;
+        description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+
+        description_label_revealer = new Gtk.Revealer ();
+        description_label_revealer.reveal_child = false;
+        description_label_revealer.add (description_label);
+
+        var task_grid = new Gtk.Grid ();
+        task_grid.add (due_label_revealer);
+        task_grid.add (description_label_revealer);
+
+        task_detail_revealer = new Gtk.Revealer ();
         task_detail_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
+        task_detail_revealer.add (task_grid);
 
         due_switch = new Gtk.Switch ();
         due_switch.valign = Gtk.Align.CENTER;
@@ -177,7 +213,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
 
         notify["task"].connect (() => {
-            task_detail_revealer.task = task;
             update_request ();
         });
         update_request ();
@@ -229,7 +264,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     public void reveal_child_request (bool value) {
         task_form_revealer.reveal_child = value;
-        task_detail_revealer.reveal_child_request (!value);
+        task_details_reveal_request (!value);
 
         unowned Gtk.StyleContext style_context = get_style_context ();
 
@@ -248,8 +283,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             check.active = completed;
             summary_entry.text = null;
             summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+
+            task_detail_revealer.reveal_child = false;
             task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
+            due_label_revealer.reveal_child = false;
+            description_label_revealer.reveal_child = false;
         } else {
             unowned ICal.Component ical_task = task.get_icalcomponent ();
             completed = ical_task.get_status () == ICal.PropertyStatus.COMPLETED;
@@ -280,6 +319,54 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
                 task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
             }
+
+
+            if (ical_task.get_due ().is_null_time () ) {
+                due_label_revealer.reveal_child = false;
+            } else {
+                var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
+                var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
+                var format = h24_settings.get_string ("clock-format");
+
+                due_label.label = Granite.DateTime.get_relative_datetime (due_date_time);
+                due_label.tooltip_text = _("%s at %s").printf (
+                    due_date_time.format (Granite.DateTime.get_default_date_format (true)),
+                    due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                );
+
+                var today = new GLib.DateTime.now_local ();
+                if (today.compare (due_date_time) > 0 && !completed) {
+                    get_style_context ().add_class ("past-due");
+                } else {
+                    get_style_context ().remove_class ("past-due");
+                }
+
+                due_label_revealer.reveal_child = true;
+            }
+
+            if (ical_task.get_description () == null) {
+                description_label_revealer.reveal_child = false;
+
+            } else {
+                var description = Tasks.Util.line_break_to_space (ical_task.get_description ());
+
+                if (description != null && description.length > 0) {
+                    description_label.label = description;
+                    description_label_revealer.reveal_child = true;
+                } else {
+                    description_label_revealer.reveal_child = false;
+                }
+            }
+
+            task_details_reveal_request (true);
+        }
+    }
+
+    private void task_details_reveal_request (bool value) {
+        if (value && (due_label_revealer.reveal_child || description_label_revealer.reveal_child)) {
+            task_detail_revealer.reveal_child = true;
+        } else {
+            task_detail_revealer.reveal_child = false;
         }
     }
 }
