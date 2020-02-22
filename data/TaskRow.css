@@ -43,6 +43,7 @@ row:focus:not(.card) {
 
 row.card {
     background-color: @base_color;
+    margin-bottom: 12px;
     margin-top: 1px;
     padding-top: 6px;
 }
