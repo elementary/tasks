@@ -234,7 +234,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
             ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
         } else {
-            ical_task.set_due ( ICal.Time.null_time ());
+#if E_CAL_2_0
+            ical_task.set_due (new ICal.Time.null_time ());
+#else
+            ical_task.set_due (ICal.Time.null_time ());
+#endif
         }
 
         // Clear the old description
