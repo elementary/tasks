@@ -204,8 +204,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
 
         delete_button.clicked.connect (() => {
-            task_delete (task);
             cancel_edit ();
+            remove_request ();
+            task_delete (task);
         });
 
         key_release_event.connect ((event) => {
@@ -380,7 +381,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         }
     }
 
-    public void remove_request () {
+    private void remove_request () {
         revealer.reveal_child = false;
         GLib.Timeout.add (revealer.transition_duration, () => {
             destroy ();

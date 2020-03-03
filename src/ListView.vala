@@ -166,7 +166,6 @@ public class Tasks.ListView : Gtk.Grid {
                 update_task (client, task, ECal.ObjModType.ALL);
             });
             task_row.task_delete.connect ((task) => {
-                task_row.remove_request ();
                 remove_task (client, task, ECal.ObjModType.ALL);
             });
             task_list.add (task_row);
