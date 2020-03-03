@@ -33,6 +33,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private Gtk.Entry summary_entry;
     private Gtk.Label description_label;
     private Gtk.Label due_label;
+    private Gtk.Revealer revealer;
     private Gtk.Revealer description_label_revealer;
     private Gtk.Revealer due_label_revealer;
     private Gtk.Revealer task_detail_revealer;
@@ -122,7 +123,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         description_frame.add (description_textview);
 
         var delete_button = new Gtk.Button ();
-        delete_button.sensitive = false;
         delete_button.label = _("Delete Task");
         delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
@@ -168,7 +168,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.attach (task_detail_revealer, 1, 1);
         grid.attach (task_form_revealer, 1, 2);
 
-        add (grid);
+        revealer = new Gtk.Revealer ();
+        revealer.reveal_child = true;
+        revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
+        revealer.add (grid);
+
+        add (revealer);
         margin_start = margin_end = 12;
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
@@ -200,6 +205,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         delete_button.clicked.connect (() => {
             task_delete (task);
+            cancel_edit ();
         });
 
         key_release_event.connect ((event) => {
@@ -372,5 +378,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         } else {
             task_detail_revealer.reveal_child = false;
         }
+    }
+
+    public void remove_request () {
+        revealer.reveal_child = false;
+        GLib.Timeout.add (revealer.transition_duration, () => {
+            destroy ();
+            return GLib.Source.REMOVE;
+        });
     }
 }

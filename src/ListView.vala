@@ -165,6 +165,10 @@ public class Tasks.ListView : Gtk.Grid {
             task_row.task_save.connect ((task) => {
                 update_task (client, task, ECal.ObjModType.ALL);
             });
+            task_row.task_delete.connect ((task) => {
+                task_row.remove_request ();
+                remove_task (client, task, ECal.ObjModType.ALL);
+            });
             task_list.add (task_row);
             return true;
         });
@@ -281,6 +285,25 @@ public class Tasks.ListView : Gtk.Grid {
                 }
                 on_objects_modified (source, client, ical_tasks);
 
+            } catch (Error e) {
+                warning (e.message);
+            }
+        });
+    }
+
+    public void remove_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
+        unowned ICal.Component comp = task.get_icalcomponent ();
+        string uid = comp.get_uid ();
+        string? rid = task.has_recurrences () ? null : task.get_recurid_as_string ();
+        debug (@"Removing task '$uid'");
+
+#if E_CAL_2_0
+        client.remove_object.begin (uid, rid, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
+#else
+        client.remove_object.begin (uid, rid, mod_type, null, (obj, results) => {
+#endif
+            try {
+                client.remove_object.end (results);
             } catch (Error e) {
                 warning (e.message);
             }
