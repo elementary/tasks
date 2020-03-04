@@ -93,6 +93,13 @@ public class Tasks.ListView : Gtk.Grid {
 
                 try {
                      var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
+
+                     var task_row = new Tasks.TaskRow.for_source (source);
+                     task_row.task_save.connect ((task) => {
+                         add_task (client, task);
+                     });
+                     task_list.add (task_row);
+
                      client.get_view_sync ("", out view, null);
 
                      view.objects_added.connect ((objects) => on_objects_added (source, client, objects));
@@ -161,7 +168,7 @@ public class Tasks.ListView : Gtk.Grid {
 
     private void tasks_added (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
         tasks.foreach ((task) => {
-            var task_row = new Tasks.TaskRow (source, task);
+            var task_row = new Tasks.TaskRow.for_component (task, source);
             task_row.task_save.connect ((task) => {
                 update_task (client, task, ECal.ObjModType.ALL);
             });
@@ -258,6 +265,33 @@ public class Tasks.ListView : Gtk.Grid {
         }
 
         return 0;
+    }
+
+    public void add_task (ECal.Client client, ECal.Component task) {
+        add_task_async.begin (client, task);
+    }
+
+    private async void add_task_async (ECal.Client client, ECal.Component task) {
+        unowned ICal.Component comp = task.get_icalcomponent ();
+        debug (@"Adding task '$(comp.get_uid())'");
+
+        if (client != null) {
+            try {
+                string? uid;
+#if E_CAL_2_0
+                yield client.create_object (comp, ECal.OperationFlags.NONE, null, out uid);
+#else
+                yield client.create_object (comp, null, out uid);
+#endif
+                if (uid != null) {
+                    comp.set_uid (uid);
+                }
+            } catch (GLib.Error error) {
+                critical (error.message);
+            }
+        } else {
+            critical ("No list was found, task not added");
+        }
     }
 
     public void update_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
