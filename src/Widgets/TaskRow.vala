@@ -197,7 +197,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         if (icon != null) {
             grid.attach (icon, 0, 0);
-        } else if(check != null) {
+        } else if (check != null) {
             grid.attach (check, 0, 0);
         }
 
