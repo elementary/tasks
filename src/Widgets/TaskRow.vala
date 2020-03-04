@@ -212,6 +212,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         add (revealer);
         margin_start = margin_end = 12;
+        get_style_context ().add_class ("collapsed");
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         if (check != null) {
@@ -334,11 +335,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         unowned Gtk.StyleContext style_context = get_style_context ();
 
         if (value) {
+            style_context.remove_class ("collapsed");
             style_context.add_class (Granite.STYLE_CLASS_CARD);
-            style_context.add_class ("collapsed");
+
         } else {
             style_context.remove_class (Granite.STYLE_CLASS_CARD);
-            style_context.remove_class ("collapsed");
+            style_context.add_class ("collapsed");
         }
     }
 
@@ -348,7 +350,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             check.active = completed;
             summary_entry.text = "";
             summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
-
+            summary_entry.get_style_context ().add_class ("add-task");
             task_detail_revealer.reveal_child = false;
             task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
@@ -381,6 +383,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             }
 
             summary_entry.text = ical_task.get_summary () == null ? "" : ical_task.get_summary ();
+            summary_entry.get_style_context ().remove_class ("add-task");
 
             if (completed) {
                 summary_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);

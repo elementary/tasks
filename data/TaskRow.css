@@ -50,10 +50,11 @@ row.card {
 
 row entry.flat  {
     background: transparent;
-    border: none;
+    border-style: solid;
+    border-color: transparent;
     padding: 0;
 }
 
-row entry.flat:focus {
-    opacity: 1;
+row.collapsed entry.add-task  {
+    border-color: shade (@base_color, 0.8);
 }
