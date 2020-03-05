@@ -100,7 +100,13 @@ public class Tasks.ListView : Gtk.Grid {
                      });
                      task_list.add (task_row);
 
-                     client.get_view_sync ("", out view, null);
+                     /*
+                      * We need to pass a valid S-expression to guarantee the below callback events are fired.
+                      *
+                      * See `e-cal-backend-sexp.c` of evolution-data-server for available S-expressions:
+                      * https://gitlab.gnome.org/GNOME/evolution-data-server/-/blob/master/src/calendar/libedata-cal/e-cal-backend-sexp.c
+                      */
+                     client.get_view_sync ("(contains? 'any' '')", out view, null);
 
                      view.objects_added.connect ((objects) => on_objects_added (source, client, objects));
                      view.objects_removed.connect ((objects) => on_objects_removed (source, client, objects));
