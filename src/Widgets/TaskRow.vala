@@ -19,14 +19,14 @@
 */
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
-
     public signal void task_save (ECal.Component task);
     public signal void task_delete (ECal.Component task);
 
-    public bool created { get; private set; }
     public bool completed { get; private set; }
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
+
+    private bool created;
 
     private Granite.Widgets.DatePicker due_datepicker;
     private Granite.Widgets.TimePicker due_timepicker;
@@ -76,6 +76,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check = new Gtk.CheckButton ();
         check.valign = Gtk.Align.CENTER;
         Tasks.Application.set_task_color (source, check);
+
+        state_stack = new Gtk.Stack ();
+        state_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
+        state_stack.add (icon);
+        state_stack.add (check);
 
         summary_entry = new Gtk.Entry ();
 
@@ -142,13 +147,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         var description_frame = new Gtk.Frame (null);
         description_frame.add (description_textview);
 
-        Gtk.Button delete_button;
-        if (created) {
-            delete_button = new Gtk.Button ();
-            delete_button.label = _("Delete Task");
-            delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
-        }
-
         var cancel_button = new Gtk.Button ();
         cancel_button.label = _("Cancel");
 
@@ -161,10 +159,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         button_box.margin_top = 12;
         button_box.spacing = 6;
         button_box.set_layout (Gtk.ButtonBoxStyle.END);
-        if (delete_button != null) {
-            button_box.add (delete_button);
-            button_box.set_child_secondary (delete_button, true);
-        }
         button_box.add (cancel_button);
         button_box.add (save_button);
 
@@ -188,19 +182,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.margin_start = grid.margin_end = 12;
         grid.column_spacing = 6;
         grid.row_spacing = 3;
-
-        state_stack = new Gtk.Stack ();
-        state_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
-
-        if (created) {
-            state_stack.add (check);
-            state_stack.add (icon);
-
-        } else {
-            state_stack.add (icon);
-            state_stack.add (check);
-        }
-
         grid.attach (state_stack, 0, 0);
         grid.attach (summary_entry, 1, 0);
         grid.attach (task_detail_revealer, 1, 1);
@@ -214,6 +195,24 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         add (revealer);
         margin_start = margin_end = 12;
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        if (created) {
+            check.show ();
+            state_stack.visible_child = check;
+
+            var delete_button = new Gtk.Button ();
+            delete_button.label = _("Delete Task");
+            delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+
+            button_box.add (delete_button);
+            button_box.set_child_secondary (delete_button, true);
+
+            delete_button.clicked.connect (() => {
+                cancel_edit ();
+                remove_request ();
+                task_delete (task);
+            });
+        }
 
         check.toggled.connect (() => {
             if (task == null) {
@@ -242,14 +241,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         cancel_button.clicked.connect (() => {
             cancel_edit ();
         });
-
-        if (delete_button != null) {
-            delete_button.clicked.connect (() => {
-                cancel_edit ();
-                remove_request ();
-                task_delete (task);
-            });
-        }
 
         key_release_event.connect ((event) => {
             if (event.keyval == Gdk.Key.Escape) {
