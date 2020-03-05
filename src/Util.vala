@@ -45,19 +45,6 @@ namespace Tasks.Util {
     }
 
     /*
-     * Returns whether or not a ECal.Component was created in the backend EDS.
-     */
-    public bool calcomponent_created (ECal.Component comp) {
-        if (comp == null) {
-            return false;
-        }
-        ICal.Time created;
-        comp.get_created (out created);
-        return !created.is_null_time ();
-    }
-
-
-    /*
      * Gee Utility Functions
      */
 

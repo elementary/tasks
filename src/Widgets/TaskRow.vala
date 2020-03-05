@@ -68,7 +68,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
-        created = Tasks.Util.calcomponent_created (task);
+        created = calcomponent_created (task);
 
         icon = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.MENU);
         icon.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
@@ -442,5 +442,17 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             destroy ();
             return GLib.Source.REMOVE;
         });
+    }
+
+    /*
+     * Returns whether or not a ECal.Component was created in the backend EDS.
+     */
+    private bool calcomponent_created (ECal.Component comp) {
+        if (comp == null) {
+            return false;
+        }
+        ICal.Time created;
+        comp.get_created (out created);
+        return !created.is_null_time ();
     }
 }
