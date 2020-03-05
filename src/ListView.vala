@@ -162,7 +162,7 @@ public class Tasks.ListView : Gtk.Grid {
                 ecal_tasks.foreach ((task) => {
                     debug_task (source, task);
 
-                    if (!added_tasks.contains(task)) {
+                    if (!added_tasks.contains (task)) {
                         added_tasks.add (task);
                     }
                 });
@@ -204,7 +204,7 @@ public class Tasks.ListView : Gtk.Grid {
 
                 ecal_tasks.foreach ((task) => {
                     debug_task (source, task);
-                    if (!updated_tasks.contains(task)) {
+                    if (!updated_tasks.contains (task)) {
                         updated_tasks.add (task);
                     }
                 });
