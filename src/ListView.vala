@@ -52,6 +52,7 @@ public class Tasks.ListView : Gtk.Grid {
         placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
 
         task_list = new Gtk.ListBox ();
+        task_list.selection_mode = Gtk.SelectionMode.NONE;
         task_list.set_filter_func (filter_function);
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
@@ -78,6 +79,10 @@ public class Tasks.ListView : Gtk.Grid {
             }
         });
 
+        task_list.row_activated.connect ((row) => {
+            ((Tasks.TaskRow) row).reveal_child_request (true);
+        });
+
         notify["source"].connect (() => {
             foreach (unowned Gtk.Widget child in task_list.get_children ()) {
                 child.destroy ();
@@ -88,7 +93,20 @@ public class Tasks.ListView : Gtk.Grid {
 
                 try {
                      var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
-                     client.get_view_sync ("", out view, null);
+
+                     var task_row = new Tasks.TaskRow.for_source (source);
+                     task_row.task_save.connect ((task) => {
+                         add_task (client, task);
+                     });
+                     task_list.add (task_row);
+
+                     /*
+                      * We need to pass a valid S-expression to guarantee the below callback events are fired.
+                      *
+                      * See `e-cal-backend-sexp.c` of evolution-data-server for available S-expressions:
+                      * https://gitlab.gnome.org/GNOME/evolution-data-server/-/blob/master/src/calendar/libedata-cal/e-cal-backend-sexp.c
+                      */
+                     client.get_view_sync ("(contains? 'any' '')", out view, null);
 
                      view.objects_added.connect ((objects) => on_objects_added (source, client, objects));
                      view.objects_removed.connect ((objects) => on_objects_removed (source, client, objects));
@@ -143,7 +161,10 @@ public class Tasks.ListView : Gtk.Grid {
 
                 ecal_tasks.foreach ((task) => {
                     debug_task (source, task);
-                    added_tasks.add (task);
+
+                    if (!added_tasks.contains (task)) {
+                        added_tasks.add (task);
+                    }
                 });
 
             } catch (Error e) {
@@ -156,9 +177,12 @@ public class Tasks.ListView : Gtk.Grid {
 
     private void tasks_added (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
         tasks.foreach ((task) => {
-            var task_row = new Tasks.TaskRow (source, task);
-            task_row.task_changed.connect ((task) => {
+            var task_row = new Tasks.TaskRow.for_component (task, source);
+            task_row.task_save.connect ((task) => {
                 update_task (client, task, ECal.ObjModType.ALL);
+            });
+            task_row.task_delete.connect ((task) => {
+                remove_task (client, task, ECal.ObjModType.ALL);
             });
             task_list.add (task_row);
             return true;
@@ -180,7 +204,9 @@ public class Tasks.ListView : Gtk.Grid {
 
                 ecal_tasks.foreach ((task) => {
                     debug_task (source, task);
-                    updated_tasks.add (task);
+                    if (!updated_tasks.contains (task)) {
+                        updated_tasks.add (task);
+                    }
                 });
 
             } catch (Error e) {
@@ -252,6 +278,33 @@ public class Tasks.ListView : Gtk.Grid {
         return 0;
     }
 
+    public void add_task (ECal.Client client, ECal.Component task) {
+        add_task_async.begin (client, task);
+    }
+
+    private async void add_task_async (ECal.Client client, ECal.Component task) {
+        unowned ICal.Component comp = task.get_icalcomponent ();
+        debug (@"Adding task '$(comp.get_uid())'");
+
+        if (client != null) {
+            try {
+                string? uid;
+#if E_CAL_2_0
+                yield client.create_object (comp, ECal.OperationFlags.NONE, null, out uid);
+#else
+                yield client.create_object (comp, null, out uid);
+#endif
+                if (uid != null) {
+                    comp.set_uid (uid);
+                }
+            } catch (GLib.Error error) {
+                critical (error.message);
+            }
+        } else {
+            critical ("No list was found, task not added");
+        }
+    }
+
     public void update_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
         unowned ICal.Component comp = task.get_icalcomponent ();
         debug (@"Updating task '$(comp.get_uid())' [mod_type=$(mod_type)]");
@@ -266,12 +319,35 @@ public class Tasks.ListView : Gtk.Grid {
                 SList<ECal.Component> ecal_tasks;
                 client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
 
+#if E_CAL_2_0
+                var ical_tasks = new SList<ICal.Component> ();
+#else
                 var ical_tasks = new SList<unowned ICal.Component> ();
+#endif
                 foreach (unowned ECal.Component ecal_task in ecal_tasks) {
                     ical_tasks.append (ecal_task.get_icalcomponent ());
                 }
                 on_objects_modified (source, client, ical_tasks);
 
+            } catch (Error e) {
+                warning (e.message);
+            }
+        });
+    }
+
+    public void remove_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
+        unowned ICal.Component comp = task.get_icalcomponent ();
+        string uid = comp.get_uid ();
+        string? rid = task.has_recurrences () ? null : task.get_recurid_as_string ();
+        debug (@"Removing task '$uid'");
+
+#if E_CAL_2_0
+        client.remove_object.begin (uid, rid, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
+#else
+        client.remove_object.begin (uid, rid, mod_type, null, (obj, results) => {
+#endif
+            try {
+                client.remove_object.end (results);
             } catch (Error e) {
                 warning (e.message);
             }

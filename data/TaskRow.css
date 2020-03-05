@@ -24,5 +24,41 @@
     color: @SILVER_900;
     font-size: 0.9em;
     font-weight: 600;
-    padding: 1px 6px;
+    padding: 3px 6px;
+}
+
+row {
+    border-radius: 3px;
+    transition: all 250ms ease-in-out;
+}
+
+row:focus:not(.card) {
+    background-color: shade (@base_color, 0.8);
+}
+
+.past-due .due-date {
+    background: alpha (@error_color, 0.2);
+    color: @error_color;
+}
+
+row.card {
+    background-color: @base_color;
+    margin-bottom: 12px;
+    margin-top: 1px;
+    padding-top: 6px;
+}
+
+row entry.flat  {
+    background: transparent;
+    border-style: solid;
+    border-color: transparent;
+    padding: 0;
+}
+
+row entry.flat:focus {
+    opacity: 1;
+}
+
+row:not(.card) entry.add-task {
+    border-color: alpha (@text_color, 0.25);
 }

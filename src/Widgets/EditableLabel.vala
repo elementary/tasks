@@ -31,7 +31,7 @@ public class Tasks.EditableLabel : Gtk.EventBox {
 
     public string text { get; set; }
 
-    private bool editing {
+    public bool editing {
         set {
             if (value) {
                 entry.text = text;
@@ -124,6 +124,10 @@ public class Tasks.EditableLabel : Gtk.EventBox {
 
         entry.activate.connect (() => {
             editing = false;
+        });
+
+        grab_focus.connect (() => {
+            editing = true;
         });
 
         entry.focus_out_event.connect ((event) => {
