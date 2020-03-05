@@ -163,8 +163,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         button_box.set_layout (Gtk.ButtonBoxStyle.END);
         if (delete_button != null) {
             button_box.add (delete_button);
+            button_box.set_child_secondary (delete_button, true);
         }
-        button_box.set_child_secondary (delete_button, true);
         button_box.add (cancel_button);
         button_box.add (save_button);
 
