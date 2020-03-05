@@ -44,7 +44,6 @@ namespace Tasks.Util {
         return str;
     }
 
-
     /*
      * Gee Utility Functions
      */
