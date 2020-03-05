@@ -55,6 +55,6 @@ row entry.flat  {
     padding: 0;
 }
 
-row.collapsed entry.add-task  {
-    border-color: shade (@base_color, 0.8);
+row:not(.card) entry.add-task {
+    border-color: alpha (@text_color, 0.25);
 }

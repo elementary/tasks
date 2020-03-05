@@ -213,7 +213,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         add (revealer);
         margin_start = margin_end = 12;
-        get_style_context ().add_class ("collapsed");
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         check.toggled.connect (() => {
@@ -334,12 +333,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         unowned Gtk.StyleContext style_context = get_style_context ();
 
         if (value) {
-            style_context.remove_class ("collapsed");
+            style_context.add_class ("collapsed");
             style_context.add_class (Granite.STYLE_CLASS_CARD);
 
         } else {
             style_context.remove_class (Granite.STYLE_CLASS_CARD);
-            style_context.add_class ("collapsed");
+            style_context.remove_class ("collapsed");
         }
     }
 
