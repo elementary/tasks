@@ -7,5 +7,6 @@
     <file compressed="true">SourceRow.css</file>
     <file compressed="true">Sidebar.css</file>
     <file compressed="true">TaskRow.css</file>
+    <file compressed="true">TaskList.css</file>
   </gresource>
 </gresources>
