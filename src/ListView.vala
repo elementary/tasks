@@ -27,6 +27,13 @@ public class Tasks.ListView : Gtk.Grid {
     private Gtk.ListBox add_task_list;
     private Gtk.ListBox task_list;
 
+    private static Gtk.CssProvider tasklist_provider;
+
+    static construct {
+        tasklist_provider = new Gtk.CssProvider ();
+        tasklist_provider.load_from_resource ("io/elementary/tasks/TaskList.css");
+    }
+
     construct {
         editable_title = new EditableLabel ();
         editable_title.margin_start = 24;
@@ -75,6 +82,8 @@ public class Tasks.ListView : Gtk.Grid {
         attach (settings_button, 1, 0);
         attach (add_task_list, 0, 1, 2);
         attach (scrolled_window, 0, 2, 2);
+
+        scrolled_window.get_style_context ().add_provider (tasklist_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         Application.settings.changed["show-completed"].connect (() => {
             task_list.invalidate_filter ();
