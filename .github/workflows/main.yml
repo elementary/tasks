@@ -6,12 +6,30 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        containers: [elementary/docker:unstable, elementary/docker:odin-unstable]
 
     container:
-      image: ${{ matrix.containers }}
+      image: elementary/docker:juno-unstable
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Dependencies
+      run: |
+        apt update
+        apt install -y libecal1.2-dev libedataserver1.2-dev libgranite-dev libgtk-3-dev libical-dev meson valac
+    - name: Build
+      env:
+        DESTDIR: out
+      run: |
+        meson build
+        ninja -C build
+        ninja -C build install
+
+  build-odin:
+
+    runs-on: ubuntu-latest
+
+    container:
+      image: elementary/docker:odin-unstable
 
     steps:
     - uses: actions/checkout@v1
