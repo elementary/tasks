@@ -24,7 +24,7 @@ jobs:
         ninja -C build
         ninja -C build install
 
-  build/odin-unstable:
+  build-odin-unstable:
 
     runs-on: ubuntu-latest
 
