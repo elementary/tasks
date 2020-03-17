@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  juno-unstable:
+  build:
 
     runs-on: ubuntu-latest
 
@@ -24,7 +24,7 @@ jobs:
         ninja -C build
         ninja -C build install
 
-  odin-unstable:
+  build/odin-unstable:
 
     runs-on: ubuntu-latest
 
