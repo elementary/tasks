@@ -6,9 +6,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        containers: [elementary/docker:unstable, elementary/docker:odin-unstable]
 
     container:
-      image: elementary/docker:unstable
+      image: ${{ matrix.containers }}
 
     steps:
     - uses: actions/checkout@v1
