@@ -78,7 +78,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         Tasks.Application.set_task_color (source, check);
 
         state_stack = new Gtk.Stack ();
+        state_stack.valign = Gtk.Align.START;
         state_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
+        state_stack.get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         state_stack.add (icon);
         state_stack.add (check);
 

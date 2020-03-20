@@ -57,6 +57,13 @@ row entry.flat:focus {
     opacity: 1;
 }
 
-row:not(.card) entry.add-task {
+row:not(.card) entry.add-task,
+row.card entry {
     border-color: alpha (@text_color, 0.25);
+    padding-bottom: 3px;
+    margin-bottom: 6px;
+}
+
+row stack {
+    margin-top: 3px;
 }
