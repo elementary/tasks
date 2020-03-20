@@ -325,8 +325,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         if (value) {
             style_context.add_class ("collapsed");
             style_context.add_class (Granite.STYLE_CLASS_CARD);
+            style_context.add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         } else {
+            style_context.remove_class (Gtk.STYLE_CLASS_BACKGROUND);
             style_context.remove_class (Granite.STYLE_CLASS_CARD);
             style_context.remove_class ("collapsed");
         }

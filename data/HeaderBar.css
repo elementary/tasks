@@ -18,6 +18,8 @@
 *
 */
 
+@define-color fg_color white;
+
 .sidebar-header {
     background-color: shade (@bg_color, 0.92);
     color: mix (@bg_color, @text_color, 0.77);
@@ -37,6 +39,10 @@
 
 .listview-header:dir(rtl) {
     border-top-right-radius: 0;
+}
+
+.listview-header {
+    background-color: @fg_color;
 }
 
 paned {
