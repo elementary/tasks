@@ -27,6 +27,8 @@ public class Tasks.ListView : Gtk.Grid {
     private Gtk.ListBox add_task_list;
     private Gtk.ListBox task_list;
 
+    private Tasks.TaskRow active_task_row;
+
     private static Gtk.CssProvider tasklist_provider;
 
     static construct {
@@ -97,11 +99,25 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         add_task_list.row_activated.connect ((row) => {
-            ((Tasks.TaskRow) row).reveal_child_request (true);
+            var task_row = (Tasks.TaskRow) row;
+
+            if (active_task_row != null) {
+                active_task_row.reveal_child_request (false);
+            }
+
+            task_row.reveal_child_request (true);
+            active_task_row = task_row;
         });
 
         task_list.row_activated.connect ((row) => {
-            ((Tasks.TaskRow) row).reveal_child_request (true);
+            var task_row = (Tasks.TaskRow) row;
+
+            if (active_task_row != null) {
+                active_task_row.reveal_child_request (false);
+            }
+
+            task_row.reveal_child_request (true);
+            active_task_row = task_row;
         });
 
         notify["source"].connect (() => {
