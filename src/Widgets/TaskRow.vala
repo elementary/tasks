@@ -231,7 +231,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
 
         summary_entry.grab_focus.connect (() => {
-            reveal_child_request (true);
+            activate ();
         });
 
         description_textview.button_press_event.connect (() => {
