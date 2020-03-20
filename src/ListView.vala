@@ -63,14 +63,12 @@ public class Tasks.ListView : Gtk.Grid {
         add_task_list = new Gtk.ListBox ();
         add_task_list.selection_mode = Gtk.SelectionMode.NONE;
         add_task_list.margin_top = 24;
-        add_task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         task_list = new Gtk.ListBox ();
         task_list.selection_mode = Gtk.SelectionMode.NONE;
         task_list.set_filter_func (filter_function);
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
-        task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow (null, null);
         scrolled_window.expand = true;
@@ -84,6 +82,9 @@ public class Tasks.ListView : Gtk.Grid {
         attach (scrolled_window, 0, 2, 2);
 
         scrolled_window.get_style_context ().add_provider (tasklist_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        get_style_context ().add_class ("task-list");
+        get_style_context ().add_provider (tasklist_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         Application.settings.changed["show-completed"].connect (() => {
             task_list.invalidate_filter ();

@@ -18,6 +18,12 @@
 *
 */
 
+@define-color fg_color white;
+
+grid.task-list {
+  background-color: @fg_color;;
+}
+
 scrolledwindow undershoot.top {
     background:
         linear-gradient(

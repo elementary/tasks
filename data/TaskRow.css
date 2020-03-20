@@ -31,23 +31,19 @@ row {
     transition: all 250ms ease-in-out;
 }
 
-row:focus:not(.card) {
-    background-color: shade (@base_color, 0.8);
-}
-
 .past-due .due-date {
     background: alpha (@error_color, 0.2);
     color: @error_color;
 }
 
 row.card {
-    background-color: @base_color;
     padding-top: 8px;
 }
 
+
 row.card.collapsed {
-    box-shadow: inset 0 0 0 1px alpha (#000, 0.05),
-        inset 0 -1px 2px alpha (#000, 0.22);
+    box-shadow: inset 0 1px 0 0 alpha (#000, 0.05),
+        inset -2px -2px 2px -2px alpha (#000, 0.22);
 }
 
 row entry.flat  {
