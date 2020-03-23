@@ -340,13 +340,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         Tasks.Application.set_task_color (source, check);
 
         if (task == null || !created) {
+            get_style_context ().add_class ("add-task");
             state_stack.set_visible_child (icon);
 
             completed = false;
             check.active = completed;
             summary_entry.text = "";
             summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
-            summary_entry.get_style_context ().add_class ("add-task");
             task_detail_revealer.reveal_child = false;
             task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
@@ -358,6 +358,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             description_textbuffer.text = "";
 
         } else if (created) {
+            get_style_context ().remove_class ("add-task");
             state_stack.set_visible_child (check);
 
             unowned ICal.Component ical_task = task.get_icalcomponent ();
@@ -381,7 +382,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             }
 
             summary_entry.text = ical_task.get_summary () == null ? "" : ical_task.get_summary ();
-            summary_entry.get_style_context ().remove_class ("add-task");
 
             if (completed) {
                 summary_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
