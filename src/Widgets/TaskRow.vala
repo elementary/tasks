@@ -85,6 +85,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         state_stack.add (check);
 
         summary_entry = new Gtk.Entry ();
+        summary_entry.placeholder_text = _("Add task to list, press Enter to save...");
 
         unowned Gtk.StyleContext summary_entry_context = summary_entry.get_style_context ();
         summary_entry_context.add_class (Gtk.STYLE_CLASS_FLAT);
