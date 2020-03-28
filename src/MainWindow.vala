@@ -131,11 +131,20 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         listbox.row_selected.connect ((row) => {
             if (row != null) {
-                var source = ((Tasks.SourceRow) row).source;
-                listview.source = source;
-                Tasks.Application.settings.set_string ("selected-list", source.uid);
+                if (row is Tasks.SourceRow) {
+                    var source = ((Tasks.SourceRow) row).source;
+                    listview.source = source;
+                    Tasks.Application.settings.set_string ("selected-list", source.uid);
 
-                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
+                    ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
+
+                } else if (row is Tasks.ScheduledRow) {
+                    listview.source = null;
+                    Tasks.Application.settings.set_string ("selected-list", "scheduled");
+
+                    ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+                }
+
             } else {
                 ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
                 var first_row = listbox.get_row_at_index (0);
