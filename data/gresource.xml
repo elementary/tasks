@@ -5,6 +5,7 @@
     <file compressed="true">EditableLabel.css</file>
     <file compressed="true">HeaderBar.css</file>
     <file compressed="true">SourceRow.css</file>
+    <file compressed="true">ScheduledRow.css</file>
     <file compressed="true">Sidebar.css</file>
     <file compressed="true">TaskRow.css</file>
   </gresource>

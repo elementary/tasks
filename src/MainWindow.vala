@@ -87,6 +87,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         listbox = new Gtk.ListBox ();
         listbox.set_sort_func (sort_function);
 
+        var scheduled_row = new Tasks.ScheduledRow ();
+        listbox.add (scheduled_row);
+
         var scrolledwindow = new Gtk.ScrolledWindow (null, null);
         scrolledwindow.expand = true;
         scrolledwindow.margin_bottom = 3;
@@ -213,6 +216,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         var header_label = new Granite.HeaderLabel (display_name);
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
+        header_label.margin_left = 4;
 
         row.set_header (header_label);
     }
