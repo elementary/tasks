@@ -441,6 +441,7 @@ public class Tasks.TaskModel : Object {
 #endif
         debug (@"Received $(objects.length()) added task(s) for task list '%s'", task_list.dup_display_name ());
         var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);  // vala-lint=line-length
+
         objects.foreach ((ical_comp) => {
             try {
                 SList<ECal.Component> ecal_tasks;
