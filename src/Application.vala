@@ -20,6 +20,7 @@
 
 public class Tasks.Application : Gtk.Application {
     public static GLib.Settings settings;
+    public static Tasks.TaskModel model;
 
     public Application () {
         Object (
@@ -30,6 +31,7 @@ public class Tasks.Application : Gtk.Application {
 
     static construct {
         settings = new Settings ("io.elementary.tasks");
+        model = new Tasks.TaskModel ();
     }
 
     protected override void activate () {

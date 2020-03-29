@@ -121,10 +121,27 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         get_style_context ().add_class ("rounded");
 
-        init_registry.begin ();
-
         Tasks.Application.settings.bind ("pane-position", header_paned, "position", GLib.SettingsBindFlags.DEFAULT);
         Tasks.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
+
+        Tasks.Application.model.task_list_added.connect (add_source);
+        Tasks.Application.model.task_list_changed.connect (update_source);
+        Tasks.Application.model.task_list_removed.connect (remove_source);
+
+        Tasks.Application.model.list_task_lists ().foreach ((source) => {
+            E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+            if (list.selected == true && source.enabled == true) {
+                add_source (source);
+
+                if (last_selected_list == "" && Tasks.Application.model.default_task_list == source) {
+                    listbox.select_row (source_rows[source]);
+
+                } else if (last_selected_list == source.uid) {
+                    listbox.select_row (source_rows[source]);
+                }
+            }
+        });
 
         listbox.row_selected.connect ((row) => {
             if (row != null) {
@@ -189,6 +206,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
+    /*
     private async void init_registry () {
         try {
             registry = yield new E.SourceRegistry (null);
@@ -222,9 +240,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         } catch (GLib.Error error) {
             critical (error.message);
         }
-    }
+    }*/
 
-    private void add_source (E.SourceRegistry registry, E.Source source) {
+    private void add_source (E.Source source) {
         if (source_rows == null) {
             source_rows = new Gee.HashMap<E.Source, Tasks.SourceRow> ();
         }
@@ -237,14 +255,14 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private void update_source (E.SourceRegistry registry, E.Source source) {
+    private void update_source (E.Source source) {
         E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
         if (list.selected != true || source.enabled != true) {
-            remove_source (registry, source);
+            remove_source (source);
 
         } else if (!source_rows.has_key (source)) {
-            add_source (registry, source);
+            add_source (source);
 
         } else {
             source_rows[source].update_request ();
@@ -252,7 +270,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         }
     }
 
-    private void remove_source (E.SourceRegistry registry, E.Source source) {
+    private void remove_source (E.Source source) {
         listbox.unselect_row (source_rows[source]);
         source_rows[source].remove_request ();
         source_rows.unset (source);
