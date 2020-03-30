@@ -95,7 +95,13 @@ public class Tasks.ListView : Gtk.Grid {
                 update_request ();
 
                 try {
-                    view = Tasks.Application.model.create_task_list_view (source, "(contains? 'any' '')", on_tasks_added, on_tasks_modified, on_tasks_removed);
+                    view = Tasks.Application.model.create_task_list_view (
+                        source,
+                        "(contains? 'any' '')",
+                        on_tasks_added,
+                        on_tasks_modified,
+                        on_tasks_removed );
+
                 } catch (Error e) {
                     critical (e.message);
                 }

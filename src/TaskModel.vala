@@ -71,7 +71,7 @@ public class Tasks.TaskModel : Object {
         }
 
         if (client == null) {
-            throw new Tasks.TaskModelError.CLIENT_NOT_AVAILABLE ("No client available for task list '%s'".printf(task_list.dup_display_name ()));
+            throw new Tasks.TaskModelError.CLIENT_NOT_AVAILABLE ("No client available for task list '%s'".printf (task_list.dup_display_name ()));  // vala-lint=line-length
         }
 
         return client;
@@ -120,12 +120,12 @@ public class Tasks.TaskModel : Object {
     }
 
     construct {
-        var promise =  new Gee.Promise<E.SourceRegistry> ();
+        var promise = new Gee.Promise<E.SourceRegistry> ();
         registry = promise.future;
         init_registry.begin (promise);
 
         task_list_client = new HashTable<string, ECal.Client> (str_hash, str_equal);
-        task_list_client_views = new HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> (direct_hash, direct_equal);
+        task_list_client_views = new HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> (direct_hash, direct_equal);  // vala-lint=line-length
     }
 
     private async void init_registry (Gee.Promise<E.SourceRegistry> promise) {
@@ -147,7 +147,7 @@ public class Tasks.TaskModel : Object {
             });
 
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((task_list) => {
-                E.SourceTaskList task_list_extension = (E.SourceTaskList)task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+                E.SourceTaskList task_list_extension = (E.SourceTaskList)task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);  // vala-lint=line-length
                 if (task_list_extension.selected == true && task_list.enabled == true) {
                     add_task_list (task_list);
                 }
@@ -292,7 +292,7 @@ public class Tasks.TaskModel : Object {
 
         view.objects_added.connect ((objects) => on_objects_added (task_list, client, objects, on_tasks_added));
         view.objects_removed.connect ((objects) => on_objects_removed (task_list, client, objects, on_tasks_removed));
-        view.objects_modified.connect ((objects) => on_objects_modified (task_list, client, objects, on_tasks_modified));
+        view.objects_modified.connect ((objects) => on_objects_modified (task_list, client, objects, on_tasks_modified));  // vala-lint=line-length
         view.start ();
 
         lock (task_list_client_views) {
@@ -326,12 +326,12 @@ public class Tasks.TaskModel : Object {
     }
 
 #if E_CAL_2_0
-    private void on_objects_added (E.Source task_list, ECal.Client client, SList<ICal.Component> objects, TasksAddedFunc on_tasks_added) {
+    private void on_objects_added (E.Source task_list, ECal.Client client, SList<ICal.Component> objects, TasksAddedFunc on_tasks_added) {  // vala-lint=line-length
 #else
-    private void on_objects_added (E.Source task_list, ECal.Client client, SList<weak ICal.Component> objects, TasksAddedFunc on_tasks_added) {
+    private void on_objects_added (E.Source task_list, ECal.Client client, SList<weak ICal.Component> objects, TasksAddedFunc on_tasks_added) {  // vala-lint=line-length
 #endif
         debug (@"Received $(objects.length()) added task(s) for task list '%s'", task_list.dup_display_name ());
-        var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
+        var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);  // vala-lint=line-length
         objects.foreach ((ical_comp) => {
             try {
                 SList<ECal.Component> ecal_tasks;
@@ -354,12 +354,12 @@ public class Tasks.TaskModel : Object {
     }
 
 #if E_CAL_2_0
-    private void on_objects_modified (E.Source task_list, ECal.Client client, SList<ICal.Component> objects, TasksModifiedFunc on_tasks_modified) {
+    private void on_objects_modified (E.Source task_list, ECal.Client client, SList<ICal.Component> objects, TasksModifiedFunc on_tasks_modified) {  // vala-lint=line-length
 #else
-    private void on_objects_modified (E.Source task_list, ECal.Client client, SList<weak ICal.Component> objects, TasksModifiedFunc on_tasks_modified) {
+    private void on_objects_modified (E.Source task_list, ECal.Client client, SList<weak ICal.Component> objects, TasksModifiedFunc on_tasks_modified) {  // vala-lint=line-length
 #endif
         debug (@"Received $(objects.length()) modified task(s) for task list '%s'", task_list.dup_display_name ());
-        var updated_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
+        var updated_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);  // vala-lint=line-length
         objects.foreach ((comp) => {
             try {
                 SList<ECal.Component> ecal_tasks;
@@ -381,9 +381,9 @@ public class Tasks.TaskModel : Object {
     }
 
 #if E_CAL_2_0
-    private void on_objects_removed (E.Source task_list, ECal.Client client, SList<ECal.ComponentId?> cids, TasksRemovedFunc on_tasks_removed) {
+    private void on_objects_removed (E.Source task_list, ECal.Client client, SList<ECal.ComponentId?> cids, TasksRemovedFunc on_tasks_removed) {  // vala-lint=line-length
 #else
-    private void on_objects_removed (E.Source task_list, ECal.Client client, SList<weak ECal.ComponentId?> cids, TasksRemovedFunc on_tasks_removed) {
+    private void on_objects_removed (E.Source task_list, ECal.Client client, SList<weak ECal.ComponentId?> cids, TasksRemovedFunc on_tasks_removed) {  // vala-lint=line-length
 #endif
         debug (@"Received $(cids.length()) removed task(s) for task list '%s'", task_list.dup_display_name ());
 

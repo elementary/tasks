@@ -50,7 +50,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         add_action_entries (ACTION_ENTRIES, this);
 
         foreach (var action in action_accelerators.get_keys ()) {
-            ((Gtk.Application) GLib.Application.get_default ()).set_accels_for_action (ACTION_PREFIX + action, action_accelerators[action].to_array ());
+            ((Gtk.Application) GLib.Application.get_default ()).set_accels_for_action (ACTION_PREFIX + action, action_accelerators[action].to_array ());  // vala-lint=line-length
         }
 
         var header_provider = new Gtk.CssProvider ();
@@ -191,7 +191,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         try {
             registry = Tasks.Application.model.get_registry ();
         } catch (Error e) {
-            warning(e.message);
+            warning (e.message);
             return;
         }
         string display_name;
