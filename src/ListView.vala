@@ -87,6 +87,7 @@ public class Tasks.ListView : Gtk.Grid {
             if (view != null) {
                 Tasks.Application.model.destroy_task_list_view (view);
             }
+
             foreach (unowned Gtk.Widget child in task_list.get_children ()) {
                 child.destroy ();
             }
