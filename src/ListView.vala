@@ -21,11 +21,42 @@
 public class Tasks.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
-    private ECal.ClientView view;
+    private Gee.Collection<ECal.ClientView> views;
+
+    /*
+     * We need to pass a valid S-expression as query to guarantee the callback events are fired.
+     *
+     * See `e-cal-backend-sexp.c` of evolution-data-server for available S-expressions:
+     * https://gitlab.gnome.org/GNOME/evolution-data-server/-/blob/master/src/calendar/libedata-cal/e-cal-backend-sexp.c
+     */
+
+    public void add_view (E.Source task_list, string query) {
+        var view = Tasks.Application.model.create_task_list_view (
+                        task_list,
+                        query,
+                        on_tasks_added,
+                        on_tasks_modified,
+                        on_tasks_removed );
+        lock (views) {
+            views.add (view);
+        }
+    }
+
+    private void remove_views () {
+        lock (views) {
+            foreach (ECal.ClientView view in views) {
+                Tasks.Application.model.destroy_task_list_view (view);
+            }
+            views.clear ();
+        }
+    }
+
     private EditableLabel editable_title;
     private Gtk.ListBox task_list;
 
     construct {
+        views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
+
         editable_title = new EditableLabel ();
         editable_title.margin_start = 24;
 
@@ -84,9 +115,8 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         notify["source"].connect (() => {
-            if (view != null) {
-                Tasks.Application.model.destroy_task_list_view (view);
-            }
+            remove_views ();
+
             foreach (unowned Gtk.Widget child in task_list.get_children ()) {
                 child.destroy ();
             }
@@ -95,12 +125,7 @@ public class Tasks.ListView : Gtk.Grid {
                 update_request ();
 
                 try {
-                    view = Tasks.Application.model.create_task_list_view (
-                        source,
-                        "(contains? 'any' '')",
-                        on_tasks_added,
-                        on_tasks_modified,
-                        on_tasks_removed );
+                    add_view (source, "(contains? 'any' '')");
 
                 } catch (Error e) {
                     critical (e.message);
@@ -114,12 +139,18 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         editable_title.changed.connect (() => {
+            if (source == null) {
+                return;
+            }
             source.display_name = editable_title.text;
             source.write.begin (null);
         });
     }
 
     public void update_request () {
+        if (source == null) {
+            return;
+        }
         editable_title.text = source.dup_display_name ();
         Tasks.Application.set_task_color (source, editable_title);
     }
@@ -150,7 +181,7 @@ public class Tasks.ListView : Gtk.Grid {
         return 0;
     }
 
-    private void on_tasks_added (Gee.Collection<ECal.Component> tasks) {
+    private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source);
             task_row.task_save.connect ((task) => {
