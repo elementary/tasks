@@ -84,6 +84,9 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         notify["source"].connect (() => {
+            if (view != null) {
+                Tasks.Application.model.destroy_task_list_view (view);
+            }
             foreach (unowned Gtk.Widget child in task_list.get_children ()) {
                 child.destroy ();
             }
@@ -92,31 +95,17 @@ public class Tasks.ListView : Gtk.Grid {
                 update_request ();
 
                 try {
-                     var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
+                    view = Tasks.Application.model.create_task_list_view (
+                        source,
+                        "(contains? 'any' '')",
+                        on_tasks_added,
+                        on_tasks_modified,
+                        on_tasks_removed );
 
-                     var task_row = new Tasks.TaskRow.for_source (source);
-                     task_row.task_save.connect ((task) => {
-                         add_task (client, task);
-                     });
-                     task_list.add (task_row);
+                } catch (Error e) {
+                    critical (e.message);
+                }
 
-                     /*
-                      * We need to pass a valid S-expression to guarantee the below callback events are fired.
-                      *
-                      * See `e-cal-backend-sexp.c` of evolution-data-server for available S-expressions:
-                      * https://gitlab.gnome.org/GNOME/evolution-data-server/-/blob/master/src/calendar/libedata-cal/e-cal-backend-sexp.c
-                      */
-                     client.get_view_sync ("(contains? 'any' '')", out view, null);
-
-                     view.objects_added.connect ((objects) => on_objects_added (source, client, objects));
-                     view.objects_removed.connect ((objects) => on_objects_removed (source, client, objects));
-                     view.objects_modified.connect ((objects) => on_objects_modified (source, client, objects));
-
-                     view.start ();
-
-                 } catch (Error e) {
-                     critical (e.message);
-                 }
             } else {
                 editable_title.text = "";
             }
@@ -147,42 +136,28 @@ public class Tasks.ListView : Gtk.Grid {
         return true;
     }
 
-#if E_CAL_2_0
-    private void on_objects_added (E.Source source, ECal.Client client, SList<ICal.Component> objects) {
-#else
-    private void on_objects_added (E.Source source, ECal.Client client, SList<weak ICal.Component> objects) {
-#endif
-        debug (@"Received $(objects.length()) added task(s) for source '%s'", source.dup_display_name ());
-        var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
-        objects.foreach ((ical_comp) => {
-            try {
-                SList<ECal.Component> ecal_tasks;
-                client.get_objects_for_uid_sync (ical_comp.get_uid (), out ecal_tasks, null);
+    [CCode (instance_pos = -1)]
+    private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {
+        var row1_completed = ((Tasks.TaskRow) row1).completed;
+        var row2_completed = ((Tasks.TaskRow) row2).completed;
 
-                ecal_tasks.foreach ((task) => {
-                    debug_task (source, task);
+        if (row1_completed && !row2_completed) {
+            return 1;
+        } else if (row2_completed && !row1_completed) {
+            return -1;
+        }
 
-                    if (!added_tasks.contains (task)) {
-                        added_tasks.add (task);
-                    }
-                });
-
-            } catch (Error e) {
-                warning (e.message);
-            }
-        });
-
-        tasks_added (client, source, added_tasks.read_only_view);
+        return 0;
     }
 
-    private void tasks_added (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
+    private void on_tasks_added (Gee.Collection<ECal.Component> tasks) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source);
             task_row.task_save.connect ((task) => {
-                update_task (client, task, ECal.ObjModType.ALL);
+                Tasks.Application.model.update_task (source, task, ECal.ObjModType.ALL);
             });
             task_row.task_delete.connect ((task) => {
-                remove_task (client, task, ECal.ObjModType.ALL);
+                Tasks.Application.model.remove_task (source, task, ECal.ObjModType.ALL);
             });
             task_list.add (task_row);
             return true;
@@ -190,35 +165,7 @@ public class Tasks.ListView : Gtk.Grid {
         task_list.show_all ();
     }
 
-#if E_CAL_2_0
-    private void on_objects_modified (E.Source source, ECal.Client client, SList<ICal.Component> objects) {
-#else
-    private void on_objects_modified (E.Source source, ECal.Client client, SList<weak ICal.Component> objects) {
-#endif
-        debug (@"Received $(objects.length()) modified task(s) for source '%s'", source.dup_display_name ());
-        var updated_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
-        objects.foreach ((comp) => {
-            try {
-                SList<ECal.Component> ecal_tasks;
-                client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
-
-                ecal_tasks.foreach ((task) => {
-                    debug_task (source, task);
-                    if (!updated_tasks.contains (task)) {
-                        updated_tasks.add (task);
-                    }
-                });
-
-            } catch (Error e) {
-                warning (e.message);
-            }
-        });
-
-        tasks_updated (client, source, updated_tasks.read_only_view);
-    }
-
-
-    private void tasks_updated (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
+    private void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
         Tasks.TaskRow task_row = null;
         var row_index = 0;
 
@@ -237,13 +184,7 @@ public class Tasks.ListView : Gtk.Grid {
         } while (task_row != null);
     }
 
-#if E_CAL_2_0
-    private void on_objects_removed (E.Source source, ECal.Client client, SList<ECal.ComponentId?> cids) {
-#else
-    private void on_objects_removed (E.Source source, ECal.Client client, SList<weak ECal.ComponentId?> cids) {
-#endif
-        debug (@"Received $(cids.length()) removed task(s) for source '%s'", source.dup_display_name ());
-
+    private void on_tasks_removed (SList<ECal.ComponentId?> cids) {
         unowned Tasks.TaskRow? task_row = null;
         var row_index = 0;
         do {
@@ -261,101 +202,5 @@ public class Tasks.ListView : Gtk.Grid {
             }
             row_index++;
         } while (task_row != null);
-    }
-
-
-    [CCode (instance_pos = -1)]
-    private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {
-        var row1_completed = ((Tasks.TaskRow) row1).completed;
-        var row2_completed = ((Tasks.TaskRow) row2).completed;
-
-        if (row1_completed && !row2_completed) {
-            return 1;
-        } else if (row2_completed && !row1_completed) {
-            return -1;
-        }
-
-        return 0;
-    }
-
-    public void add_task (ECal.Client client, ECal.Component task) {
-        add_task_async.begin (client, task);
-    }
-
-    private async void add_task_async (ECal.Client client, ECal.Component task) {
-        unowned ICal.Component comp = task.get_icalcomponent ();
-        debug (@"Adding task '$(comp.get_uid())'");
-
-        if (client != null) {
-            try {
-                string? uid;
-#if E_CAL_2_0
-                yield client.create_object (comp, ECal.OperationFlags.NONE, null, out uid);
-#else
-                yield client.create_object (comp, null, out uid);
-#endif
-                if (uid != null) {
-                    comp.set_uid (uid);
-                }
-            } catch (GLib.Error error) {
-                critical (error.message);
-            }
-        } else {
-            critical ("No list was found, task not added");
-        }
-    }
-
-    public void update_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
-        unowned ICal.Component comp = task.get_icalcomponent ();
-        debug (@"Updating task '$(comp.get_uid())' [mod_type=$(mod_type)]");
-
-#if E_CAL_2_0
-        client.modify_object.begin (comp, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
-#else
-        client.modify_object.begin (comp, mod_type, null, (obj, results) => {
-#endif
-            try {
-                client.modify_object.end (results);
-                SList<ECal.Component> ecal_tasks;
-                client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
-
-#if E_CAL_2_0
-                var ical_tasks = new SList<ICal.Component> ();
-#else
-                var ical_tasks = new SList<unowned ICal.Component> ();
-#endif
-                foreach (unowned ECal.Component ecal_task in ecal_tasks) {
-                    ical_tasks.append (ecal_task.get_icalcomponent ());
-                }
-                on_objects_modified (source, client, ical_tasks);
-
-            } catch (Error e) {
-                warning (e.message);
-            }
-        });
-    }
-
-    public void remove_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
-        unowned ICal.Component comp = task.get_icalcomponent ();
-        string uid = comp.get_uid ();
-        string? rid = task.has_recurrences () ? null : task.get_recurid_as_string ();
-        debug (@"Removing task '$uid'");
-
-#if E_CAL_2_0
-        client.remove_object.begin (uid, rid, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
-#else
-        client.remove_object.begin (uid, rid, mod_type, null, (obj, results) => {
-#endif
-            try {
-                client.remove_object.end (results);
-            } catch (Error e) {
-                warning (e.message);
-            }
-        });
-    }
-
-    private void debug_task (E.Source source, ECal.Component task) {
-        unowned ICal.Component comp = task.get_icalcomponent ();
-        debug (@"Task ['$(comp.get_summary())', $(source.dup_display_name()), $(comp.get_uid()))]");
     }
 }
