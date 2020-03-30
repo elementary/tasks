@@ -76,7 +76,7 @@ public class Tasks.ListView : Gtk.Grid {
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-        settings_button_revealer =  new Gtk.Revealer ();
+        settings_button_revealer = new Gtk.Revealer ();
         settings_button_revealer.transition_type = Gtk.RevealerTransitionType.CROSSFADE;
         settings_button_revealer.add (settings_button);
 
