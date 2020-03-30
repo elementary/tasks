@@ -123,7 +123,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         Tasks.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
 
         Tasks.Application.model.task_list_added.connect (add_source);
-        Tasks.Application.model.task_list_changed.connect (update_source);
+        Tasks.Application.model.task_list_modified.connect (update_source);
         Tasks.Application.model.task_list_removed.connect (remove_source);
 
         listbox.row_selected.connect ((row) => {

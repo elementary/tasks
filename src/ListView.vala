@@ -85,7 +85,7 @@ public class Tasks.ListView : Gtk.Grid {
 
         notify["source"].connect (() => {
             if (view != null) {
-                Tasks.Application.model.destroy_view (view);
+                Tasks.Application.model.destroy_task_list_view (view);
             }
             foreach (unowned Gtk.Widget child in task_list.get_children ()) {
                 child.destroy ();
@@ -95,7 +95,7 @@ public class Tasks.ListView : Gtk.Grid {
                 update_request ();
 
                 try {
-                    view = Tasks.Application.model.create_view_for_list (source, "(contains? 'any' '')", on_tasks_added, on_tasks_modified, on_tasks_removed);
+                    view = Tasks.Application.model.create_task_list_view (source, "(contains? 'any' '')", on_tasks_added, on_tasks_modified, on_tasks_removed);
                 } catch (Error e) {
                     critical (e.message);
                 }
@@ -284,9 +284,9 @@ public class Tasks.ListView : Gtk.Grid {
         });
 */
     }
-
+/*
     private void debug_task (E.Source source, ECal.Component task) {
         unowned ICal.Component comp = task.get_icalcomponent ();
         debug (@"Task ['$(comp.get_summary())', $(source.dup_display_name()), $(comp.get_uid()))]");
-    }
+    }*/
 }
