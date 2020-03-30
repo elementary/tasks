@@ -185,6 +185,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                     }
                 }
             });
+
+            if (last_selected_list == "scheduled") {
+                listbox.select_row (scheduled_row);
+            }
         });
     }
 
