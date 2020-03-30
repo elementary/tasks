@@ -51,6 +51,7 @@ public class Tasks.ListView : Gtk.Grid {
         }
     }
 
+    private Gtk.Revealer settings_button_revealer;
     private EditableLabel editable_title;
     private Gtk.ListBox task_list;
 
@@ -75,6 +76,10 @@ public class Tasks.ListView : Gtk.Grid {
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
+        settings_button_revealer =  new Gtk.Revealer ();
+        settings_button_revealer.transition_type = Gtk.RevealerTransitionType.CROSSFADE;
+        settings_button_revealer.add (settings_button);
+
         var placeholder = new Gtk.Label (_("No Tasks"));
         placeholder.show ();
 
@@ -97,7 +102,7 @@ public class Tasks.ListView : Gtk.Grid {
         column_spacing = 12;
         row_spacing = 24;
         attach (editable_title, 0, 0);
-        attach (settings_button, 1, 0);
+        attach (settings_button_revealer, 1, 0);
         attach (scrolled_window, 0, 1, 2);
 
         Application.settings.changed["show-completed"].connect (() => {
@@ -121,20 +126,7 @@ public class Tasks.ListView : Gtk.Grid {
                 child.destroy ();
             }
 
-            if (source != null) {
-                update_request ();
-
-                try {
-                    add_view (source, "(contains? 'any' '')");
-
-                } catch (Error e) {
-                    critical (e.message);
-                }
-
-            } else {
-                editable_title.text = "";
-            }
-
+            update_request ();
             show_all ();
         });
 
@@ -145,14 +137,23 @@ public class Tasks.ListView : Gtk.Grid {
             source.display_name = editable_title.text;
             source.write.begin (null);
         });
+
+        update_request ();
     }
 
     public void update_request () {
         if (source == null) {
-            return;
+            editable_title.sensitive = false;
+            editable_title.text = _("Scheduled");
+            Tasks.Application.set_task_color_from_string ("#3689e6", editable_title);
+            settings_button_revealer.reveal_child = false;
+
+        } else {
+            settings_button_revealer.reveal_child = true;
+            editable_title.text = source.dup_display_name ();
+            Tasks.Application.set_task_color (source, editable_title);
+            editable_title.sensitive = true;
         }
-        editable_title.text = source.dup_display_name ();
-        Tasks.Application.set_task_color (source, editable_title);
     }
 
     [CCode (instance_pos = -1)]
@@ -169,12 +170,36 @@ public class Tasks.ListView : Gtk.Grid {
 
     [CCode (instance_pos = -1)]
     private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {
-        var row1_completed = ((Tasks.TaskRow) row1).completed;
-        var row2_completed = ((Tasks.TaskRow) row2).completed;
+        var row_a = (Tasks.TaskRow) row1;
+        var row_b = (Tasks.TaskRow) row2;
 
-        if (row1_completed && !row2_completed) {
+        if (row_a.completed == row_b.completed) {
+            unowned ICal.Component comp_a = row_a.task.get_icalcomponent ();
+            unowned ICal.Component comp_b = row_b.task.get_icalcomponent ();
+
+            ICal.Time start_a = comp_a.get_dtstart ();
+            ICal.Time stamp_a = comp_a.get_dtstamp ();
+
+            ICal.Time start_b = comp_b.get_dtstart ();
+            ICal.Time stamp_b = comp_b.get_dtstamp ();
+
+            if ( start_a.is_null_time () && start_b.is_null_time () ) {
+                return stamp_b.compare (stamp_a);
+
+            } else if (start_a.is_null_time () && !start_b.is_null_time ()) {
+                return 1;
+
+            } else if (start_b.is_null_time () && !start_a.is_null_time ()) {
+                return -1;
+
+            } else {
+                return start_a.compare (start_b);
+            }
+
+        } else if (row_a.completed && !row_b.completed) {
             return 1;
-        } else if (row2_completed && !row1_completed) {
+
+        } else if (row_b.completed && !row_a.completed) {
             return -1;
         }
 
@@ -193,7 +218,9 @@ public class Tasks.ListView : Gtk.Grid {
             task_list.add (task_row);
             return true;
         });
+
         task_list.show_all ();
+        task_list.invalidate_sort ();
     }
 
     private void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
@@ -213,6 +240,8 @@ public class Tasks.ListView : Gtk.Grid {
             }
             row_index++;
         } while (task_row != null);
+
+        task_list.invalidate_sort ();
     }
 
     private void on_tasks_removed (SList<ECal.ComponentId?> cids) {
