@@ -18,6 +18,12 @@
 *
 */
 
+
+errordomain Tasks.TaskModelError {
+    CLIENT_NOT_AVAILABLE
+}
+
+
 public class Tasks.TaskModel : Object {
 
     /*
@@ -35,121 +41,73 @@ public class Tasks.TaskModel : Object {
      * 6. provide a method to view all sources with a custom query
      * 7. make sure the view gets updated if one or more sources are removed
      */
+    public signal void registry_ready (E.SourceRegistry registry);
 
     public signal void task_list_added (E.Source task_list);
     public signal void task_list_changed (E.Source task_list);
     public signal void task_list_removed (E.Source task_list);
 
-    private E.SourceRegistry registry;
-    private HashTable<string, ECal.Client> source_client;
-    private HashTable<string, Gee.Collection<ECal.ClientView>> source_views;
+    public delegate void TasksAddedFunc (Gee.Collection<ECal.Component> tasks);
+    public delegate void TasksModifiedFunc (Gee.Collection<ECal.Component> tasks);
+    public delegate void TasksRemovedFunc (SList<ECal.ComponentId?> cids);
 
-    public E.Source default_task_list {
-        get {
-            return registry.default_task_list;
-        }
+    private Gee.Future<E.SourceRegistry> registry;
+    private HashTable<string, ECal.Client> source_client;
+    private HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> client_views;
+
+    /** BLOCKS until the E.SourceRegistry is available.
+     * Returns the E.SourceRegistry or rethrows the exception
+     * thrown while trying to establish the connection.
+     */
+    public E.SourceRegistry get_registry () throws Error {
+        registry.wait ();
+        return registry.value;
     }
 
     construct {
-        open.begin ();
+        var promise =  new Gee.Promise<E.SourceRegistry> ();
+        registry = promise.future;
+        init_registry.begin (promise);
 
         source_client = new HashTable<string, ECal.Client> (str_hash, str_equal);
-        source_views = new HashTable<string, Gee.Collection<ECal.ClientView>> (str_hash, str_equal);
+        client_views = new HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> (direct_hash, direct_equal);
     }
 
-    private async void open () {
+    private async void init_registry (Gee.Promise<E.SourceRegistry> promise) {
         try {
-            registry = yield new E.SourceRegistry (null);
+            var registry = yield new E.SourceRegistry (null);
 
-            registry.source_removed.connect ((source) => {
-                remove_source (source);
-                task_list_removed (source);
+            registry.source_added.connect ((source) => {
+                add_source (source);
+                task_list_added (source);
             });
 
             registry.source_changed.connect ((source) => {
                 task_list_changed (source);
             });
 
-            registry.source_added.connect ((source) => {
-                add_source_async.begin (source, () => {
-                    task_list_added (source);
-                });
+            registry.source_removed.connect ((source) => {
+                remove_source (source);
+                task_list_removed (source);
             });
 
-            list_task_lists ().foreach ((source) => {
+            registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((source) => {
                 E.SourceTaskList task_list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
                 if (task_list.selected == true && source.enabled == true) {
-                    add_source_async.begin (source);
+                    add_source (source);
                 }
             });
 
-        } catch (GLib.Error error) {
-            critical (error.message);
+            promise.set_value (registry);
+            registry_ready (registry);
+
+        } catch (Error e) {
+            critical (e.message);
+            promise.set_exception (e);
         }
     }
 
-    public List<E.Source> list_task_lists () {
-        return registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
-    }
-
-    private void remove_source (E.Source source) {
-        debug ("Removing source '%s'", source.dup_display_name ());
-        /* Already out of the model, so do nothing */
-        unowned string uid = source.get_uid ();
-
-        if (!source_views.contains (uid)) {
-            return;
-        }
-
-        foreach (var source_view in source_views.get (uid)) {
-            try {
-                source_view.stop ();
-            } catch (Error e) {
-                warning (e.message);
-            }
-        }
-
-        source_views.remove (uid);
-        lock (source_client) {
-            source_client.remove (uid);
-        }
-
-        //var tasks = source_events.get (source).get_values ().read_only_view;
-        //events_removed (source, events);
-        //source_events.remove (source);
-    }
-
-/*    private void load_source (E.Source source) {
-        var iso_first = ECal.isodate_from_time_t ((time_t)data_range.first_dt.to_unix ());
-        var iso_last = ECal.isodate_from_time_t ((time_t)data_range.last_dt.add_days (1).to_unix ());
-        var query = @"(occur-in-time-range? (make-time \"$iso_first\") (make-time \"$iso_last\"))";
-
-        ECal.Client client;
-        lock (source_client) {
-            client = source_client.get (source.dup_uid ());
-        }
-
-        if (client == null) {
-            return;
-        }
-
-        debug ("Getting client-view for source '%s'", source.dup_display_name ());
-        client.get_view.begin (query, null, (obj, results) => {
-            var view = on_client_view_received (results, source, client);
-            view.objects_added.connect ((objects) => on_objects_added (source, client, objects));
-            view.objects_removed.connect ((objects) => on_objects_removed (source, client, objects));
-            view.objects_modified.connect ((objects) => on_objects_modified (source, client, objects));
-            try {
-                view.start ();
-            } catch (Error e) {
-                //critical (e.message);
-            }
-
-            source_view.set (source.dup_uid (), view);
-        });
-    }
-*/
-    private async void add_source_async (E.Source source) {
+    private void add_source (E.Source source) {
         debug ("Adding source '%s'", source.dup_display_name ());
         try {
             var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
@@ -159,58 +117,105 @@ public class Tasks.TaskModel : Object {
         }
     }
 
+    private void remove_source (E.Source source) {
+        debug ("Removing source '%s'", source.dup_display_name ());
+        /* Already out of the model, so do nothing */
+        unowned string uid = source.get_uid ();
+
+        ECal.Client client;
+        lock (source_client) {
+            client = source_client.get (uid);
+        }
+
+        if (client == null) {
+            return;
+        }
+
+        if (!client_views.contains (client)) {
+            return;
+        }
+
+        foreach (var view in client_views.get (client)) {
+            try {
+                view.stop ();
+            } catch (Error e) {
+                warning (e.message);
+            }
+        }
+
+        client_views.remove (client);
+        lock (source_client) {
+            source_client.remove (uid);
+        }
+
+        //var tasks = source_events.get (source).get_values ().read_only_view;
+        //events_removed (source, events);
+        //source_events.remove (source);
+    }
+
     private void debug_task (E.Source source, ECal.Component task) {
         unowned ICal.Component comp = task.get_icalcomponent ();
         debug (@"Task ['$(comp.get_summary())', $(source.dup_display_name()), $(comp.get_uid()))]");
     }
-/*
-    private ECal.ClientView on_client_view_received (AsyncResult results, E.Source source, ECal.Client client) {
-        ECal.ClientView view;
+
+    public void destroy_view (ECal.ClientView view) {
         try {
-            debug ("Received client-view for source '%s'", source.dup_display_name ());
-            bool status = client.get_view.end (results, out view);
-            assert (status == true);
+            view.stop ();
         } catch (Error e) {
-            critical ("Error loading client-view from source '%s': %s", source.dup_display_name (), e.message);
+            warning (e.message);
+        }
+
+        lock (client_views) {
+            unowned Gee.Collection<ECal.ClientView> task_list_views = client_views.get (view.client);
+
+            if (task_list_views != null) {
+                task_list_views.remove (view);
+            }
+        }
+    }
+
+    public ECal.ClientView create_view_for_list (E.Source task_list, string query, TasksAddedFunc on_tasks_added, TasksModifiedFunc on_tasks_modified, TasksRemovedFunc on_tasks_removed) throws Error { // vala-lint=line-length
+        unowned string source_uid = task_list.get_uid ();
+
+        ECal.Client client;
+        lock (source_client) {
+            client = source_client.get (source_uid);
+        }
+
+        if (client == null) {
+            throw new Tasks.TaskModelError.CLIENT_NOT_AVAILABLE ("No client available for task-list '%s'".printf(task_list.dup_display_name ()));
+        }
+        debug ("Getting view for task-list '%s'", task_list.dup_display_name ());
+
+        ECal.ClientView view;
+        client.get_view_sync (query, out view, null);
+
+        view.objects_added.connect ((objects) => on_objects_added (task_list, client, objects, on_tasks_added));
+        view.objects_removed.connect ((objects) => on_objects_removed (task_list, client, objects, on_tasks_removed));
+        view.objects_modified.connect ((objects) => on_objects_modified (task_list, client, objects, on_tasks_modified));
+        view.start ();
+
+        Gee.Collection<ECal.ClientView> task_list_views;
+        lock (client_views) {
+            task_list_views = client_views.get (client);
+        }
+
+        if (task_list_views == null) {
+            task_list_views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
+        }
+        task_list_views.add (view);
+
+        lock (client_views) {
+            client_views.set (client, task_list_views);
         }
 
         return view;
     }
-*/
-
-/*
-#if E_CAL_2_0
-    private void on_objects_added (E.Source source, ECal.Client client, SList<ICal.Component> objects) {
-#else
-    private void on_objects_added (E.Source source, ECal.Client client, SList<weak ICal.Component> objects) {
-#endif
-        debug (@"Received $(objects.length()) added event(s) for source '%s'", source.dup_display_name ());
-        var events = source_events.get (source);
-        var added_events = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func); // vala-lint=line-length
-
-        objects.foreach ((comp) => {
-            unowned string uid = comp.get_uid ();
-#if E_CAL_2_0
-            client.generate_instances_for_object_sync (comp, (time_t) data_range.first_dt.to_unix (), (time_t) data_range.last_dt.to_unix (), null, (comp, start, end) => { // vala-lint=line-length
-                var event = new ECal.Component.from_icalcomponent (comp);
-#else
-            client.generate_instances_for_object_sync (comp, (time_t) data_range.first_dt.to_unix (), (time_t) data_range.last_dt.to_unix (), (event, start, end) => { // vala-lint=line-length
-#endif
-                debug_event (source, event);
-                events.set (uid, event);
-                added_events.add (event);
-                return true;
-            });
-        });
-
-        events_added (source, added_events.read_only_view);
-    }
-*/
 
 #if E_CAL_2_0
-    private void on_objects_added (E.Source source, ECal.Client client, SList<ICal.Component> objects) {
+    private void on_objects_added (E.Source source, ECal.Client client, SList<ICal.Component> objects, TasksAddedFunc on_tasks_added) {
 #else
-    private void on_objects_added (E.Source source, ECal.Client client, SList<weak ICal.Component> objects) {
+    private void on_objects_added (E.Source source, ECal.Client client, SList<weak ICal.Component> objects, TasksAddedFunc on_tasks_added) {
 #endif
         debug (@"Received $(objects.length()) added task(s) for source '%s'", source.dup_display_name ());
         var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
@@ -232,54 +237,98 @@ public class Tasks.TaskModel : Object {
             }
         });
 
-        //tasks_added (client, source, added_tasks.read_only_view);
+        on_tasks_added (added_tasks.read_only_view);
     }
-
 /*
-#if E_CAL_2_0
-    private void on_objects_modified (E.Source source, ECal.Client client, SList<ICal.Component> objects) {
-#else
-    private void on_objects_modified (E.Source source, ECal.Client client, SList<weak ICal.Component> objects) {
-#endif
-        debug (@"Received $(objects.length()) modified event(s) for source '%s'", source.dup_display_name ());
-        var updated_events = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func); // vala-lint=line-length
+    private void tasks_added (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
+        tasks.foreach ((task) => {
+            var task_row = new Tasks.TaskRow.for_component (task, source);
+            task_row.task_save.connect ((task) => {
+                update_task (client, task, ECal.ObjModType.ALL);
+            });
+            task_row.task_delete.connect ((task) => {
+                remove_task (client, task, ECal.ObjModType.ALL);
+            });
+            task_list.add (task_row);
+            return true;
+        });
+        task_list.show_all ();
+    }
+    */
 
+#if E_CAL_2_0
+    private void on_objects_modified (E.Source source, ECal.Client client, SList<ICal.Component> objects, TasksModifiedFunc on_tasks_modified) {
+#else
+    private void on_objects_modified (E.Source source, ECal.Client client, SList<weak ICal.Component> objects, TasksModifiedFunc on_tasks_modified) {
+#endif
+        debug (@"Received $(objects.length()) modified task(s) for source '%s'", source.dup_display_name ());
+        var updated_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
         objects.foreach ((comp) => {
-            unowned string uid = comp.get_uid ();
-            var events = source_events.get (source).get (uid);
-            updated_events.add_all (events);
-            foreach (var event in events) {
-                debug_event (source, event);
+            try {
+                SList<ECal.Component> ecal_tasks;
+                client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
+
+                ecal_tasks.foreach ((task) => {
+                    debug_task (source, task);
+                    if (!updated_tasks.contains (task)) {
+                        updated_tasks.add (task);
+                    }
+                });
+
+            } catch (Error e) {
+                warning (e.message);
             }
         });
 
-        events_updated (source, updated_events.read_only_view);
+        on_tasks_modified (updated_tasks.read_only_view);
     }
-*/
 
-/*
+
+ /*   private void tasks_updated (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
+        Tasks.TaskRow task_row = null;
+        var row_index = 0;
+
+        do {
+            task_row = (Tasks.TaskRow) task_list.get_row_at_index (row_index);
+
+            if (task_row != null) {
+                foreach (ECal.Component task in tasks) {
+                    if (Util.calcomponent_equal_func (task_row.task, task)) {
+                        task_row.task = task;
+                        break;
+                    }
+                }
+            }
+            row_index++;
+        } while (task_row != null);
+    }*/
+
 #if E_CAL_2_0
-        private void on_objects_removed (E.Source source, ECal.Client client, SList<ECal.ComponentId?> cids) {
+    private void on_objects_removed (E.Source source, ECal.Client client, SList<ECal.ComponentId?> cids, TasksRemovedFunc on_tasks_removed) {
 #else
-        private void on_objects_removed (E.Source source, ECal.Client client, SList<weak ECal.ComponentId?> cids) {
+    private void on_objects_removed (E.Source source, ECal.Client client, SList<weak ECal.ComponentId?> cids, TasksRemovedFunc on_tasks_removed) {
 #endif
-        debug (@"Received $(cids.length()) removed event(s) for source '%s'", source.dup_display_name ());
-        var events = source_events.get (source);
-        var removed_events = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func); // vala-lint=line-length
+        debug (@"Received $(cids.length()) removed task(s) for source '%s'", source.dup_display_name ());
 
-        cids.foreach ((cid) => {
-            if (cid == null) {
-                return;
+        on_tasks_removed (cids);
+/*
+        unowned Tasks.TaskRow? task_row = null;
+        var row_index = 0;
+        do {
+            task_row = (Tasks.TaskRow) task_list.get_row_at_index (row_index);
+
+            if (task_row != null) {
+                foreach (unowned ECal.ComponentId cid in cids) {
+                    if (cid == null) {
+                        continue;
+                    } else if (cid.get_uid () == task_row.task.get_icalcomponent ().get_uid ()) {
+                        task_list.remove (task_row);
+                        break;
+                    }
+                }
             }
-
-            var comps = events.get (cid.get_uid ());
-            foreach (ECal.Component event in comps) {
-                removed_events.add (event);
-                debug_event (source, event);
-            }
-        });
-
-        events_removed (source, removed_events.read_only_view);
+            row_index++;
+        } while (task_row != null);
+        */
     }
-*/
 }

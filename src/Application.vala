@@ -31,7 +31,7 @@ public class Tasks.Application : Gtk.Application {
 
     static construct {
         settings = new Settings ("io.elementary.tasks");
-        model = new Tasks.TaskModel ();
+        model = new Tasks.TaskModel();
     }
 
     protected override void activate () {
