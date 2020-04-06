@@ -140,7 +140,6 @@ public class Tasks.TaskModel : Object {
             });
 
             promise.set_value (registry);
-            //registry_ready (registry);
 
         } catch (Error e) {
             critical (e.message);
