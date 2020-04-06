@@ -144,7 +144,15 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
-        Tasks.Application.model.registry_ready.connect ((registry) => {
+        Tasks.Application.model.get_registry.begin ((obj,res) => {
+            E.SourceRegistry registry;
+            try {
+                registry = Tasks.Application.model.get_registry.end (res);
+            } catch (Error e) {
+                critical (e.message);
+                return;
+            }
+
             listbox.set_header_func (header_update_func);
 
             var last_selected_list = Application.settings.get_string ("selected-list");
@@ -189,7 +197,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         E.SourceRegistry registry;
         try {
-            registry = Tasks.Application.model.get_registry ();
+            registry = Tasks.Application.model.get_registry_sync ();
         } catch (Error e) {
             warning (e.message);
             return;

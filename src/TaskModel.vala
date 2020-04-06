@@ -26,23 +26,6 @@ errordomain Tasks.TaskModelError {
 
 public class Tasks.TaskModel : Object {
 
-    /*
-     * 1: registry
-     *  - n: task_list
-     *      - 1: client
-     *          - n: query -> view
-     *              n: objects
-     *
-     * 1. Init registry
-     * 2. Load all task_lists
-     * 3. create one client per task_list
-     * 4. provide method to view one task_list with a custom query
-     * 5. make sure the view gets closed if a task_list is removed
-     * 6. provide a method to view all task_lists with a custom query
-     * 7. make sure the view gets updated if one or more task_lists are removed
-     */
-    public signal void registry_ready (E.SourceRegistry registry);
-
     public signal void task_list_added (E.Source task_list);
     public signal void task_list_modified (E.Source task_list);
     public signal void task_list_removed (E.Source task_list);
@@ -55,12 +38,15 @@ public class Tasks.TaskModel : Object {
     private HashTable<string, ECal.Client> task_list_client;
     private HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> task_list_client_views;
 
-    /** BLOCKS until the E.SourceRegistry is available.
-     * Returns the E.SourceRegistry or rethrows the exception
-     * thrown while trying to establish the connection.
-     */
-    public E.SourceRegistry get_registry () throws Error {
-        registry.wait ();
+    public async E.SourceRegistry get_registry () throws Error {
+        return yield registry.wait_async ();
+    }
+
+    public E.SourceRegistry get_registry_sync () throws Error {
+        if (!registry.ready) {
+            debug ("Blocking until registry is loaded...");
+            registry.wait ();
+        }
         return registry.value;
     }
 
@@ -154,7 +140,7 @@ public class Tasks.TaskModel : Object {
             });
 
             promise.set_value (registry);
-            registry_ready (registry);
+            //registry_ready (registry);
 
         } catch (Error e) {
             critical (e.message);
