@@ -345,9 +345,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             task_detail_revealer.reveal_child = false;
             task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
+            var due_time = new DateTime.now_local ().add_hours (1);
+            due_time = due_time.add_minutes (-due_time.get_minute ());
+            due_time = due_time.add_seconds (-due_time.get_seconds ());
+
             due_label_revealer.reveal_child = false;
             due_switch.active = false;
-            due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
+            due_datepicker.date = due_timepicker.time = due_time;
 
             description_label_revealer.reveal_child = false;
             description_textbuffer.text = "";
@@ -360,8 +364,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             check.active = completed;
 
             if (ical_task.get_due ().is_null_time ()) {
+                var due_time = new DateTime.now_local ().add_hours (1);
+                due_time = due_time.add_minutes (-due_time.get_minute ());
+                due_time = due_time.add_seconds (-due_time.get_seconds ());
+
                 due_switch.active = false;
-                due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
+                due_datepicker.date = due_timepicker.time = due_time;
             } else {
                 var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
                 due_datepicker.date = due_timepicker.time = due_date_time;
