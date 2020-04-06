@@ -157,7 +157,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         });
 
         Tasks.Application.model.get_registry.begin ((obj, res) => {
->>>>>>> Dropped registry_ready signal in favour of get_registry (async) and get_registry_sync methods
             E.SourceRegistry registry;
             try {
                 registry = Tasks.Application.model.get_registry.end (res);
