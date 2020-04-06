@@ -44,7 +44,7 @@ public class Tasks.TaskModel : Object {
 
     public E.SourceRegistry get_registry_sync () throws Error {
         if (!registry.ready) {
-            debug ("Blocking until registry is loaded...");
+            debug ("Blocking until registry is loaded…");
             registry.wait ();
         }
         return registry.value;

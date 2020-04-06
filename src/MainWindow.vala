@@ -144,7 +144,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             }
         });
 
-        Tasks.Application.model.get_registry.begin ((obj,res) => {
+        Tasks.Application.model.get_registry.begin ((obj, res) => {
             E.SourceRegistry registry;
             try {
                 registry = Tasks.Application.model.get_registry.end (res);
