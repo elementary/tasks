@@ -208,7 +208,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                         var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
                         var query = "AND (NOT is-completed?) (OR (has-start?) (has-alarms?))";
 
-
                         sources.foreach ((source) => {
                             E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
