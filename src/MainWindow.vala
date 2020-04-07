@@ -189,6 +189,47 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             if (last_selected_list == "scheduled") {
                 listbox.select_row (scheduled_row);
             }
+
+            listbox.row_selected.connect ((row) => {
+                if (row != null) {
+                    if (row is Tasks.SourceRow) {
+                        var source = ((Tasks.SourceRow) row).source;
+                        listview.source = source;
+                        Tasks.Application.settings.set_string ("selected-list", source.uid);
+
+                        listview.add_view (source, "(contains? 'any' '')");
+
+                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
+
+                    } else if (row is Tasks.ScheduledRow) {
+                        listview.source = null;
+                        Tasks.Application.settings.set_string ("selected-list", "scheduled");
+
+                        var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
+                        var query = "AND (NOT is-completed?) (OR (has-start?) (has-alarms?))";
+
+
+                        sources.foreach ((source) => {
+                            E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+                            if (list.selected == true && source.enabled == true) {
+                                listview.add_view (source, query);
+                            }
+                        });
+
+                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+                    }
+
+                } else {
+                    ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+                    var first_row = listbox.get_row_at_index (0);
+                    if (first_row != null) {
+                        listbox.select_row (first_row);
+                    } else {
+                        listview.source = null;
+                    }
+                }
+            });
         });
     }
 
