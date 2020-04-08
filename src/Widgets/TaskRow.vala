@@ -34,6 +34,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private Gtk.Stack state_stack;
     private Gtk.Image icon;
     private Gtk.CheckButton check;
+    private Gtk.Spinner spinner;
     private Gtk.Entry summary_entry;
     private Gtk.Label description_label;
     private Gtk.Label due_label;
@@ -77,10 +78,14 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.valign = Gtk.Align.CENTER;
         Tasks.Application.set_task_color (source, check);
 
+        spinner = new Gtk.Spinner ();
+        spinner.start ();
+
         state_stack = new Gtk.Stack ();
         state_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
         state_stack.add (icon);
         state_stack.add (check);
+        state_stack.add (spinner);
 
         summary_entry = new Gtk.Entry ();
 
@@ -219,6 +224,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 return;
             }
             task.get_icalcomponent ().set_status (check.active ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
+            state_stack.set_visible_child (spinner);
             task_save (task);
         });
 
@@ -280,6 +286,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     private void save_task (ECal.Component task) {
+        state_stack.set_visible_child (spinner);
         unowned ICal.Component ical_task = task.get_icalcomponent ();
 
         if (due_switch.active) {
