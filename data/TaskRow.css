@@ -48,6 +48,11 @@ row.card {
     padding-top: 6px;
 }
 
+row check {
+    padding: 1px;
+    border-radius: 12px;
+}
+
 row entry.flat  {
     background: transparent;
     border-style: solid;

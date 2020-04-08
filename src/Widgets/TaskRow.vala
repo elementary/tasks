@@ -75,7 +75,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         check = new Gtk.CheckButton ();
         check.valign = Gtk.Align.CENTER;
-        Tasks.Application.set_task_color (source, check);
+        check.get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         state_stack = new Gtk.Stack ();
         state_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
@@ -333,7 +333,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         }
     }
 
-    private void update_request () {
+    public void update_request () {
+        Tasks.Application.set_task_color (source, check);
+
         if (task == null || !created) {
             state_stack.set_visible_child (icon);
 
