@@ -133,6 +133,12 @@ public class Tasks.ListView : Gtk.Grid {
     public void update_request () {
         editable_title.text = source.dup_display_name ();
         Tasks.Application.set_task_color (source, editable_title);
+
+        task_list.@foreach ((row) => {
+            if (row is Tasks.TaskRow) {
+                (row as Tasks.TaskRow).update_request ();
+            }
+        });
     }
 
     [CCode (instance_pos = -1)]
