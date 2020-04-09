@@ -75,7 +75,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         check = new Gtk.CheckButton ();
         check.valign = Gtk.Align.CENTER;
-        check.get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         state_stack = new Gtk.Stack ();
         state_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
