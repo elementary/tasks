@@ -161,6 +161,10 @@ public class Tasks.ListView : Gtk.Grid {
         debug (@"Received $(objects.length()) added task(s) for source '%s'", source.dup_display_name ());
         var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
         objects.foreach ((ical_comp) => {
+            if (ical_comp.get_uid () == null) {
+                return;
+            }
+
             try {
                 SList<ECal.Component> ecal_tasks;
                 client.get_objects_for_uid_sync (ical_comp.get_uid (), out ecal_tasks, null);
@@ -185,13 +189,13 @@ public class Tasks.ListView : Gtk.Grid {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source);
             task_row.task_completed.connect ((task) => {
-                complete_task (client, task, ECal.ObjModType.THIS_AND_PRIOR);
+                complete_task (client, task);
             });
             task_row.task_changed.connect ((task) => {
                 update_task (client, task, ECal.ObjModType.THIS_AND_FUTURE);
             });
             task_row.task_removed.connect ((task) => {
-                remove_task (client, task, ECal.ObjModType.ALL);
+                remove_task (client, task);
             });
             task_list.add (task_row);
             return true;
@@ -207,6 +211,10 @@ public class Tasks.ListView : Gtk.Grid {
         debug (@"Received $(objects.length()) modified task(s) for source '%s'", source.dup_display_name ());
         var updated_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
         objects.foreach ((comp) => {
+            if (comp.get_uid () == null) {
+                return;
+            }
+
             try {
                 SList<ECal.Component> ecal_tasks;
                 client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
@@ -225,7 +233,6 @@ public class Tasks.ListView : Gtk.Grid {
 
         tasks_updated (client, source, updated_tasks.read_only_view);
     }
-
 
     private void tasks_updated (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
         Tasks.TaskRow task_row = null;
@@ -272,7 +279,6 @@ public class Tasks.ListView : Gtk.Grid {
         } while (task_row != null);
     }
 
-
     [CCode (instance_pos = -1)]
     private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {
         var row1_completed = ((Tasks.TaskRow) row1).completed;
@@ -288,20 +294,19 @@ public class Tasks.ListView : Gtk.Grid {
     }
 
     public void add_task (ECal.Client client, ECal.Component task) {
-        add_task_async.begin (client, task);
+        add_icalcomponent (client, task.get_icalcomponent ());
     }
 
-    private async void add_task_async (ECal.Client client, ECal.Component task) {
-        unowned ICal.Component comp = task.get_icalcomponent ();
-        debug (@"Adding task '$(comp.get_uid())'");
+    private void add_icalcomponent (ECal.Client client, ICal.Component comp) {
+        debug (@"Adding instance for task '$(comp.get_uid())'");
 
         if (client != null) {
             try {
                 string? uid;
 #if E_CAL_2_0
-                yield client.create_object (comp, ECal.OperationFlags.NONE, null, out uid);
+                client.create_object_sync (comp, ECal.OperationFlags.NONE, null, out uid);
 #else
-                yield client.create_object (comp, null, out uid);
+                client.create_object_sync (comp, out uid, null);
 #endif
                 if (uid != null) {
                     comp.set_uid (uid);
@@ -310,15 +315,64 @@ public class Tasks.ListView : Gtk.Grid {
                 critical (error.message);
             }
         } else {
-            critical ("No list was found, task not added");
+            critical ("No list was found, instance for task not added");
         }
     }
 
-    public void complete_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
+    public void complete_task (ECal.Client client, ECal.Component task) {
         unowned ICal.Component comp = task.get_icalcomponent ();
-        debug (@"Completing task '$(comp.get_uid())' [mod_type=$(mod_type)]");
-        comp.set_status (comp.get_status () != ICal.PropertyStatus.COMPLETED ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
-        update_icalcomponent (client, comp, mod_type);
+        var was_completed = comp.get_status () == ICal.PropertyStatus.COMPLETED;
+
+        if (was_completed || !task.has_recurrences () || task.is_instance ()) {
+            debug (@"Completing $(task.is_instance() ? "instance" : "task") '$(comp.get_uid())'");
+
+            comp.set_status (comp.get_status () != ICal.PropertyStatus.COMPLETED ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
+
+            update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
+
+        } else {
+            var duration = ICal.Duration.null_duration ();
+            duration.weeks = 520; // roughly 10 years
+
+            var today = ICal.Time.today ();
+            var start = comp.get_dtstart ();
+            if (today.compare (start) > 0) {
+                start = today;
+            }
+            var end = start.add (duration);
+
+            comp.set_status (ICal.PropertyStatus.COMPLETED);
+            update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
+
+            ECal.RecurInstanceFn recur_instance_callback = (instance, instance_start_timet, instance_end_timet) => {
+                unowned ICal.Component instance_comp = instance.get_icalcomponent ();
+
+                if (!instance_comp.get_due ().is_null_time ()) {
+                    instance_comp.set_due (instance_comp.get_dtstart ());
+                }
+                instance_comp.set_status (ICal.PropertyStatus.NONE);
+
+                if (instance.has_alarms ()) {
+                    instance.get_alarm_uids ().@foreach((alarm_uid) => {
+                        ECal.ComponentAlarmTrigger trigger;
+#if E_CAL_2_0
+                        trigger = ECal.ComponentAlarmTrigger.relative (ECal.ComponentAlarmTriggerKind.RELATIVE_START, ICal.Duration.null_duration ());
+#else
+                        trigger = ECal.ComponentAlarmTrigger(){
+                            type = ECal.ComponentAlarmTriggerKind.RELATIVE_START,
+                            rel_duration = ICal.Duration.null_duration ()
+                        };
+#endif
+                        instance.get_alarm (alarm_uid).set_trigger (trigger);
+                    });
+                }
+
+                update_icalcomponent (client, instance_comp, ECal.ObjModType.THIS_AND_FUTURE);
+                return false; // only generate one instance
+            };
+
+            client.generate_instances_for_object_sync (comp, start.as_timet (), end.as_timet (), recur_instance_callback);
+        }
     }
 
     public void update_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
@@ -328,42 +382,50 @@ public class Tasks.ListView : Gtk.Grid {
     }
 
     private void update_icalcomponent (ECal.Client client, ICal.Component comp, ECal.ObjModType mod_type) {
+        try {
 #if E_CAL_2_0
-        client.modify_object.begin (comp, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
+            client.modify_object_sync (comp, mod_type, ECal.OperationFlags.NONE, null);
 #else
-        client.modify_object.begin (comp, mod_type, null, (obj, results) => {
+            client.modify_object_sync (comp, mod_type, null);
 #endif
-            try {
-                client.modify_object.end (results);
-                SList<ECal.Component> ecal_tasks;
-                client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
+        } catch (Error e) {
+            warning (e.message);
+            return;
+        }
+
+        if (comp.get_uid () == null) {
+            return;
+        }
+
+        try {
+            SList<ECal.Component> ecal_tasks;
+            client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
 
 #if E_CAL_2_0
-                var ical_tasks = new SList<ICal.Component> ();
+            var ical_tasks = new SList<ICal.Component> ();
 #else
-                var ical_tasks = new SList<unowned ICal.Component> ();
+            var ical_tasks = new SList<unowned ICal.Component> ();
 #endif
-                foreach (unowned ECal.Component ecal_task in ecal_tasks) {
-                    ical_tasks.append (ecal_task.get_icalcomponent ());
-                }
-                on_objects_modified (source, client, ical_tasks);
-
-            } catch (Error e) {
-                warning (e.message);
+            foreach (unowned ECal.Component ecal_task in ecal_tasks) {
+                ical_tasks.append (ecal_task.get_icalcomponent ());
             }
-        });
+            on_objects_modified (source, client, ical_tasks);
+
+        } catch (Error e) {
+            warning (e.message);
+        }
     }
 
-    public void remove_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
+    public void remove_task (ECal.Client client, ECal.Component task) {
         unowned ICal.Component comp = task.get_icalcomponent ();
         string uid = comp.get_uid ();
         string? rid = task.has_recurrences () ? null : task.get_recurid_as_string ();
         debug (@"Removing task '$uid'");
 
 #if E_CAL_2_0
-        client.remove_object.begin (uid, rid, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
+        client.remove_object.begin (uid, rid, ECal.ObjModType.ALL, ECal.OperationFlags.NONE, null, (obj, results) => {
 #else
-        client.remove_object.begin (uid, rid, mod_type, null, (obj, results) => {
+        client.remove_object.begin (uid, rid, ECal.ObjModType.ALL, null, (obj, results) => {
 #endif
             try {
                 client.remove_object.end (results);
