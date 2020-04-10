@@ -19,8 +19,10 @@
 */
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
-    public signal void task_save (ECal.Component task);
-    public signal void task_delete (ECal.Component task);
+
+    public signal void task_completed (ECal.Component task);
+    public signal void task_changed (ECal.Component task);
+    public signal void task_removed (ECal.Component task);
 
     public bool completed { get; private set; }
     public E.Source source { get; construct; }
@@ -209,7 +211,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             delete_button.clicked.connect (() => {
                 cancel_edit ();
                 remove_request ();
-                task_delete (task);
+                task_removed (task);
             });
         }
 
@@ -217,8 +219,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             if (task == null) {
                 return;
             }
-            task.get_icalcomponent ().set_status (check.active ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
-            task_save (task);
+            task_completed (task);
         });
 
         summary_entry.activate.connect (() => {
@@ -313,7 +314,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         }
 
         task.get_icalcomponent ().set_summary (summary_entry.text);
-        task_save (task);
+        task_changed (task);
     }
 
     public void reveal_child_request (bool value) {

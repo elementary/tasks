@@ -95,7 +95,7 @@ public class Tasks.ListView : Gtk.Grid {
                      var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
 
                      var task_row = new Tasks.TaskRow.for_source (source);
-                     task_row.task_save.connect ((task) => {
+                     task_row.task_changed.connect ((task) => {
                          add_task (client, task);
                      });
                      task_list.add (task_row);
@@ -184,10 +184,13 @@ public class Tasks.ListView : Gtk.Grid {
     private void tasks_added (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source);
-            task_row.task_save.connect ((task) => {
-                update_task (client, task, ECal.ObjModType.ALL);
+            task_row.task_completed.connect ((task) => {
+                complete_task (client, task, ECal.ObjModType.THIS_AND_PRIOR);
             });
-            task_row.task_delete.connect ((task) => {
+            task_row.task_changed.connect ((task) => {
+                update_task (client, task, ECal.ObjModType.THIS_AND_FUTURE);
+            });
+            task_row.task_removed.connect ((task) => {
                 remove_task (client, task, ECal.ObjModType.ALL);
             });
             task_list.add (task_row);
@@ -311,10 +314,20 @@ public class Tasks.ListView : Gtk.Grid {
         }
     }
 
+    public void complete_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
+        unowned ICal.Component comp = task.get_icalcomponent ();
+        debug (@"Completing task '$(comp.get_uid())' [mod_type=$(mod_type)]");
+        comp.set_status (comp.get_status () != ICal.PropertyStatus.COMPLETED ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
+        update_icalcomponent (client, comp, mod_type);
+    }
+
     public void update_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
         unowned ICal.Component comp = task.get_icalcomponent ();
         debug (@"Updating task '$(comp.get_uid())' [mod_type=$(mod_type)]");
+        update_icalcomponent (client, comp, mod_type);
+    }
 
+    private void update_icalcomponent (ECal.Client client, ICal.Component comp, ECal.ObjModType mod_type) {
 #if E_CAL_2_0
         client.modify_object.begin (comp, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
 #else
