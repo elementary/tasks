@@ -159,10 +159,13 @@ public class Tasks.ListView : Gtk.Grid {
     private void on_tasks_added (Gee.Collection<ECal.Component> tasks) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source);
-            task_row.task_save.connect ((task) => {
-                Tasks.Application.model.update_task (source, task, ECal.ObjModType.ALL);
+            task_row.task_completed.connect ((task) => {
+                Tasks.Application.model.complete_task (source, task, ECal.ObjModType.THIS_AND_PRIOR);
             });
-            task_row.task_delete.connect ((task) => {
+            task_row.task_changed.connect ((task) => {
+                Tasks.Application.model.update_task (source, task, ECal.ObjModType.THIS_AND_FUTURE);
+            });
+            task_row.task_removed.connect ((task) => {
                 Tasks.Application.model.remove_task (source, task, ECal.ObjModType.ALL);
             });
             task_list.add (task_row);

@@ -198,6 +198,96 @@ public class Tasks.TaskModel : Object {
         }
     }
 
+    public void complete_task (E.Source list, ECal.Component task) {
+        ECal.Client client;
+        try {
+            client = get_client (list);
+        } catch (Error e) {
+            critical (e.message);
+            return;
+        }
+
+        unowned ICal.Component comp = task.get_icalcomponent ();
+        var was_completed = comp.get_status () == ICal.PropertyStatus.COMPLETED;
+
+        if (was_completed) {
+            debug (@"Reopen $(task.is_instance() ? "instance" : "task") '$(comp.get_uid())'");
+
+            comp.set_status (ICal.PropertyStatus.NONE);
+            task.set_percent_as_int (0);
+
+            var null_time = ICal.Time.null_time ();
+            task.set_completed (ref null_time);
+
+            update_icalcomponent (client, comp, ECal.ObjModType.ONLY_THIS);
+
+        } else {
+            debug (@"Completing $(task.is_instance() ? "instance" : "task") '$(comp.get_uid())'");
+
+            comp.set_status (ICal.PropertyStatus.COMPLETED);
+            task.set_percent_as_int (100);
+
+            var today_time = ICal.Time.today ();
+            task.set_completed (ref today_time);
+
+            update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
+        }
+
+        if (task.has_recurrences () && !was_completed) {
+            var duration = ICal.Duration.null_duration ();
+            duration.weeks = 520; // roughly 10 years
+
+            var today = ICal.Time.today ();
+            var start = comp.get_dtstart ();
+            if (today.compare (start) > 0) {
+                start = today;
+            }
+            var end = start.add (duration);
+
+#if E_CAL_2_0
+            ECal.RecurInstanceCb recur_instance_callback = (instance, instance_start_timet, instance_end_timet, cancellable) => {
+#else
+            ECal.RecurInstanceFn recur_instance_callback = (instance, instance_start_timet, instance_end_timet) => {
+#endif
+                unowned ICal.Component instance_comp = instance.get_icalcomponent ();
+
+                if (!instance_comp.get_due ().is_null_time ()) {
+                    instance_comp.set_due (instance_comp.get_dtstart ());
+                }
+
+                instance_comp.set_status (ICal.PropertyStatus.NONE);
+                instance.set_percent_as_int (0);
+
+                var null_time = ICal.Time.null_time ();
+                instance.set_completed (ref null_time);
+
+                if (instance.has_alarms ()) {
+                    instance.get_alarm_uids ().@foreach ((alarm_uid) => {
+                        ECal.ComponentAlarmTrigger trigger;
+#if E_CAL_2_0
+                        trigger = ECal.ComponentAlarmTrigger.relative (ECal.ComponentAlarmTriggerKind.RELATIVE_START, ICal.Duration.null_duration ());
+#else
+                        trigger = ECal.ComponentAlarmTrigger () {
+                            type = ECal.ComponentAlarmTriggerKind.RELATIVE_START,
+                            rel_duration = ICal.Duration.null_duration ()
+                        };
+#endif
+                        instance.get_alarm (alarm_uid).set_trigger (trigger);
+                    });
+                }
+
+                update_icalcomponent (client, instance_comp, ECal.ObjModType.THIS_AND_FUTURE);
+                return false; // only generate one instance
+            };
+
+#if E_CAL_2_0
+            client.generate_instances_for_object_sync (comp, start.as_timet (), end.as_timet (), null, recur_instance_callback);
+#else
+            client.generate_instances_for_object_sync (comp, start.as_timet (), end.as_timet (), recur_instance_callback);
+#endif
+        }
+    }
+
     public void update_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) {
         ECal.Client client;
         try {
@@ -209,31 +299,41 @@ public class Tasks.TaskModel : Object {
 
         unowned ICal.Component comp = task.get_icalcomponent ();
         debug (@"Updating task '$(comp.get_uid())' [mod_type=$(mod_type)]");
+        update_icalcomponent (client, comp, mod_type);
+    }
+
+    private void update_icalcomponent (ECal.Client client, ICal.Component comp, ECal.ObjModType mod_type) {
+        try {
+#if E_CAL_2_0
+            client.modify_object_sync (comp, mod_type, ECal.OperationFlags.NONE, null);
+#else
+            client.modify_object_sync (comp, mod_type, null);
+#endif
+        } catch (Error e) {
+            warning (e.message);
+            return;
+        }
+
+        if (comp.get_uid () == null) {
+            return;
+        }
+
+        try {
+            SList<ECal.Component> ecal_tasks;
+            client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
 
 #if E_CAL_2_0
-        client.modify_object.begin (comp, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
+            var ical_tasks = new SList<ICal.Component> ();
 #else
-        client.modify_object.begin (comp, mod_type, null, (obj, results) => {
+            var ical_tasks = new SList<unowned ICal.Component> ();
 #endif
-            try {
-                client.modify_object.end (results);
-                SList<ECal.Component> ecal_tasks;
-                client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
-
-#if E_CAL_2_0
-                var ical_tasks = new SList<ICal.Component> ();
-#else
-                var ical_tasks = new SList<unowned ICal.Component> ();
-#endif
-                foreach (unowned ECal.Component ecal_task in ecal_tasks) {
-                    ical_tasks.append (ecal_task.get_icalcomponent ());
-                }
-                //on_objects_modified (task_list, client, ical_tasks);
-
-            } catch (Error e) {
-                warning (e.message);
+            foreach (unowned ECal.Component ecal_task in ecal_tasks) {
+                ical_tasks.append (ecal_task.get_icalcomponent ());
             }
-        });
+
+        } catch (Error e) {
+            warning (e.message);
+        }
     }
 
     public void remove_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) {
