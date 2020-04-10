@@ -353,12 +353,12 @@ public class Tasks.ListView : Gtk.Grid {
                 instance_comp.set_status (ICal.PropertyStatus.NONE);
 
                 if (instance.has_alarms ()) {
-                    instance.get_alarm_uids ().@foreach((alarm_uid) => {
+                    instance.get_alarm_uids ().@foreach ((alarm_uid) => {
                         ECal.ComponentAlarmTrigger trigger;
 #if E_CAL_2_0
                         trigger = ECal.ComponentAlarmTrigger.relative (ECal.ComponentAlarmTriggerKind.RELATIVE_START, ICal.Duration.null_duration ());
 #else
-                        trigger = ECal.ComponentAlarmTrigger(){
+                        trigger = ECal.ComponentAlarmTrigger () {
                             type = ECal.ComponentAlarmTriggerKind.RELATIVE_START,
                             rel_duration = ICal.Duration.null_duration ()
                         };
