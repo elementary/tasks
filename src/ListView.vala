@@ -328,7 +328,7 @@ public class Tasks.ListView : Gtk.Grid {
 
             comp.set_status (ICal.PropertyStatus.NONE);
             task.set_percent_as_int (0);
-            task.set_completed (ICal.Time.null_time ());
+            //task.set_completed (ICal.Time.null_time ());
 
             update_icalcomponent (client, comp, ECal.ObjModType.ONLY_THIS);
 
@@ -337,7 +337,7 @@ public class Tasks.ListView : Gtk.Grid {
 
             comp.set_status (ICal.PropertyStatus.COMPLETED);
             task.set_percent_as_int (100);
-            task.set_completed (ICal.Time.today ());
+            //task.set_completed (ICal.Time.today ());
 
             update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
         }
@@ -353,7 +353,11 @@ public class Tasks.ListView : Gtk.Grid {
             }
             var end = start.add (duration);
 
+#if E_CAL_2_0
+            E.CalRecurInstanceFn recur_instance_callback = (instance, instance_start_timet, instance_end_timet) => {
+#else
             ECal.RecurInstanceFn recur_instance_callback = (instance, instance_start_timet, instance_end_timet) => {
+#endif
                 unowned ICal.Component instance_comp = instance.get_icalcomponent ();
 
                 if (!instance_comp.get_due ().is_null_time ()) {
