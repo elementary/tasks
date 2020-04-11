@@ -217,7 +217,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             if (task == null) {
                 return;
             }
-            task.get_icalcomponent ().set_status (check.active ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
+            task.get_icalcomponent ().set_status (check.active ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);  // vala-lint=line-length
             task_save (task);
         });
 
@@ -274,7 +274,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             move_focus (Gtk.DirectionType.TAB_FORWARD);
             reset_create ();
         }
-        summary_entry.text = task.get_icalcomponent ().get_summary () == null ? "" : task.get_icalcomponent ().get_summary ();
+        summary_entry.text = task.get_icalcomponent ().get_summary () == null ? "" : task.get_icalcomponent ().get_summary ();  // vala-lint=line-length
         reveal_child_request (false);
     }
 
