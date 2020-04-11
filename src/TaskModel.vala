@@ -214,10 +214,14 @@ public class Tasks.TaskModel : Object {
             debug (@"Reopen $(task.is_instance() ? "instance" : "task") '$(comp.get_uid())'");
 
             comp.set_status (ICal.PropertyStatus.NONE);
-            task.set_percent_as_int (0);
+            task.set_percent_complete (0);
 
+#if E_CAL_2_0
+            task.set_completed (new ICal.Time.null_time ());
+#else
             var null_time = ICal.Time.null_time ();
             task.set_completed (ref null_time);
+#endif
 
             update_icalcomponent (client, comp, ECal.ObjModType.ONLY_THIS);
 
@@ -225,19 +229,29 @@ public class Tasks.TaskModel : Object {
             debug (@"Completing $(task.is_instance() ? "instance" : "task") '$(comp.get_uid())'");
 
             comp.set_status (ICal.PropertyStatus.COMPLETED);
-            task.set_percent_as_int (100);
+            task.set_percent_complete (100);
 
+#if E_CAL_2_0
+            task.set_completed (new ICal.Time.today ());
+#else
             var today_time = ICal.Time.today ();
             task.set_completed (ref today_time);
+#endif
 
             update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
         }
 
         if (task.has_recurrences () && !was_completed) {
+#if E_CAL_2_0
+            var duration = new ICal.Duration.null_duration ();
+            duration.set_weeks (520); // roughly 10 years
+            var today = new ICal.Time.today ();
+#else
             var duration = ICal.Duration.null_duration ();
             duration.weeks = 520; // roughly 10 years
-
             var today = ICal.Time.today ();
+#endif
+
             var start = comp.get_dtstart ();
             if (today.compare (start) > 0) {
                 start = today;
@@ -245,27 +259,37 @@ public class Tasks.TaskModel : Object {
             var end = start.add (duration);
 
 #if E_CAL_2_0
-            ECal.RecurInstanceCb recur_instance_callback = (instance, instance_start_timet, instance_end_timet, cancellable) => {
+            ECal.RecurInstanceCb recur_instance_callback = (instance_comp, instance_start_timet, instance_end_timet, cancellable) => {
 #else
             ECal.RecurInstanceFn recur_instance_callback = (instance, instance_start_timet, instance_end_timet) => {
 #endif
+
+#if E_CAL_2_0
+                var instance = new ECal.Component ();
+                instance.set_icalcomponent (instance_comp);
+#else
                 unowned ICal.Component instance_comp = instance.get_icalcomponent ();
+#endif
 
                 if (!instance_comp.get_due ().is_null_time ()) {
                     instance_comp.set_due (instance_comp.get_dtstart ());
                 }
 
                 instance_comp.set_status (ICal.PropertyStatus.NONE);
-                instance.set_percent_as_int (0);
+                instance.set_percent_complete (0);
 
+#if E_CAL_2_0
+                instance.set_completed (new ICal.Time.null_time ());
+#else
                 var null_time = ICal.Time.null_time ();
                 instance.set_completed (ref null_time);
+#endif
 
                 if (instance.has_alarms ()) {
                     instance.get_alarm_uids ().@foreach ((alarm_uid) => {
                         ECal.ComponentAlarmTrigger trigger;
 #if E_CAL_2_0
-                        trigger = ECal.ComponentAlarmTrigger.relative (ECal.ComponentAlarmTriggerKind.RELATIVE_START, ICal.Duration.null_duration ());
+                        trigger = new ECal.ComponentAlarmTrigger.relative (ECal.ComponentAlarmTriggerKind.RELATIVE_START, new ICal.Duration.null_duration ());
 #else
                         trigger = ECal.ComponentAlarmTrigger () {
                             type = ECal.ComponentAlarmTriggerKind.RELATIVE_START,
