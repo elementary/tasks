@@ -328,6 +328,7 @@ public class Tasks.ListView : Gtk.Grid {
 
             comp.set_status (ICal.PropertyStatus.NONE);
             task.set_percent_as_int (0);
+
             var null_time = ICal.Time.null_time ();
             task.set_completed (ref null_time);
 
@@ -338,6 +339,7 @@ public class Tasks.ListView : Gtk.Grid {
 
             comp.set_status (ICal.PropertyStatus.COMPLETED);
             task.set_percent_as_int (100);
+
             var today_time = ICal.Time.today ();
             task.set_completed (ref today_time);
 
@@ -355,13 +357,22 @@ public class Tasks.ListView : Gtk.Grid {
             }
             var end = start.add (duration);
 
+#if E_CAL_2_0
+            ECal.RecurInstanceCb recur_instance_callback = (instance, instance_start_timet, instance_end_timet, cancellable) => {
+#else
             ECal.RecurInstanceFn recur_instance_callback = (instance, instance_start_timet, instance_end_timet) => {
+#endif
                 unowned ICal.Component instance_comp = instance.get_icalcomponent ();
 
                 if (!instance_comp.get_due ().is_null_time ()) {
                     instance_comp.set_due (instance_comp.get_dtstart ());
                 }
+
                 instance_comp.set_status (ICal.PropertyStatus.NONE);
+                instance.set_percent_as_int (0);
+
+                var null_time = ICal.Time.null_time ();
+                instance.set_completed (ref null_time);
 
                 if (instance.has_alarms ()) {
                     instance.get_alarm_uids ().@foreach ((alarm_uid) => {
@@ -382,7 +393,11 @@ public class Tasks.ListView : Gtk.Grid {
                 return false; // only generate one instance
             };
 
+#if E_CAL_2_0
+            client.generate_instances_for_object_sync (comp, start.as_timet (), end.as_timet (), null, recur_instance_callback);
+#else
             client.generate_instances_for_object_sync (comp, start.as_timet (), end.as_timet (), recur_instance_callback);
+#endif
         }
     }
 
