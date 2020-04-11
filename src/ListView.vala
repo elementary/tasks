@@ -323,14 +323,26 @@ public class Tasks.ListView : Gtk.Grid {
         unowned ICal.Component comp = task.get_icalcomponent ();
         var was_completed = comp.get_status () == ICal.PropertyStatus.COMPLETED;
 
-        if (was_completed || !task.has_recurrences () || task.is_instance ()) {
-            debug (@"Completing $(task.is_instance() ? "instance" : "task") '$(comp.get_uid())'");
+        if (was_completed) {
+            debug (@"Reopen $(task.is_instance() ? "instance" : "task") '$(comp.get_uid())'");
 
-            comp.set_status (comp.get_status () != ICal.PropertyStatus.COMPLETED ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
+            comp.set_status (ICal.PropertyStatus.NONE);
+            task.set_percent_as_int (0);
+            task.set_completed (ICal.Time.null_time ());
 
-            update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
+            update_icalcomponent (client, comp, ECal.ObjModType.ONLY_THIS);
 
         } else {
+            debug (@"Completing $(task.is_instance() ? "instance" : "task") '$(comp.get_uid())'");
+
+            comp.set_status (ICal.PropertyStatus.COMPLETED);
+            task.set_percent_as_int (100);
+            task.set_completed (ICal.Time.today ());
+
+            update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
+        }
+
+        if (task.has_recurrences () && !was_completed) {
             var duration = ICal.Duration.null_duration ();
             duration.weeks = 520; // roughly 10 years
 
@@ -340,9 +352,6 @@ public class Tasks.ListView : Gtk.Grid {
                 start = today;
             }
             var end = start.add (duration);
-
-            comp.set_status (ICal.PropertyStatus.COMPLETED);
-            update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
 
             ECal.RecurInstanceFn recur_instance_callback = (instance, instance_start_timet, instance_end_timet) => {
                 unowned ICal.Component instance_comp = instance.get_icalcomponent ();
