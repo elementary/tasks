@@ -160,7 +160,7 @@ public class Tasks.ListView : Gtk.Grid {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source);
             task_row.task_completed.connect ((task) => {
-                Tasks.Application.model.complete_task (source, task, ECal.ObjModType.THIS_AND_PRIOR);
+                Tasks.Application.model.complete_task (source, task);
             });
             task_row.task_changed.connect ((task) => {
                 Tasks.Application.model.update_task (source, task, ECal.ObjModType.THIS_AND_FUTURE);
