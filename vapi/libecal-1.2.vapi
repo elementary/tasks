@@ -189,7 +189,7 @@ namespace ECal {
 		public void set_categories_list (GLib.SList<string> categ_list);
 		public void set_classification (ECal.ComponentClassification classif);
 		public void set_comment_list (GLib.SList<ECal.ComponentText> text_list);
-		public void set_completed (ICal.Time t);
+		public void set_completed (ref ICal.Time t);
 		public void set_contact_list (GLib.SList<ECal.ComponentText> text_list);
 		public void set_created (ICal.Time t);
 		public void set_description_list (GLib.SList<ECal.ComponentText> text_list);
