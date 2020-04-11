@@ -66,6 +66,10 @@ public class Tasks.ListView : Gtk.Grid {
         add_task_list.selection_mode = Gtk.SelectionMode.NONE;
         add_task_list.margin_top = 24;
 
+        add_task_list = new Gtk.ListBox ();
+        add_task_list.selection_mode = Gtk.SelectionMode.NONE;
+        add_task_list.margin_top = 24;
+
         task_list = new Gtk.ListBox ();
         task_list.selection_mode = Gtk.SelectionMode.NONE;
         task_list.set_filter_func (filter_function);
@@ -129,8 +133,18 @@ public class Tasks.ListView : Gtk.Grid {
                 child.destroy ();
             }
 
+            foreach (unowned Gtk.Widget child in task_list.get_children ()) {
+                child.destroy ();
+            }
+
             if (source != null) {
                 update_request ();
+
+                var add_task_row = new Tasks.TaskRow.for_source (source);
+                add_task_row.task_changed.connect ((task) => {
+                    Tasks.Application.model.add_task (source, task);
+                });
+                add_task_list.add (add_task_row);
 
                 try {
                     view = Tasks.Application.model.create_task_list_view (
