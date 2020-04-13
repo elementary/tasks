@@ -21,6 +21,7 @@
 public class Tasks.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
+    private string scheduled_color;
     private Gee.Collection<ECal.ClientView> views;
 
     /*
@@ -56,6 +57,7 @@ public class Tasks.ListView : Gtk.Grid {
     private Gtk.ListBox task_list;
 
     construct {
+        scheduled_color = "#3689e6";
         views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
 
         editable_title = new EditableLabel ();
@@ -92,6 +94,7 @@ public class Tasks.ListView : Gtk.Grid {
         task_list.set_filter_func (filter_function);
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
+        task_list.set_header_func (header_function);
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow (null, null);
@@ -147,7 +150,7 @@ public class Tasks.ListView : Gtk.Grid {
             editable_title.text = _("Scheduled");
             settings_button_revealer.reveal_child = false;
 
-            Tasks.Application.set_task_color_from_string ("#3689e6", editable_title);
+            Tasks.Application.set_task_color_from_string (scheduled_color, editable_title);
 
             task_list.@foreach ((row) => {
                 if (row is Tasks.TaskRow) {
@@ -220,9 +223,37 @@ public class Tasks.ListView : Gtk.Grid {
         return 0;
     }
 
+    private void header_function (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
+        if (source != null || !(lbrow is Tasks.TaskRow)) {
+            return;
+        }
+        var row = (Tasks.TaskRow) lbrow;
+        unowned ICal.Component comp = row.task.get_icalcomponent ();
+
+        if (comp.get_due ().is_null_time ()) {
+            return;
+        }
+
+        if (lbbefore != null) {
+            var before = (Tasks.TaskRow) lbbefore;
+            unowned ICal.Component comp_before = before.task.get_icalcomponent ();
+
+            if (comp_before.get_due ().compare_date_only (comp.get_due ()) == 0) {
+                return;
+            }
+        }
+
+        var due_date_time = Util.ical_to_date_time (comp.get_due ());
+        var header_label = new Granite.HeaderLabel (_("%s").printf (due_date_time.format (Granite.DateTime.get_default_date_format (true))));
+        header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
+        header_label.margin_left = 4;
+
+        row.set_header (header_label);
+    }
+
     private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
-            var task_row = new Tasks.TaskRow.for_component (task, source);
+            var task_row = new Tasks.TaskRow.for_component (task, source, scheduled_color, this.source == null);
             task_row.task_completed.connect ((task) => {
                 Tasks.Application.model.complete_task (source, task);
             });

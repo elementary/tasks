@@ -36,12 +36,7 @@ public class Tasks.ScheduledRow : Gtk.ListBoxRow {
     construct {
         icon = new Gtk.Image.from_icon_name ("preferences-system-time-symbolic", Gtk.IconSize.MENU);
 
-        var icon_style_context = icon.get_style_context ();
-        icon_style_context.add_class ("icon");
-        icon_style_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-        icon_style_context.add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-        display_name_label = new Granite.HeaderLabel (_("Scheduled"));
+        display_name_label = new Gtk.Label (_("Scheduled"));
         display_name_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
         display_name_label.halign = Gtk.Align.START;
         display_name_label.hexpand = true;
