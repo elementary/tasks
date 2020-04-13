@@ -56,6 +56,8 @@ public class Tasks.ListView : Gtk.Grid {
     private Gtk.ListBox task_list;
 
     construct {
+        views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
+
         editable_title = new EditableLabel ();
         editable_title.margin_start = 24;
 
@@ -118,9 +120,7 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         notify["source"].connect (() => {
-            if (view != null) {
-                Tasks.Application.model.destroy_task_list_view (view);
-            }
+            remove_views ();
 
             foreach (unowned Gtk.Widget child in task_list.get_children ()) {
                 child.destroy ();
@@ -131,6 +131,9 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         editable_title.changed.connect (() => {
+            if (source == null) {
+                return;
+            }
             source.display_name = editable_title.text;
             source.write.begin (null);
         });
@@ -139,8 +142,6 @@ public class Tasks.ListView : Gtk.Grid {
     }
 
     public void update_request () {
-        editable_title.text = source.dup_display_name ();
-
         if (source == null) {
             editable_title.sensitive = false;
             editable_title.text = _("Scheduled");
