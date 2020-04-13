@@ -240,7 +240,7 @@ public class Tasks.TaskModel : Object {
 
             update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
         }
-        debug ("Getting view for task-list '%s'", task_list.dup_display_name ());
+        debug ("Getting view for task-list '%s'", list.dup_display_name ());
 
         if (task.has_recurrences () && !was_completed) {
 #if E_CAL_2_0

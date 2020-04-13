@@ -220,7 +220,7 @@ public class Tasks.ListView : Gtk.Grid {
         return 0;
     }
 
-    private void on_tasks_added (Gee.Collection<ECal.Component> tasks) {
+    private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source);
             task_row.task_completed.connect ((task) => {
