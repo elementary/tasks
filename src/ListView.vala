@@ -114,8 +114,51 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         editable_title.changed.connect (() => {
-            source.display_name = editable_title.text;
-            source.write.begin (null);
+            //source.display_name = editable_title.text;
+
+            //SOURCE_EXTENSION_TASK_LIST
+            /*if (source.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
+                debug ("source has task list extension");
+                E.SourceTaskList task_list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+                task_list.backend_name = editable_title.text;
+            }*/
+
+            /*
+            //SOURCE_EXTENSION_MEMO_LIST
+            if (source.has_extension (E.SOURCE_EXTENSION_MEMO_LIST)) {
+                debug ("source has memo list extension");
+                E.SourceMemoList memo_list = (E.SourceMemoList)source.get_extension (E.SOURCE_EXTENSION_MEMO_LIST);
+                memo_list.backend_name = editable_title.text;
+            }*/
+
+            //SOURCE_EXTENSION_WEBDAV_BACKEND
+            /*if (source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
+                debug ("source has webdav extension");
+                E.SourceWebdav webdav = (E.SourceWebdav)source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+                webdav.display_name = editable_title.text;
+            }/*
+
+            /*
+            //SOURCE_EXTENSION_REFRESH
+            if (source.has_extension (E.SOURCE_EXTENSION_REFRESH)) {
+                debug ("source has refresh extension");
+                E.SourceRefresh refresh = (E.SourceRefresh)source.get_extension (E.SOURCE_EXTENSION_REFRESH);
+                debug (@"refresh.enabled = $(refresh.enabled)");
+            }*/
+
+            /*
+            try {
+                var registry = Tasks.Application.model.get_registry_sync ();
+                var list_source = registry.find_extension (source, E.SOURCE_EXTENSION_TASK_LIST);
+
+                list_source.display_name = editable_title.text;
+                registry.commit_source_sync (list_source, null);
+
+            } catch (Error e) {
+                critical (e.message);
+            }*/
+
+            //Tasks.Application.model.get_registry_sync ().commit_source_sync (source, null);
         });
     }
 
