@@ -412,9 +412,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                     );
 
                 } else {
-                    due_label.label = Granite.DateTime.get_relative_datetime (due_date_time);
-                    due_label.tooltip_text = _("%s at %s").printf (
-                        due_date_time.format (Granite.DateTime.get_default_date_format (true)),
+                    due_label.label = _("%s at %s").printf (
+                        Tasks.Util.get_relative_date (due_date_time),
                         due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
                     );
                 }
