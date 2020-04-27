@@ -79,11 +79,14 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         check.valign = Gtk.Align.CENTER;
 
         state_stack = new Gtk.Stack ();
+        state_stack.valign = Gtk.Align.START;
         state_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
+        state_stack.get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         state_stack.add (icon);
         state_stack.add (check);
 
         summary_entry = new Gtk.Entry ();
+        summary_entry.placeholder_text = _("Add task to list, press Enter to save…");
 
         unowned Gtk.StyleContext summary_entry_context = summary_entry.get_style_context ();
         summary_entry_context.add_class (Gtk.STYLE_CLASS_FLAT);
@@ -180,7 +183,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         var grid = new Gtk.Grid ();
         grid.margin = 6;
-        grid.margin_start = grid.margin_end = 12;
+        grid.margin_start = grid.margin_end = 24;
         grid.column_spacing = 6;
         grid.row_spacing = 3;
         grid.attach (state_stack, 0, 0);
@@ -194,7 +197,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         revealer.add (grid);
 
         add (revealer);
-        margin_start = margin_end = 12;
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         if (created) {
@@ -230,7 +232,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
 
         summary_entry.grab_focus.connect (() => {
-            reveal_child_request (true);
+            activate ();
         });
 
         description_textview.button_press_event.connect (() => {
@@ -326,8 +328,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         if (value) {
             style_context.add_class ("collapsed");
             style_context.add_class (Granite.STYLE_CLASS_CARD);
+            style_context.add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         } else {
+            style_context.remove_class (Gtk.STYLE_CLASS_BACKGROUND);
             style_context.remove_class (Granite.STYLE_CLASS_CARD);
             style_context.remove_class ("collapsed");
         }
@@ -337,13 +341,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         Tasks.Application.set_task_color (source, check);
 
         if (task == null || !created) {
+            get_style_context ().add_class ("add-task");
             state_stack.set_visible_child (icon);
 
             completed = false;
             check.active = completed;
             summary_entry.text = "";
             summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
-            summary_entry.get_style_context ().add_class ("add-task");
             task_detail_revealer.reveal_child = false;
             task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
@@ -359,6 +363,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             description_textbuffer.text = "";
 
         } else if (created) {
+            get_style_context ().remove_class ("add-task");
             state_stack.set_visible_child (check);
 
             unowned ICal.Component ical_task = task.get_icalcomponent ();
@@ -386,7 +391,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             }
 
             summary_entry.text = ical_task.get_summary () == null ? "" : ical_task.get_summary ();
-            summary_entry.get_style_context ().remove_class ("add-task");
 
             if (completed) {
                 summary_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);

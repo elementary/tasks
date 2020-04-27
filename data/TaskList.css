@@ -20,33 +20,22 @@
 
 @define-color fg_color white;
 
-.sidebar-header {
-    background-color: shade (@bg_color, 0.92);
-    color: mix (@bg_color, @text_color, 0.77);
+grid.task-list {
+  background-color: @fg_color;;
 }
 
-.sidebar-header:dir(ltr) {
-    border-top-right-radius: 0;
+scrolledwindow undershoot.top {
+    background:
+        linear-gradient(
+            @bg_color 0%,
+            alpha (@bg_color, 0) 50%
+        );
 }
 
-.sidebar-header:dir(rtl) {
-    border-top-left-radius: 0;
-}
-
-.listview-header:dir(ltr) {
-    border-top-left-radius: 0;
-}
-
-.listview-header:dir(rtl) {
-    border-top-right-radius: 0;
-}
-
-.listview-header {
-    background-color: @fg_color;
-}
-
-paned {
-    background-color: @bg_color;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+scrolledwindow undershoot.bottom {
+    background:
+        linear-gradient(
+            alpha (@bg_color, 0) 50%,
+            @bg_color 100%
+        );
 }
