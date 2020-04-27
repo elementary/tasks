@@ -87,6 +87,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         listbox = new Gtk.ListBox ();
         listbox.set_sort_func (sort_function);
 
+        var scheduled_row = new Tasks.ScheduledRow ();
+        listbox.add (scheduled_row);
+
         var scrolledwindow = new Gtk.ScrolledWindow (null, null);
         scrolledwindow.expand = true;
         scrolledwindow.margin_bottom = 3;
@@ -126,24 +129,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         Tasks.Application.model.task_list_modified.connect (update_source);
         Tasks.Application.model.task_list_removed.connect (remove_source);
 
-        listbox.row_selected.connect ((row) => {
-            if (row != null) {
-                var source = ((Tasks.SourceRow) row).source;
-                listview.source = source;
-                Tasks.Application.settings.set_string ("selected-list", source.uid);
-
-                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
-            } else {
-                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
-                var first_row = listbox.get_row_at_index (0);
-                if (first_row != null) {
-                    listbox.select_row (first_row);
-                } else {
-                    listview.source = null;
-                }
-            }
-        });
-
         Tasks.Application.model.get_registry.begin ((obj, res) => {
             E.SourceRegistry registry;
             try {
@@ -173,6 +158,50 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                     }
                 }
             });
+
+            if (last_selected_list == "scheduled") {
+                listbox.select_row (scheduled_row);
+            }
+
+            listbox.row_selected.connect ((row) => {
+                if (row != null) {
+                    if (row is Tasks.SourceRow) {
+                        var source = ((Tasks.SourceRow) row).source;
+                        listview.source = source;
+                        Tasks.Application.settings.set_string ("selected-list", source.uid);
+
+                        listview.add_view (source, "(contains? 'any' '')");
+
+                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
+
+                    } else if (row is Tasks.ScheduledRow) {
+                        listview.source = null;
+                        Tasks.Application.settings.set_string ("selected-list", "scheduled");
+
+                        var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
+                        var query = "AND (NOT is-completed?) (OR (has-start?) (has-alarms?))";
+
+                        sources.foreach ((source) => {
+                            E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+                            if (list.selected == true && source.enabled == true) {
+                                listview.add_view (source, query);
+                            }
+                        });
+
+                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+                    }
+
+                } else {
+                    ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+                    var first_row = listbox.get_row_at_index (0);
+                    if (first_row != null) {
+                        listbox.select_row (first_row);
+                    } else {
+                        listview.source = null;
+                    }
+                }
+            });
         });
     }
 
@@ -187,6 +216,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void header_update_func (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
+        if (!(lbrow is Tasks.SourceRow)) {
+            return;
+        }
         var row = (Tasks.SourceRow) lbrow;
         if (lbbefore != null) {
             var before = (Tasks.SourceRow) lbbefore;
@@ -213,12 +245,16 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         var header_label = new Granite.HeaderLabel (display_name);
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
+        header_label.margin_left = 4;
 
         row.set_header (header_label);
     }
 
     [CCode (instance_pos = -1)]
     private int sort_function (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow lbbefore) {
+        if (!(lbrow is Tasks.SourceRow)) {
+            return -1;
+        }
         var row = (Tasks.SourceRow) lbrow;
         var before = (Tasks.SourceRow) lbbefore;
         if (row.source.parent == before.source.parent) {

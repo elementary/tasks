@@ -30,7 +30,7 @@ public class Tasks.TaskModel : Object {
     public signal void task_list_modified (E.Source task_list);
     public signal void task_list_removed (E.Source task_list);
 
-    public delegate void TasksAddedFunc (Gee.Collection<ECal.Component> tasks);
+    public delegate void TasksAddedFunc (Gee.Collection<ECal.Component> tasks, E.Source task_list);
     public delegate void TasksModifiedFunc (Gee.Collection<ECal.Component> tasks);
     public delegate void TasksRemovedFunc (SList<ECal.ComponentId?> cids);
 
@@ -240,6 +240,7 @@ public class Tasks.TaskModel : Object {
 
             update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
         }
+        debug ("Getting view for task-list '%s'", list.dup_display_name ());
 
         if (task.has_recurrences () && !was_completed) {
 #if E_CAL_2_0
@@ -441,6 +442,7 @@ public class Tasks.TaskModel : Object {
 #endif
         debug (@"Received $(objects.length()) added task(s) for task list '%s'", task_list.dup_display_name ());
         var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);  // vala-lint=line-length
+
         objects.foreach ((ical_comp) => {
             try {
                 SList<ECal.Component> ecal_tasks;
@@ -459,7 +461,7 @@ public class Tasks.TaskModel : Object {
             }
         });
 
-        on_tasks_added (added_tasks.read_only_view);
+        on_tasks_added (added_tasks.read_only_view, task_list);
     }
 
 #if E_CAL_2_0
@@ -469,6 +471,7 @@ public class Tasks.TaskModel : Object {
 #endif
         debug (@"Received $(objects.length()) modified task(s) for task list '%s'", task_list.dup_display_name ());
         var updated_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);  // vala-lint=line-length
+
         objects.foreach ((comp) => {
             try {
                 SList<ECal.Component> ecal_tasks;
@@ -476,6 +479,7 @@ public class Tasks.TaskModel : Object {
 
                 ecal_tasks.foreach ((task) => {
                     debug_task (task_list, task);
+
                     if (!updated_tasks.contains (task)) {
                         updated_tasks.add (task);
                     }

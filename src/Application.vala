@@ -74,11 +74,15 @@ public class Tasks.Application : Gtk.Application {
 
     private static Gee.HashMap<string, Gtk.CssProvider>? providers;
     public static void set_task_color (E.Source source, Gtk.Widget widget) {
+        var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        var color = task_list.dup_color ();
+        set_task_color_from_string (color, widget);
+    }
+
+    public static void set_task_color_from_string (string color, Gtk.Widget widget) {
         if (providers == null) {
             providers = new Gee.HashMap<string, Gtk.CssProvider> ();
         }
-        var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-        var color = task_list.dup_color ();
         if (!providers.has_key (color)) {
             string style = """
                 @define-color colorAccent %s;
