@@ -23,7 +23,10 @@ public class Tasks.ListView : Gtk.Grid {
 
     private ECal.ClientView view;
     private EditableLabel editable_title;
+
+    private Gtk.ListBox add_task_list;
     private Gtk.ListBox task_list;
+    private Tasks.TaskRow active_task_row;
 
     construct {
         editable_title = new EditableLabel ();
@@ -51,6 +54,11 @@ public class Tasks.ListView : Gtk.Grid {
         placeholder_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
 
+        add_task_list = new Gtk.ListBox ();
+        add_task_list.selection_mode = Gtk.SelectionMode.NONE;
+        add_task_list.margin_top = 24;
+        add_task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
+
         task_list = new Gtk.ListBox ();
         task_list.selection_mode = Gtk.SelectionMode.NONE;
         task_list.set_filter_func (filter_function);
@@ -64,10 +72,10 @@ public class Tasks.ListView : Gtk.Grid {
 
         margin_bottom = 3;
         column_spacing = 12;
-        row_spacing = 24;
         attach (editable_title, 0, 0);
         attach (settings_button, 1, 0);
-        attach (scrolled_window, 0, 1, 2);
+        attach (add_task_list, 0, 1, 2);
+        attach (scrolled_window, 0, 2, 2);
 
         Application.settings.changed["show-completed"].connect (() => {
             task_list.invalidate_filter ();
@@ -79,20 +87,49 @@ public class Tasks.ListView : Gtk.Grid {
             }
         });
 
+        add_task_list.row_activated.connect ((row) => {
+            var task_row = (Tasks.TaskRow) row;
+
+            if (active_task_row != null) {
+                active_task_row.reveal_child_request (false);
+            }
+
+            task_row.reveal_child_request (true);
+            active_task_row = task_row;
+        });
+
         task_list.row_activated.connect ((row) => {
-            ((Tasks.TaskRow) row).reveal_child_request (true);
+            var task_row = (Tasks.TaskRow) row;
+
+            if (active_task_row != null) {
+                active_task_row.reveal_child_request (false);
+            }
+
+            task_row.reveal_child_request (true);
+            active_task_row = task_row;
         });
 
         notify["source"].connect (() => {
             if (view != null) {
                 Tasks.Application.model.destroy_task_list_view (view);
             }
+
+            foreach (unowned Gtk.Widget child in add_task_list.get_children ()) {
+                child.destroy ();
+            }
+
             foreach (unowned Gtk.Widget child in task_list.get_children ()) {
                 child.destroy ();
             }
 
             if (source != null) {
                 update_request ();
+
+                var add_task_row = new Tasks.TaskRow.for_source (source);
+                add_task_row.task_changed.connect ((task) => {
+                    Tasks.Application.model.add_task (source, task);
+                });
+                add_task_list.add (add_task_row);
 
                 try {
                     view = Tasks.Application.model.create_task_list_view (
