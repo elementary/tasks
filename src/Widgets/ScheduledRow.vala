@@ -20,18 +20,11 @@
 
 public class Tasks.ScheduledRow : Gtk.ListBoxRow {
 
-    private static Gtk.CssProvider listrow_provider;
-
     private Gtk.Image icon;
     private Gtk.Image status_image;
     private Gtk.Label display_name_label;
     private Gtk.Stack status_stack;
     private Gtk.Revealer revealer;
-
-    static construct {
-        listrow_provider = new Gtk.CssProvider ();
-        listrow_provider.load_from_resource ("io/elementary/tasks/ScheduledRow.css");
-    }
 
     construct {
         icon = new Gtk.Image.from_icon_name ("preferences-system-time-symbolic", Gtk.IconSize.MENU);
@@ -44,7 +37,6 @@ public class Tasks.ScheduledRow : Gtk.ListBoxRow {
 
         status_image = new Gtk.Image ();
         status_image.pixel_size = 16;
-        status_image.get_style_context ().add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var spinner = new Gtk.Spinner ();
         spinner.active = true;

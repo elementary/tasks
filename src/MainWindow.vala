@@ -221,8 +221,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             return;
         }
         var row = (Tasks.SourceRow) lbrow;
-        if (lbbefore != null) {
+        if (lbbefore != null && lbbefore is Tasks.SourceRow) {
             var before = (Tasks.SourceRow) lbbefore;
+
             if (row.source.parent == before.source.parent) {
                 return;
             }
