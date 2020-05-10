@@ -50,7 +50,8 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         add_action_entries (ACTION_ENTRIES, this);
 
         foreach (var action in action_accelerators.get_keys ()) {
-            ((Gtk.Application) GLib.Application.get_default ()).set_accels_for_action (ACTION_PREFIX + action, action_accelerators[action].to_array ());  // vala-lint=line-length
+            var accels = action_accelerators[action].to_array ();
+            ((Gtk.Application) GLib.Application.get_default ()).set_accels_for_action (ACTION_PREFIX + action, accels);
         }
 
         var header_provider = new Gtk.CssProvider ();
