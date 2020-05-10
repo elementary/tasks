@@ -83,6 +83,7 @@ public class Tasks.Application : Gtk.Application {
         if (providers == null) {
             providers = new Gee.HashMap<string, Gtk.CssProvider> ();
         }
+
         if (!providers.has_key (color)) {
             string style = """
                 @define-color colorAccent %s;

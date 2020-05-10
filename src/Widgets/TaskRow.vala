@@ -62,7 +62,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         Object (task: task, source: source);
     }
 
-    public TaskRow.for_component (ECal.Component task, E.Source source, string? tint_color, bool is_scheduled_view = false) {
+    public TaskRow.for_component (ECal.Component task, E.Source source, string? tint_color = null, bool is_scheduled_view = false) {
         Object (source: source, task: task, tint_color: tint_color, is_scheduled_view: is_scheduled_view);
     }
 

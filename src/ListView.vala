@@ -21,7 +21,6 @@
 public class Tasks.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
-    private string scheduled_color;
     private Gee.Collection<ECal.ClientView> views;
 
     /*
@@ -57,7 +56,6 @@ public class Tasks.ListView : Gtk.Grid {
     private Gtk.ListBox task_list;
 
     construct {
-        scheduled_color = "#3689e6";
         views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
 
         editable_title = new EditableLabel ();
@@ -150,7 +148,7 @@ public class Tasks.ListView : Gtk.Grid {
             editable_title.text = _("Scheduled");
             settings_button_revealer.reveal_child = false;
 
-            Tasks.Application.set_task_color_from_string (scheduled_color, editable_title);
+            Tasks.Application.set_task_color_from_string ("@colorAccent", editable_title);
 
             task_list.@foreach ((row) => {
                 if (row is Tasks.TaskRow) {
@@ -253,7 +251,7 @@ public class Tasks.ListView : Gtk.Grid {
 
     private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
-            var task_row = new Tasks.TaskRow.for_component (task, source, scheduled_color, this.source == null);
+            var task_row = new Tasks.TaskRow.for_component (task, source, "@colorAccent", this.source == null);
             task_row.task_completed.connect ((task) => {
                 Tasks.Application.model.complete_task (source, task);
             });
