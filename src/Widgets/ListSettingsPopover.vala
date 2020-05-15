@@ -164,7 +164,7 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
             task_list.color = "#68b723";
             source.write.begin (null);
         });
-        
+
         color_button_mint.toggled.connect (() => {
             task_list.color = "#28bca3";
             source.write.begin (null);
