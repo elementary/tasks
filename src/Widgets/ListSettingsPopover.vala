@@ -54,14 +54,14 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         color_button_lime_context.add_class ("color-button");
         color_button_lime_context.add_class ("lime");
         color_button_lime_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        
+
         var color_button_mint = new Gtk.RadioButton.from_widget (color_button_strawberry);
 
         unowned Gtk.StyleContext color_button_mint_context = color_button_mint.get_style_context ();
         color_button_mint_context.add_class ("color-button");
         color_button_mint_context.add_class ("mint");
         color_button_mint_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        
+
         var color_button_blueberry = new Gtk.RadioButton.from_widget (color_button_strawberry);
 
         unowned Gtk.StyleContext color_button_blueberry_context = color_button_blueberry.get_style_context ();
@@ -75,7 +75,7 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         color_button_grape_context.add_class ("color-button");
         color_button_grape_context.add_class ("grape");
         color_button_grape_context.add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        
+
         var color_button_bubblegum = new Gtk.RadioButton.from_widget (color_button_strawberry);
 
         unowned Gtk.StyleContext color_button_bubblegum_context = color_button_bubblegum.get_style_context ();
