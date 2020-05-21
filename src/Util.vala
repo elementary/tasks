@@ -137,4 +137,31 @@ namespace Tasks.Util {
             date.day, date.hour, date.minute, date.second);
 #endif
     }
+
+    /**
+     * Compares a {@link GLib.DateTime} to {@link GLib.DateTime.now_local} and returns a location, relative date string.
+     * Results appear as natural-language strings like "Today", "Yesterday", "Fri, Apr 17", "Jan 15", "Sep 18 2019".
+     *
+     * @param date_time a {@link GLib.DateTime} to compare against {@link GLib.DateTime.now_local}
+     *
+     * @return a localized, relative date string
+     */
+    public static string get_relative_date (GLib.DateTime date_time) {
+        var now = new GLib.DateTime.now_local ();
+        var diff = now.difference (date_time);
+
+        if (Granite.DateTime.is_same_day (date_time, now)) {
+            return _("Today");
+        } else if (Granite.DateTime.is_same_day (date_time.add_days (1), now)) {
+            return _("Yesterday");
+        } else if (Granite.DateTime.is_same_day (date_time.add_days (-1), now)) {
+            return _("Tomorrow");
+        } else if (diff < 6 * TimeSpan.DAY && diff > -6 * TimeSpan.DAY) {
+            return date_time.format (Granite.DateTime.get_default_date_format (true, true, false));
+        } else if (date_time.get_year () == now.get_year ()) {
+            return date_time.format (Granite.DateTime.get_default_date_format (false, true, false));
+        } else {
+            return date_time.format (Granite.DateTime.get_default_date_format (false, true, true));
+        }
+    }
 }
