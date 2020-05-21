@@ -61,4 +61,3 @@ public class Tasks.ScheduledRow : Gtk.ListBoxRow {
         add (revealer);
     }
 }
-
