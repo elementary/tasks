@@ -389,7 +389,20 @@ public class Tasks.TaskModel : Object {
 
     private void debug_task (E.Source task_list, ECal.Component task) {
         unowned ICal.Component comp = task.get_icalcomponent ();
-        debug (@"Task ['$(comp.get_summary())', $(task_list.dup_display_name()), $(comp.get_uid()))]");
+        var task_summary = comp.get_summary ();
+        var task_uid = comp.get_uid ();
+        var task_list_display_name = task_list.dup_display_name ();
+
+        if (task_summary == null)
+            task_summary = "";
+
+        if (task_uid == null)
+            task_uid = "";
+
+        if (task_list_display_name == null)
+            task_list_display_name = "";
+
+        debug (@"Task ['$(task_summary)', $(task_list_display_name), $(task_uid)))]");
     }
 
     public ECal.ClientView create_task_list_view (E.Source task_list, string query, TasksAddedFunc on_tasks_added, TasksModifiedFunc on_tasks_modified, TasksRemovedFunc on_tasks_removed) throws Error { // vala-lint=line-length
