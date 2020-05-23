@@ -20,44 +20,22 @@
 
 public class Tasks.ScheduledRow : Gtk.ListBoxRow {
 
-    private Gtk.Image icon;
-    private Gtk.Image status_image;
-    private Gtk.Label display_name_label;
-    private Gtk.Stack status_stack;
-    private Gtk.Revealer revealer;
-
     construct {
-        icon = new Gtk.Image.from_icon_name ("preferences-system-time-symbolic", Gtk.IconSize.MENU);
+        var icon = new Gtk.Image.from_icon_name ("preferences-system-time-symbolic", Gtk.IconSize.MENU);
 
-        display_name_label = new Gtk.Label (_("Scheduled"));
+        var display_name_label = new Gtk.Label (_("Scheduled"));
         display_name_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
         display_name_label.halign = Gtk.Align.START;
         display_name_label.hexpand = true;
         display_name_label.margin_end = 9;
 
-        status_image = new Gtk.Image ();
-        status_image.pixel_size = 16;
-
-        var spinner = new Gtk.Spinner ();
-        spinner.active = true;
-        spinner.tooltip_text = _("Connecting…");
-
-        status_stack = new Gtk.Stack ();
-        status_stack.add_named (status_image, "image");
-        status_stack.add_named (spinner, "spinner");
-
         var grid = new Gtk.Grid ();
         grid.column_spacing = 3;
-        grid.margin_start = 4;
+        grid.margin_start = 10;
         grid.margin_end = 6;
         grid.add (icon);
         grid.add (display_name_label);
-        grid.add (status_stack);
 
-        revealer = new Gtk.Revealer ();
-        revealer.reveal_child = true;
-        revealer.add (grid);
-
-        add (revealer);
+        add (grid);
     }
 }
