@@ -58,11 +58,22 @@ public class Tasks.ListView : Gtk.Grid {
     }
 
     private Gtk.Revealer settings_button_revealer;
+    private Gtk.Stack title_stack;
+    private Gtk.Label scheduled_title;
     private EditableLabel editable_title;
     private Gtk.ListBox task_list;
 
     construct {
         views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
+
+        scheduled_title = new Gtk.Label (_("Scheduled"));
+        scheduled_title.ellipsize = Pango.EllipsizeMode.END;
+        scheduled_title.margin_start = 24;
+        scheduled_title.xalign = 0;
+
+        unowned Gtk.StyleContext scheduled_title_context = scheduled_title.get_style_context ();
+        scheduled_title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
+        scheduled_title_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
         editable_title = new EditableLabel ();
         editable_title.margin_start = 24;
@@ -70,6 +81,11 @@ public class Tasks.ListView : Gtk.Grid {
         unowned Gtk.StyleContext title_context = editable_title.get_style_context ();
         title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
         title_context.add_class (Granite.STYLE_CLASS_ACCENT);
+
+        title_stack = new Gtk.Stack ();
+        title_stack.homogeneous = false;
+        title_stack.add (scheduled_title);
+        title_stack.add (editable_title);
 
         var list_settings_popover = new Tasks.ListSettingsPopover ();
 
@@ -108,7 +124,7 @@ public class Tasks.ListView : Gtk.Grid {
         margin_bottom = 3;
         column_spacing = 12;
         row_spacing = 24;
-        attach (editable_title, 0, 0);
+        attach (title_stack, 0, 0);
         attach (settings_button_revealer, 1, 0);
         attach (scrolled_window, 0, 1, 2);
 
@@ -145,22 +161,13 @@ public class Tasks.ListView : Gtk.Grid {
 
     public void update_request () {
         if (source == null) {
-            editable_title.sensitive = false;
-            editable_title.text = _("Scheduled");
+            title_stack.visible_child = scheduled_title;
             settings_button_revealer.reveal_child = false;
 
-            Tasks.Application.set_task_color_from_string ("@colorAccent", editable_title);
-
-            task_list.@foreach ((row) => {
-                if (row is Tasks.TaskRow) {
-                    ((Tasks.TaskRow) row).update_request ();
-                }
-            });
-
         } else {
+            title_stack.visible_child = editable_title;
             settings_button_revealer.reveal_child = true;
             editable_title.text = source.dup_display_name ();
-            editable_title.sensitive = true;
 
             Tasks.Application.set_task_color (source, editable_title);
 
@@ -252,7 +259,7 @@ public class Tasks.ListView : Gtk.Grid {
 
     private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
-            var task_row = new Tasks.TaskRow.for_component (task, source, "@colorAccent", this.source == null);
+            var task_row = new Tasks.TaskRow.for_component (task, source, this.source == null);
             task_row.task_completed.connect ((task) => {
                 Tasks.Application.model.complete_task (source, task);
             });

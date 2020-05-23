@@ -27,7 +27,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     public bool completed { get; private set; }
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
-    public string? tint_color { get; construct; }
     public bool is_scheduled_view { get; construct; }
 
     private bool created;
@@ -62,8 +61,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         Object (task: task, source: source);
     }
 
-    public TaskRow.for_component (ECal.Component task, E.Source source, string? tint_color = null, bool is_scheduled_view = false) {
-        Object (source: source, task: task, tint_color: tint_color, is_scheduled_view: is_scheduled_view);
+    public TaskRow.for_component (ECal.Component task, E.Source source, bool is_scheduled_view = false) {
+        Object (source: source, task: task, is_scheduled_view: is_scheduled_view);
     }
 
     static construct {
@@ -336,9 +335,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     public void update_request () {
-        if (is_scheduled_view && tint_color != null) {
-            Tasks.Application.set_task_color_from_string (tint_color, check);
-        } else {
+        if (!is_scheduled_view) {
             Tasks.Application.set_task_color (source, check);
         }
 
