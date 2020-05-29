@@ -27,6 +27,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     public bool completed { get; private set; }
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
+    public bool is_scheduled_view { get; construct; }
 
     private bool created;
 
@@ -60,8 +61,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         Object (task: task, source: source);
     }
 
-    public TaskRow.for_component (ECal.Component task, E.Source source) {
-        Object (source: source, task: task);
+    public TaskRow.for_component (ECal.Component task, E.Source source, bool is_scheduled_view = false) {
+        Object (source: source, task: task, is_scheduled_view: is_scheduled_view);
     }
 
     static construct {
@@ -334,7 +335,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     public void update_request () {
-        Tasks.Application.set_task_color (source, check);
+        if (!is_scheduled_view) {
+            Tasks.Application.set_task_color (source, check);
+        }
 
         if (task == null || !created) {
             state_stack.set_visible_child (icon);
@@ -396,11 +399,17 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
                 var format = h24_settings.get_string ("clock-format");
 
-                due_label.label = Granite.DateTime.get_relative_datetime (due_date_time);
-                due_label.tooltip_text = _("%s at %s").printf (
-                    due_date_time.format (Granite.DateTime.get_default_date_format (true)),
-                    due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
-                );
+                if (is_scheduled_view) {
+                    due_label.label = _("%s").printf (
+                        due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                    );
+
+                } else {
+                    due_label.label = _("%s at %s").printf (
+                        Tasks.Util.get_relative_date (due_date_time),
+                        due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                    );
+                }
 
                 var today = new GLib.DateTime.now_local ();
                 if (today.compare (due_date_time) > 0 && !completed) {

@@ -31,6 +31,7 @@ executable(
     'src/MainWindow.vala',
     'src/Util.vala',
     'src/Widgets/EditableLabel.vala',
+    'src/Widgets/ScheduledRow.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskRow.vala',
     'src/Widgets/ListSettingsPopover.vala',
