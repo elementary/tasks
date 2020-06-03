@@ -30,7 +30,7 @@ public class Tasks.TaskModel : Object {
     public signal void task_list_modified (E.Source task_list);
     public signal void task_list_removed (E.Source task_list);
 
-    public delegate void TasksAddedFunc (Gee.Collection<ECal.Component> tasks);
+    public delegate void TasksAddedFunc (Gee.Collection<ECal.Component> tasks, E.Source task_list);
     public delegate void TasksModifiedFunc (Gee.Collection<ECal.Component> tasks);
     public delegate void TasksRemovedFunc (SList<ECal.ComponentId?> cids);
 
@@ -472,7 +472,7 @@ public class Tasks.TaskModel : Object {
             }
         });
 
-        on_tasks_added (added_tasks.read_only_view);
+        on_tasks_added (added_tasks.read_only_view, task_list);
     }
 
 #if E_CAL_2_0
