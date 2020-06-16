@@ -468,7 +468,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 #else
         ICal.Time created;
         comp.get_created (out created);
-        return created.is_valid_time () != 0;
+        return !created.is_null_time ();
 #endif
     }
 }
