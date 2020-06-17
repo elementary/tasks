@@ -515,7 +515,7 @@ public class Calendar.Store : Object {
 
         if (source_is_enabled && !source_is_connected) {
             connect_source.begin (source);
-        } else if (source_is_connected && !source_is_enabled){
+        } else if (source_is_connected && !source_is_enabled) {
             disconnect_source.begin (source);
         }
         source_changed (source);
