@@ -307,7 +307,7 @@ public class Tasks.ListView : Gtk.Grid {
             if (task_row != null) {
                 foreach (ECal.Component task in tasks) {
                     if (Calendar.Util.ecalcomponent_equal_func (task_row.task, task)) {
-                        task_list.remove (task_row);
+                        task_row.destroy ();
                         break;
                     }
                 }

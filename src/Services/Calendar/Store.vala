@@ -320,56 +320,60 @@ public class Calendar.Store : Object {
     public void add_component (E.Source source, ECal.Component component) {
         var components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
         components.add (component);
-
         components_added (components.read_only_view, source);
+
         add_component_to_backend.begin (source, component, (obj, res) => {
-            components_removed (components.read_only_view, source);
-            components.clear ();
+            Idle.add(() => {
+                components_removed (components.read_only_view, source);
 
-            try {
-                components.add (add_component_to_backend.end (res));
-                components_added (components.read_only_view, source);
+                try {
+                    add_component_to_backend.end (res);
 
-            } catch (Error e) {
-                error_received (e);
-                critical (e.message);
-            }
+                } catch (Error e) {
+                    error_received (e);
+                    critical (e.message);
+                }
+                return Source.REMOVE;
+            });
         });
     }
 
     public void modify_component (E.Source source, ECal.Component component, ECal.ObjModType mod_type) {
         var components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
         components.add (component);
-
         components_modified (components.read_only_view, source);
+
         modify_component_in_backend.begin (source, component, mod_type, (obj, res) => {
-            components.clear ();
+            Idle.add(() => {
+                try {
+                    modify_component_in_backend.end (res);
 
-            try {
-                components.add (modify_component_in_backend.end (res));
-                components_modified (components.read_only_view, source);
-
-            } catch (Error e) {
-                error_received (e);
-                critical (e.message);
-            }
+                } catch (Error e) {
+                    error_received (e);
+                    critical (e.message);
+                }
+                return Source.REMOVE;
+            });
         });
     }
 
     public void remove_component (E.Source source, ECal.Component component, ECal.ObjModType mod_type) {
         var components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
         components.add (component);
-
         components_removed (components.read_only_view, source);
-        remove_component_from_backend.begin (source, component, mod_type, (obj, res) => {
-            try {
-                remove_component_from_backend.end (res);
 
-            } catch (Error e) {
-                components_added (components.read_only_view, source);
-                error_received (e);
-                critical (e.message);
-            }
+        remove_component_from_backend.begin (source, component, mod_type, (obj, res) => {
+            Idle.add(() => {
+                try {
+                    remove_component_from_backend.end (res);
+
+                } catch (Error e) {
+                    components_added (components.read_only_view, source);
+                    error_received (e);
+                    critical (e.message);
+                }
+                return Source.REMOVE;
+            });
         });
     }
 
@@ -600,10 +604,8 @@ public class Calendar.Store : Object {
 
     //--- Private Component Event Handlers ---//
 
-    private async ECal.Component add_component_to_backend (E.Source source, ECal.Component component) throws Error {
-        var added_component = component.clone ();
-
-        unowned ICal.Component comp = added_component.get_icalcomponent ();
+    private async void add_component_to_backend (E.Source source, ECal.Component component) throws Error {
+        unowned ICal.Component comp = component.get_icalcomponent ();
         debug (@"Adding component '$(comp.get_uid())'");
 
         ECal.Client client;
@@ -617,16 +619,10 @@ public class Calendar.Store : Object {
 #else
         yield client.create_object (comp, null, out uid);
 #endif
-        if (uid != null) {
-            added_component.set_uid (uid);
-        }
-        return added_component;
     }
 
-    private async ECal.Component modify_component_in_backend (E.Source source, ECal.Component component, ECal.ObjModType mod_type) throws Error {
-        var modified_component = component.clone ();
-
-        unowned ICal.Component ical_component = modified_component.get_icalcomponent ();
+    private async void modify_component_in_backend (E.Source source, ECal.Component component, ECal.ObjModType mod_type) throws Error {
+        unowned ICal.Component ical_component = component.get_icalcomponent ();
         debug (@"Updating component '$(ical_component.get_uid())' [mod_type=$(mod_type)]");
 
         ECal.Client client;
@@ -710,8 +706,6 @@ public class Calendar.Store : Object {
             client.generate_instances_for_object_sync (ical_component, start.as_timet (), end.as_timet (), recur_instance_callback);
 #endif
         }
-
-        return modified_component;
     }
 
     private async void remove_component_from_backend (E.Source source, ECal.Component component, ECal.ObjModType mod_type) throws Error {  // vala-lint=line-length
@@ -857,6 +851,6 @@ public class Calendar.Store : Object {
 
     private void debug_component (E.Source source, ECal.Component component) {
         unowned ICal.Component comp = component.get_icalcomponent ();
-        debug (@"Component ['$(comp.get_summary())', $(source.dup_display_name()), $(comp.get_uid()))]");
+        debug (@"Component ['$(comp.get_summary())', $(source.dup_display_name()), $(comp.get_uid())]");
     }
 }
