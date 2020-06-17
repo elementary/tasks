@@ -83,7 +83,7 @@ public class Calendar.Store : Object {
             week_starts_on = (GLib.DateWeekday) (week_start - 1);
         }
 
-        month_start = Calendar.Util.get_start_of_month (get_page ());
+        month_start = Calendar.Util.date_time_get_start_of_month (get_page ());
         compute_ranges ();
         notify["month-start"].connect (on_parameter_changed);
     }
@@ -223,7 +223,7 @@ public class Calendar.Store : Object {
     }
 
     public void add_component (E.Source source, ECal.Component component) {
-        var components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.calcomponent_equal_func);  // vala-lint=line-length
+        var components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
         components.add (component);
 
         components_added (components.read_only_view, source);
@@ -243,7 +243,7 @@ public class Calendar.Store : Object {
     }
 
     public void modify_component (E.Source source, ECal.Component component, ECal.ObjModType mod_type) {
-        var components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.calcomponent_equal_func);  // vala-lint=line-length
+        var components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
         components.add (component);
 
         components_modified (components.read_only_view, source);
@@ -293,7 +293,7 @@ public class Calendar.Store : Object {
     }
 
     public void remove_component (E.Source source, ECal.Component component, ECal.ObjModType mod_type) {
-        var components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.calcomponent_equal_func);  // vala-lint=line-length
+        var components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
         components.add (component);
 
         components_removed (components.read_only_view, source);
@@ -492,7 +492,7 @@ public class Calendar.Store : Object {
             // create empty source-component map
             var components = new Gee.TreeMultiMap<string, ECal.Component> (
                 (GLib.CompareDataFunc<string>?) GLib.strcmp,
-                (GLib.CompareDataFunc<ECal.Component>?) Calendar.Util.calcomponent_compare_func);
+                (GLib.CompareDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_compare_func);
             source_components.set (source_uid, components);
 
             Idle.add (() => {
@@ -689,7 +689,7 @@ public class Calendar.Store : Object {
     private void on_objects_added_to_backend (E.Source source, SList<weak ICal.Component> objects) {
 #endif
         debug (@"Received $(objects.length()) added component(s) for source '%s'", source.dup_display_name ());
-        var added_components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.calcomponent_equal_func);  // vala-lint=line-length
+        var added_components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
 
         ECal.Client client;
         lock (source_client) {
@@ -745,7 +745,7 @@ public class Calendar.Store : Object {
     private void on_objects_modified_in_backend (E.Source source, SList<weak ICal.Component> objects) {
 #endif
         debug (@"Received $(objects.length()) modified component(s) for source '%s'", source.dup_display_name ());
-        var modified_components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.calcomponent_equal_func);  // vala-lint=line-length
+        var modified_components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
 
         ECal.Client client;
         lock (source_client) {
@@ -781,7 +781,7 @@ public class Calendar.Store : Object {
     private void on_objects_removed_from_backend (E.Source source, SList<weak ECal.ComponentId?> cids) {
 #endif
         debug (@"Received $(cids.length()) removed component(s) for source '%s'", source.dup_display_name ());
-        var removed_components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.calcomponent_equal_func);  // vala-lint=line-length
+        var removed_components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
         var source_comps = source_components.get (source.get_uid ());
 
         cids.foreach ((cid) => {
