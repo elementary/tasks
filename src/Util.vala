@@ -44,15 +44,6 @@ namespace Tasks.Util {
         return str;
     }
 
-    /*
-     * Gee Utility Functions
-     */
-
-    /* Returns true if 'a' and 'b' are the same ECal.Component */
-    private bool calcomponent_equal_func (ECal.Component a, ECal.Component b) {
-        return a.get_id ().equal (b.get_id ());
-    }
-
 
         //--- Date and Time ---//
 
@@ -104,38 +95,6 @@ namespace Tasks.Util {
         }
 
         return result;
-    }
-
-    /**
-     * Converts the given TimeType to a DateTime.
-     */
-    private TimeZone timezone_from_ical (ICal.Time date) {
-        int is_daylight;
-        var interval = date.get_timezone ().get_utc_offset (null, out is_daylight);
-        bool is_positive = interval >= 0;
-        interval = interval.abs ();
-        var hours = (interval / 3600);
-        var minutes = (interval % 3600) / 60;
-        var hour_string = "%s%02d:%02d".printf (is_positive ? "+" : "-", hours, minutes);
-
-        return new TimeZone (hour_string);
-    }
-
-    /**
-     * Converts the given TimeType to a DateTime.
-     * XXX : Track next versions of evolution in order to convert ICal.Timezone to GLib.TimeZone with a dedicated function…
-     */
-    public DateTime ical_to_date_time (ICal.Time date) {
-#if E_CAL_2_0
-        int year, month, day, hour, minute, second;
-        date.get_date (out year, out month, out day);
-        date.get_time (out hour, out minute, out second);
-        return new DateTime (timezone_from_ical (date), year, month,
-            day, hour, minute, second);
-#else
-        return new DateTime (timezone_from_ical (date), date.year, date.month,
-            date.day, date.hour, date.minute, date.second);
-#endif
     }
 
     /**

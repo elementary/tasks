@@ -32,6 +32,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     private Gtk.ListBox listbox;
     private Gee.HashMap<E.Source, Tasks.SourceRow>? source_rows;
     private Tasks.ListView listview;
+    private Gee.Collection<ECal.ClientView> taskviews;
 
     public MainWindow (Gtk.Application application) {
         Object (
@@ -52,6 +53,8 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         foreach (var action in action_accelerators.get_keys ()) {
             ((Gtk.Application) GLib.Application.get_default ()).set_accels_for_action (ACTION_PREFIX + action, action_accelerators[action].to_array ());  // vala-lint=line-length
         }
+
+        taskviews = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
 
         var header_provider = new Gtk.CssProvider ();
         header_provider.load_from_resource ("io/elementary/tasks/HeaderBar.css");
@@ -125,84 +128,77 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         Tasks.Application.settings.bind ("pane-position", header_paned, "position", GLib.SettingsBindFlags.DEFAULT);
         Tasks.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
 
-        Tasks.Application.model.task_list_added.connect (add_source);
-        Tasks.Application.model.task_list_modified.connect (update_source);
-        Tasks.Application.model.task_list_removed.connect (remove_source);
+        Tasks.Application.task_store.source_added.connect (add_source);
+        Tasks.Application.task_store.source_changed.connect (update_source);
+        Tasks.Application.task_store.source_removed.connect (remove_source);
 
-        Tasks.Application.model.get_registry.begin ((obj, res) => {
-            E.SourceRegistry registry;
-            try {
-                registry = Tasks.Application.model.get_registry.end (res);
-            } catch (Error e) {
-                critical (e.message);
-                return;
-            }
+        Tasks.Application.task_store.components_added.connect (listview.on_tasks_added);
+        Tasks.Application.task_store.components_modified.connect (listview.on_tasks_modified);
+        Tasks.Application.task_store.components_removed.connect (listview.on_tasks_removed);
 
-            listbox.set_header_func (header_update_func);
-
-            var last_selected_list = Application.settings.get_string ("selected-list");
-            var default_task_list = registry.default_task_list;
-            var task_lists = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
-
-            task_lists.foreach ((source) => {
-                E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-
-                if (list.selected == true && source.enabled == true) {
-                    add_source (source);
-
-                    if (last_selected_list == "" && default_task_list == source) {
-                        listbox.select_row (source_rows[source]);
-
-                    } else if (last_selected_list == source.uid) {
-                        listbox.select_row (source_rows[source]);
+        listbox.set_header_func (header_update_func);
+        listbox.row_selected.connect ((row) => {
+            lock (taskviews) {
+                taskviews.foreach ((taskview) => {
+                    try {
+                        Tasks.Application.task_store.remove_view (taskview);
+                    } catch (Error e) {
+                        warning (e.message);
                     }
-                }
-            });
-
-            if (last_selected_list == "scheduled") {
-                listbox.select_row (scheduled_row);
+                });
+                taskviews.clear ();
             }
 
-            listbox.row_selected.connect ((row) => {
-                if (row != null) {
-                    if (row is Tasks.SourceRow) {
-                        var source = ((Tasks.SourceRow) row).source;
-                        listview.source = source;
-                        Tasks.Application.settings.set_string ("selected-list", source.uid);
+            if (row != null) {
+                if (row is Tasks.SourceRow) {
+                    var source = ((Tasks.SourceRow) row).source;
+                    Tasks.Application.settings.set_string ("selected-list", source.uid);
 
-                        listview.add_view (source, "(contains? 'any' '')");
+                    listview.source = source;
+                    try {
+                        var view = Tasks.Application.task_store.add_view (source, "(contains? 'any' '')");
+                        taskviews.add (view);
+                    } catch (Error e) {
+                        warning (e.message);
+                    }
 
-                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
+                    ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
 
-                    } else if (row is Tasks.ScheduledRow) {
-                        listview.source = null;
-                        Tasks.Application.settings.set_string ("selected-list", "scheduled");
+                } else if (row is Tasks.ScheduledRow) {
+                    listview.source = null;
+                    Tasks.Application.settings.set_string ("selected-list", "scheduled");
 
-                        var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
-                        var query = "AND (NOT is-completed?) (OR (has-start?) (has-alarms?))";
+                    var sources = Tasks.Application.task_store.list_sources ();
+                    var query = "AND (NOT is-completed?) (OR (has-start?) (has-alarms?))";
 
-                        sources.foreach ((source) => {
-                            E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-
-                            if (list.selected == true && source.enabled == true) {
-                                listview.add_view (source, query);
+                    sources.foreach ((source) => {
+                        if (Tasks.Application.task_store.is_source_enabled (source)) {
+                            try {
+                                var view = Tasks.Application.task_store.add_view (source, query);
+                                taskviews.add (view);
+                            } catch (Error e) {
+                                warning (e.message);
                             }
-                        });
+                        }
+                    });
 
-                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
-                    }
-
-                } else {
                     ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
-                    var first_row = listbox.get_row_at_index (0);
-                    if (first_row != null) {
-                        listbox.select_row (first_row);
-                    } else {
-                        listview.source = null;
-                    }
                 }
-            });
+
+            } else {
+                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+                var first_row = listbox.get_row_at_index (0);
+                if (first_row != null) {
+                    listbox.select_row (first_row);
+                } else {
+                    listview.source = null;
+                }
+            }
         });
+
+        if (Application.settings.get_string ("selected-list") == "scheduled") {
+            listbox.select_row (scheduled_row);
+        }
     }
 
     private void action_delete_selected_list () {
@@ -227,22 +223,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             }
         }
 
-        E.SourceRegistry registry;
-        try {
-            registry = Tasks.Application.model.get_registry_sync ();
-        } catch (Error e) {
-            warning (e.message);
-            return;
-        }
-        string display_name;
-
-        var ancestor = registry.find_extension (row.source, E.SOURCE_EXTENSION_COLLECTION);
-        if (ancestor != null) {
-            display_name = ancestor.display_name;
-        } else {
-            display_name = ((E.SourceTaskList?) row.source.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name;
-        }
-
+        var display_name = Tasks.Application.task_store.get_source_ancestor_display_name (row.source);
         var header_label = new Granite.HeaderLabel (display_name);
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
         header_label.margin_start = 6;
@@ -275,13 +256,19 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
             listbox.add (source_rows[source]);
             listbox.show_all ();
+
+            var selected_list = Application.settings.get_string ("selected-list");
+            if (selected_list == "" && Tasks.Application.task_store.get_default_source () == source) {
+                listbox.select_row (source_rows[source]);
+
+            } else if (selected_list == source.uid) {
+                listbox.select_row (source_rows[source]);
+            }
         }
     }
 
     private void update_source (E.Source source) {
-        E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-
-        if (list.selected != true || source.enabled != true) {
+        if (!Tasks.Application.task_store.is_source_enabled (source)) {
             remove_source (source);
 
         } else if (!source_rows.has_key (source)) {

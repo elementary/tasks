@@ -19,12 +19,13 @@ public class Calendar.Store : Object {
 
     public signal void error_received (GLib.Error e);
 
-    /* Notifies when sources are added, updated, or removed */
+    /* Notifies when sources are added, changed, or removed */
     public signal void source_connecting (E.Source source, GLib.Cancellable cancellable);
     public signal void source_added (E.Source source);
+    public signal void source_changed (E.Source source);
     public signal void source_removed (E.Source source);
 
-    /* Notifies when components are added, updated, or removed */
+    /* Notifies when components are added, modified, or removed */
     public signal void components_added (Gee.Collection<ECal.Component> components, E.Source source);
     public signal void components_modified (Gee.Collection<ECal.Component> components, E.Source source);
     public signal void components_removed (Gee.Collection<ECal.Component> components, E.Source source);
@@ -32,7 +33,7 @@ public class Calendar.Store : Object {
     public ECal.ClientSourceType source_type { get; construct; }
     private E.SourceRegistry registry { get; private set; }
     private HashTable<string, ECal.Client> source_client;
-    private HashTable<string, Gee.Collection<ECal.ClientView>> source_views;
+    private HashTable<string, Gee.ArrayList<ECal.ClientView>> source_views;
 
     internal HashTable<string, Gee.TreeMultiMap<string, ECal.Component>> source_components;
 
@@ -60,8 +61,6 @@ public class Calendar.Store : Object {
     public static Calendar.Store get_task_store () {
         if (task_store == null)
             task_store = new Calendar.Store (ECal.ClientSourceType.TASKS);
-        if (state_settings == null)
-            state_settings = new GLib.Settings ("io.elementary.tasks.savedstate");
         return task_store;
     }
 
@@ -75,7 +74,7 @@ public class Calendar.Store : Object {
         open.begin ();
 
         source_client = new HashTable<string, ECal.Client> (str_hash, str_equal);
-        source_views = new HashTable<string, Gee.Collection<ECal.ClientView>> (str_hash, str_equal);
+        source_views = new HashTable<string, Gee.ArrayList<ECal.ClientView>> (str_hash, str_equal);
         source_components = new HashTable<string, Gee.TreeMultiMap<string, ECal.Component>> (str_hash, str_equal);
 
         int week_start = Posix.NLTime.FIRST_WEEKDAY.to_string ().data[0];
@@ -116,6 +115,24 @@ public class Calendar.Store : Object {
         return registry.ref_source (uid);
     }
 
+    public string? get_source_ancestor_display_name (E.Source source) {
+        var ancestor_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);
+        if (ancestor_source != null) {
+            return ancestor_source.dup_display_name ();
+        }
+
+        switch (source_type) {
+            case ECal.ClientSourceType.EVENTS:
+                return ((E.SourceCalendar?) source.get_extension (E.SOURCE_EXTENSION_CALENDAR)).dup_backend_name ();
+
+            case ECal.ClientSourceType.TASKS:
+                return ((E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).dup_backend_name ();
+
+            default:
+                return null;
+        }
+    }
+
     public bool is_source_enabled (E.Source source) {
         switch (source_type) {
             case ECal.ClientSourceType.EVENTS:
@@ -146,6 +163,10 @@ public class Calendar.Store : Object {
         return true;
     }
 
+    public bool is_source_connected (E.Source source) {
+        return source_client.contains (source.get_uid ());
+    }
+
     public void trash_source (E.Source source) {
         source_trash.push_tail (source);
         on_source_removed_from_backend (source);
@@ -169,13 +190,40 @@ public class Calendar.Store : Object {
         }
     }
 
+    public E.Source? get_default_source () {
+        if (registry != null) {
+            switch (source_type) {
+            case ECal.ClientSourceType.EVENTS:
+                return registry.default_calendar;
+
+            case ECal.ClientSourceType.TASKS:
+                return registry.default_task_list;
+            }
+        }
+        return null;
+    }
+
+    public List<E.Source>? list_sources () {
+        if (registry != null) {
+            switch (source_type) {
+                case ECal.ClientSourceType.EVENTS:
+                    return registry.list_sources (E.SOURCE_EXTENSION_CALENDAR);
+                case ECal.ClientSourceType.TASKS:
+                    return registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
+            }
+        }
+        return null;
+    }
+
+    //--- Public ClientView API ---//
+
     /**
      * We need to pass a valid S-expression as query to guarantee the callback events are fired.
      *
      * See `e-cal-backend-sexp.c` of evolution-data-server for available S-expressions:
      * https://gitlab.gnome.org/GNOME/evolution-data-server/-/blob/master/src/calendar/libedata-cal/e-cal-backend-sexp.c
      **/
-    public void add_source_view (E.Source source, string sexp) throws Error {
+    public ECal.ClientView add_view (E.Source source, string sexp) throws Error {
         ECal.Client client;
         lock (source_client) {
             client = source_client.get (source.get_uid ());
@@ -200,6 +248,22 @@ public class Calendar.Store : Object {
 
             source_views.set (source.dup_uid (), views);
         }
+
+        return view;
+    }
+
+    public void remove_view (ECal.ClientView view) throws Error {
+        lock (source_views) {
+            foreach (var source_uid in source_views.get_keys ()) {
+                var views = source_views.get (source_uid);
+
+                if (views != null && views.contains (view)) {
+                    var removed_view = views.remove_at (views.index_of (view));
+                    removed_view.stop ();
+                    break;
+                }
+            }
+        }
     }
 
     //--- Public Component API ---//
@@ -220,6 +284,37 @@ public class Calendar.Store : Object {
 
     public bool is_component_completed (ECal.Component component) {
         return component.get_icalcomponent ().get_status () == ICal.PropertyStatus.COMPLETED;
+    }
+
+    public void set_component_status (ECal.Component component, ICal.PropertyStatus status) {
+        unowned ICal.Component ical_component = component.get_icalcomponent ();
+        ical_component.set_status (status);
+
+        switch (status) {
+            case ICal.PropertyStatus.NONE:
+
+                component.set_percent_complete (0);
+#if E_CAL_2_0
+                component.set_completed (new ICal.Time.null_time ());
+#else
+                var null_time = ICal.Time.null_time ();
+                component.set_completed (ref null_time);
+#endif
+                break;
+
+            case ICal.PropertyStatus.COMPLETED:
+                component.set_percent_complete (100);
+#if E_CAL_2_0
+                component.set_completed (new ICal.Time.today ());
+#else
+                var today_time = ICal.Time.today ();
+                component.set_completed (ref today_time);
+#endif
+                break;
+
+            default:
+                break;
+        }
     }
 
     public void add_component (E.Source source, ECal.Component component) {
@@ -259,37 +354,6 @@ public class Calendar.Store : Object {
                 critical (e.message);
             }
         });
-    }
-
-    public void set_component_status (ECal.Component component, ICal.PropertyStatus status) {
-        unowned ICal.Component ical_component = component.get_icalcomponent ();
-        ical_component.set_status (status);
-
-        switch (status) {
-            case ICal.PropertyStatus.NONE:
-
-                component.set_percent_complete (0);
-#if E_CAL_2_0
-                component.set_completed (new ICal.Time.null_time ());
-#else
-                var null_time = ICal.Time.null_time ();
-                component.set_completed (ref null_time);
-#endif
-                break;
-
-            case ICal.PropertyStatus.COMPLETED:
-                component.set_percent_complete (100);
-#if E_CAL_2_0
-                component.set_completed (new ICal.Time.today ());
-#else
-                var today_time = ICal.Time.today ();
-                component.set_completed (ref today_time);
-#endif
-                break;
-
-            default:
-                break;
-        }
     }
 
     public void remove_component (E.Source source, ECal.Component component, ECal.ObjModType mod_type) {
@@ -372,7 +436,7 @@ public class Calendar.Store : Object {
         }
 
         try {
-            add_source_view (source, query);
+            add_view (source, query);
         } catch (Error e) {
             error_received (e);
             critical ("Error from source '%s': %s", source.dup_display_name (), e.message);
@@ -437,20 +501,6 @@ public class Calendar.Store : Object {
         debug (@"Date ranges: ($data_range_first <= $month_start < $month_end <= $data_range_last)");  // vala-lint=line-length
     }
 
-    //--- Private Source Utilities --//
-
-    private List<E.Source>? list_sources () {
-        if (registry != null) {
-            switch (source_type) {
-                case ECal.ClientSourceType.EVENTS:
-                    return registry.list_sources (E.SOURCE_EXTENSION_CALENDAR);
-                case ECal.ClientSourceType.TASKS:
-                    return registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
-            }
-        }
-        return null;
-    }
-
     //--- Private Source Event Handlers --//
 
     private void on_source_added_to_backend (E.Source source) {
@@ -460,11 +510,15 @@ public class Calendar.Store : Object {
     }
 
     private void on_source_changed_in_backend (E.Source source) {
-        if (is_source_enabled (source)) {
+        var source_is_enabled = is_source_enabled (source);
+        var source_is_connected = is_source_connected (source);
+
+        if (source_is_enabled && !source_is_connected) {
             connect_source.begin (source);
-        } else {
+        } else if (source_is_connected && !source_is_enabled){
             disconnect_source.begin (source);
         }
+        source_changed (source);
     }
 
     private void on_source_removed_from_backend (E.Source source) {

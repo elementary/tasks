@@ -21,42 +21,6 @@
 public class Tasks.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
-    private Gee.Collection<ECal.ClientView> views;
-
-    /*
-     * We need to pass a valid S-expression as query to guarantee the callback events are fired.
-     *
-     * See `e-cal-backend-sexp.c` of evolution-data-server for available S-expressions:
-     * https://gitlab.gnome.org/GNOME/evolution-data-server/-/blob/master/src/calendar/libedata-cal/e-cal-backend-sexp.c
-     */
-
-    public void add_view (E.Source task_list, string query) {
-        try {
-            var view = Tasks.Application.model.create_task_list_view (
-                task_list,
-                query,
-                on_tasks_added,
-                on_tasks_modified,
-                on_tasks_removed );
-
-            lock (views) {
-                views.add (view);
-            }
-
-        } catch (Error e) {
-            critical (e.message);
-        }
-    }
-
-    private void remove_views () {
-        lock (views) {
-            foreach (ECal.ClientView view in views) {
-                Tasks.Application.model.destroy_task_list_view (view);
-            }
-            views.clear ();
-        }
-    }
-
     private Gtk.Revealer settings_button_revealer;
     private Gtk.Stack title_stack;
     private Gtk.Label scheduled_title;
@@ -67,8 +31,6 @@ public class Tasks.ListView : Gtk.Grid {
     private Tasks.TaskRow active_task_row;
 
     construct {
-        views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
-
         scheduled_title = new Gtk.Label (_("Scheduled"));
         scheduled_title.ellipsize = Pango.EllipsizeMode.END;
         scheduled_title.margin_start = 24;
@@ -169,8 +131,6 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         notify["source"].connect (() => {
-            remove_views ();
-
             foreach (unowned Gtk.Widget child in add_task_list.get_children ()) {
                 child.destroy ();
             }
@@ -182,7 +142,7 @@ public class Tasks.ListView : Gtk.Grid {
             if (source != null) {
                 var add_task_row = new Tasks.TaskRow.for_source (source);
                 add_task_row.task_changed.connect ((task) => {
-                    Tasks.Application.model.add_task (source, task);
+                    Tasks.Application.task_store.add_component (source, task);
                 });
                 add_task_list.add (add_task_row);
             }
@@ -287,7 +247,7 @@ public class Tasks.ListView : Gtk.Grid {
             }
         }
 
-        var due_date_time = Util.ical_to_date_time (comp.get_due ());
+        var due_date_time = Calendar.Util.ical_time_to_date_time (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time));
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
         header_label.margin_start = 6;
@@ -295,17 +255,22 @@ public class Tasks.ListView : Gtk.Grid {
         row.set_header (header_label);
     }
 
-    private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
+    public void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source, this.source == null);
             task_row.task_completed.connect ((task) => {
-                Tasks.Application.model.complete_task (source, task);
+                if (Tasks.Application.task_store.is_component_completed (task)) {
+                    Tasks.Application.task_store.set_component_status (task, ICal.PropertyStatus.NONE);
+                } else {
+                    Tasks.Application.task_store.set_component_status (task, ICal.PropertyStatus.COMPLETED);
+                }
+                Tasks.Application.task_store.modify_component (source, task, ECal.ObjModType.THIS_AND_PRIOR);
             });
             task_row.task_changed.connect ((task) => {
-                Tasks.Application.model.update_task (source, task, ECal.ObjModType.THIS_AND_FUTURE);
+                Tasks.Application.task_store.modify_component (source, task, ECal.ObjModType.THIS_AND_FUTURE);
             });
             task_row.task_removed.connect ((task) => {
-                Tasks.Application.model.remove_task (source, task, ECal.ObjModType.ALL);
+                Tasks.Application.task_store.remove_component (source, task, ECal.ObjModType.ALL);
             });
             task_list.add (task_row);
             return true;
@@ -313,7 +278,7 @@ public class Tasks.ListView : Gtk.Grid {
         task_list.show_all ();
     }
 
-    private void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
+    public void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
         Tasks.TaskRow task_row = null;
         var row_index = 0;
 
@@ -322,7 +287,7 @@ public class Tasks.ListView : Gtk.Grid {
 
             if (task_row != null) {
                 foreach (ECal.Component task in tasks) {
-                    if (Util.calcomponent_equal_func (task_row.task, task)) {
+                    if (Calendar.Util.ecalcomponent_equal_func (task_row.task, task)) {
                         task_row.task = task;
                         break;
                     }
@@ -332,17 +297,16 @@ public class Tasks.ListView : Gtk.Grid {
         } while (task_row != null);
     }
 
-    private void on_tasks_removed (SList<ECal.ComponentId?> cids) {
+    public void on_tasks_removed (Gee.Collection<ECal.Component> tasks) {
         unowned Tasks.TaskRow? task_row = null;
         var row_index = 0;
+
         do {
             task_row = (Tasks.TaskRow) task_list.get_row_at_index (row_index);
 
             if (task_row != null) {
-                foreach (unowned ECal.ComponentId cid in cids) {
-                    if (cid == null) {
-                        continue;
-                    } else if (cid.get_uid () == task_row.task.get_icalcomponent ().get_uid ()) {
+                foreach (ECal.Component task in tasks) {
+                    if (Calendar.Util.ecalcomponent_equal_func (task_row.task, task)) {
                         task_list.remove (task_row);
                         break;
                     }
