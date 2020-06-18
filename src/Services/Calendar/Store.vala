@@ -316,7 +316,7 @@ public class Calendar.Store : Object {
         components_added (components.read_only_view, source, views.read_only_view);
 
         add_component_to_backend.begin (source, component, (obj, res) => {
-            Idle.add(() => {
+            Idle.add (() => {
                 components_removed (components.read_only_view, source, views.read_only_view);
 
                 try {
@@ -339,7 +339,7 @@ public class Calendar.Store : Object {
         components_modified (components.read_only_view, source, views.read_only_view);
 
         modify_component_in_backend.begin (source, component, mod_type, (obj, res) => {
-            Idle.add(() => {
+            Idle.add (() => {
                 try {
                     modify_component_in_backend.end (res);
 
@@ -360,7 +360,7 @@ public class Calendar.Store : Object {
         components_removed (components.read_only_view, source, views.read_only_view);
 
         remove_component_from_backend.begin (source, component, mod_type, (obj, res) => {
-            Idle.add(() => {
+            Idle.add (() => {
                 try {
                     remove_component_from_backend.end (res);
 
@@ -615,7 +615,7 @@ public class Calendar.Store : Object {
         debug ("Disconnecting source '%s'", source.dup_display_name ());
 
         var views = get_views_for_source (source);
-        foreach(var view in views) {
+        foreach (var view in views) {
             try {
                 remove_view (view);
             } catch (Error e) {

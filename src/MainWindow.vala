@@ -287,7 +287,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void components_added (Gee.Collection<ECal.Component> components, E.Source source, Gee.Collection<ECal.ClientView> views) {
-        foreach( var view in views ) {
+        foreach (var view in views) {
             if (taskviews.contains (view)) {
                 listview.add_tasks (components, source);
                 break;
@@ -296,7 +296,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void components_modified (Gee.Collection<ECal.Component> components, E.Source source, Gee.Collection<ECal.ClientView> views) {
-        foreach( var view in views ) {
+        foreach (var view in views) {
             if (taskviews.contains (view)) {
                 listview.modify_tasks (components, source);
                 break;
@@ -305,7 +305,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void components_removed (Gee.Collection<ECal.Component> components, E.Source source, Gee.Collection<ECal.ClientView> views) {
-        foreach( var view in views ) {
+        foreach (var view in views) {
             if (taskviews.contains (view)) {
                 listview.remove_tasks (components);
                 break;
