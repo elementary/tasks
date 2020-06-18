@@ -25,11 +25,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     public signal void task_removed (ECal.Component task);
 
     public bool completed { get; private set; }
+    public bool is_new { get; construct; }
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
     public bool is_scheduled_view { get; construct; }
-
-    private bool created;
 
     private Granite.Widgets.DatePicker due_datepicker;
     private Granite.Widgets.TimePicker due_timepicker;
@@ -51,18 +50,18 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private static Gtk.CssProvider taskrow_provider;
 
     private TaskRow (ECal.Component task, E.Source source) {
-        Object (task: task, source: source);
+        Object (is_new: false, task: task, source: source);
     }
 
     public TaskRow.for_source (E.Source source) {
         var task = new ECal.Component ();
         task.set_new_vtype (ECal.ComponentVType.TODO);
 
-        Object (task: task, source: source);
+        Object (is_new: true, task: task, source: source);
     }
 
     public TaskRow.for_component (ECal.Component task, E.Source source, bool is_scheduled_view = false) {
-        Object (source: source, task: task, is_scheduled_view: is_scheduled_view);
+        Object (is_new: false, source: source, task: task, is_scheduled_view: is_scheduled_view);
     }
 
     static construct {
@@ -71,8 +70,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
-        created = Tasks.Application.task_store.is_component_created (task);
-
         icon = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.MENU);
         icon.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
@@ -154,7 +151,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         var save_button = new Gtk.Button ();
         save_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
-        save_button.label = created ? _("Save Changes") : _("Add Task");
+        save_button.label = is_new ? _("Add Task") : _("Save Changes");
 
         var button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL);
         button_box.baseline_position = Gtk.BaselinePosition.CENTER;
@@ -198,7 +195,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         margin_start = margin_end = 12;
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        if (created) {
+        if (!is_new) {
             check.show ();
             state_stack.visible_child = check;
 
@@ -224,7 +221,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
 
         summary_entry.activate.connect (() => {
-            if (created || (summary_entry.text != null && summary_entry.text.strip ().length > 0)) {
+            if (!is_new || (summary_entry.text != null && summary_entry.text.strip ().length > 0)) {
                 save_task (task);
             }
             cancel_edit ();
@@ -270,11 +267,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     private void cancel_edit () {
-        if (created) {
-            move_focus (Gtk.DirectionType.TAB_BACKWARD);
-        } else {
+        if (is_new) {
             move_focus (Gtk.DirectionType.TAB_FORWARD);
             reset_create ();
+        } else {
+            move_focus (Gtk.DirectionType.TAB_BACKWARD);
         }
         summary_entry.text = task.get_icalcomponent ().get_summary () == null ? "" : task.get_icalcomponent ().get_summary ();  // vala-lint=line-length
         reveal_child_request (false);
@@ -339,7 +336,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             Tasks.Application.set_task_color (source, check);
         }
 
-        if (task == null || !created) {
+        if (task == null || is_new) {
             state_stack.set_visible_child (icon);
 
             completed = false;
@@ -357,7 +354,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             description_label_revealer.reveal_child = false;
             description_textbuffer.text = "";
 
-        } else if (created) {
+        } else if (!is_new) {
             state_stack.set_visible_child (check);
 
             unowned ICal.Component ical_task = task.get_icalcomponent ();

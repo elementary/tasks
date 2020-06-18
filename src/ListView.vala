@@ -255,7 +255,7 @@ public class Tasks.ListView : Gtk.Grid {
         row.set_header (header_label);
     }
 
-    public void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
+    public void add_tasks (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source, this.source == null);
             task_row.task_completed.connect ((task) => {
@@ -278,7 +278,7 @@ public class Tasks.ListView : Gtk.Grid {
         task_list.show_all ();
     }
 
-    public void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
+    public void modify_tasks (Gee.Collection<ECal.Component> tasks, E.Source source) {
         Tasks.TaskRow task_row = null;
         var row_index = 0;
 
@@ -297,7 +297,7 @@ public class Tasks.ListView : Gtk.Grid {
         } while (task_row != null);
     }
 
-    public void on_tasks_removed (Gee.Collection<ECal.Component> tasks) {
+    public void remove_tasks (Gee.Collection<ECal.Component> tasks) {
         unowned Tasks.TaskRow? task_row = null;
         var row_index = 0;
 

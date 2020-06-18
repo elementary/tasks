@@ -132,9 +132,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         Tasks.Application.task_store.source_changed.connect (update_source);
         Tasks.Application.task_store.source_removed.connect (remove_source);
 
-        Tasks.Application.task_store.components_added.connect (listview.on_tasks_added);
-        Tasks.Application.task_store.components_modified.connect (listview.on_tasks_modified);
-        Tasks.Application.task_store.components_removed.connect (listview.on_tasks_removed);
+        Tasks.Application.task_store.components_added.connect (components_added);
+        Tasks.Application.task_store.components_modified.connect (components_modified);
+        Tasks.Application.task_store.components_removed.connect (components_removed);
 
         listbox.set_header_func (header_update_func);
         listbox.row_selected.connect ((row) => {
@@ -284,6 +284,33 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         listbox.unselect_row (source_rows[source]);
         source_rows[source].remove_request ();
         source_rows.unset (source);
+    }
+
+    private void components_added (Gee.Collection<ECal.Component> components, E.Source source, Gee.Collection<ECal.ClientView> views) {
+        foreach( var view in views ) {
+            if (taskviews.contains (view)) {
+                listview.add_tasks (components, source);
+                break;
+            }
+        }
+    }
+
+    private void components_modified (Gee.Collection<ECal.Component> components, E.Source source, Gee.Collection<ECal.ClientView> views) {
+        foreach( var view in views ) {
+            if (taskviews.contains (view)) {
+                listview.modify_tasks (components, source);
+                break;
+            }
+        }
+    }
+
+    private void components_removed (Gee.Collection<ECal.Component> components, E.Source source, Gee.Collection<ECal.ClientView> views) {
+        foreach( var view in views ) {
+            if (taskviews.contains (view)) {
+                listview.remove_tasks (components);
+                break;
+            }
+        }
     }
 
     public override bool configure_event (Gdk.EventConfigure event) {
