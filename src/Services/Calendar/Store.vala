@@ -616,7 +616,12 @@ public class Calendar.Store : Object {
 
         var views = get_views_for_source (source);
         foreach(var view in views) {
-            remove_view (view);
+            try {
+                remove_view (view);
+            } catch (Error e) {
+                error_received (e);
+                warning (e.message);
+            }
         }
 
         lock (source_views) {
@@ -866,7 +871,6 @@ public class Calendar.Store : Object {
         var views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
         views.add (view);
 
-        var client = view.client;
         var source = get_source_for_view (view);
         var source_comps = source_components.get (source.get_uid ());
 
