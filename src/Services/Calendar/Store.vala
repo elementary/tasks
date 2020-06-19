@@ -835,7 +835,7 @@ public class Calendar.Store : Object {
                                 debug_component (source, ecal_comp);
                                 source_comps.set (uid, ecal_comp);
 
-                                if (transactional_components.contains (ecal_comp)) {
+                                if (transactional_components != null && transactional_components.contains (ecal_comp)) {
                                     modified_components.add (ecal_comp);
                                 } else {
                                     added_components.add (ecal_comp);
@@ -853,7 +853,7 @@ public class Calendar.Store : Object {
                                 debug_component (source, ecal_comp);
                                 source_comps.set (uid, ecal_comp);
 
-                                if (transactional_components.contains (ecal_comp)) {
+                                if (transactional_components != null && transactional_components.contains (ecal_comp)) {
                                     modified_components.add (ecal_comp);
                                 } else {
                                     added_components.add (ecal_comp);
