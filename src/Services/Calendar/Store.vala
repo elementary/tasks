@@ -815,7 +815,7 @@ public class Calendar.Store : Object {
         var modified_components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
 
         lock (add_transaction_components) {
-            var transactional_components = add_transaction_components.get (view);
+            unowned Gee.Collection<ECal.Component> transactional_components = add_transaction_components.get (view);
 
             objects.foreach ((ical_comp) => {
                 unowned string uid = ical_comp.get_uid ();
