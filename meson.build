@@ -39,7 +39,6 @@ executable(
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskRow.vala',
     'src/Widgets/ListSettingsPopover.vala',
-    #'src/TaskModel.vala',
     dependencies: [
         dependency('glib-2.0'),
         dependency('gobject-2.0'),
