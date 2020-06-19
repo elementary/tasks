@@ -34,6 +34,7 @@ public class Calendar.Store : Object {
     private E.SourceRegistry registry { get; private set; }
     private HashTable<string, ECal.Client> source_client;
     private HashTable<string, Gee.ArrayList<ECal.ClientView>> source_views;
+    private HashTable<ECal.ClientView, Gee.Collection<ECal.Component>> add_transaction_components;
 
     internal HashTable<string, Gee.TreeMultiMap<string, ECal.Component>> source_components;
 
@@ -76,6 +77,7 @@ public class Calendar.Store : Object {
         source_client = new HashTable<string, ECal.Client> (str_hash, str_equal);
         source_views = new HashTable<string, Gee.ArrayList<ECal.ClientView>> (str_hash, str_equal);
         source_components = new HashTable<string, Gee.TreeMultiMap<string, ECal.Component>> (str_hash, str_equal);
+        add_transaction_components = new HashTable<ECal.ClientView, Gee.Collection<ECal.Component>> (direct_hash, direct_equal);
 
         int week_start = Posix.NLTime.FIRST_WEEKDAY.to_string ().data[0];
         if (week_start >= 1 && week_start <= 7) {
@@ -239,6 +241,12 @@ public class Calendar.Store : Object {
         view.start ();
 
         added_view_to_source (view, source);
+        lock (add_transaction_components) {
+            add_transaction_components.set (
+                view,
+                new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func)  // vala-lint=line-length
+            );
+        }
 
         return view;
     }
@@ -250,6 +258,10 @@ public class Calendar.Store : Object {
 
                 if (views != null && views.contains (view)) {
                     var removed_view = views.remove_at (views.index_of (view));
+
+                    lock (add_transaction_components) {
+                        add_transaction_components.remove (removed_view);
+                    }
                     removed_view.stop ();
                     break;
                 }
@@ -315,14 +327,31 @@ public class Calendar.Store : Object {
         components.add (component);
         components_added (components.read_only_view, source, views.read_only_view);
 
+        lock (add_transaction_components) {
+            foreach(var view in views) {
+                var transactional_components = add_transaction_components.get (view);
+                if (transactional_components != null) {
+                    transactional_components.add (component);
+                }
+            }
+        }
+
         add_component_to_backend.begin (source, component, (obj, res) => {
             Idle.add (() => {
-                components_removed (components.read_only_view, source, views.read_only_view);
-
                 try {
                     add_component_to_backend.end (res);
 
                 } catch (Error e) {
+                    lock (add_transaction_components) {
+                        foreach(var view in views) {
+                            var transactional_components = add_transaction_components.get (view);
+                            if (transactional_components != null) {
+                                transactional_components.remove (component);
+                            }
+                        }
+                    }
+                    components_removed (components.read_only_view, source, views.read_only_view);
+
                     error_received (e);
                     critical (e.message);
                 }
@@ -783,46 +812,69 @@ public class Calendar.Store : Object {
 
         debug (@"Received $(objects.length()) added component(s) for source '%s'", source.dup_display_name ());
         var added_components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
+        var modified_components = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
 
-        objects.foreach ((ical_comp) => {
-            unowned string uid = ical_comp.get_uid ();
+        lock (add_transaction_components) {
+            var transactional_components = add_transaction_components.get (view);
 
-            try {
-                SList<ECal.Component> ecal_comps;
+            objects.foreach ((ical_comp) => {
+                unowned string uid = ical_comp.get_uid ();
 
-                if (source_type == ECal.ClientSourceType.EVENTS) {
+                try {
+                    SList<ECal.Component> ecal_comps;
+
+                    if (source_type == ECal.ClientSourceType.EVENTS) {
 #if E_CAL_2_0
-                    client.generate_instances_for_object_sync (ical_comp, (time_t) data_range.first_dt.to_unix (), (time_t) data_range.last_dt.to_unix (), null, (comp, start, end) => {  // vala-lint=line-length
-                        var ecal_comp = new ECal.Component.from_icalcomponent (comp);
+                        client.generate_instances_for_object_sync (ical_comp, (time_t) data_range.first_dt.to_unix (), (time_t) data_range.last_dt.to_unix (), null, (comp, start, end) => {  // vala-lint=line-length
+                            var ecal_comp = new ECal.Component.from_icalcomponent (comp);
 #else
-                    client.generate_instances_for_object_sync (ical_comp, (time_t) data_range.first_dt.to_unix (), (time_t) data_range.last_dt.to_unix (), (ecal_comp, start, end) => {  // vala-lint=line-length
+                        client.generate_instances_for_object_sync (ical_comp, (time_t) data_range.first_dt.to_unix (), (time_t) data_range.last_dt.to_unix (), (ecal_comp, start, end) => {  // vala-lint=line-length
 #endif
 
-                        debug_component (source, ecal_comp);
-                        source_comps.set (uid, ecal_comp);
-                        added_components.add (ecal_comp);
-                        return true;
-                    });
+                            if (!added_components.contains (ecal_comp) && !modified_components.contains (ecal_comp)) {
+                                debug_component (source, ecal_comp);
+                                source_comps.set (uid, ecal_comp);
 
-                } else {
-                    client.get_objects_for_uid_sync (ical_comp.get_uid (), out ecal_comps, null);
+                                if (transactional_components.contains (ecal_comp)) {
+                                    modified_components.add (ecal_comp);
+                                } else {
+                                    added_components.add (ecal_comp);
+                                }
+                                transactional_components.remove (ecal_comp);
+                            }
+                            return true;
+                        });
 
-                    ecal_comps.foreach ((ecal_comp) => {
-                        if (!added_components.contains (ecal_comp)) {
-                            debug_component (source, ecal_comp);
-                            source_comps.set (uid, ecal_comp);
-                            added_components.add (ecal_comp);
-                        }
-                    });
+                    } else {
+                        client.get_objects_for_uid_sync (ical_comp.get_uid (), out ecal_comps, null);
+
+                        ecal_comps.foreach ((ecal_comp) => {
+                            if (!added_components.contains (ecal_comp) && !modified_components.contains (ecal_comp)) {
+                                debug_component (source, ecal_comp);
+                                source_comps.set (uid, ecal_comp);
+
+                                if (transactional_components.contains (ecal_comp)) {
+                                    modified_components.add (ecal_comp);
+                                } else {
+                                    added_components.add (ecal_comp);
+                                }
+                                transactional_components.remove (ecal_comp);
+                            }
+                        });
+                    }
+
+                } catch (Error e) {
+                    warning (e.message);
                 }
-
-            } catch (Error e) {
-                warning (e.message);
-            }
-        });
+            });
+        }
 
         if (!added_components.is_empty) {
             components_added (added_components.read_only_view, source, views.read_only_view);
+        }
+
+        if (!modified_components.is_empty) {
+            components_modified (modified_components.read_only_view, source, views.read_only_view);
         }
     }
 
