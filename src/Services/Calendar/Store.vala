@@ -328,7 +328,7 @@ public class Calendar.Store : Object {
         components_added (components.read_only_view, source, views.read_only_view);
 
         lock (add_transaction_components) {
-            foreach(var view in views) {
+            foreach (var view in views) {
                 var transactional_components = add_transaction_components.get (view);
                 if (transactional_components != null) {
                     transactional_components.add (component);
@@ -343,7 +343,7 @@ public class Calendar.Store : Object {
 
                 } catch (Error e) {
                     lock (add_transaction_components) {
-                        foreach(var view in views) {
+                        foreach (var view in views) {
                             var transactional_components = add_transaction_components.get (view);
                             if (transactional_components != null) {
                                 transactional_components.remove (component);
