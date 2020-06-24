@@ -7,9 +7,9 @@ You'll need the following dependencies:
 * gobject-2.0
 * granite >=0.5
 * gtk+-3.0
-* libecal-1.2
+* libecal1.2-dev
 * libedataserver-1.2
-* libedataserverui-1.2
+* libedataserverui1.2-dev
 * libical
 * meson
 * valac
