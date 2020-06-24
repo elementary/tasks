@@ -39,9 +39,8 @@ public class Calendar.Store : Object {
     internal HashTable<string, Gee.TreeMultiMap<string, ECal.Component>> source_components;
 
     private GLib.Queue<E.Source> source_trash;
-#if EDataServerUI
     private E.CredentialsPrompter credentials_prompter;
-#endif
+
     private static GLib.Settings state_settings;
 
     private Store (ECal.ClientSourceType source_type) {
@@ -92,10 +91,8 @@ public class Calendar.Store : Object {
     private async void open () {
         try {
             registry = yield new E.SourceRegistry (null);
-#if EDataServerUI
             credentials_prompter = new E.CredentialsPrompter (registry);
             credentials_prompter.set_auto_prompt (true);
-#endif
 
             registry.source_added.connect (on_source_added_to_backend);
             registry.source_changed.connect (on_source_changed_in_backend);

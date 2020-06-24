@@ -46,6 +46,7 @@ executable(
         dependency('gtk+-3.0'),
         libecal_dep,
         dependency('libedataserver-1.2'),
+        dependency('libedataserverui-1.2'),
         libical_dep
     ],
     install : true

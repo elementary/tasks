@@ -9,6 +9,7 @@ You'll need the following dependencies:
 * gtk+-3.0
 * libecal-1.2
 * libedataserver-1.2
+* libedataserverui-1.2
 * libical
 * meson
 * valac
