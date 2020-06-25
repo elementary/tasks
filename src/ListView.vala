@@ -142,7 +142,7 @@ public class Tasks.ListView : Gtk.Grid {
             if (source != null) {
                 var add_task_row = new Tasks.TaskRow.for_source (source);
                 add_task_row.task_changed.connect ((task) => {
-                    Tasks.Application.task_store.add_component (source, task);
+                    Tasks.Application.task_store.component_add (source, task);
                 });
                 add_task_list.add (add_task_row);
             }
@@ -247,7 +247,7 @@ public class Tasks.ListView : Gtk.Grid {
             }
         }
 
-        var due_date_time = Calendar.Util.ical_time_to_date_time (comp.get_due ());
+        var due_date_time = Calendar.Util.icaltime_to_datetime (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time));
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
         header_label.margin_start = 6;
@@ -259,18 +259,18 @@ public class Tasks.ListView : Gtk.Grid {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source, this.source == null);
             task_row.task_completed.connect ((task) => {
-                if (Tasks.Application.task_store.is_component_completed (task)) {
-                    Tasks.Application.task_store.set_component_status (task, ICal.PropertyStatus.NONE);
+                if (Tasks.Application.task_store.component_is_completed (task)) {
+                    Tasks.Application.task_store.component_set_status (task, ICal.PropertyStatus.NONE);
                 } else {
-                    Tasks.Application.task_store.set_component_status (task, ICal.PropertyStatus.COMPLETED);
+                    Tasks.Application.task_store.component_set_status (task, ICal.PropertyStatus.COMPLETED);
                 }
-                Tasks.Application.task_store.modify_component (source, task, ECal.ObjModType.THIS_AND_PRIOR);
+                Tasks.Application.task_store.component_modify (source, task, ECal.ObjModType.THIS_AND_PRIOR);
             });
             task_row.task_changed.connect ((task) => {
-                Tasks.Application.task_store.modify_component (source, task, ECal.ObjModType.THIS_AND_FUTURE);
+                Tasks.Application.task_store.component_modify (source, task, ECal.ObjModType.THIS_AND_FUTURE);
             });
             task_row.task_removed.connect ((task) => {
-                Tasks.Application.task_store.remove_component (source, task, ECal.ObjModType.ALL);
+                Tasks.Application.task_store.component_remove (source, task, ECal.ObjModType.ALL);
             });
             task_list.add (task_row);
             return true;

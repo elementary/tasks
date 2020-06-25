@@ -141,7 +141,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             lock (taskviews) {
                 taskviews.foreach ((taskview) => {
                     try {
-                        Tasks.Application.task_store.remove_view (taskview);
+                        Tasks.Application.task_store.view_remove (taskview);
                     } catch (Error e) {
                         warning (e.message);
                     }
@@ -156,7 +156,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
                     listview.source = source;
                     try {
-                        var view = Tasks.Application.task_store.add_view (source, "(contains? 'any' '')");
+                        var view = Tasks.Application.task_store.view_add (source, "(contains? 'any' '')");
                         taskviews.add (view);
                     } catch (Error e) {
                         warning (e.message);
@@ -168,13 +168,13 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                     listview.source = null;
                     Tasks.Application.settings.set_string ("selected-list", "scheduled");
 
-                    var sources = Tasks.Application.task_store.list_sources ();
+                    var sources = Tasks.Application.task_store.sources_list ();
                     var query = "AND (NOT is-completed?) (OR (has-start?) (has-alarms?))";
 
                     sources.foreach ((source) => {
-                        if (Tasks.Application.task_store.is_source_enabled (source)) {
+                        if (Tasks.Application.task_store.source_is_active (source)) {
                             try {
-                                var view = Tasks.Application.task_store.add_view (source, query);
+                                var view = Tasks.Application.task_store.view_add (source, query);
                                 taskviews.add (view);
                             } catch (Error e) {
                                 warning (e.message);
@@ -223,7 +223,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             }
         }
 
-        var display_name = Tasks.Application.task_store.get_source_ancestor_display_name (row.source);
+        var display_name = Tasks.Application.task_store.source_get_ancestor_display_name (row.source);
         var header_label = new Granite.HeaderLabel (display_name);
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
         header_label.margin_start = 6;
@@ -258,7 +258,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             listbox.show_all ();
 
             var selected_list = Application.settings.get_string ("selected-list");
-            if (selected_list == "" && Tasks.Application.task_store.get_default_source () == source) {
+            if (selected_list == "" && Tasks.Application.task_store.source_get_default () == source) {
                 listbox.select_row (source_rows[source]);
 
             } else if (selected_list == source.uid) {
@@ -268,7 +268,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void update_source (E.Source source) {
-        if (!Tasks.Application.task_store.is_source_enabled (source)) {
+        if (!Tasks.Application.task_store.source_is_active (source)) {
             remove_source (source);
 
         } else if (!source_rows.has_key (source)) {

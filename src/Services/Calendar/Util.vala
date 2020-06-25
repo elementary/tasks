@@ -21,7 +21,7 @@ namespace Calendar.Util {
 
     //--- GLib.DateTime Helpers ---//
 
-    public GLib.DateTime date_time_get_start_of_month (owned GLib.DateTime? date = null) {
+    public GLib.DateTime datetime_get_start_of_month (owned GLib.DateTime? date = null) {
         if (date == null) {
             date = new GLib.DateTime.now_local ();
         }
@@ -29,14 +29,14 @@ namespace Calendar.Util {
         return new GLib.DateTime.local (date.get_year (), date.get_month (), 1, 0, 0, 0);
     }
 
-    public GLib.DateTime date_time_strip_time (GLib.DateTime datetime) {
+    public GLib.DateTime datetime_strip_time (GLib.DateTime datetime) {
         return datetime.add_full (0, 0, 0, -datetime.get_hour (), -datetime.get_minute (), -datetime.get_second ());
     }
 
     /**
      * Say if an event lasts all day.
      */
-    public bool date_time_is_all_day (GLib.DateTime dtstart, GLib.DateTime dtend) {
+    public bool datetime_is_all_day (GLib.DateTime dtstart, GLib.DateTime dtend) {
         var utc_start = dtstart.to_timezone (new TimeZone.utc ());
         var timespan = dtend.difference (dtstart);
 
@@ -52,7 +52,7 @@ namespace Calendar.Util {
     /**
      * Converts the given ICal.Time to a DateTime.
      */
-    public TimeZone ical_time_get_timezone (ICal.Time date) {
+    public TimeZone icaltime_get_timezone (ICal.Time date) {
         int is_daylight;
         var interval = date.get_timezone ().get_utc_offset (null, out is_daylight);
         bool is_positive = interval >= 0;
@@ -68,17 +68,24 @@ namespace Calendar.Util {
      * Converts the given ICal.Time to a DateTime.
      * XXX : Track next versions of evolution in order to convert ICal.Timezone to GLib.TimeZone with a dedicated function…
      */
-    public GLib.DateTime ical_time_to_date_time (ICal.Time date) {
+    public GLib.DateTime icaltime_to_datetime (ICal.Time date) {
 #if E_CAL_2_0
         int year, month, day, hour, minute, second;
         date.get_date (out year, out month, out day);
         date.get_time (out hour, out minute, out second);
-        return new GLib.DateTime (ical_time_get_timezone (date), year, month,
+        return new GLib.DateTime (icaltime_get_timezone (date), year, month,
             day, hour, minute, second);
 #else
-        return new GLib.DateTime (ical_time_get_timezone (date), date.year, date.month,
+        return new GLib.DateTime (icaltime_get_timezone (date), date.year, date.month,
             date.day, date.hour, date.minute, date.second);
 #endif
+    }
+
+    //--- E.Source Helpers ---//
+
+    /* Returns true if 'a' and 'b' are the same E.Source */
+    public bool source_equal_func (E.Source a, E.Source b) {
+        return a.get_uid () == b.get_uid ();
     }
 
     //--- ECal.Component Helpers ---//
@@ -157,6 +164,53 @@ namespace Calendar.Util {
 
         /* If the event is inside the selected date */
         if (start_unix < selected_date_unix_next && selected_date_unix < end_unix) {
+            return true;
+        }
+
+        return false;
+    }
+
+    //--- ICal.Component Helpers ---//
+
+    public void icalcomponent_to_local_datetimes (ICal.Component component, out GLib.DateTime start_date, out GLib.DateTime end_date) {
+        ICal.Time dt_start = component.get_dtstart ();
+        ICal.Time dt_end = component.get_dtend ();
+        start_date = Calendar.Util.icaltime_to_datetime (dt_start);
+
+        if (!dt_end.is_null_time ()) {
+            end_date = Calendar.Util.icaltime_to_datetime (dt_end);
+        } else if (dt_start.is_date ()) {
+            end_date = start_date;
+        } else if (!component.get_duration ().is_null_duration ()) {
+            end_date = Calendar.Util.icaltime_to_datetime (dt_start.add (component.get_duration ()));
+        } else {
+            end_date = start_date.add_days (1);
+        }
+
+        if (Calendar.Util.datetime_is_all_day (start_date, end_date)) {
+            end_date = end_date.add_days (-1);
+        }
+    }
+
+    public bool icalcomponent_is_in_range (ICal.Component component, Calendar.Util.DateRange range) {
+        GLib.DateTime start, end;
+        icalcomponent_to_local_datetimes (component, out start, out end);
+
+        int c1 = start.compare (range.first_dt);
+        int c2 = start.compare (range.last_dt);
+        int c3 = end.compare (range.first_dt);
+        int c4 = end.compare (range.last_dt);
+
+        if (c1 <= 0 && c3 > 0) {
+            return true;
+        }
+        if (c2 < 0 && c4 > 0) {
+            return true;
+        }
+        if (c1 >= 0 && c2 < 0) {
+            return true;
+        }
+        if (c3 > 0 && c4 < 0) {
             return true;
         }
 
