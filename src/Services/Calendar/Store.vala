@@ -136,6 +136,22 @@ public class Calendar.Store : Object {
         });
     }
 
+    public void source_remove (E.Source source) {
+        source_removed (source);
+        source.remove.begin (null, (obj,res) => {
+            Idle.add (() => {
+                try {
+                    source.remove.end (res);
+                } catch (Error e) {
+                    source_added (source);
+                    error_received (e);
+                    critical (e.message);
+                }
+                return Source.REMOVE;
+            });
+        });
+    }
+
     public E.Source source_get_with_uid (string uid) {
         return registry.ref_source (uid);
     }
@@ -227,7 +243,7 @@ public class Calendar.Store : Object {
         source.set_enabled (false);
     }
 
-    public void source_undo_trash () {
+    public void source_trash_undo () {
         if (sources_trashed.is_empty ())
             return;
 
@@ -236,7 +252,7 @@ public class Calendar.Store : Object {
         registry_source_added (source);
     }
 
-    public void source_empty_trash () {
+    public void source_trash_empty () {
         E.Source source = sources_trashed.pop_tail ();
         while (source != null) {
             source.remove.begin (null);
@@ -669,12 +685,12 @@ public class Calendar.Store : Object {
     }
 
     private void registry_source_changed (E.Source source) {
-        var source_is_enabled = source_is_active (source);
+        var source_is_active = source_is_active (source);
         var source_is_connected = source_is_connected (source);
 
-        if (source_is_enabled && !source_is_connected) {
+        if (source_is_active && !source_is_connected) {
             source_connect.begin (source);
-        } else if (source_is_connected && !source_is_enabled) {
+        } else if (source_is_connected && !source_is_active) {
             source_disconnect.begin (source);
         }
         source_changed (source);
