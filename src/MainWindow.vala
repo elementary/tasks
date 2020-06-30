@@ -310,6 +310,13 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         listbox.unselect_row (source_rows[source]);
         source_rows[source].remove_request ();
         source_rows.unset (source);
+
+        Idle.add (() => {
+            listbox.invalidate_sort ();
+            listbox.invalidate_headers ();
+
+            return Source.REMOVE;
+        });
     }
 
     public override bool configure_event (Gdk.EventConfigure event) {
