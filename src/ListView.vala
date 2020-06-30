@@ -283,9 +283,12 @@ public class Tasks.ListView : Gtk.Grid {
             unowned ICal.Component comp_before = before.task.get_icalcomponent ();
 
             if (comp_before.get_due ().compare_date_only (comp.get_due ()) == 0) {
+                debug (@"Same: $(Tasks.Util.get_relative_date (Util.ical_to_date_time (comp.get_due())))");
                 return;
             }
         }
+
+        debug (@"NOT Same: $(Tasks.Util.get_relative_date (Util.ical_to_date_time (comp.get_due())))");
 
         var due_date_time = Util.ical_to_date_time (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time));
@@ -310,7 +313,14 @@ public class Tasks.ListView : Gtk.Grid {
             task_list.add (task_row);
             return true;
         });
-        task_list.show_all ();
+
+        Idle.add (() => {
+            task_list.invalidate_sort ();
+            task_list.invalidate_headers ();
+            task_list.show_all ();
+
+            return Source.REMOVE;
+        });
     }
 
     private void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
@@ -330,6 +340,13 @@ public class Tasks.ListView : Gtk.Grid {
             }
             row_index++;
         } while (task_row != null);
+
+        Idle.add (() => {
+            task_list.invalidate_sort ();
+            task_list.invalidate_headers ();
+
+            return Source.REMOVE;
+        });
     }
 
     private void on_tasks_removed (SList<ECal.ComponentId?> cids) {
@@ -350,5 +367,12 @@ public class Tasks.ListView : Gtk.Grid {
             }
             row_index++;
         } while (task_row != null);
+
+        Idle.add (() => {
+            task_list.invalidate_sort ();
+            task_list.invalidate_headers ();
+
+            return Source.REMOVE;
+        });
     }
 }

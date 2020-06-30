@@ -274,7 +274,13 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             source_rows[source] = new Tasks.SourceRow (source);
 
             listbox.add (source_rows[source]);
-            listbox.show_all ();
+            Idle.add (() => {
+                listbox.invalidate_sort ();
+                listbox.invalidate_headers ();
+                listbox.show_all ();
+
+                return Source.REMOVE;
+            });
         }
     }
 
@@ -290,6 +296,13 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         } else {
             source_rows[source].update_request ();
             listview.update_request ();
+
+            Idle.add (() => {
+                listbox.invalidate_sort ();
+                listbox.invalidate_headers ();
+
+                return Source.REMOVE;
+            });
         }
     }
 
