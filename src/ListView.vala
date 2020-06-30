@@ -283,12 +283,9 @@ public class Tasks.ListView : Gtk.Grid {
             unowned ICal.Component comp_before = before.task.get_icalcomponent ();
 
             if (comp_before.get_due ().compare_date_only (comp.get_due ()) == 0) {
-                debug (@"Same: $(Tasks.Util.get_relative_date (Util.ical_to_date_time (comp.get_due())))");
                 return;
             }
         }
-
-        debug (@"NOT Same: $(Tasks.Util.get_relative_date (Util.ical_to_date_time (comp.get_due())))");
 
         var due_date_time = Util.ical_to_date_time (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time));
