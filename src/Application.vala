@@ -82,7 +82,8 @@ public class Tasks.Application : Gtk.Application {
         if (!providers.has_key (color)) {
             string style = """
                 @define-color colorAccent %s;
-            """.printf (color);
+                @define-color accent_color %s;
+            """.printf (color, color);
 
             try {
                 var style_provider = new Gtk.CssProvider ();
