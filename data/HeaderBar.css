@@ -19,28 +19,12 @@
 */
 
 .sidebar-header {
-    background-color: shade (@bg_color, 0.92);
-    color: mix (@bg_color, @text_color, 0.77);
+    background-color: shade (@base_color, 0.95);
+    color: mix (@base_color, @text_color, 0.67);
+    box-shadow: none;
+    border-right: 1px solid alpha (black, 0.25);
 }
 
-.sidebar-header:dir(ltr) {
-    border-top-right-radius: 0;
-}
-
-.sidebar-header:dir(rtl) {
-    border-top-left-radius: 0;
-}
-
-.listview-header:dir(ltr) {
-    border-top-left-radius: 0;
-}
-
-.listview-header:dir(rtl) {
-    border-top-right-radius: 0;
-}
-
-paned {
-    background-color: @bg_color;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+.listview-header {
+    box-shadow: none;
 }

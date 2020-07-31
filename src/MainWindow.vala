@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.MainWindow : Gtk.ApplicationWindow {
+public class Tasks.MainWindow : Hdy.ApplicationWindow {
     public const string ACTION_PREFIX = "win.";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
 
@@ -47,6 +47,8 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     construct {
+        Hdy.init ();
+
         add_action_entries (ACTION_ENTRIES, this);
 
         foreach (var action in action_accelerators.get_keys ()) {
@@ -56,7 +58,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         var header_provider = new Gtk.CssProvider ();
         header_provider.load_from_resource ("io/elementary/tasks/HeaderBar.css");
 
-        var sidebar_header = new Gtk.HeaderBar ();
+        var sidebar_header = new Hdy.HeaderBar ();
         sidebar_header.decoration_layout = "close:";
         sidebar_header.has_subtitle = false;
         sidebar_header.show_close_button = true;
@@ -68,7 +70,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         sidebar_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
         sidebar_header_context.add_provider (header_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        var listview_header = new Gtk.HeaderBar ();
+        var listview_header = new Hdy.HeaderBar ();
         listview_header.has_subtitle = false;
         listview_header.decoration_layout = ":maximize";
         listview_header.show_close_button = true;
@@ -79,10 +81,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         listview_header_context.add_class ("default-decoration");
         listview_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
         listview_header_context.add_provider (header_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-        var header_paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
-        header_paned.pack1 (sidebar_header, false, false);
-        header_paned.pack2 (listview_header, true, false);
 
         listbox = new Gtk.ListBox ();
         listbox.set_sort_func (sort_function);
@@ -108,22 +106,22 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         listview = new Tasks.ListView ();
 
-        var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
-        paned.pack1 (sidebar, false, false);
-        paned.pack2 (listview, true, false);
+        var sidebar_view = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        sidebar_view.hexpand = false;
+        sidebar_view.set_size_request (200, -1);
+        sidebar_view.add (sidebar_header);
+        sidebar_view.add (sidebar);
 
-        set_titlebar (header_paned);
-        add (paned);
+        var main_view = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        main_view.hexpand = true;
+        main_view.add (listview_header);
+        main_view.add (listview);
 
-        // This must come after setting header_paned as the titlebar
-        unowned Gtk.StyleContext header_paned_context = header_paned.get_style_context ();
-        header_paned_context.remove_class ("titlebar");
-        header_paned_context.add_provider (header_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        var main_grid = new Gtk.Grid ();
+        main_grid.add (sidebar_view);
+        main_grid.add (main_view);
 
-        get_style_context ().add_class ("rounded");
-
-        Tasks.Application.settings.bind ("pane-position", header_paned, "position", GLib.SettingsBindFlags.DEFAULT);
-        Tasks.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
+        add (main_grid);
 
         Tasks.Application.model.task_list_added.connect (add_source);
         Tasks.Application.model.task_list_modified.connect (update_source);

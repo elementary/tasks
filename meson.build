@@ -3,7 +3,7 @@ project('io.elementary.tasks', 'vala', 'c')
 gnome = import('gnome')
 i18n = import('i18n')
 
-add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()), language:'c')
+add_global_arguments('-DHANDY_USE_UNSTABLE_API','-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()), language:'c')
 add_project_arguments(['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala')
 
 gresource = gnome.compile_resources(
@@ -41,6 +41,7 @@ executable(
         dependency('gobject-2.0'),
         dependency('granite', version: '>=0.5'),
         dependency('gtk+-3.0'),
+        dependency('libhandy-1'),
         libecal_dep,
         dependency('libedataserver-1.2'),
         libical_dep
