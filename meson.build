@@ -9,7 +9,6 @@ add_global_arguments(
     language:'c'
 )
 
-
 add_project_arguments(['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala')
 
 gresource = gnome.compile_resources(
