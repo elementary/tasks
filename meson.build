@@ -43,6 +43,7 @@ executable(
         dependency('gtk+-3.0'),
         libecal_dep,
         dependency('libedataserver-1.2'),
+        dependency('libhandy-1', version: '>=0.90.0'),
         libical_dep
     ],
     install : true
