@@ -3,11 +3,7 @@ project('io.elementary.tasks', 'vala', 'c')
 gnome = import('gnome')
 i18n = import('i18n')
 
-add_global_arguments(
-    '-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()),
-    '-DHANDY_USE_UNSTABLE_API',
-    language:'c'
-)
+add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()), language:'c')
 
 add_project_arguments(['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala')
 
@@ -48,7 +44,7 @@ executable(
         dependency('gtk+-3.0'),
         libecal_dep,
         dependency('libedataserver-1.2'),
-        dependency('libhandy-1', version: '>=0.83.0'),
+        dependency('libhandy-1', version: '>=0.90.0'),
         libical_dep
     ],
     install : true
