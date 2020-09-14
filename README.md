@@ -9,6 +9,7 @@ You'll need the following dependencies:
 * gtk+-3.0
 * libecal-1.2
 * libedataserver-1.2
+* libhandy-1-dev >= 0.90.0
 * libical
 * meson
 * valac
