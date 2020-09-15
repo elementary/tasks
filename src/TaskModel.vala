@@ -185,11 +185,7 @@ public class Tasks.TaskModel : Object {
 
         try {
             string? uid;
-#if E_CAL_2_0
             yield client.create_object (comp, ECal.OperationFlags.NONE, null, out uid);
-#else
-            yield client.create_object (comp, null, out uid);
-#endif
             if (uid != null) {
                 comp.set_uid (uid);
             }
@@ -216,12 +212,7 @@ public class Tasks.TaskModel : Object {
             comp.set_status (ICal.PropertyStatus.NONE);
             task.set_percent_complete (0);
 
-#if E_CAL_2_0
             task.set_completed (new ICal.Time.null_time ());
-#else
-            var null_time = ICal.Time.null_time ();
-            task.set_completed (ref null_time);
-#endif
 
             update_icalcomponent (client, comp, ECal.ObjModType.ONLY_THIS);
 
@@ -230,27 +221,15 @@ public class Tasks.TaskModel : Object {
 
             comp.set_status (ICal.PropertyStatus.COMPLETED);
             task.set_percent_complete (100);
-
-#if E_CAL_2_0
             task.set_completed (new ICal.Time.today ());
-#else
-            var today_time = ICal.Time.today ();
-            task.set_completed (ref today_time);
-#endif
 
             update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
         }
 
         if (task.has_recurrences () && !was_completed) {
-#if E_CAL_2_0
             var duration = new ICal.Duration.null_duration ();
             duration.set_weeks (520); // roughly 10 years
             var today = new ICal.Time.today ();
-#else
-            var duration = ICal.Duration.null_duration ();
-            duration.weeks = 520; // roughly 10 years
-            var today = ICal.Time.today ();
-#endif
 
             var start = comp.get_dtstart ();
             if (today.compare (start) > 0) {
@@ -258,18 +237,10 @@ public class Tasks.TaskModel : Object {
             }
             var end = start.add (duration);
 
-#if E_CAL_2_0
             ECal.RecurInstanceCb recur_instance_callback = (instance_comp, instance_start_timet, instance_end_timet, cancellable) => {
-#else
-            ECal.RecurInstanceFn recur_instance_callback = (instance, instance_start_timet, instance_end_timet) => {
-#endif
 
-#if E_CAL_2_0
                 var instance = new ECal.Component ();
                 instance.set_icalcomponent (instance_comp);
-#else
-                unowned ICal.Component instance_comp = instance.get_icalcomponent ();
-#endif
 
                 if (!instance_comp.get_due ().is_null_time ()) {
                     instance_comp.set_due (instance_comp.get_dtstart ());
@@ -278,24 +249,12 @@ public class Tasks.TaskModel : Object {
                 instance_comp.set_status (ICal.PropertyStatus.NONE);
                 instance.set_percent_complete (0);
 
-#if E_CAL_2_0
                 instance.set_completed (new ICal.Time.null_time ());
-#else
-                var null_time = ICal.Time.null_time ();
-                instance.set_completed (ref null_time);
-#endif
 
                 if (instance.has_alarms ()) {
                     instance.get_alarm_uids ().@foreach ((alarm_uid) => {
                         ECal.ComponentAlarmTrigger trigger;
-#if E_CAL_2_0
                         trigger = new ECal.ComponentAlarmTrigger.relative (ECal.ComponentAlarmTriggerKind.RELATIVE_START, new ICal.Duration.null_duration ());
-#else
-                        trigger = ECal.ComponentAlarmTrigger () {
-                            type = ECal.ComponentAlarmTriggerKind.RELATIVE_START,
-                            rel_duration = ICal.Duration.null_duration ()
-                        };
-#endif
                         instance.get_alarm (alarm_uid).set_trigger (trigger);
                     });
                 }
@@ -304,11 +263,7 @@ public class Tasks.TaskModel : Object {
                 return false; // only generate one instance
             };
 
-#if E_CAL_2_0
             client.generate_instances_for_object_sync (comp, start.as_timet (), end.as_timet (), null, recur_instance_callback);
-#else
-            client.generate_instances_for_object_sync (comp, start.as_timet (), end.as_timet (), recur_instance_callback);
-#endif
         }
     }
 
@@ -328,11 +283,7 @@ public class Tasks.TaskModel : Object {
 
     private void update_icalcomponent (ECal.Client client, ICal.Component comp, ECal.ObjModType mod_type) {
         try {
-#if E_CAL_2_0
             client.modify_object_sync (comp, mod_type, ECal.OperationFlags.NONE, null);
-#else
-            client.modify_object_sync (comp, mod_type, null);
-#endif
         } catch (Error e) {
             warning (e.message);
             return;
@@ -346,11 +297,7 @@ public class Tasks.TaskModel : Object {
             SList<ECal.Component> ecal_tasks;
             client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
 
-#if E_CAL_2_0
             var ical_tasks = new SList<ICal.Component> ();
-#else
-            var ical_tasks = new SList<unowned ICal.Component> ();
-#endif
             foreach (unowned ECal.Component ecal_task in ecal_tasks) {
                 ical_tasks.append (ecal_task.get_icalcomponent ());
             }
@@ -374,11 +321,7 @@ public class Tasks.TaskModel : Object {
         string? rid = task.has_recurrences () ? null : task.get_recurid_as_string ();
         debug (@"Removing task '$uid'");
 
-#if E_CAL_2_0
         client.remove_object.begin (uid, rid, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
-#else
-        client.remove_object.begin (uid, rid, mod_type, null, (obj, results) => {
-#endif
             try {
                 client.remove_object.end (results);
             } catch (Error e) {
@@ -447,11 +390,7 @@ public class Tasks.TaskModel : Object {
         }
     }
 
-#if E_CAL_2_0
     private void on_objects_added (E.Source task_list, ECal.Client client, SList<ICal.Component> objects, TasksAddedFunc on_tasks_added) {  // vala-lint=line-length
-#else
-    private void on_objects_added (E.Source task_list, ECal.Client client, SList<weak ICal.Component> objects, TasksAddedFunc on_tasks_added) {  // vala-lint=line-length
-#endif
         debug (@"Received $(objects.length()) added task(s) for task list '%s'", task_list.dup_display_name ());
         var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);  // vala-lint=line-length
         objects.foreach ((ical_comp) => {
@@ -475,11 +414,7 @@ public class Tasks.TaskModel : Object {
         on_tasks_added (added_tasks.read_only_view, task_list);
     }
 
-#if E_CAL_2_0
     private void on_objects_modified (E.Source task_list, ECal.Client client, SList<ICal.Component> objects, TasksModifiedFunc on_tasks_modified) {  // vala-lint=line-length
-#else
-    private void on_objects_modified (E.Source task_list, ECal.Client client, SList<weak ICal.Component> objects, TasksModifiedFunc on_tasks_modified) {  // vala-lint=line-length
-#endif
         debug (@"Received $(objects.length()) modified task(s) for task list '%s'", task_list.dup_display_name ());
         var updated_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);  // vala-lint=line-length
         objects.foreach ((comp) => {
@@ -502,11 +437,7 @@ public class Tasks.TaskModel : Object {
         on_tasks_modified (updated_tasks.read_only_view);
     }
 
-#if E_CAL_2_0
     private void on_objects_removed (E.Source task_list, ECal.Client client, SList<ECal.ComponentId?> cids, TasksRemovedFunc on_tasks_removed) {  // vala-lint=line-length
-#else
-    private void on_objects_removed (E.Source task_list, ECal.Client client, SList<weak ECal.ComponentId?> cids, TasksRemovedFunc on_tasks_removed) {  // vala-lint=line-length
-#endif
         debug (@"Received $(cids.length()) removed task(s) for task list '%s'", task_list.dup_display_name ());
 
         on_tasks_removed (cids);
