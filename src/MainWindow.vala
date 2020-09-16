@@ -110,14 +110,14 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         Tasks.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
 
-        Tasks.Application.model.task_list_added.connect (add_source);
-        Tasks.Application.model.task_list_modified.connect (update_source);
-        Tasks.Application.model.task_list_removed.connect (remove_source);
+        Tasks.Application.task_store.task_list_added.connect (add_source);
+        Tasks.Application.task_store.task_list_modified.connect (update_source);
+        Tasks.Application.task_store.task_list_removed.connect (remove_source);
 
-        Tasks.Application.model.get_registry.begin ((obj, res) => {
+        Tasks.Application.task_store.get_registry.begin ((obj, res) => {
             E.SourceRegistry registry;
             try {
-                registry = Tasks.Application.model.get_registry.end (res);
+                registry = Tasks.Application.task_store.get_registry.end (res);
             } catch (Error e) {
                 critical (e.message);
                 return;
@@ -214,7 +214,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         E.SourceRegistry registry;
         try {
-            registry = Tasks.Application.model.get_registry_sync ();
+            registry = Tasks.Application.task_store.get_registry_sync ();
         } catch (Error e) {
             warning (e.message);
             return;

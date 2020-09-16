@@ -19,12 +19,12 @@
 */
 
 
-errordomain Tasks.TaskModelError {
+errordomain Calendar.TaskStoreError {
     CLIENT_NOT_AVAILABLE
 }
 
 
-public class Tasks.TaskModel : Object {
+public class Calendar.TaskStore : Object {
 
     public signal void task_list_added (E.Source task_list);
     public signal void task_list_modified (E.Source task_list);
@@ -57,7 +57,7 @@ public class Tasks.TaskModel : Object {
         }
 
         if (client == null) {
-            throw new Tasks.TaskModelError.CLIENT_NOT_AVAILABLE ("No client available for task list '%s'".printf (task_list.dup_display_name ()));  // vala-lint=line-length
+            throw new Calendar.TaskStoreError.CLIENT_NOT_AVAILABLE ("No client available for task list '%s'".printf (task_list.dup_display_name ()));  // vala-lint=line-length
         }
 
         return client;
@@ -392,7 +392,7 @@ public class Tasks.TaskModel : Object {
 
     private void on_objects_added (E.Source task_list, ECal.Client client, SList<ICal.Component> objects, TasksAddedFunc on_tasks_added) {  // vala-lint=line-length
         debug (@"Received $(objects.length()) added task(s) for task list '%s'", task_list.dup_display_name ());
-        var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);  // vala-lint=line-length
+        var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
         objects.foreach ((ical_comp) => {
             try {
                 SList<ECal.Component> ecal_tasks;
@@ -416,7 +416,7 @@ public class Tasks.TaskModel : Object {
 
     private void on_objects_modified (E.Source task_list, ECal.Client client, SList<ICal.Component> objects, TasksModifiedFunc on_tasks_modified) {  // vala-lint=line-length
         debug (@"Received $(objects.length()) modified task(s) for task list '%s'", task_list.dup_display_name ());
-        var updated_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);  // vala-lint=line-length
+        var updated_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Calendar.Util.ecalcomponent_equal_func);  // vala-lint=line-length
         objects.foreach ((comp) => {
             try {
                 SList<ECal.Component> ecal_tasks;

@@ -32,7 +32,7 @@ public class Tasks.ListView : Gtk.Grid {
 
     public void add_view (E.Source task_list, string query) {
         try {
-            var view = Tasks.Application.model.create_task_list_view (
+            var view = Tasks.Application.task_store.create_task_list_view (
                 task_list,
                 query,
                 on_tasks_added,
@@ -51,7 +51,7 @@ public class Tasks.ListView : Gtk.Grid {
     private void remove_views () {
         lock (views) {
             foreach (ECal.ClientView view in views) {
-                Tasks.Application.model.destroy_task_list_view (view);
+                Tasks.Application.task_store.destroy_task_list_view (view);
             }
             views.clear ();
         }
@@ -182,7 +182,7 @@ public class Tasks.ListView : Gtk.Grid {
             if (source != null) {
                 var add_task_row = new Tasks.TaskRow.for_source (source);
                 add_task_row.task_changed.connect ((task) => {
-                    Tasks.Application.model.add_task (source, task);
+                    Tasks.Application.task_store.add_task (source, task);
                 });
                 add_task_list.add (add_task_row);
             }
@@ -287,7 +287,7 @@ public class Tasks.ListView : Gtk.Grid {
             }
         }
 
-        var due_date_time = Util.ical_to_date_time (comp.get_due ());
+        var due_date_time = Calendar.Util.icaltime_to_datetime (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time));
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
         header_label.margin_start = 6;
@@ -299,13 +299,13 @@ public class Tasks.ListView : Gtk.Grid {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source, this.source == null);
             task_row.task_completed.connect ((task) => {
-                Tasks.Application.model.complete_task (source, task);
+                Tasks.Application.task_store.complete_task (source, task);
             });
             task_row.task_changed.connect ((task) => {
-                Tasks.Application.model.update_task (source, task, ECal.ObjModType.THIS_AND_FUTURE);
+                Tasks.Application.task_store.update_task (source, task, ECal.ObjModType.THIS_AND_FUTURE);
             });
             task_row.task_removed.connect ((task) => {
-                Tasks.Application.model.remove_task (source, task, ECal.ObjModType.ALL);
+                Tasks.Application.task_store.remove_task (source, task, ECal.ObjModType.ALL);
             });
             task_list.add (task_row);
             return true;
@@ -322,7 +322,7 @@ public class Tasks.ListView : Gtk.Grid {
 
             if (task_row != null) {
                 foreach (ECal.Component task in tasks) {
-                    if (Util.calcomponent_equal_func (task_row.task, task)) {
+                    if (Calendar.Util.ecalcomponent_equal_func (task_row.task, task)) {
                         task_row.task = task;
                         break;
                     }

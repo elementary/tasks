@@ -20,7 +20,7 @@
 
 public class Tasks.Application : Gtk.Application {
     public static GLib.Settings settings;
-    public static Tasks.TaskModel model;
+    public static Calendar.TaskStore task_store;
 
     public Application () {
         Object (
@@ -31,7 +31,7 @@ public class Tasks.Application : Gtk.Application {
 
     static construct {
         settings = new Settings ("io.elementary.tasks");
-        model = new Tasks.TaskModel ();
+        task_store = new Calendar.TaskStore ();
     }
 
     protected override void activate () {

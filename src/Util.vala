@@ -48,65 +48,6 @@ namespace Tasks.Util {
      * Gee Utility Functions
      */
 
-    /* Returns true if 'a' and 'b' are the same ECal.Component */
-    private bool calcomponent_equal_func (ECal.Component a, ECal.Component b) {
-        return a.get_id ().equal (b.get_id ());
-    }
-
-
-        //--- Date and Time ---//
-
-
-    /**
-     * Converts two datetimes to one TimeType. The first contains the date,
-     * its time settings are ignored. The second one contains the time itself.
-     */
-    public ICal.Time date_time_to_ical (DateTime date, DateTime? time_local, string? timezone = null) {
-        var result = new ICal.Time.from_day_of_year (date.get_day_of_year (), date.get_year ());
-
-        if (time_local != null) {
-            if (timezone != null) {
-                result.set_timezone (ICal.Timezone.get_builtin_timezone (timezone));
-            } else {
-                result.set_timezone (ECal.util_get_system_timezone ());
-            }
-
-            result.set_is_date (false);
-            result.set_time (time_local.get_hour (), time_local.get_minute (), time_local.get_second ());
-        } else {
-            result.set_is_date (true);
-            result.set_time (0, 0, 0);
-        }
-
-        return result;
-    }
-
-    /**
-     * Converts the given TimeType to a DateTime.
-     */
-    private TimeZone timezone_from_ical (ICal.Time date) {
-        int is_daylight;
-        var interval = date.get_timezone ().get_utc_offset (null, out is_daylight);
-        bool is_positive = interval >= 0;
-        interval = interval.abs ();
-        var hours = (interval / 3600);
-        var minutes = (interval % 3600) / 60;
-        var hour_string = "%s%02d:%02d".printf (is_positive ? "+" : "-", hours, minutes);
-
-        return new TimeZone (hour_string);
-    }
-
-    /**
-     * Converts the given TimeType to a DateTime.
-     * XXX : Track next versions of evolution in order to convert ICal.Timezone to GLib.TimeZone with a dedicated function…
-     */
-    public DateTime ical_to_date_time (ICal.Time date) {
-        int year, month, day, hour, minute, second;
-        date.get_date (out year, out month, out day);
-        date.get_time (out hour, out minute, out second);
-        return new DateTime (timezone_from_ical (date), year, month,
-            day, hour, minute, second);
-    }
 
     /**
      * Compares a {@link GLib.DateTime} to {@link GLib.DateTime.now_local} and returns a location, relative date string.

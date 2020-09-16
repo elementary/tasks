@@ -284,8 +284,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         unowned ICal.Component ical_task = task.get_icalcomponent ();
 
         if (due_switch.active) {
-            ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
-            ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
+            ical_task.set_due (Calendar.Util.datetimes_to_icaltime (due_datepicker.date, due_timepicker.time));
+            ical_task.set_due (Calendar.Util.datetimes_to_icaltime (due_datepicker.date, due_timepicker.time));
         } else {
             ical_task.set_due (new ICal.Time.null_time ());
         }
@@ -360,7 +360,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 due_switch.active = false;
                 due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
             } else {
-                var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
+                var due_date_time = Calendar.Util.icaltime_to_datetime (ical_task.get_due ());
                 due_datepicker.date = due_timepicker.time = due_date_time;
 
                 due_switch.active = true;
@@ -387,7 +387,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             if (ical_task.get_due ().is_null_time () ) {
                 due_label_revealer.reveal_child = false;
             } else {
-                var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
+                var due_date_time = Calendar.Util.icaltime_to_datetime (ical_task.get_due ());
                 var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
                 var format = h24_settings.get_string ("clock-format");
 
