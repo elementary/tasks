@@ -44,4 +44,3 @@ namespace Calendar.Util {
         return result;
     }
 }
-

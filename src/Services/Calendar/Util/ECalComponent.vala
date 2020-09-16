@@ -26,4 +26,3 @@ namespace Calendar.Util {
         return a.get_id ().equal (b.get_id ());
     }
 }
-

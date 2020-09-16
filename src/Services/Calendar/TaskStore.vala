@@ -443,3 +443,4 @@ public class Calendar.TaskStore : Object {
         on_tasks_removed (cids);
     }
 }
+
