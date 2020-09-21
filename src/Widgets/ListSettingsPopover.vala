@@ -54,11 +54,23 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         color_button_blue_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_blue_context.add_class ("blue");
 
+        var color_button_mint = new Gtk.RadioButton.from_widget (color_button_red);
+
+        unowned Gtk.StyleContext color_button_mint_context = color_button_mint.get_style_context ();
+        color_button_mint_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_mint_context.add_class ("mint");
+
         var color_button_purple = new Gtk.RadioButton.from_widget (color_button_red);
 
         unowned Gtk.StyleContext color_button_purple_context = color_button_purple.get_style_context ();
         color_button_purple_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_purple_context.add_class ("purple");
+
+        var color_button_pink = new Gtk.RadioButton.from_widget (color_button_red);
+
+        unowned Gtk.StyleContext color_button_pink_context = color_button_pink.get_style_context ();
+        color_button_pink_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_pink_context.add_class ("pink");
 
         var color_button_brown = new Gtk.RadioButton.from_widget (color_button_red);
 
@@ -81,8 +93,10 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         color_grid.add (color_button_orange);
         color_grid.add (color_button_yellow);
         color_grid.add (color_button_green);
+        color_grid.add (color_button_mint);
         color_grid.add (color_button_blue);
         color_grid.add (color_button_purple);
+        color_grid.add (color_button_pink);
         color_grid.add (color_button_brown);
         color_grid.add (color_button_slate);
 
@@ -133,6 +147,11 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
             source.write.begin (null);
         });
 
+        color_button_mint.toggled.connect (() => {
+            task_list.color = "#0e9a83";
+            source.write.begin (null);
+        });
+
         color_button_green.toggled.connect (() => {
             task_list.color = "#68b723";
             source.write.begin (null);
@@ -145,6 +164,11 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
 
         color_button_purple.toggled.connect (() => {
             task_list.color = "#a56de2";
+            source.write.begin (null);
+        });
+
+        color_button_pink.toggled.connect (() => {
+            task_list.color = "#de3e80";
             source.write.begin (null);
         });
 
@@ -173,11 +197,17 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
                 case "#68b723":
                     color_button_green.active = true;
                     break;
+                case "#0e9a83":
+                    color_button_mint.active = true;
+                    break;
                 case "#3689e6":
                     color_button_blue.active = true;
                     break;
                 case "#a56de2":
                     color_button_purple.active = true;
+                    break;
+                case "#de3e80":
+                    color_button_pink.active = true;
                     break;
                 case "#8a715e":
                     color_button_brown.active = true;
