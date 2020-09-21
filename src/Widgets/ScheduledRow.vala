@@ -21,7 +21,7 @@
 public class Tasks.ScheduledRow : Gtk.ListBoxRow {
 
     construct {
-        var icon = new Gtk.Image.from_icon_name ("preferences-system-time-symbolic", Gtk.IconSize.MENU);
+        var icon = new Gtk.Image.from_icon_name ("appointment", Gtk.IconSize.MENU);
 
         var display_name_label = new Gtk.Label (_("Scheduled"));
         display_name_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
@@ -29,10 +29,11 @@ public class Tasks.ScheduledRow : Gtk.ListBoxRow {
         display_name_label.hexpand = true;
         display_name_label.margin_end = 9;
 
-        var grid = new Gtk.Grid ();
-        grid.column_spacing = 3;
-        grid.margin_start = 10;
-        grid.margin_end = 6;
+        var grid = new Gtk.Grid () {
+            column_spacing = 6,
+            margin_start = 12,
+            margin_end = 6
+        };
         grid.add (icon);
         grid.add (display_name_label);
 
