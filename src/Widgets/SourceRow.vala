@@ -63,10 +63,11 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
         status_stack.add_named (status_image, "image");
         status_stack.add_named (spinner, "spinner");
 
-        var grid = new Gtk.Grid ();
-        grid.column_spacing = 3;
-        grid.margin_start = 12;
-        grid.margin_end = 6;
+        var grid = new Gtk.Grid () {
+            column_spacing = 6,
+            margin_start = 12,
+            margin_end = 6
+        };
         grid.add (source_color);
         grid.add (display_name_label);
         grid.add (status_stack);

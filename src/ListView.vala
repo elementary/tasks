@@ -129,7 +129,6 @@ public class Tasks.ListView : Gtk.Grid {
         scrolled_window.expand = true;
         scrolled_window.add (task_list);
 
-        margin_bottom = 3;
         column_spacing = 12;
         attach (title_stack, 0, 0);
         attach (settings_button_revealer, 1, 0);
