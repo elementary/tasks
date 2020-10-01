@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-01 12:24+0000\n"
-"PO-Revision-Date: 2020-10-01 12:49+0000\n"
-"Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
+"PO-Revision-Date: 2020-10-01 12:55+0000\n"
+"Last-Translator: Corentin Noël <corentin@elementary.io>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -32,23 +32,23 @@ msgstr ""
 
 #: src/MainWindow.vala:40
 msgid "Tasks"
-msgstr ""
+msgstr "Tâches"
 
 #: src/Util.vala:124
 msgid "Today"
-msgstr ""
+msgstr "Aujourd'hui"
 
 #: src/Util.vala:126
 msgid "Yesterday"
-msgstr ""
+msgstr "Hier"
 
 #: src/Util.vala:128
 msgid "Tomorrow"
-msgstr ""
+msgstr "Demain"
 
 #: src/Widgets/EditableLabel.vala:72
 msgid "Edit…"
-msgstr ""
+msgstr "Modifier…"
 
 #: src/Widgets/ListSettingsPopover.vala:89
 msgid "Show Completed"
@@ -60,7 +60,7 @@ msgstr ""
 
 #: src/Widgets/SourceRow.vala:60
 msgid "Connecting…"
-msgstr ""
+msgstr "Connexion…"
 
 #: src/Widgets/SourceRow.vala:97
 msgid "Waiting for login credentials"
@@ -80,7 +80,7 @@ msgstr ""
 
 #: src/Widgets/TaskRow.vala:153
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: src/Widgets/TaskRow.vala:157
 msgid "Save Changes"
