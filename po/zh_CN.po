@@ -8,96 +8,107 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-01 12:24+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-10-04 13:14+0000\n"
+"Last-Translator: imgradeone Yan <imgradeone@outlook.com>\n"
+"Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
+"tasks/tasks/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.9.1\n"
 
 #: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
+#, fuzzy
 msgid "Scheduled"
-msgstr ""
+msgstr "已计划"
 
 #: src/ListView.vala:98
+#, fuzzy
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "编辑名称与个性化"
 
 #: src/ListView.vala:108
+#, fuzzy
 msgid "No Tasks"
-msgstr ""
+msgstr "没有待办事项"
 
 #: src/MainWindow.vala:40
+#, fuzzy
 msgid "Tasks"
-msgstr ""
+msgstr "待办事项"
 
 #: src/Util.vala:124
 msgid "Today"
-msgstr ""
+msgstr "今天"
 
 #: src/Util.vala:126
 msgid "Yesterday"
-msgstr ""
+msgstr "昨天"
 
 #: src/Util.vala:128
 msgid "Tomorrow"
-msgstr ""
+msgstr "明天"
 
 #: src/Widgets/EditableLabel.vala:72
 msgid "Edit…"
-msgstr ""
+msgstr "编辑…"
 
 #: src/Widgets/ListSettingsPopover.vala:89
 msgid "Show Completed"
-msgstr ""
+msgstr "显示已完成的事项"
 
 #: src/Widgets/ListSettingsPopover.vala:107
 msgid "Delete List"
-msgstr ""
+msgstr "删除列表"
 
 #: src/Widgets/SourceRow.vala:60
 msgid "Connecting…"
-msgstr ""
+msgstr "连接中…"
 
 #: src/Widgets/SourceRow.vala:97
+#, fuzzy
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "等待登录凭证中"
 
 #: src/Widgets/SourceRow.vala:101
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "目前与（可能是远程的）数据服务器断开连接"
 
 #: src/Widgets/SourceRow.vala:105
 msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 
 #: src/Widgets/TaskRow.vala:132
+#, fuzzy
 msgid "Schedule:"
-msgstr ""
+msgstr "日程："
 
 #: src/Widgets/TaskRow.vala:153
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: src/Widgets/TaskRow.vala:157
 msgid "Save Changes"
-msgstr ""
+msgstr "保存修改"
 
 #: src/Widgets/TaskRow.vala:157
+#, fuzzy
 msgid "Add Task"
-msgstr ""
+msgstr "添加待办事项"
 
 #: src/Widgets/TaskRow.vala:206
+#, fuzzy
 msgid "Delete Task"
-msgstr ""
+msgstr "删除待办事项"
 
 #: src/Widgets/TaskRow.vala:395
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: src/Widgets/TaskRow.vala:400
-#, c-format
+#, c-format, fuzzy
 msgid "%s at %s"
-msgstr ""
+msgstr "%s 在 %s"
