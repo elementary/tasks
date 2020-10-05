@@ -17,7 +17,7 @@
  * Boston, MA 02110-1301 USA.
  */
 
-namespace Calendar.Util {
+namespace EDS {
 
     //--- ICal.Time Helpers ---//
 

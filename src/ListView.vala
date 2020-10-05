@@ -286,7 +286,7 @@ public class Tasks.ListView : Gtk.Grid {
             }
         }
 
-        var due_date_time = Calendar.Util.icaltime_to_datetime (comp.get_due ());
+        var due_date_time = EDS.icaltime_to_datetime (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time));
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
         header_label.margin_start = 6;
@@ -321,7 +321,7 @@ public class Tasks.ListView : Gtk.Grid {
 
             if (task_row != null) {
                 foreach (ECal.Component task in tasks) {
-                    if (Calendar.Util.ecalcomponent_equal_func (task_row.task, task)) {
+                    if (EDS.ecalcomponent_equal_func (task_row.task, task)) {
                         task_row.task = task;
                         break;
                     }

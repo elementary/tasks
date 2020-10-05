@@ -17,12 +17,37 @@
  * Boston, MA 02110-1301 USA.
  */
 
-namespace Calendar.Util {
+namespace EDS {
 
     //--- ECal.Component Helpers ---//
 
     /* Returns true if 'a' and 'b' are the same ECal.Component */
     public bool ecalcomponent_equal_func (ECal.Component a, ECal.Component b) {
         return a.get_id ().equal (b.get_id ());
+    }
+
+    //--- GLib.DateTime Helpers ---//
+
+    /**
+     * Converts two datetimes to one TimeType. The first contains the date,
+     * its time settings are ignored. The second one contains the time itself.
+     */
+    public ICal.Time datetimes_to_icaltime (GLib.DateTime date, GLib.DateTime? time_local, string? timezone = null) {
+        var result = new ICal.Time.from_day_of_year (date.get_day_of_year (), date.get_year ());
+        if (time_local != null) {
+            if (timezone != null) {
+                result.set_timezone (ICal.Timezone.get_builtin_timezone (timezone));
+            } else {
+                result.set_timezone (ECal.util_get_system_timezone ());
+            }
+
+            result.set_is_date (false);
+            result.set_time (time_local.get_hour (), time_local.get_minute (), time_local.get_second ());
+        } else {
+            result.set_is_date (true);
+            result.set_time (0, 0, 0);
+        }
+
+        return result;
     }
 }
