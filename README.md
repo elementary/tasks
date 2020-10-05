@@ -1,4 +1,5 @@
 # Tasks
+[![Translation status](https://l10n.elementary.io/widgets/tasks/-/svg-badge.svg)](https://l10n.elementary.io/engage/tasks/?utm_source=widget)
 
 ## Building and Installation
 
