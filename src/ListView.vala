@@ -115,7 +115,7 @@ public class Tasks.ListView : Gtk.Grid {
         add_task_list = new Gtk.ListBox ();
         add_task_list.selection_mode = Gtk.SelectionMode.NONE;
         add_task_list.margin_top = 24;
-        add_task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
+        //add_task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         task_list = new Gtk.ListBox ();
         task_list.selection_mode = Gtk.SelectionMode.NONE;
@@ -123,7 +123,7 @@ public class Tasks.ListView : Gtk.Grid {
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
         task_list.set_header_func (header_function);
-        task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
+        //task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow (null, null);
         scrolled_window.expand = true;
