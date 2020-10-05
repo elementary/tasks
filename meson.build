@@ -12,16 +12,7 @@ gresource = gnome.compile_resources(
     source_dir: 'data'
 )
 
-libecal_dep = dependency('libecal-2.0', required: false)
-if libecal_dep.found()
-    libical_dep = dependency('libical-glib')
-    add_project_arguments('--define=E_CAL_2_0', language: 'vala')
-    add_project_arguments('-DLIBICAL_GLIB_UNSTABLE_API=1', language: 'c')
-else
-    libecal_dep = dependency('libecal-1.2', version: '>=3.8.0')
-    libical_dep = dependency('libical')
-    add_project_arguments('--vapidir', join_paths(meson.current_source_dir(), 'vapi'), language: 'vala')
-endif
+add_project_arguments('-DLIBICAL_GLIB_UNSTABLE_API=1', language: 'c')
 
 executable(
     meson.project_name(),
@@ -31,6 +22,7 @@ executable(
     'src/MainWindow.vala',
     'src/Util.vala',
     'src/Widgets/EditableLabel.vala',
+    'src/Widgets/ScheduledRow.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskRow.vala',
     'src/Widgets/ListSettingsPopover.vala',
@@ -40,9 +32,10 @@ executable(
         dependency('gobject-2.0'),
         dependency('granite', version: '>=0.5'),
         dependency('gtk+-3.0'),
-        libecal_dep,
+        dependency('libecal-2.0'),
         dependency('libedataserver-1.2'),
-        libical_dep
+        dependency('libhandy-1', version: '>=0.90.0'),
+        dependency('libical-glib')
     ],
     install : true
 )

@@ -1,6 +1,9 @@
 src/Application.vala
 src/ListView.vala
-src/ListSettingsDialog.vala
 src/MainWindow.vala
+src/Util.vala
 src/Widgets/EditableLabel.vala
+src/Widgets/ListSettingsPopover.vala
+src/Widgets/ScheduledRow.vala
 src/Widgets/SourceRow.vala
+src/Widgets/TaskRow.vala
