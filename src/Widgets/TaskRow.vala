@@ -331,6 +331,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             Tasks.Application.set_task_color (source, check);
         }
 
+        var default_due_datetime = new DateTime.now_local ().add_hours (1);
+        default_due_datetime = default_due_datetime.add_minutes (-default_due_datetime.get_minute ());
+        default_due_datetime = default_due_datetime.add_seconds (-default_due_datetime.get_seconds ());
+
         if (task == null || !created) {
             state_stack.set_visible_child (icon);
 
@@ -344,7 +348,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
             due_label_revealer.reveal_child = false;
             due_switch.active = false;
-            due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
+            due_datepicker.date = due_timepicker.time = default_due_datetime;
 
             description_label_revealer.reveal_child = false;
             description_textbuffer.text = "";
@@ -358,10 +362,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
             if (ical_task.get_due ().is_null_time ()) {
                 due_switch.active = false;
-                due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
+                due_datepicker.date = due_timepicker.time = default_due_datetime;
             } else {
-                var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
-                due_datepicker.date = due_timepicker.time = due_date_time;
+                var due_datetime = Util.ical_to_date_time (ical_task.get_due ());
+                due_datepicker.date = due_timepicker.time = due_datetime;
 
                 due_switch.active = true;
             }
