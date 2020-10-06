@@ -148,11 +148,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         description_label_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT;
         description_label_revealer.add (description_label);
 
-        var description_textview = new Gtk.TextView ();
-        description_textview.border_width = 12;
-        description_textview.height_request = 140;
+        var description_textview = new Gtk.TextView () {
+            accepts_tab = false,
+            border_width = 12,
+            height_request = 140,
+            hexpand = true
+        };
         description_textview.set_wrap_mode (Gtk.WrapMode.WORD_CHAR);
-        description_textview.accepts_tab = false;
 
         description_textbuffer = new Gtk.TextBuffer (null);
         description_textview.set_buffer (description_textbuffer);
