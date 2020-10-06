@@ -19,12 +19,15 @@
 */
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
-    public signal void task_save (ECal.Component task);
-    public signal void task_delete (ECal.Component task);
+
+    public signal void task_completed (ECal.Component task);
+    public signal void task_changed (ECal.Component task);
+    public signal void task_removed (ECal.Component task);
 
     public bool completed { get; private set; }
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
+    public bool is_scheduled_view { get; construct; }
 
     private bool created;
 
@@ -58,8 +61,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         Object (task: task, source: source);
     }
 
-    public TaskRow.for_component (ECal.Component task, E.Source source) {
-        Object (source: source, task: task);
+    public TaskRow.for_component (ECal.Component task, E.Source source, bool is_scheduled_view = false) {
+        Object (source: source, task: task, is_scheduled_view: is_scheduled_view);
     }
 
     static construct {
@@ -75,7 +78,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         check = new Gtk.CheckButton ();
         check.valign = Gtk.Align.CENTER;
-        Tasks.Application.set_task_color (source, check);
 
         state_stack = new Gtk.Stack ();
         state_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
@@ -210,7 +212,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             delete_button.clicked.connect (() => {
                 cancel_edit ();
                 remove_request ();
-                task_delete (task);
+                task_removed (task);
             });
         }
 
@@ -218,8 +220,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             if (task == null) {
                 return;
             }
-            task.get_icalcomponent ().set_status (check.active ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
-            task_save (task);
+            task_completed (task);
         });
 
         summary_entry.activate.connect (() => {
@@ -275,7 +276,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             move_focus (Gtk.DirectionType.TAB_FORWARD);
             reset_create ();
         }
-        summary_entry.text = task.get_icalcomponent ().get_summary () == null ? "" : task.get_icalcomponent ().get_summary ();
+        summary_entry.text = task.get_icalcomponent ().get_summary () == null ? "" : task.get_icalcomponent ().get_summary ();  // vala-lint=line-length
         reveal_child_request (false);
     }
 
@@ -286,21 +287,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
             ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
         } else {
-#if E_CAL_2_0
             ical_task.set_due (new ICal.Time.null_time ());
-#else
-            ical_task.set_due (ICal.Time.null_time ());
-#endif
         }
 
         // Clear the old description
         int count = ical_task.count_properties (ICal.PropertyKind.DESCRIPTION_PROPERTY);
         for (int i = 0; i < count; i++) {
-#if E_CAL_2_0
             ICal.Property remove_prop;
-#else
-            unowned ICal.Property remove_prop;
-#endif
             remove_prop = ical_task.get_first_property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
             ical_task.remove_property (remove_prop);
         }
@@ -314,7 +307,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         }
 
         task.get_icalcomponent ().set_summary (summary_entry.text);
-        task_save (task);
+        task_changed (task);
     }
 
     public void reveal_child_request (bool value) {
@@ -333,7 +326,15 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         }
     }
 
-    private void update_request () {
+    public void update_request () {
+        if (!is_scheduled_view) {
+            Tasks.Application.set_task_color (source, check);
+        }
+
+        var default_due_datetime = new DateTime.now_local ().add_hours (1);
+        default_due_datetime = default_due_datetime.add_minutes (-default_due_datetime.get_minute ());
+        default_due_datetime = default_due_datetime.add_seconds (-default_due_datetime.get_seconds ());
+
         if (task == null || !created) {
             state_stack.set_visible_child (icon);
 
@@ -347,7 +348,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
             due_label_revealer.reveal_child = false;
             due_switch.active = false;
-            due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
+            due_datepicker.date = due_timepicker.time = default_due_datetime;
 
             description_label_revealer.reveal_child = false;
             description_textbuffer.text = "";
@@ -361,10 +362,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
             if (ical_task.get_due ().is_null_time ()) {
                 due_switch.active = false;
-                due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
+                due_datepicker.date = due_timepicker.time = default_due_datetime;
             } else {
-                var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
-                due_datepicker.date = due_timepicker.time = due_date_time;
+                var due_datetime = Util.ical_to_date_time (ical_task.get_due ());
+                due_datepicker.date = due_timepicker.time = due_datetime;
 
                 due_switch.active = true;
             }
@@ -394,11 +395,17 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
                 var format = h24_settings.get_string ("clock-format");
 
-                due_label.label = Granite.DateTime.get_relative_datetime (due_date_time);
-                due_label.tooltip_text = _("%s at %s").printf (
-                    due_date_time.format (Granite.DateTime.get_default_date_format (true)),
-                    due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
-                );
+                if (is_scheduled_view) {
+                    due_label.label = _("%s").printf (
+                        due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                    );
+
+                } else {
+                    due_label.label = _("%s at %s").printf (
+                        Tasks.Util.get_relative_date (due_date_time),
+                        due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                    );
+                }
 
                 var today = new GLib.DateTime.now_local ();
                 if (today.compare (due_date_time) > 0 && !completed) {
@@ -451,8 +458,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         if (comp == null) {
             return false;
         }
-        ICal.Time created;
-        comp.get_created (out created);
-        return !created.is_null_time ();
+        var created = comp.get_created ();
+        return created.is_valid_time ();
     }
 }

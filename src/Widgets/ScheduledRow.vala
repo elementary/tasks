@@ -18,19 +18,25 @@
 *
 */
 
-.sidebar {
-    border-bottom-left-radius: 4px;
-}
+public class Tasks.ScheduledRow : Gtk.ListBoxRow {
 
-.sidebar:dir(rtl) {
-    border-bottom-right-radius: 4px;
-}
+    construct {
+        var icon = new Gtk.Image.from_icon_name ("appointment", Gtk.IconSize.MENU);
 
-.sidebar .inline-toolbar {
-    background-color: shade (@bg_color, 0.9);
-    -gtk-icon-style: symbolic;
-}
+        var display_name_label = new Gtk.Label (_("Scheduled"));
+        display_name_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
+        display_name_label.halign = Gtk.Align.START;
+        display_name_label.hexpand = true;
+        display_name_label.margin_end = 9;
 
-.sidebar .inline-toolbar button {
-    padding: 6px;
+        var grid = new Gtk.Grid () {
+            column_spacing = 6,
+            margin_start = 12,
+            margin_end = 6
+        };
+        grid.add (icon);
+        grid.add (display_name_label);
+
+        add (grid);
+    }
 }
