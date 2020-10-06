@@ -19,20 +19,28 @@
 */
 
 public class Tasks.TaskRow : Gtk.ListBoxRow {
-    public signal void task_save (ECal.Component task);
-    public signal void task_delete (ECal.Component task);
+
+    public signal void task_completed (ECal.Component task);
+    public signal void task_changed (ECal.Component task);
+    public signal void task_removed (ECal.Component task);
 
     public bool completed { get; private set; }
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
+    public bool is_scheduled_view { get; construct; }
+
+    private bool created;
 
     private Granite.Widgets.DatePicker due_datepicker;
     private Granite.Widgets.TimePicker due_timepicker;
 
+    private Gtk.Stack state_stack;
+    private Gtk.Image icon;
     private Gtk.CheckButton check;
     private Gtk.Entry summary_entry;
     private Gtk.Label description_label;
     private Gtk.Label due_label;
+    private Gtk.Revealer revealer;
     private Gtk.Revealer description_label_revealer;
     private Gtk.Revealer due_revealer;
     private Gtk.Revealer due_label_revealer;
@@ -42,8 +50,19 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     private static Gtk.CssProvider taskrow_provider;
 
-    public TaskRow (E.Source source, ECal.Component task) {
-        Object (source: source, task: task);
+    private TaskRow (ECal.Component task, E.Source source) {
+        Object (task: task, source: source);
+    }
+
+    public TaskRow.for_source (E.Source source) {
+        var task = new ECal.Component ();
+        task.set_new_vtype (ECal.ComponentVType.TODO);
+
+        Object (task: task, source: source);
+    }
+
+    public TaskRow.for_component (ECal.Component task, E.Source source, bool is_scheduled_view = false) {
+        Object (source: source, task: task, is_scheduled_view: is_scheduled_view);
     }
 
     static construct {
@@ -52,11 +71,19 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
+        created = calcomponent_created (task);
+
+        icon = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.MENU);
+        icon.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+
         check = new Gtk.CheckButton ();
         check.margin_end = 6;
         check.valign = Gtk.Align.CENTER;
 
-        Tasks.Application.set_task_color (source, check);
+        state_stack = new Gtk.Stack ();
+        state_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
+        state_stack.add (icon);
+        state_stack.add (check);
 
         summary_entry = new Gtk.Entry ();
 
@@ -133,25 +160,18 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         var description_frame = new Gtk.Frame (null);
         description_frame.add (description_textview);
 
-        var delete_button = new Gtk.Button ();
-        delete_button.sensitive = false;
-        delete_button.label = _("Delete Task");
-        delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
-
         var cancel_button = new Gtk.Button ();
         cancel_button.label = _("Cancel");
 
         var save_button = new Gtk.Button ();
-        save_button.label = _("Save Changes");
         save_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+        save_button.label = created ? _("Save Changes") : _("Add Task");
 
         var button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL);
         button_box.baseline_position = Gtk.BaselinePosition.CENTER;
         button_box.margin_top = 12;
         button_box.spacing = 6;
         button_box.set_layout (Gtk.ButtonBoxStyle.END);
-        button_box.add (delete_button);
-        button_box.set_child_secondary (delete_button, true);
         button_box.add (cancel_button);
         button_box.add (save_button);
 
@@ -170,27 +190,51 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         grid.margin = 6;
         grid.margin_start = grid.margin_end = 12;
         grid.row_spacing = 3;
-        grid.attach (check, 0, 0);
+        grid.attach (state_stack, 0, 0);
         grid.attach (summary_entry, 1, 0, 2);
         grid.attach (due_revealer, 1, 1);
         grid.attach (description_label_revealer, 2, 1);
         grid.attach (task_form_revealer, 1, 2, 2);
 
-        add (grid);
+        revealer = new Gtk.Revealer ();
+        revealer.reveal_child = true;
+        revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
+        revealer.add (grid);
+
+        add (revealer);
         margin_start = margin_end = 12;
         get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        if (created) {
+            check.show ();
+            state_stack.visible_child = check;
+
+            var delete_button = new Gtk.Button ();
+            delete_button.label = _("Delete Task");
+            delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+
+            button_box.add (delete_button);
+            button_box.set_child_secondary (delete_button, true);
+
+            delete_button.clicked.connect (() => {
+                cancel_edit ();
+                remove_request ();
+                task_removed (task);
+            });
+        }
 
         check.toggled.connect (() => {
             if (task == null) {
                 return;
             }
-            task.get_icalcomponent ().set_status (check.active ? ICal.PropertyStatus.COMPLETED : ICal.PropertyStatus.NONE);
-            task_save (task);
+            task_completed (task);
         });
 
         summary_entry.activate.connect (() => {
-            move_focus (Gtk.DirectionType.TAB_BACKWARD);
-            save_task ();
+            if (created || (summary_entry.text != null && summary_entry.text.strip ().length > 0)) {
+                save_task (task);
+            }
+            cancel_edit ();
         });
 
         summary_entry.grab_focus.connect (() => {
@@ -206,10 +250,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             cancel_edit ();
         });
 
-        delete_button.clicked.connect (() => {
-            task_delete (task);
-        });
-
         key_release_event.connect ((event) => {
             if (event.keyval == Gdk.Key.Escape) {
                 cancel_edit ();
@@ -217,7 +257,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
 
         save_button.clicked.connect (() => {
-            save_task ();
+            save_task (task);
+            cancel_edit ();
         });
 
         notify["task"].connect (() => {
@@ -229,30 +270,37 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         due_switch.bind_property ("active", due_timepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
     }
 
+    private void reset_create () {
+        var empty_task = new ECal.Component ();
+        empty_task.set_new_vtype (ECal.ComponentVType.TODO);
+        task = empty_task;
+    }
+
     private void cancel_edit () {
-        move_focus (Gtk.DirectionType.TAB_BACKWARD);
-        summary_entry.text = task.get_icalcomponent ().get_summary ();
+        if (created) {
+            move_focus (Gtk.DirectionType.TAB_BACKWARD);
+        } else {
+            move_focus (Gtk.DirectionType.TAB_FORWARD);
+            reset_create ();
+        }
+        summary_entry.text = task.get_icalcomponent ().get_summary () == null ? "" : task.get_icalcomponent ().get_summary ();  // vala-lint=line-length
         reveal_child_request (false);
     }
 
-    private void save_task () {
+    private void save_task (ECal.Component task) {
         unowned ICal.Component ical_task = task.get_icalcomponent ();
 
         if (due_switch.active) {
             ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
             ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
         } else {
-            ical_task.set_due ( ICal.Time.null_time ());
+            ical_task.set_due (new ICal.Time.null_time ());
         }
 
         // Clear the old description
         int count = ical_task.count_properties (ICal.PropertyKind.DESCRIPTION_PROPERTY);
         for (int i = 0; i < count; i++) {
-#if E_CAL_2_0
             ICal.Property remove_prop;
-#else
-            unowned ICal.Property remove_prop;
-#endif
             remove_prop = ical_task.get_first_property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
             ical_task.remove_property (remove_prop);
         }
@@ -266,8 +314,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         }
 
         task.get_icalcomponent ().set_summary (summary_entry.text);
-        reveal_child_request (false);
-        task_save (task);
+        task_changed (task);
     }
 
     public void reveal_child_request (bool value) {
@@ -287,48 +334,74 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         unowned Gtk.StyleContext style_context = get_style_context ();
 
         if (value) {
-            style_context.add_class (Granite.STYLE_CLASS_CARD);
             style_context.add_class ("collapsed");
+            style_context.add_class (Granite.STYLE_CLASS_CARD);
+
         } else {
             style_context.remove_class (Granite.STYLE_CLASS_CARD);
             style_context.remove_class ("collapsed");
         }
     }
 
-    private void update_request () {
-        if (task == null) {
+    public void update_request () {
+        if (!is_scheduled_view) {
+            Tasks.Application.set_task_color (source, check);
+        }
+
+        var default_due_datetime = new DateTime.now_local ().add_hours (1);
+        default_due_datetime = default_due_datetime.add_minutes (-default_due_datetime.get_minute ());
+        default_due_datetime = default_due_datetime.add_seconds (-default_due_datetime.get_seconds ());
+
+        if (task == null || !created) {
+            state_stack.set_visible_child (icon);
+
             completed = false;
             check.active = completed;
-            summary_entry.text = null;
+            summary_entry.text = "";
             summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            summary_entry.get_style_context ().add_class ("add-task");
 
             due_label_revealer.reveal_child = false;
+            due_switch.active = false;
+            due_datepicker.date = due_timepicker.time = default_due_datetime;
+
             description_label_revealer.reveal_child = false;
-        } else {
+            description_textbuffer.text = "";
+
+        } else if (created) {
+            state_stack.set_visible_child (check);
+
             unowned ICal.Component ical_task = task.get_icalcomponent ();
             completed = ical_task.get_status () == ICal.PropertyStatus.COMPLETED;
             check.active = completed;
 
             if (ical_task.get_due ().is_null_time ()) {
                 due_switch.active = false;
-                due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
+                due_datepicker.date = due_timepicker.time = default_due_datetime;
                 due_label_revealer.reveal_child = false;
                 due_revealer.reveal_child = false;
                 get_style_context ().remove_class ("past-due");
             } else {
-                var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
-                due_datepicker.date = due_timepicker.time = due_date_time;
+                var due_datetime = Util.ical_to_date_time (ical_task.get_due ());
+                due_datepicker.date = due_timepicker.time = due_datetime;
 
                 due_switch.active = true;
 
+                var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
                 var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
                 var format = h24_settings.get_string ("clock-format");
 
-                due_label.label = Granite.DateTime.get_relative_datetime (due_date_time);
-                due_label.tooltip_text = _("%s at %s").printf (
-                    due_date_time.format (Granite.DateTime.get_default_date_format (true)),
-                    due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
-                );
+                if (is_scheduled_view) {
+                    due_label.label = _("%s").printf (
+                        due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                    );
+
+                } else {
+                    due_label.label = _("%s at %s").printf (
+                        Tasks.Util.get_relative_date (due_date_time),
+                        due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                    );
+                }
 
                 var today = new GLib.DateTime.now_local ();
                 if (today.compare (due_date_time) > 0 && !completed) {
@@ -368,5 +441,24 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 }
             }
         }
+    }
+
+    private void remove_request () {
+        revealer.reveal_child = false;
+        GLib.Timeout.add (revealer.transition_duration, () => {
+            destroy ();
+            return GLib.Source.REMOVE;
+        });
+    }
+
+    /*
+     * Returns whether or not a ECal.Component was created in the backend EDS.
+     */
+    private bool calcomponent_created (ECal.Component comp) {
+        if (comp == null) {
+            return false;
+        }
+        var created = comp.get_created ();
+        return created.is_valid_time ();
     }
 }

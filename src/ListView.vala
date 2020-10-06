@@ -21,17 +21,74 @@
 public class Tasks.ListView : Gtk.Grid {
     public E.Source? source { get; set; }
 
-    private ECal.ClientView view;
+    private Gee.Collection<ECal.ClientView> views;
+
+    /*
+     * We need to pass a valid S-expression as query to guarantee the callback events are fired.
+     *
+     * See `e-cal-backend-sexp.c` of evolution-data-server for available S-expressions:
+     * https://gitlab.gnome.org/GNOME/evolution-data-server/-/blob/master/src/calendar/libedata-cal/e-cal-backend-sexp.c
+     */
+
+    public void add_view (E.Source task_list, string query) {
+        try {
+            var view = Tasks.Application.model.create_task_list_view (
+                task_list,
+                query,
+                on_tasks_added,
+                on_tasks_modified,
+                on_tasks_removed );
+
+            lock (views) {
+                views.add (view);
+            }
+
+        } catch (Error e) {
+            critical (e.message);
+        }
+    }
+
+    private void remove_views () {
+        lock (views) {
+            foreach (ECal.ClientView view in views) {
+                Tasks.Application.model.destroy_task_list_view (view);
+            }
+            views.clear ();
+        }
+    }
+
+    private Gtk.Revealer settings_button_revealer;
+    private Gtk.Stack title_stack;
+    private Gtk.Label scheduled_title;
     private EditableLabel editable_title;
+
+    private Gtk.ListBox add_task_list;
     private Gtk.ListBox task_list;
+    private Tasks.TaskRow active_task_row;
 
     construct {
+        views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
+
+        scheduled_title = new Gtk.Label (_("Scheduled"));
+        scheduled_title.ellipsize = Pango.EllipsizeMode.END;
+        scheduled_title.margin_start = 24;
+        scheduled_title.xalign = 0;
+
+        unowned Gtk.StyleContext scheduled_title_context = scheduled_title.get_style_context ();
+        scheduled_title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
+        scheduled_title_context.add_class (Granite.STYLE_CLASS_ACCENT);
+
         editable_title = new EditableLabel ();
         editable_title.margin_start = 24;
 
         unowned Gtk.StyleContext title_context = editable_title.get_style_context ();
         title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
         title_context.add_class (Granite.STYLE_CLASS_ACCENT);
+
+        title_stack = new Gtk.Stack ();
+        title_stack.homogeneous = false;
+        title_stack.add (scheduled_title);
+        title_stack.add (editable_title);
 
         var list_settings_popover = new Tasks.ListSettingsPopover ();
 
@@ -44,6 +101,10 @@ public class Tasks.ListView : Gtk.Grid {
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
+        settings_button_revealer = new Gtk.Revealer ();
+        settings_button_revealer.transition_type = Gtk.RevealerTransitionType.CROSSFADE;
+        settings_button_revealer.add (settings_button);
+
         var placeholder = new Gtk.Label (_("No Tasks"));
         placeholder.show ();
 
@@ -51,23 +112,28 @@ public class Tasks.ListView : Gtk.Grid {
         placeholder_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
 
+        add_task_list = new Gtk.ListBox ();
+        add_task_list.selection_mode = Gtk.SelectionMode.NONE;
+        add_task_list.margin_top = 24;
+        add_task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
+
         task_list = new Gtk.ListBox ();
         task_list.selection_mode = Gtk.SelectionMode.NONE;
         task_list.set_filter_func (filter_function);
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
+        task_list.set_header_func (header_function);
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow (null, null);
         scrolled_window.expand = true;
         scrolled_window.add (task_list);
 
-        margin_bottom = 3;
         column_spacing = 12;
-        row_spacing = 24;
-        attach (editable_title, 0, 0);
-        attach (settings_button, 1, 0);
-        attach (scrolled_window, 0, 1, 2);
+        attach (title_stack, 0, 0);
+        attach (settings_button_revealer, 1, 0);
+        attach (add_task_list, 0, 1, 2);
+        attach (scrolled_window, 0, 2, 2);
 
         Application.settings.changed["show-completed"].connect (() => {
             task_list.invalidate_filter ();
@@ -79,35 +145,48 @@ public class Tasks.ListView : Gtk.Grid {
             }
         });
 
+        add_task_list.row_activated.connect ((row) => {
+            var task_row = (Tasks.TaskRow) row;
+
+            if (active_task_row != null) {
+                active_task_row.reveal_child_request (false);
+            }
+
+            task_row.reveal_child_request (true);
+            active_task_row = task_row;
+        });
+
         task_list.row_activated.connect ((row) => {
-            ((Tasks.TaskRow) row).reveal_child_request (true);
+            var task_row = (Tasks.TaskRow) row;
+
+            if (active_task_row != null) {
+                active_task_row.reveal_child_request (false);
+            }
+
+            task_row.reveal_child_request (true);
+            active_task_row = task_row;
         });
 
         notify["source"].connect (() => {
+            remove_views ();
+
+            foreach (unowned Gtk.Widget child in add_task_list.get_children ()) {
+                child.destroy ();
+            }
+
             foreach (unowned Gtk.Widget child in task_list.get_children ()) {
                 child.destroy ();
             }
 
             if (source != null) {
-                update_request ();
-
-                try {
-                     var client = (ECal.Client) ECal.Client.connect_sync (source, ECal.ClientSourceType.TASKS, -1, null);
-                     client.get_view_sync ("", out view, null);
-
-                     view.objects_added.connect ((objects) => on_objects_added (source, client, objects));
-                     view.objects_removed.connect ((objects) => on_objects_removed (source, client, objects));
-                     view.objects_modified.connect ((objects) => on_objects_modified (source, client, objects));
-
-                     view.start ();
-
-                 } catch (Error e) {
-                     critical (e.message);
-                 }
-            } else {
-                editable_title.text = "";
+                var add_task_row = new Tasks.TaskRow.for_source (source);
+                add_task_row.task_changed.connect ((task) => {
+                    Tasks.Application.model.add_task (source, task);
+                });
+                add_task_list.add (add_task_row);
             }
 
+            update_request ();
             show_all ();
         });
 
@@ -118,8 +197,23 @@ public class Tasks.ListView : Gtk.Grid {
     }
 
     public void update_request () {
-        editable_title.text = source.dup_display_name ();
-        Tasks.Application.set_task_color (source, editable_title);
+        if (source == null) {
+            title_stack.visible_child = scheduled_title;
+            settings_button_revealer.reveal_child = false;
+
+        } else {
+            title_stack.visible_child = editable_title;
+            settings_button_revealer.reveal_child = true;
+            editable_title.text = source.dup_display_name ();
+
+            Tasks.Application.set_task_color (source, editable_title);
+
+            task_list.@foreach ((row) => {
+                if (row is Tasks.TaskRow) {
+                    (row as Tasks.TaskRow).update_request ();
+                }
+            });
+        }
     }
 
     [CCode (instance_pos = -1)]
@@ -134,36 +228,83 @@ public class Tasks.ListView : Gtk.Grid {
         return true;
     }
 
-#if E_CAL_2_0
-    private void on_objects_added (E.Source source, ECal.Client client, SList<ICal.Component> objects) {
-#else
-    private void on_objects_added (E.Source source, ECal.Client client, SList<weak ICal.Component> objects) {
-#endif
-        debug (@"Received $(objects.length()) added task(s) for source '%s'", source.dup_display_name ());
-        var added_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
-        objects.foreach ((ical_comp) => {
-            try {
-                SList<ECal.Component> ecal_tasks;
-                client.get_objects_for_uid_sync (ical_comp.get_uid (), out ecal_tasks, null);
+    [CCode (instance_pos = -1)]
+    private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {
+        var row_a = (Tasks.TaskRow) row1;
+        var row_b = (Tasks.TaskRow) row2;
 
-                ecal_tasks.foreach ((task) => {
-                    debug_task (source, task);
-                    added_tasks.add (task);
-                });
+        if (row_a.completed == row_b.completed) {
+            unowned ICal.Component comp_a = row_a.task.get_icalcomponent ();
+            unowned ICal.Component comp_b = row_b.task.get_icalcomponent ();
 
-            } catch (Error e) {
-                warning (e.message);
+            ICal.Time start_a = comp_a.get_dtstart ();
+            ICal.Time stamp_a = comp_a.get_dtstamp ();
+
+            ICal.Time start_b = comp_b.get_dtstart ();
+            ICal.Time stamp_b = comp_b.get_dtstamp ();
+
+            if ( start_a.is_null_time () && start_b.is_null_time () ) {
+                return stamp_b.compare (stamp_a);
+
+            } else if (start_a.is_null_time () && !start_b.is_null_time ()) {
+                return 1;
+
+            } else if (start_b.is_null_time () && !start_a.is_null_time ()) {
+                return -1;
+
+            } else {
+                return start_a.compare (start_b);
             }
-        });
 
-        tasks_added (client, source, added_tasks.read_only_view);
+        } else if (row_a.completed && !row_b.completed) {
+            return 1;
+
+        } else if (row_b.completed && !row_a.completed) {
+            return -1;
+        }
+
+        return 0;
     }
 
-    private void tasks_added (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
+    private void header_function (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
+        if (source != null || !(lbrow is Tasks.TaskRow)) {
+            return;
+        }
+        var row = (Tasks.TaskRow) lbrow;
+        unowned ICal.Component comp = row.task.get_icalcomponent ();
+
+        if (comp.get_due ().is_null_time ()) {
+            return;
+        }
+
+        if (lbbefore != null) {
+            var before = (Tasks.TaskRow) lbbefore;
+            unowned ICal.Component comp_before = before.task.get_icalcomponent ();
+
+            if (comp_before.get_due ().compare_date_only (comp.get_due ()) == 0) {
+                return;
+            }
+        }
+
+        var due_date_time = Util.ical_to_date_time (comp.get_due ());
+        var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time));
+        header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
+        header_label.margin_start = 6;
+
+        row.set_header (header_label);
+    }
+
+    private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
-            var task_row = new Tasks.TaskRow (source, task);
-            task_row.task_save.connect ((task) => {
-                update_task (client, task, ECal.ObjModType.ALL);
+            var task_row = new Tasks.TaskRow.for_component (task, source, this.source == null);
+            task_row.task_completed.connect ((task) => {
+                Tasks.Application.model.complete_task (source, task);
+            });
+            task_row.task_changed.connect ((task) => {
+                Tasks.Application.model.update_task (source, task, ECal.ObjModType.THIS_AND_FUTURE);
+            });
+            task_row.task_removed.connect ((task) => {
+                Tasks.Application.model.remove_task (source, task, ECal.ObjModType.ALL);
             });
             task_list.add (task_row);
             return true;
@@ -171,33 +312,7 @@ public class Tasks.ListView : Gtk.Grid {
         task_list.show_all ();
     }
 
-#if E_CAL_2_0
-    private void on_objects_modified (E.Source source, ECal.Client client, SList<ICal.Component> objects) {
-#else
-    private void on_objects_modified (E.Source source, ECal.Client client, SList<weak ICal.Component> objects) {
-#endif
-        debug (@"Received $(objects.length()) modified task(s) for source '%s'", source.dup_display_name ());
-        var updated_tasks = new Gee.ArrayList<ECal.Component> ((Gee.EqualDataFunc<ECal.Component>?) Util.calcomponent_equal_func);
-        objects.foreach ((comp) => {
-            try {
-                SList<ECal.Component> ecal_tasks;
-                client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
-
-                ecal_tasks.foreach ((task) => {
-                    debug_task (source, task);
-                    updated_tasks.add (task);
-                });
-
-            } catch (Error e) {
-                warning (e.message);
-            }
-        });
-
-        tasks_updated (client, source, updated_tasks.read_only_view);
-    }
-
-
-    private void tasks_updated (ECal.Client client, E.Source source, Gee.Collection<ECal.Component> tasks) {
+    private void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
         Tasks.TaskRow task_row = null;
         var row_index = 0;
 
@@ -216,13 +331,7 @@ public class Tasks.ListView : Gtk.Grid {
         } while (task_row != null);
     }
 
-#if E_CAL_2_0
-    private void on_objects_removed (E.Source source, ECal.Client client, SList<ECal.ComponentId?> cids) {
-#else
-    private void on_objects_removed (E.Source source, ECal.Client client, SList<weak ECal.ComponentId?> cids) {
-#endif
-        debug (@"Received $(cids.length()) removed task(s) for source '%s'", source.dup_display_name ());
-
+    private void on_tasks_removed (SList<ECal.ComponentId?> cids) {
         unowned Tasks.TaskRow? task_row = null;
         var row_index = 0;
         do {
@@ -240,55 +349,5 @@ public class Tasks.ListView : Gtk.Grid {
             }
             row_index++;
         } while (task_row != null);
-    }
-
-
-    [CCode (instance_pos = -1)]
-    private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {
-        var row1_completed = ((Tasks.TaskRow) row1).completed;
-        var row2_completed = ((Tasks.TaskRow) row2).completed;
-
-        if (row1_completed && !row2_completed) {
-            return 1;
-        } else if (row2_completed && !row1_completed) {
-            return -1;
-        }
-
-        return 0;
-    }
-
-    public void update_task (ECal.Client client, ECal.Component task, ECal.ObjModType mod_type) {
-        unowned ICal.Component comp = task.get_icalcomponent ();
-        debug (@"Updating task '$(comp.get_uid())' [mod_type=$(mod_type)]");
-
-#if E_CAL_2_0
-        client.modify_object.begin (comp, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
-#else
-        client.modify_object.begin (comp, mod_type, null, (obj, results) => {
-#endif
-            try {
-                client.modify_object.end (results);
-                SList<ECal.Component> ecal_tasks;
-                client.get_objects_for_uid_sync (comp.get_uid (), out ecal_tasks, null);
-
-#if E_CAL_2_0
-                var ical_tasks = new SList<ICal.Component> ();
-#else
-                var ical_tasks = new SList<unowned ICal.Component> ();
-#endif
-                foreach (unowned ECal.Component ecal_task in ecal_tasks) {
-                    ical_tasks.append (ecal_task.get_icalcomponent ());
-                }
-                on_objects_modified (source, client, ical_tasks);
-
-            } catch (Error e) {
-                warning (e.message);
-            }
-        });
-    }
-
-    private void debug_task (E.Source source, ECal.Component task) {
-        unowned ICal.Component comp = task.get_icalcomponent ();
-        debug (@"Task ['$(comp.get_summary())', $(source.dup_display_name()), $(comp.get_uid()))]");
     }
 }

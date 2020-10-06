@@ -20,6 +20,7 @@
 
 public class Tasks.Application : Gtk.Application {
     public static GLib.Settings settings;
+    public static Tasks.TaskModel model;
 
     public Application () {
         Object (
@@ -30,6 +31,7 @@ public class Tasks.Application : Gtk.Application {
 
     static construct {
         settings = new Settings ("io.elementary.tasks");
+        model = new Tasks.TaskModel ();
     }
 
     protected override void activate () {
@@ -68,6 +70,15 @@ public class Tasks.Application : Gtk.Application {
                 main_window.destroy ();
             }
         });
+
+        var granite_settings = Granite.Settings.get_default ();
+        var gtk_settings = Gtk.Settings.get_default ();
+
+        gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+
+        granite_settings.notify["prefers-color-scheme"].connect (() => {
+            gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+        });
     }
 
     private static Gee.HashMap<string, Gtk.CssProvider>? providers;
@@ -80,7 +91,8 @@ public class Tasks.Application : Gtk.Application {
         if (!providers.has_key (color)) {
             string style = """
                 @define-color colorAccent %s;
-            """.printf (color);
+                @define-color accent_color %s;
+            """.printf (color, color);
 
             try {
                 var style_provider = new Gtk.CssProvider ();

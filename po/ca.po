@@ -7,15 +7,103 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-02 13:42-0700\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2020-10-01 12:24+0000\n"
+"PO-Revision-Date: 2020-10-04 13:14+0000\n"
+"Last-Translator: David M <rbndavid@gmail.com>\n"
+"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/tasks/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.9.1\n"
 
-#: src/MainWindow.vala:29
-msgid "Reminders"
-msgstr ""
+#: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
+msgid "Scheduled"
+msgstr "Planificat"
+
+#: src/ListView.vala:98
+msgid "Edit Name and Appearance"
+msgstr "Editeu-ne el nom i l'aparença"
+
+#: src/ListView.vala:108
+msgid "No Tasks"
+msgstr "Sense tasques"
+
+#: src/MainWindow.vala:40
+msgid "Tasks"
+msgstr "Tasques"
+
+#: src/Util.vala:124
+msgid "Today"
+msgstr "Avui"
+
+#: src/Util.vala:126
+msgid "Yesterday"
+msgstr "Ahir"
+
+#: src/Util.vala:128
+msgid "Tomorrow"
+msgstr "Demà"
+
+#: src/Widgets/EditableLabel.vala:72
+msgid "Edit…"
+msgstr "Edita…"
+
+#: src/Widgets/ListSettingsPopover.vala:89
+msgid "Show Completed"
+msgstr "Mostra les fetes"
+
+#: src/Widgets/ListSettingsPopover.vala:107
+msgid "Delete List"
+msgstr "Suprimeix la llista"
+
+#: src/Widgets/SourceRow.vala:60
+msgid "Connecting…"
+msgstr "Es connecta…"
+
+#: src/Widgets/SourceRow.vala:97
+msgid "Waiting for login credentials"
+msgstr "S'esperen les credencials d'entrada."
+
+#: src/Widgets/SourceRow.vala:101
+msgid "Currently disconnected from the (possibly remote) data store"
+msgstr "Actualment desconnectat del magatzem de dades (possiblement remot)"
+
+#: src/Widgets/SourceRow.vala:105
+msgid "SSL certificate trust was rejected for the connection"
+msgstr "S'ha rebutjat la confiança del certificat SSL per a la connexió."
+
+#: src/Widgets/TaskRow.vala:132
+msgid "Schedule:"
+msgstr "Programació:"
+
+#: src/Widgets/TaskRow.vala:153
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#: src/Widgets/TaskRow.vala:157
+msgid "Save Changes"
+msgstr "Desa els canvis"
+
+#: src/Widgets/TaskRow.vala:157
+msgid "Add Task"
+msgstr "Afegeix una tasca"
+
+#: src/Widgets/TaskRow.vala:206
+msgid "Delete Task"
+msgstr "Suprimeix la tasca"
+
+#: src/Widgets/TaskRow.vala:395
+#, c-format
+msgid "%s"
+msgstr "%s"
+
+#: src/Widgets/TaskRow.vala:400
+#, c-format
+msgid "%s at %s"
+msgstr "%s a %s"
+
+#~ msgid "Reminders"
+#~ msgstr "Recordatoris"

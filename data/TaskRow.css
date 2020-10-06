@@ -54,10 +54,15 @@ row.card {
 
 row entry.flat  {
     background: transparent;
-    border: none;
+    border-style: solid;
+    border-color: transparent;
     padding: 0;
 }
 
 row entry.flat:focus {
     opacity: 1;
+}
+
+row:not(.card) entry.add-task {
+    border-color: alpha (@text_color, 0.25);
 }
