@@ -223,19 +223,23 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 return;
             }
 
-            var new_local_source = new E.Source (null, null);
+            try {
+                var new_local_source = new E.Source (null, null);
 
-            var list = new GLib.List<E.Source> ();
-            list.append (new_local_source);
+                var list = new GLib.List<E.Source> ();
+                list.append (new_local_source);
 
-            registry.create_sources.begin (list, null, (obj, res) => {
-                try {
-                    registry.create_sources.end (res);
-                } catch (Error e) {
-                    critical (e.message);
-                    return;
-                }
-            });
+                registry.create_sources.begin (list, null, (obj, res) => {
+                    try {
+                        registry.create_sources.end (res);
+                    } catch (Error e) {
+                        critical (e.message);
+                        return;
+                    }
+                });
+            } catch (Error e) {
+                critical (e.message);
+            }
         });
     }
 
