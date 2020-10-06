@@ -125,29 +125,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             listbox.set_header_func (header_update_func);
 
-            var last_selected_list = Application.settings.get_string ("selected-list");
-            var default_task_list = registry.default_task_list;
-            var task_lists = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
-
-            task_lists.foreach ((source) => {
-                E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-
-                if (list.selected == true && source.enabled == true) {
-                    add_source (source);
-
-                    if (last_selected_list == "" && default_task_list == source) {
-                        listbox.select_row (source_rows[source]);
-
-                    } else if (last_selected_list == source.uid) {
-                        listbox.select_row (source_rows[source]);
-                    }
-                }
-            });
-
-            if (last_selected_list == "scheduled") {
-                listbox.select_row (scheduled_row);
-            }
-
             listbox.row_selected.connect ((row) => {
                 if (row != null) {
                     if (row is Tasks.SourceRow) {
@@ -187,6 +164,29 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     }
                 }
             });
+
+            var last_selected_list = Application.settings.get_string ("selected-list");
+            var default_task_list = registry.default_task_list;
+            var task_lists = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
+
+            task_lists.foreach ((source) => {
+                E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+                if (list.selected == true && source.enabled == true) {
+                    add_source (source);
+
+                    if (last_selected_list == "" && default_task_list == source) {
+                        listbox.select_row (source_rows[source]);
+
+                    } else if (last_selected_list == source.uid) {
+                        listbox.select_row (source_rows[source]);
+                    }
+                }
+            });
+
+            if (last_selected_list == "scheduled") {
+                listbox.select_row (scheduled_row);
+            }
         });
     }
 
