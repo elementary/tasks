@@ -31,7 +31,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     private static Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
 
     private uint configure_id;
-    private Gtk.MenuButton add_tasklist_button;
     private Gtk.ListBox listbox;
     private Gee.HashMap<E.Source, Tasks.SourceRow>? source_rows;
     private Tasks.ListView listview;
@@ -96,22 +95,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         scrolledwindow.hscrollbar_policy = Gtk.PolicyType.NEVER;
         scrolledwindow.add (listbox);
 
-        var offline_tasklist_modelbutton = new Gtk.ModelButton ();
-        offline_tasklist_modelbutton.text = _("Local Task List");
-
-        var modelbutton_grid = new Gtk.Grid ();
-        modelbutton_grid.orientation = Gtk.Orientation.VERTICAL;
-        modelbutton_grid.add (offline_tasklist_modelbutton);
-        modelbutton_grid.show_all ();
-
-        var add_tasklist_popover = new Gtk.Popover (add_tasklist_button);
-        add_tasklist_popover.add (modelbutton_grid);
-
-        add_tasklist_button = new Gtk.MenuButton () {
+        var add_tasklist_button = new Gtk.Button () {
+            action_name = ACTION_PREFIX + ACTION_ADD_NEW_LIST,
             always_show_image = true,
             image = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR),
             label = _("Add Task List…"),
-            popover = add_tasklist_popover,
             tooltip_markup = Granite.markup_accel_tooltip (
                 application_instance.get_accels_for_action (ACTION_PREFIX + ACTION_ADD_NEW_LIST)
             )
@@ -223,14 +211,32 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 listbox.select_row (scheduled_row);
             }
         });
-
-        offline_tasklist_modelbutton.clicked.connect (() => {
-            critical ("YATTA");
-        });
     }
 
     private void action_add_new_list () {
-        add_tasklist_button.activate ();
+        Tasks.Application.model.get_registry.begin ((obj, res) => {
+            E.SourceRegistry registry;
+            try {
+                registry = Tasks.Application.model.get_registry.end (res);
+            } catch (Error e) {
+                critical (e.message);
+                return;
+            }
+
+            var new_local_source = new E.Source (null, null);
+
+            var list = new GLib.List<E.Source> ();
+            list.append (new_local_source);
+
+            registry.create_sources.begin (list, null, (obj, res) => {
+                try {
+                    registry.create_sources.end (res);
+                } catch (Error e) {
+                    critical (e.message);
+                    return;
+                }
+            });
+        });
     }
 
     private void action_delete_selected_list () {
