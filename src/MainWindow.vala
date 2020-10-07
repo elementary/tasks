@@ -247,6 +247,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             };
             error_dialog.show_error_details (error_message);
             error_dialog.run ();
+            error_dialog.destroy ();
         }
     }
 
