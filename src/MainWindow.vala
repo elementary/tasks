@@ -225,13 +225,12 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             try {
                 var new_local_source = new E.Source (null, null);
+                E.SourceTaskList source_task_list = (E.SourceTaskList)new_local_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+                source_task_list.backend_name = "local";
 
-                var list = new GLib.List<E.Source> ();
-                list.append (new_local_source);
-
-                registry.create_sources.begin (list, null, (obj, res) => {
+                registry.commit_source.begin (new_local_source, null, (obj, res) => {
                     try {
-                        registry.create_sources.end (res);
+                        registry.commit_source.end (res);
                     } catch (Error e) {
                         critical (e.message);
                         return;
