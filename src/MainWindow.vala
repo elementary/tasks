@@ -214,32 +214,39 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void action_add_new_list () {
+        string? error_message = null;
         Tasks.Application.model.get_registry.begin ((obj, res) => {
-            E.SourceRegistry registry;
             try {
-                registry = Tasks.Application.model.get_registry.end (res);
-            } catch (Error e) {
-                critical (e.message);
-                return;
-            }
+                var registry = Tasks.Application.model.get_registry.end (res);
 
-            try {
                 var new_local_source = new E.Source (null, null);
-                E.SourceTaskList source_task_list = (E.SourceTaskList)new_local_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+                var source_task_list = (E.SourceTaskList) new_local_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
                 source_task_list.backend_name = "local";
 
                 registry.commit_source.begin (new_local_source, null, (obj, res) => {
                     try {
                         registry.commit_source.end (res);
                     } catch (Error e) {
-                        critical (e.message);
-                        return;
+                        error_message = e.message;
                     }
                 });
             } catch (Error e) {
-                critical (e.message);
+                error_message = e.message;
             }
         });
+
+        if (error_message != null) {
+            var error_dialog = new Granite.MessageDialog (
+                _("Creating a new task list failed"),
+                _(""),
+                new ThemedIcon ("dialog-error"),
+                Gtk.ButtonsType.CLOSE
+            ) {
+                transient_for = this
+            };
+            error_dialog.show_error_details (error_message);
+            error_dialog.run ();
+        }
     }
 
     private void action_delete_selected_list () {
