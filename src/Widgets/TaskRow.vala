@@ -47,6 +47,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private Gtk.Revealer task_form_revealer;
     private Gtk.Switch due_switch;
     private Gtk.TextBuffer description_textbuffer;
+    private unowned Gtk.StyleContext style_context;
 
     private static Gtk.CssProvider taskrow_provider;
 
@@ -196,7 +197,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         add (revealer);
         margin_start = margin_end = 12;
-        get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        style_context = get_style_context ();
+        style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
+        style_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         if (created) {
             check.show ();
@@ -319,8 +323,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     public void reveal_child_request (bool value) {
         task_form_revealer.reveal_child = value;
         task_details_reveal_request (!value);
-
-        unowned Gtk.StyleContext style_context = get_style_context ();
 
         if (value) {
             style_context.add_class ("collapsed");
