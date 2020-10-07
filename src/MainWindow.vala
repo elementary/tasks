@@ -141,7 +141,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         Tasks.Application.settings.set_string ("selected-list", "scheduled");
 
                         var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
-                        var query = "AND (NOT is-completed?) (OR (has-start?) (has-alarms?))";
+                        var query = "AND (NOT is-completed?) (has-start?)";
 
                         sources.foreach ((source) => {
                             E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
