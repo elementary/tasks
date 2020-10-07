@@ -222,6 +222,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 var new_local_source = new E.Source (null, null);
                 var source_task_list = (E.SourceTaskList) new_local_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
                 source_task_list.backend_name = "local";
+                source_task_list.color = "#0e9a83";
 
                 registry.commit_source.begin (new_local_source, null, (obj, res) => {
                     try {
