@@ -220,6 +220,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 var registry = Tasks.Application.model.get_registry.end (res);
 
                 var new_local_source = new E.Source (null, null);
+                new_local_source.parent = "local-stub";
+                new_local_source.display_name = _("New list");
+
                 var source_task_list = (E.SourceTaskList) new_local_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
                 source_task_list.backend_name = "local";
                 source_task_list.color = "#0e9a83";
