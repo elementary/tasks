@@ -242,7 +242,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         if (error_message != null) {
             var error_dialog = new Granite.MessageDialog (
                 _("Creating a new task list failed"),
-                _(""),
+                _("The task list registry may be unavailable or unable to be written to."),
                 new ThemedIcon ("dialog-error"),
                 Gtk.ButtonsType.CLOSE
             ) {
@@ -326,7 +326,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             listbox.add (source_rows[source]);
             listbox.show_all ();
-            listbox.invalidate_headers ();
         }
     }
 
