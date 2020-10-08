@@ -306,7 +306,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         }
         var row = (Tasks.SourceRow) lbrow;
         var before = (Tasks.SourceRow) lbbefore;
-        if (row.source.parent == before.source.parent) {
+        if (before.source.parent == null) {
+            return -1;
+        } else if (row.source.parent == before.source.parent) {
             return row.source.display_name.collate (before.source.display_name);
         } else {
             return row.source.parent.collate (before.source.parent);
@@ -324,6 +326,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             listbox.add (source_rows[source]);
             listbox.show_all ();
+            listbox.invalidate_headers ();
         }
     }
 
