@@ -20,9 +20,11 @@
 
 public class Tasks.MainWindow : Hdy.ApplicationWindow {
     public const string ACTION_PREFIX = "win.";
+    public const string ACTION_ADD_NEW_LIST = "action-add-new-list";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
 
     private const ActionEntry[] ACTION_ENTRIES = {
+        { ACTION_ADD_NEW_LIST, action_add_new_list },
         { ACTION_DELETE_SELECTED_LIST, action_delete_selected_list }
     };
 
@@ -44,6 +46,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     static construct {
         Hdy.init ();
 
+        action_accelerators[ACTION_ADD_NEW_LIST] = "<Control>N";
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "<Control>BackSpace";
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "Delete";
     }
@@ -51,8 +54,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     construct {
         add_action_entries (ACTION_ENTRIES, this);
 
+        var application_instance = (Gtk.Application) GLib.Application.get_default ();
         foreach (var action in action_accelerators.get_keys ()) {
-            ((Gtk.Application) GLib.Application.get_default ()).set_accels_for_action (ACTION_PREFIX + action, action_accelerators[action].to_array ());  // vala-lint=line-length
+            application_instance.set_accels_for_action (
+                ACTION_PREFIX + action, action_accelerators[action].to_array ()
+            );
         }
 
         var header_provider = new Gtk.CssProvider ();
@@ -89,9 +95,26 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         scrolledwindow.hscrollbar_policy = Gtk.PolicyType.NEVER;
         scrolledwindow.add (listbox);
 
+        var add_tasklist_button = new Gtk.Button () {
+            action_name = ACTION_PREFIX + ACTION_ADD_NEW_LIST,
+            always_show_image = true,
+            image = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR),
+            label = _("Add Task List…"),
+            tooltip_markup = Granite.markup_accel_tooltip (
+                application_instance.get_accels_for_action (ACTION_PREFIX + ACTION_ADD_NEW_LIST)
+            )
+        };
+
+        var actionbar = new Gtk.ActionBar ();
+        actionbar.add (add_tasklist_button);
+
+        unowned Gtk.StyleContext actionbar_style_context = actionbar.get_style_context ();
+        actionbar_style_context.add_class (Gtk.STYLE_CLASS_FLAT);
+
         var sidebar = new Gtk.Grid ();
         sidebar.attach (sidebar_header, 0, 0);
         sidebar.attach (scrolledwindow, 0, 1);
+        sidebar.attach (actionbar, 0, 2);
 
         unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
         sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);
@@ -190,6 +213,47 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         });
     }
 
+    private void action_add_new_list () {
+        string? error_message = null;
+        Tasks.Application.model.get_registry.begin ((obj, res) => {
+            try {
+                var registry = Tasks.Application.model.get_registry.end (res);
+
+                var new_local_source = new E.Source (null, null);
+                new_local_source.parent = "local-stub";
+                new_local_source.display_name = _("New list");
+
+                var source_task_list = (E.SourceTaskList) new_local_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+                source_task_list.backend_name = "local";
+                source_task_list.color = "#0e9a83";
+
+                registry.commit_source.begin (new_local_source, null, (obj, res) => {
+                    try {
+                        registry.commit_source.end (res);
+                    } catch (Error e) {
+                        error_message = e.message;
+                    }
+                });
+            } catch (Error e) {
+                error_message = e.message;
+            }
+        });
+
+        if (error_message != null) {
+            var error_dialog = new Granite.MessageDialog (
+                _("Creating a new task list failed"),
+                _("The task list registry may be unavailable or unable to be written to."),
+                new ThemedIcon ("dialog-error"),
+                Gtk.ButtonsType.CLOSE
+            ) {
+                transient_for = this
+            };
+            error_dialog.show_error_details (error_message);
+            error_dialog.run ();
+            error_dialog.destroy ();
+        }
+    }
+
     private void action_delete_selected_list () {
         var list_row = ((Tasks.SourceRow) listbox.get_selected_row ());
         var source = list_row.source;
@@ -242,7 +306,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         }
         var row = (Tasks.SourceRow) lbrow;
         var before = (Tasks.SourceRow) lbbefore;
-        if (row.source.parent == before.source.parent) {
+        if (before.source.parent == null) {
+            return -1;
+        } else if (row.source.parent == before.source.parent) {
             return row.source.display_name.collate (before.source.display_name);
         } else {
             return row.source.parent.collate (before.source.parent);
