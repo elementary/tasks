@@ -219,17 +219,31 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             try {
                 var registry = Tasks.Application.model.get_registry.end (res);
 
-                var new_local_source = new E.Source (null, null);
-                new_local_source.parent = "local-stub";
-                new_local_source.display_name = _("New list");
+                var new_source = new E.Source (null, null);
+                new_source.display_name = _("New list");
 
-                var source_task_list = (E.SourceTaskList) new_local_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-                source_task_list.backend_name = "local";
-                source_task_list.color = "#0e9a83";
+                var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+                new_source_tasklist_extension.color = "#0e9a83";
 
-                registry.commit_source.begin (new_local_source, null, (obj, res) => {
+                var selected_source = listview.source;
+                if (selected_source == null) {
+                    new_source.parent = "local-stub";
+                    new_source_tasklist_extension.backend_name = "local";
+                } else {
+                    var selected_source_tasklist_extension = (E.SourceTaskList) selected_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+                    new_source.parent = selected_source.parent;
+                    new_source_tasklist_extension.backend_name = selected_source_tasklist_extension.backend_name;
+                }
+
+                debug (@"parent: $(new_source.parent)");
+                debug (@"backend_name: $(new_source_tasklist_extension.backend_name)");
+
+                var new_sources_list = new GLib.List<E.Source> ();
+                new_sources_list.append (new_source);
+
+                registry.create_sources.begin (new_sources_list, null, (obj, res) => {
                     try {
-                        registry.commit_source.end (res);
+                        registry.create_sources.end (res);
                     } catch (Error e) {
                         error_message = e.message;
                     }
