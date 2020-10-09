@@ -218,21 +218,28 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             try {
                 var registry = Tasks.Application.model.get_registry.end (res);
 
-                var new_source = new E.Source (null, null);
-                new_source.display_name = _("New list");
-
-                var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-                new_source_tasklist_extension.color = "#0e9a83";
+                E.Source new_source;
+                E.SourceTaskList new_source_tasklist_extension;
 
                 var selected_source = listview.source;
                 if (selected_source == null) {
+                    new_source = new E.Source (null, null);
+                    new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
                     new_source.parent = "local-stub";
                     new_source_tasklist_extension.backend_name = "local";
+
                 } else {
+                    new_source = new E.Source (null, selected_source.main_context);
+                    new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
                     var selected_source_tasklist_extension = (E.SourceTaskList) selected_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
                     new_source.parent = selected_source.parent;
                     new_source_tasklist_extension.backend_name = selected_source_tasklist_extension.backend_name;
                 }
+
+                new_source.display_name = _("New list");
+                new_source_tasklist_extension.color = "#0e9a83";
 
                 debug (@"parent: $(new_source.parent)");
                 debug (@"backend_name: $(new_source_tasklist_extension.backend_name)");
@@ -257,7 +264,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         GLib.Idle.add (() => {
             var error_dialog = new Granite.MessageDialog (
                 _("Creating a new task list failed"),
-                _("The task list registry may be unavailable or unable to be written to."),
+                //_("The task list registry may be unavailable or unable to be written to."),
+                e.message,
                 new ThemedIcon ("dialog-error"),
                 Gtk.ButtonsType.CLOSE
             ) {
