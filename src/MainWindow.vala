@@ -214,7 +214,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void action_add_new_list () {
-        string? error_message = null;
         Tasks.Application.model.get_registry.begin ((obj, res) => {
             try {
                 var registry = Tasks.Application.model.get_registry.end (res);
@@ -245,15 +244,17 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     try {
                         registry.create_sources.end (res);
                     } catch (Error e) {
-                        error_message = e.message;
+                        dialog_add_task_list_error (e);
                     }
                 });
             } catch (Error e) {
-                error_message = e.message;
+                dialog_add_task_list_error (e);
             }
         });
+    }
 
-        if (error_message != null) {
+    private void dialog_add_task_list_error (Error e) {
+        GLib.Idle.add (() => {
             var error_dialog = new Granite.MessageDialog (
                 _("Creating a new task list failed"),
                 _("The task list registry may be unavailable or unable to be written to."),
@@ -262,10 +263,12 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             ) {
                 transient_for = this
             };
-            error_dialog.show_error_details (error_message);
+            error_dialog.show_error_details (e.message);
             error_dialog.run ();
             error_dialog.destroy ();
-        }
+
+            return GLib.Source.REMOVE;
+        });
     }
 
     private void action_delete_selected_list () {
