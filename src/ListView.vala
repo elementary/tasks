@@ -192,7 +192,24 @@ public class Tasks.ListView : Gtk.Grid {
 
         editable_title.changed.connect (() => {
             source.display_name = editable_title.text;
-            source.write.begin (null);
+
+            if (source.writable) {
+                // if (source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
+            //     var source_webdav_extension = (E.SourceWebdav) source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+            //     source_webdav_extension.display_name = editable_title.text;
+            // }
+            //
+                source.write.begin (null, (obj,res) => {
+                    try {
+                        source.write.end (res);
+                    } catch (Error e) {
+                        warning (e.message);
+                    }
+                });
+
+            } else {
+                warning (@"Source is not writable: $(source.display_name)");
+            }
         });
     }
 
