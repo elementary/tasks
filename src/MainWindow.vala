@@ -229,49 +229,79 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     new_source.parent = "local-stub";
                     new_source_tasklist_extension.backend_name = "local";
 
-                } else {
-                    new_source = new E.Source (null, selected_source.main_context);
+                    new_source.display_name = _("New list");
+                    new_source_tasklist_extension.color = "#0e9a83";
+
+                    debug (@"parent: $(new_source.parent)");
+                    debug (@"backend_name: $(new_source_tasklist_extension.backend_name)");
+
+                    var new_sources_list = new GLib.List<E.Source> ();
+                    new_sources_list.append (new_source);
+
+                    registry.create_sources.begin (new_sources_list, null, (obj, res) => {
+                        try {
+                            registry.create_sources.end (res);
+                        } catch (Error e) {
+                            dialog_add_task_list_error (e);
+                        }
+                    });
+
+                } else if (selected_source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)){
+                    var selected_source_webdav_extension = (E.SourceWebdav) selected_source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+                    var selected_source_collection_extension = (E.SourceCollection) selected_source.get_extension (E.SOURCE_EXTENSION_COLLECTION);
+                    var selected_source_uri = selected_source_webdav_extension.soup_uri;
+
+                    var new_source_uri = new Soup.URI (null);
+                    new_source_uri.set_scheme (selected_source_uri.get_scheme ());
+                    new_source_uri.set_user (selected_source_uri.get_user ());
+                    new_source_uri.set_password (selected_source_uri.get_password ());
+                    new_source_uri.set_host (selected_source_uri.get_host ());
+                    new_source_uri.set_port (selected_source_uri.get_port ());
+
+                    var uuid_regex = new GLib.Regex ("[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}/?");
+                    var selected_source_path = selected_source_uri.get_path ();
+                    var new_source_path = uuid_regex.replace (selected_source_path, selected_source_path.length, 0, GLib.Uuid.string_random ().up ());
+                    new_source_uri.set_path (new_source_path);
+
+                    debug (@"MKCALENDAR: $(new_source_uri.to_string (false))");
+
+                    var webdav_session = new E.WebDAVSession (selected_source);
+                    webdav_session.mkcalendar_sync (
+                        new_source_uri.to_string (false),
+                        _("New list"),
+                        null,
+                        "#0e9a83",
+                        E.WebDAVResourceSupports.TASKS,
+                        null);
+
+                    /*new_source = new E.Source (null, n);
                     new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
                     var selected_source_tasklist_extension = (E.SourceTaskList) selected_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
                     new_source.parent = selected_source.parent;
-                    new_source_tasklist_extension.backend_name = selected_source_tasklist_extension.backend_name;
+                    new_source_tasklist_extension.backend_name = selected_source_tasklist_extension.backend_name;*/
                 }
 
-                new_source.display_name = _("New list");
-                new_source_tasklist_extension.color = "#0e9a83";
-
-                debug (@"parent: $(new_source.parent)");
-                debug (@"backend_name: $(new_source_tasklist_extension.backend_name)");
-
-                var new_sources_list = new GLib.List<E.Source> ();
-                new_sources_list.append (new_source);
-
-                registry.create_sources.begin (new_sources_list, null, (obj, res) => {
-                    try {
-                        registry.create_sources.end (res);
-                    } catch (Error e) {
-                        dialog_add_task_list_error (e);
-                    }
-                });
             } catch (Error e) {
+                critical (e.message);
                 dialog_add_task_list_error (e);
             }
         });
     }
 
     private void dialog_add_task_list_error (Error e) {
+        string error_message = e.message;
+
         GLib.Idle.add (() => {
             var error_dialog = new Granite.MessageDialog (
                 _("Creating a new task list failed"),
-                //_("The task list registry may be unavailable or unable to be written to."),
-                e.message,
+                _("The task list registry may be unavailable or unable to be written to."),
                 new ThemedIcon ("dialog-error"),
                 Gtk.ButtonsType.CLOSE
             ) {
                 transient_for = this
             };
-            error_dialog.show_error_details (e.message);
+            error_dialog.show_error_details (error_message);
             error_dialog.run ();
             error_dialog.destroy ();
 
