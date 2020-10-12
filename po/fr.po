@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-01 12:24+0000\n"
-"PO-Revision-Date: 2020-10-01 12:55+0000\n"
-"Last-Translator: Corentin Noël <corentin@elementary.io>\n"
+"PO-Revision-Date: 2020-10-13 12:14+0000\n"
+"Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -20,15 +20,15 @@ msgstr ""
 
 #: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
-msgstr ""
+msgstr "Planifié"
 
 #: src/ListView.vala:98
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "Modifier le nom et l'apparence"
 
 #: src/ListView.vala:108
 msgid "No Tasks"
-msgstr ""
+msgstr "Aucune tâche"
 
 #: src/MainWindow.vala:40
 msgid "Tasks"
@@ -52,11 +52,11 @@ msgstr "Modifier…"
 
 #: src/Widgets/ListSettingsPopover.vala:89
 msgid "Show Completed"
-msgstr ""
+msgstr "Afficher les tâches complétées"
 
 #: src/Widgets/ListSettingsPopover.vala:107
 msgid "Delete List"
-msgstr ""
+msgstr "Supprimer la liste"
 
 #: src/Widgets/SourceRow.vala:60
 msgid "Connecting…"
@@ -64,19 +64,19 @@ msgstr "Connexion…"
 
 #: src/Widgets/SourceRow.vala:97
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "En attente des identifiants de connexion"
 
 #: src/Widgets/SourceRow.vala:101
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "Actuellement déconnecté de la base de données (possiblement distante)"
 
 #: src/Widgets/SourceRow.vala:105
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "Le certificat SSL à été rejeté pour la connexion"
 
 #: src/Widgets/TaskRow.vala:132
 msgid "Schedule:"
-msgstr ""
+msgstr "Planning :"
 
 #: src/Widgets/TaskRow.vala:153
 msgid "Cancel"
@@ -84,25 +84,25 @@ msgstr "Annuler"
 
 #: src/Widgets/TaskRow.vala:157
 msgid "Save Changes"
-msgstr ""
+msgstr "Enregistrer les modifications"
 
 #: src/Widgets/TaskRow.vala:157
 msgid "Add Task"
-msgstr ""
+msgstr "Ajouter une tâche"
 
 #: src/Widgets/TaskRow.vala:206
 msgid "Delete Task"
-msgstr ""
+msgstr "Supprimer la tâche"
 
 #: src/Widgets/TaskRow.vala:395
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: src/Widgets/TaskRow.vala:400
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s à %s"
 
 #~ msgid "Reminders"
 #~ msgstr "Rappels"
