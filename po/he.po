@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-01 12:24+0000\n"
+"POT-Creation-Date: 2020-10-09 07:27+0000\n"
 "PO-Revision-Date: 2020-10-04 13:14+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/tasks/he/>\n"
@@ -30,9 +30,25 @@ msgstr "עריכת השם והמראה"
 msgid "No Tasks"
 msgstr "אין משימות"
 
-#: src/MainWindow.vala:40
+#: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr "משימות"
+
+#: src/MainWindow.vala:102
+msgid "Add Task List…"
+msgstr ""
+
+#: src/MainWindow.vala:224
+msgid "New list"
+msgstr ""
+
+#: src/MainWindow.vala:244
+msgid "Creating a new task list failed"
+msgstr ""
+
+#: src/MainWindow.vala:245
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr ""
 
 #: src/Util.vala:124
 msgid "Today"
@@ -50,11 +66,11 @@ msgstr "מחר"
 msgid "Edit…"
 msgstr "עריכה…"
 
-#: src/Widgets/ListSettingsPopover.vala:89
+#: src/Widgets/ListSettingsPopover.vala:103
 msgid "Show Completed"
 msgstr "הצגת אלו שהושלמו"
 
-#: src/Widgets/ListSettingsPopover.vala:107
+#: src/Widgets/ListSettingsPopover.vala:121
 msgid "Delete List"
 msgstr "מחיקת רשימה"
 
@@ -74,32 +90,32 @@ msgstr "אין תקשורת כרגע למאגר הנתונים (כנראה מר�
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "מהימנות אישור SSL נדחתה עבור החיבור"
 
-#: src/Widgets/TaskRow.vala:132
+#: src/Widgets/TaskRow.vala:133
 msgid "Schedule:"
 msgstr "תזמון:"
 
-#: src/Widgets/TaskRow.vala:153
+#: src/Widgets/TaskRow.vala:154
 msgid "Cancel"
 msgstr "ביטול"
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 msgid "Save Changes"
 msgstr "שמירת השינויים"
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 msgid "Add Task"
 msgstr "הוספת משימה"
 
-#: src/Widgets/TaskRow.vala:206
+#: src/Widgets/TaskRow.vala:210
 msgid "Delete Task"
 msgstr "מחיקת משימה"
 
-#: src/Widgets/TaskRow.vala:395
+#: src/Widgets/TaskRow.vala:401
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: src/Widgets/TaskRow.vala:400
+#: src/Widgets/TaskRow.vala:406
 #, c-format
 msgid "%s at %s"
 msgstr "%s ב־%s"
