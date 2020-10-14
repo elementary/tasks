@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-09 07:27+0000\n"
-"PO-Revision-Date: 2020-10-04 13:14+0000\n"
+"PO-Revision-Date: 2020-10-15 00:34+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
-"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
-">\n"
+"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,19 +37,21 @@ msgstr "Tareas"
 
 #: src/MainWindow.vala:102
 msgid "Add Task List…"
-msgstr ""
+msgstr "Añadir lista de tareas…"
 
 #: src/MainWindow.vala:224
 msgid "New list"
-msgstr ""
+msgstr "Lista nueva"
 
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Falló la creación de una lista de tareas nueva"
 
 #: src/MainWindow.vala:245
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
+"Es posible que el registro de listas de tareas no esté disponible o no se "
+"pueda modificar."
 
 #: src/Util.vala:124
 msgid "Today"
