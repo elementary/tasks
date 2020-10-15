@@ -221,19 +221,27 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
                 var selected_source = listview.source;
 
+                new_source.display_name = _("New list");
+                new_source_tasklist_extension.color = "#0e9a83";
+
+                E.Source collection_source = null;
                 if (selected_source == null) {
                     new_source.parent = "local-stub";
                     new_source_tasklist_extension.backend_name = "local";
 
                 } else {
+                    collection_source = registry.find_extension (selected_source, E.SOURCE_EXTENSION_COLLECTION);
+
                     var selected_source_tasklist_extension = (E.SourceTaskList) selected_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
                     new_source.parent = selected_source.parent;
                     new_source_tasklist_extension.backend_name = selected_source_tasklist_extension.backend_name;
                 }
-                new_source.display_name = _("New list");
-                new_source_tasklist_extension.color = "#0e9a83";
 
-                registry.commit_source_sync (new_source, null);
+                if (collection_source == null) {
+                    registry.commit_source_sync (new_source, null);
+                } else {
+                    collection_source.remote_create_sync (new_source, null);
+                }
 
             } catch (Error e) {
                 critical (e.message);
