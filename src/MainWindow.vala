@@ -258,14 +258,24 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     new_source_uri.set_host (selected_source_uri.get_host ());
                     new_source_uri.set_port (selected_source_uri.get_port ());
 
-                    var uuid_regex = new GLib.Regex ("[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}/?");
-                    var selected_source_path = selected_source_uri.get_path ();
-                    var new_source_path = uuid_regex.replace (selected_source_path, selected_source_path.length, 0, GLib.Uuid.string_random ().up ());
-                    new_source_uri.set_path (new_source_path);
+                    var uri_dir_path = selected_source_uri.get_path ();
+                    if (uri_dir_path.has_suffix ("/")) {
+                        uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
+                    }
+                    uri_dir_path = uri_dir_path.substring(0, uri_dir_path.last_index_of ("/"));
+                    new_source_uri.set_path (uri_dir_path + "/" + GLib.Uuid.string_random ().up ());
 
                     debug (@"MKCALENDAR: $(new_source_uri.to_string (false))");
 
                     var webdav_session = new E.WebDAVSession (selected_source);
+                    if (webdav_session.has_feature (typeof (Soup.Auth))) {
+                        var webdav_auth_manager = (Soup.AuthManager) webdav_session.get_feature (typeof (Soup.AuthManager));
+                        var webdav_auth = (Soup.Auth) webdav_session.get_feature (typeof (Soup.Auth));
+                        webdav_auth_manager.use_auth (new_source_uri, webdav_auth);
+                    } else {
+                        warning ("E.WebDAVSession's Soup.Auth feature is null");
+                    }
+
                     webdav_session.mkcalendar_sync (
                         new_source_uri.to_string (false),
                         _("New list"),
@@ -273,13 +283,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         "#0e9a83",
                         E.WebDAVResourceSupports.TASKS,
                         null);
-
-                    /*new_source = new E.Source (null, n);
-                    new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-
-                    var selected_source_tasklist_extension = (E.SourceTaskList) selected_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-                    new_source.parent = selected_source.parent;
-                    new_source_tasklist_extension.backend_name = selected_source_tasklist_extension.backend_name;*/
                 }
 
             } catch (Error e) {
