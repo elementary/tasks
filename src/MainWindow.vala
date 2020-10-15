@@ -217,87 +217,23 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         Tasks.Application.model.get_registry.begin ((obj, res) => {
             try {
                 var registry = Tasks.Application.model.get_registry.end (res);
-
-                E.Source new_source;
-                E.SourceTaskList new_source_tasklist_extension;
-
+                var new_source = new E.Source (null, null);
+                var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
                 var selected_source = listview.source;
-                if (selected_source == null) {
-                    new_source = new E.Source (null, null);
-                    new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
+                if (selected_source == null) {
                     new_source.parent = "local-stub";
                     new_source_tasklist_extension.backend_name = "local";
 
-                    new_source.display_name = _("New list");
-                    new_source_tasklist_extension.color = "#0e9a83";
-
-                    debug (@"parent: $(new_source.parent)");
-                    debug (@"backend_name: $(new_source_tasklist_extension.backend_name)");
-
-                    var new_sources_list = new GLib.List<E.Source> ();
-                    new_sources_list.append (new_source);
-
-                    registry.create_sources.begin (new_sources_list, null, (obj, res) => {
-                        try {
-                            registry.create_sources.end (res);
-                        } catch (Error e) {
-                            dialog_add_task_list_error (e);
-                        }
-                    });
-
                 } else {
-                    new_source = new E.Source (null, null);
-                    debug (@"$(E.util_get_source_full_name (registry, selected_source))");
-                    var collection_source = registry.find_extension (selected_source, E.SOURCE_EXTENSION_COLLECTION);
-                    debug (@"$(E.util_get_source_full_name (registry, collection_source))");
-                    debug (@"$(E.util_can_use_collection_as_credential_source (collection_source, new_source))");
-                    collection_source.remote_create_sync (new_source, null);
-                    /*
+                    var selected_source_tasklist_extension = (E.SourceTaskList) selected_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+                    new_source.parent = selected_source.parent;
+                    new_source_tasklist_extension.backend_name = selected_source_tasklist_extension.backend_name;
+                }
+                new_source.display_name = _("New list");
+                new_source_tasklist_extension.color = "#0e9a83";
 
-                    /*var selected_webdav_session = new E.WebDAVSession (selected_source);
-                    if (new_source.invoke_authenticate_sync (selected_webdav_session.credentials, null)) {
-                        debug ("Authenticated!!!");
-                    }*/
-
-                } /*else if (selected_source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)){
-                    var selected_source_webdav_extension = (E.SourceWebdav) selected_source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
-                    var selected_source_collection_extension = (E.SourceCollection) selected_source.get_extension (E.SOURCE_EXTENSION_COLLECTION);
-                    var selected_source_uri = selected_source_webdav_extension.soup_uri;
-
-                    var new_source_uri = new Soup.URI (null);
-                    new_source_uri.set_scheme (selected_source_uri.get_scheme ());
-                    new_source_uri.set_user (selected_source_uri.get_user ());
-                    new_source_uri.set_password (selected_source_uri.get_password ());
-                    new_source_uri.set_host (selected_source_uri.get_host ());
-                    new_source_uri.set_port (selected_source_uri.get_port ());
-
-                    var uri_dir_path = selected_source_uri.get_path ();
-                    if (uri_dir_path.has_suffix ("/")) {
-                        uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
-                    }
-                    uri_dir_path = uri_dir_path.substring(0, uri_dir_path.last_index_of ("/"));
-                    new_source_uri.set_path (uri_dir_path + "/" + GLib.Uuid.string_random ().up ());
-
-                    debug (@"MKCALENDAR: $(new_source_uri.to_string (false))");
-
-                    var webdav_session = new E.WebDAVSession (selected_source);
-                    if (webdav_session.has_feature (typeof (Soup.Auth))) {
-                        var webdav_auth_manager = (Soup.AuthManager) webdav_session.get_feature (typeof (Soup.AuthManager));
-                        var webdav_auth = (Soup.Auth) webdav_session.get_feature (typeof (Soup.Auth));
-                        webdav_auth_manager.use_auth (new_source_uri, webdav_auth);
-                    } else {
-                        warning ("E.WebDAVSession's Soup.Auth feature is null");
-                    }
-
-                    webdav_session.mkcalendar_sync (
-                        new_source_uri.to_string (false),
-                        _("New list"),
-                        null,
-                        "#0e9a83",
-                        E.WebDAVResourceSupports.TASKS,
-                        null);
-                }*/
+                registry.commit_source_sync (new_source, null);
 
             } catch (Error e) {
                 critical (e.message);
