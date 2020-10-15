@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-09 07:27+0000\n"
-"PO-Revision-Date: 2020-10-13 12:14+0000\n"
+"PO-Revision-Date: 2020-10-16 21:14+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
 "Language: fr\n"
@@ -36,19 +36,21 @@ msgstr "Tâches"
 
 #: src/MainWindow.vala:102
 msgid "Add Task List…"
-msgstr ""
+msgstr "Ajouter une liste de tâche…"
 
 #: src/MainWindow.vala:224
 msgid "New list"
-msgstr ""
+msgstr "Nouvelle liste"
 
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Échec de la création d'une nouvelle liste de tâches"
 
 #: src/MainWindow.vala:245
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
+"Le registre des listes de tâches est probablement indisponible ou en lecture "
+"seule."
 
 #: src/Util.vala:124
 msgid "Today"
