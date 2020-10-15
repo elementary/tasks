@@ -246,7 +246,21 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         }
                     });
 
-                } else if (selected_source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)){
+                } else {
+                    new_source = new E.Source (null, null);
+                    debug (@"$(E.util_get_source_full_name (registry, selected_source))");
+                    var collection_source = registry.find_extension (selected_source, E.SOURCE_EXTENSION_COLLECTION);
+                    debug (@"$(E.util_get_source_full_name (registry, collection_source))");
+                    debug (@"$(E.util_can_use_collection_as_credential_source (collection_source, new_source))");
+                    collection_source.remote_create_sync (new_source, null);
+                    /*
+
+                    /*var selected_webdav_session = new E.WebDAVSession (selected_source);
+                    if (new_source.invoke_authenticate_sync (selected_webdav_session.credentials, null)) {
+                        debug ("Authenticated!!!");
+                    }*/
+
+                } /*else if (selected_source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)){
                     var selected_source_webdav_extension = (E.SourceWebdav) selected_source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
                     var selected_source_collection_extension = (E.SourceCollection) selected_source.get_extension (E.SOURCE_EXTENSION_COLLECTION);
                     var selected_source_uri = selected_source_webdav_extension.soup_uri;
@@ -283,7 +297,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         "#0e9a83",
                         E.WebDAVResourceSupports.TASKS,
                         null);
-                }
+                }*/
 
             } catch (Error e) {
                 critical (e.message);
