@@ -24,6 +24,7 @@ executable(
     'src/Widgets/EditableLabel.vala',
     'src/Widgets/ScheduledRow.vala',
     'src/Widgets/SourceRow.vala',
+    'src/Widgets/TaskPropertyWidget.vala',
     'src/Widgets/TaskRow.vala',
     'src/Widgets/ListSettingsPopover.vala',
     'src/TaskModel.vala',

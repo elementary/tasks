@@ -122,6 +122,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         var task_grid = new Gtk.Grid ();
         task_grid.add (due_label_revealer);
         task_grid.add (description_label_revealer);
+        task_grid.add (new Tasks.TaskPropertyWidget ());
 
         task_detail_revealer = new Gtk.Revealer ();
         task_detail_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;

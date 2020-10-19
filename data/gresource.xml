@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/io/elementary/tasks">
+    <file compressed="true" preprocess="xml-stripblanks">ui/TaskPropertyWidget.glade</file>
     <file compressed="true">EditableLabel.css</file>
     <file compressed="true">HeaderBar.css</file>
     <file compressed="true">SourceRow.css</file>
