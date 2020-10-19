@@ -20,4 +20,9 @@
 [GtkTemplate (ui = "/io/elementary/tasks/ui/TaskPropertyWidget.glade")]
 public class Tasks.TaskPropertyWidget : Gtk.ButtonBox {
 
+    [GtkChild] public Gtk.Button button;
+    [GtkChild] public Gtk.Image icon;
+    [GtkChild] public Gtk.Button remove_button;
+    [GtkChild] public Gtk.Image remove_icon;
+    [GtkChild] public Gtk.Revealer remove_revealer;
 }

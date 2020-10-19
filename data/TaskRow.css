@@ -18,13 +18,12 @@
 *
 */
 
-.due-date {
+.property {
     border-radius: 3px;
     background: @SILVER_300;
     color: @SILVER_900;
     font-size: 0.9em;
     font-weight: 600;
-    padding: 3px 6px;
 }
 
 row {

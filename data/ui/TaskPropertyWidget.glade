@@ -2,64 +2,74 @@
 <!-- Generated with glade 3.38.1 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
-  <object class="GtkImage" id="office-calendar-symbolic">
+  <object class="GtkImage" id="icon">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="icon-name">office-calendar-symbolic</property>
+    <property name="halign">center</property>
+    <property name="valign">end</property>
+    <property name="icon-name">image-missing</property>
   </object>
-  <object class="GtkImage" id="window-close">
+  <object class="GtkImage" id="remove_icon">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
+    <property name="halign">center</property>
+    <property name="valign">center</property>
     <property name="icon-name">window-close</property>
   </object>
   <template class="TasksTaskPropertyWidget" parent="GtkButtonBox">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
+    <property name="halign">start</property>
+    <property name="valign">center</property>
     <property name="layout-style">start</property>
     <child>
-      <object class="GtkButton">
-        <property name="label" translatable="yes">Set Date</property>
+      <object class="GtkButton" id="button">
+        <property name="label" translatable="yes">Set Property</property>
         <property name="visible">True</property>
         <property name="can-focus">True</property>
         <property name="receives-default">True</property>
-        <property name="image">office-calendar-symbolic</property>
+        <property name="image">icon</property>
         <property name="relief">none</property>
         <property name="always-show-image">True</property>
-        <style>
-          <class name="flat"/>
-        </style>
       </object>
       <packing>
         <property name="expand">True</property>
         <property name="fill">True</property>
         <property name="position">0</property>
+        <property name="non-homogeneous">True</property>
       </packing>
     </child>
     <child>
-      <object class="GtkRevealer">
+      <object class="GtkRevealer" id="remove_revealer">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
+        <property name="halign">end</property>
+        <property name="valign">center</property>
         <property name="transition-type">none</property>
         <child>
-          <object class="GtkButton">
+          <object class="GtkButton" id="remove_button">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
-            <property name="image">window-close</property>
+            <property name="halign">start</property>
+            <property name="valign">start</property>
+            <property name="image">remove_icon</property>
             <property name="relief">none</property>
             <property name="image-position">right</property>
             <property name="always-show-image">True</property>
-            <style>
-              <class name="flat"/>
-            </style>
           </object>
         </child>
       </object>
       <packing>
-        <property name="expand">False</property>
+        <property name="expand">True</property>
         <property name="fill">True</property>
         <property name="position">1</property>
+        <property name="non-homogeneous">True</property>
       </packing>
     </child>
+    <style>
+      <class name="flat"/>
+      <class name="property"/>
+    </style>
   </template>
 </interface>

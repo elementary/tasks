@@ -42,7 +42,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private Gtk.Label due_label;
     private Gtk.Revealer revealer;
     private Gtk.Revealer description_label_revealer;
-    private Gtk.Revealer due_label_revealer;
+    private Gtk.Revealer due_property_revealer;
+    private Gtk.Revealer location_property_revealer;
     private Gtk.Revealer task_detail_revealer;
     private Gtk.Revealer task_form_revealer;
     private Gtk.Switch due_switch;
@@ -91,7 +92,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         summary_entry_context.add_class (Gtk.STYLE_CLASS_FLAT);
         summary_entry_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        var due_image = new Gtk.Image.from_icon_name ("office-calendar-symbolic", Gtk.IconSize.BUTTON);
+        /*var due_image = new Gtk.Image.from_icon_name ("office-calendar-symbolic", Gtk.IconSize.BUTTON);
 
         due_label = new Gtk.Label (null);
         due_label.margin_start = 3;
@@ -103,11 +104,26 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         unowned Gtk.StyleContext due_grid_context = due_grid.get_style_context ();
         due_grid_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        due_grid_context.add_class ("due-date");
+        due_grid_context.add_class ("due-date");*/
+        var due_property = new Tasks.TaskPropertyWidget ();
+        due_property.icon.icon_name = "office-calendar-symbolic";
+        due_property.button.label = _("Set Date");
+        due_property.get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        due_label_revealer = new Gtk.Revealer ();
-        due_label_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT;
-        due_label_revealer.add (due_grid);
+        due_property_revealer = new Gtk.Revealer ();
+        due_property_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT;
+        due_property_revealer.add (due_property);
+
+        var location_property = new Tasks.TaskPropertyWidget ();
+        location_property.icon.icon_name = "location-inactive-symbolic";
+        location_property.button.label = _("Set Location");
+        location_property.get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        location_property_revealer = new Gtk.Revealer ();
+        location_property_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT;
+        location_property_revealer.expand = false;
+        location_property_revealer.reveal_child = true;
+        location_property_revealer.add (location_property);
 
         description_label = new Gtk.Label (null);
         description_label.xalign = 0;
@@ -119,10 +135,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         description_label_revealer.reveal_child = false;
         description_label_revealer.add (description_label);
 
-        var task_grid = new Gtk.Grid ();
-        task_grid.add (due_label_revealer);
+        var task_grid = new Gtk.Grid () {
+            column_spacing = 6
+        };
+        task_grid.add (due_property_revealer);
+        task_grid.add (location_property_revealer);
         task_grid.add (description_label_revealer);
-        task_grid.add (new Tasks.TaskPropertyWidget ());
 
         task_detail_revealer = new Gtk.Revealer ();
         task_detail_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
@@ -349,7 +367,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             task_detail_revealer.reveal_child = false;
             task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-            due_label_revealer.reveal_child = false;
+            due_property_revealer.reveal_child = false;
             due_switch.active = false;
             due_datepicker.date = due_timepicker.time = default_due_datetime;
 
@@ -392,7 +410,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
 
             if (ical_task.get_due ().is_null_time () ) {
-                due_label_revealer.reveal_child = false;
+                due_property_revealer.reveal_child = false;
             } else {
                 var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
                 var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
@@ -417,7 +435,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                     get_style_context ().remove_class ("past-due");
                 }
 
-                due_label_revealer.reveal_child = true;
+                due_property_revealer.reveal_child = true;
             }
 
             if (ical_task.get_description () == null) {
@@ -439,7 +457,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     private void task_details_reveal_request (bool value) {
-        if (value && (due_label_revealer.reveal_child || description_label_revealer.reveal_child)) {
+        if (value && (due_property_revealer.reveal_child || description_label_revealer.reveal_child)) {
             task_detail_revealer.reveal_child = true;
         } else {
             task_detail_revealer.reveal_child = false;
