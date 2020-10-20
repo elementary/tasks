@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-01 12:24+0000\n"
-"PO-Revision-Date: 2020-10-05 15:14+0000\n"
+"POT-Creation-Date: 2020-10-09 07:27+0000\n"
+"PO-Revision-Date: 2020-10-15 00:34+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/tasks/"
 "pt/>\n"
@@ -31,9 +31,26 @@ msgstr "Editar nome e aparência"
 msgid "No Tasks"
 msgstr "Sem tarefas"
 
-#: src/MainWindow.vala:40
+#: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr "Tarefas"
+
+#: src/MainWindow.vala:102
+msgid "Add Task List…"
+msgstr "Adicionar lista de tarefas…"
+
+#: src/MainWindow.vala:224
+msgid "New list"
+msgstr "Nova lista"
+
+#: src/MainWindow.vala:244
+msgid "Creating a new task list failed"
+msgstr "Falha ao criar uma nova lista de tarefas"
+
+#: src/MainWindow.vala:245
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr ""
+"O registo da lista de tarefas pode não estar disponível ou não ser gravado."
 
 #: src/Util.vala:124
 msgid "Today"
@@ -51,11 +68,11 @@ msgstr "Amanhã"
 msgid "Edit…"
 msgstr "Editar…"
 
-#: src/Widgets/ListSettingsPopover.vala:89
+#: src/Widgets/ListSettingsPopover.vala:103
 msgid "Show Completed"
 msgstr "Mostrar concluído"
 
-#: src/Widgets/ListSettingsPopover.vala:107
+#: src/Widgets/ListSettingsPopover.vala:121
 msgid "Delete List"
 msgstr "Eliminar lista"
 
@@ -75,32 +92,32 @@ msgstr "Atualmente desligado do armazenamento de dados (possivelmente remoto)"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "A confiança do certificado SSL foi rejeitada para a ligação"
 
-#: src/Widgets/TaskRow.vala:132
+#: src/Widgets/TaskRow.vala:133
 msgid "Schedule:"
 msgstr "Agenda:"
 
-#: src/Widgets/TaskRow.vala:153
+#: src/Widgets/TaskRow.vala:154
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 msgid "Save Changes"
 msgstr "Guardar alterações"
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 msgid "Add Task"
 msgstr "Adicionar tarefa"
 
-#: src/Widgets/TaskRow.vala:206
+#: src/Widgets/TaskRow.vala:210
 msgid "Delete Task"
 msgstr "Eliminar tarefa"
 
-#: src/Widgets/TaskRow.vala:395
+#: src/Widgets/TaskRow.vala:401
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: src/Widgets/TaskRow.vala:400
+#: src/Widgets/TaskRow.vala:406
 #, c-format
 msgid "%s at %s"
 msgstr "%s a %s"
