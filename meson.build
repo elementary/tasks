@@ -22,6 +22,9 @@ executable(
     'src/MainWindow.vala',
     'src/Util.vala',
     'src/Widgets/EditableLabel.vala',
+    'src/Widgets/EntryPopover.vala',
+    'src/Widgets/DateTimePopover.vala',
+    'src/Widgets/LocationPopover.vala',
     'src/Widgets/ScheduledRow.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskRow.vala',
@@ -35,7 +38,12 @@ executable(
         dependency('libecal-2.0'),
         dependency('libedataserver-1.2'),
         dependency('libhandy-1', version: '>=0.90.0'),
-        dependency('libical-glib')
+        dependency('libical-glib'),
+        dependency('geocode-glib-1.0'),
+        dependency('champlain-0.12'),
+        dependency('champlain-gtk-0.12'),
+        dependency('clutter-1.0'),
+        dependency('clutter-gtk-1.0')
     ],
     install : true
 )

@@ -35,7 +35,7 @@ row:focus:not(.card) {
     background-color: shade (@base_color, 0.8);
 }
 
-.past-due .due-date {
+.past-due {
     background: alpha (@error_color, 0.2);
     color: @error_color;
 }
