@@ -126,7 +126,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 return _("%s").printf (
                     value.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
                 );
-    
+
             } else {
                 return _("%s at %s").printf (
                     Tasks.Util.get_relative_date (value),

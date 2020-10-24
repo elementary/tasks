@@ -37,7 +37,7 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Geocode.Location?> {
 
     private Granite.Widgets.ModeButton location_mode = new Granite.Widgets.ModeButton ();
 
-    private Gtk.Grid grid =  new Gtk.Grid () {
+    private Gtk.Grid grid = new Gtk.Grid () {
         margin = 6,
         row_spacing = 6,
         column_spacing = 6

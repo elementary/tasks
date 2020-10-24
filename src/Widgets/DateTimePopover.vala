@@ -26,12 +26,12 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
     private Granite.Widgets.TimePicker timepicker = new Granite.Widgets.TimePicker () {
         sensitive = false
     };
-    
+
     private Gtk.Button today_button = new Gtk.Button () {
         label = _("Today")
     };
 
-    private Gtk.Grid grid =  new Gtk.Grid () {
+    private Gtk.Grid grid = new Gtk.Grid () {
         margin = 6,
         row_spacing = 3,
         column_spacing = 6
