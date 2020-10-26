@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-25 10:18+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2020-10-27 22:15+0000\n"
+"Last-Translator: Uwe S <saabisto@gmx.de>\n"
+"Language-Team: German <https://l10n.elementary.io/projects/tasks/tasks/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.9.1\n"
 
 #: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
@@ -23,19 +24,19 @@ msgstr ""
 
 #: src/ListView.vala:98
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "Name und Erscheinungsbild bearbeiten"
 
 #: src/ListView.vala:108
 msgid "No Tasks"
-msgstr ""
+msgstr "Keine Aufgaben vorhanden"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
-msgstr ""
+msgstr "Aufgaben"
 
 #: src/MainWindow.vala:102
 msgid "Add Task List…"
-msgstr ""
+msgstr "Aufgabenliste hinzufügen …"
 
 #: src/MainWindow.vala:224
 msgid "New list"
@@ -43,7 +44,7 @@ msgstr ""
 
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Erstellen einer neuen Aufgabenliste gescheitert"
 
 #: src/MainWindow.vala:245
 msgid "The task list registry may be unavailable or unable to be written to."
@@ -51,71 +52,73 @@ msgstr ""
 
 #: src/Util.vala:124
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 #: src/Util.vala:126
 msgid "Yesterday"
-msgstr ""
+msgstr "Gestern"
 
 #: src/Util.vala:128
 msgid "Tomorrow"
-msgstr ""
+msgstr "Morgen"
 
 #: src/Widgets/EditableLabel.vala:72
 msgid "Edit…"
-msgstr ""
+msgstr "Bearbeiten …"
 
 #: src/Widgets/ListSettingsPopover.vala:103
 msgid "Show Completed"
-msgstr ""
+msgstr "Abgeschlossene anzeigen"
 
 #: src/Widgets/ListSettingsPopover.vala:121
 msgid "Delete List"
-msgstr ""
+msgstr "Liste löschen"
 
 #: src/Widgets/SourceRow.vala:60
 msgid "Connecting…"
-msgstr ""
+msgstr "Verbinden …"
 
 #: src/Widgets/SourceRow.vala:97
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "Auf Zugangsdaten warten"
 
 #: src/Widgets/SourceRow.vala:101
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr ""
 
 #: src/Widgets/SourceRow.vala:105
+#, fuzzy
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "SSL-Zertifikat nicht vertrauenswürdig für die  Verbindung"
 
 #: src/Widgets/TaskRow.vala:133
+#, fuzzy
 msgid "Schedule:"
-msgstr ""
+msgstr "Zeitplan:"
 
 #: src/Widgets/TaskRow.vala:154
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: src/Widgets/TaskRow.vala:158
 msgid "Save Changes"
-msgstr ""
+msgstr "Änderungen speichern"
 
 #: src/Widgets/TaskRow.vala:158
 msgid "Add Task"
-msgstr ""
+msgstr "Aufgabe hinzufügen"
 
 #: src/Widgets/TaskRow.vala:210
 msgid "Delete Task"
-msgstr ""
+msgstr "Aufgabe löschen"
 
 #: src/Widgets/TaskRow.vala:401
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:406
-#, c-format
+#, c-format, fuzzy
 msgid "%s at %s"
-msgstr ""
+msgstr "%s um %s"
