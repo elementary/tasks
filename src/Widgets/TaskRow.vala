@@ -128,6 +128,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 );
 
             } else {
+                ///TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
                 return _("%s at %s").printf (
                     Tasks.Util.get_relative_date (value),
                     value.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))

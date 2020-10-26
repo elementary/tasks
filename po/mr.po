@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-09 07:27+0000\n"
-"PO-Revision-Date: 2020-10-07 05:14+0000\n"
+"POT-Creation-Date: 2020-10-25 10:18+0000\n"
+"PO-Revision-Date: 2020-10-26 07:15+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/"
 ">\n"
@@ -37,15 +37,15 @@ msgstr "कामे"
 
 #: src/MainWindow.vala:102
 msgid "Add Task List…"
-msgstr ""
+msgstr "कार्य यादी जोडा…"
 
 #: src/MainWindow.vala:224
 msgid "New list"
-msgstr ""
+msgstr "नवीन यादी"
 
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "नवीन कार्य सूची तयार करणे अयशस्वी झाले"
 
 #: src/MainWindow.vala:245
 msgid "The task list registry may be unavailable or unable to be written to."
@@ -116,6 +116,7 @@ msgstr "कार्य हटवा"
 msgid "%s"
 msgstr "%s"
 
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:406
 #, c-format
 msgid "%s at %s"
