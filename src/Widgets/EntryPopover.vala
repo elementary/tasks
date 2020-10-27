@@ -60,6 +60,8 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
     };
 
     construct {
+        set_css_name ("entry-popover");
+
         events |= Gdk.EventMask.ENTER_NOTIFY_MASK
             | Gdk.EventMask.LEAVE_NOTIFY_MASK;
 
@@ -70,9 +72,6 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
         button_box.add (popover_button);
         button_box.add (delete_button_revealer);
         add (button_box);
-
-        popover_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
-        delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
         delete_button.clicked.connect (() => {
             value = null;

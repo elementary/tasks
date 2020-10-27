@@ -18,13 +18,20 @@
 *
 */
 
-.due-date {
+entry-popover {
     border-radius: 3px;
-    background: @SILVER_300;
+    border: 1px solid @SILVER_300;
+    background: @theme_bg_color;
     color: @SILVER_900;
     font-size: 0.9em;
     font-weight: 600;
     padding: 3px 6px;
+}
+
+entry-popover.error {
+    background: alpha (@error_color, 0.2);
+    border-color: alpha (@error_color, 0.4);
+    color: @error_color;
 }
 
 row {
@@ -33,11 +40,6 @@ row {
 
 row:focus:not(.card) {
     background-color: shade (@base_color, 0.8);
-}
-
-.past-due {
-    background: alpha (@error_color, 0.2);
-    color: @error_color;
 }
 
 row.card {

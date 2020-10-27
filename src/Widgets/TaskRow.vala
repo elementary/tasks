@@ -38,7 +38,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     private Gtk.Revealer due_datetime_popover_revealer = new Gtk.Revealer () {
         transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
-        margin_end = 3,
+        margin_end = 6,
         reveal_child = false
     };
 
@@ -49,7 +49,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     private Gtk.Revealer location_popover_revealer = new Gtk.Revealer () {
         transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
-        margin_end = 3,
+        margin_end = 6,
         reveal_child = false
     };
 
@@ -109,7 +109,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         unowned Gtk.StyleContext due_datetime_popover_context = due_datetime_popover.get_style_context ();
         due_datetime_popover_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        due_datetime_popover_context.add_class ("due-date");
+
+        unowned Gtk.StyleContext location_popover_context = location_popover.get_style_context ();
+        location_popover_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         due_datetime_popover_revealer.add (due_datetime_popover);
         location_popover_revealer.add (location_popover);
@@ -139,9 +141,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         due_datetime_popover.value_changed.connect ((value) => {
             var today = new GLib.DateTime.now_local ();
             if (value != null && today.compare (value) > 0 && !completed) {
-                due_datetime_popover.get_style_context ().add_class ("past-due");
+                due_datetime_popover.get_style_context ().add_class ("error");
             } else {
-                due_datetime_popover.get_style_context ().remove_class ("past-due");
+                due_datetime_popover.get_style_context ().remove_class ("error");
             }
         });
 
