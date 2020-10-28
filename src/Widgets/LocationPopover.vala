@@ -173,6 +173,12 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Geocode.Location?> {
             foreach (var place in places) {
                 point.latitude = place.location.latitude;
                 point.longitude = place.location.longitude;
+
+                if (value != null) {
+                    value.latitude = place.location.latitude;
+                    value.longitude = place.location.latitude;
+                }
+
                 Idle.add (() => {
                     if (search_cancellable.is_cancelled () == false) {
                         map_embed.champlain_view.go_to (point.latitude, point.longitude);
@@ -180,9 +186,6 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Geocode.Location?> {
                     return GLib.Source.REMOVE;
                 });
             }
-
-            /*if (location == location_entry.text)
-                map_selected = true;*/
 
             search_entry.has_focus = true;
         } catch (Error error) {

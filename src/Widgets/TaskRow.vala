@@ -316,12 +316,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         var icalcomponent = task.get_icalcomponent ();
         summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
         due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time (icalcomponent.get_due ());
-        if (icalcomponent.get_location () != null && icalcomponent.get_location ().strip ().length > 0) {
-            var location = new Geocode.Location.with_description (0, 0, Geocode.LocationAccuracy.UNKNOWN, icalcomponent.get_location ());
-            location_popover.value = location;
-        } else {
-            location_popover.value = null;
-        }
+        location_popover.value = Util.ecalcomponent_get_location (task);
+
         reveal_child_request (false);
     }
 
@@ -351,23 +347,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         }
 
         // save the new location - if we have any
-        ical_task.set_location ("");
-        var ical_geo_property_count = ical_task.count_properties (ICal.PropertyKind.GEO_PROPERTY);
-        for (int i = 0; i < ical_geo_property_count; i++) {
-            var remove_prop = ical_task.get_first_property (ICal.PropertyKind.GEO_PROPERTY);
-            ical_task.remove_property (remove_prop);
-        }
-
-        if (location_popover.value != null) {
-            if (location_popover.value.description != null) {
-                ical_task.set_location (location_popover.value.description);
-            }
-
-            var geo_property = new ICal.Property (ICal.PropertyKind.GEO_PROPERTY);
-            var geo = new ICal.Geo (location_popover.value.latitude, location_popover.value.longitude);
-            geo_property.set_geo (geo);
-            ical_task.add_property (geo_property);
-        }
+        Util.ecalcomponent_set_location (task, location_popover.value);
 
         task.get_icalcomponent ().set_summary (summary_entry.text);
         task_changed (task);
@@ -420,10 +400,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 due_datetime_popover.value = due_datetime;
             }
 
-            if (ical_task.get_location () != null && ical_task.get_location ().strip ().length > 0) {
-                var location = new Geocode.Location.with_description (0, 0, Geocode.LocationAccuracy.UNKNOWN, ical_task.get_location ());
-                location_popover.value = location;
-            }
+            location_popover.value = Util.ecalcomponent_get_location (task);
 
             if (ical_task.get_description () != null) {
                 description_textbuffer.text = ical_task.get_description ();
@@ -448,7 +425,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 due_datetime_popover_revealer.reveal_child = true;
             }
 
-            if (ical_task.get_location () == null || ical_task.get_location ().strip ().length == 0 ) {
+            if (Util.ecalcomponent_get_location (task) == null) {
                 location_popover_revealer.reveal_child = false;
             } else {
                 location_popover_revealer.reveal_child = true;
