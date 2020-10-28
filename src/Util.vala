@@ -157,13 +157,13 @@ namespace Tasks.Util {
                 var alarm_property_bag_count = alarm_property_bag.get_count ();
 
                 for (int i = 0; i < alarm_property_bag_count; i++) {
-                    var alarm_property = alarm_property_bag.get(i);
+                    var alarm_property = alarm_property_bag.get (i);
 
                     if (alarm_property.isa () == ICal.PropertyKind.X_PROPERTY) {
                         var alarm_property_x_name = alarm_property.get_x_name ();
 
                         if (alarm_property_x_name != null) {
-                            switch(alarm_property_x_name) {
+                            switch (alarm_property_x_name) {
                                 case "X-APPLE-PROXIMITY":
                                     var alarm_property_value = alarm_property.get_value_as_string ();
                                     switch (alarm_property_value) {
@@ -198,7 +198,7 @@ namespace Tasks.Util {
             }
         }
 
-        if(longitude != 0 && latitude != 0 || description != null && description.strip ().length > 0) {
+        if (longitude != 0 && latitude != 0 || description != null && description.strip ().length > 0) {
             var location = new Geocode.Location.with_description (
                 latitude,
                 longitude,
@@ -237,7 +237,7 @@ namespace Tasks.Util {
                 var alarm_property_bag_count = alarm_property_bag.get_count ();
 
                 for (int i = 0; i < alarm_property_bag_count; i++) {
-                    unowned ICal.Property? alarm_property = alarm_property_bag.get(i);
+                    unowned ICal.Property? alarm_property = alarm_property_bag.get (i);
 
                     if (alarm_property != null &&
                         alarm_property.isa () == ICal.PropertyKind.X_PROPERTY &&

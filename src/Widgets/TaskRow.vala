@@ -151,7 +151,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             if (value == null || value.description == null || value.description.strip ().length == 0) {
                 return null;
             }
-            return value.description.length > 30 ? (value.description.substring (0,30) + "…") : value.description;
+            return value.description.length > 30 ? (value.description.substring (0, 30) + "…") : value.description;
         });
 
         description_label = new Gtk.Label (null);
