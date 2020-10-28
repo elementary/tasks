@@ -147,6 +147,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             }
         });
 
+        location_popover.value_format.connect ((value) => {
+            if (value == null || value.description == null || value.description.strip ().length == 0) {
+                return null;
+            }
+            return value.description.length > 30 ? (value.description.substring (0,30) + "…") : value.description;
+        });
+
         description_label = new Gtk.Label (null);
         description_label.xalign = 0;
         description_label.lines = 1;
@@ -290,6 +297,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         update_request ();
 
         task_form_revealer.bind_property ("reveal_child", due_datetime_popover, "sensitive", GLib.BindingFlags.SYNC_CREATE);
+        task_form_revealer.bind_property ("reveal_child", location_popover, "sensitive", GLib.BindingFlags.SYNC_CREATE);
     }
 
     private void reset_create () {
@@ -308,6 +316,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         var icalcomponent = task.get_icalcomponent ();
         summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
         due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time (icalcomponent.get_due ());
+        if (icalcomponent.get_location () != null && icalcomponent.get_location ().strip ().length > 0) {
+            var location = new Geocode.Location.with_description (0, 0, Geocode.LocationAccuracy.UNKNOWN, icalcomponent.get_location ());
+            location_popover.value = location;
+        } else {
+            location_popover.value = null;
+        }
         reveal_child_request (false);
     }
 
@@ -334,6 +348,25 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             var property = new ICal.Property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
             property.set_description (description.strip ());
             ical_task.add_property (property);
+        }
+
+        // save the new location - if we have any
+        ical_task.set_location ("");
+        var ical_geo_property_count = ical_task.count_properties (ICal.PropertyKind.GEO_PROPERTY);
+        for (int i = 0; i < ical_geo_property_count; i++) {
+            var remove_prop = ical_task.get_first_property (ICal.PropertyKind.GEO_PROPERTY);
+            ical_task.remove_property (remove_prop);
+        }
+
+        if (location_popover.value != null) {
+            if (location_popover.value.description != null) {
+                ical_task.set_location (location_popover.value.description);
+            }
+
+            var geo_property = new ICal.Property (ICal.PropertyKind.GEO_PROPERTY);
+            var geo = new ICal.Geo (location_popover.value.latitude, location_popover.value.longitude);
+            geo_property.set_geo (geo);
+            ical_task.add_property (geo_property);
         }
 
         task.get_icalcomponent ().set_summary (summary_entry.text);
@@ -367,7 +400,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             summary_entry.text = "";
             summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
             summary_entry.get_style_context ().add_class ("add-task");
+            location_popover_revealer.reveal_child = false;
             task_detail_revealer.reveal_child = false;
+
             task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
             description_label_revealer.reveal_child = false;
@@ -383,6 +418,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             if (!ical_task.get_due ().is_null_time ()) {
                 var due_datetime = Util.ical_to_date_time (ical_task.get_due ());
                 due_datetime_popover.value = due_datetime;
+            }
+
+            if (ical_task.get_location () != null && ical_task.get_location ().strip ().length > 0) {
+                var location = new Geocode.Location.with_description (0, 0, Geocode.LocationAccuracy.UNKNOWN, ical_task.get_location ());
+                location_popover.value = location;
             }
 
             if (ical_task.get_description () != null) {
@@ -405,8 +445,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             if (ical_task.get_due ().is_null_time () ) {
                 due_datetime_popover_revealer.reveal_child = false;
             } else {
-                due_datetime_popover.value = Util.ical_to_date_time (ical_task.get_due ());
                 due_datetime_popover_revealer.reveal_child = true;
+            }
+
+            if (ical_task.get_location () == null || ical_task.get_location ().strip ().length == 0 ) {
+                location_popover_revealer.reveal_child = false;
+            } else {
+                location_popover_revealer.reveal_child = true;
             }
 
             if (ical_task.get_description () == null) {
