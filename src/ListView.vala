@@ -193,46 +193,47 @@ public class Tasks.ListView : Gtk.Grid {
         editable_title.changed.connect (() => {
             source.display_name = editable_title.text;
 
-            if (source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
-                var source_webdav_session = new E.WebDAVSession (source);
-                var source_webdav_extension = (E.SourceWebdav) source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
-
-                var changes = new GLib.SList<E.WebDAVPropertyChange> ();
-                changes.append (new E.WebDAVPropertyChange.set (
-                    E.WEBDAV_NS_DAV,
-                    "displayname",
-                    editable_title.text
-                ));
-
-                try {
-                    E.webdav_session_update_properties_sync (
-                        source_webdav_session,
-                        null,
-                        changes,
-                        null
-                    );
-                } catch (Error e) {
-                    warning (e.message);
-                }
-            }
-
-            /*Tasks.Application.model.get_registry.begin ((obj, res) => {
+            Tasks.Application.model.get_registry.begin ((obj, res) => {
                 try {
                     var registry = Tasks.Application.model.get_registry.end (res);
+                    var collection_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);
 
-                    registry.commit_source_sync (source, null);
+                    if (collection_source != null && source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
+                        var source_webdav_extension = (E.SourceWebdav) source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+                        var collection_source_webdav_session = new E.WebDAVSession (collection_source);
+        
+                        var changes = new GLib.SList<E.WebDAVPropertyChange> ();
+                        changes.append (new E.WebDAVPropertyChange.set (
+                            E.WEBDAV_NS_DAV,
+                            "displayname",
+                            source.display_name
+                        ));
+        
+                        //  changes.append (new E.WebDAVPropertyChange.set (
+                        //      E.WEBDAV_NS_DAV,
+                        //      "calendar-color",
+                        //      "#%02x%02x%02x".printf (
+                        //          0,0,0
+                        //      )
+                        //  ));
+        
+                        debug (@"source_webdav_extension.soup_uri: $(source_webdav_extension.soup_uri.to_string (false))");
+        
+                        E.webdav_session_update_properties_sync (
+                            collection_source_webdav_session,
+                            source_webdav_extension.soup_uri.to_string (false),
+                            changes,
+                            null
+                        );
 
-                    if (source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
-
+                    } else {
+                        registry.commit_source_sync (source, null);
                     }
-
-                    debug ("Commit source...");
-
 
                 } catch (Error e) {
                     critical (e.message);
                 }
-            });*/
+            });
         });
     }
 
