@@ -205,7 +205,12 @@ public class Tasks.ListView : Gtk.Grid {
                 ));
 
                 try {
-                    source_webdav_session.update_properties_sync (null, changes, null);
+                    E.webdav_session_update_properties_sync (
+                        source_webdav_session,
+                        null,
+                        changes,
+                        null
+                    );
                 } catch (Error e) {
                     warning (e.message);
                 }
