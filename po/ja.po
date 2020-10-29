@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-01 12:24+0000\n"
-"PO-Revision-Date: 2020-10-04 13:14+0000\n"
+"POT-Creation-Date: 2020-10-25 10:18+0000\n"
+"PO-Revision-Date: 2020-10-26 07:15+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/>"
-"\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
+">\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,9 +31,25 @@ msgstr "名前や外観を変更します"
 msgid "No Tasks"
 msgstr "タスクがありません"
 
-#: src/MainWindow.vala:40
+#: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr "タスク"
+
+#: src/MainWindow.vala:102
+msgid "Add Task List…"
+msgstr "タスク一覧を追加…"
+
+#: src/MainWindow.vala:224
+msgid "New list"
+msgstr "新しい一覧"
+
+#: src/MainWindow.vala:244
+msgid "Creating a new task list failed"
+msgstr "新しいタスク一覧を作成できませんでした"
+
+#: src/MainWindow.vala:245
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr "タスク一覧の登録ができないか、書き込みできない可能性があります。"
 
 #: src/Util.vala:124
 msgid "Today"
@@ -51,11 +67,11 @@ msgstr "明日"
 msgid "Edit…"
 msgstr "編集…"
 
-#: src/Widgets/ListSettingsPopover.vala:89
+#: src/Widgets/ListSettingsPopover.vala:103
 msgid "Show Completed"
 msgstr "完了したタスクを表示"
 
-#: src/Widgets/ListSettingsPopover.vala:107
+#: src/Widgets/ListSettingsPopover.vala:121
 msgid "Delete List"
 msgstr "一覧を削除"
 
@@ -75,32 +91,33 @@ msgstr "（リモートの）データストアから切断されています"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "SSL 証明書が拒否されました"
 
-#: src/Widgets/TaskRow.vala:132
+#: src/Widgets/TaskRow.vala:133
 msgid "Schedule:"
 msgstr "繰り返し:"
 
-#: src/Widgets/TaskRow.vala:153
+#: src/Widgets/TaskRow.vala:154
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 msgid "Save Changes"
 msgstr "変更を保存"
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 msgid "Add Task"
 msgstr "タスクを追加"
 
-#: src/Widgets/TaskRow.vala:206
+#: src/Widgets/TaskRow.vala:210
 msgid "Delete Task"
 msgstr "タスクを削除"
 
-#: src/Widgets/TaskRow.vala:395
+#: src/Widgets/TaskRow.vala:401
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: src/Widgets/TaskRow.vala:400
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:406
 #, c-format
 msgid "%s at %s"
-msgstr "%2$s 上の %1$s"
+msgstr "%s の %s"
