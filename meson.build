@@ -22,6 +22,8 @@ executable(
     'src/MainWindow.vala',
     'src/Util.vala',
     'src/Widgets/EditableLabel.vala',
+    'src/Widgets/EntryPopover.vala',
+    'src/Widgets/DateTimePopover.vala',
     'src/Widgets/ScheduledRow.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskRow.vala',
