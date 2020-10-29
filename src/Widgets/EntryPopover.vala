@@ -120,4 +120,3 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
         });
     }
 }
-

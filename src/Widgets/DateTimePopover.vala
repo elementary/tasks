@@ -108,4 +108,3 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
         return next_full_hour;
     }
 }
-
