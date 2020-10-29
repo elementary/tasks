@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-01 12:24+0000\n"
-"PO-Revision-Date: 2020-10-07 05:14+0000\n"
+"POT-Creation-Date: 2020-10-25 10:18+0000\n"
+"PO-Revision-Date: 2020-10-26 07:15+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
-"Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/>"
-"\n"
+"Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/"
+">\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,9 +31,25 @@ msgstr "नाव आणि स्वरूप संपादित करा"
 msgid "No Tasks"
 msgstr "कोणतीही कामे नाहीत"
 
-#: src/MainWindow.vala:40
+#: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr "कामे"
+
+#: src/MainWindow.vala:102
+msgid "Add Task List…"
+msgstr "कार्य यादी जोडा…"
+
+#: src/MainWindow.vala:224
+msgid "New list"
+msgstr "नवीन यादी"
+
+#: src/MainWindow.vala:244
+msgid "Creating a new task list failed"
+msgstr "नवीन कार्य सूची तयार करणे अयशस्वी झाले"
+
+#: src/MainWindow.vala:245
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr ""
 
 #: src/Util.vala:124
 msgid "Today"
@@ -51,11 +67,11 @@ msgstr "उद्या"
 msgid "Edit…"
 msgstr "संपादित करा…"
 
-#: src/Widgets/ListSettingsPopover.vala:89
+#: src/Widgets/ListSettingsPopover.vala:103
 msgid "Show Completed"
 msgstr "पूर्ण झाले दर्शवा"
 
-#: src/Widgets/ListSettingsPopover.vala:107
+#: src/Widgets/ListSettingsPopover.vala:121
 msgid "Delete List"
 msgstr "यादी हटवा"
 
@@ -75,32 +91,33 @@ msgstr "सध्या (शक्यतो दूरस्थ) डेटा स
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "कनेक्शनसाठी एसएसएल प्रमाणपत्र विश्वास नाकारला गेला"
 
-#: src/Widgets/TaskRow.vala:132
+#: src/Widgets/TaskRow.vala:133
 msgid "Schedule:"
 msgstr "निर्धारित करा:"
 
-#: src/Widgets/TaskRow.vala:153
+#: src/Widgets/TaskRow.vala:154
 msgid "Cancel"
 msgstr "रद्द करा"
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 msgid "Save Changes"
 msgstr "बदल जतन करा"
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 msgid "Add Task"
 msgstr "कार्य जोडा"
 
-#: src/Widgets/TaskRow.vala:206
+#: src/Widgets/TaskRow.vala:210
 msgid "Delete Task"
 msgstr "कार्य हटवा"
 
-#: src/Widgets/TaskRow.vala:395
+#: src/Widgets/TaskRow.vala:401
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: src/Widgets/TaskRow.vala:400
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:406
 #, c-format
 msgid "%s at %s"
 msgstr "%s वर %s"
