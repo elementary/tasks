@@ -29,6 +29,7 @@ cleanup:
   - '*.la'
 modules:
   - name: libical
+    buildsystem: cmake-ninja
     config-opts:
       - '-DCMAKE_BUILD_TYPE=Release'
       - '-DCMAKE_INSTALL_LIBDIR=/app/lib'
@@ -97,5 +98,5 @@ modules:
   - name: tasks
     buildsystem: meson
     sources:
-      - type: git
-        url: https://github.com/elementary/tasks.git
+      - type: dir
+        path: .
