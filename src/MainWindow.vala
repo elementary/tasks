@@ -217,30 +217,59 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         Tasks.Application.model.get_registry.begin ((obj, res) => {
             try {
                 var registry = Tasks.Application.model.get_registry.end (res);
+                var selected_source = listview.source;
+                var collection_source = registry.find_extension (selected_source, E.SOURCE_EXTENSION_COLLECTION);
+
                 var new_source = new E.Source (null, null);
                 var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-                var selected_source = listview.source;
-
                 new_source.display_name = _("New list");
                 new_source_tasklist_extension.color = "#0e9a83";
 
-                E.Source collection_source = null;
                 if (selected_source == null) {
                     new_source.parent = "local-stub";
                     new_source_tasklist_extension.backend_name = "local";
 
-                } else {
-                    collection_source = registry.find_extension (selected_source, E.SOURCE_EXTENSION_COLLECTION);
-
-                    var selected_source_tasklist_extension = (E.SourceTaskList) selected_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-                    new_source.parent = selected_source.parent;
-                    new_source_tasklist_extension.backend_name = selected_source_tasklist_extension.backend_name;
-                }
-
-                if (collection_source == null) {
                     registry.commit_source_sync (new_source, null);
+
+                } else if (collection_source != null && selected_source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)){
+                    var selected_source_webdav_extension = (E.SourceWebdav) selected_source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+                    var collection_source_webdav_session = new E.WebDAVSession (collection_source);
+                    var credentials_provider = new E.SourceCredentialsProvider (registry);
+
+                    E.NamedParameters credentials;
+                    credentials_provider.lookup_sync (collection_source, null, out credentials);
+                    collection_source_webdav_session.credentials = credentials;
+
+                    new_source.parent = selected_source.parent;
+                    var selected_source_uri = selected_source_webdav_extension.soup_uri;
+
+                    var new_source_uri = new Soup.URI (null);
+                    new_source_uri.set_scheme (selected_source_uri.get_scheme ());
+                    new_source_uri.set_user (selected_source_uri.get_user ());
+                    new_source_uri.set_password (selected_source_uri.get_password ());
+                    new_source_uri.set_host (selected_source_uri.get_host ());
+                    new_source_uri.set_port (selected_source_uri.get_port ());
+
+                    var uri_dir_path = selected_source_uri.get_path ();
+                    if (uri_dir_path.has_suffix ("/")) {
+                        uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
+                    }
+                    uri_dir_path = uri_dir_path.substring(0, uri_dir_path.last_index_of ("/"));
+                    new_source_uri.set_path (uri_dir_path + "/" + GLib.Uuid.string_random ().up ());
+
+                    collection_source_webdav_session.mkcalendar_sync (
+                        new_source_uri.to_string (false),
+                        new_source.display_name,
+                        null,
+                        new_source_tasklist_extension.color,
+                        E.WebDAVResourceSupports.TASKS,
+                        null
+                    );
+
+                    registry.refresh_backend_sync (collection_source.uid, null);
+
                 } else {
-                    collection_source.remote_create_sync (new_source, null);
+                    throw new Error (0, 404, "Unknown source backend type");
                 }
 
             } catch (Error e) {
