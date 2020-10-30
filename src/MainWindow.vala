@@ -231,7 +231,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
                     registry.commit_source_sync (new_source, null);
 
-                } else if (collection_source != null && selected_source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)){
+                } else if (collection_source != null && selected_source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
                     var selected_source_webdav_extension = (E.SourceWebdav) selected_source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
                     var collection_source_webdav_session = new E.WebDAVSession (collection_source);
                     var credentials_provider = new E.SourceCredentialsProvider (registry);
@@ -254,7 +254,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     if (uri_dir_path.has_suffix ("/")) {
                         uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
                     }
-                    uri_dir_path = uri_dir_path.substring(0, uri_dir_path.last_index_of ("/"));
+                    uri_dir_path = uri_dir_path.substring (0, uri_dir_path.last_index_of ("/"));
                     new_source_uri.set_path (uri_dir_path + "/" + GLib.Uuid.string_random ().up ());
 
                     collection_source_webdav_session.mkcalendar_sync (
