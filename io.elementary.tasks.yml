@@ -7,6 +7,7 @@ sdk: org.gnome.Sdk
 command: io.elementary.tasks
 finish-args:
   - '--share=ipc'
+  - '--share=network'
   - '--socket=fallback-x11'
   - '--socket=wayland'
 
@@ -14,9 +15,9 @@ finish-args:
   - '--system-talk-name=org.freedesktop.Accounts'
 
   # EDS DBus interfaces
-  - '--talk-name=org.gnome.evolution.dataserver.AddressBook9'
+  - '--talk-name=org.gnome.evolution.dataserver.AddressBook10'
   - '--talk-name=org.gnome.evolution.dataserver.Calendar8'
-  - '--talk-name=org.gnome.evolution.dataserver.Source5'
+  - '--talk-name=org.gnome.evolution.dataserver.Sources5'
   - '--talk-name=org.gnome.evolution.dataserver.Subprocess.Backend.*'
 
   - '--metadata=X-DConf=migrate-path=/io/elementary/tasks/'
@@ -25,11 +26,13 @@ cleanup:
   - '/lib/pkgconfig'
   - '/lib/debug'
   - '/share/vala'
-  - '*a'
+  - '*.a'
   - '*.la'
 modules:
   - name: libical
     buildsystem: cmake-ninja
+    cleanup:
+      - '/lib/cmake'
     config-opts:
       - '-DCMAKE_BUILD_TYPE=Release'
       - '-DCMAKE_INSTALL_LIBDIR=/app/lib'
@@ -46,9 +49,9 @@ modules:
   - name: evolution-data-server
     buildsystem: cmake-ninja
     cleanup:
-      - /lib/evolution-data-server/*-backends
-      - /libexec
-      - /share/dbus-1/services
+      - '/lib/evolution-data-server/*-backends'
+      - '/libexec'
+      - '/share/dbus-1/services'
     config-opts:
       - '-DCMAKE_BUILD_TYPE=Release'
       - '-DENABLE_GTK=ON'
