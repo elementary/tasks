@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-01 12:24+0000\n"
-"PO-Revision-Date: 2020-10-04 13:14+0000\n"
+"POT-Creation-Date: 2020-10-25 10:18+0000\n"
+"PO-Revision-Date: 2020-10-24 11:15+0000\n"
 "Last-Translator: imgradeone Yan <imgradeone@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "tasks/tasks/zh_Hans/>\n"
@@ -34,10 +34,29 @@ msgstr "编辑名称与个性化"
 msgid "No Tasks"
 msgstr "没有待办事项"
 
-#: src/MainWindow.vala:40
+#: src/MainWindow.vala:42
 #, fuzzy
 msgid "Tasks"
 msgstr "待办事项"
+
+#: src/MainWindow.vala:102
+#, fuzzy
+msgid "Add Task List…"
+msgstr "添加待办事项列表…"
+
+#: src/MainWindow.vala:224
+msgid "New list"
+msgstr "新列表"
+
+#: src/MainWindow.vala:244
+#, fuzzy
+msgid "Creating a new task list failed"
+msgstr "创建新待办事项列表失败"
+
+#: src/MainWindow.vala:245
+#, fuzzy
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr "该待办事项列表可能不支持或者不能写入。"
 
 #: src/Util.vala:124
 msgid "Today"
@@ -55,11 +74,11 @@ msgstr "明天"
 msgid "Edit…"
 msgstr "编辑…"
 
-#: src/Widgets/ListSettingsPopover.vala:89
+#: src/Widgets/ListSettingsPopover.vala:103
 msgid "Show Completed"
 msgstr "显示已完成的事项"
 
-#: src/Widgets/ListSettingsPopover.vala:107
+#: src/Widgets/ListSettingsPopover.vala:121
 msgid "Delete List"
 msgstr "删除列表"
 
@@ -80,35 +99,36 @@ msgstr "目前与（可能是远程的）数据服务器断开连接"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:132
+#: src/Widgets/TaskRow.vala:133
 #, fuzzy
 msgid "Schedule:"
 msgstr "日程："
 
-#: src/Widgets/TaskRow.vala:153
+#: src/Widgets/TaskRow.vala:154
 msgid "Cancel"
 msgstr "取消"
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 msgid "Save Changes"
 msgstr "保存修改"
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 #, fuzzy
 msgid "Add Task"
 msgstr "添加待办事项"
 
-#: src/Widgets/TaskRow.vala:206
+#: src/Widgets/TaskRow.vala:210
 #, fuzzy
 msgid "Delete Task"
 msgstr "删除待办事项"
 
-#: src/Widgets/TaskRow.vala:395
+#: src/Widgets/TaskRow.vala:401
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: src/Widgets/TaskRow.vala:400
-#, c-format, fuzzy
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:406
+#, fuzzy, c-format
 msgid "%s at %s"
 msgstr "%s 在 %s"

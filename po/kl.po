@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-01 12:24+0000\n"
+"POT-Creation-Date: 2020-10-25 10:18+0000\n"
 "PO-Revision-Date: 2019-08-02 13:42-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -28,8 +28,24 @@ msgstr ""
 msgid "No Tasks"
 msgstr ""
 
-#: src/MainWindow.vala:40
+#: src/MainWindow.vala:42
 msgid "Tasks"
+msgstr ""
+
+#: src/MainWindow.vala:102
+msgid "Add Task List…"
+msgstr ""
+
+#: src/MainWindow.vala:224
+msgid "New list"
+msgstr ""
+
+#: src/MainWindow.vala:244
+msgid "Creating a new task list failed"
+msgstr ""
+
+#: src/MainWindow.vala:245
+msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
 #: src/Util.vala:124
@@ -48,11 +64,11 @@ msgstr ""
 msgid "Edit…"
 msgstr ""
 
-#: src/Widgets/ListSettingsPopover.vala:89
+#: src/Widgets/ListSettingsPopover.vala:103
 msgid "Show Completed"
 msgstr ""
 
-#: src/Widgets/ListSettingsPopover.vala:107
+#: src/Widgets/ListSettingsPopover.vala:121
 msgid "Delete List"
 msgstr ""
 
@@ -72,32 +88,33 @@ msgstr ""
 msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:132
+#: src/Widgets/TaskRow.vala:133
 msgid "Schedule:"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:153
+#: src/Widgets/TaskRow.vala:154
 msgid "Cancel"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 msgid "Save Changes"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:157
+#: src/Widgets/TaskRow.vala:158
 msgid "Add Task"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:206
+#: src/Widgets/TaskRow.vala:210
 msgid "Delete Task"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:395
+#: src/Widgets/TaskRow.vala:401
 #, c-format
 msgid "%s"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:400
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:406
 #, c-format
 msgid "%s at %s"
 msgstr ""
