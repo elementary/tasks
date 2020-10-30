@@ -96,9 +96,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         summary_entry_context.add_class (Gtk.STYLE_CLASS_FLAT);
         summary_entry_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        unowned Gtk.StyleContext due_datetime_popover_context = due_datetime_popover.get_style_context ();
-        due_datetime_popover_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
         due_datetime_popover_revealer.add (due_datetime_popover);
 
         due_datetime_popover.value_format.connect ((value) => {
@@ -272,8 +269,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             update_request ();
         });
         update_request ();
-
-        task_form_revealer.bind_property ("reveal_child", due_datetime_popover, "sensitive", GLib.BindingFlags.SYNC_CREATE);
     }
 
     private void reset_create () {

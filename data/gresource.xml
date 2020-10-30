@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/io/elementary/tasks">
     <file compressed="true">EditableLabel.css</file>
+    <file compressed="true">EntryPopover.css</file>
     <file compressed="true">HeaderBar.css</file>
     <file compressed="true">SourceRow.css</file>
     <file compressed="true">TaskRow.css</file>

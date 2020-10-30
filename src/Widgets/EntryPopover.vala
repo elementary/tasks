@@ -27,10 +27,16 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
     public signal void value_changed (T value);
     public signal string? value_format (T value);
 
+    private static Gtk.CssProvider style_provider;
     private Gtk.MenuButton popover_button;
 
     class construct {
         set_css_name ("entry-popover");
+    }
+
+    static construct {
+        style_provider = new Gtk.CssProvider ();
+        style_provider.load_from_resource ("io/elementary/tasks/EntryPopover.css");
     }
 
     construct {
@@ -44,10 +50,12 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
             label = (placeholder != null && placeholder.length > 0 ? placeholder : _("Set Value")),
             popover = popover
         };
+        popover_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
-        var delete_button = new Gtk.Button.from_icon_name ("window-close", Gtk.IconSize.BUTTON) {
+        var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic", Gtk.IconSize.BUTTON) {
             tooltip_text = _("Remove")
         };
+        delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
         var delete_button_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
@@ -55,12 +63,10 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
         };
         delete_button_revealer.add (delete_button);
 
-        var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0) {
-            baseline_position = Gtk.BaselinePosition.CENTER,
-            homogeneous = false
-        };
+        var button_box = new Gtk.Grid ();
         button_box.add (popover_button);
         button_box.add (delete_button_revealer);
+        button_box.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         add (button_box);
 
