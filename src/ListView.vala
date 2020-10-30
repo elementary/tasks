@@ -199,26 +199,21 @@ public class Tasks.ListView : Gtk.Grid {
                     var collection_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);
 
                     if (collection_source != null && source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
-                        var source_webdav_extension = (E.SourceWebdav) source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
                         var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-        
+                        var source_webdav_extension = (E.SourceWebdav) source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+
+                        var credentials_provider = new E.SourceCredentialsProvider (registry);
+                        E.NamedParameters credentials;
+                        credentials_provider.lookup_sync (collection_source, null, out credentials);
+                        collection_source_webdav_session.credentials = credentials;
+
                         var changes = new GLib.SList<E.WebDAVPropertyChange> ();
                         changes.append (new E.WebDAVPropertyChange.set (
                             E.WEBDAV_NS_DAV,
                             "displayname",
                             source.display_name
                         ));
-        
-                        //  changes.append (new E.WebDAVPropertyChange.set (
-                        //      E.WEBDAV_NS_DAV,
-                        //      "calendar-color",
-                        //      "#%02x%02x%02x".printf (
-                        //          0,0,0
-                        //      )
-                        //  ));
-        
-                        debug (@"source_webdav_extension.soup_uri: $(source_webdav_extension.soup_uri.to_string (false))");
-        
+
                         E.webdav_session_update_properties_sync (
                             collection_source_webdav_session,
                             source_webdav_extension.soup_uri.to_string (false),
