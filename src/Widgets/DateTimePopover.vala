@@ -18,29 +18,30 @@
 */
 
 public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
-
-    private Gtk.Calendar calendar = new Gtk.Calendar () {
-        sensitive = false
-    };
-
-    private Granite.Widgets.TimePicker timepicker = new Granite.Widgets.TimePicker () {
-        sensitive = false
-    };
-
-    private Gtk.Button today_button = new Gtk.Button () {
-        label = _("Today")
-    };
-
-    private Gtk.Grid grid = new Gtk.Grid () {
-        margin = 6,
-        row_spacing = 3,
-        column_spacing = 6
-    };
+    private Gtk.Calendar calendar;
+    private Granite.Widgets.TimePicker timepicker;
 
     construct {
+        calendar = new Gtk.Calendar () {
+            sensitive = false
+        };
+
+        var today_button = new Gtk.Button () {
+            label = _("Today")
+        };
+
+        timepicker = new Granite.Widgets.TimePicker () {
+            sensitive = false
+        };
+
+        var grid = new Gtk.Grid () {
+            margin = 6,
+            row_spacing = 3,
+            column_spacing = 6
+        };
         grid.attach (calendar, 0, 0, 2);
-        grid.attach (today_button, 0, 1, 1);
-        grid.attach (timepicker, 1, 1, 1);
+        grid.attach (today_button, 0, 1);
+        grid.attach (timepicker, 1, 1);
         grid.show_all ();
 
         popover.add (grid);
