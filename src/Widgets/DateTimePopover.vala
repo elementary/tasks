@@ -25,6 +25,7 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
         calendar = new Gtk.Calendar () {
             sensitive = false
         };
+        calendar.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         var today_button = new Gtk.Button () {
             label = _("Today")
