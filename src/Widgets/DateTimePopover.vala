@@ -44,8 +44,7 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
         grid.attach (calendar, 0, 0);
         grid.attach (timepicker, 0, 1);
         grid.attach (today_separator, 0, 2);
-        grid.attach (today_button, 0, 3);
-        
+        grid.attach (today_button, 0, 3);        
         grid.show_all ();
 
         popover.add (grid);
