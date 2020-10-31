@@ -18,7 +18,6 @@
 */
 
 public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
-    public Gtk.ArrowType direction { get; set; }
     public Gtk.Image image { get; set; }
     public Gtk.Popover popover { get; private set; }
     public string? placeholder { get; set; }
@@ -71,7 +70,6 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
         add (button_box);
 
         bind_property ("image", popover_button, "image");
-        bind_property ("direction", popover_button, "direction");
 
         delete_button.clicked.connect (() => {
             value = null;

@@ -27,22 +27,25 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
         };
         calendar.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
-        var today_button = new Gtk.Button () {
-            label = _("Today")
-        };
-
         timepicker = new Granite.Widgets.TimePicker () {
             sensitive = false
         };
 
+        var today_separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
+        var today_button = new Gtk.ModelButton () {
+            text = _("Today")
+        };
+
         var grid = new Gtk.Grid () {
             margin = 6,
-            row_spacing = 3,
+            row_spacing = 6,
             column_spacing = 6
         };
-        grid.attach (calendar, 0, 0, 2);
-        grid.attach (today_button, 0, 1);
-        grid.attach (timepicker, 1, 1);
+        grid.attach (calendar, 0, 0);
+        grid.attach (timepicker, 0, 1);
+        grid.attach (today_separator, 0, 2);
+        grid.attach (today_button, 0, 3);
+        
         grid.show_all ();
 
         popover.add (grid);
@@ -50,7 +53,7 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
         popover.show.connect (on_popover_show);
         popover.closed.connect (on_popover_closed);
 
-        today_button.clicked.connect (on_today_button_clicked);
+        today_button.button_release_event.connect (on_today_button_release_event);
         calendar.day_selected.connect (on_calendar_day_selected);
         timepicker.time_changed.connect (on_timepicker_time_changed);
     }
@@ -74,11 +77,13 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
         calendar.sensitive = timepicker.sensitive = false;
     }
 
-    private void on_today_button_clicked () {
+    private bool on_today_button_release_event () {
         var now_local = new GLib.DateTime.now_local ();
 
         calendar.select_month (now_local.get_month () - 1, now_local.get_year ());
         calendar.select_day (now_local.get_day_of_month ());
+
+        return Gdk.EVENT_STOP;
     }
 
     private void on_calendar_day_selected () {
