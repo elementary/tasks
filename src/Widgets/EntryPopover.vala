@@ -18,60 +18,60 @@
 */
 
 public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
-
+    public Gtk.ArrowType direction { get; set; }
+    public Gtk.Image image { get; set; }
+    public Gtk.Popover popover { get; private set; }
     public string? placeholder { get; set; }
-
-    public Gtk.Image image {
-        get { return (Gtk.Image) popover_button.image; }
-        set { popover_button.image = value; }
-    }
-
-    public Gtk.Popover popover {
-        get { return popover_button.popover; }
-    }
-
-    public Gtk.ArrowType direction {
-        get { return popover_button.direction; }
-        set { popover_button.direction = value; }
-    }
 
     public T value { get; set; }
     public signal void value_changed (T value);
     public signal string? value_format (T value);
 
-    private Gtk.Box button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0) {
-        baseline_position = Gtk.BaselinePosition.CENTER,
-        homogeneous = false
-    };
+    private static Gtk.CssProvider style_provider;
+    private Gtk.MenuButton popover_button;
 
-    private Gtk.MenuButton popover_button = new Gtk.MenuButton () {
-        always_show_image = true,
-        use_popover = true
-    };
+    class construct {
+        set_css_name ("entry-popover");
+    }
 
-    private Gtk.Button delete_button = new Gtk.Button.from_icon_name ("window-close", Gtk.IconSize.BUTTON) {
-        always_show_image = true,
-        tooltip_text = _("Remove")
-    };
-
-    private Gtk.Revealer delete_button_revealer = new Gtk.Revealer () {
-        transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
-        reveal_child = false
-    };
+    static construct {
+        style_provider = new Gtk.CssProvider ();
+        style_provider.load_from_resource ("io/elementary/tasks/EntryPopover.css");
+    }
 
     construct {
-        set_css_name ("entry-popover");
-
         events |= Gdk.EventMask.ENTER_NOTIFY_MASK
             | Gdk.EventMask.LEAVE_NOTIFY_MASK;
 
-        popover_button.label = (placeholder != null && placeholder.length > 0 ? placeholder : _("Set Value"));
-        popover_button.popover = new Gtk.Popover (popover_button);
+        popover = new Gtk.Popover (popover_button);
 
+        popover_button = new Gtk.MenuButton () {
+            always_show_image = true,
+            label = (placeholder != null && placeholder.length > 0 ? placeholder : _("Set Value")),
+            popover = popover
+        };
+        popover_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+
+        var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic", Gtk.IconSize.BUTTON) {
+            tooltip_text = _("Remove")
+        };
+        delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+
+        var delete_button_revealer = new Gtk.Revealer () {
+            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
+            reveal_child = false
+        };
         delete_button_revealer.add (delete_button);
+
+        var button_box = new Gtk.Grid ();
         button_box.add (popover_button);
         button_box.add (delete_button_revealer);
+        button_box.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
         add (button_box);
+
+        bind_property ("image", popover_button, "image");
+        bind_property ("direction", popover_button, "direction");
 
         delete_button.clicked.connect (() => {
             value = null;
