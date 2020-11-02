@@ -101,8 +101,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         due_datetime_popover_revealer.add (due_datetime_popover);
 
         due_datetime_popover.value_format.connect ((value) => {
+            due_datetime_popover.get_style_context ().remove_class ("error");
             if (value == null) {
                 return null;
+            }
+            var today = new GLib.DateTime.now_local ();
+            if (today.compare (value) > 0 && !completed) {
+                due_datetime_popover.get_style_context ().add_class ("error");
             }
 
             var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
@@ -123,11 +128,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         });
 
         due_datetime_popover.value_changed.connect ((value) => {
-            var today = new GLib.DateTime.now_local ();
-            if (value != null && today.compare (value) > 0 && !completed) {
-                due_datetime_popover.get_style_context ().add_class ("error");
-            } else {
-                due_datetime_popover.get_style_context ().remove_class ("error");
+            if (!task_form_revealer.reveal_child) {
+                if (value == null) {
+                    due_datetime_popover_revealer.reveal_child = false;
+                }
+                save_task (task);
             }
         });
 

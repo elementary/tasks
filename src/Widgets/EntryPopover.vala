@@ -23,6 +23,7 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
     public string? placeholder { get; set; }
 
     public T value { get; set; }
+    private T value_on_popover_show { get; set; }
     public signal void value_changed (T value);
     public signal string? value_format (T value);
 
@@ -72,7 +73,11 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
         bind_property ("image", popover_button, "image");
 
         delete_button.clicked.connect (() => {
+            var value_has_changed = value != null;
             value = null;
+            if (value_has_changed) {
+                value_changed (value);
+            }
         });
 
         popover_button.clicked.connect (() => {
@@ -102,7 +107,6 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
             } else {
                 popover_button.label = value_formatted;
             }
-            value_changed (value);
         });
 
         enter_notify_event.connect (() => {
@@ -114,6 +118,16 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
         leave_notify_event.connect (() => {
             if (delete_button_revealer.reveal_child) {
                 delete_button_revealer.reveal_child = false;
+            }
+        });
+
+        popover.show.connect (() => {
+            value_on_popover_show = value;
+        });
+
+        popover.closed.connect (() => {
+            if (value != value_on_popover_show) {
+                value_changed (value);
             }
         });
     }
