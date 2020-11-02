@@ -199,6 +199,8 @@ public class Tasks.ListView : Gtk.Grid {
                     var collection_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);
 
                     if (collection_source != null && source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
+                        debug (@"WebDAV Rename '$(source.get_uid())'");
+
                         var collection_source_webdav_session = new E.WebDAVSession (collection_source);
                         var source_webdav_extension = (E.SourceWebdav) source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
@@ -222,6 +224,7 @@ public class Tasks.ListView : Gtk.Grid {
                         );
 
                     } else {
+                        debug (@"Local Rename '$(source.get_uid())'");
                         registry.commit_source_sync (source, null);
                     }
 
