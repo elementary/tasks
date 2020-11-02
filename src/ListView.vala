@@ -191,8 +191,6 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         editable_title.changed.connect (() => {
-            source.display_name = editable_title.text;
-
             Tasks.Application.model.get_registry.begin ((obj, res) => {
                 try {
                     var registry = Tasks.Application.model.get_registry.end (res);
@@ -213,7 +211,7 @@ public class Tasks.ListView : Gtk.Grid {
                         changes.append (new E.WebDAVPropertyChange.set (
                             E.WEBDAV_NS_DAV,
                             "displayname",
-                            source.display_name
+                            editable_title.text
                         ));
 
                         E.webdav_session_update_properties_sync (
@@ -223,8 +221,11 @@ public class Tasks.ListView : Gtk.Grid {
                             null
                         );
 
+                        registry.refresh_backend_sync (collection_source.uid, null);
+
                     } else {
                         debug (@"Local Rename '$(source.get_uid())'");
+                        source.display_name = editable_title.text;
                         registry.commit_source_sync (source, null);
                     }
 
