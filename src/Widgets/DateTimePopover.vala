@@ -21,8 +21,11 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
     private Gtk.Calendar calendar;
     private Granite.Widgets.TimePicker timepicker;
 
-    public DateTimePopover (string? placeholder, string? icon_name) {
-        Object (placeholder: placeholder, icon_name: icon_name);
+    public DateTimePopover () {
+        Object (
+            icon_name: "office-calendar-symbolic",
+            placeholder: _("Set Due")
+        );
     }
 
     construct {
