@@ -29,25 +29,32 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
     }
 
     construct {
-        calendar = new Gtk.Calendar ();
+        calendar = new Gtk.Calendar () {
+            margin = 6
+        };
         calendar.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
-        timepicker = new Granite.Widgets.TimePicker ();
+        timepicker = new Granite.Widgets.TimePicker () {
+            margin = 12,
+            margin_top = 0
+        };
 
-        var today_separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
+        var today_separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL) {
+            margin_bottom = 3,
+            margin_top = 3
+        };
+
         var today_button = new Gtk.ModelButton () {
             text = _("Today")
         };
 
         var grid = new Gtk.Grid () {
-            margin = 6,
-            row_spacing = 6,
-            column_spacing = 6
+            margin_top= 3
         };
-        grid.attach (calendar, 0, 0);
-        grid.attach (timepicker, 0, 1);
-        grid.attach (today_separator, 0, 2);
-        grid.attach (today_button, 0, 3);
+        grid.attach (today_button, 0, 0);
+        grid.attach (today_separator, 0, 1);
+        grid.attach (calendar, 0, 2);
+        grid.attach (timepicker, 0, 3);
         grid.show_all ();
 
         popover.add (grid);
