@@ -76,8 +76,6 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
 
         add (button_box);
 
-        bind_property ("image", popover_button, "image");
-
         delete_button.clicked.connect (() => {
             var value_has_changed = value != null;
             value = null;
