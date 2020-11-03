@@ -407,8 +407,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                     due_label.label = _("%s").printf (
                         due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
                     );
-
                 } else {
+                    ///TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
                     due_label.label = _("%s at %s").printf (
                         Tasks.Util.get_relative_date (due_date_time),
                         due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
