@@ -31,17 +31,12 @@ row {
     transition: all 250ms ease-in-out;
 }
 
-row:focus:not(.card) {
-    background-color: shade (@base_color, 0.8);
-}
-
 .past-due .due-date {
     background: alpha (@error_color, 0.2);
     color: @error_color;
 }
 
 row.card {
-    background-color: @base_color;
     margin-bottom: 12px;
     margin-top: 1px;
     padding-top: 6px;
@@ -52,6 +47,7 @@ row entry.flat  {
     border-style: solid;
     border-color: transparent;
     padding: 0;
+    box-shadow: none;
 }
 
 row entry.flat:focus {
@@ -60,4 +56,7 @@ row entry.flat:focus {
 
 row:not(.card) entry.add-task {
     border-color: alpha (@text_color, 0.25);
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
 }
