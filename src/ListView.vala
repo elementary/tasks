@@ -199,12 +199,13 @@ public class Tasks.ListView : Gtk.Grid {
                     if (collection_source != null && source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
                         debug ("WebDAV Rename: %s", source.get_uid ());
 
-                        var collection_source_webdav_session = new E.WebDAVSession (collection_source);
                         var source_webdav_extension = (E.SourceWebdav) source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
-                        var credentials_provider = new E.SourceCredentialsProvider (registry);
                         E.NamedParameters credentials;
+                        var credentials_provider = new E.SourceCredentialsProvider (registry);
                         credentials_provider.lookup_sync (collection_source, null, out credentials);
+
+                        var collection_source_webdav_session = new E.WebDAVSession (collection_source);
                         collection_source_webdav_session.credentials = credentials;
 
                         var changes = new GLib.SList<E.WebDAVPropertyChange> ();
