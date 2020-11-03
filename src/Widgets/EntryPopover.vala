@@ -108,10 +108,7 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
                 popover_button.label = placeholder;
 
                 if (delete_button_revealer.reveal_child) {
-                    Timeout.add (150, () => {
-                        delete_button_revealer.reveal_child = false;
-                        return GLib.Source.REMOVE;
-                    });
+                    delete_button_revealer.reveal_child = false;
                 }
 
             } else {
