@@ -224,7 +224,7 @@ public class Tasks.ListView : Gtk.Grid {
                         registry.refresh_backend_sync (collection_source.uid, null);
 
                     } else {
-                        debug (@"Local Rename '$(source.get_uid())'");
+                        debug ("Local Rename: %s", source.get_uid ());
                         source.display_name = editable_title.text;
                         registry.commit_source_sync (source, null);
                     }
