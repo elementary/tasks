@@ -47,6 +47,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private Gtk.Revealer task_form_revealer;
     private Gtk.Switch due_switch;
     private Gtk.TextBuffer description_textbuffer;
+    private unowned Gtk.StyleContext style_context;
 
     private static Gtk.CssProvider taskrow_provider;
 
@@ -196,7 +197,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         add (revealer);
         margin_start = margin_end = 12;
-        get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        style_context = get_style_context ();
+        style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
+        style_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         if (created) {
             check.show ();
@@ -284,10 +288,16 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         unowned ICal.Component ical_task = task.get_icalcomponent ();
 
         if (due_switch.active) {
-            ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
-            ical_task.set_due (Util.date_time_to_ical (due_datepicker.date, due_timepicker.time));
+            var due_icaltime = Util.date_time_to_ical (due_datepicker.date, due_timepicker.time);
+
+            ical_task.set_due (due_icaltime);
+            ical_task.set_dtstart (due_icaltime);
+
         } else {
-            ical_task.set_due (new ICal.Time.null_time ());
+            var null_icaltime = new ICal.Time.null_time ();
+
+            ical_task.set_due (null_icaltime);
+            ical_task.set_dtstart (null_icaltime);
         }
 
         // Clear the old description
@@ -314,8 +324,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         task_form_revealer.reveal_child = value;
         task_details_reveal_request (!value);
 
-        unowned Gtk.StyleContext style_context = get_style_context ();
-
         if (value) {
             style_context.add_class ("collapsed");
             style_context.add_class (Granite.STYLE_CLASS_CARD);
@@ -331,6 +339,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             Tasks.Application.set_task_color (source, check);
         }
 
+        var default_due_datetime = new DateTime.now_local ().add_hours (1);
+        default_due_datetime = default_due_datetime.add_minutes (-default_due_datetime.get_minute ());
+        default_due_datetime = default_due_datetime.add_seconds (-default_due_datetime.get_seconds ());
+
         if (task == null || !created) {
             state_stack.set_visible_child (icon);
 
@@ -344,7 +356,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
             due_label_revealer.reveal_child = false;
             due_switch.active = false;
-            due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
+            due_datepicker.date = due_timepicker.time = default_due_datetime;
 
             description_label_revealer.reveal_child = false;
             description_textbuffer.text = "";
@@ -358,10 +370,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
             if (ical_task.get_due ().is_null_time ()) {
                 due_switch.active = false;
-                due_datepicker.date = due_timepicker.time = new DateTime.now_local ();
+                due_datepicker.date = due_timepicker.time = default_due_datetime;
             } else {
-                var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
-                due_datepicker.date = due_timepicker.time = due_date_time;
+                var due_datetime = Util.ical_to_date_time (ical_task.get_due ());
+                due_datepicker.date = due_timepicker.time = due_datetime;
 
                 due_switch.active = true;
             }
@@ -395,8 +407,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                     due_label.label = _("%s").printf (
                         due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
                     );
-
                 } else {
+                    ///TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
                     due_label.label = _("%s at %s").printf (
                         Tasks.Util.get_relative_date (due_date_time),
                         due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
