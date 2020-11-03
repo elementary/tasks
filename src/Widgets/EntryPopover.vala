@@ -18,7 +18,7 @@
 */
 
 public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
-    public Gtk.Image image { get; set; }
+    public string icon_name { get; set; }
     public Gtk.Popover popover { get; private set; }
     public string? placeholder { get; set; }
 
@@ -47,7 +47,7 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
 
         popover_button = new Gtk.MenuButton () {
             always_show_image = true,
-            label = (placeholder != null && placeholder.length > 0 ? placeholder : _("Set Value")),
+            label = placeholder,
             popover = popover
         };
 
@@ -94,14 +94,18 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
 
         notify["placeholder"].connect (() => {
             if (value_format (value) == null) {
-                popover_button.label = (placeholder != null && placeholder.length > 0 ? placeholder : _("Set Value"));
+                popover_button.label = placeholder;
             }
+        });
+
+        notify["icon_name"].connect (() => {
+            popover_button.image = new Gtk.Image.from_icon_name (icon_name, Gtk.IconSize.BUTTON);
         });
 
         notify["value"].connect (() => {
             var value_formatted = value_format (value);
             if (value_formatted == null) {
-                popover_button.label = (placeholder != null && placeholder.length > 0 ? placeholder : _("Set Value"));
+                popover_button.label = placeholder;
 
                 if (delete_button_revealer.reveal_child) {
                     Timeout.add (150, () => {
