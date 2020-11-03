@@ -301,9 +301,14 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         unowned ICal.Component ical_task = task.get_icalcomponent ();
 
         if (due_datetime_popover.value != null) {
-            ical_task.set_due (Util.date_time_to_ical (due_datetime_popover.value, due_datetime_popover.value));
+            var due_icaltime = Util.date_time_to_ical (due_datetime_popover.value, due_datetime_popover.value);
+            ical_task.set_due (due_icaltime);
+            ical_task.set_dtstart (due_icaltime);
         } else {
-            ical_task.set_due (new ICal.Time.null_time ());
+            var null_icaltime = new ICal.Time.null_time ();
+
+            ical_task.set_due (null_icaltime);
+            ical_task.set_dtstart (null_icaltime);
         }
 
         // Clear the old description
