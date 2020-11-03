@@ -89,7 +89,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         summary_entry_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         due_datetime_popover = new Tasks.DateTimePopover () {
-            icon_name = "office-calendar-symbolic",
+            icon = "office-calendar-symbolic",
             placeholder = _("Set Due")
         };
 

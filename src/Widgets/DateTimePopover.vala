@@ -22,14 +22,10 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
     private Granite.Widgets.TimePicker timepicker;
 
     construct {
-        calendar = new Gtk.Calendar () {
-            sensitive = false
-        };
+        calendar = new Gtk.Calendar ();
         calendar.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
-        timepicker = new Granite.Widgets.TimePicker () {
-            sensitive = false
-        };
+        timepicker = new Granite.Widgets.TimePicker ();
 
         var today_separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL);
         var today_button = new Gtk.ModelButton () {
@@ -50,7 +46,6 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
         popover.add (grid);
 
         popover.show.connect (on_popover_show);
-        popover.closed.connect (on_popover_closed);
 
         today_button.button_release_event.connect (on_today_button_release_event);
         calendar.day_selected.connect (on_calendar_day_selected);
@@ -68,12 +63,6 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
         calendar.select_month (selected_datetime.get_month () - 1, selected_datetime.get_year ());
         calendar.select_day (selected_datetime.get_day_of_month ());
         timepicker.time = selected_datetime;
-
-        calendar.sensitive = timepicker.sensitive = true;
-    }
-
-    private void on_popover_closed () {
-        calendar.sensitive = timepicker.sensitive = false;
     }
 
     private bool on_today_button_release_event () {
@@ -86,9 +75,6 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
     }
 
     private void on_calendar_day_selected () {
-        if (!calendar.sensitive) {
-            return;
-        }
         var selected_datetime = new GLib.DateTime.local (
             calendar.year,
             calendar.month + 1,
@@ -102,9 +88,6 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
     }
 
     private void on_timepicker_time_changed () {
-        if (!timepicker.sensitive) {
-            return;
-        }
         value = timepicker.time;
     }
 
