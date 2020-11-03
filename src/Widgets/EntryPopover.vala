@@ -18,18 +18,17 @@
 */
 
 public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
-    public signal void value_changed (T value);
     public signal string? value_format (T value);
+    public signal void value_changed (T value);
 
     public Gtk.Popover popover { get; private set; }
-    public T value { get; set; }
-
     public string icon_name { get; construct; }
     public string placeholder { get; construct; }
+    public T value { get; set; }
 
-    private T value_on_popover_show;
-    private static Gtk.CssProvider style_provider;
     private Gtk.MenuButton popover_button;
+    private static Gtk.CssProvider style_provider;
+    private T value_on_popover_show;
 
     protected EntryPopover (string placeholder, string? icon_name = null) {
         Object (
