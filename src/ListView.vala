@@ -312,7 +312,6 @@ public class Tasks.ListView : Gtk.Grid {
 
         Idle.add (() => {
             task_list.invalidate_sort ();
-            task_list.invalidate_headers ();
             task_list.show_all ();
 
             return Source.REMOVE;
@@ -339,7 +338,6 @@ public class Tasks.ListView : Gtk.Grid {
 
         Idle.add (() => {
             task_list.invalidate_sort ();
-            task_list.invalidate_headers ();
 
             return Source.REMOVE;
         });
@@ -366,7 +364,6 @@ public class Tasks.ListView : Gtk.Grid {
 
         Idle.add (() => {
             task_list.invalidate_sort ();
-            task_list.invalidate_headers ();
 
             return Source.REMOVE;
         });
