@@ -50,12 +50,18 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
             label = (placeholder != null && placeholder.length > 0 ? placeholder : _("Set Value")),
             popover = popover
         };
-        popover_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+
+        unowned Gtk.StyleContext popover_button_context = popover_button.get_style_context ();
+        popover_button_context.add_class (Gtk.STYLE_CLASS_FLAT);
+        popover_button_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic", Gtk.IconSize.BUTTON) {
             tooltip_text = _("Remove")
         };
-        delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+
+        unowned Gtk.StyleContext delete_button_context = delete_button.get_style_context ();
+        delete_button_context.add_class (Gtk.STYLE_CLASS_FLAT);
+        delete_button_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var delete_button_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,

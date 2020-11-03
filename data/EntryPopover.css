@@ -23,8 +23,7 @@ entry-popover grid {
     background: @SILVER_300;
 }
 
-entry-popover button image,
-entry-popover button label {
+entry-popover button {
     color: @SILVER_900;
     font-size: 0.9em;
     font-weight: 600;
@@ -34,7 +33,6 @@ entry-popover.error grid {
     background: alpha (@error_color, 0.2);
 }
 
-entry-popover.error button image,
-entry-popover.error button label {
+entry-popover.error button {
     color: @error_color;
 }
