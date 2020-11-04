@@ -279,6 +279,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
                                 try {
                                     E.webdav_discover_sources.end (
+                                        collection_source,
                                         res,
                                         out webdav_certificate_pem,
                                         out webdav_certificate_errors,
