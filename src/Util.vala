@@ -53,9 +53,15 @@ namespace Tasks.Util {
         return a.get_id ().equal (b.get_id ());
     }
 
+    public bool esource_equal_func (E.Source a, E.Source b) {
+        return a.uid == b.uid;
+    }
 
-        //--- Date and Time ---//
+    public uint esource_hash_func (E.Source source) {
+        return str_hash (source.uid);
+    }
 
+    //--- Date and Time ---//
 
     /**
      * Converts two datetimes to one TimeType. The first contains the date,

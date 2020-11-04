@@ -33,7 +33,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     private uint configure_id;
     private Gtk.ListBox listbox;
     private Gee.HashMap<E.Source, Tasks.SourceRow>? source_rows;
+    private Gee.Collection<E.Source>? source_collections;
     private Tasks.ListView listview;
+    private Gtk.Popover add_tasklist_popover;
+    private Gtk.ButtonBox add_tasklist_buttonbox;
+    private E.SourceRegistryWatcher source_collection_watcher;
 
     public MainWindow (Gtk.Application application) {
         Object (
@@ -95,7 +99,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         scrolledwindow.hscrollbar_policy = Gtk.PolicyType.NEVER;
         scrolledwindow.add (listbox);
 
-        var add_tasklist_button = new Gtk.Button () {
+        /*var add_tasklist_button = new Gtk.Button () {
             action_name = ACTION_PREFIX + ACTION_ADD_NEW_LIST,
             always_show_image = true,
             image = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR),
@@ -103,6 +107,17 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             tooltip_markup = Granite.markup_accel_tooltip (
                 application_instance.get_accels_for_action (ACTION_PREFIX + ACTION_ADD_NEW_LIST)
             )
+        };*/
+
+        add_tasklist_popover = new Gtk.Popover (null);
+        add_tasklist_buttonbox = new Gtk.ButtonBox (Gtk.Orientation.VERTICAL);
+        add_tasklist_popover.add (add_tasklist_buttonbox);
+
+        var add_tasklist_button = new Gtk.MenuButton () {
+            label = ("Add Task List…"),
+            image = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR),
+            always_show_image = true,
+            popover = add_tasklist_popover
         };
 
         var actionbar = new Gtk.ActionBar ();
@@ -145,6 +160,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 critical (e.message);
                 return;
             }
+
+            source_collection_watcher = new E.SourceRegistryWatcher (registry, E.SOURCE_EXTENSION_COLLECTION);
+            source_collection_watcher.appeared.connect (add_source_collection);
+            source_collection_watcher.disappeared.connect (remove_source_collection);
+            source_collection_watcher.reclaim ();
 
             listbox.set_header_func (header_update_func);
 
@@ -214,62 +234,93 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void action_add_new_list () {
+        add_new_list (null);
+    }
+
+    private void add_new_list (E.Source? source) {
+        var selected_source = source == null ? listview.source : source;
+
+        if (selected_source == null) {
+            add_tasklist_popover.popup ();
+            return;
+        }
+
         Tasks.Application.model.get_registry.begin ((obj, res) => {
             try {
                 var registry = Tasks.Application.model.get_registry.end (res);
-                var selected_source = listview.source;
                 var collection_source = registry.find_extension (selected_source, E.SOURCE_EXTENSION_COLLECTION);
+                var collection_source_extension = (E.SourceCollection) collection_source.get_extension (E.SOURCE_EXTENSION_COLLECTION);
 
                 var new_source = new E.Source (null, null);
                 var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
                 new_source.display_name = _("New list");
                 new_source_tasklist_extension.color = "#0e9a83";
 
-                if (selected_source == null) {
-                    new_source.parent = "local-stub";
-                    new_source_tasklist_extension.backend_name = "local";
+                switch (collection_source_extension.backend_name) {
+                    case "webdav":
+                        var collection_source_webdav_session = new E.WebDAVSession (collection_source);
+                        var credentials_provider = new E.SourceCredentialsProvider (registry);
 
-                    registry.commit_source_sync (new_source, null);
+                        E.NamedParameters credentials;
+                        credentials_provider.lookup_sync (collection_source, null, out credentials);
+                        collection_source_webdav_session.credentials = credentials;
 
-                } else if (collection_source != null && selected_source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
-                    var selected_source_webdav_extension = (E.SourceWebdav) selected_source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
-                    var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-                    var credentials_provider = new E.SourceCredentialsProvider (registry);
+                        string webdav_certificate_pem;
+                        TlsCertificateFlags webdav_certificate_errors;
+                        SList<E.WebDAVDiscoveredSource?> webdav_discovered_sources;
+                        SList<string> webdav_calendar_user_addresses;
 
-                    E.NamedParameters credentials;
-                    credentials_provider.lookup_sync (collection_source, null, out credentials);
-                    collection_source_webdav_session.credentials = credentials;
+                        E.webdav_discover_sources_sync (
+                            collection_source,
+                            collection_source_extension.calendar_url,
+                            E.WebDAVDiscoverSupports.TASKS,
+                            credentials,
+                            out webdav_certificate_pem,
+                            out webdav_certificate_errors,
+                            out webdav_discovered_sources,
+                            out webdav_calendar_user_addresses,
+                            null
+                        );
 
-                    new_source.parent = selected_source.parent;
-                    var selected_source_uri = selected_source_webdav_extension.soup_uri;
+                        Soup.URI? new_source_uri = null;
+                        if (webdav_discovered_sources.length () > 0) {
+                            var webdav_discovered_source = webdav_discovered_sources.nth_data (0);
+                            new_source_uri = new Soup.URI (webdav_discovered_source.href.dup ());
+                            E.webdav_discover_free_discovered_sources (webdav_discovered_sources);
+                        }
 
-                    var new_source_uri = new Soup.URI (null);
-                    new_source_uri.set_scheme (selected_source_uri.get_scheme ());
-                    new_source_uri.set_user (selected_source_uri.get_user ());
-                    new_source_uri.set_password (selected_source_uri.get_password ());
-                    new_source_uri.set_host (selected_source_uri.get_host ());
-                    new_source_uri.set_port (selected_source_uri.get_port ());
+                        if (new_source_uri == null) {
+                            throw new Error (1,202, "Error resolving WebDAV endpoint.");
+                        }
 
-                    var uri_dir_path = selected_source_uri.get_path ();
-                    if (uri_dir_path.has_suffix ("/")) {
-                        uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
-                    }
-                    uri_dir_path = uri_dir_path.substring (0, uri_dir_path.last_index_of ("/"));
-                    new_source_uri.set_path (uri_dir_path + "/" + GLib.Uuid.string_random ().up ());
+                        var uri_dir_path = new_source_uri.get_path ();
+                        if (uri_dir_path.has_suffix ("/")) {
+                            uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
+                        }
+                        uri_dir_path = uri_dir_path.substring (0, uri_dir_path.last_index_of ("/"));
+                        new_source_uri.set_path (uri_dir_path + "/" + GLib.Uuid.string_random ().up ());
 
-                    collection_source_webdav_session.mkcalendar_sync (
-                        new_source_uri.to_string (false),
-                        new_source.display_name,
-                        null,
-                        new_source_tasklist_extension.color,
-                        E.WebDAVResourceSupports.TASKS,
-                        null
-                    );
+                        collection_source_webdav_session.mkcalendar_sync (
+                            new_source_uri.to_string (false),
+                            new_source.display_name,
+                            null,
+                            new_source_tasklist_extension.color,
+                            E.WebDAVResourceSupports.TASKS,
+                            null
+                        );
 
-                    registry.refresh_backend_sync (collection_source.uid, null);
+                        registry.refresh_backend_sync (collection_source.uid, null);
+                        break;
 
-                } else {
-                    throw new Error (0, 404, "Unknown source backend type");
+                    case "google":
+                        throw new Error (1,202, "Task list management for a Google backend is not supported yet.");
+
+                    default:
+                        new_source.parent = "local-stub";
+                        new_source_tasklist_extension.backend_name = "local";
+
+                        registry.commit_source_sync (new_source, null);
+                        break;
                 }
 
             } catch (Error e) {
@@ -393,6 +444,45 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         listbox.unselect_row (source_rows[source]);
         source_rows[source].remove_request ();
         source_rows.unset (source);
+    }
+
+    private void add_source_collection (E.Source source_collection) {
+        if (source_collections == null) {
+            source_collections = new Gee.HashSet<E.Source> (Util.esource_hash_func, Util.esource_equal_func);
+        }
+        E.SourceTaskList source_collection_tasklist_extension = (E.SourceTaskList)source_collection.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+        if (source_collections.contains (source_collection) || !source_collection.enabled || !source_collection_tasklist_extension.selected) {
+            return;
+        }
+        source_collections.add (source_collection);
+        update_add_tasklist_buttonbox ();
+    }
+
+    private void remove_source_collection (E.Source source_collection) {
+        if (source_collections != null && source_collections.contains (source_collection)) {
+            source_collections.remove (source_collection);
+        }
+        update_add_tasklist_buttonbox ();
+    }
+
+    private void update_add_tasklist_buttonbox () {
+        foreach (var child in add_tasklist_buttonbox.get_children ()) {
+            add_tasklist_buttonbox.remove (child);
+        }
+        foreach (var source_collection in source_collections) {
+            var source_button = new Gtk.ModelButton () {
+                text = source_collection.display_name
+            };
+
+            source_button.button_release_event.connect (() => {
+                add_new_list (source_collection);
+                return Gdk.EVENT_PROPAGATE;
+            });
+
+            add_tasklist_buttonbox.add (source_button);
+        }
+        add_tasklist_buttonbox.show_all ();
     }
 
     public override bool configure_event (Gdk.EventConfigure event) {
