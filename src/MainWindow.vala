@@ -265,51 +265,60 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         credentials_provider.lookup_sync (collection_source, null, out credentials);
                         collection_source_webdav_session.credentials = credentials;
 
-                        string webdav_certificate_pem;
-                        TlsCertificateFlags webdav_certificate_errors;
-                        SList<E.WebDAVDiscoveredSource?> webdav_discovered_sources;
-                        SList<string> webdav_calendar_user_addresses;
-
-                        E.webdav_discover_sources_sync (
+                        E.webdav_discover_sources.begin (
                             collection_source,
                             collection_source_extension.calendar_url,
                             E.WebDAVDiscoverSupports.TASKS,
                             credentials,
-                            out webdav_certificate_pem,
-                            out webdav_certificate_errors,
-                            out webdav_discovered_sources,
-                            out webdav_calendar_user_addresses,
-                            null
-                        );
-
-                        Soup.URI? new_source_uri = null;
-                        if (webdav_discovered_sources.length () > 0) {
-                            var webdav_discovered_source = webdav_discovered_sources.nth_data (0);
-                            new_source_uri = new Soup.URI (webdav_discovered_source.href.dup ());
-                            E.webdav_discover_free_discovered_sources (webdav_discovered_sources);
-                        }
-
-                        if (new_source_uri == null) {
-                            throw new Error (1,202, "Error resolving WebDAV endpoint.");
-                        }
-
-                        var uri_dir_path = new_source_uri.get_path ();
-                        if (uri_dir_path.has_suffix ("/")) {
-                            uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
-                        }
-                        uri_dir_path = uri_dir_path.substring (0, uri_dir_path.last_index_of ("/"));
-                        new_source_uri.set_path (uri_dir_path + "/" + GLib.Uuid.string_random ().up ());
-
-                        collection_source_webdav_session.mkcalendar_sync (
-                            new_source_uri.to_string (false),
-                            new_source.display_name,
                             null,
-                            new_source_tasklist_extension.color,
-                            E.WebDAVResourceSupports.TASKS,
-                            null
-                        );
+                            (obj, res) => {
+                                string webdav_certificate_pem;
+                                TlsCertificateFlags? webdav_certificate_errors;
+                                SList<E.WebDAVDiscoveredSource?> webdav_discovered_sources;
+                                SList<string> webdav_calendar_user_addresses;
 
-                        registry.refresh_backend_sync (collection_source.uid, null);
+                                try {
+                                    E.webdav_discover_sources.end (
+                                        res,
+                                        out webdav_certificate_pem,
+                                        out webdav_certificate_errors,
+                                        out webdav_discovered_sources,
+                                        out webdav_calendar_user_addresses
+                                    );
+    
+                                    Soup.URI? new_source_uri = null;
+                                    if (webdav_discovered_sources.length () > 0) {
+                                        var webdav_discovered_source = webdav_discovered_sources.nth_data (0);
+                                        new_source_uri = new Soup.URI (webdav_discovered_source.href.dup ());
+                                    }
+                                    E.webdav_discover_free_discovered_sources (webdav_discovered_sources);
+    
+                                    if (new_source_uri == null) {
+                                        throw new Error (1,404, "Error resolving WebDAV endpoint from backend");
+                                    }
+    
+                                    var uri_dir_path = new_source_uri.get_path ();
+                                    if (uri_dir_path.has_suffix ("/")) {
+                                        uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
+                                    }
+                                    uri_dir_path = uri_dir_path.substring (0, uri_dir_path.last_index_of ("/"));
+                                    new_source_uri.set_path (uri_dir_path + "/" + GLib.Uuid.string_random ().up ());
+    
+                                    collection_source_webdav_session.mkcalendar_sync (
+                                        new_source_uri.to_string (false),
+                                        new_source.display_name,
+                                        null,
+                                        new_source_tasklist_extension.color,
+                                        E.WebDAVResourceSupports.TASKS,
+                                        null
+                                    );
+                                    registry.refresh_backend_sync (collection_source.uid, null);
+
+                                } catch (Error e) {
+                                    critical (e.message);
+                                    dialog_add_task_list_error (e);
+                                }
+                            });
                         break;
 
                     case "google":
