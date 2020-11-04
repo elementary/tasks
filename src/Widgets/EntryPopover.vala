@@ -22,7 +22,7 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
     public signal void value_changed (T value);
 
     public Gtk.Popover popover { get; private set; }
-    public string icon_name { get; construct; }
+    public string? icon_name { get; construct; }
     public string placeholder { get; construct; }
     public T value { get; set; }
 
