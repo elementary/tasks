@@ -292,7 +292,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                                         var webdav_discovered_source = webdav_discovered_sources.nth_data (0);
                                         new_source_uri = new Soup.URI (webdav_discovered_source.href.dup ());
                                     }
-                                    E.webdav_discover_free_discovered_sources (webdav_discovered_sources);
+                                    E.webdav_discover_do_free_discovered_sources ((owned) webdav_discovered_sources);
     
                                     if (new_source_uri == null) {
                                         throw new Error (1,404, "Error resolving WebDAV endpoint from backend");
