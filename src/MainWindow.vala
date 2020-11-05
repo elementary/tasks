@@ -278,7 +278,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                                 SList<string> webdav_calendar_user_addresses;
 
                                 try {
-                                    E.webdav_discover_sources.end (
+                                    E.webdav_discover_sources_finish (
                                         collection_source,
                                         res,
                                         out webdav_certificate_pem,
