@@ -278,6 +278,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                                 SList<string> webdav_calendar_user_addresses;
 
                                 try {
+                                    /**
+                                     * TEMPORARY WORKAROUND: `E.webdav_discover_sources_finish`
+                                     * Use `E.webdav_discover_sources.end` once the following commit of libedataserver is released:
+                                     * https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/4f4ea2f45d5e2bffcf446b9fdc1bb65e94982d03
+                                     */
                                     E.webdav_discover_sources_finish (
                                         collection_source,
                                         res,
@@ -292,6 +297,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                                         var webdav_discovered_source = webdav_discovered_sources.nth_data (0);
                                         new_source_uri = new Soup.URI (webdav_discovered_source.href.dup ());
                                     }
+                                    /**
+                                     * TEMPORARY WORKAROUND: `E.webdav_discover_do_free_discovered_sources`
+                                     * Remove this line, once the following commit of libedataserver is released:
+                                     * https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/9d1505cd3518ff32bd03050fd898abf89d31d389
+                                     */
                                     E.webdav_discover_do_free_discovered_sources ((owned) webdav_discovered_sources);
     
                                     if (new_source_uri == null) {
