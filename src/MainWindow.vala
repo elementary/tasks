@@ -238,116 +238,32 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void add_new_list (E.Source? source) {
-        var selected_source = source == null ? listview.source : source;
+        var collection_or_sibling = source == null ? listview.source : source;
 
-        if (selected_source == null) {
+        if (collection_or_sibling == null) {
             add_tasklist_popover.popup ();
             return;
         }
 
-        Tasks.Application.model.get_registry.begin ((obj, res) => {
-            try {
-                var registry = Tasks.Application.model.get_registry.end (res);
-                var collection_source = registry.find_extension (selected_source, E.SOURCE_EXTENSION_COLLECTION);
-                var collection_source_extension = (E.SourceCollection) collection_source.get_extension (E.SOURCE_EXTENSION_COLLECTION);
+        try {
+            var new_source = new E.Source (null, null);
+            var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+            new_source.display_name = _("New list");
+            new_source_tasklist_extension.color = "#0e9a83";
 
-                var new_source = new E.Source (null, null);
-                var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-                new_source.display_name = _("New list");
-                new_source_tasklist_extension.color = "#0e9a83";
-
-                switch (collection_source_extension.backend_name) {
-                    case "webdav":
-                        var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-                        var credentials_provider = new E.SourceCredentialsProvider (registry);
-
-                        E.NamedParameters credentials;
-                        credentials_provider.lookup_sync (collection_source, null, out credentials);
-                        collection_source_webdav_session.credentials = credentials;
-
-                        E.webdav_discover_sources.begin (
-                            collection_source,
-                            collection_source_extension.calendar_url,
-                            E.WebDAVDiscoverSupports.TASKS,
-                            credentials,
-                            null,
-                            (obj, res) => {
-                                string webdav_certificate_pem;
-                                TlsCertificateFlags? webdav_certificate_errors;
-                                SList<E.WebDAVDiscoveredSource?> webdav_discovered_sources;
-                                SList<string> webdav_calendar_user_addresses;
-
-                                try {
-                                    /**
-                                     * TEMPORARY WORKAROUND: `E.webdav_discover_sources_finish`
-                                     * Use `E.webdav_discover_sources.end` once the following commit of libedataserver is released:
-                                     * https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/4f4ea2f45d5e2bffcf446b9fdc1bb65e94982d03
-                                     */
-                                    E.webdav_discover_sources_finish (
-                                        collection_source,
-                                        res,
-                                        out webdav_certificate_pem,
-                                        out webdav_certificate_errors,
-                                        out webdav_discovered_sources,
-                                        out webdav_calendar_user_addresses
-                                    );
-    
-                                    Soup.URI? new_source_uri = null;
-                                    if (webdav_discovered_sources.length () > 0) {
-                                        var webdav_discovered_source = webdav_discovered_sources.nth_data (0);
-                                        new_source_uri = new Soup.URI (webdav_discovered_source.href.dup ());
-                                    }
-                                    /**
-                                     * TEMPORARY WORKAROUND: `E.webdav_discover_do_free_discovered_sources`
-                                     * Remove this line, once the following commit of libedataserver is released:
-                                     * https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/9d1505cd3518ff32bd03050fd898abf89d31d389
-                                     */
-                                    E.webdav_discover_do_free_discovered_sources ((owned) webdav_discovered_sources);
-    
-                                    if (new_source_uri == null) {
-                                        throw new Error (1,404, "Error resolving WebDAV endpoint from backend");
-                                    }
-    
-                                    var uri_dir_path = new_source_uri.get_path ();
-                                    if (uri_dir_path.has_suffix ("/")) {
-                                        uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
-                                    }
-                                    uri_dir_path = uri_dir_path.substring (0, uri_dir_path.last_index_of ("/"));
-                                    new_source_uri.set_path (uri_dir_path + "/" + GLib.Uuid.string_random ().up ());
-    
-                                    collection_source_webdav_session.mkcalendar_sync (
-                                        new_source_uri.to_string (false),
-                                        new_source.display_name,
-                                        null,
-                                        new_source_tasklist_extension.color,
-                                        E.WebDAVResourceSupports.TASKS,
-                                        null
-                                    );
-                                    registry.refresh_backend_sync (collection_source.uid, null);
-
-                                } catch (Error e) {
-                                    critical (e.message);
-                                    dialog_add_task_list_error (e);
-                                }
-                            });
-                        break;
-
-                    case "google":
-                        throw new Error (1,202, "Task list management for a Google backend is not supported yet.");
-
-                    default:
-                        new_source.parent = "local-stub";
-                        new_source_tasklist_extension.backend_name = "local";
-
-                        registry.commit_source_sync (new_source, null);
-                        break;
+            Tasks.Application.model.add_task_list_async.begin (new_source, collection_or_sibling, (obj, res) => {
+                try {
+                    Tasks.Application.model.add_task_list_async.end (res);
+                } catch (Error e) {
+                    critical (e.message);
+                    dialog_add_task_list_error (e);
                 }
+            });
 
-            } catch (Error e) {
-                critical (e.message);
-                dialog_add_task_list_error (e);
-            }
-        });
+        } catch (Error e) {
+            critical (e.message);
+            dialog_add_task_list_error (e);
+        }
     }
 
     private void dialog_add_task_list_error (Error e) {

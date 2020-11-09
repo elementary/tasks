@@ -20,7 +20,9 @@
 
 
 errordomain Tasks.TaskModelError {
-    CLIENT_NOT_AVAILABLE
+    CLIENT_NOT_AVAILABLE,
+    BACKEND_NOT_SUPPORTED,
+    WEBDAV_DISCOVER_FAILED
 }
 
 
@@ -119,7 +121,8 @@ public class Tasks.TaskModel : Object {
             var registry = yield new E.SourceRegistry (null);
 
             registry.source_added.connect ((task_list) => {
-                add_task_list (task_list);
+                debug ("Adding task list '%s'", task_list.dup_display_name ());
+                create_task_list_client (task_list);
                 task_list_added (task_list);
             });
 
@@ -128,14 +131,25 @@ public class Tasks.TaskModel : Object {
             });
 
             registry.source_removed.connect ((task_list) => {
-                remove_task_list (task_list);
+                debug ("Removing task list '%s'", task_list.dup_display_name ());
+
+                ECal.Client client;
+                try {
+                    client = get_client (task_list);
+                } catch (Error e) {
+                    /* Already out of the model, so do nothing */
+                    warning (e.message);
+                    return;
+                }
+
+                destroy_task_list_client (task_list, client);
                 task_list_removed (task_list);
             });
 
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((task_list) => {
                 E.SourceTaskList task_list_extension = (E.SourceTaskList)task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);  // vala-lint=line-length
                 if (task_list_extension.selected == true && task_list.enabled == true) {
-                    add_task_list (task_list);
+                    registry.source_added (task_list);
                 }
             });
 
@@ -147,24 +161,106 @@ public class Tasks.TaskModel : Object {
         }
     }
 
-    private void add_task_list (E.Source task_list) {
-        debug ("Adding task list '%s'", task_list.dup_display_name ());
-        create_task_list_client (task_list);
-    }
+    public async void add_task_list_async (E.Source task_list, E.Source collection_or_sibling) throws Error {
+        var registry = get_registry_sync ();
+        var collection_source = registry.find_extension (collection_or_sibling, E.SOURCE_EXTENSION_COLLECTION);
+        var collection_source_extension = (E.SourceCollection) collection_source.get_extension (E.SOURCE_EXTENSION_COLLECTION);
+        var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
-    private void remove_task_list (E.Source task_list) {
-        debug ("Removing task list '%s'", task_list.dup_display_name ());
+        switch (collection_source_extension.backend_name) {
+            case "webdav":
+                var webdav_request_promise = new Gee.Promise<bool> ();
+                var collection_source_webdav_session = new E.WebDAVSession (collection_source);
+                var credentials_provider = new E.SourceCredentialsProvider (registry);
 
-        ECal.Client client;
-        try {
-            client = get_client (task_list);
-        } catch (Error e) {
-            /* Already out of the model, so do nothing */
-            warning (e.message);
-            return;
+                E.NamedParameters credentials;
+                credentials_provider.lookup_sync (collection_source, null, out credentials);
+                collection_source_webdav_session.credentials = credentials;
+
+                E.webdav_discover_sources.begin (
+                    collection_source,
+                    collection_source_extension.calendar_url,
+                    E.WebDAVDiscoverSupports.TASKS,
+                    credentials,
+                    null,
+                    (obj, res) => {
+                        string webdav_certificate_pem;
+                        GLib.TlsCertificateFlags? webdav_certificate_errors;
+                        GLib.SList<E.WebDAVDiscoveredSource?> webdav_discovered_sources;
+                        GLib.SList<string> webdav_calendar_user_addresses;
+
+                        try {
+                            /**
+                             * TEMPORARY WORKAROUND: `E.webdav_discover_sources_finish`
+                             * Use `E.webdav_discover_sources.end` once the following commit of libedataserver is released:
+                             * https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/4f4ea2f45d5e2bffcf446b9fdc1bb65e94982d03
+                             */
+                            E.webdav_discover_sources_finish (
+                                collection_source,
+                                res,
+                                out webdav_certificate_pem,
+                                out webdav_certificate_errors,
+                                out webdav_discovered_sources,
+                                out webdav_calendar_user_addresses
+                            );
+
+                            Soup.URI? task_list_uri = null;
+                            if (webdav_discovered_sources.length () > 0) {
+                                var webdav_discovered_source = webdav_discovered_sources.nth_data (0);
+                                task_list_uri = new Soup.URI (webdav_discovered_source.href.dup ());
+                            }
+                            /**
+                             * TEMPORARY WORKAROUND: `E.webdav_discover_do_free_discovered_sources`
+                             * Remove this line, once the following commit of libedataserver is released:
+                             * https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/9d1505cd3518ff32bd03050fd898abf89d31d389
+                             */
+                            E.webdav_discover_do_free_discovered_sources ((owned) webdav_discovered_sources);
+
+                            if (task_list_uri == null) {
+                                throw new Tasks.TaskModelError.WEBDAV_DISCOVER_FAILED ("Error resolving WebDAV endpoint from backend");
+                            }
+
+                            var uri_dir_path = task_list_uri.get_path ();
+                            if (uri_dir_path.has_suffix ("/")) {
+                                uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
+                            }
+                            uri_dir_path = uri_dir_path.substring (0, uri_dir_path.last_index_of ("/"));
+                            task_list_uri.set_path (uri_dir_path + "/" + GLib.Uuid.string_random ().up ());
+
+                            collection_source_webdav_session.mkcalendar_sync (
+                                task_list_uri.to_string (false),
+                                task_list.display_name,
+                                null,
+                                task_list_extension.color,
+                                E.WebDAVResourceSupports.TASKS,
+                                null
+                            );
+                            registry.refresh_backend_sync (collection_source.uid, null);
+                            webdav_request_promise.set_value (true);
+
+                        } catch (Error e) {
+                            webdav_request_promise.set_exception (e);
+                            webdav_request_promise.set_value (false);
+                        }
+                    }
+                );
+
+                webdav_request_promise.future.wait ();
+                if (webdav_request_promise.future.exception != null) {
+                    throw webdav_request_promise.future.exception;
+                }
+                break;
+
+            case "google":
+                throw new Tasks.TaskModelError.BACKEND_NOT_SUPPORTED ("Task list management for Google is not supported yet.");
+
+            default:
+                task_list.parent = "local-stub";
+                task_list_extension.backend_name = "local";
+
+                registry.commit_source_sync (task_list, null);
+                break;
         }
-
-        destroy_task_list_client (task_list, client);
     }
 
     public void add_task (E.Source list, ECal.Component task) {
