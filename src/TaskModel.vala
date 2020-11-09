@@ -21,8 +21,7 @@
 
 errordomain Tasks.TaskModelError {
     CLIENT_NOT_AVAILABLE,
-    BACKEND_NOT_SUPPORTED,
-    WEBDAV_DISCOVER_FAILED
+    BACKEND_ERROR
 }
 
 
@@ -217,7 +216,7 @@ public class Tasks.TaskModel : Object {
                             E.webdav_discover_do_free_discovered_sources ((owned) webdav_discovered_sources);
 
                             if (task_list_uri == null) {
-                                throw new Tasks.TaskModelError.WEBDAV_DISCOVER_FAILED ("Error resolving WebDAV endpoint from backend");
+                                throw new Tasks.TaskModelError.BACKEND_ERROR ("Unable to resolve the WebDAV endpoint from backend.");
                             }
 
                             var uri_dir_path = task_list_uri.get_path ();
@@ -240,19 +239,20 @@ public class Tasks.TaskModel : Object {
 
                         } catch (Error e) {
                             webdav_request_promise.set_exception (e);
-                            webdav_request_promise.set_value (false);
                         }
                     }
                 );
 
-                webdav_request_promise.future.wait ();
-                if (webdav_request_promise.future.exception != null) {
-                    throw webdav_request_promise.future.exception;
+                var webdav_timeout = new GLib.DateTime.now_local ().add_seconds (10);
+                bool webdav_success;
+
+                if (!webdav_request_promise.future.wait_until (webdav_timeout.to_unix (), out webdav_success) || !webdav_success) {
+                    throw new Tasks.TaskModelError.BACKEND_ERROR ("The WebDAV backend took too long to respond.");
                 }
                 break;
 
             case "google":
-                throw new Tasks.TaskModelError.BACKEND_NOT_SUPPORTED ("Task list management for Google is not supported yet.");
+                throw new Tasks.TaskModelError.BACKEND_ERROR ("Task list management for Google is not supported yet.");
 
             default:
                 task_list.parent = "local-stub";
