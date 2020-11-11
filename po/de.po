@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-25 10:18+0000\n"
-"PO-Revision-Date: 2020-10-27 22:15+0000\n"
+"PO-Revision-Date: 2020-11-13 03:15+0000\n"
 "Last-Translator: Uwe S <saabisto@gmx.de>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/tasks/tasks/de/>\n"
 "Language: de\n"
@@ -20,11 +20,11 @@ msgstr ""
 
 #: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
-msgstr ""
+msgstr "Geplant"
 
 #: src/ListView.vala:98
 msgid "Edit Name and Appearance"
-msgstr "Name und Erscheinungsbild bearbeiten"
+msgstr "Name und Erscheinungsbild ändern"
 
 #: src/ListView.vala:108
 msgid "No Tasks"
@@ -40,15 +40,18 @@ msgstr "Aufgabenliste hinzufügen …"
 
 #: src/MainWindow.vala:224
 msgid "New list"
-msgstr ""
+msgstr "Neue Liste"
 
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
 msgstr "Erstellen einer neuen Aufgabenliste gescheitert"
 
 #: src/MainWindow.vala:245
+#, fuzzy
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
+"Die Aufgabenlistenverwaltung ist möglicherweise nicht erreichbar oder "
+"schreibgeschützt."
 
 #: src/Util.vala:124
 msgid "Today"
@@ -83,13 +86,14 @@ msgid "Waiting for login credentials"
 msgstr "Auf Zugangsdaten warten"
 
 #: src/Widgets/SourceRow.vala:101
+#, fuzzy
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "Im Augenblick nicht mit der (entfernten?) Datenbank verbunden"
 
 #: src/Widgets/SourceRow.vala:105
 #, fuzzy
 msgid "SSL certificate trust was rejected for the connection"
-msgstr "SSL-Zertifikat nicht vertrauenswürdig für die  Verbindung"
+msgstr "SSL-Zertifikat nicht vertrauenswürdig für die Verbindung"
 
 #: src/Widgets/TaskRow.vala:133
 #, fuzzy
@@ -119,6 +123,6 @@ msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:406
-#, c-format, fuzzy
+#, c-format
 msgid "%s at %s"
 msgstr "%s um %s"
