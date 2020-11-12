@@ -72,6 +72,7 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
             selected_datetime = get_next_full_hour (
                 new GLib.DateTime.now_local ()
             );
+            value = selected_datetime;
         }
 
         calendar.select_month (selected_datetime.get_month () - 1, selected_datetime.get_year ());
@@ -93,8 +94,8 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
             calendar.year,
             calendar.month + 1,
             calendar.day,
-            timepicker.time.get_hour (),
-            timepicker.time.get_minute (),
+            value.get_hour (),
+            value.get_minute (),
             0
         );
         timepicker.time = selected_datetime;

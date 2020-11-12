@@ -125,13 +125,19 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
         });
 
         popover.show.connect (() => {
-            value_on_popover_show = value;
+            GLib.Idle.add (() => {
+                value_on_popover_show = value;
+                return GLib.Source.REMOVE;
+            });
         });
 
         popover.closed.connect (() => {
-            if (value != value_on_popover_show) {
-                value_changed (value);
-            }
+            GLib.Idle.add (() => {
+                if (value != value_on_popover_show) {
+                    value_changed (value);
+                }
+                return GLib.Source.REMOVE;
+            });
         });
     }
 }
