@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-25 10:18+0000\n"
-"PO-Revision-Date: 2020-10-24 11:15+0000\n"
-"Last-Translator: imgradeone Yan <imgradeone@outlook.com>\n"
+"PO-Revision-Date: 2020-11-13 03:15+0000\n"
+"Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "tasks/tasks/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -20,43 +20,36 @@ msgstr ""
 "X-Generator: Weblate 3.9.1\n"
 
 #: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
-#, fuzzy
 msgid "Scheduled"
 msgstr "已计划"
 
 #: src/ListView.vala:98
-#, fuzzy
 msgid "Edit Name and Appearance"
-msgstr "编辑名称与个性化"
+msgstr "编辑名称与外观"
 
 #: src/ListView.vala:108
-#, fuzzy
 msgid "No Tasks"
-msgstr "没有待办事项"
+msgstr "无待办事项"
 
 #: src/MainWindow.vala:42
-#, fuzzy
 msgid "Tasks"
 msgstr "待办事项"
 
 #: src/MainWindow.vala:102
-#, fuzzy
 msgid "Add Task List…"
-msgstr "添加待办事项列表…"
+msgstr "添加列表…"
 
 #: src/MainWindow.vala:224
 msgid "New list"
 msgstr "新列表"
 
 #: src/MainWindow.vala:244
-#, fuzzy
 msgid "Creating a new task list failed"
-msgstr "创建新待办事项列表失败"
+msgstr "创建新列表失败"
 
 #: src/MainWindow.vala:245
-#, fuzzy
 msgid "The task list registry may be unavailable or unable to be written to."
-msgstr "该待办事项列表可能不支持或者不能写入。"
+msgstr "该列表的注册表不可用或者不能写入。"
 
 #: src/Util.vala:124
 msgid "Today"
