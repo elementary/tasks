@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 10:18+0000\n"
+"POT-Creation-Date: 2020-11-12 21:54+0000\n"
 "PO-Revision-Date: 2020-11-13 03:15+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
@@ -92,36 +92,35 @@ msgstr "目前与（可能是远程的）数据服务器断开连接"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:133
-#, fuzzy
-msgid "Schedule:"
-msgstr "日程："
-
-#: src/Widgets/TaskRow.vala:154
-msgid "Cancel"
-msgstr "取消"
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Save Changes"
-msgstr "保存修改"
-
-#: src/Widgets/TaskRow.vala:158
-#, fuzzy
-msgid "Add Task"
-msgstr "添加待办事项"
-
-#: src/Widgets/TaskRow.vala:210
-#, fuzzy
-msgid "Delete Task"
-msgstr "删除待办事项"
-
-#: src/Widgets/TaskRow.vala:401
+#: src/Widgets/TaskRow.vala:114
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:406
+#: src/Widgets/TaskRow.vala:120
 #, fuzzy, c-format
 msgid "%s at %s"
 msgstr "%s 在 %s"
+
+#: src/Widgets/TaskRow.vala:169
+msgid "Cancel"
+msgstr "取消"
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Save Changes"
+msgstr "保存修改"
+
+#: src/Widgets/TaskRow.vala:173
+#, fuzzy
+msgid "Add Task"
+msgstr "添加待办事项"
+
+#: src/Widgets/TaskRow.vala:221
+#, fuzzy
+msgid "Delete Task"
+msgstr "删除待办事项"
+
+#, fuzzy
+#~ msgid "Schedule:"
+#~ msgstr "日程："

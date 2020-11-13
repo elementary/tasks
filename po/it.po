@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 10:18+0000\n"
+"POT-Creation-Date: 2020-11-12 21:54+0000\n"
 "PO-Revision-Date: 2020-10-27 22:15+0000\n"
 "Last-Translator: Fabio Zaramella <fabiozaramella@hotmail.it>\n"
-"Language-Team: Italian <https://l10n.elementary.io/projects/tasks/tasks/it/>"
-"\n"
+"Language-Team: Italian <https://l10n.elementary.io/projects/tasks/tasks/it/"
+">\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,33 +94,32 @@ msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 "L'attendibilità del certificato SSL è stata rifiutata per la connessione"
 
-#: src/Widgets/TaskRow.vala:133
-msgid "Schedule:"
-msgstr "Programma:"
-
-#: src/Widgets/TaskRow.vala:154
-msgid "Cancel"
-msgstr "Annulla"
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Save Changes"
-msgstr "Salva modifiche"
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Add Task"
-msgstr "Aggiungi attività"
-
-#: src/Widgets/TaskRow.vala:210
-msgid "Delete Task"
-msgstr "Cancella attività"
-
-#: src/Widgets/TaskRow.vala:401
+#: src/Widgets/TaskRow.vala:114
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:406
+#: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"
 msgstr "%s alle %s"
+
+#: src/Widgets/TaskRow.vala:169
+msgid "Cancel"
+msgstr "Annulla"
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Save Changes"
+msgstr "Salva modifiche"
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Add Task"
+msgstr "Aggiungi attività"
+
+#: src/Widgets/TaskRow.vala:221
+msgid "Delete Task"
+msgstr "Cancella attività"
+
+#~ msgid "Schedule:"
+#~ msgstr "Programma:"
