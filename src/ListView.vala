@@ -211,7 +211,6 @@ public class Tasks.ListView : Gtk.Grid {
 
                     return GLib.Source.REMOVE;
                 });
-                
             });
         });
     }
