@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 10:18+0000\n"
+"POT-Creation-Date: 2020-11-12 21:54+0000\n"
 "PO-Revision-Date: 2020-10-29 23:15+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
-"Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/>"
-"\n"
+"Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/"
+">\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,33 +91,32 @@ msgstr "सध्या (शक्यतो दूरस्थ) डेटा स
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "कनेक्शनसाठी एसएसएल प्रमाणपत्र विश्वास नाकारला गेला"
 
-#: src/Widgets/TaskRow.vala:133
-msgid "Schedule:"
-msgstr "निर्धारित करा:"
-
-#: src/Widgets/TaskRow.vala:154
-msgid "Cancel"
-msgstr "रद्द करा"
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Save Changes"
-msgstr "बदल जतन करा"
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Add Task"
-msgstr "कार्य जोडा"
-
-#: src/Widgets/TaskRow.vala:210
-msgid "Delete Task"
-msgstr "कार्य हटवा"
-
-#: src/Widgets/TaskRow.vala:401
+#: src/Widgets/TaskRow.vala:114
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:406
+#: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"
 msgstr "%s वर %s"
+
+#: src/Widgets/TaskRow.vala:169
+msgid "Cancel"
+msgstr "रद्द करा"
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Save Changes"
+msgstr "बदल जतन करा"
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Add Task"
+msgstr "कार्य जोडा"
+
+#: src/Widgets/TaskRow.vala:221
+msgid "Delete Task"
+msgstr "कार्य हटवा"
+
+#~ msgid "Schedule:"
+#~ msgstr "निर्धारित करा:"

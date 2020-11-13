@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 10:18+0000\n"
+"POT-Creation-Date: 2020-11-12 21:54+0000\n"
 "PO-Revision-Date: 2020-10-26 07:15+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
@@ -91,33 +91,32 @@ msgstr "（リモートの）データストアから切断されています"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "SSL 証明書が拒否されました"
 
-#: src/Widgets/TaskRow.vala:133
-msgid "Schedule:"
-msgstr "繰り返し:"
-
-#: src/Widgets/TaskRow.vala:154
-msgid "Cancel"
-msgstr "キャンセル"
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Save Changes"
-msgstr "変更を保存"
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Add Task"
-msgstr "タスクを追加"
-
-#: src/Widgets/TaskRow.vala:210
-msgid "Delete Task"
-msgstr "タスクを削除"
-
-#: src/Widgets/TaskRow.vala:401
+#: src/Widgets/TaskRow.vala:114
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:406
+#: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"
 msgstr "%s の %s"
+
+#: src/Widgets/TaskRow.vala:169
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Save Changes"
+msgstr "変更を保存"
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Add Task"
+msgstr "タスクを追加"
+
+#: src/Widgets/TaskRow.vala:221
+msgid "Delete Task"
+msgstr "タスクを削除"
+
+#~ msgid "Schedule:"
+#~ msgstr "繰り返し:"
