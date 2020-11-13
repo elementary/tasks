@@ -191,47 +191,27 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         editable_title.changed.connect (() => {
-            Tasks.Application.model.get_registry.begin ((obj, res) => {
-                try {
-                    var registry = Tasks.Application.model.get_registry.end (res);
-                    var collection_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);
+            Application.model.update_task_list_display_name.begin (source, editable_title.text, (obj, res) => {
+                GLib.Idle.add (() => {
+                    try {
+                        Application.model.update_task_list_display_name.end (res);
+                    } catch (Error e) {
+                        editable_title.text = source.display_name;
 
-                    if (collection_source != null && source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
-                        debug (@"WebDAV Rename '$(source.get_uid())'");
-
-                        var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-                        var source_webdav_extension = (E.SourceWebdav) source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
-
-                        var credentials_provider = new E.SourceCredentialsProvider (registry);
-                        E.NamedParameters credentials;
-                        credentials_provider.lookup_sync (collection_source, null, out credentials);
-                        collection_source_webdav_session.credentials = credentials;
-
-                        var changes = new GLib.SList<E.WebDAVPropertyChange> ();
-                        changes.append (new E.WebDAVPropertyChange.set (
-                            E.WEBDAV_NS_DAV,
-                            "displayname",
-                            editable_title.text
-                        ));
-
-                        E.webdav_session_update_properties_sync (
-                            collection_source_webdav_session,
-                            source_webdav_extension.soup_uri.to_string (false),
-                            changes,
-                            null
+                        var error_dialog = new Granite.MessageDialog (
+                            _("Renaming task list failed"),
+                            _("The task list registry may be unavailable or unable to be written to."),
+                            new ThemedIcon ("dialog-error"),
+                            Gtk.ButtonsType.CLOSE
                         );
-
-                        registry.refresh_backend_sync (collection_source.uid, null);
-
-                    } else {
-                        debug (@"Local Rename '$(source.get_uid())'");
-                        source.display_name = editable_title.text;
-                        registry.commit_source_sync (source, null);
+                        error_dialog.show_error_details (e.message);
+                        error_dialog.run ();
+                        error_dialog.destroy ();
                     }
 
-                } catch (Error e) {
-                    critical (e.message);
-                }
+                    return GLib.Source.REMOVE;
+                });
+                
             });
         });
     }

@@ -20,7 +20,8 @@
 
 
 errordomain Tasks.TaskModelError {
-    CLIENT_NOT_AVAILABLE
+    CLIENT_NOT_AVAILABLE,
+    BACKEND_ERROR
 }
 
 
@@ -144,6 +145,48 @@ public class Tasks.TaskModel : Object {
         } catch (Error e) {
             critical (e.message);
             promise.set_exception (e);
+        }
+    }
+
+    public async void update_task_list_display_name (E.Source task_list, string display_name) throws Error {
+        var registry = get_registry_sync ();
+        var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+
+        if (collection_source != null && task_list.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
+            debug (@"WebDAV Rename '$(task_list.get_uid())'");
+
+            var collection_source_webdav_session = new E.WebDAVSession (collection_source);
+            var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+
+            var credentials_provider = new E.SourceCredentialsProvider (registry);
+            E.NamedParameters credentials;
+            credentials_provider.lookup_sync (collection_source, null, out credentials);
+            collection_source_webdav_session.credentials = credentials;
+
+            var changes = new GLib.SList<E.WebDAVPropertyChange> ();
+            changes.append (new E.WebDAVPropertyChange.set (
+                E.WEBDAV_NS_DAV,
+                "displayname",
+                display_name
+            ));
+
+            E.webdav_session_update_properties_sync (
+                collection_source_webdav_session,
+                source_webdav_extension.soup_uri.to_string (false),
+                changes,
+                null
+            );
+
+            registry.refresh_backend_sync (collection_source.uid, null);
+
+        } else if (task_list.parent == "local-stub") {
+            debug (@"Local Rename '$(task_list.get_uid())'");
+
+            task_list.display_name = display_name;
+            registry.commit_source_sync (task_list, null);
+
+        } else {
+            throw new Tasks.TaskModelError.BACKEND_ERROR ("Renaming tasks list is not supported yet for this type of backend.");
         }
     }
 
