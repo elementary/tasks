@@ -180,7 +180,7 @@ public class Tasks.TaskModel : Object {
             registry.refresh_backend_sync (collection_source.uid, null);
 
         } else if (task_list.parent == "local-stub") {
-            debug ("Local Rename '%s'", task_list.get_uid());
+            debug ("Local Rename '%s'", task_list.get_uid ());
 
             task_list.display_name = display_name;
             registry.commit_source_sync (task_list, null);
