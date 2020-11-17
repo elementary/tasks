@@ -153,7 +153,7 @@ public class Tasks.TaskModel : Object {
         var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
 
         if (collection_source != null && task_list.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
-            debug (@"WebDAV Rename '$(task_list.get_uid())'");
+            debug ("WebDAV Rename ", task_list.get_uid ());
 
             var collection_source_webdav_session = new E.WebDAVSession (collection_source);
             var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
