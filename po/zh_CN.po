@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-12 21:54+0000\n"
-"PO-Revision-Date: 2020-11-13 03:15+0000\n"
+"PO-Revision-Date: 2020-11-17 02:15+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "tasks/tasks/zh_Hans/>\n"
@@ -80,17 +80,16 @@ msgid "Connecting…"
 msgstr "连接中…"
 
 #: src/Widgets/SourceRow.vala:97
-#, fuzzy
 msgid "Waiting for login credentials"
-msgstr "等待登录凭证中"
+msgstr "正在等待登录凭证"
 
 #: src/Widgets/SourceRow.vala:101
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr "目前与（可能是远程的）数据服务器断开连接"
+msgstr "当前与（可能是远程的）数据服务器的连接断开"
 
 #: src/Widgets/SourceRow.vala:105
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "连接的 SSL 证书信任被拒"
 
 #: src/Widgets/TaskRow.vala:114
 #, c-format
@@ -99,9 +98,9 @@ msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:120
-#, fuzzy, c-format
+#, c-format
 msgid "%s at %s"
-msgstr "%s 在 %s"
+msgstr "%s %s"
 
 #: src/Widgets/TaskRow.vala:169
 msgid "Cancel"
@@ -112,14 +111,12 @@ msgid "Save Changes"
 msgstr "保存修改"
 
 #: src/Widgets/TaskRow.vala:173
-#, fuzzy
 msgid "Add Task"
-msgstr "添加待办事项"
+msgstr "添加"
 
 #: src/Widgets/TaskRow.vala:221
-#, fuzzy
 msgid "Delete Task"
-msgstr "删除待办事项"
+msgstr "删除"
 
 #, fuzzy
 #~ msgid "Schedule:"
