@@ -153,7 +153,7 @@ public class Tasks.TaskModel : Object {
         var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
 
         if (collection_source != null && task_list.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
-            debug ("WebDAV Rename ", task_list.get_uid ());
+            debug ("WebDAV Rename '%s'", task_list.get_uid ());
 
             var collection_source_webdav_session = new E.WebDAVSession (collection_source);
             var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
@@ -180,7 +180,7 @@ public class Tasks.TaskModel : Object {
             registry.refresh_backend_sync (collection_source.uid, null);
 
         } else if (task_list.parent == "local-stub") {
-            debug (@"Local Rename '$(task_list.get_uid())'");
+            debug ("Local Rename '%s'", task_list.get_uid());
 
             task_list.display_name = display_name;
             registry.commit_source_sync (task_list, null);
