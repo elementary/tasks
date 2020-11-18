@@ -328,7 +328,13 @@ public class Tasks.ListView : Gtk.Grid {
             task_list.add (task_row);
             return true;
         });
-        task_list.show_all ();
+
+        Idle.add (() => {
+            task_list.invalidate_sort ();
+            task_list.show_all ();
+
+            return Source.REMOVE;
+        });
     }
 
     private void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
@@ -348,6 +354,12 @@ public class Tasks.ListView : Gtk.Grid {
             }
             row_index++;
         } while (task_row != null);
+
+        Idle.add (() => {
+            task_list.invalidate_sort ();
+
+            return Source.REMOVE;
+        });
     }
 
     private void on_tasks_removed (SList<ECal.ComponentId?> cids) {
@@ -368,5 +380,11 @@ public class Tasks.ListView : Gtk.Grid {
             }
             row_index++;
         } while (task_row != null);
+
+        Idle.add (() => {
+            task_list.invalidate_sort ();
+
+            return Source.REMOVE;
+        });
     }
 }
