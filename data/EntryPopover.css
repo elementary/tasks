@@ -1,5 +1,5 @@
 /*
-* Copyright 2019 elementary, Inc. (https://elementary.io)
+* Copyright 2020 elementary, Inc. (https://elementary.io)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -18,32 +18,21 @@
 *
 */
 
-row {
-    transition: all 250ms ease-in-out;
+entry-popover grid {
+    border-radius: 3px;
+    background: @SILVER_300;
 }
 
-row:focus:not(.card) {
-    background-color: shade (@base_color, 0.8);
+entry-popover button {
+    color: @SILVER_900;
+    font-size: 0.9em;
+    font-weight: 600;
 }
 
-row.card {
-    background-color: @base_color;
-    margin-bottom: 12px;
-    margin-top: 1px;
-    padding-top: 6px;
+entry-popover.error grid {
+    background: alpha (@error_color, 0.2);
 }
 
-row entry.flat  {
-    background: transparent;
-    border-style: solid;
-    border-color: transparent;
-    padding: 0;
-}
-
-row entry.flat:focus {
-    opacity: 1;
-}
-
-row:not(.card) entry.add-task {
-    border-color: alpha (@text_color, 0.25);
+entry-popover.error button {
+    color: @error_color;
 }

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 10:18+0000\n"
+"POT-Creation-Date: 2020-11-12 21:54+0000\n"
 "PO-Revision-Date: 2020-10-15 00:34+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -92,33 +92,32 @@ msgstr "Atualmente desligado do armazenamento de dados (possivelmente remoto)"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "A confiança do certificado SSL foi rejeitada para a ligação"
 
-#: src/Widgets/TaskRow.vala:133
-msgid "Schedule:"
-msgstr "Agenda:"
-
-#: src/Widgets/TaskRow.vala:154
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Save Changes"
-msgstr "Guardar alterações"
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Add Task"
-msgstr "Adicionar tarefa"
-
-#: src/Widgets/TaskRow.vala:210
-msgid "Delete Task"
-msgstr "Eliminar tarefa"
-
-#: src/Widgets/TaskRow.vala:401
+#: src/Widgets/TaskRow.vala:114
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:406
+#: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"
 msgstr "%s a %s"
+
+#: src/Widgets/TaskRow.vala:169
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Save Changes"
+msgstr "Guardar alterações"
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Add Task"
+msgstr "Adicionar tarefa"
+
+#: src/Widgets/TaskRow.vala:221
+msgid "Delete Task"
+msgstr "Eliminar tarefa"
+
+#~ msgid "Schedule:"
+#~ msgstr "Agenda:"

@@ -31,21 +31,18 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     private bool created;
 
-    private Granite.Widgets.DatePicker due_datepicker;
-    private Granite.Widgets.TimePicker due_timepicker;
+    private Tasks.DateTimePopover due_datetime_popover;
+    private Gtk.Revealer due_datetime_popover_revealer;
 
     private Gtk.Stack state_stack;
     private Gtk.Image icon;
     private Gtk.CheckButton check;
     private Gtk.Entry summary_entry;
     private Gtk.Label description_label;
-    private Gtk.Label due_label;
     private Gtk.Revealer revealer;
     private Gtk.Revealer description_label_revealer;
-    private Gtk.Revealer due_label_revealer;
     private Gtk.Revealer task_detail_revealer;
     private Gtk.Revealer task_form_revealer;
-    private Gtk.Switch due_switch;
     private Gtk.TextBuffer description_textbuffer;
     private unowned Gtk.StyleContext style_context;
 
@@ -91,23 +88,50 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         summary_entry_context.add_class (Gtk.STYLE_CLASS_FLAT);
         summary_entry_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        var due_image = new Gtk.Image.from_icon_name ("office-calendar-symbolic", Gtk.IconSize.BUTTON);
+        due_datetime_popover = new Tasks.DateTimePopover ();
 
-        due_label = new Gtk.Label (null);
-        due_label.margin_start = 3;
+        due_datetime_popover_revealer = new Gtk.Revealer () {
+            margin_end = 6,
+            reveal_child = false,
+            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT
+        };
+        due_datetime_popover_revealer.add (due_datetime_popover);
 
-        var due_grid = new Gtk.Grid ();
-        due_grid.margin_end = 6;
-        due_grid.add (due_image);
-        due_grid.add (due_label);
+        due_datetime_popover.value_format.connect ((value) => {
+            due_datetime_popover.get_style_context ().remove_class ("error");
+            if (value == null) {
+                return null;
+            }
+            var today = new GLib.DateTime.now_local ();
+            if (today.compare (value) > 0 && !completed) {
+                due_datetime_popover.get_style_context ().add_class ("error");
+            }
 
-        unowned Gtk.StyleContext due_grid_context = due_grid.get_style_context ();
-        due_grid_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        due_grid_context.add_class ("due-date");
+            var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
+            var format = h24_settings.get_string ("clock-format");
 
-        due_label_revealer = new Gtk.Revealer ();
-        due_label_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT;
-        due_label_revealer.add (due_grid);
+            if (is_scheduled_view) {
+                return _("%s").printf (
+                    value.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                );
+
+            } else {
+                ///TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+                return _("%s at %s").printf (
+                    Tasks.Util.get_relative_date (value),
+                    value.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                );
+            }
+        });
+
+        due_datetime_popover.value_changed.connect ((value) => {
+            if (!task_form_revealer.reveal_child) {
+                if (value == null) {
+                    due_datetime_popover_revealer.reveal_child = false;
+                }
+                save_task (task);
+            }
+        });
 
         description_label = new Gtk.Label (null);
         description_label.xalign = 0;
@@ -116,27 +140,17 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
         description_label_revealer = new Gtk.Revealer ();
+        description_label_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT;
         description_label_revealer.reveal_child = false;
         description_label_revealer.add (description_label);
 
         var task_grid = new Gtk.Grid ();
-        task_grid.add (due_label_revealer);
+        task_grid.add (due_datetime_popover_revealer);
         task_grid.add (description_label_revealer);
 
         task_detail_revealer = new Gtk.Revealer ();
         task_detail_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
         task_detail_revealer.add (task_grid);
-
-        due_switch = new Gtk.Switch ();
-        due_switch.valign = Gtk.Align.CENTER;
-
-        var due_label = new Gtk.Label (_("Schedule:"));
-
-        due_datepicker = new Granite.Widgets.DatePicker ();
-        due_datepicker.hexpand = true;
-
-        due_timepicker = new Granite.Widgets.TimePicker ();
-        due_timepicker.hexpand = true;
 
         var description_textview = new Gtk.TextView ();
         description_textview.border_width = 12;
@@ -148,6 +162,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         description_textview.set_buffer (description_textbuffer);
 
         var description_frame = new Gtk.Frame (null);
+        description_frame.hexpand = true;
         description_frame.add (description_textview);
 
         var cancel_button = new Gtk.Button ();
@@ -168,13 +183,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         var form_grid = new Gtk.Grid ();
         form_grid.column_spacing = 12;
         form_grid.row_spacing = 12;
-        form_grid.margin_bottom = 6;
-        form_grid.attach (due_label, 0, 0);
-        form_grid.attach (due_switch, 1, 0);
-        form_grid.attach (due_datepicker, 2, 0);
-        form_grid.attach (due_timepicker, 3, 0);
-        form_grid.attach (description_frame, 0, 1, 4);
-        form_grid.attach (button_box, 0, 2, 4);
+        form_grid.margin_top = form_grid.margin_bottom = 6;
+        form_grid.attach (description_frame, 0, 0);
+        form_grid.attach (button_box, 0, 1);
 
         task_form_revealer = new Gtk.Revealer ();
         task_form_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
@@ -262,9 +273,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             update_request ();
         });
         update_request ();
-
-        due_switch.bind_property ("active", due_datepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
-        due_switch.bind_property ("active", due_timepicker, "sensitive", GLib.BindingFlags.SYNC_CREATE);
     }
 
     private void reset_create () {
@@ -280,19 +288,19 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             move_focus (Gtk.DirectionType.TAB_FORWARD);
             reset_create ();
         }
-        summary_entry.text = task.get_icalcomponent ().get_summary () == null ? "" : task.get_icalcomponent ().get_summary ();  // vala-lint=line-length
+        var icalcomponent = task.get_icalcomponent ();
+        summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
+        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time (icalcomponent.get_due ());
         reveal_child_request (false);
     }
 
     private void save_task (ECal.Component task) {
         unowned ICal.Component ical_task = task.get_icalcomponent ();
 
-        if (due_switch.active) {
-            var due_icaltime = Util.date_time_to_ical (due_datepicker.date, due_timepicker.time);
-
+        if (due_datetime_popover.value != null) {
+            var due_icaltime = Util.date_time_to_ical (due_datetime_popover.value, due_datetime_popover.value);
             ical_task.set_due (due_icaltime);
             ical_task.set_dtstart (due_icaltime);
-
         } else {
             var null_icaltime = new ICal.Time.null_time ();
 
@@ -354,9 +362,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             task_detail_revealer.reveal_child = false;
             task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-            due_label_revealer.reveal_child = false;
-            due_switch.active = false;
-            due_datepicker.date = due_timepicker.time = default_due_datetime;
+            due_datetime_popover_revealer.reveal_child = false;
 
             description_label_revealer.reveal_child = false;
             description_textbuffer.text = "";
@@ -367,16 +373,6 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             unowned ICal.Component ical_task = task.get_icalcomponent ();
             completed = ical_task.get_status () == ICal.PropertyStatus.COMPLETED;
             check.active = completed;
-
-            if (ical_task.get_due ().is_null_time ()) {
-                due_switch.active = false;
-                due_datepicker.date = due_timepicker.time = default_due_datetime;
-            } else {
-                var due_datetime = Util.ical_to_date_time (ical_task.get_due ());
-                due_datepicker.date = due_timepicker.time = due_datetime;
-
-                due_switch.active = true;
-            }
 
             if (ical_task.get_description () != null) {
                 description_textbuffer.text = ical_task.get_description ();
@@ -395,34 +391,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
             }
 
-
-            if (ical_task.get_due ().is_null_time () ) {
-                due_label_revealer.reveal_child = false;
+            if (ical_task.get_due ().is_null_time ()) {
+                due_datetime_popover_revealer.reveal_child = false;
             } else {
-                var due_date_time = Util.ical_to_date_time (ical_task.get_due ());
-                var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
-                var format = h24_settings.get_string ("clock-format");
-
-                if (is_scheduled_view) {
-                    due_label.label = _("%s").printf (
-                        due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
-                    );
-                } else {
-                    ///TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-                    due_label.label = _("%s at %s").printf (
-                        Tasks.Util.get_relative_date (due_date_time),
-                        due_date_time.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
-                    );
-                }
-
-                var today = new GLib.DateTime.now_local ();
-                if (today.compare (due_date_time) > 0 && !completed) {
-                    get_style_context ().add_class ("past-due");
-                } else {
-                    get_style_context ().remove_class ("past-due");
-                }
-
-                due_label_revealer.reveal_child = true;
+                var due_datetime = Util.ical_to_date_time (ical_task.get_due ());
+                due_datetime_popover.value = due_datetime;
+                due_datetime_popover_revealer.reveal_child = true;
             }
 
             if (ical_task.get_description () == null) {
@@ -444,11 +418,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     private void task_details_reveal_request (bool value) {
-        if (value && (due_label_revealer.reveal_child || description_label_revealer.reveal_child)) {
-            task_detail_revealer.reveal_child = true;
-        } else {
-            task_detail_revealer.reveal_child = false;
-        }
+        description_label_revealer.reveal_child = value && description_label.label != null && description_label.label.strip ().length > 0;
+        due_datetime_popover_revealer.reveal_child = !value || due_datetime_popover.value != null;
+
+        task_detail_revealer.reveal_child = description_label_revealer.reveal_child ||
+            due_datetime_popover_revealer.reveal_child;
     }
 
     private void remove_request () {
