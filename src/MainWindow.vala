@@ -384,7 +384,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 collection_sources = new Gee.HashSet<E.Source> (Util.esource_hash_func, Util.esource_equal_func);
             }
             E.SourceTaskList collection_source_tasklist_extension = (E.SourceTaskList)collection_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-    
+
             if (collection_sources.contains (collection_source) || !collection_source.enabled || !collection_source_tasklist_extension.selected) {
                 return;
             }
@@ -403,12 +403,12 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 var source_button = new Gtk.ModelButton () {
                     text = get_collection_source_display_name (collection_source)
                 };
-    
+
                 source_button.button_release_event.connect (() => {
                     add_new_list (collection_source);
                     return Gdk.EVENT_PROPAGATE;
                 });
-    
+
                 add_tasklist_buttonbox.add (source_button);
             }
         }

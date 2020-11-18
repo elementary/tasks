@@ -221,7 +221,7 @@ public class Tasks.TaskModel : Object {
 
     private async Soup.URI discover_webdav_server_uri (E.NamedParameters credentials, E.Source collection_source) throws Error {
         var collection_source_extension = (E.SourceCollection) collection_source.get_extension (E.SOURCE_EXTENSION_COLLECTION);
-        
+
         Soup.URI? webdav_server_uri = null;
         GLib.Error? webdav_error = null;
 
@@ -283,7 +283,7 @@ public class Tasks.TaskModel : Object {
 
         yield;
 
-        if(webdav_error != null){
+        if (webdav_error != null) {
             throw webdav_error;
         }
         return webdav_server_uri;
