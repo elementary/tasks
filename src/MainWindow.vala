@@ -184,7 +184,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         Tasks.Application.settings.set_string ("selected-list", "scheduled");
 
                         var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
-                        var query = "AND (NOT is-completed?) (OR (has-start?) (has-alarms?))";
+                        var query = "AND (NOT is-completed?) (has-start?)";
 
                         sources.foreach ((source) => {
                             E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
@@ -357,7 +357,13 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             source_rows[source] = new Tasks.SourceRow (source);
 
             listbox.add (source_rows[source]);
-            listbox.show_all ();
+            Idle.add (() => {
+                listbox.invalidate_sort ();
+                listbox.invalidate_headers ();
+                listbox.show_all ();
+
+                return Source.REMOVE;
+            });
         }
     }
 
@@ -373,6 +379,13 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         } else {
             source_rows[source].update_request ();
             listview.update_request ();
+
+            Idle.add (() => {
+                listbox.invalidate_sort ();
+                listbox.invalidate_headers ();
+
+                return Source.REMOVE;
+            });
         }
     }
 
@@ -380,6 +393,13 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         listbox.unselect_row (source_rows[source]);
         source_rows[source].remove_request ();
         source_rows.unset (source);
+
+        Idle.add (() => {
+            listbox.invalidate_sort ();
+            listbox.invalidate_headers ();
+
+            return Source.REMOVE;
+        });
     }
 
     private void add_source_collection (E.Source source_collection) {

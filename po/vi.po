@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 10:18+0000\n"
+"POT-Creation-Date: 2020-11-12 21:54+0000\n"
 "PO-Revision-Date: 2020-10-07 05:14+0000\n"
 "Last-Translator: Trkien618 <hacngoctrungkien@gmail.com>\n"
 "Language-Team: Vietnamese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -91,33 +91,32 @@ msgstr "Hiện đã ngắt kết nối với kho dữ liệu (có thể đã ng�
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Chứng chỉ SSL tin cậy đã bị từ chối kết nối"
 
-#: src/Widgets/TaskRow.vala:133
-msgid "Schedule:"
-msgstr "Thời khoá biểu:"
-
-#: src/Widgets/TaskRow.vala:154
-msgid "Cancel"
-msgstr "Huỷ bỏ"
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Save Changes"
-msgstr "Lưu các thay đổi"
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Add Task"
-msgstr "Thêm tác vụ"
-
-#: src/Widgets/TaskRow.vala:210
-msgid "Delete Task"
-msgstr "Xoá tác vụ"
-
-#: src/Widgets/TaskRow.vala:401
+#: src/Widgets/TaskRow.vala:114
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:406
+#: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"
 msgstr "%s tại %s"
+
+#: src/Widgets/TaskRow.vala:169
+msgid "Cancel"
+msgstr "Huỷ bỏ"
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Save Changes"
+msgstr "Lưu các thay đổi"
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Add Task"
+msgstr "Thêm tác vụ"
+
+#: src/Widgets/TaskRow.vala:221
+msgid "Delete Task"
+msgstr "Xoá tác vụ"
+
+#~ msgid "Schedule:"
+#~ msgstr "Thời khoá biểu:"

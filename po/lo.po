@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-25 10:18+0000\n"
+"POT-Creation-Date: 2020-11-12 21:54+0000\n"
 "PO-Revision-Date: 2019-08-02 13:42-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -88,33 +88,29 @@ msgstr ""
 msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:133
-msgid "Schedule:"
-msgstr ""
-
-#: src/Widgets/TaskRow.vala:154
-msgid "Cancel"
-msgstr ""
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Save Changes"
-msgstr ""
-
-#: src/Widgets/TaskRow.vala:158
-msgid "Add Task"
-msgstr ""
-
-#: src/Widgets/TaskRow.vala:210
-msgid "Delete Task"
-msgstr ""
-
-#: src/Widgets/TaskRow.vala:401
+#: src/Widgets/TaskRow.vala:114
 #, c-format
 msgid "%s"
 msgstr ""
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:406
+#: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"
+msgstr ""
+
+#: src/Widgets/TaskRow.vala:169
+msgid "Cancel"
+msgstr ""
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Save Changes"
+msgstr ""
+
+#: src/Widgets/TaskRow.vala:173
+msgid "Add Task"
+msgstr ""
+
+#: src/Widgets/TaskRow.vala:221
+msgid "Delete Task"
 msgstr ""
