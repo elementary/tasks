@@ -123,7 +123,9 @@ public class Tasks.EditableLabel : Gtk.EventBox {
         });
 
         entry.activate.connect (() => {
-            editing = false;
+            if (stack.visible_child == entry) {
+                editing = false;
+            }
         });
 
         grab_focus.connect (() => {
@@ -131,7 +133,9 @@ public class Tasks.EditableLabel : Gtk.EventBox {
         });
 
         entry.focus_out_event.connect ((event) => {
-            editing = false;
+            if (stack.visible_child == entry) {
+                editing = false;
+            }
             return Gdk.EVENT_PROPAGATE;
         });
     }

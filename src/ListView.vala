@@ -191,8 +191,27 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         editable_title.changed.connect (() => {
-            source.display_name = editable_title.text;
-            source.write.begin (null);
+            Application.model.update_task_list_display_name.begin (source, editable_title.text, (obj, res) => {
+                GLib.Idle.add (() => {
+                    try {
+                        Application.model.update_task_list_display_name.end (res);
+                    } catch (Error e) {
+                        editable_title.text = source.display_name;
+
+                        var error_dialog = new Granite.MessageDialog (
+                            _("Renaming task list failed"),
+                            _("The task list registry may be unavailable or unable to be written to."),
+                            new ThemedIcon ("dialog-error"),
+                            Gtk.ButtonsType.CLOSE
+                        );
+                        error_dialog.show_error_details (e.message);
+                        error_dialog.run ();
+                        error_dialog.destroy ();
+                    }
+
+                    return GLib.Source.REMOVE;
+                });
+            });
         });
     }
 
