@@ -54,11 +54,11 @@ namespace Tasks.Util {
     }
 
     public bool esource_equal_func (E.Source a, E.Source b) {
-        return a.uid == b.uid;
+        return a.equal (b);
     }
 
     public uint esource_hash_func (E.Source source) {
-        return str_hash (source.uid);
+        return source.hash ();
     }
 
     //--- Date and Time ---//
