@@ -325,7 +325,13 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             source_rows[source] = new Tasks.SourceRow (source);
 
             listbox.add (source_rows[source]);
-            listbox.show_all ();
+            Idle.add (() => {
+                listbox.invalidate_sort ();
+                listbox.invalidate_headers ();
+                listbox.show_all ();
+
+                return Source.REMOVE;
+            });
         }
     }
 
@@ -341,6 +347,13 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         } else {
             source_rows[source].update_request ();
             listview.update_request ();
+
+            Idle.add (() => {
+                listbox.invalidate_sort ();
+                listbox.invalidate_headers ();
+
+                return Source.REMOVE;
+            });
         }
     }
 
@@ -348,6 +361,13 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         listbox.unselect_row (source_rows[source]);
         source_rows[source].remove_request ();
         source_rows.unset (source);
+
+        Idle.add (() => {
+            listbox.invalidate_sort ();
+            listbox.invalidate_headers ();
+
+            return Source.REMOVE;
+        });
     }
 
     public override bool configure_event (Gdk.EventConfigure event) {
