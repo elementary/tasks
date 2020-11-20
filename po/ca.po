@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-18 03:55+0000\n"
-"PO-Revision-Date: 2020-10-15 00:34+0000\n"
+"PO-Revision-Date: 2020-11-21 13:15+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/tasks/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/tasks/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,10 +32,8 @@ msgid "No Tasks"
 msgstr "Sense tasques"
 
 #: src/ListView.vala:202
-#, fuzzy
-#| msgid "Creating a new task list failed"
 msgid "Renaming task list failed"
-msgstr "Ha fallat crear una llista de tasques nova."
+msgstr "Ha fallat canviar el nom de llista de tasques."
 
 #: src/ListView.vala:203 src/MainWindow.vala:245
 msgid "The task list registry may be unavailable or unable to be written to."
