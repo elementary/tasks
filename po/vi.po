@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-12 21:54+0000\n"
+"POT-Creation-Date: 2020-11-18 03:55+0000\n"
 "PO-Revision-Date: 2020-10-07 05:14+0000\n"
 "Last-Translator: Trkien618 <hacngoctrungkien@gmail.com>\n"
 "Language-Team: Vietnamese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -31,6 +31,14 @@ msgstr "Chỉnh sửa tên và giao diện"
 msgid "No Tasks"
 msgstr "Không có tác vụ"
 
+#: src/ListView.vala:202
+msgid "Renaming task list failed"
+msgstr ""
+
+#: src/ListView.vala:203 src/MainWindow.vala:245
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr ""
+
 #: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr "Các tác vụ"
@@ -45,10 +53,6 @@ msgstr ""
 
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
-msgstr ""
-
-#: src/MainWindow.vala:245
-msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
 #: src/Util.vala:124
@@ -96,7 +100,7 @@ msgstr "Chứng chỉ SSL tin cậy đã bị từ chối kết nối"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"

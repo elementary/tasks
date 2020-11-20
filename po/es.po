@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-12 21:54+0000\n"
+"POT-Creation-Date: 2020-11-18 03:55+0000\n"
 "PO-Revision-Date: 2020-10-15 00:34+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
@@ -31,6 +31,18 @@ msgstr "Editar nombre y apariencia"
 msgid "No Tasks"
 msgstr "No hay tareas"
 
+#: src/ListView.vala:202
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Renaming task list failed"
+msgstr "Falló la creación de una lista de tareas nueva"
+
+#: src/ListView.vala:203 src/MainWindow.vala:245
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr ""
+"Es posible que el registro de listas de tareas no esté disponible o no se "
+"pueda modificar."
+
 #: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr "Tareas"
@@ -46,12 +58,6 @@ msgstr "Lista nueva"
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
 msgstr "Falló la creación de una lista de tareas nueva"
-
-#: src/MainWindow.vala:245
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
-"Es posible que el registro de listas de tareas no esté disponible o no se "
-"pueda modificar."
 
 #: src/Util.vala:124
 msgid "Today"
@@ -98,7 +104,7 @@ msgstr "El depósito de certificados SSL se rechazó para efectuar la conexión"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"

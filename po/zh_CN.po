@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-12 21:54+0000\n"
+"POT-Creation-Date: 2020-11-18 03:55+0000\n"
 "PO-Revision-Date: 2020-11-17 02:15+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
@@ -31,6 +31,16 @@ msgstr "编辑名称与外观"
 msgid "No Tasks"
 msgstr "无待办事项"
 
+#: src/ListView.vala:202
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Renaming task list failed"
+msgstr "创建新列表失败"
+
+#: src/ListView.vala:203 src/MainWindow.vala:245
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr "该列表的注册表不可用或者不能写入。"
+
 #: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr "待办事项"
@@ -46,10 +56,6 @@ msgstr "新列表"
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
 msgstr "创建新列表失败"
-
-#: src/MainWindow.vala:245
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr "该列表的注册表不可用或者不能写入。"
 
 #: src/Util.vala:124
 msgid "Today"
@@ -96,7 +102,7 @@ msgstr "连接的 SSL 证书信任被拒"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"

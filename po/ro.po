@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-12 21:54+0000\n"
+"POT-Creation-Date: 2020-11-18 03:55+0000\n"
 "PO-Revision-Date: 2019-08-02 13:42-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -30,6 +30,14 @@ msgstr ""
 msgid "No Tasks"
 msgstr ""
 
+#: src/ListView.vala:202
+msgid "Renaming task list failed"
+msgstr ""
+
+#: src/ListView.vala:203 src/MainWindow.vala:245
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr ""
+
 #: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr ""
@@ -44,10 +52,6 @@ msgstr ""
 
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
-msgstr ""
-
-#: src/MainWindow.vala:245
-msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
 #: src/Util.vala:124
@@ -95,7 +99,7 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"
