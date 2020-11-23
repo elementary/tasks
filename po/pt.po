@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-12 21:54+0000\n"
-"PO-Revision-Date: 2020-10-15 00:34+0000\n"
+"POT-Creation-Date: 2020-11-18 03:55+0000\n"
+"PO-Revision-Date: 2020-11-23 05:15+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/tasks/"
 "pt/>\n"
@@ -31,6 +31,15 @@ msgstr "Editar nome e aparência"
 msgid "No Tasks"
 msgstr "Sem tarefas"
 
+#: src/ListView.vala:202
+msgid "Renaming task list failed"
+msgstr "Falha ao renomear lista de tarefas"
+
+#: src/ListView.vala:203 src/MainWindow.vala:245
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr ""
+"O registo da lista de tarefas pode não estar disponível ou não ser gravado."
+
 #: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr "Tarefas"
@@ -46,11 +55,6 @@ msgstr "Nova lista"
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
 msgstr "Falha ao criar uma nova lista de tarefas"
-
-#: src/MainWindow.vala:245
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
-"O registo da lista de tarefas pode não estar disponível ou não ser gravado."
 
 #: src/Util.vala:124
 msgid "Today"
@@ -97,7 +101,7 @@ msgstr "A confiança do certificado SSL foi rejeitada para a ligação"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"

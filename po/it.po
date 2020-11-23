@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-12 21:54+0000\n"
+"POT-Creation-Date: 2020-11-18 03:55+0000\n"
 "PO-Revision-Date: 2020-10-27 22:15+0000\n"
 "Last-Translator: Fabio Zaramella <fabiozaramella@hotmail.it>\n"
 "Language-Team: Italian <https://l10n.elementary.io/projects/tasks/tasks/it/"
@@ -31,6 +31,18 @@ msgstr "Modifica nome e aspetto"
 msgid "No Tasks"
 msgstr "Nessuna attività"
 
+#: src/ListView.vala:202
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Renaming task list failed"
+msgstr "Creazione di un nuovo elenco di attività non riuscita"
+
+#: src/ListView.vala:203 src/MainWindow.vala:245
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr ""
+"Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
+"può essere scritto."
+
 #: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr "Attività"
@@ -46,12 +58,6 @@ msgstr "Nuovo elenco"
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
-
-#: src/MainWindow.vala:245
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
-"Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
-"può essere scritto."
 
 #: src/Util.vala:124
 msgid "Today"
@@ -99,7 +105,7 @@ msgstr ""
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s at %s"

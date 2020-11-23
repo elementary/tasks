@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-05 09:41-0700\n"
-"PO-Revision-Date: 2020-11-13 03:15+0000\n"
+"PO-Revision-Date: 2020-11-20 04:15+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "tasks/extra/zh_Hans/>\n"
@@ -25,17 +25,16 @@ msgstr "待办事项"
 
 #: data/tasks.appdata.xml.in:45
 msgid "elementary, Inc."
-msgstr ""
+msgstr "elementary, Inc."
 
 #: data/tasks.desktop.in:4
-#, fuzzy
 msgid "Create and track the progress of tasks"
-msgstr "创建并跟踪事项进度"
+msgstr "创建并跟踪待办事项进度"
 
 #: data/tasks.desktop.in:6
 msgid "io.elementary.tasks"
-msgstr ""
+msgstr "io.elementary.tasks"
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "待办;备忘;"
