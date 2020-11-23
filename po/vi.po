@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-18 03:55+0000\n"
-"PO-Revision-Date: 2020-10-07 05:14+0000\n"
+"PO-Revision-Date: 2020-11-23 05:15+0000\n"
 "Last-Translator: Trkien618 <hacngoctrungkien@gmail.com>\n"
 "Language-Team: Vietnamese <https://l10n.elementary.io/projects/tasks/tasks/"
 "vi/>\n"
@@ -33,11 +33,11 @@ msgstr "Không có tác vụ"
 
 #: src/ListView.vala:202
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "Đổi tên danh sách tác vụ thất bại"
 
 #: src/ListView.vala:203 src/MainWindow.vala:245
 msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "Sổ đăng ký danh sách tác vụ có thể không có sẵn hoặc không thể ghi vào."
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
@@ -45,15 +45,15 @@ msgstr "Các tác vụ"
 
 #: src/MainWindow.vala:102
 msgid "Add Task List…"
-msgstr ""
+msgstr "Thêm danh sách tác vụ…"
 
 #: src/MainWindow.vala:224
 msgid "New list"
-msgstr ""
+msgstr "Danh sách mới"
 
 #: src/MainWindow.vala:244
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Tạo danh sách tác vụ mới không thành công"
 
 #: src/Util.vala:124
 msgid "Today"
