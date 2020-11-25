@@ -182,8 +182,8 @@ public class Tasks.TaskModel : Object {
         } else if ("gtasks" == ((E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name && E.GDataOAuth2Authorizer.supported ()) {
             debug ("GTasks Rename '%s'", task_list.get_uid ());
 
-            var oauth2_authorizer = (GData.OAuth2Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
-            var gtasks_service = new GData.TasksService (oauth2_authorizer);
+            var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+            var gtasks_service = new GData.TasksService (authorizer);
             var task_list_resource_extension = (E.SourceResource) task_list.get_extension (E.SOURCE_EXTENSION_RESOURCE);
 
             GData.TasksTasklist? gtasks_tasklist = null;
