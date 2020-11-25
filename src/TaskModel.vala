@@ -58,7 +58,7 @@ public class Tasks.TaskModel : Object {
         }
 
         if (client == null) {
-            throw new Tasks.TaskModelError.CLIENT_NOT_AVAILABLE ("No client available for task list '%s'".printf (task_list.dup_display_name ()));  // vala-lint=line-length
+            throw new Tasks.TaskModelError.CLIENT_NOT_AVAILABLE ("No client available for task list '%s'", task_list.dup_display_name ());  // vala-lint=line-length
         }
 
         return client;
@@ -189,7 +189,7 @@ public class Tasks.TaskModel : Object {
             GData.TasksTasklist? gtasks_tasklist = null;
 
             unowned GLib.List<GData.Entry> gtasks_all_tasklist_entries = gtasks_service.query_all_tasklists (null, null, null).get_entries ();
-            foreach (var gtask_tasklist_entry in gtasks_all_tasklist_entries) {
+            foreach (unowned GData.Entry gtask_tasklist_entry in gtasks_all_tasklist_entries) {
                 if ("gtasks::%s".printf (gtask_tasklist_entry.id) == task_list_resource_extension.identity) {
                     gtasks_tasklist = (GData.TasksTasklist) gtask_tasklist_entry;
                     break;
@@ -197,7 +197,7 @@ public class Tasks.TaskModel : Object {
             }
 
             if (gtasks_tasklist == null) {
-                throw new Tasks.TaskModelError.BACKEND_ERROR ("Task list '%s' is no longer available in Google backend.".printf (task_list_resource_extension.identity));
+                throw new Tasks.TaskModelError.BACKEND_ERROR ("Task list '%s' is no longer available in Google backend.", task_list_resource_extension.identity);
             }
 
             gtasks_tasklist.title = display_name;
