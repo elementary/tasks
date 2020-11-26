@@ -8,8 +8,14 @@ You'll need the following dependencies:
 * gobject-2.0
 * granite >=0.5
 * gtk+-3.0
+* libchamplain-0.12-dev
+* libchamplain-gtk-0.12-dev
+* libclutter-1.0-dev
+* libclutter-gtk-1.0-dev
 * libecal-2.0
 * libedataserver-1.2
+* libgeoclue-2-dev
+* libgeocode-glib-dev
 * libhandy-1-dev >= 0.90.0
 * libical
 * meson
