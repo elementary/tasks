@@ -54,7 +54,7 @@ namespace Tasks.Util {
     }
 
 
-        //--- Date and Time ---//
+    //--- Date and Time ---//
 
 
     /**
@@ -132,6 +132,173 @@ namespace Tasks.Util {
             return date_time.format (Granite.DateTime.get_default_date_format (false, true, false));
         } else {
             return date_time.format (Granite.DateTime.get_default_date_format (false, true, true));
+        }
+    }
+
+
+    //--- X-Property ---//
+
+
+    public unowned ICal.Property? get_icalcomponent_x_property (ICal.Component ical_component, string x_property_name) {
+        return get_ecalpropertybag_x_property (new ECal.ComponentPropertyBag.from_component (ical_component, (property) => {
+            return property.isa () == ICal.PropertyKind.X_PROPERTY;
+        }), x_property_name);
+    }
+
+    public unowned ICal.Property? get_ecalpropertybag_x_property (ECal.ComponentPropertyBag ecal_propertybag, string x_property_name) {
+        unowned ICal.Property? property = null;
+
+        var ecal_propertybag_count = ecal_propertybag.get_count ();
+        for (int i = 0; i < ecal_propertybag_count; i++) {
+            property = ecal_propertybag.get (i);
+            if (property.isa () == ICal.PropertyKind.X_PROPERTY && property.get_x_name () == x_property_name) {
+                break;
+            }
+        }
+        return property;
+    }
+
+
+    //--- Location ---//
+
+
+    public Tasks.Location? get_ecalcomponent_location (ECal.Component ecalcomponent) {
+        var icalcomponent = ecalcomponent.get_icalcomponent ();
+
+        string? description = icalcomponent.get_location ();
+        int accuracy = Geocode.LocationAccuracy.UNKNOWN;
+        Tasks.LocationProximity proximity = Tasks.LocationProximity.ARRIVE;
+        double longitude, latitude;
+        longitude = latitude = 0;
+
+        var geo_property = icalcomponent.get_first_property (ICal.PropertyKind.GEO_PROPERTY);
+        if (geo_property != null) {
+            var geo = geo_property.get_geo ();
+            longitude = geo.get_lon ();
+            latitude = geo.get_lat ();
+        }
+
+        unowned ICal.Property? apple_proximity_property = null;
+        unowned ICal.Property? apple_location_property = null;
+
+        if (ecalcomponent.has_alarms ()) {
+            var all_alarms = ecalcomponent.get_all_alarms ();
+            foreach (var alarm in all_alarms) {
+                unowned ECal.ComponentPropertyBag alarm_property_bag = alarm.get_property_bag ();
+
+                if (apple_proximity_property == null) {
+                    apple_proximity_property = get_ecalpropertybag_x_property (alarm_property_bag, "X-APPLE-PROXIMITY");
+                }
+
+                if (apple_location_property == null) {
+                    apple_proximity_property = get_ecalpropertybag_x_property (alarm_property_bag, "X-APPLE-STRUCTURED-LOCATION");
+                }
+            }
+        }
+
+        if (apple_proximity_property != null) {
+            var apple_proximity_property_value = apple_proximity_property.get_value_as_string ();
+            switch (apple_proximity_property_value) {
+                case "DEPART":
+                    proximity = Tasks.LocationProximity.DEPART;
+                    break;
+                case "ARRIVE":
+                    proximity = Tasks.LocationProximity.ARRIVE;
+                    break;
+            }
+        }
+
+        if (apple_location_property != null) {
+            var apple_location_property_value = apple_location_property.get_value_as_string ();
+            if (apple_location_property_value != null && apple_location_property_value.contains (":")) {
+                // Split value with format "geo:$latitude,$longitude"
+                var geo = apple_location_property_value.split (":");
+                if (geo.length > 1 && geo[1].contains (",")) {
+                    var coordinates = geo[1].split (",");
+
+                    if (coordinates.length > 1) {
+                        latitude = double.parse (coordinates[0]);
+                        longitude = double.parse (coordinates[1]);
+                    }
+                }
+            }
+        }
+
+        if (longitude != 0 && latitude != 0 || description != null && description.strip ().length > 0) {
+            var location = Tasks.Location () {
+                description = description,
+                longitude = longitude,
+                latitude = latitude,
+                accuracy = accuracy,
+                proximity = proximity
+            };
+
+            if (location.description == null || location.description.strip ().length == 0) {
+                try {
+                    var place = new Geocode.Reverse.for_location (new Geocode.Location (
+                        location.latitude,
+                        location.longitude,
+                        location.accuracy
+                        )).resolve ();
+                    location.description = place.location.description;
+                } catch (Error e) {
+                    warning (e.message);
+                }
+            }
+
+            return location;
+        }
+        return null;
+    }
+
+    public void set_ecalcomponent_location (ECal.Component ecalcomponent, Tasks.Location? location) {
+        var icalcomponent = ecalcomponent.get_icalcomponent ();
+        icalcomponent.set_location ("");
+
+        var geo_property_count = icalcomponent.count_properties (ICal.PropertyKind.GEO_PROPERTY);
+        for (int i = 0; i < geo_property_count; i++) {
+            var remove_prop = icalcomponent.get_first_property (ICal.PropertyKind.GEO_PROPERTY);
+            icalcomponent.remove_property (remove_prop);
+        }
+
+        if (ecalcomponent.has_alarms ()) {
+            var all_alarms = ecalcomponent.get_all_alarms ();
+            foreach (var alarm in all_alarms) {
+                if (null != get_ecalpropertybag_x_property (alarm.get_property_bag (), "X-APPLE-STRUCTURED-LOCATION")) {
+                    ecalcomponent.remove_alarm (alarm.get_uid ());
+                }
+            }
+        }
+
+        if (location != null) {
+            if (location.description != null) {
+                icalcomponent.set_location (location.description);
+            }
+
+            var geo_property = new ICal.Property (ICal.PropertyKind.GEO_PROPERTY);
+            var geo = new ICal.Geo (location.latitude, location.longitude);
+            geo_property.set_geo (geo);
+            icalcomponent.add_property (geo_property);
+
+            var location_alarm = new ECal.ComponentAlarm ();
+            location_alarm.set_action (ECal.ComponentAlarmAction.DISPLAY);
+
+            var location_alarm_trigger = new ECal.ComponentAlarmTrigger.relative (ECal.ComponentAlarmTriggerKind.RELATIVE_START, new ICal.Duration.null_duration ());
+            location_alarm.set_trigger (location_alarm_trigger);
+
+            unowned ECal.ComponentPropertyBag location_alarm_property_bag = location_alarm.get_property_bag ();
+
+            var location_alarm_x_apple_proximity_property = new ICal.Property (ICal.PropertyKind.X_PROPERTY);
+            location_alarm_x_apple_proximity_property.set_x_name ("X-APPLE-PROXIMITY");
+            location_alarm_x_apple_proximity_property.set_value (new ICal.Value.x (location.accuracy < 0 ? "DEPART" : "ARRIVE"));
+            location_alarm_property_bag.take (location_alarm_x_apple_proximity_property);
+
+            var location_alarm_x_apple_structured_location_property = new ICal.Property (ICal.PropertyKind.X_PROPERTY);
+            location_alarm_x_apple_structured_location_property.set_x_name (@"X-APPLE-STRUCTURED-LOCATION;X-APPLE-RADIUS=100;X-TITLE=$(location.description);VALUE=URI");
+            location_alarm_x_apple_structured_location_property.set_value (new ICal.Value.x (@"geo:$(location.latitude),$(location.longitude)"));
+            location_alarm_property_bag.take (location_alarm_x_apple_structured_location_property);
+
+            ecalcomponent.add_alarm (location_alarm);
         }
     }
 }

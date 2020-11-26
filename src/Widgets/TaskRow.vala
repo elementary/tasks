@@ -34,6 +34,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private Tasks.DateTimePopover due_datetime_popover;
     private Gtk.Revealer due_datetime_popover_revealer;
 
+    private Tasks.LocationPopover location_popover;
+    private Gtk.Revealer location_popover_revealer;
+
     private Gtk.Stack state_stack;
     private Gtk.Image icon;
     private Gtk.CheckButton check;
@@ -133,6 +136,31 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             }
         });
 
+        location_popover = new Tasks.LocationPopover ();
+
+        location_popover_revealer = new Gtk.Revealer () {
+            margin_end = 6,
+            reveal_child = false,
+            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT
+        };
+        location_popover_revealer.add (location_popover);
+
+        location_popover.value_format.connect ((value) => {
+            if (value == null) {
+                return null;
+            }
+            return value.description;
+        });
+
+        location_popover.value_changed.connect ((value) => {
+            if (!task_form_revealer.reveal_child) {
+                if (value == null) {
+                    location_popover_revealer.reveal_child = false;
+                }
+                save_task (task);
+            }
+        });
+
         description_label = new Gtk.Label (null);
         description_label.xalign = 0;
         description_label.lines = 1;
@@ -146,6 +174,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         var task_grid = new Gtk.Grid ();
         task_grid.add (due_datetime_popover_revealer);
+        task_grid.add (location_popover_revealer);
         task_grid.add (description_label_revealer);
 
         task_detail_revealer = new Gtk.Revealer ();
@@ -291,6 +320,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         var icalcomponent = task.get_icalcomponent ();
         summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
         due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time (icalcomponent.get_due ());
+        location_popover.value = Util.get_ecalcomponent_location (task);
         reveal_child_request (false);
     }
 
@@ -307,6 +337,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             ical_task.set_due (null_icaltime);
             ical_task.set_dtstart (null_icaltime);
         }
+
+        Util.set_ecalcomponent_location (task, location_popover.value);
 
         // Clear the old description
         int count = ical_task.count_properties (ICal.PropertyKind.DESCRIPTION_PROPERTY);
@@ -363,6 +395,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
             due_datetime_popover_revealer.reveal_child = false;
+            location_popover_revealer.reveal_child = false;
 
             description_label_revealer.reveal_child = false;
             description_textbuffer.text = "";
@@ -399,6 +432,14 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 due_datetime_popover_revealer.reveal_child = true;
             }
 
+            var location = Util.get_ecalcomponent_location (task);
+            if (location == null) {
+                location_popover_revealer.reveal_child = false;
+            } else {
+                location_popover.value = location;
+                location_popover_revealer.reveal_child = true;
+            }
+
             if (ical_task.get_description () == null) {
                 description_label_revealer.reveal_child = false;
 
@@ -420,9 +461,11 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     private void task_details_reveal_request (bool value) {
         description_label_revealer.reveal_child = value && description_label.label != null && description_label.label.strip ().length > 0;
         due_datetime_popover_revealer.reveal_child = !value || due_datetime_popover.value != null;
+        location_popover_revealer.reveal_child = !value || location_popover.value != null;
 
         task_detail_revealer.reveal_child = description_label_revealer.reveal_child ||
-            due_datetime_popover_revealer.reveal_child;
+            due_datetime_popover_revealer.reveal_child ||
+            location_popover_revealer.reveal_child;
     }
 
     private void remove_request () {
