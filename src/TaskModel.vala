@@ -58,7 +58,7 @@ public class Tasks.TaskModel : Object {
         }
 
         if (client == null) {
-            throw new Tasks.TaskModelError.CLIENT_NOT_AVAILABLE ("No client available for task list '%s'".printf (task_list.dup_display_name ()));  // vala-lint=line-length
+            throw new Tasks.TaskModelError.CLIENT_NOT_AVAILABLE ("No client available for task list '%s'", task_list.dup_display_name ());  // vala-lint=line-length
         }
 
         return client;
@@ -317,6 +317,32 @@ public class Tasks.TaskModel : Object {
                 changes,
                 null
             );
+
+            registry.refresh_backend_sync (collection_source.uid, null);
+
+        } else if ("gtasks" == ((E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name && E.GDataOAuth2Authorizer.supported ()) {
+            debug ("GTasks Rename '%s'", task_list.get_uid ());
+
+            var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+            var gtasks_service = new GData.TasksService (authorizer);
+            var task_list_resource_extension = (E.SourceResource) task_list.get_extension (E.SOURCE_EXTENSION_RESOURCE);
+
+            GData.TasksTasklist? gtasks_tasklist = null;
+
+            unowned GLib.List<GData.Entry> gtasks_all_tasklist_entries = gtasks_service.query_all_tasklists (null, null, null).get_entries ();
+            foreach (unowned GData.Entry gtask_tasklist_entry in gtasks_all_tasklist_entries) {
+                if ("gtasks::%s".printf (gtask_tasklist_entry.id) == task_list_resource_extension.identity) {
+                    gtasks_tasklist = (GData.TasksTasklist) gtask_tasklist_entry;
+                    break;
+                }
+            }
+
+            if (gtasks_tasklist == null) {
+                throw new Tasks.TaskModelError.BACKEND_ERROR ("Task list '%s' is no longer available in Google backend.", task_list_resource_extension.identity);
+            }
+
+            gtasks_tasklist.title = display_name;
+            gtasks_service.update_tasklist (gtasks_tasklist, null);
 
             registry.refresh_backend_sync (collection_source.uid, null);
 
