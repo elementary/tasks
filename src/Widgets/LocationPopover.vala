@@ -192,7 +192,7 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
 
                 if (value != null) {
                     value.latitude = place.location.latitude;
-                    value.longitude = place.location.latitude;
+                    value.longitude = place.location.longitude;
                 }
 
                 Idle.add (() => {

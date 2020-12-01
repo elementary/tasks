@@ -178,8 +178,8 @@ namespace Tasks.Util {
             latitude = geo.get_lat ();
         }
 
-        unowned ICal.Property? apple_proximity_property = null;
-        unowned ICal.Property? apple_location_property = null;
+        ICal.Property? apple_proximity_property = null;
+        ICal.Property? apple_location_property = null;
 
         if (ecalcomponent.has_alarms ()) {
             var all_alarms = ecalcomponent.get_all_alarms ();
@@ -191,7 +191,7 @@ namespace Tasks.Util {
                 }
 
                 if (apple_location_property == null) {
-                    apple_proximity_property = get_ecalpropertybag_x_property (alarm_property_bag, "X-APPLE-STRUCTURED-LOCATION");
+                    apple_location_property = get_ecalpropertybag_x_property (alarm_property_bag, "X-APPLE-STRUCTURED-LOCATION");
                 }
             }
         }
@@ -209,6 +209,20 @@ namespace Tasks.Util {
         }
 
         if (apple_location_property != null) {
+            /*
+             * X-APPLE-STRUCTURED-LOCATION;
+             *   VALUE=URI;
+             *   X-ADDRESS=Via Monte Ceneri 1\\n6802 Rivera\\nSwitzerland;
+             *   X-APPLE-RADIUS=100;
+             *   X-APPLE-REFERENCEFRAME=1;
+             *   X-TITLE=Via Monte Ceneri 1 6802 Rivera Switzerland:
+             *   geo:46.141813,8.917549
+             */
+            var apple_location_parameter_x_title = apple_location_property.get_parameter_as_string ("X-TITLE");
+            if (apple_location_parameter_x_title != null && apple_location_parameter_x_title.strip () != "") {
+                description = apple_location_parameter_x_title;
+            }
+
             var apple_location_property_value = apple_location_property.get_value_as_string ();
             if (apple_location_property_value != null && apple_location_property_value.contains (":")) {
                 // Split value with format "geo:$latitude,$longitude"
@@ -290,12 +304,27 @@ namespace Tasks.Util {
 
             var location_alarm_x_apple_proximity_property = new ICal.Property (ICal.PropertyKind.X_PROPERTY);
             location_alarm_x_apple_proximity_property.set_x_name ("X-APPLE-PROXIMITY");
-            location_alarm_x_apple_proximity_property.set_value (new ICal.Value.x (location.accuracy < 0 ? "DEPART" : "ARRIVE"));
+            location_alarm_x_apple_proximity_property.set_value (new ICal.Value.x (location.proximity == LocationProximity.DEPART ? "DEPART" : "ARRIVE"));
             location_alarm_property_bag.take (location_alarm_x_apple_proximity_property);
 
+
+            /*
+             * X-APPLE-STRUCTURED-LOCATION;
+             *   VALUE=URI;
+             *   X-ADDRESS=Via Monte Ceneri 1\\n6802 Rivera\\nSwitzerland;
+             *   X-APPLE-RADIUS=100;
+             *   X-APPLE-REFERENCEFRAME=1;
+             *   X-TITLE=Via Monte Ceneri 1 6802 Rivera Switzerland:
+             *   geo:46.141813,8.917549
+             */
             var location_alarm_x_apple_structured_location_property = new ICal.Property (ICal.PropertyKind.X_PROPERTY);
-            location_alarm_x_apple_structured_location_property.set_x_name (@"X-APPLE-STRUCTURED-LOCATION;X-APPLE-RADIUS=100;X-TITLE=$(location.description);VALUE=URI");
-            location_alarm_x_apple_structured_location_property.set_value (new ICal.Value.x (@"geo:$(location.latitude),$(location.longitude)"));
+            location_alarm_x_apple_structured_location_property.set_x_name ("X-APPLE-STRUCTURED-LOCATION");
+            location_alarm_x_apple_structured_location_property.add_parameter (new ICal.Parameter.from_string ("VALUE=URI"));
+            location_alarm_x_apple_structured_location_property.add_parameter (new ICal.Parameter.from_string ("X-ADDRESS=%s".printf (location.description)));
+            location_alarm_x_apple_structured_location_property.add_parameter (new ICal.Parameter.from_string ("X-APPLE-RADIUS=100"));
+            location_alarm_x_apple_structured_location_property.add_parameter (new ICal.Parameter.from_string ("X-APPLE-REFERENCEFRAME=1"));
+            location_alarm_x_apple_structured_location_property.add_parameter (new ICal.Parameter.from_string ("X-TITLE=%s".printf (location.description)));
+            location_alarm_x_apple_structured_location_property.set_value (new ICal.Value.x (@"geo:%f,%f".printf (location.latitude, location.longitude)));
             location_alarm_property_bag.take (location_alarm_x_apple_structured_location_property);
 
             ecalcomponent.add_alarm (location_alarm);
