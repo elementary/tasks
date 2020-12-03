@@ -33,7 +33,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     private Gee.HashMap<E.Source, Tasks.SourceRow>? source_rows;
     private Gee.Collection<E.Source>? collection_sources;
     private Tasks.ListView listview;
-    private Gtk.Popover add_tasklist_popover;
     private Gtk.ButtonBox add_tasklist_buttonbox;
 
     public MainWindow (Gtk.Application application) {
@@ -95,8 +94,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         scrolledwindow.hscrollbar_policy = Gtk.PolicyType.NEVER;
         scrolledwindow.add (listbox);
 
-        add_tasklist_popover = new Gtk.Popover (null);
         add_tasklist_buttonbox = new Gtk.ButtonBox (Gtk.Orientation.VERTICAL);
+
+        var add_tasklist_popover = new Gtk.Popover (null);
         add_tasklist_popover.add (add_tasklist_buttonbox);
 
         var add_tasklist_button = new Gtk.MenuButton () {
@@ -404,9 +404,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     text = get_collection_source_display_name (collection_source)
                 };
 
-                source_button.button_release_event.connect (() => {
+                source_button.clicked.connect (() => {
                     add_new_list (collection_source);
-                    return Gdk.EVENT_PROPAGATE;
                 });
 
                 add_tasklist_buttonbox.add (source_button);
