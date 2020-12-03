@@ -163,7 +163,7 @@ public class Tasks.TaskModel : Object {
     public async void add_task_list (E.Source task_list, E.Source collection_or_sibling) throws Error {
         var registry = get_registry_sync ();
         var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-        var backend_name = get_backend_name (collection_or_sibling, registry);
+        var backend_name = get_collection_backend_name (collection_or_sibling, registry);
 
         switch (backend_name.down ()) {
             case "webdav":
@@ -202,7 +202,23 @@ public class Tasks.TaskModel : Object {
         }
     }
 
-    private string get_backend_name (E.Source source, E.SourceRegistry registry) {
+    public bool is_add_task_list_supported (E.Source source) {
+        try {
+            var registry = get_registry_sync ();
+            var backend_name = get_collection_backend_name (source, registry);
+
+            switch (backend_name.down ()) {
+                case "webdav": return true;
+                case "local": return true;
+            }
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+        return false;
+    }
+
+    private string get_collection_backend_name (E.Source source, E.SourceRegistry registry) {
         string? backend_name = null;
 
         var collection_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);

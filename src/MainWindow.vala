@@ -196,7 +196,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
                 if (list.selected == true && source.enabled == true) {
-                    add_collection_of_source (source, registry);
                     add_source (source);
 
                     if (last_selected_list == "" && default_task_list == source) {
@@ -206,6 +205,13 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         listbox.select_row (source_rows[source]);
                     }
                 }
+            });
+
+            add_collection_source (registry.ref_builtin_task_list ());
+
+            var task_list_collections = registry.list_sources (E.SOURCE_EXTENSION_COLLECTION);
+            task_list_collections.foreach ((collection_source) => {
+                add_collection_source (collection_source);
             });
 
             if (last_selected_list == "scheduled") {
@@ -278,7 +284,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             }
         }
 
-        var header_label = new Granite.HeaderLabel (get_collection_source_display_name (row.source));
+        var header_label = new Granite.HeaderLabel (Util.get_esource_collection_display_name (row.source));
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
         header_label.margin_start = 6;
 
@@ -299,6 +305,30 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         } else {
             return row.source.parent.collate (before.source.parent);
         }
+    }
+
+    private void add_collection_source (E.Source collection_source) {
+        if (collection_sources == null) {
+            collection_sources = new Gee.HashSet<E.Source> (Util.esource_hash_func, Util.esource_equal_func);
+        }
+        E.SourceTaskList collection_source_tasklist_extension = (E.SourceTaskList)collection_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+        if (collection_sources.contains (collection_source) || !collection_source.enabled || !collection_source_tasklist_extension.selected) {
+            return;
+        }
+        collection_sources.add (collection_source);
+
+        var source_button = new Gtk.ModelButton () {
+            text = Util.get_esource_collection_display_name (collection_source),
+            sensitive = Application.model.is_add_task_list_supported (collection_source)
+        };
+
+        source_button.clicked.connect (() => {
+            add_new_list (collection_source);
+        });
+
+        add_tasklist_buttonbox.add (source_button);
+        add_tasklist_buttonbox.show_all ();
     }
 
     private void add_source (E.Source source) {
@@ -354,82 +384,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             return Source.REMOVE;
         });
-    }
-
-    private void add_collection_of_source (E.Source source, E.SourceRegistry registry) {
-        var collection_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);
-
-        if (collection_source == null && source.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
-            var task_list_extension = (E.SourceTaskList) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-
-            if ("local" == task_list_extension.backend_name) {
-                try {
-                    collection_source = new E.Source.with_uid ("local", null);
-                    var collection_source_tasklist_extension = (E.SourceTaskList) collection_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-                    collection_source_tasklist_extension.backend_name = "local";
-                    collection_source.parent = "local-stub";
-                    collection_source.display_name = get_collection_source_display_name (source);
-                } catch (Error e) {
-                    warning (e.message);
-                }
-            }
-        }
-
-        if (collection_source == null) {
-            return;
-        }
-
-        lock (collection_sources) {
-            if (collection_sources == null) {
-                collection_sources = new Gee.HashSet<E.Source> (Util.esource_hash_func, Util.esource_equal_func);
-            }
-            E.SourceTaskList collection_source_tasklist_extension = (E.SourceTaskList)collection_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-
-            if (collection_sources.contains (collection_source) || !collection_source.enabled || !collection_source_tasklist_extension.selected) {
-                return;
-            }
-            collection_sources.add (collection_source);
-        }
-        update_add_tasklist_buttonbox ();
-    }
-
-    private void update_add_tasklist_buttonbox () {
-        foreach (var child in add_tasklist_buttonbox.get_children ()) {
-            add_tasklist_buttonbox.remove (child);
-        }
-
-        lock (collection_sources) {
-            foreach (var collection_source in collection_sources) {
-                var source_button = new Gtk.ModelButton () {
-                    text = get_collection_source_display_name (collection_source)
-                };
-
-                source_button.clicked.connect (() => {
-                    add_new_list (collection_source);
-                });
-
-                add_tasklist_buttonbox.add (source_button);
-            }
-        }
-        add_tasklist_buttonbox.show_all ();
-    }
-
-    private string get_collection_source_display_name (E.Source source) {
-        var display_name = "";
-        try {
-            var registry = Tasks.Application.model.get_registry_sync ();
-            var collection_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);
-
-            if (collection_source != null) {
-                display_name = collection_source.display_name;
-            } else if (source.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
-                display_name = ((E.SourceTaskList) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name;
-            }
-
-        } catch (Error e) {
-            warning (e.message);
-        }
-        return display_name;
     }
 
     public override bool configure_event (Gdk.EventConfigure event) {
