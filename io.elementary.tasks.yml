@@ -105,6 +105,16 @@ modules:
         url: https://gitlab.gnome.org/GNOME/libchamplain.git
         tag: 'LIBCHAMPLAIN_0_12_20'
 
+  - name: geocode-glib
+    buildsystem: meson
+    config-opts:
+      - '-Denable-installed-tests=false'
+      - '-Denable-gtk-doc=false'
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/geocode-glib.git
+        tag: '3.26.2'
+
   - name: tasks
     buildsystem: meson
     sources:
