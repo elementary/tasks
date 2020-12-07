@@ -95,7 +95,6 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
     }
 
     private void on_value_changed () {
-        debug ("on_value_changed");
         if (value == null) {
             return;
         }

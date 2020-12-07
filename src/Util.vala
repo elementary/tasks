@@ -305,7 +305,7 @@ namespace Tasks.Util {
             var location_alarm_x_apple_proximity_property = new ICal.Property (ICal.PropertyKind.X_PROPERTY);
             location_alarm_x_apple_proximity_property.set_x_name ("X-APPLE-PROXIMITY");
             location_alarm_x_apple_proximity_property.set_value (new ICal.Value.x (location.proximity == LocationProximity.DEPART ? "DEPART" : "ARRIVE"));
-            location_alarm_property_bag.take (location_alarm_x_apple_proximity_property);
+            location_alarm_property_bag.add (location_alarm_x_apple_proximity_property);
 
 
             /*
@@ -325,7 +325,7 @@ namespace Tasks.Util {
             location_alarm_x_apple_structured_location_property.add_parameter (new ICal.Parameter.from_string ("X-APPLE-REFERENCEFRAME=1"));
             location_alarm_x_apple_structured_location_property.add_parameter (new ICal.Parameter.from_string ("X-TITLE=%s".printf (location.description)));
             location_alarm_x_apple_structured_location_property.set_value (new ICal.Value.x (@"geo:%f,%f".printf (location.latitude, location.longitude)));
-            location_alarm_property_bag.take (location_alarm_x_apple_structured_location_property);
+            location_alarm_property_bag.add (location_alarm_x_apple_structured_location_property);
 
             ecalcomponent.add_alarm (location_alarm);
         }
