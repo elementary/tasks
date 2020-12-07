@@ -249,9 +249,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             reveal_child_request (true);
         });
 
-        description_textview.button_press_event.connect (() => {
-            description_textview.grab_focus ();
-            return Gdk.EVENT_STOP;
+        description_textview.button_press_event.connect ((sender, event) => {
+            if (event.type == Gdk.EventType.BUTTON_PRESS && !description_textview.has_focus) {
+                description_textview.grab_focus ();
+                return Gdk.EVENT_STOP;
+            }
+            return Gdk.EVENT_PROPAGATE;
         });
 
         cancel_button.clicked.connect (() => {
