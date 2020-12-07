@@ -101,6 +101,7 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
 
         var value_has_description = value.description != null && value.description.strip ().length > 0;
         if (value_has_description && search_entry.text != value.description) {
+            debug ("search_entry.text = '%s'", value.description);
             search_entry.text = value.description;
         }
 

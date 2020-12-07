@@ -163,9 +163,9 @@ namespace Tasks.Util {
 
 
     public Tasks.Location? get_ecalcomponent_location (ECal.Component ecalcomponent) {
-        var icalcomponent = ecalcomponent.get_icalcomponent ();
+        unowned ICal.Component? icalcomponent = ecalcomponent.get_icalcomponent ();
 
-        string? description = icalcomponent.get_location ();
+        unowned string? description = icalcomponent.get_location ();
         int accuracy = Geocode.LocationAccuracy.UNKNOWN;
         Tasks.LocationProximity proximity = Tasks.LocationProximity.ARRIVE;
         double longitude, latitude;
@@ -183,7 +183,7 @@ namespace Tasks.Util {
 
         if (ecalcomponent.has_alarms ()) {
             var all_alarms = ecalcomponent.get_all_alarms ();
-            foreach (var alarm in all_alarms) {
+            foreach (unowned ECal.ComponentAlarm alarm in all_alarms) {
                 unowned ECal.ComponentPropertyBag alarm_property_bag = alarm.get_property_bag ();
 
                 if (apple_proximity_property == null) {
@@ -197,14 +197,10 @@ namespace Tasks.Util {
         }
 
         if (apple_proximity_property != null) {
-            var apple_proximity_property_value = apple_proximity_property.get_value_as_string ();
-            switch (apple_proximity_property_value) {
-                case "DEPART":
-                    proximity = Tasks.LocationProximity.DEPART;
-                    break;
-                case "ARRIVE":
-                    proximity = Tasks.LocationProximity.ARRIVE;
-                    break;
+            var apple_proximity_property_value = apple_proximity_property.get_value ().get_string ();
+
+            if (apple_proximity_property_value != null) {
+                proximity = Tasks.LocationProximity.from_string (apple_proximity_property_value);
             }
         }
 
@@ -223,7 +219,7 @@ namespace Tasks.Util {
                 description = apple_location_parameter_x_title;
             }
 
-            var apple_location_property_value = apple_location_property.get_value_as_string ();
+            var apple_location_property_value = apple_location_property.get_value ().get_string ();
             if (apple_location_property_value != null && apple_location_property_value.contains (":")) {
                 // Split value with format "geo:$latitude,$longitude"
                 var geo = apple_location_property_value.split (":");
@@ -266,7 +262,7 @@ namespace Tasks.Util {
     }
 
     public void set_ecalcomponent_location (ECal.Component ecalcomponent, Tasks.Location? location) {
-        var icalcomponent = ecalcomponent.get_icalcomponent ();
+        unowned ICal.Component? icalcomponent = ecalcomponent.get_icalcomponent ();
         icalcomponent.set_location ("");
 
         var geo_property_count = icalcomponent.count_properties (ICal.PropertyKind.GEO_PROPERTY);
@@ -277,7 +273,7 @@ namespace Tasks.Util {
 
         if (ecalcomponent.has_alarms ()) {
             var all_alarms = ecalcomponent.get_all_alarms ();
-            foreach (var alarm in all_alarms) {
+            foreach (unowned ECal.ComponentAlarm alarm in all_alarms) {
                 if (null != get_ecalpropertybag_x_property (alarm.get_property_bag (), "X-APPLE-STRUCTURED-LOCATION")) {
                     ecalcomponent.remove_alarm (alarm.get_uid ());
                 }
@@ -304,7 +300,7 @@ namespace Tasks.Util {
 
             var location_alarm_x_apple_proximity_property = new ICal.Property (ICal.PropertyKind.X_PROPERTY);
             location_alarm_x_apple_proximity_property.set_x_name ("X-APPLE-PROXIMITY");
-            location_alarm_x_apple_proximity_property.set_value (new ICal.Value.x (location.proximity == LocationProximity.DEPART ? "DEPART" : "ARRIVE"));
+            location_alarm_x_apple_proximity_property.set_value (new ICal.Value.x (location.proximity.to_string ()));
             location_alarm_property_bag.add (location_alarm_x_apple_proximity_property);
 
 

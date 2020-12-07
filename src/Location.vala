@@ -29,5 +29,23 @@ public struct Tasks.Location {
 
 public enum Tasks.LocationProximity {
     ARRIVE,
-    DEPART
+    DEPART;
+
+    public static Tasks.LocationProximity from_string (string val) {
+        if (val == "DEPART") {
+            return Tasks.LocationProximity.DEPART;
+        } else {
+            return Tasks.LocationProximity.ARRIVE;
+        }
+    }
+
+    public unowned string to_string () {
+        switch (this) {
+            case Tasks.LocationProximity.DEPART:
+                return "DEPART";
+            case Tasks.LocationProximity.ARRIVE:
+            default:
+                return "ARRIVE";
+        }
+    }
 }
