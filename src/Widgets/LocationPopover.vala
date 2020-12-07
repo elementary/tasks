@@ -75,9 +75,7 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
         grid.show_all ();
 
         popover.add (grid);
-
         popover.show.connect (on_popover_show);
-        popover.closed.connect (on_popover_closed);
 
         notify["value"].connect (on_value_changed);
 
@@ -94,19 +92,13 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
             // Use geoclue to find approximate location
             discover_current_location.begin ();
         }
-
-        search_entry.sensitive = location_mode.sensitive = true;
-    }
-
-    private void on_popover_closed () {
-        search_entry.sensitive = location_mode.sensitive = false;
     }
 
     private void on_value_changed () {
+        debug ("on_value_changed");
         if (value == null) {
             return;
         }
-        search_entry.sensitive = location_mode.sensitive = false;
 
         var value_has_description = value.description != null && value.description.strip ().length > 0;
         if (value_has_description && search_entry.text != value.description) {
@@ -115,14 +107,17 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
 
         switch (value.proximity) {
             case Tasks.LocationProximity.ARRIVE:
-                location_mode.selected = 0;
+                if (location_mode.selected != 0) {
+                    location_mode.selected = 0;
+                }
                 break;
 
             default:
-                location_mode.selected = 1;
+                if (location_mode.selected != 1) {
+                    location_mode.selected = 1;
+                }
                 break;
         }
-        search_entry.sensitive = location_mode.sensitive = true;
 
         bool need_relocation = true;
         if (value.latitude >= Champlain.MIN_LATITUDE && value.longitude >= Champlain.MIN_LONGITUDE &&
@@ -145,9 +140,6 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
     }
 
     private void on_search_entry_activate () {
-        if (!search_entry.sensitive) {
-            return;
-        }
         value = Tasks.Location () {
             description = search_entry.text,
             longitude = 0,
@@ -158,13 +150,12 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
     }
 
     private void on_location_mode_changed () {
-        if (!location_mode.sensitive) {
-            return;
-        }
-
         var proximity = (value == null ? Tasks.LocationProximity.DEPART : value.proximity);
-        if (location_mode.selected == 0) {
-            proximity = Tasks.LocationProximity.ARRIVE;
+
+        switch(location_mode.selected) {
+            case 0: proximity = Tasks.LocationProximity.ARRIVE; break;
+            case 1: proximity = Tasks.LocationProximity.DEPART; break;
+            default: break;
         }
 
         value = Tasks.Location () {
