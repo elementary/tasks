@@ -151,7 +151,7 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
     private void on_location_mode_changed () {
         var proximity = (value == null ? Tasks.LocationProximity.DEPART : value.proximity);
 
-        switch(location_mode.selected) {
+        switch (location_mode.selected) {
             case 0: proximity = Tasks.LocationProximity.ARRIVE; break;
             case 1: proximity = Tasks.LocationProximity.DEPART; break;
             default: break;
