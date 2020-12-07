@@ -165,7 +165,7 @@ namespace Tasks.Util {
     public Tasks.Location? get_ecalcomponent_location (ECal.Component ecalcomponent) {
         unowned ICal.Component? icalcomponent = ecalcomponent.get_icalcomponent ();
 
-        unowned string? description = icalcomponent.get_location ();
+        var description = icalcomponent.get_location ();
         int accuracy = Geocode.LocationAccuracy.UNKNOWN;
         Tasks.LocationProximity proximity = Tasks.LocationProximity.ARRIVE;
         double longitude, latitude;
