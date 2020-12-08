@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.tasks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-06 19:19+0000\n"
+"POT-Creation-Date: 2020-12-08 18:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Renaming task list failed"
 msgstr ""
 
-#: src/ListView.vala:203 src/MainWindow.vala:245
+#: src/ListView.vala:203 src/MainWindow.vala:251
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
@@ -41,27 +41,23 @@ msgstr ""
 msgid "Tasks"
 msgstr ""
 
-#: src/MainWindow.vala:102
-msgid "Add Task List…"
-msgstr ""
-
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:227
 msgid "New list"
 msgstr ""
 
-#: src/MainWindow.vala:244
+#: src/MainWindow.vala:250
 msgid "Creating a new task list failed"
 msgstr ""
 
-#: src/Util.vala:124
+#: src/Util.vala:151
 msgid "Today"
 msgstr ""
 
-#: src/Util.vala:126
+#: src/Util.vala:153
 msgid "Yesterday"
 msgstr ""
 
-#: src/Util.vala:128
+#: src/Util.vala:155
 msgid "Tomorrow"
 msgstr ""
 
