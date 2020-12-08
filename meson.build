@@ -28,7 +28,7 @@ tasks_deps = [
     dependency('libgdata')
 ]
 
-if libecal_dep.version().version_compare('<=3.38.1')
+if libecal_dep.version().version_compare('<=3.39')
     tasks_deps += meson.get_compiler('vala').find_library('libecal-2.0-fixes', dirs: meson.current_source_dir() / 'vapi')
 endif
 

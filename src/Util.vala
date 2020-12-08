@@ -53,9 +53,36 @@ namespace Tasks.Util {
         return a.get_id ().equal (b.get_id ());
     }
 
+    public bool esource_equal_func (E.Source a, E.Source b) {
+        return a.equal (b);
+    }
 
-        //--- Date and Time ---//
+    public uint esource_hash_func (E.Source source) {
+        return source.hash ();
+    }
 
+    //-- E.Source --//
+
+    public string get_esource_collection_display_name (E.Source source) {
+        var display_name = "";
+
+        try {
+            var registry = Tasks.Application.model.get_registry_sync ();
+            var collection_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);
+
+            if (collection_source != null) {
+                display_name = collection_source.display_name;
+            } else if (source.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
+                display_name = ((E.SourceTaskList) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name;
+            }
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+        return display_name;
+    }
+
+    //--- Date and Time ---//
 
     /**
      * Converts two datetimes to one TimeType. The first contains the date,
