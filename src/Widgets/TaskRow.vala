@@ -69,6 +69,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
+        can_focus = false;
         created = calcomponent_created (task);
 
         icon = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.MENU);
