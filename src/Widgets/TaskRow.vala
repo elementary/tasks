@@ -202,7 +202,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         var grid = new Gtk.Grid () {
             margin = 6,
-            margin_start = grid.margin_end = 12,
+            margin_start = margin_end = 12,
             column_spacing = 6,
             row_spacing = 3
         };

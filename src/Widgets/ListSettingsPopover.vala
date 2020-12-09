@@ -128,7 +128,7 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
 
         var grid = new Gtk.Grid () {
             orientation = Gtk.Orientation.VERTICAL,
-            margin_top = grid.margin_bottom = 3
+            margin_top = margin_bottom = 3
         };
         grid.add (color_grid);
         grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
