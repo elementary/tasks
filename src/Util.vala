@@ -241,7 +241,7 @@ namespace Tasks.Util {
              *   X-TITLE=Marco's Home:
              *   geo:46.141813,8.917549
              */
-            
+
             var apple_location_parameter_x_address = apple_location_property.get_parameter_as_string ("X-ADDRESS");
             if (apple_location_parameter_x_address != null && apple_location_parameter_x_address.strip () != "") {
                 description = ICal.Value.decode_ical_string (apple_location_parameter_x_address);
@@ -343,7 +343,7 @@ namespace Tasks.Util {
             location_alarm_x_apple_structured_location_property.set_parameter_from_string ("X-APPLE-RADIUS", "100");
             location_alarm_x_apple_structured_location_property.set_parameter_from_string ("X-APPLE-REFERENCEFRAME", "1");
             location_alarm_x_apple_structured_location_property.set_parameter_from_string ("X-TITLE", location.description);
-            location_alarm_x_apple_structured_location_property.set_value (new ICal.Value.geo (new ICal.Geo(location.latitude, location.longitude)));
+            location_alarm_x_apple_structured_location_property.set_value (new ICal.Value.geo (new ICal.Geo (location.latitude, location.longitude)));
             location_alarm_property_bag.add (location_alarm_x_apple_structured_location_property);
 
             ecalcomponent.add_alarm (location_alarm);
