@@ -159,7 +159,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
                 case Tasks.LocationProximity.DEPART:
                     return _("Leaving: %s").printf (value.description);
-                    
+
                 default:
                     return value.description;
             }
