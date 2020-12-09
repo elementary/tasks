@@ -63,33 +63,39 @@ public class Tasks.EditableLabel : Gtk.EventBox {
         events |= Gdk.EventMask.LEAVE_NOTIFY_MASK;
         events |= Gdk.EventMask.BUTTON_PRESS_MASK;
 
-        title = new Gtk.Label ("");
-        title.ellipsize = Pango.EllipsizeMode.END;
-        title.xalign = 0;
+        title = new Gtk.Label ("") {
+            ellipsize = Pango.EllipsizeMode.END,
+            xalign = 0
+        };
 
-        var edit_button = new Gtk.Button ();
-        edit_button.image = new Gtk.Image.from_icon_name ("edit-symbolic", Gtk.IconSize.MENU);
-        edit_button.tooltip_text = _("Edit…");
+        var edit_button = new Gtk.Button () {
+            image = new Gtk.Image.from_icon_name ("edit-symbolic", Gtk.IconSize.MENU),
+            tooltip_text = _("Edit…")
+        };
         edit_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
-        var button_revealer = new Gtk.Revealer ();
-        button_revealer.valign = Gtk.Align.CENTER;
-        button_revealer.transition_type = Gtk.RevealerTransitionType.CROSSFADE;
+        var button_revealer = new Gtk.Revealer () {
+            valign = Gtk.Align.CENTER,
+            transition_type = Gtk.RevealerTransitionType.CROSSFADE
+        };
         button_revealer.add (edit_button);
 
-        grid = new Gtk.Grid ();
-        grid.valign = Gtk.Align.CENTER;
-        grid.column_spacing = 12;
+        grid = new Gtk.Grid () {
+            valign = Gtk.Align.CENTER,
+            column_spacing = 12
+        };
         grid.add (title);
         grid.add (button_revealer);
 
-        entry = new Gtk.Entry ();
+        entry = new Gtk.Entry () {
+            hexpand = true
+        };
         entry.get_style_context ().add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-        entry.hexpand = true;
 
-        stack = new Gtk.Stack ();
-        stack.hhomogeneous = false;
-        stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
+        stack = new Gtk.Stack () {
+            hhomogeneous = false,
+            transition_type = Gtk.StackTransitionType.CROSSFADE
+        };
         stack.add (grid);
         stack.add (entry);
 

@@ -69,40 +69,45 @@ public class Tasks.ListView : Gtk.Grid {
     construct {
         views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
 
-        scheduled_title = new Gtk.Label (_("Scheduled"));
-        scheduled_title.ellipsize = Pango.EllipsizeMode.END;
-        scheduled_title.margin_start = 24;
-        scheduled_title.xalign = 0;
+        scheduled_title = new Gtk.Label (_("Scheduled")) {
+            ellipsize = Pango.EllipsizeMode.END,
+            margin_start = 24,
+            xalign = 0
+        };
 
         unowned Gtk.StyleContext scheduled_title_context = scheduled_title.get_style_context ();
         scheduled_title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
         scheduled_title_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
-        editable_title = new EditableLabel ();
-        editable_title.margin_start = 24;
+        editable_title = new EditableLabel () {
+            margin_start = 24
+        };
 
         unowned Gtk.StyleContext title_context = editable_title.get_style_context ();
         title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
         title_context.add_class (Granite.STYLE_CLASS_ACCENT);
 
-        title_stack = new Gtk.Stack ();
-        title_stack.homogeneous = false;
+        title_stack = new Gtk.Stack () {
+            homogeneous = false
+        };
         title_stack.add (scheduled_title);
         title_stack.add (editable_title);
 
         var list_settings_popover = new Tasks.ListSettingsPopover ();
 
-        var settings_button = new Gtk.MenuButton ();
-        settings_button.margin_end = 24;
-        settings_button.valign = Gtk.Align.CENTER;
-        settings_button.tooltip_text = _("Edit Name and Appearance");
-        settings_button.popover = list_settings_popover;
-        settings_button.image = new Gtk.Image.from_icon_name ("view-more-symbolic", Gtk.IconSize.MENU);
+        var settings_button = new Gtk.MenuButton () {
+            margin_end = 24,
+            valign = Gtk.Align.CENTER,
+            tooltip_text = _("Edit Name and Appearance"),
+            popover = list_settings_popover,
+            image = new Gtk.Image.from_icon_name ("view-more-symbolic", Gtk.IconSize.MENU)
+        };
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
         settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-        settings_button_revealer = new Gtk.Revealer ();
-        settings_button_revealer.transition_type = Gtk.RevealerTransitionType.CROSSFADE;
+        settings_button_revealer = new Gtk.Revealer () {
+            transition_type = Gtk.RevealerTransitionType.CROSSFADE
+        };
         settings_button_revealer.add (settings_button);
 
         var placeholder = new Gtk.Label (_("No Tasks"));
@@ -112,21 +117,24 @@ public class Tasks.ListView : Gtk.Grid {
         placeholder_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
 
-        add_task_list = new Gtk.ListBox ();
-        add_task_list.selection_mode = Gtk.SelectionMode.NONE;
-        add_task_list.margin_top = 24;
+        add_task_list = new Gtk.ListBox () {
+            selection_mode = Gtk.SelectionMode.NONE,
+            margin_top = 24
+        };
         add_task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
-        task_list = new Gtk.ListBox ();
-        task_list.selection_mode = Gtk.SelectionMode.NONE;
+        task_list = new Gtk.ListBox () {
+            selection_mode = Gtk.SelectionMode.NONE
+        };
         task_list.set_filter_func (filter_function);
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
         task_list.set_header_func (header_function);
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
-        var scrolled_window = new Gtk.ScrolledWindow (null, null);
-        scrolled_window.expand = true;
+        var scrolled_window = new Gtk.ScrolledWindow (null, null) {
+            expand = true
+        };
         scrolled_window.add (task_list);
 
         column_spacing = 12;

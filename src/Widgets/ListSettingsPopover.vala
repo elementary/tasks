@@ -86,9 +86,10 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
 
         var color_button_none = new Gtk.RadioButton.from_widget (color_button_blue);
 
-        var color_grid = new Gtk.Grid ();
-        color_grid.column_spacing = 6;
-        color_grid.margin = 12;
+        var color_grid = new Gtk.Grid () {
+            column_spacing = 6,
+            margin = 12
+        };
         color_grid.add (color_button_blue);
         color_grid.add (color_button_mint);
         color_grid.add (color_button_green);
@@ -100,30 +101,35 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         color_grid.add (color_button_brown);
         color_grid.add (color_button_slate);
 
-        var show_completed_label = new Gtk.Label (_("Show Completed"));
-        show_completed_label.hexpand = true;
-        show_completed_label.xalign = 0;
+        var show_completed_label = new Gtk.Label (_("Show Completed")) {
+            hexpand = true,
+            xalign = 0
+        };
 
         var show_completed_switch = new Gtk.Switch ();
 
-        var show_completed_grid = new Gtk.Grid ();
-        show_completed_grid.column_spacing = 6;
+        var show_completed_grid = new Gtk.Grid () {
+            column_spacing = 6
+        };
         show_completed_grid.add (show_completed_label);
         show_completed_grid.add (show_completed_switch);
 
-        var show_completed_button = new Gtk.ModelButton ();
-        show_completed_button.margin_top = 3;
+        var show_completed_button = new Gtk.ModelButton () {
+            margin_top = 3
+        };
         show_completed_button.get_child ().destroy ();
         show_completed_button.add (show_completed_grid);
 
-        var delete_button = new Gtk.ModelButton ();
-        delete_button.action_name = MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST;
-        delete_button.text = _("Delete List");
+        var delete_button = new Gtk.ModelButton () {
+            action_name = MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST,
+            text = _("Delete List")
+        };
         delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
-        var grid = new Gtk.Grid ();
-        grid.orientation = Gtk.Orientation.VERTICAL;
-        grid.margin_top = grid.margin_bottom = 3;
+        var grid = new Gtk.Grid () {
+            orientation = Gtk.Orientation.VERTICAL,
+            margin_top = margin_bottom = 3
+        };
         grid.add (color_grid);
         grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
         grid.add (show_completed_button);

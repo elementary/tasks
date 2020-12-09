@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.tasks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-08 21:19+0000\n"
+"POT-Creation-Date: 2020-12-09 16:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,19 +21,19 @@ msgstr ""
 msgid "Scheduled"
 msgstr ""
 
-#: src/ListView.vala:98
+#: src/ListView.vala:101
 msgid "Edit Name and Appearance"
 msgstr ""
 
-#: src/ListView.vala:108
+#: src/ListView.vala:113
 msgid "No Tasks"
 msgstr ""
 
-#: src/ListView.vala:202
+#: src/ListView.vala:210
 msgid "Renaming task list failed"
 msgstr ""
 
-#: src/ListView.vala:203 src/MainWindow.vala:251
+#: src/ListView.vala:211 src/MainWindow.vala:254
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
@@ -41,11 +41,11 @@ msgstr ""
 msgid "Tasks"
 msgstr ""
 
-#: src/MainWindow.vala:227
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr ""
 
-#: src/MainWindow.vala:250
+#: src/MainWindow.vala:253
 msgid "Creating a new task list failed"
 msgstr ""
 
@@ -61,57 +61,57 @@ msgstr ""
 msgid "Tomorrow"
 msgstr ""
 
-#: src/Widgets/EditableLabel.vala:72
+#: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
 msgstr ""
 
-#: src/Widgets/ListSettingsPopover.vala:103
+#: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
 msgstr ""
 
-#: src/Widgets/ListSettingsPopover.vala:121
+#: src/Widgets/ListSettingsPopover.vala:125
 msgid "Delete List"
 msgstr ""
 
-#: src/Widgets/SourceRow.vala:60
+#: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
 msgstr ""
 
-#: src/Widgets/SourceRow.vala:97
+#: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
 msgstr ""
 
-#: src/Widgets/SourceRow.vala:101
+#: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr ""
 
-#: src/Widgets/SourceRow.vala:105
+#: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:115
+#: src/Widgets/TaskRow.vala:117
 #, c-format
 msgid "%s"
 msgstr ""
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:121
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:123
 #, c-format
 msgid "%s at %s"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:170
+#: src/Widgets/TaskRow.vala:176
 msgid "Cancel"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:174
+#: src/Widgets/TaskRow.vala:178
 msgid "Save Changes"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:174
+#: src/Widgets/TaskRow.vala:178
 msgid "Add Task"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:222
+#: src/Widgets/TaskRow.vala:231
 msgid "Delete Task"
 msgstr ""

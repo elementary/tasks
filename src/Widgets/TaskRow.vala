@@ -78,11 +78,13 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         icon = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.MENU);
         icon.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-        check = new Gtk.CheckButton ();
-        check.valign = Gtk.Align.CENTER;
+        check = new Gtk.CheckButton () {
+            valign = Gtk.Align.CENTER
+        };
 
-        state_stack = new Gtk.Stack ();
-        state_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
+        state_stack = new Gtk.Stack () {
+            transition_type = Gtk.StackTransitionType.CROSSFADE
+        };
         state_stack.add (icon);
         state_stack.add (check);
 
@@ -162,15 +164,17 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             }
         });
 
-        description_label = new Gtk.Label (null);
-        description_label.xalign = 0;
-        description_label.lines = 1;
-        description_label.ellipsize = Pango.EllipsizeMode.END;
+        description_label = new Gtk.Label (null) {
+            xalign = 0,
+            lines = 1,
+            ellipsize = Pango.EllipsizeMode.END
+        };
         description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
-        description_label_revealer = new Gtk.Revealer ();
-        description_label_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT;
-        description_label_revealer.reveal_child = false;
+        description_label_revealer = new Gtk.Revealer () {
+            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
+            reveal_child = false
+        };
         description_label_revealer.add (description_label);
 
         var task_grid = new Gtk.Grid ();
@@ -178,61 +182,67 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         task_grid.add (location_popover_revealer);
         task_grid.add (description_label_revealer);
 
-        task_detail_revealer = new Gtk.Revealer ();
-        task_detail_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
+        task_detail_revealer = new Gtk.Revealer () {
+            transition_type = Gtk.RevealerTransitionType.SLIDE_UP
+        };
         task_detail_revealer.add (task_grid);
 
-        var description_textview = new Gtk.TextView ();
-        description_textview.border_width = 12;
-        description_textview.height_request = 140;
+        var description_textview = new Gtk.TextView () {
+            border_width = 12,
+            height_request = 140,
+            accepts_tab = false
+        };
         description_textview.set_wrap_mode (Gtk.WrapMode.WORD_CHAR);
-        description_textview.accepts_tab = false;
 
         description_textbuffer = new Gtk.TextBuffer (null);
         description_textview.set_buffer (description_textbuffer);
 
-        var description_frame = new Gtk.Frame (null);
-        description_frame.hexpand = true;
+        var description_frame = new Gtk.Frame (null) {
+            hexpand = true
+        };
         description_frame.add (description_textview);
 
-        var cancel_button = new Gtk.Button ();
-        cancel_button.label = _("Cancel");
+        var cancel_button = new Gtk.Button.with_label (_("Cancel"));
 
-        var save_button = new Gtk.Button ();
+        var save_button = new Gtk.Button.with_label (created ? _("Save Changes") : _("Add Task"));
         save_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
-        save_button.label = created ? _("Save Changes") : _("Add Task");
 
-        var button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL);
-        button_box.baseline_position = Gtk.BaselinePosition.CENTER;
-        button_box.margin_top = 12;
-        button_box.spacing = 6;
+        var button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL) {
+            baseline_position = Gtk.BaselinePosition.CENTER,
+            margin_top = 12,
+            spacing = 6
+        };
         button_box.set_layout (Gtk.ButtonBoxStyle.END);
         button_box.add (cancel_button);
         button_box.add (save_button);
 
-        var form_grid = new Gtk.Grid ();
-        form_grid.column_spacing = 12;
-        form_grid.row_spacing = 12;
-        form_grid.margin_top = form_grid.margin_bottom = 6;
+        var form_grid = new Gtk.Grid () {
+            column_spacing = 12,
+            row_spacing = 12,
+            margin_top = margin_bottom = 6
+        };
         form_grid.attach (description_frame, 0, 0);
         form_grid.attach (button_box, 0, 1);
 
-        task_form_revealer = new Gtk.Revealer ();
-        task_form_revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
+        task_form_revealer = new Gtk.Revealer () {
+            transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN
+        };
         task_form_revealer.add (form_grid);
 
-        var grid = new Gtk.Grid ();
-        grid.margin = 6;
-        grid.margin_start = grid.margin_end = 12;
-        grid.column_spacing = 6;
-        grid.row_spacing = 3;
+        var grid = new Gtk.Grid () {
+            margin = 6,
+            margin_start = margin_end = 12,
+            column_spacing = 6,
+            row_spacing = 3
+        };
         grid.attach (state_stack, 0, 0);
         grid.attach (summary_entry, 1, 0);
         grid.attach (task_detail_revealer, 1, 1);
         grid.attach (task_form_revealer, 1, 2);
 
-        revealer = new Gtk.Revealer ();
-        revealer.reveal_child = true;
+        revealer = new Gtk.Revealer () {
+            reveal_child = true
+        };
         revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
         revealer.add (grid);
 
@@ -247,8 +257,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             check.show ();
             state_stack.visible_child = check;
 
-            var delete_button = new Gtk.Button ();
-            delete_button.label = _("Delete Task");
+            var delete_button = new Gtk.Button.with_label (_("Delete Task"));
             delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
             button_box.add (delete_button);

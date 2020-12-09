@@ -65,10 +65,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         var header_provider = new Gtk.CssProvider ();
         header_provider.load_from_resource ("io/elementary/tasks/HeaderBar.css");
 
-        var sidebar_header = new Hdy.HeaderBar ();
-        sidebar_header.decoration_layout = "close:";
-        sidebar_header.has_subtitle = false;
-        sidebar_header.show_close_button = true;
+        var sidebar_header = new Hdy.HeaderBar () {
+            decoration_layout = "close:",
+            has_subtitle = false,
+            show_close_button = true
+        };
 
         unowned Gtk.StyleContext sidebar_header_context = sidebar_header.get_style_context ();
         sidebar_header_context.add_class ("sidebar-header");
@@ -76,10 +77,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         sidebar_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
         sidebar_header_context.add_provider (header_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        var listview_header = new Hdy.HeaderBar ();
-        listview_header.has_subtitle = false;
-        listview_header.decoration_layout = ":maximize";
-        listview_header.show_close_button = true;
+        var listview_header = new Hdy.HeaderBar () {
+            has_subtitle = false,
+            decoration_layout = ":maximize",
+            show_close_button = true
+        };
 
         unowned Gtk.StyleContext listview_header_context = listview_header.get_style_context ();
         listview_header_context.add_class ("default-decoration");
@@ -91,9 +93,10 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         var scheduled_row = new Tasks.ScheduledRow ();
         listbox.add (scheduled_row);
 
-        var scrolledwindow = new Gtk.ScrolledWindow (null, null);
-        scrolledwindow.expand = true;
-        scrolledwindow.hscrollbar_policy = Gtk.PolicyType.NEVER;
+        var scrolledwindow = new Gtk.ScrolledWindow (null, null) {
+            expand = true,
+            hscrollbar_policy = Gtk.PolicyType.NEVER
+        };
         scrolledwindow.add (listbox);
 
         add_tasklist_buttonbox = new Gtk.ButtonBox (Gtk.Orientation.VERTICAL);
@@ -286,9 +289,10 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             }
         }
 
-        var header_label = new Granite.HeaderLabel (Util.get_esource_collection_display_name (row.source));
-        header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
-        header_label.margin_start = 6;
+        var header_label = new Granite.HeaderLabel (Util.get_esource_collection_display_name (row.source)) {
+            ellipsize = Pango.EllipsizeMode.MIDDLE,
+            margin_start = 6
+        };
 
         row.set_header (header_label);
     }
