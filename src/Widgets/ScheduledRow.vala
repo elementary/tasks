@@ -23,11 +23,12 @@ public class Tasks.ScheduledRow : Gtk.ListBoxRow {
     construct {
         var icon = new Gtk.Image.from_icon_name ("appointment", Gtk.IconSize.MENU);
 
-        var display_name_label = new Gtk.Label (_("Scheduled"));
-        display_name_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
-        display_name_label.halign = Gtk.Align.START;
-        display_name_label.hexpand = true;
-        display_name_label.margin_end = 9;
+        var display_name_label = new Gtk.Label (_("Scheduled")) {
+            ellipsize = Pango.EllipsizeMode.MIDDLE,
+            halign = Gtk.Align.START,
+            hexpand = true,
+            margin_end = 9
+        };
 
         var grid = new Gtk.Grid () {
             column_spacing = 6,
