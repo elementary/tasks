@@ -224,7 +224,7 @@ namespace Tasks.Util {
         }
 
         if (apple_proximity_property != null) {
-            var apple_proximity_property_value = apple_proximity_property.get_value ().get_string ();
+            var apple_proximity_property_value = apple_proximity_property.get_value_as_string ();
 
             if (apple_proximity_property_value != null) {
                 proximity = Tasks.LocationProximity.from_string (apple_proximity_property_value);
@@ -246,7 +246,7 @@ namespace Tasks.Util {
                 description = apple_location_parameter_x_title;
             }
 
-            var apple_location_property_value = apple_location_property.get_value ().get_string ();
+            var apple_location_property_value = apple_location_property.get_value_as_string ();
             if (apple_location_property_value != null && apple_location_property_value.contains (":")) {
                 // Split value with format "geo:$latitude,$longitude"
                 var geo = apple_location_property_value.split (":");
