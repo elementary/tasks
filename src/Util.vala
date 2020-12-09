@@ -242,7 +242,6 @@ namespace Tasks.Util {
              *   X-TITLE=Marco's Home:
              *   geo:46.141813,8.917549
              */
-            
             string? apple_location_property_parameter_x_address = null;
             string? apple_location_property_parameter_x_title = null;
 
@@ -264,7 +263,7 @@ namespace Tasks.Util {
                     case "X-TITLE":
                         apple_location_property_parameter_x_title = apple_location_property_x_parameter.get_xvalue ();
                         break;
-                    
+
                     default:
                         break;
                 }
