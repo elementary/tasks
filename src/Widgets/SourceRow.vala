@@ -39,25 +39,29 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
     }
 
     construct {
-        source_color = new Gtk.Grid ();
-        source_color.valign = Gtk.Align.CENTER;
+        source_color = new Gtk.Grid () {
+            valign = Gtk.Align.CENTER
+        };
 
         unowned Gtk.StyleContext source_color_context = source_color.get_style_context ();
         source_color_context.add_class ("source-color");
         source_color_context.add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        display_name_label = new Gtk.Label (source.display_name);
-        display_name_label.halign = Gtk.Align.START;
-        display_name_label.hexpand = true;
-        display_name_label.margin_end = 9;
+        display_name_label = new Gtk.Label (source.display_name) {
+            halign = Gtk.Align.START,
+            hexpand = true,
+            margin_end = 9
+        };
 
-        status_image = new Gtk.Image ();
-        status_image.pixel_size = 16;
+        status_image = new Gtk.Image () {
+            pixel_size = 16
+        };
         status_image.get_style_context ().add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        var spinner = new Gtk.Spinner ();
-        spinner.active = true;
-        spinner.tooltip_text = _("Connecting…");
+        var spinner = new Gtk.Spinner () {
+            active = true,
+            tooltip_text = _("Connecting…")
+        };
 
         status_stack = new Gtk.Stack ();
         status_stack.add_named (status_image, "image");
@@ -72,8 +76,9 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
         grid.add (display_name_label);
         grid.add (status_stack);
 
-        revealer = new Gtk.Revealer ();
-        revealer.reveal_child = true;
+        revealer = new Gtk.Revealer () {
+            reveal_child = true
+        };
         revealer.add (grid);
 
         add (revealer);
