@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.tasks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-06 19:19+0000\n"
+"POT-Creation-Date: 2020-12-08 21:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Renaming task list failed"
 msgstr ""
 
-#: src/ListView.vala:203 src/MainWindow.vala:245
+#: src/ListView.vala:203 src/MainWindow.vala:251
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
@@ -41,27 +41,23 @@ msgstr ""
 msgid "Tasks"
 msgstr ""
 
-#: src/MainWindow.vala:102
-msgid "Add Task List…"
-msgstr ""
-
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:227
 msgid "New list"
 msgstr ""
 
-#: src/MainWindow.vala:244
+#: src/MainWindow.vala:250
 msgid "Creating a new task list failed"
 msgstr ""
 
-#: src/Util.vala:124
+#: src/Util.vala:151
 msgid "Today"
 msgstr ""
 
-#: src/Util.vala:126
+#: src/Util.vala:153
 msgid "Yesterday"
 msgstr ""
 
-#: src/Util.vala:128
+#: src/Util.vala:155
 msgid "Tomorrow"
 msgstr ""
 
@@ -93,29 +89,29 @@ msgstr ""
 msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:114
+#: src/Widgets/TaskRow.vala:115
 #, c-format
 msgid "%s"
 msgstr ""
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:120
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:121
 #, c-format
 msgid "%s at %s"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:169
+#: src/Widgets/TaskRow.vala:170
 msgid "Cancel"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:173
+#: src/Widgets/TaskRow.vala:174
 msgid "Save Changes"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:173
+#: src/Widgets/TaskRow.vala:174
 msgid "Add Task"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:221
+#: src/Widgets/TaskRow.vala:222
 msgid "Delete Task"
 msgstr ""

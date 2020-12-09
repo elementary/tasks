@@ -120,7 +120,8 @@ public class Tasks.TaskModel : Object {
             var registry = yield new E.SourceRegistry (null);
 
             registry.source_added.connect ((task_list) => {
-                add_task_list (task_list);
+                debug ("Adding task list '%s'", task_list.dup_display_name ());
+                create_task_list_client (task_list);
                 task_list_added (task_list);
             });
 
@@ -129,14 +130,25 @@ public class Tasks.TaskModel : Object {
             });
 
             registry.source_removed.connect ((task_list) => {
-                remove_task_list (task_list);
+                debug ("Removing task list '%s'", task_list.dup_display_name ());
+
+                ECal.Client client;
+                try {
+                    client = get_client (task_list);
+                } catch (Error e) {
+                    /* Already out of the model, so do nothing */
+                    warning (e.message);
+                    return;
+                }
+
+                destroy_task_list_client (task_list, client);
                 task_list_removed (task_list);
             });
 
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((task_list) => {
                 E.SourceTaskList task_list_extension = (E.SourceTaskList)task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);  // vala-lint=line-length
                 if (task_list_extension.selected == true && task_list.enabled == true) {
-                    add_task_list (task_list);
+                    registry.source_added (task_list);
                 }
             });
 
@@ -146,6 +158,151 @@ public class Tasks.TaskModel : Object {
             critical (e.message);
             promise.set_exception (e);
         }
+    }
+
+    public async void add_task_list (E.Source task_list, E.Source collection_or_sibling) throws Error {
+        var registry = get_registry_sync ();
+        var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        var backend_name = get_collection_backend_name (collection_or_sibling, registry);
+
+        switch (backend_name.down ()) {
+            case "webdav":
+                var collection_source = registry.find_extension (collection_or_sibling, E.SOURCE_EXTENSION_COLLECTION);
+                var collection_source_webdav_session = new E.WebDAVSession (collection_source);
+                var credentials_provider = new E.SourceCredentialsProvider (registry);
+
+                E.NamedParameters credentials;
+                credentials_provider.lookup_sync (collection_source, null, out credentials);
+                collection_source_webdav_session.credentials = credentials;
+
+                var webdav_task_list_uri = yield discover_webdav_server_uri (credentials, collection_source);
+                webdav_task_list_uri.set_path (webdav_task_list_uri.get_path () + "/" + GLib.Uuid.string_random ().up ());
+
+                collection_source_webdav_session.mkcalendar_sync (
+                    webdav_task_list_uri.to_string (false),
+                    task_list.display_name,
+                    null,
+                    task_list_extension.color,
+                    E.WebDAVResourceSupports.TASKS,
+                    null
+                );
+
+                registry.refresh_backend_sync (collection_source.uid, null);
+                break;
+
+            case "local":
+                task_list.parent = "local-stub";
+                task_list_extension.backend_name = "local";
+
+                registry.commit_source_sync (task_list, null);
+                break;
+
+            default:
+                throw new Tasks.TaskModelError.BACKEND_ERROR ("Task list management for '%s' is not supported yet.".printf (backend_name));
+        }
+    }
+
+    public bool is_add_task_list_supported (E.Source source) {
+        try {
+            var registry = get_registry_sync ();
+            var backend_name = get_collection_backend_name (source, registry);
+
+            switch (backend_name.down ()) {
+                case "webdav": return true;
+                case "local": return true;
+            }
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+        return false;
+    }
+
+    private string get_collection_backend_name (E.Source source, E.SourceRegistry registry) {
+        string? backend_name = null;
+
+        var collection_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);
+        if (collection_source != null) {
+            var collection_source_extension = (E.SourceCollection) collection_source.get_extension (E.SOURCE_EXTENSION_COLLECTION);
+            backend_name = collection_source_extension.backend_name;
+        }
+
+        if (backend_name == null && source.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
+            var source_extension = (E.SourceTaskList) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+            backend_name = source_extension.backend_name;
+        }
+
+        return backend_name == null ? "" : backend_name;
+    }
+
+    private async Soup.URI discover_webdav_server_uri (E.NamedParameters credentials, E.Source collection_source) throws Error {
+        var collection_source_extension = (E.SourceCollection) collection_source.get_extension (E.SOURCE_EXTENSION_COLLECTION);
+
+        Soup.URI? webdav_server_uri = null;
+        GLib.Error? webdav_error = null;
+
+        E.webdav_discover_sources.begin (
+            collection_source,
+            collection_source_extension.calendar_url,
+            E.WebDAVDiscoverSupports.TASKS,
+            credentials,
+            null,
+            (obj, res) => {
+                string webdav_certificate_pem;
+                GLib.TlsCertificateFlags? webdav_certificate_errors;
+                GLib.SList<E.WebDAVDiscoveredSource?> webdav_discovered_sources;
+                GLib.SList<string> webdav_calendar_user_addresses;
+
+                try {
+                    /**
+                     * TEMPORARY WORKAROUND: `E.webdav_discover_sources_finish`
+                     * Use `E.webdav_discover_sources.end` once the following commit of libedataserver is released:
+                     * https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/4f4ea2f45d5e2bffcf446b9fdc1bb65e94982d03
+                     */
+                    E.webdav_discover_sources_finish (
+                        collection_source,
+                        res,
+                        out webdav_certificate_pem,
+                        out webdav_certificate_errors,
+                        out webdav_discovered_sources,
+                        out webdav_calendar_user_addresses
+                    );
+
+                    if (webdav_discovered_sources.length () > 0) {
+                        var webdav_discovered_source = webdav_discovered_sources.nth_data (0);
+                        webdav_server_uri = new Soup.URI (webdav_discovered_source.href.dup ());
+                    }
+                    /**
+                     * TEMPORARY WORKAROUND: `E.webdav_discover_do_free_discovered_sources`
+                     * Remove this line, once the following commit of libedataserver is released:
+                     * https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/9d1505cd3518ff32bd03050fd898abf89d31d389
+                     */
+                    E.webdav_discover_do_free_discovered_sources ((owned) webdav_discovered_sources);
+
+                    if (webdav_server_uri == null) {
+                        throw new Tasks.TaskModelError.BACKEND_ERROR ("Unable to resolve the WebDAV uri from backend.");
+                    }
+
+                    var uri_dir_path = webdav_server_uri.get_path ();
+                    if (uri_dir_path.has_suffix ("/")) {
+                        uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
+                    }
+                    uri_dir_path = uri_dir_path.substring (0, uri_dir_path.last_index_of ("/"));
+                    webdav_server_uri.set_path (uri_dir_path);
+
+                } catch (Error e) {
+                    webdav_error = e;
+                }
+                discover_webdav_server_uri.callback ();
+            }
+        );
+
+        yield;
+
+        if (webdav_error != null) {
+            throw webdav_error;
+        }
+        return webdav_server_uri;
     }
 
     public async void update_task_list_display_name (E.Source task_list, string display_name) throws Error {
@@ -214,26 +371,6 @@ public class Tasks.TaskModel : Object {
         } else {
             throw new Tasks.TaskModelError.BACKEND_ERROR ("Renaming tasks list is not supported yet for this type of backend.");
         }
-    }
-
-    private void add_task_list (E.Source task_list) {
-        debug ("Adding task list '%s'", task_list.dup_display_name ());
-        create_task_list_client (task_list);
-    }
-
-    private void remove_task_list (E.Source task_list) {
-        debug ("Removing task list '%s'", task_list.dup_display_name ());
-
-        ECal.Client client;
-        try {
-            client = get_client (task_list);
-        } catch (Error e) {
-            /* Already out of the model, so do nothing */
-            warning (e.message);
-            return;
-        }
-
-        destroy_task_list_client (task_list, client);
     }
 
     public void add_task (E.Source list, ECal.Component task) {
