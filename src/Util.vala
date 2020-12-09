@@ -231,7 +231,10 @@ namespace Tasks.Util {
             }
         }
 
+        debug (@">>>>>>>>> X-APPLE-STRUCTURED-LOCATION is available: $(apple_location_property != null)");
+
         if (apple_location_property != null) {
+            debug (@">>>>>>>>> X-APPLE-STRUCTURED-LOCATION = $(apple_location_property.as_ical_string ())");
             /*
              * X-APPLE-STRUCTURED-LOCATION;
              *   VALUE=URI;
@@ -241,8 +244,9 @@ namespace Tasks.Util {
              *   X-TITLE=Marco's Home:
              *   geo:46.141813,8.917549
              */
-
+            
             var apple_location_parameter_x_address = apple_location_property.get_parameter_as_string ("X-ADDRESS");
+            debug (@">>>>>>>>> X-APPLE-STRUCTURED-LOCATION:X-ADDRESS = '$(apple_location_parameter_x_address)'");
             if (apple_location_parameter_x_address != null && apple_location_parameter_x_address.strip () != "") {
                 description = ICal.Value.decode_ical_string (apple_location_parameter_x_address);
                 if (description != null) {
@@ -250,12 +254,15 @@ namespace Tasks.Util {
                 }
             }
 
+            debug (@">>>>>>>>> X-APPLE-STRUCTURED-LOCATION:VALUE = '$(apple_location_property.get_value_as_string ())'");
             var apple_location_property_geo = apple_location_property.get_geo ();
             if (apple_location_property_geo != null) {
                 latitude = apple_location_property_geo.get_lat ();
                 longitude = apple_location_property_geo.get_lon ();
             }
         }
+
+        debug (@">>>>>>>>> location.description = '$(description)'");
 
         if (longitude != 0 && latitude != 0 || description != null && description.strip ().length > 0) {
             var location = Tasks.Location () {
