@@ -38,9 +38,7 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
             width_request = 220
         };
 
-        point = new Marker () {
-            draggable = true
-        };
+        point = new Marker ();
 
         var marker_layer = new Champlain.MarkerLayer.full (Champlain.SelectionMode.SINGLE);
         marker_layer.add_marker (point);
@@ -55,8 +53,8 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
         map_frame.add (map_embed);
 
         location_mode = new Granite.Widgets.ModeButton ();
-        location_mode.append_text (_("Arrival"));
-        location_mode.append_text (_("Departure"));
+        location_mode.append_text (_("Arriving"));
+        location_mode.append_text (_("Leaving"));
 
         search_entry = new Gtk.SearchEntry () {
             placeholder_text = _("John Smith OR Example St."),
@@ -64,14 +62,13 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
         };
 
         var grid = new Gtk.Grid () {
-            margin = 6,
-            row_spacing = 6,
-            column_spacing = 6
+            margin = 12,
+            row_spacing = 12
         };
 
-        grid.attach (map_frame, 0, 0);
-        grid.attach (search_entry, 0, 1);
-        grid.attach (location_mode, 0, 2);
+        grid.attach (search_entry, 0, 0);
+        grid.attach (location_mode, 0, 1);
+        grid.attach (map_frame, 0, 2);
         grid.show_all ();
 
         popover.add (grid);
