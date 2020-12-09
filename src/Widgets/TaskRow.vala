@@ -152,16 +152,17 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             if (value == null) {
                 return null;
             }
+            var location = (value.display_name == null ? value.postal_address : value.display_name);
 
             switch (value.proximity) {
                 case Tasks.LocationProximity.ARRIVE:
-                    return _("Arriving: %s").printf (value.description);
+                    return _("Arriving: %s").printf (location);
 
                 case Tasks.LocationProximity.DEPART:
-                    return _("Leaving: %s").printf (value.description);
+                    return _("Leaving: %s").printf (location);
 
                 default:
-                    return value.description;
+                    return location;
             }
         });
 

@@ -18,7 +18,8 @@
 */
 
 public struct Tasks.Location {
-    string description;
+    string postal_address;
+    string? display_name;
 
     double longitude;
     double latitude;

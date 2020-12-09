@@ -27,7 +27,7 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
 
     public LocationPopover () {
         Object (
-            icon_name: "location-inactive-symbolic",
+            icon_name: "mark-location-symbolic",
             placeholder: _("Set Location")
         );
     }
@@ -81,7 +81,7 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
     }
 
     private void on_popover_show () {
-        search_entry.text = (value == null ? "" : value.description);
+        search_entry.text = (value == null ? "" : value.postal_address);
 
         if (search_entry.text != null && search_entry.text.strip ().length > 0) {
             search_location.begin (search_entry.text);
@@ -96,9 +96,9 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
             return;
         }
 
-        var value_has_description = value.description != null && value.description.strip ().length > 0;
-        if (value_has_description && search_entry.text != value.description) {
-            search_entry.text = value.description;
+        var value_has_postal_address = value.postal_address != null && value.postal_address.strip ().length > 0;
+        if (value_has_postal_address && search_entry.text != value.postal_address) {
+            search_entry.text = value.postal_address;
         }
 
         switch (value.proximity) {
@@ -126,8 +126,8 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
         }
 
         if (need_relocation == true) {
-            if (value_has_description) {
-                search_location.begin (value.description);
+            if (value_has_postal_address) {
+                search_location.begin (value.postal_address);
             } else {
                 // Use geoclue to find approximate location
                 discover_current_location.begin ();
@@ -137,7 +137,8 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
 
     private void on_search_entry_activate () {
         value = Tasks.Location () {
-            description = search_entry.text,
+            postal_address = search_entry.text,
+            display_name = search_entry.text,
             longitude = 0,
             latitude = 0,
             accuracy = (value == null ? Geocode.LocationAccuracy.UNKNOWN : value.accuracy),
@@ -155,7 +156,8 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
         }
 
         value = Tasks.Location () {
-            description = search_entry.text,
+            postal_address = (value == null ? search_entry.text : value.postal_address),
+            display_name = (value == null ? search_entry.text : value.display_name),
             longitude = (value == null ? 0 : value.longitude),
             latitude = (value == null ? 0 : value.latitude),
             accuracy = (value == null ? Geocode.LocationAccuracy.UNKNOWN : value.accuracy),
