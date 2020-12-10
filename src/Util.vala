@@ -240,7 +240,7 @@ namespace Tasks.Util {
              *   X-APPLE-RADIUS=100;
              *   X-APPLE-REFERENCEFRAME=1;
              *   X-TITLE=Marco's Home:
-             *   geo:46.141813,8.917549
+             *   geo:46.141813\,8.917549
              */
             string? apple_location_property_parameter_x_address = null;
             string? apple_location_property_parameter_x_title = null;
@@ -284,10 +284,16 @@ namespace Tasks.Util {
                 display_name = apple_location_property_parameter_x_title;
             }
 
-            var apple_location_property_geo = apple_location_property.get_geo ();
-            if (apple_location_property_geo != null) {
-                latitude = apple_location_property_geo.get_lat ();
-                longitude = apple_location_property_geo.get_lon ();
+            // geo:46.141813\,8.917549
+            var apple_location_property_value = apple_location_property.get_value_as_string ();
+            if (apple_location_property_value != null && apple_location_property_value.down ().contains ("geo:")) {
+                apple_location_property_value = apple_location_property_value.down ().replace ("geo:", "").replace ("\\", "");
+                
+                var apple_location_property_value_geo = apple_location_property_value.split (",");
+                if (apple_location_property_value_geo.length > 1) {
+                    latitude = double.parse (apple_location_property_value_geo[0]);
+                    longitude = double.parse (apple_location_property_value_geo[1]);
+                }
             }
         }
 
@@ -368,7 +374,7 @@ namespace Tasks.Util {
              *   X-APPLE-RADIUS=100;
              *   X-APPLE-REFERENCEFRAME=1;
              *   X-TITLE=Marco's Home:
-             *   geo:46.141813,8.917549
+             *   geo:46.141813\,8.917549
              */
             var location_alarm_x_apple_structured_location_property = new ICal.Property (ICal.PropertyKind.X_PROPERTY);
             location_alarm_x_apple_structured_location_property.set_x_name ("X-APPLE-STRUCTURED-LOCATION");
