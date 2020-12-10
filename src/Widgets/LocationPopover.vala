@@ -34,8 +34,8 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
 
     construct {
         map_embed = new GtkChamplain.Embed () {
-            height_request = 120,
-            width_request = 220
+            height_request = 140,
+            width_request = 260
         };
 
         point = new Marker ();
