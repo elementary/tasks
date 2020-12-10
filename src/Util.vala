@@ -288,7 +288,7 @@ namespace Tasks.Util {
             var apple_location_property_value = apple_location_property.get_value_as_string ();
             if (apple_location_property_value != null && apple_location_property_value.down ().contains ("geo:")) {
                 apple_location_property_value = apple_location_property_value.down ().replace ("geo:", "").replace ("\\", "");
-                
+
                 var apple_location_property_value_geo = apple_location_property_value.split (",");
                 if (apple_location_property_value_geo.length > 1) {
                     latitude = double.parse (apple_location_property_value_geo[0]);
