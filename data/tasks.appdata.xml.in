@@ -8,8 +8,8 @@
   <summary>Synced tasks and reminders on elementary OS</summary>
   <description>
     <p>
-      Tasks is designed for elementary OS and built to help manage all of your tasks and reminders. 
-      Create and complete tasks, manage lists and sync them across your machines using calDav.
+      Tasks is designed and built to help manage all of your tasks and reminders. Create and complete tasks, 
+      manage lists and sync them across your machines using calDav.
     </p>
   </description>
   <provides>
