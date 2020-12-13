@@ -507,7 +507,12 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         if (comp == null) {
             return false;
         }
-        var created = comp.get_created ();
+
+        ICal.Time? created = comp.get_created ();
+        if (created == null) {
+            return false;
+        }
+
         return created.is_valid_time ();
     }
 }
