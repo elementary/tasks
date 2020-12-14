@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-27 05:20+0000\n"
+"POT-Creation-Date: 2020-12-13 16:57+0000\n"
 "PO-Revision-Date: 2020-11-21 13:15+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
@@ -22,19 +22,19 @@ msgstr ""
 msgid "Scheduled"
 msgstr "Planifié"
 
-#: src/ListView.vala:98
+#: src/ListView.vala:101
 msgid "Edit Name and Appearance"
 msgstr "Modifier le nom et l'apparence"
 
-#: src/ListView.vala:108
+#: src/ListView.vala:113
 msgid "No Tasks"
 msgstr "Aucune tâche"
 
-#: src/ListView.vala:202
+#: src/ListView.vala:210
 msgid "Renaming task list failed"
 msgstr "Échec du renommage de la liste des tâches"
 
-#: src/ListView.vala:203 src/MainWindow.vala:245
+#: src/ListView.vala:211 src/MainWindow.vala:254
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des listes de tâches est probablement indisponible ou en lecture "
@@ -44,84 +44,83 @@ msgstr ""
 msgid "Tasks"
 msgstr "Tâches"
 
-#: src/MainWindow.vala:102
-msgid "Add Task List…"
-msgstr "Ajouter une liste de tâche…"
-
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "Nouvelle liste"
 
-#: src/MainWindow.vala:244
+#: src/MainWindow.vala:253
 msgid "Creating a new task list failed"
 msgstr "Échec de la création d'une nouvelle liste de tâches"
 
-#: src/Util.vala:124
+#: src/Util.vala:151
 msgid "Today"
 msgstr "Aujourd'hui"
 
-#: src/Util.vala:126
+#: src/Util.vala:153
 msgid "Yesterday"
 msgstr "Hier"
 
-#: src/Util.vala:128
+#: src/Util.vala:155
 msgid "Tomorrow"
 msgstr "Demain"
 
-#: src/Widgets/EditableLabel.vala:72
+#: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
 msgstr "Modifier…"
 
-#: src/Widgets/ListSettingsPopover.vala:103
+#: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
 msgstr "Afficher les tâches complétées"
 
-#: src/Widgets/ListSettingsPopover.vala:121
+#: src/Widgets/ListSettingsPopover.vala:125
 msgid "Delete List"
 msgstr "Supprimer la liste"
 
-#: src/Widgets/SourceRow.vala:60
+#: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
 msgstr "Connexion…"
 
-#: src/Widgets/SourceRow.vala:97
+#: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
 msgstr "En attente des identifiants de connexion"
 
-#: src/Widgets/SourceRow.vala:101
+#: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr "Actuellement déconnecté de la base de données (possiblement distante)"
 
-#: src/Widgets/SourceRow.vala:105
+#: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Le certificat SSL à été rejeté pour la connexion"
 
-#: src/Widgets/TaskRow.vala:114
+#: src/Widgets/TaskRow.vala:117
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:120
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:123
 #, c-format
 msgid "%s at %s"
 msgstr "%s à %s"
 
-#: src/Widgets/TaskRow.vala:169
+#: src/Widgets/TaskRow.vala:176
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/Widgets/TaskRow.vala:173
+#: src/Widgets/TaskRow.vala:178
 msgid "Save Changes"
 msgstr "Enregistrer les modifications"
 
-#: src/Widgets/TaskRow.vala:173
+#: src/Widgets/TaskRow.vala:178
 msgid "Add Task"
 msgstr "Ajouter une tâche"
 
-#: src/Widgets/TaskRow.vala:221
+#: src/Widgets/TaskRow.vala:231
 msgid "Delete Task"
 msgstr "Supprimer la tâche"
+
+#~ msgid "Add Task List…"
+#~ msgstr "Ajouter une liste de tâche…"
 
 #~ msgid "Schedule:"
 #~ msgstr "Planning :"
