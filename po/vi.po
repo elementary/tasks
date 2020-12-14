@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-27 05:20+0000\n"
+"POT-Creation-Date: 2020-12-13 16:57+0000\n"
 "PO-Revision-Date: 2020-11-23 05:15+0000\n"
 "Last-Translator: Trkien618 <hacngoctrungkien@gmail.com>\n"
 "Language-Team: Vietnamese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -23,19 +23,19 @@ msgstr ""
 msgid "Scheduled"
 msgstr "Thời gian biểu"
 
-#: src/ListView.vala:98
+#: src/ListView.vala:101
 msgid "Edit Name and Appearance"
 msgstr "Chỉnh sửa tên và giao diện"
 
-#: src/ListView.vala:108
+#: src/ListView.vala:113
 msgid "No Tasks"
 msgstr "Không có tác vụ"
 
-#: src/ListView.vala:202
+#: src/ListView.vala:210
 msgid "Renaming task list failed"
 msgstr "Đổi tên danh sách tác vụ thất bại"
 
-#: src/ListView.vala:203 src/MainWindow.vala:245
+#: src/ListView.vala:211 src/MainWindow.vala:254
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Sổ đăng ký danh sách tác vụ có thể không có sẵn hoặc không thể ghi vào."
@@ -44,84 +44,83 @@ msgstr ""
 msgid "Tasks"
 msgstr "Các tác vụ"
 
-#: src/MainWindow.vala:102
-msgid "Add Task List…"
-msgstr "Thêm danh sách tác vụ…"
-
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "Danh sách mới"
 
-#: src/MainWindow.vala:244
+#: src/MainWindow.vala:253
 msgid "Creating a new task list failed"
 msgstr "Tạo danh sách tác vụ mới không thành công"
 
-#: src/Util.vala:124
+#: src/Util.vala:151
 msgid "Today"
 msgstr "Hôm nay"
 
-#: src/Util.vala:126
+#: src/Util.vala:153
 msgid "Yesterday"
 msgstr "Hôm qua"
 
-#: src/Util.vala:128
+#: src/Util.vala:155
 msgid "Tomorrow"
 msgstr "Ngày mai"
 
-#: src/Widgets/EditableLabel.vala:72
+#: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
 msgstr "Chỉnh sửa…"
 
-#: src/Widgets/ListSettingsPopover.vala:103
+#: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
 msgstr "Hiện Đã hoàn thành"
 
-#: src/Widgets/ListSettingsPopover.vala:121
+#: src/Widgets/ListSettingsPopover.vala:125
 msgid "Delete List"
 msgstr "Danh sách xoá bỏ"
 
-#: src/Widgets/SourceRow.vala:60
+#: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
 msgstr "Đang kết nối…"
 
-#: src/Widgets/SourceRow.vala:97
+#: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
 msgstr "Đang chờ thông tin đăng nhập"
 
-#: src/Widgets/SourceRow.vala:101
+#: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr "Hiện đã ngắt kết nối với kho dữ liệu (có thể đã ngắt từ xa)"
 
-#: src/Widgets/SourceRow.vala:105
+#: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Chứng chỉ SSL tin cậy đã bị từ chối kết nối"
 
-#: src/Widgets/TaskRow.vala:114
+#: src/Widgets/TaskRow.vala:117
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:120
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:123
 #, c-format
 msgid "%s at %s"
 msgstr "%s tại %s"
 
-#: src/Widgets/TaskRow.vala:169
+#: src/Widgets/TaskRow.vala:176
 msgid "Cancel"
 msgstr "Huỷ bỏ"
 
-#: src/Widgets/TaskRow.vala:173
+#: src/Widgets/TaskRow.vala:178
 msgid "Save Changes"
 msgstr "Lưu các thay đổi"
 
-#: src/Widgets/TaskRow.vala:173
+#: src/Widgets/TaskRow.vala:178
 msgid "Add Task"
 msgstr "Thêm tác vụ"
 
-#: src/Widgets/TaskRow.vala:221
+#: src/Widgets/TaskRow.vala:231
 msgid "Delete Task"
 msgstr "Xoá tác vụ"
+
+#~ msgid "Add Task List…"
+#~ msgstr "Thêm danh sách tác vụ…"
 
 #~ msgid "Schedule:"
 #~ msgstr "Thời khoá biểu:"

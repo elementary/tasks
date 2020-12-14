@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-27 05:20+0000\n"
+"POT-Creation-Date: 2020-12-13 16:57+0000\n"
 "PO-Revision-Date: 2020-11-21 13:15+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
@@ -23,19 +23,19 @@ msgstr ""
 msgid "Scheduled"
 msgstr "繰り返し設定のあるタスク"
 
-#: src/ListView.vala:98
+#: src/ListView.vala:101
 msgid "Edit Name and Appearance"
 msgstr "名前や外観を変更します"
 
-#: src/ListView.vala:108
+#: src/ListView.vala:113
 msgid "No Tasks"
 msgstr "タスクがありません"
 
-#: src/ListView.vala:202
+#: src/ListView.vala:210
 msgid "Renaming task list failed"
 msgstr "タスクの名前を変更できませんでした"
 
-#: src/ListView.vala:203 src/MainWindow.vala:245
+#: src/ListView.vala:211 src/MainWindow.vala:254
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "タスク一覧の登録ができないか、書き込みできない可能性があります。"
 
@@ -43,84 +43,83 @@ msgstr "タスク一覧の登録ができないか、書き込みできない可
 msgid "Tasks"
 msgstr "タスク"
 
-#: src/MainWindow.vala:102
-msgid "Add Task List…"
-msgstr "タスク一覧を追加…"
-
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "新しい一覧"
 
-#: src/MainWindow.vala:244
+#: src/MainWindow.vala:253
 msgid "Creating a new task list failed"
 msgstr "新しいタスク一覧を作成できませんでした"
 
-#: src/Util.vala:124
+#: src/Util.vala:151
 msgid "Today"
 msgstr "今日"
 
-#: src/Util.vala:126
+#: src/Util.vala:153
 msgid "Yesterday"
 msgstr "昨日"
 
-#: src/Util.vala:128
+#: src/Util.vala:155
 msgid "Tomorrow"
 msgstr "明日"
 
-#: src/Widgets/EditableLabel.vala:72
+#: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
 msgstr "編集…"
 
-#: src/Widgets/ListSettingsPopover.vala:103
+#: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
 msgstr "完了したタスクを表示"
 
-#: src/Widgets/ListSettingsPopover.vala:121
+#: src/Widgets/ListSettingsPopover.vala:125
 msgid "Delete List"
 msgstr "一覧を削除"
 
-#: src/Widgets/SourceRow.vala:60
+#: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
 msgstr "接続試行中です…"
 
-#: src/Widgets/SourceRow.vala:97
+#: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
 msgstr "ログイン情報を待機しています"
 
-#: src/Widgets/SourceRow.vala:101
+#: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr "（リモートの）データストアから切断されています"
 
-#: src/Widgets/SourceRow.vala:105
+#: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "SSL 証明書が拒否されました"
 
-#: src/Widgets/TaskRow.vala:114
+#: src/Widgets/TaskRow.vala:117
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:120
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:123
 #, c-format
 msgid "%s at %s"
 msgstr "%s の %s"
 
-#: src/Widgets/TaskRow.vala:169
+#: src/Widgets/TaskRow.vala:176
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/Widgets/TaskRow.vala:173
+#: src/Widgets/TaskRow.vala:178
 msgid "Save Changes"
 msgstr "変更を保存"
 
-#: src/Widgets/TaskRow.vala:173
+#: src/Widgets/TaskRow.vala:178
 msgid "Add Task"
 msgstr "タスクを追加"
 
-#: src/Widgets/TaskRow.vala:221
+#: src/Widgets/TaskRow.vala:231
 msgid "Delete Task"
 msgstr "タスクを削除"
+
+#~ msgid "Add Task List…"
+#~ msgstr "タスク一覧を追加…"
 
 #~ msgid "Schedule:"
 #~ msgstr "繰り返し:"
