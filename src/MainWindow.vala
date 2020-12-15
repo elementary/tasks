@@ -48,6 +48,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "<Control>BackSpace";
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "Delete";
+
+        Gtk.IconTheme.get_default ().add_resource_path ("/io/elementary/tasks");
     }
 
     construct {
