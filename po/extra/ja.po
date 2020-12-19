@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-05 09:41-0700\n"
+"POT-Creation-Date: 2020-12-14 20:21+0000\n"
 "PO-Revision-Date: 2020-10-04 13:14+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/extra/ja/>"
-"\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/extra/ja/"
+">\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,18 @@ msgstr ""
 msgid "Tasks"
 msgstr "タスク"
 
-#: data/tasks.appdata.xml.in:45
+#: data/tasks.appdata.xml.in:8
+msgid "Synced tasks and reminders"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:10
+msgid ""
+"Tasks is designed and built to help manage all of your tasks and reminders. "
+"Create and complete tasks, manage lists and sync them across your machines "
+"using calDav."
+msgstr ""
+
+#: data/tasks.appdata.xml.in:48
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
