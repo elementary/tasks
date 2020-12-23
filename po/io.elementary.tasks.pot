@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.tasks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-14 20:21+0000\n"
+"POT-Creation-Date: 2020-12-23 13:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Renaming task list failed"
 msgstr ""
 
-#: src/ListView.vala:211 src/MainWindow.vala:254
+#: src/ListView.vala:211 src/MainWindow.vala:256
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
@@ -41,11 +41,11 @@ msgstr ""
 msgid "Tasks"
 msgstr ""
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:232
 msgid "New list"
 msgstr ""
 
-#: src/MainWindow.vala:253
+#: src/MainWindow.vala:255
 msgid "Creating a new task list failed"
 msgstr ""
 
@@ -89,29 +89,39 @@ msgstr ""
 msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:117
+#: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s"
 msgstr ""
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:123
+#: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:176
+#: src/Widgets/TaskRow.vala:159
+#, c-format
+msgid "Arriving: %s"
+msgstr ""
+
+#: src/Widgets/TaskRow.vala:162
+#, c-format
+msgid "Leaving: %s"
+msgstr ""
+
+#: src/Widgets/TaskRow.vala:216
 msgid "Cancel"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:178
+#: src/Widgets/TaskRow.vala:218
 msgid "Save Changes"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:178
+#: src/Widgets/TaskRow.vala:218
 msgid "Add Task"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:231
+#: src/Widgets/TaskRow.vala:271
 msgid "Delete Task"
 msgstr ""
