@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-13 16:57+0000\n"
+"POT-Creation-Date: 2020-12-23 13:17+0000\n"
 "PO-Revision-Date: 2020-11-21 13:15+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
@@ -35,7 +35,7 @@ msgstr "タスクがありません"
 msgid "Renaming task list failed"
 msgstr "タスクの名前を変更できませんでした"
 
-#: src/ListView.vala:211 src/MainWindow.vala:254
+#: src/ListView.vala:211 src/MainWindow.vala:256
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "タスク一覧の登録ができないか、書き込みできない可能性があります。"
 
@@ -43,11 +43,11 @@ msgstr "タスク一覧の登録ができないか、書き込みできない可
 msgid "Tasks"
 msgstr "タスク"
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:232
 msgid "New list"
 msgstr "新しい一覧"
 
-#: src/MainWindow.vala:253
+#: src/MainWindow.vala:255
 msgid "Creating a new task list failed"
 msgstr "新しいタスク一覧を作成できませんでした"
 
@@ -91,30 +91,40 @@ msgstr "（リモートの）データストアから切断されています"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "SSL 証明書が拒否されました"
 
-#: src/Widgets/TaskRow.vala:117
+#: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:123
+#: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
 msgstr "%s の %s"
 
-#: src/Widgets/TaskRow.vala:176
+#: src/Widgets/TaskRow.vala:159
+#, c-format
+msgid "Arriving: %s"
+msgstr ""
+
+#: src/Widgets/TaskRow.vala:162
+#, c-format
+msgid "Leaving: %s"
+msgstr ""
+
+#: src/Widgets/TaskRow.vala:216
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/Widgets/TaskRow.vala:178
+#: src/Widgets/TaskRow.vala:218
 msgid "Save Changes"
 msgstr "変更を保存"
 
-#: src/Widgets/TaskRow.vala:178
+#: src/Widgets/TaskRow.vala:218
 msgid "Add Task"
 msgstr "タスクを追加"
 
-#: src/Widgets/TaskRow.vala:231
+#: src/Widgets/TaskRow.vala:271
 msgid "Delete Task"
 msgstr "タスクを削除"
 
