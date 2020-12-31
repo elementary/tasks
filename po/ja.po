@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-23 13:17+0000\n"
-"PO-Revision-Date: 2020-11-21 13:15+0000\n"
+"PO-Revision-Date: 2021-01-01 04:16+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
-">\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/>"
+"\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,12 +105,12 @@ msgstr "%s の %s"
 #: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "目的地: %s"
 
 #: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "出発地: %s"
 
 #: src/Widgets/TaskRow.vala:216
 msgid "Cancel"
