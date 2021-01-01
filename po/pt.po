@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-23 13:17+0000\n"
-"PO-Revision-Date: 2020-11-23 05:15+0000\n"
+"PO-Revision-Date: 2021-01-02 16:16+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/tasks/"
 "pt/>\n"
@@ -38,7 +38,8 @@ msgstr "Falha ao renomear lista de tarefas"
 #: src/ListView.vala:211 src/MainWindow.vala:256
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
-"O registo da lista de tarefas pode não estar disponível ou não ser gravado."
+"O registo da lista de tarefas pode estar indisponível ou não pode ser "
+"gravado."
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
@@ -106,12 +107,12 @@ msgstr "%s a %s"
 #: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "A chegar: %s"
 
 #: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "A sair: %s"
 
 #: src/Widgets/TaskRow.vala:216
 msgid "Cancel"
