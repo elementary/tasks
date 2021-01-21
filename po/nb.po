@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-19 20:39+0000\n"
-"PO-Revision-Date: 2021-01-19 08:07+0000\n"
+"PO-Revision-Date: 2021-01-21 19:58+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
 "tasks/nb/>\n"
@@ -37,11 +37,12 @@ msgstr "Klarte ikke å gi gjøremålslisten nytt navn"
 
 #: src/ListView.vala:211 src/MainWindow.vala:256
 msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
 
 #: src/MainWindow.vala:42
+#, fuzzy
 msgid "Tasks"
-msgstr ""
+msgstr "Gjøremål"
 
 #: src/MainWindow.vala:232
 msgid "New list"
@@ -49,7 +50,7 @@ msgstr "Ny liste"
 
 #: src/MainWindow.vala:255
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Opprettelse av nytt gjøremål mislyktes"
 
 #: src/Util.vala:151
 msgid "Today"
@@ -81,36 +82,36 @@ msgstr "Kobler til …"
 
 #: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "Venter på innloggingsdetaljer"
 
 #: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "Frakoblet fra datalager (antagelig annensteds hen)"
 
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "Tiltro til SSL-sertifikat ble avslått for tilkoblingen"
 
 #: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s klokken %s"
 
 #: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "Ankommer: %s"
 
 #: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "Forlater: %s"
 
 #: src/Widgets/TaskRow.vala:216
 msgid "Cancel"
