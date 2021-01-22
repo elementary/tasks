@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-19 20:44+0000\n"
-"PO-Revision-Date: 2020-11-27 05:15+0000\n"
+"PO-Revision-Date: 2021-01-22 09:49+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "tasks/tasks/zh_Hans/>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
-msgstr "已计划"
+msgstr "待办事项"
 
 #: src/ListView.vala:101
 msgid "Edit Name and Appearance"
@@ -105,12 +105,12 @@ msgstr "%s %s"
 #: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "到达时间：%s"
 
 #: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "离开时间：%s"
 
 #: src/Widgets/TaskRow.vala:216
 msgid "Cancel"
