@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-19 20:44+0000\n"
-"PO-Revision-Date: 2021-01-22 09:49+0000\n"
+"PO-Revision-Date: 2021-01-26 15:50+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "tasks/tasks/zh_Hans/>\n"
@@ -69,7 +69,7 @@ msgstr "编辑…"
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
-msgstr "显示已完成的事项"
+msgstr "显示已完成项"
 
 #: src/Widgets/ListSettingsPopover.vala:125
 msgid "Delete List"
