@@ -162,7 +162,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
                         listview.add_view (source, "(contains? 'any' '')");
 
-                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
+                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
 
                     } else if (row is Tasks.ScheduledRow) {
                         listview.source = null;
@@ -226,6 +226,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void add_new_list (E.Source collection_source) {
+        var error_dialog_primary_text = _("Creating a new task list failed");
+        var error_dialog_secondary_text = _("The task list registry may be unavailable or unable to be written to.");
+
         try {
             var new_source = new E.Source (null, null);
             var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
@@ -237,23 +240,23 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     Tasks.Application.model.add_task_list.end (res);
                 } catch (Error e) {
                     critical (e.message);
-                    dialog_add_task_list_error (e);
+                    show_error_dialog (error_dialog_primary_text, error_dialog_secondary_text, e);
                 }
             });
 
         } catch (Error e) {
             critical (e.message);
-            dialog_add_task_list_error (e);
+            show_error_dialog (error_dialog_primary_text, error_dialog_secondary_text, e);
         }
     }
 
-    private void dialog_add_task_list_error (Error e) {
+    private void show_error_dialog (string primary_text, string secondary_text, Error e) {
         string error_message = e.message;
 
         GLib.Idle.add (() => {
             var error_dialog = new Granite.MessageDialog (
-                _("Creating a new task list failed"),
-                _("The task list registry may be unavailable or unable to be written to."),
+                primary_text,
+                secondary_text,
                 new ThemedIcon ("dialog-error"),
                 Gtk.ButtonsType.CLOSE
             ) {
@@ -270,8 +273,21 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     private void action_delete_selected_list () {
         var list_row = ((Tasks.SourceRow) listbox.get_selected_row ());
         var source = list_row.source;
-        if (source.removable) {
-            source.remove.begin (null);
+
+        if (Tasks.Application.model.is_remove_task_list_supported (source)) {
+            Tasks.Application.model.remove_task_list.begin (source, (obj, res) => {
+                try {
+                    Tasks.Application.model.remove_task_list.end (res);
+                } catch (Error e) {
+                    critical (e.message);
+                    show_error_dialog (
+                        _("Deleting the task list failed"),
+                        _("The task list registry may be unavailable or unable to be written to."),
+                        e
+                    );
+                }
+            });
+
         } else {
             Gdk.beep ();
         }
