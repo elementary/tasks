@@ -139,53 +139,43 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         add (grid);
 
         color_button_red.toggled.connect (() => {
-            task_list.color = "#c6262e";
-            source.write.begin (null);
+            Tasks.Application.model.update_task_list_color.begin (source, "#c6262e");
         });
 
         color_button_orange.toggled.connect (() => {
-            task_list.color = "#f37329";
-            source.write.begin (null);
+            Tasks.Application.model.update_task_list_color.begin (source, "#f37329");
         });
 
         color_button_yellow.toggled.connect (() => {
-            task_list.color = "#e6a92a";
-            source.write.begin (null);
+            Tasks.Application.model.update_task_list_color.begin (source, "#e6a92a");
         });
 
         color_button_mint.toggled.connect (() => {
-            task_list.color = "#0e9a83";
-            source.write.begin (null);
+            Tasks.Application.model.update_task_list_color.begin (source, "#0e9a83");
         });
 
         color_button_green.toggled.connect (() => {
-            task_list.color = "#68b723";
-            source.write.begin (null);
+            Tasks.Application.model.update_task_list_color.begin (source, "#68b723");
         });
 
         color_button_blue.toggled.connect (() => {
-            task_list.color = "#3689e6";
-            source.write.begin (null);
+            Tasks.Application.model.update_task_list_color.begin (source, "#3689e6");
         });
 
         color_button_purple.toggled.connect (() => {
-            task_list.color = "#a56de2";
-            source.write.begin (null);
+            Tasks.Application.model.update_task_list_color.begin (source, "#a56de2");
         });
 
         color_button_pink.toggled.connect (() => {
-            task_list.color = "#de3e80";
-            source.write.begin (null);
+            Tasks.Application.model.update_task_list_color.begin (source, "#de3e80");
         });
 
         color_button_brown.toggled.connect (() => {
-            task_list.color = "#8a715e";
-            source.write.begin (null);
+            Tasks.Application.model.update_task_list_color.begin (source, "#8a715e");
         });
 
         color_button_slate.toggled.connect (() => {
-            task_list.color = "#667885";
-            source.write.begin (null);
+            Tasks.Application.model.update_task_list_color.begin (source, "#667885");
         });
 
         notify["source"].connect (() => {
