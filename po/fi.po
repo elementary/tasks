@@ -8,30 +8,32 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-26 16:09+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-02-09 21:29+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"Language-Team: Finnish <https://l10n.elementary.io/projects/tasks/tasks/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
-msgstr ""
+msgstr "Aikataulutettu"
 
 #: src/ListView.vala:101
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "Muokkaa nimeä ja ulkoasua"
 
 #: src/ListView.vala:113
 msgid "No Tasks"
-msgstr ""
+msgstr "Ei tehtäviä"
 
 #: src/ListView.vala:210
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "Tehtäväluettelon nimeäminen uudelleen epäonnistui"
 
 #: src/ListView.vala:211 src/MainWindow.vala:256
 msgid "The task list registry may be unavailable or unable to be written to."
@@ -39,47 +41,47 @@ msgstr ""
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
-msgstr ""
+msgstr "Tehtävät"
 
 #: src/MainWindow.vala:232
 msgid "New list"
-msgstr ""
+msgstr "Uusi luettelo"
 
 #: src/MainWindow.vala:255
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Uuden tehtäväluettelon luominen epäonnistui"
 
 #: src/Util.vala:151
 msgid "Today"
-msgstr ""
+msgstr "Tänään"
 
 #: src/Util.vala:153
 msgid "Yesterday"
-msgstr ""
+msgstr "Eilen"
 
 #: src/Util.vala:155
 msgid "Tomorrow"
-msgstr ""
+msgstr "Huomenna"
 
 #: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
-msgstr ""
+msgstr "Muokkaa…"
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
-msgstr ""
+msgstr "Näytä valmistuneet"
 
 #: src/Widgets/ListSettingsPopover.vala:125
 msgid "Delete List"
-msgstr ""
+msgstr "Poista luettelo"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
-msgstr ""
+msgstr "Yhdistetään…"
 
 #: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "Odotetaan kirjautumistietoja"
 
 #: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
@@ -98,7 +100,7 @@ msgstr ""
 #: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s klo %s"
 
 #: src/Widgets/TaskRow.vala:159
 #, c-format
@@ -112,16 +114,16 @@ msgstr ""
 
 #: src/Widgets/TaskRow.vala:216
 msgid "Cancel"
-msgstr ""
+msgstr "Peru"
 
 #: src/Widgets/TaskRow.vala:218
 msgid "Save Changes"
-msgstr ""
+msgstr "Tallenna muutokset"
 
 #: src/Widgets/TaskRow.vala:218
 msgid "Add Task"
-msgstr ""
+msgstr "Lisää tehtävä"
 
 #: src/Widgets/TaskRow.vala:271
 msgid "Delete Task"
-msgstr ""
+msgstr "Poista tehtävä"
