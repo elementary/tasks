@@ -24,12 +24,18 @@ errordomain Tasks.TaskModelError {
     BACKEND_ERROR
 }
 
+public enum Tasks.Intent {
+    ADD_TASK,
+    MODIFY_TASK,
+    REMOVE_TASK;
+}
 
 public class Tasks.TaskModel : Object {
 
     public signal void task_list_added (E.Source task_list);
     public signal void task_list_modified (E.Source task_list);
     public signal void task_list_removed (E.Source task_list);
+    public signal void error_received (Tasks.Intent intent, Error e);
 
     public delegate void TasksAddedFunc (Gee.Collection<ECal.Component> tasks, E.Source task_list);
     public delegate void TasksModifiedFunc (Gee.Collection<ECal.Component> tasks);
@@ -383,6 +389,7 @@ public class Tasks.TaskModel : Object {
             client = get_client (list);
         } catch (Error e) {
             critical (e.message);
+            error_received (Tasks.Intent.ADD_TASK, e);
             return;
         }
 
@@ -397,6 +404,7 @@ public class Tasks.TaskModel : Object {
             }
         } catch (GLib.Error error) {
             critical (error.message);
+            error_received (Tasks.Intent.ADD_TASK, error);
         }
     }
 
@@ -406,6 +414,7 @@ public class Tasks.TaskModel : Object {
             client = get_client (list);
         } catch (Error e) {
             critical (e.message);
+            error_received (Tasks.Intent.MODIFY_TASK, e);
             return;
         }
 
@@ -479,6 +488,7 @@ public class Tasks.TaskModel : Object {
             client = get_client (list);
         } catch (Error e) {
             critical (e.message);
+            error_received (Tasks.Intent.MODIFY_TASK, e);
             return;
         }
 
@@ -493,6 +503,7 @@ public class Tasks.TaskModel : Object {
                 client.modify_object.end (res);
             } catch (Error e) {
                 warning (e.message);
+                error_received (Tasks.Intent.MODIFY_TASK, e);
             }
         });
     }
@@ -503,6 +514,7 @@ public class Tasks.TaskModel : Object {
             client = get_client (list);
         } catch (Error e) {
             critical (e.message);
+            error_received (Tasks.Intent.REMOVE_TASK, e);
             return;
         }
 
@@ -516,6 +528,7 @@ public class Tasks.TaskModel : Object {
                 client.remove_object.end (results);
             } catch (Error e) {
                 warning (e.message);
+                error_received (Tasks.Intent.REMOVE_TASK, e);
             }
         });
     }
