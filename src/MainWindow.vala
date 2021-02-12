@@ -270,10 +270,10 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
     private void show_error_dialog (Tasks.Intent intent, Error e) {
         string error_details = e.message;
-        
+
         string dialog_primary_text = _("Something went wrong");
         string dialog_secondary_text = _("The task list registry may be unavailable or unable to be written to.");
-        
+
         switch (intent) {
             case Tasks.Intent.ADD_TASK:
                 dialog_primary_text = _("Add task failed");
