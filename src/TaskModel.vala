@@ -241,8 +241,13 @@ public class Tasks.TaskModel : Object {
         Soup.URI? webdav_server_uri = null;
         GLib.Error? webdav_error = null;
 
+#if EDS_3_39
         E.webdav_discover_sources.begin (
             collection_source,
+#else
+            collection_source.webdav_discover_sources.begin (
+#endif
+            
             collection_source_extension.calendar_url,
             E.WebDAVDiscoverSupports.TASKS,
             credentials,
@@ -254,6 +259,7 @@ public class Tasks.TaskModel : Object {
                 GLib.SList<string> webdav_calendar_user_addresses;
 
                 try {
+#if EDS_3_39
                     /**
                      * TEMPORARY WORKAROUND: `E.webdav_discover_sources_finish`
                      * Use `E.webdav_discover_sources.end` once the following commit of libedataserver is released:
@@ -267,17 +273,30 @@ public class Tasks.TaskModel : Object {
                         out webdav_discovered_sources,
                         out webdav_calendar_user_addresses
                     );
+#else
+                    collection_source.webdav_discover_sources.end (
+                        collection_source,
+                        res,
+                        out webdav_certificate_pem,
+                        out webdav_certificate_errors,
+                        out webdav_discovered_sources,
+                        out webdav_calendar_user_addresses
+                    );
+#endif
 
                     if (webdav_discovered_sources.length () > 0) {
                         var webdav_discovered_source = webdav_discovered_sources.nth_data (0);
                         webdav_server_uri = new Soup.URI (webdav_discovered_source.href.dup ());
                     }
+
+#if EDS_3_39
                     /**
                      * TEMPORARY WORKAROUND: `E.webdav_discover_do_free_discovered_sources`
                      * Remove this line, once the following commit of libedataserver is released:
                      * https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/9d1505cd3518ff32bd03050fd898abf89d31d389
                      */
                     E.webdav_discover_do_free_discovered_sources ((owned) webdav_discovered_sources);
+#endif
 
                     if (webdav_server_uri == null) {
                         throw new Tasks.TaskModelError.BACKEND_ERROR ("Unable to resolve the WebDAV uri from backend.");

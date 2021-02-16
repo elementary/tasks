@@ -35,6 +35,7 @@ tasks_deps = [
 ]
 
 if libecal_dep.version().version_compare('<=3.39')
+    add_project_arguments('--define=EDS_3_39', language: 'vala')
     tasks_deps += meson.get_compiler('vala').find_library('libecal-2.0-fixes', dirs: meson.current_source_dir() / 'vapi')
 endif
 
