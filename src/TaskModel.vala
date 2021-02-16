@@ -241,13 +241,12 @@ public class Tasks.TaskModel : Object {
         Soup.URI? webdav_server_uri = null;
         GLib.Error? webdav_error = null;
 
-#if EDS_3_39
+#if HAS_EDS_3_40
+        collection_source.webdav_discover_sources.begin (
+#else
         E.webdav_discover_sources.begin (
             collection_source,
-#else
-            collection_source.webdav_discover_sources.begin (
 #endif
-
             collection_source_extension.calendar_url,
             E.WebDAVDiscoverSupports.TASKS,
             credentials,
@@ -259,41 +258,27 @@ public class Tasks.TaskModel : Object {
                 GLib.SList<string> webdav_calendar_user_addresses;
 
                 try {
-#if EDS_3_39
-                    /**
-                     * TEMPORARY WORKAROUND: `E.webdav_discover_sources_finish`
-                     * Use `E.webdav_discover_sources.end` once the following commit of libedataserver is released:
-                     * https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/4f4ea2f45d5e2bffcf446b9fdc1bb65e94982d03
-                     */
+
+#if HAS_EDS_3_40
+                    collection_source.webdav_discover_sources.end (
+#else
                     E.webdav_discover_sources_finish (
                         collection_source,
-                        res,
-                        out webdav_certificate_pem,
-                        out webdav_certificate_errors,
-                        out webdav_discovered_sources,
-                        out webdav_calendar_user_addresses
-                    );
-#else
-                    collection_source.webdav_discover_sources.end (
-                        res,
-                        out webdav_certificate_pem,
-                        out webdav_certificate_errors,
-                        out webdav_discovered_sources,
-                        out webdav_calendar_user_addresses
-                    );
 #endif
+                        res,
+                        out webdav_certificate_pem,
+                        out webdav_certificate_errors,
+                        out webdav_discovered_sources,
+                        out webdav_calendar_user_addresses
+                    );
 
                     if (webdav_discovered_sources.length () > 0) {
                         var webdav_discovered_source = webdav_discovered_sources.nth_data (0);
                         webdav_server_uri = new Soup.URI (webdav_discovered_source.href.dup ());
                     }
 
-#if EDS_3_39
-                    /**
-                     * TEMPORARY WORKAROUND: `E.webdav_discover_do_free_discovered_sources`
-                     * Remove this line, once the following commit of libedataserver is released:
-                     * https://gitlab.gnome.org/GNOME/evolution-data-server/-/commit/9d1505cd3518ff32bd03050fd898abf89d31d389
-                     */
+#if HAS_EDS_3_40
+#else
                     E.webdav_discover_do_free_discovered_sources ((owned) webdav_discovered_sources);
 #endif
 
@@ -345,20 +330,16 @@ public class Tasks.TaskModel : Object {
                 display_name
             ));
 
-#if EDS_3_39
+#if HAS_EDS_3_40
+            collection_source_webdav_session.update_properties_sync (    
+#else
             E.webdav_session_update_properties_sync (
                 collection_source_webdav_session,
-                source_webdav_extension.soup_uri.to_string (false),
-                changes,
-                null
-            );
-#else
-            collection_source_webdav_session.update_properties_sync (
-                source_webdav_extension.soup_uri.to_string (false),
-                changes,
-                null
-            );
 #endif
+                source_webdav_extension.soup_uri.to_string (false),
+                changes,
+                null
+            );
 
             registry.refresh_backend_sync (collection_source.uid, null);
 
