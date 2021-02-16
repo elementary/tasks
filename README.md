@@ -21,11 +21,11 @@ Run `flatpak-builder` to build:
 flatpak-builder --force-clean build io.elementary.tasks.yml
 ```
 
-To install, use `flatpak-builder --install`, then execute with `io.elementary.tasks`:
+To install, use `flatpak-builder --install`, then execute with `flatpak run io.elementary.tasks`:
 
 ```bash
 flatpak-builder --install --user --force-clean build io.elementary.tasks.yml
-io.elementary.tasks
+flatpak run io.elementary.tasks
 ```
 
 ### Build with Meson
