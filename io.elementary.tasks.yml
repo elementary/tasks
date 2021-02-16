@@ -69,7 +69,7 @@ modules:
     sources:
       - type: git
         url: https://gitlab.gnome.org/GNOME/evolution-data-server.git
-        tag: '3.38.1'
+        tag: '3.39.2'
     modules:
       - name: intltool
         cleanup:
