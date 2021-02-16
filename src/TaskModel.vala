@@ -247,7 +247,7 @@ public class Tasks.TaskModel : Object {
 #else
             collection_source.webdav_discover_sources.begin (
 #endif
-            
+
             collection_source_extension.calendar_url,
             E.WebDAVDiscoverSupports.TASKS,
             credentials,
@@ -345,7 +345,7 @@ public class Tasks.TaskModel : Object {
                 display_name
             ));
 
-#if EDS_3_39            
+#if EDS_3_39
             E.webdav_session_update_properties_sync (
                 collection_source_webdav_session,
                 source_webdav_extension.soup_uri.to_string (false),
