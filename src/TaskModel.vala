@@ -247,7 +247,7 @@ public class Tasks.TaskModel : Object {
 #else
             collection_source.webdav_discover_sources.begin (
 #endif
-            
+
             collection_source_extension.calendar_url,
             E.WebDAVDiscoverSupports.TASKS,
             credentials,
