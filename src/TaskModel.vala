@@ -331,7 +331,7 @@ public class Tasks.TaskModel : Object {
             ));
 
 #if HAS_EDS_3_40
-            collection_source_webdav_session.update_properties_sync (    
+            collection_source_webdav_session.update_properties_sync (
 #else
             E.webdav_session_update_properties_sync (
                 collection_source_webdav_session,
