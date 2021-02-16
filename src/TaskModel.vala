@@ -275,7 +275,6 @@ public class Tasks.TaskModel : Object {
                     );
 #else
                     collection_source.webdav_discover_sources.end (
-                        collection_source,
                         res,
                         out webdav_certificate_pem,
                         out webdav_certificate_errors,
@@ -346,12 +345,20 @@ public class Tasks.TaskModel : Object {
                 display_name
             ));
 
+#if EDS_3_39            
             E.webdav_session_update_properties_sync (
                 collection_source_webdav_session,
                 source_webdav_extension.soup_uri.to_string (false),
                 changes,
                 null
             );
+#else
+            collection_source_webdav_session.update_properties_sync (
+                source_webdav_extension.soup_uri.to_string (false),
+                changes,
+                null
+            );
+#endif
 
             registry.refresh_backend_sync (collection_source.uid, null);
 
