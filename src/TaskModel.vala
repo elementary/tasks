@@ -277,8 +277,7 @@ public class Tasks.TaskModel : Object {
                         webdav_server_uri = new Soup.URI (webdav_discovered_source.href.dup ());
                     }
 
-#if HAS_EDS_3_40
-#else
+#if !HAS_EDS_3_40
                     E.webdav_discover_do_free_discovered_sources ((owned) webdav_discovered_sources);
 #endif
 
