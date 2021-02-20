@@ -204,7 +204,7 @@ public class Tasks.ListView : Gtk.Grid {
                                 error_dialog.run ();
                                 error_dialog.destroy ();
                             }
-        
+
                             return GLib.Source.REMOVE;
                         });
                     });
@@ -360,7 +360,7 @@ public class Tasks.ListView : Gtk.Grid {
                             error_dialog.run ();
                             error_dialog.destroy ();
                         }
-    
+
                         return GLib.Source.REMOVE;
                     });
                 });
@@ -382,7 +382,7 @@ public class Tasks.ListView : Gtk.Grid {
                             error_dialog.run ();
                             error_dialog.destroy ();
                         }
-    
+
                         return GLib.Source.REMOVE;
                     });
                 });
@@ -404,7 +404,7 @@ public class Tasks.ListView : Gtk.Grid {
                             error_dialog.run ();
                             error_dialog.destroy ();
                         }
-    
+
                         return GLib.Source.REMOVE;
                     });
                 });
