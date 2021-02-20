@@ -142,7 +142,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         Tasks.Application.model.task_list_added.connect (add_source);
         Tasks.Application.model.task_list_modified.connect (update_source);
         Tasks.Application.model.task_list_removed.connect (remove_source);
-        Tasks.Application.model.error_received.connect (show_error_dialog);
 
         Tasks.Application.model.get_registry.begin ((obj, res) => {
             E.SourceRegistry registry;
@@ -234,12 +233,16 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             new_source_tasklist_extension.color = "#0e9a83";
 
             Tasks.Application.model.add_task_list.begin (new_source, collection_source, (obj, res) => {
-                try {
-                    Tasks.Application.model.add_task_list.end (res);
-                } catch (Error e) {
-                    critical (e.message);
-                    dialog_add_task_list_error (e);
-                }
+                GLib.Idle.add (() => {
+                    try {
+                        Application.model.add_task_list.end (res);
+                    } catch (Error e) {
+                        critical (e.message);
+                        dialog_add_task_list_error (e);
+                    }
+
+                    return GLib.Source.REMOVE;
+                });
             });
 
         } catch (Error e) {
@@ -261,43 +264,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 transient_for = this
             };
             error_dialog.show_error_details (error_message);
-            error_dialog.run ();
-            error_dialog.destroy ();
-
-            return GLib.Source.REMOVE;
-        });
-    }
-
-    private void show_error_dialog (Tasks.Intent intent, Error e) {
-        string error_details = e.message;
-
-        string dialog_primary_text = _("Something went wrong");
-        string dialog_secondary_text = _("The task list registry may be unavailable or unable to be written to.");
-
-        switch (intent) {
-            case Tasks.Intent.ADD_TASK:
-                dialog_primary_text = _("Add task failed");
-                break;
-
-            case Tasks.Intent.MODIFY_TASK:
-                dialog_primary_text = _("Updating task failed");
-                break;
-
-            case Tasks.Intent.REMOVE_TASK:
-                dialog_primary_text = _("Remove task failed");
-                break;
-        }
-
-        GLib.Idle.add (() => {
-            var error_dialog = new Granite.MessageDialog (
-                dialog_primary_text,
-                dialog_secondary_text,
-                new ThemedIcon ("dialog-error"),
-                Gtk.ButtonsType.CLOSE
-            ) {
-                transient_for = this
-            };
-            error_dialog.show_error_details (error_details);
             error_dialog.run ();
             error_dialog.destroy ();
 

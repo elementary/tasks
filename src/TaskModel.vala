@@ -24,18 +24,11 @@ errordomain Tasks.TaskModelError {
     BACKEND_ERROR
 }
 
-public enum Tasks.Intent {
-    ADD_TASK,
-    MODIFY_TASK,
-    REMOVE_TASK;
-}
-
 public class Tasks.TaskModel : Object {
 
     public signal void task_list_added (E.Source task_list);
     public signal void task_list_modified (E.Source task_list);
     public signal void task_list_removed (E.Source task_list);
-    public signal void error_received (Tasks.Intent intent, Error e);
 
     public delegate void TasksAddedFunc (Gee.Collection<ECal.Component> tasks, E.Source task_list);
     public delegate void TasksModifiedFunc (Gee.Collection<ECal.Component> tasks);
@@ -379,44 +372,21 @@ public class Tasks.TaskModel : Object {
         }
     }
 
-    public void add_task (E.Source list, ECal.Component task) {
-        add_task_async.begin (list, task);
-    }
-
-    private async void add_task_async (E.Source list, ECal.Component task) {
-        ECal.Client client;
-        try {
-            client = get_client (list);
-        } catch (Error e) {
-            critical (e.message);
-            error_received (Tasks.Intent.ADD_TASK, e);
-            return;
-        }
-
+    public async void add_task (E.Source list, ECal.Component task) throws Error {
+        ECal.Client client = get_client (list);
         unowned ICal.Component comp = task.get_icalcomponent ();
+
         debug (@"Adding task '$(comp.get_uid())'");
 
-        try {
-            string? uid;
-            yield client.create_object (comp, ECal.OperationFlags.NONE, null, out uid);
-            if (uid != null) {
-                comp.set_uid (uid);
-            }
-        } catch (GLib.Error error) {
-            critical (error.message);
-            error_received (Tasks.Intent.ADD_TASK, error);
+        string? uid;
+        yield client.create_object (comp, ECal.OperationFlags.NONE, null, out uid);
+        if (uid != null) {
+            comp.set_uid (uid);
         }
     }
 
-    public void complete_task (E.Source list, ECal.Component task) {
-        ECal.Client client;
-        try {
-            client = get_client (list);
-        } catch (Error e) {
-            critical (e.message);
-            error_received (Tasks.Intent.MODIFY_TASK, e);
-            return;
-        }
+    public async void complete_task (E.Source list, ECal.Component task) throws Error {
+        ECal.Client client = get_client (list);
 
         unowned ICal.Component comp = task.get_icalcomponent ();
         var was_completed = comp.get_status () == ICal.PropertyStatus.COMPLETED;
@@ -429,7 +399,7 @@ public class Tasks.TaskModel : Object {
 
             task.set_completed (new ICal.Time.null_time ());
 
-            update_icalcomponent (client, comp, ECal.ObjModType.ONLY_THIS);
+            yield client.modify_object (comp, ECal.ObjModType.ONLY_THIS, ECal.OperationFlags.NONE, null);
 
         } else {
             debug (@"Completing $(task.is_instance() ? "instance" : "task") '$(comp.get_uid())'");
@@ -438,7 +408,7 @@ public class Tasks.TaskModel : Object {
             task.set_percent_complete (100);
             task.set_completed (new ICal.Time.today ());
 
-            update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
+            yield client.modify_object (comp, ECal.ObjModType.THIS_AND_PRIOR, ECal.OperationFlags.NONE, null);
         }
 
         if (task.has_recurrences () && !was_completed) {
@@ -474,7 +444,8 @@ public class Tasks.TaskModel : Object {
                     });
                 }
 
-                update_icalcomponent (client, instance_comp, ECal.ObjModType.THIS_AND_FUTURE);
+                client.modify_object_sync (instance_comp, ECal.ObjModType.THIS_AND_FUTURE, ECal.OperationFlags.NONE, null);
+
                 return false; // only generate one instance
             };
 
@@ -482,55 +453,23 @@ public class Tasks.TaskModel : Object {
         }
     }
 
-    public void update_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) {
-        ECal.Client client;
-        try {
-            client = get_client (list);
-        } catch (Error e) {
-            critical (e.message);
-            error_received (Tasks.Intent.MODIFY_TASK, e);
-            return;
-        }
-
+    public async void update_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) throws Error {
+        ECal.Client client = get_client (list);
         unowned ICal.Component comp = task.get_icalcomponent ();
+
         debug (@"Updating task '$(comp.get_uid())' [mod_type=$(mod_type)]");
-        update_icalcomponent (client, comp, mod_type);
+        yield client.modify_object (comp, mod_type, ECal.OperationFlags.NONE, null);
     }
 
-    private void update_icalcomponent (ECal.Client client, ICal.Component comp, ECal.ObjModType mod_type) {
-        client.modify_object.begin (comp, mod_type, ECal.OperationFlags.NONE, null, (obj, res) => {
-            try {
-                client.modify_object.end (res);
-            } catch (Error e) {
-                warning (e.message);
-                error_received (Tasks.Intent.MODIFY_TASK, e);
-            }
-        });
-    }
-
-    public void remove_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) {
-        ECal.Client client;
-        try {
-            client = get_client (list);
-        } catch (Error e) {
-            critical (e.message);
-            error_received (Tasks.Intent.REMOVE_TASK, e);
-            return;
-        }
-
+    public async void remove_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) throws Error {
+        ECal.Client client = get_client (list);
         unowned ICal.Component comp = task.get_icalcomponent ();
+
         string uid = comp.get_uid ();
         string? rid = task.has_recurrences () ? null : task.get_recurid_as_string ();
-        debug (@"Removing task '$uid'");
 
-        client.remove_object.begin (uid, rid, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
-            try {
-                client.remove_object.end (results);
-            } catch (Error e) {
-                warning (e.message);
-                error_received (Tasks.Intent.REMOVE_TASK, e);
-            }
-        });
+        debug (@"Removing task '$uid'");
+        yield client.remove_object (uid, rid, mod_type, ECal.OperationFlags.NONE, null);
     }
 
     private void debug_task (E.Source task_list, ECal.Component task) {
