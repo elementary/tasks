@@ -304,10 +304,15 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         }
         var row = (Tasks.SourceRow) lbrow;
         var before = (Tasks.SourceRow) lbbefore;
+
         if (row.source.parent == null || before.source.parent == null) {
             return -1;
         } else if (row.source.parent == before.source.parent) {
+#if HAS_EDS_3_40
+            return E.util_source_compare_for_sort (row.source, before.source);
+#else
             return row.source.display_name.collate (before.source.display_name);
+#endif
         } else {
             return row.source.parent.collate (before.source.parent);
         }
