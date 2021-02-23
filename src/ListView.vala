@@ -19,7 +19,7 @@
 */
 
 public class Tasks.ListView : Gtk.Grid {
-    public E.Source? source { get; set; }
+    public E.Source? source { get; construct; }
 
     private Gee.Collection<ECal.ClientView> views;
 
@@ -48,7 +48,11 @@ public class Tasks.ListView : Gtk.Grid {
         }
     }
 
-    private void remove_views () {
+    public void remove_views () {
+        foreach (unowned Gtk.Widget child in task_list.get_children ()) {
+            child.destroy ();
+        }
+
         lock (views) {
             foreach (ECal.ClientView view in views) {
                 Tasks.Application.model.destroy_task_list_view (view);
@@ -65,6 +69,10 @@ public class Tasks.ListView : Gtk.Grid {
     private Gtk.ListBox add_task_list;
     private Gtk.ListBox task_list;
     private Tasks.TaskRow active_task_row;
+
+    public ListView (E.Source? source) {
+        Object (source: source);
+    }
 
     construct {
         views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
@@ -123,6 +131,14 @@ public class Tasks.ListView : Gtk.Grid {
         };
         add_task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
+        if (source != null) {
+            var add_task_row = new Tasks.TaskRow.for_source (source);
+            add_task_row.task_changed.connect ((task) => {
+                Tasks.Application.model.add_task (source, task);
+            });
+            add_task_list.add (add_task_row);
+        }
+
         task_list = new Gtk.ListBox () {
             selection_mode = Gtk.SelectionMode.NONE
         };
@@ -175,29 +191,6 @@ public class Tasks.ListView : Gtk.Grid {
             active_task_row = task_row;
         });
 
-        notify["source"].connect (() => {
-            remove_views ();
-
-            foreach (unowned Gtk.Widget child in add_task_list.get_children ()) {
-                child.destroy ();
-            }
-
-            foreach (unowned Gtk.Widget child in task_list.get_children ()) {
-                child.destroy ();
-            }
-
-            if (source != null) {
-                var add_task_row = new Tasks.TaskRow.for_source (source);
-                add_task_row.task_changed.connect ((task) => {
-                    Tasks.Application.model.add_task (source, task);
-                });
-                add_task_list.add (add_task_row);
-            }
-
-            update_request ();
-            show_all ();
-        });
-
         editable_title.changed.connect (() => {
             Application.model.update_task_list_display_name.begin (source, editable_title.text, (obj, res) => {
                 GLib.Idle.add (() => {
@@ -221,6 +214,8 @@ public class Tasks.ListView : Gtk.Grid {
                 });
             });
         });
+
+        show_all ();
     }
 
     public void update_request () {
