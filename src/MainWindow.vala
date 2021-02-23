@@ -156,7 +156,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             listbox.row_selected.connect ((row) => {
                 if (row != null) {
                     Tasks.ListView? listview;
-                    
+
                     if (row is Tasks.SourceRow) {
                         var source = ((Tasks.SourceRow) row).source;
                         var source_uid = source.dup_uid ();
