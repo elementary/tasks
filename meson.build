@@ -34,7 +34,9 @@ tasks_deps = [
     dependency('libgdata')
 ]
 
-if libecal_dep.version().version_compare('<=3.39')
+if libecal_dep.version().version_compare('>=3.39.2')
+    add_project_arguments('--define=HAS_EDS_3_40', language: 'vala')
+else
     tasks_deps += meson.get_compiler('vala').find_library('libecal-2.0-fixes', dirs: meson.current_source_dir() / 'vapi')
 endif
 
