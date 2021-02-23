@@ -261,27 +261,7 @@ public class Tasks.ListView : Gtk.Grid {
         var row_b = (Tasks.TaskRow) row2;
 
         if (row_a.completed == row_b.completed) {
-            unowned ICal.Component comp_a = row_a.task.get_icalcomponent ();
-            unowned ICal.Component comp_b = row_b.task.get_icalcomponent ();
-
-            ICal.Time start_a = comp_a.get_dtstart ();
-            ICal.Time stamp_a = comp_a.get_dtstamp ();
-
-            ICal.Time start_b = comp_b.get_dtstart ();
-            ICal.Time stamp_b = comp_b.get_dtstamp ();
-
-            if ( start_a.is_null_time () && start_b.is_null_time () ) {
-                return stamp_b.compare (stamp_a);
-
-            } else if (start_a.is_null_time () && !start_b.is_null_time ()) {
-                return 1;
-
-            } else if (start_b.is_null_time () && !start_a.is_null_time ()) {
-                return -1;
-
-            } else {
-                return start_a.compare (start_b);
-            }
+            return Util.get_ecalcomponent_sort (row_a.task).collate (Util.get_ecalcomponent_sort (row_b.task));
 
         } else if (row_a.completed && !row_b.completed) {
             return 1;
