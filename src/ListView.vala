@@ -261,7 +261,17 @@ public class Tasks.ListView : Gtk.Grid {
         var row_b = (Tasks.TaskRow) row2;
 
         if (row_a.completed == row_b.completed) {
-            return Util.get_ecalcomponent_sort (row_a.task).collate (Util.get_ecalcomponent_sort (row_b.task));
+            var apple_sortorder_a = Util.get_apple_sortorder_property (row_a.task);
+            if (apple_sortorder_a == null) {
+                apple_sortorder_a = Util.get_apple_sortorder_default (row_a.task).as_int ().to_string ();
+            }
+
+            var apple_sortorder_b = Util.get_apple_sortorder_property (row_b.task);
+            if (apple_sortorder_b == null) {
+                apple_sortorder_b = Util.get_apple_sortorder_default (row_b.task).as_int ().to_string ();
+            }
+
+            return apple_sortorder_a.collate (apple_sortorder_b);
 
         } else if (row_a.completed && !row_b.completed) {
             return 1;
