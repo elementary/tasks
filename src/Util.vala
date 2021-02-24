@@ -195,7 +195,7 @@ namespace Tasks.Util {
     /**
      * Returns the value of X-APPLE-SORT-ORDER property if set
      */
-    public string? get_apple_sortorder_property (ECal.Component ecalcomponent) {
+    public string? get_apple_sortorder_property_value (ECal.Component ecalcomponent) {
         unowned ICal.Component? icalcomponent = ecalcomponent.get_icalcomponent ();
         if (icalcomponent != null) {
             var x_apple_sort_order_property = get_icalcomponent_x_property (icalcomponent, "X-APPLE-SORT-ORDER");
@@ -213,7 +213,7 @@ namespace Tasks.Util {
     * the task and 20010101T000000Z (Cocoa/Webkit epoch)
     * as value for sorting.
     */
-    public ICal.Duration get_apple_sortorder_default (ECal.Component ecalcomponent) {
+    public ICal.Duration get_apple_sortorder_default_value (ECal.Component ecalcomponent) {
         return ecalcomponent.get_created ().subtract (new ICal.Time.from_string ("20010101T000000Z"));
     }
 
