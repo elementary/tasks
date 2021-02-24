@@ -209,7 +209,7 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         });
 
         notify["source"].connect (() => {
-            update_selected_task_list_color (source);
+            select_task_list_color (source);
         });
 
         show_completed_button.button_release_event.connect (() => {
@@ -220,7 +220,7 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         Application.settings.bind ("show-completed", show_completed_switch, "active", GLib.SettingsBindFlags.DEFAULT);
     }
 
-    private void update_selected_task_list_color (E.Source source) {
+    private void select_task_list_color (E.Source source) {
         switch (get_task_list_color (source)) {
             case "#c6262e":
                 color_button_red.active = true;
@@ -275,7 +275,7 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
             try {
                 Tasks.Application.model.update_task_list_color.end (res);
             } catch (Error e) {
-                update_selected_task_list_color (source);
+                select_task_list_color (source);
                 dialog_update_task_list_color_error (e);
             }
         });
