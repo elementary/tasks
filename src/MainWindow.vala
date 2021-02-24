@@ -223,7 +223,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             if (last_selected_list == SCHEDULED_LIST_UID) {
                 listbox.select_row (scheduled_row);
-                listbox.row_selected (scheduled_row);
 
             } else {
                 var default_task_list = registry.default_task_list;
@@ -237,11 +236,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
                         if (last_selected_list == "" && default_task_list == source) {
                             listbox.select_row (source_rows[source]);
-                            listbox.row_selected (source_rows[source]);
 
                         } else if (last_selected_list == source.uid) {
                             listbox.select_row (source_rows[source]);
-                            listbox.row_selected (source_rows[source]);
                         }
                     }
                 });
