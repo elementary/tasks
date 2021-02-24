@@ -237,7 +237,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             Tasks.Application.model.add_task_list.begin (new_source, collection_source, (obj, res) => {
                 try {
-                    Tasks.Application.model.add_task_list.end (res);
+                    Application.model.add_task_list.end (res);
                 } catch (Error e) {
                     critical (e.message);
                     show_error_dialog (error_dialog_primary_text, error_dialog_secondary_text, e);
