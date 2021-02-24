@@ -22,6 +22,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     public const string ACTION_PREFIX = "win.";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
 
+    private const string SCHEDULED_LIST_UID = "scheduled";
+
     private const ActionEntry[] ACTION_ENTRIES = {
         { ACTION_DELETE_SELECTED_LIST, action_delete_selected_list }
     };
@@ -173,12 +175,10 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (source.removable);
 
                     } else if (row is Tasks.ScheduledRow) {
-                        var scheduled_uid = "scheduled";
-
-                        listview = (Tasks.ListView) listview_stack.get_child_by_name (scheduled_uid);
+                        listview = (Tasks.ListView) listview_stack.get_child_by_name (SCHEDULED_LIST_UID);
                         if (listview == null) {
                             listview = new Tasks.ListView (null);
-                            listview_stack.add_named (listview, scheduled_uid);
+                            listview_stack.add_named (listview, SCHEDULED_LIST_UID);
                         }
 
                         listview.remove_views ();
@@ -194,8 +194,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                             }
                         });
 
-                        listview_stack.set_visible_child_name (scheduled_uid);
-                        Tasks.Application.settings.set_string ("selected-list", "scheduled");
+                        listview_stack.set_visible_child_name (SCHEDULED_LIST_UID);
+                        Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);
                         ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
                     }
 
@@ -221,7 +221,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             var last_selected_list = Application.settings.get_string ("selected-list");
 
-            if (last_selected_list == "scheduled") {
+            if (last_selected_list == SCHEDULED_LIST_UID) {
                 listbox.select_row (scheduled_row);
                 listbox.row_selected (scheduled_row);
 
