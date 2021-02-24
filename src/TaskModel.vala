@@ -21,7 +21,8 @@
 
 errordomain Tasks.TaskModelError {
     CLIENT_NOT_AVAILABLE,
-    BACKEND_ERROR
+    BACKEND_ERROR,
+    INVALID_ARGUMENT;
 }
 
 public class Tasks.TaskModel : Object {
@@ -379,46 +380,67 @@ public class Tasks.TaskModel : Object {
     }
 
     public async void update_task_list_color (E.Source task_list, string color) throws Error {
-        var registry = get_registry_sync ();
-        var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
-
-        // Change color in EDS
-        if (task_list.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
-            debug ("Local update color '%s'", task_list.get_uid ());
-
-            var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-            task_list_extension.color = color;
-
-            registry.commit_source_sync (task_list, null);
+        if (!task_list.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
+            throw new Tasks.TaskModelError.INVALID_ARGUMENT ("Changing the color is not supported by this source.");
         }
 
-        // Change color in WebDAV backend
-        if (collection_source != null && task_list.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
-            debug ("WebDAV update color '%s'", task_list.get_uid ());
+        var registry = get_registry_sync ();
+        var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+        var backend_name = get_collection_backend_name (collection_source, registry);
+        var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        var previous_color = task_list_extension.color;
 
-            var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-            var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+        // Change color in local EDS first, because remote may take quite some time
+        debug ("Update local color for '%s'", task_list.get_uid ());
+        task_list_extension.color = color;
+        registry.commit_source_sync (task_list, null);
 
-            var credentials_provider = new E.SourceCredentialsProvider (registry);
-            E.NamedParameters credentials;
-            credentials_provider.lookup_sync (collection_source, null, out credentials);
-            collection_source_webdav_session.credentials = credentials;
+        try {
+            switch (backend_name.down ()) {
+                case "webdav":
+                    if (collection_source == null || !task_list.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
+                        throw new Tasks.TaskModelError.INVALID_ARGUMENT ("Required information is missing to update the color of this source.");
+                    }
+                    debug ("Update %s color for '%s'", backend_name, task_list.get_uid ());
 
-            var changes = new GLib.SList<E.WebDAVPropertyChange> ();
-            changes.append (new E.WebDAVPropertyChange.set (
-                E.WEBDAV_NS_ICAL,
-                "calendar-color",
-                color
-            ));
+                    var collection_source_webdav_session = new E.WebDAVSession (collection_source);
+                    var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
-            E.webdav_session_update_properties_sync (
-                collection_source_webdav_session,
-                source_webdav_extension.soup_uri.to_string (false),
-                changes,
-                null
-            );
+                    var credentials_provider = new E.SourceCredentialsProvider (registry);
+                    E.NamedParameters credentials;
+                    credentials_provider.lookup_sync (collection_source, null, out credentials);
+                    collection_source_webdav_session.credentials = credentials;
 
-            registry.refresh_backend_sync (collection_source.uid, null);
+                    var changes = new GLib.SList<E.WebDAVPropertyChange> ();
+                    changes.append (new E.WebDAVPropertyChange.set (
+                        E.WEBDAV_NS_ICAL,
+                        "calendar-color",
+                        color
+                    ));
+
+                    E.webdav_session_update_properties_sync (
+                        collection_source_webdav_session,
+                        source_webdav_extension.soup_uri.to_string (false),
+                        changes,
+                        null
+                    );
+
+                    registry.refresh_backend_sync (collection_source.uid, null);
+                    break;
+
+                case "local":
+                    // we updated the local color above, so we are already done here.
+                    break;
+
+                default:
+                    throw new Tasks.TaskModelError.BACKEND_ERROR ("Updating the list color is not supported for '%s' backends.", backend_name);
+            }
+
+        } catch (Error e) {
+            debug ("Reset local color for '%s'", task_list.get_uid ());
+            task_list_extension.color = previous_color;
+            registry.commit_source_sync (task_list, null);
+            throw e;
         }
     }
 
