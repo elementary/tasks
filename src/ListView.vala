@@ -189,7 +189,25 @@ public class Tasks.ListView : Gtk.Grid {
             if (source != null) {
                 var add_task_row = new Tasks.TaskRow.for_source (source);
                 add_task_row.task_changed.connect ((task) => {
-                    Tasks.Application.model.add_task (source, task);
+                    Tasks.Application.model.add_task.begin (source, task, (obj, res) => {
+                        GLib.Idle.add (() => {
+                            try {
+                                Tasks.Application.model.add_task.end (res);
+                            } catch (Error e) {
+                                var error_dialog = new Granite.MessageDialog (
+                                    _("Adding task failed"),
+                                    _("The task list registry may be unavailable or unable to be written to."),
+                                    new ThemedIcon ("dialog-error"),
+                                    Gtk.ButtonsType.CLOSE
+                                );
+                                error_dialog.show_error_details (e.message);
+                                error_dialog.run ();
+                                error_dialog.destroy ();
+                            }
+
+                            return GLib.Source.REMOVE;
+                        });
+                    });
                 });
                 add_task_list.add (add_task_row);
             }
@@ -237,7 +255,8 @@ public class Tasks.ListView : Gtk.Grid {
 
             task_list.@foreach ((row) => {
                 if (row is Tasks.TaskRow) {
-                    (row as Tasks.TaskRow).update_request ();
+                    var task_row = (row as Tasks.TaskRow);
+                    task_row.update_request ();
                 }
             });
         }
@@ -314,16 +333,75 @@ public class Tasks.ListView : Gtk.Grid {
     private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.TaskRow.for_component (task, source, this.source == null);
+
             task_row.task_completed.connect ((task) => {
-                Tasks.Application.model.complete_task (source, task);
+                Tasks.Application.model.complete_task.begin (source, task, (obj, res) => {
+                    GLib.Idle.add (() => {
+                        try {
+                            Tasks.Application.model.complete_task.end (res);
+                        } catch (Error e) {
+                            var error_dialog = new Granite.MessageDialog (
+                                _("Completing task failed"),
+                                _("The task registry may be unavailable or unable to be written to."),
+                                new ThemedIcon ("dialog-error"),
+                                Gtk.ButtonsType.CLOSE
+                            );
+                            error_dialog.show_error_details (e.message);
+                            error_dialog.run ();
+                            error_dialog.destroy ();
+                        }
+
+                        return GLib.Source.REMOVE;
+                    });
+                });
             });
+
             task_row.task_changed.connect ((task) => {
-                Tasks.Application.model.update_task (source, task, ECal.ObjModType.THIS_AND_FUTURE);
+                Tasks.Application.model.update_task.begin (source, task, ECal.ObjModType.THIS_AND_FUTURE, (obj, res) => {
+                    GLib.Idle.add (() => {
+                        try {
+                            Tasks.Application.model.update_task.end (res);
+                        } catch (Error e) {
+                            var error_dialog = new Granite.MessageDialog (
+                                _("Updating task failed"),
+                                _("The task registry may be unavailable or unable to be written to."),
+                                new ThemedIcon ("dialog-error"),
+                                Gtk.ButtonsType.CLOSE
+                            );
+                            error_dialog.show_error_details (e.message);
+                            error_dialog.run ();
+                            error_dialog.destroy ();
+                        }
+
+                        return GLib.Source.REMOVE;
+                    });
+                });
             });
+
             task_row.task_removed.connect ((task) => {
-                Tasks.Application.model.remove_task (source, task, ECal.ObjModType.ALL);
+                Tasks.Application.model.remove_task.begin (source, task, ECal.ObjModType.ALL, (obj, res) => {
+                    GLib.Idle.add (() => {
+                        try {
+                            Tasks.Application.model.remove_task.end (res);
+                        } catch (Error e) {
+                            var error_dialog = new Granite.MessageDialog (
+                                _("Removing task failed"),
+                                _("The task registry may be unavailable or unable to be written to."),
+                                new ThemedIcon ("dialog-error"),
+                                Gtk.ButtonsType.CLOSE
+                            );
+                            error_dialog.show_error_details (e.message);
+                            error_dialog.run ();
+                            error_dialog.destroy ();
+                        }
+
+                        return GLib.Source.REMOVE;
+                    });
+                });
             });
+
             task_list.add (task_row);
+
             return true;
         });
 
