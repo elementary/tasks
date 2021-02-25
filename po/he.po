@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 12:20+0000\n"
+"POT-Creation-Date: 2021-02-23 20:15+0000\n"
 "PO-Revision-Date: 2021-01-21 19:58+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/tasks/he/>\n"
@@ -30,13 +30,44 @@ msgstr "עריכת השם והמראה"
 msgid "No Tasks"
 msgstr "אין משימות"
 
-#: src/ListView.vala:210
+#: src/ListView.vala:198
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Adding task failed"
+msgstr "שינוי שם רשימת המשימות נכשל"
+
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr "רשם רשימות המשימות כנראה אינו זמין או שלא ניתן לכתוב אליו."
+
+#: src/ListView.vala:228
 msgid "Renaming task list failed"
 msgstr "שינוי שם רשימת המשימות נכשל"
 
-#: src/ListView.vala:211 src/MainWindow.vala:256
-msgid "The task list registry may be unavailable or unable to be written to."
+#: src/ListView.vala:354
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Completing task failed"
+msgstr "שינוי שם רשימת המשימות נכשל"
+
+#: src/ListView.vala:355 src/ListView.vala:377 src/ListView.vala:399
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task registry may be unavailable or unable to be written to."
 msgstr "רשם רשימות המשימות כנראה אינו זמין או שלא ניתן לכתוב אליו."
+
+#: src/ListView.vala:376
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Updating task failed"
+msgstr "שינוי שם רשימת המשימות נכשל"
+
+#: src/ListView.vala:398
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Removing task failed"
+msgstr "שינוי שם רשימת המשימות נכשל"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
@@ -46,7 +77,7 @@ msgstr "משימות"
 msgid "New list"
 msgstr "רשימה חדשה"
 
-#: src/MainWindow.vala:255
+#: src/MainWindow.vala:259
 msgid "Creating a new task list failed"
 msgstr "יצירת רשימת משימות חדשה נכשלה"
 
@@ -95,7 +126,7 @@ msgstr "מהימנות אישור SSL נדחתה עבור החיבור"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"

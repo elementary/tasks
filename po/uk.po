@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 12:20+0000\n"
+"POT-Creation-Date: 2021-02-23 20:15+0000\n"
 "PO-Revision-Date: 2021-01-25 21:59+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/tasks/uk/"
@@ -32,15 +32,48 @@ msgstr "Змінити назву та вигляд"
 msgid "No Tasks"
 msgstr "Немає завдань"
 
-#: src/ListView.vala:210
-msgid "Renaming task list failed"
+#: src/ListView.vala:198
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Adding task failed"
 msgstr "Не вдалося перейменувати перелік завдань"
 
-#: src/ListView.vala:211 src/MainWindow.vala:256
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Реєстр переліку завдань може бути недоступним або неможливо записати до "
 "нього."
+
+#: src/ListView.vala:228
+msgid "Renaming task list failed"
+msgstr "Не вдалося перейменувати перелік завдань"
+
+#: src/ListView.vala:354
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Completing task failed"
+msgstr "Не вдалося перейменувати перелік завдань"
+
+#: src/ListView.vala:355 src/ListView.vala:377 src/ListView.vala:399
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr ""
+"Реєстр переліку завдань може бути недоступним або неможливо записати до "
+"нього."
+
+#: src/ListView.vala:376
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Updating task failed"
+msgstr "Не вдалося перейменувати перелік завдань"
+
+#: src/ListView.vala:398
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Removing task failed"
+msgstr "Не вдалося перейменувати перелік завдань"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
@@ -50,7 +83,7 @@ msgstr "Завдання"
 msgid "New list"
 msgstr "Новий перелік"
 
-#: src/MainWindow.vala:255
+#: src/MainWindow.vala:259
 msgid "Creating a new task list failed"
 msgstr "Не вдалося створити перелік завдань"
 
@@ -99,7 +132,7 @@ msgstr "Не довірений SSL сертифікат для під'єдна�
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
