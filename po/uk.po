@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-23 20:15+0000\n"
-"PO-Revision-Date: 2021-01-25 21:59+0000\n"
+"PO-Revision-Date: 2021-02-25 16:36+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/tasks/uk/"
 ">\n"
@@ -33,10 +33,8 @@ msgid "No Tasks"
 msgstr "Немає завдань"
 
 #: src/ListView.vala:198
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Adding task failed"
-msgstr "Не вдалося перейменувати перелік завдань"
+msgstr "Не вдалося додати завдання"
 
 #: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
 msgid "The task list registry may be unavailable or unable to be written to."
@@ -49,31 +47,20 @@ msgid "Renaming task list failed"
 msgstr "Не вдалося перейменувати перелік завдань"
 
 #: src/ListView.vala:354
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Completing task failed"
-msgstr "Не вдалося перейменувати перелік завдань"
+msgstr "Не вдалося позначити завдання виконаним"
 
 #: src/ListView.vala:355 src/ListView.vala:377 src/ListView.vala:399
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
-"Реєстр переліку завдань може бути недоступним або неможливо записати до "
-"нього."
+msgstr "Реєстр завдань може бути недоступним або неможливо записати до нього."
 
 #: src/ListView.vala:376
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Updating task failed"
-msgstr "Не вдалося перейменувати перелік завдань"
+msgstr "Не вдалося оновити завдання"
 
 #: src/ListView.vala:398
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Removing task failed"
-msgstr "Не вдалося перейменувати перелік завдань"
+msgstr "Не вдалося вилучити завдання"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
