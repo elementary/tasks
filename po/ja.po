@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-23 20:15+0000\n"
-"PO-Revision-Date: 2021-02-25 06:59+0000\n"
+"PO-Revision-Date: 2021-02-25 13:19+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
-">\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/>"
+"\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,10 +32,8 @@ msgid "No Tasks"
 msgstr "タスクがありません"
 
 #: src/ListView.vala:198
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Adding task failed"
-msgstr "タスクの名前を変更できませんでした"
+msgstr "タスクを追加できませんでした"
 
 #: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
 msgid "The task list registry may be unavailable or unable to be written to."
@@ -46,29 +44,20 @@ msgid "Renaming task list failed"
 msgstr "タスクの名前を変更できませんでした"
 
 #: src/ListView.vala:354
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Completing task failed"
-msgstr "タスクの名前を変更できませんでした"
+msgstr "タスクを完了済みとしてマークできませんでした"
 
 #: src/ListView.vala:355 src/ListView.vala:377 src/ListView.vala:399
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr "タスク一覧の登録ができないか、書き込みできない可能性があります。"
+msgstr "タスクを登録できないか、書き込みできない可能性があります。"
 
 #: src/ListView.vala:376
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Updating task failed"
-msgstr "タスクの名前を変更できませんでした"
+msgstr "タスクを更新できませんでした"
 
 #: src/ListView.vala:398
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Removing task failed"
-msgstr "タスクの名前を変更できませんでした"
+msgstr "タスクを削除できませんでした"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
