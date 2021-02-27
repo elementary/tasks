@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 12:20+0000\n"
+"POT-Creation-Date: 2021-02-26 10:23+0000\n"
 "PO-Revision-Date: 2021-01-01 04:16+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
@@ -30,15 +30,48 @@ msgstr "Modifier le nom et l'apparence"
 msgid "No Tasks"
 msgstr "Aucune tâche"
 
-#: src/ListView.vala:210
-msgid "Renaming task list failed"
+#: src/ListView.vala:198
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Adding task failed"
 msgstr "Échec du renommage de la liste des tâches"
 
-#: src/ListView.vala:211 src/MainWindow.vala:256
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des listes de tâches est probablement indisponible ou en lecture "
 "seule."
+
+#: src/ListView.vala:228
+msgid "Renaming task list failed"
+msgstr "Échec du renommage de la liste des tâches"
+
+#: src/ListView.vala:354
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Completing task failed"
+msgstr "Échec du renommage de la liste des tâches"
+
+#: src/ListView.vala:355 src/ListView.vala:377 src/ListView.vala:399
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr ""
+"Le registre des listes de tâches est probablement indisponible ou en lecture "
+"seule."
+
+#: src/ListView.vala:376
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Updating task failed"
+msgstr "Échec du renommage de la liste des tâches"
+
+#: src/ListView.vala:398
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Removing task failed"
+msgstr "Échec du renommage de la liste des tâches"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
@@ -48,7 +81,7 @@ msgstr "Tâches"
 msgid "New list"
 msgstr "Nouvelle liste"
 
-#: src/MainWindow.vala:255
+#: src/MainWindow.vala:259
 msgid "Creating a new task list failed"
 msgstr "Échec de la création d'une nouvelle liste de tâches"
 
