@@ -274,13 +274,33 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         });
     }
 
+    private void dialog_refresh_collection_error (Error e) {
+        string error_message = e.message;
+
+        GLib.Idle.add (() => {
+            var error_dialog = new Granite.MessageDialog (
+                _("Refresh collection failed"),
+                _("The backend may be unavailable or unable to read from."),
+                new ThemedIcon ("dialog-error"),
+                Gtk.ButtonsType.CLOSE
+            ) {
+                transient_for = this
+            };
+            error_dialog.show_error_details (error_message);
+            error_dialog.run ();
+            error_dialog.destroy ();
+
+            return GLib.Source.REMOVE;
+        });
+    }
+
     private void dialog_refresh_task_list_error (Error e) {
         string error_message = e.message;
 
         GLib.Idle.add (() => {
             var error_dialog = new Granite.MessageDialog (
-                _("Refresh task list from backend failed"),
-                _("The task list backend may be unavailable or unable to read from."),
+                _("Refresh task list failed"),
+                _("The backend may be unavailable or unable to read from."),
                 new ThemedIcon ("dialog-error"),
                 Gtk.ButtonsType.CLOSE
             ) {
@@ -305,6 +325,23 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void action_refresh_all_lists () {
+        if (collection_sources != null) {
+            Tasks.Application.model.get_registry.begin ((obj, res) => {
+                try {
+                    var registry = Tasks.Application.model.get_registry.end (res);
+
+                    lock (collection_sources) {
+                        foreach (var collection_source in collection_sources) {
+                            registry.refresh_backend_sync (collection_source.dup_uid ());
+                        }
+                    }
+
+                } catch (Error e) {
+                    dialog_refresh_collection_error (e);
+                }
+            });
+        }
+
         if (source_rows != null) {
             lock (source_rows) {
                 source_rows.foreach (source_row => {
