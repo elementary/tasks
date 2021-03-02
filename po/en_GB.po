@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 10:23+0000\n"
-"PO-Revision-Date: 2021-02-14 16:07+0000\n"
+"POT-Creation-Date: 2021-03-01 15:39+0000\n"
+"PO-Revision-Date: 2021-02-27 19:38+0000\n"
 "Last-Translator: Ciarán Ainsworth <ciaranainsworth@outlook.com>\n"
 "Language-Team: English (United Kingdom) <https://l10n.elementary.io/projects/"
 "tasks/tasks/en_GB/>\n"
@@ -32,10 +32,8 @@ msgid "No Tasks"
 msgstr "No Tasks"
 
 #: src/ListView.vala:198
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Adding task failed"
-msgstr "Renaming task list failed"
+msgstr "Adding task failed"
 
 #: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
 msgid "The task list registry may be unavailable or unable to be written to."
@@ -46,29 +44,20 @@ msgid "Renaming task list failed"
 msgstr "Renaming task list failed"
 
 #: src/ListView.vala:354
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Completing task failed"
-msgstr "Renaming task list failed"
+msgstr "Completing task failed"
 
 #: src/ListView.vala:355 src/ListView.vala:377 src/ListView.vala:399
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr "The task list registry may be unavailable or unable to be written to."
+msgstr "The task registry may be unavailable or unable to be written to."
 
 #: src/ListView.vala:376
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Updating task failed"
-msgstr "Renaming task list failed"
+msgstr "Updating task failed"
 
 #: src/ListView.vala:398
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Removing task failed"
-msgstr "Renaming task list failed"
+msgstr "Removing task failed"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
@@ -127,7 +116,7 @@ msgstr "SSL certificate trust was rejected for the connection"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
