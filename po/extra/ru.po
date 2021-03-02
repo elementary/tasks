@@ -8,23 +8,25 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-26 10:23+0000\n"
-"PO-Revision-Date: 2019-08-02 13:43-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-03-02 19:02+0000\n"
+"Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
+"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/extra/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
-msgstr ""
+msgstr "Задачи"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "Синхронизированые задачи и напоминания"
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
@@ -32,19 +34,22 @@ msgid ""
 "Create and complete tasks, manage lists and sync them across your machines "
 "using calDav."
 msgstr ""
+"Задачи разработаны и построены для управления всеми вашими задачами и "
+"напоминаниями. Создавайте и выполняйте задачи, управляйте списками и "
+"синхронизируйте их на своих машинах с помощью calDav."
 
 #: data/tasks.appdata.xml.in:48
 msgid "elementary, Inc."
-msgstr ""
+msgstr "elementary, Inc."
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
-msgstr ""
+msgstr "Создавайте и отслеживайте прогресс выполнения задач"
 
 #: data/tasks.desktop.in:6
 msgid "io.elementary.tasks"
-msgstr ""
+msgstr "io.elementary.tasks"
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "Задачи;Напоминания;"
