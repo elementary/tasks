@@ -217,6 +217,16 @@ public class Tasks.TaskModel : Object {
         return false;
     }
 
+    public async bool refresh_task_list (E.Source source, GLib.Cancellable? cancellable = null) throws Error {
+        var client = get_client (source);
+
+        if (client.check_refresh_supported ()) {
+            yield client.refresh (cancellable);
+            return true;
+        }
+        return false;
+    }
+
     private string get_collection_backend_name (E.Source source, E.SourceRegistry registry) {
         string? backend_name = null;
 

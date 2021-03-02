@@ -21,9 +21,11 @@
 public class Tasks.MainWindow : Hdy.ApplicationWindow {
     public const string ACTION_PREFIX = "win.";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
+    public const string ACTION_REFRESH_ALL_LISTS = "action-refresh-all-lists";
 
     private const ActionEntry[] ACTION_ENTRIES = {
-        { ACTION_DELETE_SELECTED_LIST, action_delete_selected_list }
+        { ACTION_DELETE_SELECTED_LIST, action_delete_selected_list },
+        { ACTION_REFRESH_ALL_LISTS, action_refresh_all_lists }
     };
 
     private static Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
@@ -48,6 +50,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "<Control>BackSpace";
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "Delete";
+        action_accelerators[ACTION_REFRESH_ALL_LISTS] = "<Control>r";
 
         Gtk.IconTheme.get_default ().add_resource_path ("/io/elementary/tasks");
     }
@@ -271,6 +274,26 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         });
     }
 
+    private void dialog_refresh_task_list_error (Error e) {
+        string error_message = e.message;
+
+        GLib.Idle.add (() => {
+            var error_dialog = new Granite.MessageDialog (
+                _("Refresh task list from backend failed"),
+                _("The task list backend may be unavailable or unable to read from."),
+                new ThemedIcon ("dialog-error"),
+                Gtk.ButtonsType.CLOSE
+            ) {
+                transient_for = this
+            };
+            error_dialog.show_error_details (error_message);
+            error_dialog.run ();
+            error_dialog.destroy ();
+
+            return GLib.Source.REMOVE;
+        });
+    }
+
     private void action_delete_selected_list () {
         var list_row = ((Tasks.SourceRow) listbox.get_selected_row ());
         var source = list_row.source;
@@ -278,6 +301,29 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             source.remove.begin (null);
         } else {
             Gdk.beep ();
+        }
+    }
+
+    private void action_refresh_all_lists () {
+        if (source_rows != null) {
+            lock (source_rows) {
+                source_rows.foreach (source_row => {
+                    source_row.key.set_connection_status (E.SourceConnectionStatus.CONNECTING);
+                    source_row.value.update_request ();
+
+                    Tasks.Application.model.refresh_task_list.begin (source_row.key, null, (obj, res) => {
+                        try {
+                            Tasks.Application.model.refresh_task_list.end (res);
+                            source_row.key.set_connection_status (E.SourceConnectionStatus.CONNECTED);
+                        } catch (Error e) {
+                            source_row.key.set_connection_status (E.SourceConnectionStatus.DISCONNECTED);
+                            dialog_refresh_task_list_error (e);
+                        }
+                        source_row.value.update_request ();
+                    });
+                    return true;
+                });
+            }
         }
     }
 
