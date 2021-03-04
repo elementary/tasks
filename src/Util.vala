@@ -208,10 +208,14 @@ namespace Tasks.Util {
     }
 
     /**
-    * if the X-APPLE-SORT-ORDER property is not set,
-    * Apple uses the number of seconds between the creation of
-    * the task and 20010101T000000Z (Cocoa/Webkit epoch)
-    * as value for sorting.
+    * Calculates the number of seconds between the ECal.Component's
+    * creation date and the Cocoa/Webkit epoch (= 20010101T000000Z).
+    *
+    * The same value is calculated on iOS devices and used for sorting
+    * in case there is no X-APPLE-SORT-ORDER property value set.
+    *
+    * So this default value calculation ensures we achieve the same sort
+    * order of tasks like we have on iOS devices.
     */
     public ICal.Duration get_apple_sortorder_default_value (ECal.Component ecalcomponent) {
         return ecalcomponent.get_created ().subtract (new ICal.Time.from_string ("20010101T000000Z"));
