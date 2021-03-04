@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-01 15:39+0000\n"
-"PO-Revision-Date: 2021-03-01 15:34+0000\n"
-"Last-Translator: david <dcardelleg@gmail.com>\n"
+"POT-Creation-Date: 2021-03-04 00:01+0000\n"
+"PO-Revision-Date: 2021-03-03 23:58+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
 ">\n"
 "Language: es\n"
@@ -129,12 +129,12 @@ msgstr "%s a las %s"
 #: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
-msgstr "Llegando: %s"
+msgstr "Llegada: %s"
 
 #: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
-msgstr "Dejando: %s"
+msgstr "Partida: %s"
 
 #: src/Widgets/TaskRow.vala:216
 msgid "Cancel"
