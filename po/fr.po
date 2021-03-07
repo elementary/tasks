@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-04 07:52+0000\n"
+"POT-Creation-Date: 2021-03-05 09:35+0000\n"
 "PO-Revision-Date: 2021-03-05 09:28+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
@@ -44,20 +44,20 @@ msgstr ""
 msgid "Renaming task list failed"
 msgstr "Échec du renommage de la liste des tâches"
 
-#: src/ListView.vala:354
+#: src/ListView.vala:344
 msgid "Completing task failed"
 msgstr "Échec de complétion de la tâche"
 
-#: src/ListView.vala:355 src/ListView.vala:377 src/ListView.vala:399
+#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des tâches est probablement indisponible ou en lecture seule."
 
-#: src/ListView.vala:376
+#: src/ListView.vala:366
 msgid "Updating task failed"
 msgstr "Échec de la mise à jour de la tâche"
 
-#: src/ListView.vala:398
+#: src/ListView.vala:388
 msgid "Removing task failed"
 msgstr "Échec de la suppression de la tâche"
 

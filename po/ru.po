@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-04 07:52+0000\n"
+"POT-Creation-Date: 2021-03-05 09:35+0000\n"
 "PO-Revision-Date: 2021-03-02 19:02+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
@@ -44,19 +44,19 @@ msgstr "Журнал списка задач может быть недосту�
 msgid "Renaming task list failed"
 msgstr "Не удалось переименовать список задач"
 
-#: src/ListView.vala:354
+#: src/ListView.vala:344
 msgid "Completing task failed"
 msgstr "Не удалось обозначить задачу выполненной"
 
-#: src/ListView.vala:355 src/ListView.vala:377 src/ListView.vala:399
+#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Реестр задач может быть недоступен или не может быть записан."
 
-#: src/ListView.vala:376
+#: src/ListView.vala:366
 msgid "Updating task failed"
 msgstr "Не удалось обновить задачу"
 
-#: src/ListView.vala:398
+#: src/ListView.vala:388
 msgid "Removing task failed"
 msgstr "Не удалось удалить задачу"
 
