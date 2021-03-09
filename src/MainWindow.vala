@@ -189,7 +189,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         sources.foreach ((source) => {
                             E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
-                            if (list.selected == true && source.enabled == true) {
+                            if (list.selected == true && source.enabled == true && !source.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
                                 listview.add_view (source, query);
                             }
                         });
@@ -223,6 +223,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             if (last_selected_list == SCHEDULED_LIST_UID) {
                 listbox.select_row (scheduled_row);
+                listbox.row_selected (scheduled_row);
 
             } else {
                 var default_task_list = registry.default_task_list;
