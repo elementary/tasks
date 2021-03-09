@@ -254,12 +254,16 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             new_source_tasklist_extension.color = "#0e9a83";
 
             Tasks.Application.model.add_task_list.begin (new_source, collection_source, (obj, res) => {
-                try {
-                    Tasks.Application.model.add_task_list.end (res);
-                } catch (Error e) {
-                    critical (e.message);
-                    dialog_add_task_list_error (e);
-                }
+                GLib.Idle.add (() => {
+                    try {
+                        Application.model.add_task_list.end (res);
+                    } catch (Error e) {
+                        critical (e.message);
+                        dialog_add_task_list_error (e);
+                    }
+
+                    return GLib.Source.REMOVE;
+                });
             });
 
         } catch (Error e) {
