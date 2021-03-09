@@ -280,27 +280,17 @@ public class Tasks.ListView : Gtk.Grid {
         var row_b = (Tasks.TaskRow) row2;
 
         if (row_a.completed == row_b.completed) {
-            unowned ICal.Component comp_a = row_a.task.get_icalcomponent ();
-            unowned ICal.Component comp_b = row_b.task.get_icalcomponent ();
-
-            ICal.Time start_a = comp_a.get_dtstart ();
-            ICal.Time stamp_a = comp_a.get_dtstamp ();
-
-            ICal.Time start_b = comp_b.get_dtstart ();
-            ICal.Time stamp_b = comp_b.get_dtstamp ();
-
-            if ( start_a.is_null_time () && start_b.is_null_time () ) {
-                return stamp_b.compare (stamp_a);
-
-            } else if (start_a.is_null_time () && !start_b.is_null_time ()) {
-                return 1;
-
-            } else if (start_b.is_null_time () && !start_a.is_null_time ()) {
-                return -1;
-
-            } else {
-                return start_a.compare (start_b);
+            var apple_sortorder_a = Util.get_apple_sortorder_property_value (row_a.task);
+            if (apple_sortorder_a == null) {
+                apple_sortorder_a = Util.get_apple_sortorder_default_value (row_a.task).as_int ().to_string ();
             }
+
+            var apple_sortorder_b = Util.get_apple_sortorder_property_value (row_b.task);
+            if (apple_sortorder_b == null) {
+                apple_sortorder_b = Util.get_apple_sortorder_default_value (row_b.task).as_int ().to_string ();
+            }
+
+            return apple_sortorder_a.collate (apple_sortorder_b);
 
         } else if (row_a.completed && !row_b.completed) {
             return 1;

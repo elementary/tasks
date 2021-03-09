@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 10:23+0000\n"
-"PO-Revision-Date: 2020-11-23 05:15+0000\n"
+"POT-Creation-Date: 2021-03-05 09:35+0000\n"
+"PO-Revision-Date: 2021-03-07 04:21+0000\n"
 "Last-Translator: Trkien618 <hacngoctrungkien@gmail.com>\n"
 "Language-Team: Vietnamese <https://l10n.elementary.io/projects/tasks/tasks/"
 "vi/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
@@ -32,10 +32,8 @@ msgid "No Tasks"
 msgstr "Không có tác vụ"
 
 #: src/ListView.vala:198
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Adding task failed"
-msgstr "Đổi tên danh sách tác vụ thất bại"
+msgstr "Thêm tác vụ thất bại"
 
 #: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
 msgid "The task list registry may be unavailable or unable to be written to."
@@ -46,31 +44,21 @@ msgstr ""
 msgid "Renaming task list failed"
 msgstr "Đổi tên danh sách tác vụ thất bại"
 
-#: src/ListView.vala:354
-#, fuzzy
-#| msgid "Renaming task list failed"
+#: src/ListView.vala:344
 msgid "Completing task failed"
-msgstr "Đổi tên danh sách tác vụ thất bại"
+msgstr "Hoàn thành tác vụ thất bại"
 
-#: src/ListView.vala:355 src/ListView.vala:377 src/ListView.vala:399
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
+#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
-"Sổ đăng ký danh sách tác vụ có thể không có sẵn hoặc không thể ghi vào."
+msgstr "Sổ đăng ký tác vụ có thể không có sẵn hoặc không thể ghi vào."
 
-#: src/ListView.vala:376
-#, fuzzy
-#| msgid "Renaming task list failed"
+#: src/ListView.vala:366
 msgid "Updating task failed"
-msgstr "Đổi tên danh sách tác vụ thất bại"
+msgstr "Cập nhật tác vụ thất bại"
 
-#: src/ListView.vala:398
-#, fuzzy
-#| msgid "Renaming task list failed"
+#: src/ListView.vala:388
 msgid "Removing task failed"
-msgstr "Đổi tên danh sách tác vụ thất bại"
+msgstr "Loại bỏ tác vụ thất bại"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
@@ -138,12 +126,12 @@ msgstr "%s tại %s"
 #: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "Đi đến: %s"
 
 #: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "Rời khỏi: %s"
 
 #: src/Widgets/TaskRow.vala:216
 msgid "Cancel"
