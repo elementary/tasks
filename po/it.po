@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 12:20+0000\n"
+"POT-Creation-Date: 2021-03-05 09:35+0000\n"
 "PO-Revision-Date: 2021-01-26 16:07+0000\n"
 "Last-Translator: Marco De Paolini <marco.depaolini@gmail.com>\n"
 "Language-Team: Italian <https://l10n.elementary.io/projects/tasks/tasks/it/"
@@ -31,15 +31,48 @@ msgstr "Modifica nome e aspetto"
 msgid "No Tasks"
 msgstr "Nessuna attività"
 
-#: src/ListView.vala:210
-msgid "Renaming task list failed"
+#: src/ListView.vala:198
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Adding task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/ListView.vala:211 src/MainWindow.vala:256
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
+
+#: src/ListView.vala:228
+msgid "Renaming task list failed"
+msgstr "Cambio del nome dell'elenco di attività non riuscito"
+
+#: src/ListView.vala:344
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Completing task failed"
+msgstr "Cambio del nome dell'elenco di attività non riuscito"
+
+#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr ""
+"Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
+"può essere scritto."
+
+#: src/ListView.vala:366
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Updating task failed"
+msgstr "Cambio del nome dell'elenco di attività non riuscito"
+
+#: src/ListView.vala:388
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Removing task failed"
+msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
@@ -49,7 +82,7 @@ msgstr "Attività"
 msgid "New list"
 msgstr "Nuovo elenco"
 
-#: src/MainWindow.vala:255
+#: src/MainWindow.vala:259
 msgid "Creating a new task list failed"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
 
