@@ -231,7 +231,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 task_lists.foreach ((source) => {
                     E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
-                    if (list.selected == true && source.enabled == true) {
+                    if (list.selected == true && source.enabled == true && !source.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
                         add_source (source);
 
                         if (last_selected_list == "" && default_task_list == source) {
