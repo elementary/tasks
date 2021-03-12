@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 12:20+0000\n"
-"PO-Revision-Date: 2021-01-01 04:16+0000\n"
+"POT-Creation-Date: 2021-03-07 04:25+0000\n"
+"PO-Revision-Date: 2021-02-25 13:19+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
 ">\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
@@ -31,13 +31,33 @@ msgstr "名前や外観を変更します"
 msgid "No Tasks"
 msgstr "タスクがありません"
 
-#: src/ListView.vala:210
+#: src/ListView.vala:198
+msgid "Adding task failed"
+msgstr "タスクを追加できませんでした"
+
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr "タスク一覧の登録ができないか、書き込みできない可能性があります。"
+
+#: src/ListView.vala:228
 msgid "Renaming task list failed"
 msgstr "タスクの名前を変更できませんでした"
 
-#: src/ListView.vala:211 src/MainWindow.vala:256
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr "タスク一覧の登録ができないか、書き込みできない可能性があります。"
+#: src/ListView.vala:344
+msgid "Completing task failed"
+msgstr "タスクを完了済みとしてマークできませんでした"
+
+#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr "タスクを登録できないか、書き込みできない可能性があります。"
+
+#: src/ListView.vala:366
+msgid "Updating task failed"
+msgstr "タスクを更新できませんでした"
+
+#: src/ListView.vala:388
+msgid "Removing task failed"
+msgstr "タスクを削除できませんでした"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
@@ -47,7 +67,7 @@ msgstr "タスク"
 msgid "New list"
 msgstr "新しい一覧"
 
-#: src/MainWindow.vala:255
+#: src/MainWindow.vala:259
 msgid "Creating a new task list failed"
 msgstr "新しいタスク一覧を作成できませんでした"
 
@@ -85,7 +105,7 @@ msgstr "ログイン情報を待機しています"
 
 #: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr "（リモートの）データストアから切断されています"
+msgstr "(リモートの) データストアから切断されています"
 
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"

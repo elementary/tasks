@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 12:20+0000\n"
+"POT-Creation-Date: 2021-03-07 04:25+0000\n"
 "PO-Revision-Date: 2020-11-23 05:15+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/"
@@ -31,13 +31,44 @@ msgstr "नाव आणि स्वरूप संपादित करा"
 msgid "No Tasks"
 msgstr "कोणतीही कामे नाहीत"
 
-#: src/ListView.vala:210
+#: src/ListView.vala:198
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Adding task failed"
+msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
+
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
+
+#: src/ListView.vala:228
 msgid "Renaming task list failed"
 msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
 
-#: src/ListView.vala:211 src/MainWindow.vala:256
-msgid "The task list registry may be unavailable or unable to be written to."
+#: src/ListView.vala:344
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Completing task failed"
+msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
+
+#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task registry may be unavailable or unable to be written to."
 msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
+
+#: src/ListView.vala:366
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Updating task failed"
+msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
+
+#: src/ListView.vala:388
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Removing task failed"
+msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
@@ -47,7 +78,7 @@ msgstr "कामे"
 msgid "New list"
 msgstr "नवीन यादी"
 
-#: src/MainWindow.vala:255
+#: src/MainWindow.vala:259
 msgid "Creating a new task list failed"
 msgstr "नवीन कार्य सूची तयार करणे अयशस्वी झाले"
 

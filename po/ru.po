@@ -7,122 +7,144 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 12:20+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2021-03-07 04:25+0000\n"
+"PO-Revision-Date: 2021-03-02 19:02+0000\n"
+"Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
+"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
-msgstr ""
+msgstr "По расписанию"
 
 #: src/ListView.vala:101
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "Изменить название и внешний вид"
 
 #: src/ListView.vala:113
 msgid "No Tasks"
-msgstr ""
+msgstr "Нет задач"
 
-#: src/ListView.vala:210
-msgid "Renaming task list failed"
-msgstr ""
+#: src/ListView.vala:198
+msgid "Adding task failed"
+msgstr "Не удалось добавить задачу"
 
-#: src/ListView.vala:211 src/MainWindow.vala:256
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
 msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "Журнал списка задач может быть недоступен или не может быть записан."
+
+#: src/ListView.vala:228
+msgid "Renaming task list failed"
+msgstr "Не удалось переименовать список задач"
+
+#: src/ListView.vala:344
+msgid "Completing task failed"
+msgstr "Не удалось обозначить задачу выполненной"
+
+#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr "Реестр задач может быть недоступен или не может быть записан."
+
+#: src/ListView.vala:366
+msgid "Updating task failed"
+msgstr "Не удалось обновить задачу"
+
+#: src/ListView.vala:388
+msgid "Removing task failed"
+msgstr "Не удалось удалить задачу"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
-msgstr ""
+msgstr "Задачи"
 
 #: src/MainWindow.vala:232
 msgid "New list"
-msgstr ""
+msgstr "Новый список"
 
-#: src/MainWindow.vala:255
+#: src/MainWindow.vala:259
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Не удалось создать список задач"
 
 #: src/Util.vala:151
 msgid "Today"
-msgstr ""
+msgstr "Сегодня"
 
 #: src/Util.vala:153
 msgid "Yesterday"
-msgstr ""
+msgstr "Вчера"
 
 #: src/Util.vala:155
 msgid "Tomorrow"
-msgstr ""
+msgstr "Завтра"
 
 #: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
-msgstr ""
+msgstr "Редактировать…"
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
-msgstr ""
+msgstr "Показать выполненные"
 
 #: src/Widgets/ListSettingsPopover.vala:125
 msgid "Delete List"
-msgstr ""
+msgstr "Удалить список"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
-msgstr ""
+msgstr "Подключение…"
 
 #: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "Ожидание данных для входа"
 
 #: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "В настоящее время отключено от (возможно, удаленного) хранилища данных"
 
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "Ненадежный SSL сертификат для подключения, отклонено"
 
 #: src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s в %s"
 
 #: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "Прибытие: %s"
 
 #: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "Отправление: %s"
 
 #: src/Widgets/TaskRow.vala:216
 msgid "Cancel"
-msgstr ""
+msgstr "Отменить"
 
 #: src/Widgets/TaskRow.vala:218
 msgid "Save Changes"
-msgstr ""
+msgstr "Сохранить изменения"
 
 #: src/Widgets/TaskRow.vala:218
 msgid "Add Task"
-msgstr ""
+msgstr "Добавить задачу"
 
 #: src/Widgets/TaskRow.vala:271
 msgid "Delete Task"
-msgstr ""
+msgstr "Удалить задачу"

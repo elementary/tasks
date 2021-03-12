@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-18 12:20+0000\n"
-"PO-Revision-Date: 2021-02-18 23:28+0000\n"
+"POT-Creation-Date: 2021-03-07 04:25+0000\n"
+"PO-Revision-Date: 2021-03-03 23:58+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
 ">\n"
@@ -31,15 +31,37 @@ msgstr "Editar nombre y apariencia"
 msgid "No Tasks"
 msgstr "No hay tareas"
 
-#: src/ListView.vala:210
-msgid "Renaming task list failed"
-msgstr "Falló el cambio de nombre de una lista de tareas"
+#: src/ListView.vala:198
+msgid "Adding task failed"
+msgstr "No se pudo agregar la tarea"
 
-#: src/ListView.vala:211 src/MainWindow.vala:256
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de listas de tareas no esté disponible o no se "
 "pueda modificar."
+
+#: src/ListView.vala:228
+msgid "Renaming task list failed"
+msgstr "Falló el cambio de nombre de una lista de tareas"
+
+#: src/ListView.vala:344
+msgid "Completing task failed"
+msgstr "No se pudo completar la tarea"
+
+#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr ""
+"Es posible que el registro de tareas no esté disponible o no se pueda "
+"escribir en él."
+
+#: src/ListView.vala:366
+msgid "Updating task failed"
+msgstr "Error al actualizar la tarea"
+
+#: src/ListView.vala:388
+msgid "Removing task failed"
+msgstr "No se pudo eliminar la tarea"
 
 #: src/MainWindow.vala:42
 msgid "Tasks"
@@ -49,7 +71,7 @@ msgstr "Tareas"
 msgid "New list"
 msgstr "Lista nueva"
 
-#: src/MainWindow.vala:255
+#: src/MainWindow.vala:259
 msgid "Creating a new task list failed"
 msgstr "Falló la creación de una lista de tareas nueva"
 
