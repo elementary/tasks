@@ -203,7 +203,6 @@ public class Tasks.TaskModel : Object {
 
     public async void remove_task_list (E.Source task_list) throws Error {
         var registry = get_registry_sync ();
-        var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
         var backend_name = get_collection_backend_name (task_list, registry);
 
         switch (backend_name.down ()) {
