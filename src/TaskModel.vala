@@ -217,7 +217,7 @@ public class Tasks.TaskModel : Object {
         return false;
     }
 
-    private string get_collection_backend_name (E.Source source, E.SourceRegistry registry) {
+    public string get_collection_backend_name (E.Source source, E.SourceRegistry registry) {
         string? backend_name = null;
 
         var collection_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);
