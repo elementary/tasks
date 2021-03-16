@@ -209,7 +209,7 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         });
 
         notify["source"].connect (() => {
-            select_task_list_color (source);
+            select_task_list_color (get_task_list_color (source));
         });
 
         show_completed_button.button_release_event.connect (() => {
@@ -220,8 +220,10 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
         Application.settings.bind ("show-completed", show_completed_switch, "active", GLib.SettingsBindFlags.DEFAULT);
     }
 
-    private void select_task_list_color (E.Source source) {
-        switch (get_task_list_color (source)) {
+    private void select_task_list_color (string color) {
+        debug ("Select task list color: %s", color);
+
+        switch (color.down ()) {
             case "#c6262e":
                 color_button_red.active = true;
                 break;
@@ -267,7 +269,8 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
     }
 
     private void update_task_list_color (E.Source source, string color) {
-        if (get_task_list_color (source) == color) {
+        var old_color = get_task_list_color (source);
+        if (old_color == color) {
             return;
         }
 
@@ -275,27 +278,21 @@ public class Tasks.ListSettingsPopover : Gtk.Popover {
             try {
                 Tasks.Application.model.update_task_list_color.end (res);
             } catch (Error e) {
-                select_task_list_color (source);
+                select_task_list_color (old_color);
                 dialog_update_task_list_color_error (e);
             }
         });
     }
 
     private void dialog_update_task_list_color_error (Error e) {
-        string error_message = e.message;
-
-        GLib.Idle.add (() => {
-            var error_dialog = new Granite.MessageDialog (
-                _("Updating the task list color failed"),
-                _("The task list registry may be unavailable or unable to be written to."),
-                new ThemedIcon ("dialog-error"),
-                Gtk.ButtonsType.CLOSE
-            );
-            error_dialog.show_error_details (error_message);
-            error_dialog.run ();
-            error_dialog.destroy ();
-
-            return GLib.Source.REMOVE;
-        });
+        var error_dialog = new Granite.MessageDialog (
+            _("Updating the task list color failed"),
+            _("The task list registry may be unavailable or unable to be written to."),
+            new ThemedIcon ("dialog-error"),
+            Gtk.ButtonsType.CLOSE
+        );
+        error_dialog.show_error_details (e.message);
+        error_dialog.run ();
+        error_dialog.destroy ();
     }
 }

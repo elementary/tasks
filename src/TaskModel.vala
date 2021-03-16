@@ -383,12 +383,15 @@ public class Tasks.TaskModel : Object {
         if (!task_list.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
             throw new Tasks.TaskModelError.INVALID_ARGUMENT ("Changing the color is not supported by this source.");
         }
+        var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        var previous_color = task_list_extension.dup_color ();
 
         var registry = get_registry_sync ();
         var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
-        var backend_name = get_collection_backend_name (collection_source, registry);
-        var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-        var previous_color = task_list_extension.color;
+        var backend_name = "local";
+        if (collection_source != null) {
+            backend_name = get_collection_backend_name (collection_source, registry);
+        }
 
         // Change color in local EDS first, because remote may take quite some time
         debug ("Update local color for '%s'", task_list.get_uid ());
