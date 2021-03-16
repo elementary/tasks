@@ -20,6 +20,7 @@
 public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
     private Gtk.Calendar calendar;
     private Granite.Widgets.TimePicker timepicker;
+    private Gtk.Revealer timepicker_revealer;
 
     public DateTimePopover () {
         Object (
@@ -39,6 +40,13 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
             margin_top = 0
         };
 
+        timepicker_revealer = new Gtk.Revealer () {
+            reveal_child = true,
+            margin = 0
+        };
+
+        timepicker_revealer.add (timepicker);
+
         var today_separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL) {
             margin_bottom = 3,
             margin_top = 3
@@ -54,7 +62,7 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
         grid.attach (today_button, 0, 0);
         grid.attach (today_separator, 0, 1);
         grid.attach (calendar, 0, 2);
-        grid.attach (timepicker, 0, 3);
+        grid.attach (timepicker_revealer, 0, 3);
         grid.show_all ();
 
         popover.add (grid);
@@ -64,6 +72,10 @@ public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
         today_button.button_release_event.connect (on_today_button_release_event);
         calendar.day_selected.connect (on_calendar_day_selected);
         timepicker.time_changed.connect (on_timepicker_time_changed);
+    }
+
+    public void hide_timepicker () {
+        timepicker_revealer.reveal_child = false;
     }
 
     private void on_popover_show () {

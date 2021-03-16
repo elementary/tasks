@@ -106,6 +106,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         due_datetime_popover = new Tasks.DateTimePopover ();
 
+        if (is_gtask) {
+            due_datetime_popover.hide_timepicker ();
+        }
+
         due_datetime_popover_revealer = new Gtk.Revealer () {
             margin_end = 6,
             reveal_child = false,
