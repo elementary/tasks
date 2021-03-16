@@ -189,6 +189,19 @@ public class Tasks.TaskModel : Object {
                 registry.refresh_backend_sync (collection_source.uid, null);
                 break;
 
+            case "google":
+                var collection_source = registry.find_extension (collection_or_sibling, E.SOURCE_EXTENSION_COLLECTION);
+                var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+                var gtasks_service = new GData.TasksService (authorizer);
+
+                var gtasks_tasklist = new GData.TasksTasklist (null) {
+                    title = task_list.display_name
+                };
+
+                gtasks_service.insert_tasklist (gtasks_tasklist, null);
+                yield registry.refresh_backend (collection_source.uid, null);
+                break;
+
             case "local":
                 task_list.parent = "local-stub";
                 task_list_extension.backend_name = "local";
@@ -243,6 +256,7 @@ public class Tasks.TaskModel : Object {
 
             switch (backend_name.down ()) {
                 case "webdav": return true;
+                case "google": return true;
                 case "local": return true;
             }
 
