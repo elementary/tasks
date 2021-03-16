@@ -62,9 +62,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             );
         }
 
-        var header_provider = new Gtk.CssProvider ();
-        header_provider.load_from_resource ("io/elementary/tasks/HeaderBar.css");
-
         var sidebar_header = new Hdy.HeaderBar () {
             decoration_layout = "close:",
             has_subtitle = false,
@@ -72,10 +69,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         };
 
         unowned Gtk.StyleContext sidebar_header_context = sidebar_header.get_style_context ();
-        sidebar_header_context.add_class ("sidebar-header");
         sidebar_header_context.add_class ("default-decoration");
         sidebar_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
-        sidebar_header_context.add_provider (header_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var listview_header = new Hdy.HeaderBar () {
             has_subtitle = false,
