@@ -189,11 +189,59 @@ public class Tasks.TaskModel : Object {
                 registry.refresh_backend_sync (collection_source.uid, null);
                 break;
 
+            case "google":
+                var collection_source = registry.find_extension (collection_or_sibling, E.SOURCE_EXTENSION_COLLECTION);
+                var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+                var gtasks_service = new GData.TasksService (authorizer);
+
+                var gtasks_tasklist = new GData.TasksTasklist (null) {
+                    title = task_list.display_name
+                };
+
+                gtasks_service.insert_tasklist (gtasks_tasklist, null);
+                yield registry.refresh_backend (collection_source.uid, null);
+                break;
+
             case "local":
                 task_list.parent = "local-stub";
                 task_list_extension.backend_name = "local";
 
                 registry.commit_source_sync (task_list, null);
+                break;
+
+            default:
+                throw new Tasks.TaskModelError.BACKEND_ERROR ("Task list management for '%s' is not supported yet.".printf (backend_name));
+        }
+    }
+
+    public async void remove_task_list (E.Source task_list) throws Error {
+        var registry = get_registry_sync ();
+        var backend_name = get_collection_backend_name (task_list, registry);
+
+        switch (backend_name.down ()) {
+            case "webdav":
+                var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+                var collection_source_webdav_session = new E.WebDAVSession (collection_source);
+                var credentials_provider = new E.SourceCredentialsProvider (registry);
+
+                E.NamedParameters credentials;
+                credentials_provider.lookup_sync (collection_source, null, out credentials);
+                collection_source_webdav_session.credentials = credentials;
+
+                var task_list_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+
+                collection_source_webdav_session.delete_sync (
+                    task_list_webdav_extension.soup_uri.to_string (false),
+                    E.WEBDAV_DEPTH_THIS_AND_CHILDREN,
+                    null,
+                    null
+                );
+
+                registry.refresh_backend_sync (collection_source.uid, null);
+                break;
+
+            case "local":
+                task_list.remove_sync (null);
                 break;
 
             default:
@@ -208,7 +256,24 @@ public class Tasks.TaskModel : Object {
 
             switch (backend_name.down ()) {
                 case "webdav": return true;
+                case "google": return true;
                 case "local": return true;
+            }
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+        return false;
+    }
+
+    public bool is_remove_task_list_supported (E.Source source) {
+        try {
+            var registry = get_registry_sync ();
+            var backend_name = get_collection_backend_name (source, registry);
+
+            switch (backend_name.down ()) {
+                case "webdav": return true;
+                case "local": return source.removable;
             }
 
         } catch (Error e) {
