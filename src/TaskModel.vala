@@ -239,6 +239,32 @@ public class Tasks.TaskModel : Object {
 
                 registry.refresh_backend_sync (collection_source.uid, null);
                 break;
+            case "google":
+                var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+                var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+                var service = new GData.TasksService (authorizer);
+                var resource_extension = (E.SourceResource) task_list.get_extension (E.SOURCE_EXTENSION_RESOURCE);
+
+                GData.TasksTasklist? tasklist = null;
+
+                unowned GLib.List<GData.Entry> gtasklists = service.query_all_tasklists (null, null, null).get_entries ();
+                foreach (unowned GData.Entry gtasklist in gtasklists) {
+                    if ("gtasks::%s".printf (gtasklist.id) == resource_extension.identity) {
+                        tasklist = (GData.TasksTasklist) gtasklist;
+                        break;
+                    }
+                }
+
+                if (tasklist == null) {
+                    throw new Tasks.TaskModelError.BACKEND_ERROR (
+                        "Task list '%s' is no longer available in Google backend.",
+                        resource_extension.identity
+                    );
+                }
+
+                service.delete_tasklist (tasklist, null);
+                yield registry.refresh_backend (collection_source.uid, null);
+                break;
 
             case "local":
                 task_list.remove_sync (null);
@@ -273,6 +299,7 @@ public class Tasks.TaskModel : Object {
 
             switch (backend_name.down ()) {
                 case "webdav": return true;
+                case "google": return true;
                 case "local": return source.removable;
             }
 
