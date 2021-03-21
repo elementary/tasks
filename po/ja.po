@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-21 09:26+0000\n"
-"PO-Revision-Date: 2021-02-25 13:19+0000\n"
+"PO-Revision-Date: 2021-03-22 00:48+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
-">\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/>"
+"\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,10 +73,8 @@ msgid "New list"
 msgstr "新しい一覧"
 
 #: src/MainWindow.vala:279
-#, fuzzy
-#| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
-msgstr "新しいタスク一覧を作成できませんでした"
+msgstr "タスク一覧を削除できませんでした"
 
 #: src/Util.vala:151
 msgid "Today"
