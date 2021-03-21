@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-21 09:26+0000\n"
-"PO-Revision-Date: 2021-03-02 19:02+0000\n"
+"PO-Revision-Date: 2021-03-22 00:48+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
-"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,10 +74,8 @@ msgid "New list"
 msgstr "Новый список"
 
 #: src/MainWindow.vala:279
-#, fuzzy
-#| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
-msgstr "Не удалось создать список задач"
+msgstr "Не удалось удалить список задач"
 
 #: src/Util.vala:151
 msgid "Today"
