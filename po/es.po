@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 04:25+0000\n"
+"POT-Creation-Date: 2021-03-17 00:03+0000\n"
 "PO-Revision-Date: 2021-03-03 23:58+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
@@ -35,7 +35,8 @@ msgstr "No hay tareas"
 msgid "Adding task failed"
 msgstr "No se pudo agregar la tarea"
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de listas de tareas no esté disponible o no se "
@@ -67,12 +68,18 @@ msgstr "No se pudo eliminar la tarea"
 msgid "Tasks"
 msgstr "Tareas"
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr "Falló la creación de una lista de tareas nueva"
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "Lista nueva"
 
-#: src/MainWindow.vala:259
-msgid "Creating a new task list failed"
+#: src/MainWindow.vala:279
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Deleting the task list failed"
 msgstr "Falló la creación de una lista de tareas nueva"
 
 #: src/Util.vala:151

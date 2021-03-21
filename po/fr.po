@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 04:25+0000\n"
+"POT-Creation-Date: 2021-03-17 00:03+0000\n"
 "PO-Revision-Date: 2021-03-05 09:28+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
@@ -34,7 +34,8 @@ msgstr "Aucune tâche"
 msgid "Adding task failed"
 msgstr "Échec de l'ajout de la tâche"
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des listes de tâches est probablement indisponible ou en lecture "
@@ -65,12 +66,18 @@ msgstr "Échec de la suppression de la tâche"
 msgid "Tasks"
 msgstr "Tâches"
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr "Échec de la création d'une nouvelle liste de tâches"
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "Nouvelle liste"
 
-#: src/MainWindow.vala:259
-msgid "Creating a new task list failed"
+#: src/MainWindow.vala:279
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Deleting the task list failed"
 msgstr "Échec de la création d'une nouvelle liste de tâches"
 
 #: src/Util.vala:151

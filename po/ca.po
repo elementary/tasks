@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 04:25+0000\n"
+"POT-Creation-Date: 2021-03-17 00:03+0000\n"
 "PO-Revision-Date: 2021-02-26 10:20+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/tasks/ca/"
@@ -35,7 +35,8 @@ msgstr "Sense tasques"
 msgid "Adding task failed"
 msgstr "Ha fallat afegir-hi la tasca."
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "El registre de la llista de tasques pot no estar disponible o no s'hi pot "
@@ -65,12 +66,18 @@ msgstr "Ha fallat suprimir la tasca."
 msgid "Tasks"
 msgstr "Tasques"
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr "Ha fallat crear una llista de tasques nova."
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "Llista nova"
 
-#: src/MainWindow.vala:259
-msgid "Creating a new task list failed"
+#: src/MainWindow.vala:279
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Deleting the task list failed"
 msgstr "Ha fallat crear una llista de tasques nova."
 
 #: src/Util.vala:151

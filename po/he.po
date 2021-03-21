@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 04:25+0000\n"
+"POT-Creation-Date: 2021-03-17 00:03+0000\n"
 "PO-Revision-Date: 2021-02-25 13:19+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/tasks/he/>\n"
@@ -34,7 +34,8 @@ msgstr "אין משימות"
 msgid "Adding task failed"
 msgstr "הוספת המשימה נכשלה"
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "רשם רשימות המשימות כנראה אינו זמין או שלא ניתן לכתוב אליו."
 
@@ -62,12 +63,18 @@ msgstr "הסרת המשימה נכשלה"
 msgid "Tasks"
 msgstr "משימות"
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr "יצירת רשימת משימות חדשה נכשלה"
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "רשימה חדשה"
 
-#: src/MainWindow.vala:259
-msgid "Creating a new task list failed"
+#: src/MainWindow.vala:279
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Deleting the task list failed"
 msgstr "יצירת רשימת משימות חדשה נכשלה"
 
 #: src/Util.vala:151
