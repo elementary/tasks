@@ -240,6 +240,26 @@ public class Tasks.TaskModel : Object {
 
                 registry.refresh_backend_sync (collection_source.uid, null);
                 break;
+            case "google":
+                var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+                var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+                var service = new GData.TasksService (authorizer);
+                var uri = "https://www.googleapis.com/tasks/v1/users/@me/lists/%s";
+                var id = ((E.SourceResource) task_list.get_extension (
+                    E.SOURCE_EXTENSION_RESOURCE
+                )).identity.replace ("gtasks::", "");
+
+                var tasklist = (GData.TasksTasklist) yield service.query_single_entry_async (
+                    GData.TasksService.get_primary_authorization_domain (),
+                    uri.printf (id),
+                    null,
+                    typeof (GData.TasksTasklist),
+                    null
+                );
+
+                service.delete_tasklist (tasklist, null);
+                yield registry.refresh_backend (collection_source.uid, null);
+                break;
 
             case "local":
                 task_list.remove_sync (null);
@@ -274,6 +294,7 @@ public class Tasks.TaskModel : Object {
 
             switch (backend_name.down ()) {
                 case "webdav": return true;
+                case "google": return true;
                 case "local": return source.removable;
             }
 
