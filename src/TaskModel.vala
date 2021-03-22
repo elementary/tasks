@@ -248,25 +248,13 @@ public class Tasks.TaskModel : Object {
                     E.SOURCE_EXTENSION_RESOURCE
                 )).identity.replace ("gtasks::", "");
 
-                GData.TasksTasklist tasklist = null;
-                try {
-                    tasklist = (GData.TasksTasklist) yield service.query_single_entry_async (
-                        GData.TasksService.get_primary_authorization_domain (),
-                        uri.printf (id),
-                        null,
-                        typeof (GData.TasksTasklist),
-                        null
-                    );
-                } catch (Error e) {
-                    if (e is GData.ServiceError.NOT_FOUND) {
-                        throw new Tasks.TaskModelError.BACKEND_ERROR (
-                            "Task list '%s' is no longer available in Google backend.",
-                            id
-                        );
-                    } else {
-                        throw e;
-                    }
-                }
+                var tasklist = (GData.TasksTasklist) yield service.query_single_entry_async (
+                    GData.TasksService.get_primary_authorization_domain (),
+                    uri.printf (id),
+                    null,
+                    typeof (GData.TasksTasklist),
+                    null
+                );
 
                 service.delete_tasklist (tasklist, null);
                 yield registry.refresh_backend (collection_source.uid, null);
