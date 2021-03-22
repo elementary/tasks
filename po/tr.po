@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-21 17:44+0000\n"
-"PO-Revision-Date: 2021-02-26 22:47+0000\n"
+"POT-Creation-Date: 2021-03-22 12:21+0000\n"
+"PO-Revision-Date: 2021-03-22 18:58+0000\n"
 "Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/tasks/tasks/tr/"
 ">\n"
@@ -73,10 +73,8 @@ msgid "New list"
 msgstr "Yeni liste"
 
 #: src/MainWindow.vala:279
-#, fuzzy
-#| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
-msgstr "Yeni bir görev listesi oluşturma başarısız oldu"
+msgstr "Görev listesi silinemedi"
 
 #: src/Util.vala:151
 msgid "Today"
@@ -123,7 +121,7 @@ msgstr "Bağlantı için SSL sertifika güveni reddedildi"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:146
 #, c-format
 msgid "%s at %s"
