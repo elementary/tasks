@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-21 17:44+0000\n"
-"PO-Revision-Date: 2021-03-05 09:28+0000\n"
+"PO-Revision-Date: 2021-03-22 12:14+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
 "Language: fr\n"
@@ -75,10 +75,8 @@ msgid "New list"
 msgstr "Nouvelle liste"
 
 #: src/MainWindow.vala:279
-#, fuzzy
-#| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
-msgstr "Échec de la création d'une nouvelle liste de tâches"
+msgstr "Échec de la suppression de la liste de tâches"
 
 #: src/Util.vala:151
 msgid "Today"
