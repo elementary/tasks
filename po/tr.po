@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-05 09:35+0000\n"
-"PO-Revision-Date: 2021-02-26 22:47+0000\n"
+"POT-Creation-Date: 2021-03-22 12:21+0000\n"
+"PO-Revision-Date: 2021-03-22 18:58+0000\n"
 "Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/tasks/tasks/tr/"
 ">\n"
@@ -35,7 +35,8 @@ msgstr "Görev Yok"
 msgid "Adding task failed"
 msgstr "Görev eklenemedi"
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Görev listesi kayıt defteri kullanılamıyor veya yazılamıyor olabilir."
 
@@ -63,13 +64,17 @@ msgstr "Görev kaldırılamadı"
 msgid "Tasks"
 msgstr "Görevler"
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr "Yeni bir görev listesi oluşturma başarısız oldu"
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "Yeni liste"
 
-#: src/MainWindow.vala:259
-msgid "Creating a new task list failed"
-msgstr "Yeni bir görev listesi oluşturma başarısız oldu"
+#: src/MainWindow.vala:279
+msgid "Deleting the task list failed"
+msgstr "Görev listesi silinemedi"
 
 #: src/Util.vala:151
 msgid "Today"
@@ -111,40 +116,40 @@ msgstr "Şu anda (muhtemelen uzak) veri deposu bağlantısı kesik"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Bağlantı için SSL sertifika güveni reddedildi"
 
-#: src/Widgets/TaskRow.vala:120
+#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:126
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:146
 #, c-format
 msgid "%s at %s"
 msgstr "%s saat %s"
 
-#: src/Widgets/TaskRow.vala:159
+#: src/Widgets/TaskRow.vala:180
 #, c-format
 msgid "Arriving: %s"
 msgstr "Varınca: %s"
 
-#: src/Widgets/TaskRow.vala:162
+#: src/Widgets/TaskRow.vala:183
 #, c-format
 msgid "Leaving: %s"
 msgstr "Ayrılınca: %s"
 
-#: src/Widgets/TaskRow.vala:216
+#: src/Widgets/TaskRow.vala:237
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Save Changes"
 msgstr "Değişiklikleri Kaydet"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Add Task"
 msgstr "Görev Ekle"
 
-#: src/Widgets/TaskRow.vala:271
+#: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
 msgstr "Görevi Sil"
 
