@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-05 09:35+0000\n"
-"PO-Revision-Date: 2021-03-05 09:28+0000\n"
+"POT-Creation-Date: 2021-03-22 12:21+0000\n"
+"PO-Revision-Date: 2021-03-22 12:14+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
 "Language: fr\n"
@@ -34,7 +34,8 @@ msgstr "Aucune tâche"
 msgid "Adding task failed"
 msgstr "Échec de l'ajout de la tâche"
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des listes de tâches est probablement indisponible ou en lecture "
@@ -65,13 +66,17 @@ msgstr "Échec de la suppression de la tâche"
 msgid "Tasks"
 msgstr "Tâches"
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr "Échec de la création d'une nouvelle liste de tâches"
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "Nouvelle liste"
 
-#: src/MainWindow.vala:259
-msgid "Creating a new task list failed"
-msgstr "Échec de la création d'une nouvelle liste de tâches"
+#: src/MainWindow.vala:279
+msgid "Deleting the task list failed"
+msgstr "Échec de la suppression de la liste de tâches"
 
 #: src/Util.vala:151
 msgid "Today"
@@ -113,40 +118,40 @@ msgstr "Actuellement déconnecté de la base de données (possiblement distante)
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Le certificat SSL à été rejeté pour la connexion"
 
-#: src/Widgets/TaskRow.vala:120
+#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:126
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:146
 #, c-format
 msgid "%s at %s"
 msgstr "%s à %s"
 
-#: src/Widgets/TaskRow.vala:159
+#: src/Widgets/TaskRow.vala:180
 #, c-format
 msgid "Arriving: %s"
 msgstr "Arrivée : %s"
 
-#: src/Widgets/TaskRow.vala:162
+#: src/Widgets/TaskRow.vala:183
 #, c-format
 msgid "Leaving: %s"
 msgstr "Départ : %s"
 
-#: src/Widgets/TaskRow.vala:216
+#: src/Widgets/TaskRow.vala:237
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Save Changes"
 msgstr "Enregistrer les modifications"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Add Task"
 msgstr "Ajouter une tâche"
 
-#: src/Widgets/TaskRow.vala:271
+#: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
 msgstr "Supprimer la tâche"
 

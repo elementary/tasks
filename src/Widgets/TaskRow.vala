@@ -75,6 +75,16 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         can_focus = false;
         created = calcomponent_created (task);
 
+        // GTasks tasks only have date on due time, so only show the date
+        bool is_gtask = false;
+        E.SourceRegistry? registry = null;
+        try {
+            registry = Application.model.get_registry_sync ();
+            is_gtask = Application.model.get_collection_backend_name (source, registry) == "google";
+        } catch (Error e) {
+            warning ("unable to get the registry, assuming task is not from gtask");
+        }
+
         icon = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.MENU);
         icon.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
@@ -96,6 +106,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
         due_datetime_popover = new Tasks.DateTimePopover ();
 
+        if (is_gtask) {
+            due_datetime_popover.hide_timepicker ();
+        }
+
         due_datetime_popover_revealer = new Gtk.Revealer () {
             margin_end = 6,
             reveal_child = false,
@@ -113,20 +127,27 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
                 due_datetime_popover.get_style_context ().add_class ("error");
             }
 
-            var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
-            var format = h24_settings.get_string ("clock-format");
-
-            if (is_scheduled_view) {
-                return _("%s").printf (
-                    value.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
-                );
-
+            if (is_gtask) {
+                if (is_scheduled_view) {
+                    return null;
+                } else {
+                    return _("%s").printf (Tasks.Util.get_relative_date (value));
+                }
             } else {
-                ///TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-                return _("%s at %s").printf (
-                    Tasks.Util.get_relative_date (value),
-                    value.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
-                );
+                var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
+                var format = h24_settings.get_string ("clock-format");
+
+                if (is_scheduled_view) {
+                    return _("%s").printf (
+                        value.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                    );
+                } else {
+                    ///TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+                    return _("%s at %s").printf (
+                        Tasks.Util.get_relative_date (value),
+                        value.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                    );
+                }
             }
         });
 
