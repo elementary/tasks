@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 04:25+0000\n"
-"PO-Revision-Date: 2021-03-02 19:02+0000\n"
+"POT-Creation-Date: 2021-03-22 12:21+0000\n"
+"PO-Revision-Date: 2021-03-22 00:48+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
 ">\n"
@@ -36,7 +36,8 @@ msgstr "Нет задач"
 msgid "Adding task failed"
 msgstr "Не удалось добавить задачу"
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
@@ -64,13 +65,17 @@ msgstr "Не удалось удалить задачу"
 msgid "Tasks"
 msgstr "Задачи"
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr "Не удалось создать список задач"
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "Новый список"
 
-#: src/MainWindow.vala:259
-msgid "Creating a new task list failed"
-msgstr "Не удалось создать список задач"
+#: src/MainWindow.vala:279
+msgid "Deleting the task list failed"
+msgstr "Не удалось удалить список задач"
 
 #: src/Util.vala:151
 msgid "Today"
@@ -112,39 +117,39 @@ msgstr "В настоящее время отключено от (возможн
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Ненадежный SSL сертификат для подключения, отклонено"
 
-#: src/Widgets/TaskRow.vala:120
+#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:126
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:146
 #, c-format
 msgid "%s at %s"
 msgstr "%s в %s"
 
-#: src/Widgets/TaskRow.vala:159
+#: src/Widgets/TaskRow.vala:180
 #, c-format
 msgid "Arriving: %s"
 msgstr "Прибытие: %s"
 
-#: src/Widgets/TaskRow.vala:162
+#: src/Widgets/TaskRow.vala:183
 #, c-format
 msgid "Leaving: %s"
 msgstr "Отправление: %s"
 
-#: src/Widgets/TaskRow.vala:216
+#: src/Widgets/TaskRow.vala:237
 msgid "Cancel"
 msgstr "Отменить"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Add Task"
 msgstr "Добавить задачу"
 
-#: src/Widgets/TaskRow.vala:271
+#: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
 msgstr "Удалить задачу"

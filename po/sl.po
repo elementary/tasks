@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 04:25+0000\n"
+"POT-Creation-Date: 2021-03-22 12:21+0000\n"
 "PO-Revision-Date: 2019-08-02 13:42-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -34,7 +34,8 @@ msgstr ""
 msgid "Adding task failed"
 msgstr ""
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
@@ -62,12 +63,16 @@ msgstr ""
 msgid "Tasks"
 msgstr ""
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr ""
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr ""
 
-#: src/MainWindow.vala:259
-msgid "Creating a new task list failed"
+#: src/MainWindow.vala:279
+msgid "Deleting the task list failed"
 msgstr ""
 
 #: src/Util.vala:151
@@ -110,39 +115,39 @@ msgstr ""
 msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:120
+#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
 #, c-format
 msgid "%s"
 msgstr ""
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:126
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:146
 #, c-format
 msgid "%s at %s"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:159
+#: src/Widgets/TaskRow.vala:180
 #, c-format
 msgid "Arriving: %s"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:162
+#: src/Widgets/TaskRow.vala:183
 #, c-format
 msgid "Leaving: %s"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:216
+#: src/Widgets/TaskRow.vala:237
 msgid "Cancel"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Save Changes"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Add Task"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:271
+#: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
 msgstr ""

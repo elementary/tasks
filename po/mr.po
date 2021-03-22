@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 04:25+0000\n"
+"POT-Creation-Date: 2021-03-22 12:21+0000\n"
 "PO-Revision-Date: 2020-11-23 05:15+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/"
@@ -37,7 +37,8 @@ msgstr "कोणतीही कामे नाहीत"
 msgid "Adding task failed"
 msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
 
@@ -74,12 +75,18 @@ msgstr "कार्य सूचीचे नाव बदलणे अयश�
 msgid "Tasks"
 msgstr "कामे"
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr "नवीन कार्य सूची तयार करणे अयशस्वी झाले"
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "नवीन यादी"
 
-#: src/MainWindow.vala:259
-msgid "Creating a new task list failed"
+#: src/MainWindow.vala:279
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Deleting the task list failed"
 msgstr "नवीन कार्य सूची तयार करणे अयशस्वी झाले"
 
 #: src/Util.vala:151
@@ -122,40 +129,40 @@ msgstr "सध्या (शक्यतो दूरस्थ) डेटा स
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "कनेक्शनसाठी एसएसएल प्रमाणपत्र विश्वास नाकारला गेला"
 
-#: src/Widgets/TaskRow.vala:120
+#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:126
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:146
 #, c-format
 msgid "%s at %s"
 msgstr "%s वर %s"
 
-#: src/Widgets/TaskRow.vala:159
+#: src/Widgets/TaskRow.vala:180
 #, c-format
 msgid "Arriving: %s"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:162
+#: src/Widgets/TaskRow.vala:183
 #, c-format
 msgid "Leaving: %s"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:216
+#: src/Widgets/TaskRow.vala:237
 msgid "Cancel"
 msgstr "रद्द करा"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Save Changes"
 msgstr "बदल जतन करा"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Add Task"
 msgstr "कार्य जोडा"
 
-#: src/Widgets/TaskRow.vala:271
+#: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
 msgstr "कार्य हटवा"
 
