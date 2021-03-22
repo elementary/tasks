@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 04:25+0000\n"
+"POT-Creation-Date: 2021-03-21 17:44+0000\n"
 "PO-Revision-Date: 2021-02-26 01:28+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
@@ -37,7 +37,8 @@ msgstr "Ingen gjøremål"
 msgid "Adding task failed"
 msgstr "Kunne ikke legge til nytt gjøremål"
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:260
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
 
@@ -73,12 +74,18 @@ msgstr "Kunne ikke fjerne gjøremål"
 msgid "Tasks"
 msgstr "Gjøremål"
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr "Opprettelse av nytt gjøremål mislyktes"
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "Ny liste"
 
-#: src/MainWindow.vala:259
-msgid "Creating a new task list failed"
+#: src/MainWindow.vala:279
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Deleting the task list failed"
 msgstr "Opprettelse av nytt gjøremål mislyktes"
 
 #: src/Util.vala:151
@@ -121,39 +128,39 @@ msgstr "Frakoblet fra datalager (antagelig annensteds hen)"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Tiltro til SSL-sertifikat ble avslått for tilkoblingen"
 
-#: src/Widgets/TaskRow.vala:120
+#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:126
+#: src/Widgets/TaskRow.vala:146
 #, c-format
 msgid "%s at %s"
 msgstr "%s klokken %s"
 
-#: src/Widgets/TaskRow.vala:159
+#: src/Widgets/TaskRow.vala:180
 #, c-format
 msgid "Arriving: %s"
 msgstr "Ankommer: %s"
 
-#: src/Widgets/TaskRow.vala:162
+#: src/Widgets/TaskRow.vala:183
 #, c-format
 msgid "Leaving: %s"
 msgstr "Forlater: %s"
 
-#: src/Widgets/TaskRow.vala:216
+#: src/Widgets/TaskRow.vala:237
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Save Changes"
 msgstr "Lagre endringer"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Add Task"
 msgstr "Legg til gjøremål"
 
-#: src/Widgets/TaskRow.vala:271
+#: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
 msgstr "Slett gjøremål"
