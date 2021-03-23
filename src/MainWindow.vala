@@ -147,6 +147,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 registry = Tasks.Application.model.get_registry.end (res);
             } catch (Error e) {
                 critical (e.message);
+                dialog_get_registry_error (e);
                 return;
             }
             listbox.set_header_func (header_update_func);
@@ -223,10 +224,21 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         });
     }
 
-    private void add_new_list (E.Source collection_source) {
-        var error_dialog_primary_text = _("Creating a new task list failed");
-        var error_dialog_secondary_text = _("The task list registry may be unavailable or unable to be written to.");
+    private void dialog_get_registry_error (Error e) {
+        var error_dialog = new Granite.MessageDialog (
+            _("Unable to access registry"),
+            _("The task list registry may be unavailable."),
+            new ThemedIcon ("dialog-error"),
+            Gtk.ButtonsType.CLOSE
+        ) {
+            transient_for = this
+        };
+        error_dialog.show_error_details (e.message);
+        error_dialog.run ();
+        error_dialog.destroy ();
+    }
 
+    private void add_new_list (E.Source collection_source) {
         try {
             var new_source = new E.Source (null, null);
             var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
@@ -238,74 +250,28 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     Application.model.add_task_list.end (res);
                 } catch (Error e) {
                     critical (e.message);
-                    show_error_dialog (error_dialog_primary_text, error_dialog_secondary_text, e);
+                    dialog_add_new_list_error (e);
                 }
             });
 
         } catch (Error e) {
             critical (e.message);
-            show_error_dialog (error_dialog_primary_text, error_dialog_secondary_text, e);
+            dialog_add_new_list_error (e);
         }
     }
 
-    private void show_error_dialog (string primary_text, string secondary_text, Error e) {
-        string error_message = e.message;
-
-        GLib.Idle.add (() => {
-            var error_dialog = new Granite.MessageDialog (
-                primary_text,
-                secondary_text,
-                new ThemedIcon ("dialog-error"),
-                Gtk.ButtonsType.CLOSE
-            ) {
-                transient_for = this
-            };
-            error_dialog.show_error_details (error_message);
-            error_dialog.run ();
-            error_dialog.destroy ();
-
-            return GLib.Source.REMOVE;
-        });
-    }
-
-    private void dialog_refresh_collection_error (Error e) {
-        string error_message = e.message;
-
-        GLib.Idle.add (() => {
-            var error_dialog = new Granite.MessageDialog (
-                _("Refresh collection failed"),
-                _("The backend may be unavailable or unable to read from."),
-                new ThemedIcon ("dialog-error"),
-                Gtk.ButtonsType.CLOSE
-            ) {
-                transient_for = this
-            };
-            error_dialog.show_error_details (error_message);
-            error_dialog.run ();
-            error_dialog.destroy ();
-
-            return GLib.Source.REMOVE;
-        });
-    }
-
-    private void dialog_refresh_task_list_error (Error e) {
-        string error_message = e.message;
-
-        GLib.Idle.add (() => {
-            var error_dialog = new Granite.MessageDialog (
-                _("Refresh task list failed"),
-                _("The backend may be unavailable or unable to read from."),
-                new ThemedIcon ("dialog-error"),
-                Gtk.ButtonsType.CLOSE
-            ) {
-                transient_for = this
-            };
-            error_dialog.show_error_details (error_message);
-            error_dialog.run ();
-            error_dialog.destroy ();
-
-            return GLib.Source.REMOVE;
-        });
+    private void dialog_add_new_list_error (Error e) {
+        var error_dialog = new Granite.MessageDialog (
+            _("Creating a new task list failed"),
+            _("The task list registry may be unavailable or unable to be written to."),
+            new ThemedIcon ("dialog-error"),
+            Gtk.ButtonsType.CLOSE
+        ) {
+            transient_for = this
+        };
+        error_dialog.show_error_details (e.message);
+        error_dialog.run ();
+        error_dialog.destroy ();
     }
 
     private void action_delete_selected_list () {
@@ -318,11 +284,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     Tasks.Application.model.remove_task_list.end (res);
                 } catch (Error e) {
                     critical (e.message);
-                    show_error_dialog (
-                        _("Deleting the task list failed"),
-                        _("The task list registry may be unavailable or unable to be written to."),
-                        e
-                    );
+                    dialog_remove_task_list_error (e, source);
                 }
             });
 
@@ -331,44 +293,95 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         }
     }
 
-    private void action_refresh_all_lists () {
-        if (collection_sources != null) {
-            Tasks.Application.model.get_registry.begin ((obj, res) => {
-                try {
-                    var registry = Tasks.Application.model.get_registry.end (res);
+    private void dialog_remove_task_list_error (Error e, E.Source source) {
+        var error_dialog = new Granite.MessageDialog (
+            _("Deleting task list '%s' failed").printf (source.dup_display_name ()),
+            _("The task list registry may be unavailable or unable to be written to."),
+            new ThemedIcon ("dialog-error"),
+            Gtk.ButtonsType.CLOSE
+        ) {
+            transient_for = this
+        };
+        error_dialog.show_error_details (e.message);
+        error_dialog.run ();
+        error_dialog.destroy ();
+    }
 
+    private void action_refresh_all_lists () {
+        Tasks.Application.model.get_registry.begin ((obj, res) => {
+            try {
+                var registry = Tasks.Application.model.get_registry.end (res);
+
+                if (collection_sources != null) {
                     lock (collection_sources) {
                         foreach (var collection_source in collection_sources) {
-                            registry.refresh_backend_sync (collection_source.dup_uid ());
+                            var backend_name = Tasks.Application.model.get_collection_backend_name (collection_source, registry);
+
+                            if (backend_name.down () != "local") {
+                                try {
+                                    registry.refresh_backend_sync (collection_source.dup_uid ());
+                                } catch (Error e) {
+                                    dialog_refresh_backend_error (e, collection_source, registry);
+                                }
+                            }
                         }
                     }
-
-                } catch (Error e) {
-                    dialog_refresh_collection_error (e);
                 }
-            });
-        }
 
-        if (source_rows != null) {
-            lock (source_rows) {
-                source_rows.foreach (source_row => {
-                    source_row.key.set_connection_status (E.SourceConnectionStatus.CONNECTING);
-                    source_row.value.update_request ();
+                if (source_rows != null) {
+                    lock (source_rows) {
+                        source_rows.foreach (source_row => {
+                            source_row.key.set_connection_status (E.SourceConnectionStatus.CONNECTING);
+                            source_row.value.update_request ();
 
-                    Tasks.Application.model.refresh_task_list.begin (source_row.key, null, (obj, res) => {
-                        try {
-                            Tasks.Application.model.refresh_task_list.end (res);
-                            source_row.key.set_connection_status (E.SourceConnectionStatus.CONNECTED);
-                        } catch (Error e) {
-                            source_row.key.set_connection_status (E.SourceConnectionStatus.DISCONNECTED);
-                            dialog_refresh_task_list_error (e);
-                        }
-                        source_row.value.update_request ();
-                    });
-                    return true;
-                });
+                            Tasks.Application.model.refresh_task_list.begin (source_row.key, null, (obj, res) => {
+                                try {
+                                    Tasks.Application.model.refresh_task_list.end (res);
+                                    source_row.key.set_connection_status (E.SourceConnectionStatus.CONNECTED);
+                                } catch (Error e) {
+                                    source_row.key.set_connection_status (E.SourceConnectionStatus.DISCONNECTED);
+                                    dialog_refresh_task_list_error (e, source_row.key, registry);
+                                }
+                                source_row.value.update_request ();
+                            });
+                            return true;
+                        });
+                    }
+                }
+
+            } catch (Error e) {
+                dialog_get_registry_error (e);
             }
-        }
+        });
+    }
+
+    private void dialog_refresh_backend_error (Error e, E.Source source, E.SourceRegistry registry) {
+        var error_dialog = new Granite.MessageDialog (
+            _("Unable to get updates from '%s'").printf (Application.model.get_collection_backend_name (source, registry)),
+            _("The tasks stored there may be unavailable or unable to be read from."),
+            new ThemedIcon ("preferences-desktop-online-accounts"),
+            Gtk.ButtonsType.CLOSE
+        ) {
+            transient_for = this,
+            badge_icon = new ThemedIcon ("dialog-error")
+        };
+        error_dialog.show_error_details (e.message);
+        error_dialog.run ();
+        error_dialog.destroy ();
+    }
+
+    private void dialog_refresh_task_list_error (Error e, E.Source source, E.SourceRegistry registry) {
+        var error_dialog = new Granite.MessageDialog (
+            _("Unable to get updates for '%s'").printf (source.dup_display_name ()),
+            _("The task list '%s' may be unavailable or unable to be read.").printf (Application.model.get_collection_backend_name (source, registry)),
+            new ThemedIcon ("dialog-error"),
+            Gtk.ButtonsType.CLOSE
+        ) {
+            transient_for = this
+        };
+        error_dialog.show_error_details (e.message);
+        error_dialog.run ();
+        error_dialog.destroy ();
     }
 
     private void header_update_func (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
