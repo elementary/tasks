@@ -193,6 +193,22 @@ namespace Tasks.Util {
 
 
     /**
+     * Returns the value of X-EVOLUTION-GTASKS-POSITION property if set
+     */
+    public string? get_gtasks_position_property_value (ECal.Component ecalcomponent) {
+        unowned ICal.Component? icalcomponent = ecalcomponent.get_icalcomponent ();
+        if (icalcomponent != null) {
+            var gtasks_position = get_icalcomponent_x_property (icalcomponent, "X-EVOLUTION-GTASKS-POSITION");
+
+            if (gtasks_position != null) {
+                return gtasks_position.get_x ();
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Returns the value of X-APPLE-SORT-ORDER property if set
      */
     public string? get_apple_sortorder_property_value (ECal.Component ecalcomponent) {
