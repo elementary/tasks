@@ -456,26 +456,23 @@ public class Tasks.TaskModel : Object {
 
             var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
             var gtasks_service = new GData.TasksService (authorizer);
-            var task_list_resource_extension = (E.SourceResource) task_list.get_extension (E.SOURCE_EXTENSION_RESOURCE);
+            var uri = "https://www.googleapis.com/tasks/v1/users/@me/lists/%s";
+            var task_list_id = ((E.SourceResource) task_list.get_extension (
+                E.SOURCE_EXTENSION_RESOURCE
+            )).identity.replace ("gtasks::", "");
 
-            GData.TasksTasklist? gtasks_tasklist = null;
-
-            unowned GLib.List<GData.Entry> gtasks_all_tasklist_entries = gtasks_service.query_all_tasklists (null, null, null).get_entries ();
-            foreach (unowned GData.Entry gtask_tasklist_entry in gtasks_all_tasklist_entries) {
-                if ("gtasks::%s".printf (gtask_tasklist_entry.id) == task_list_resource_extension.identity) {
-                    gtasks_tasklist = (GData.TasksTasklist) gtask_tasklist_entry;
-                    break;
-                }
-            }
-
-            if (gtasks_tasklist == null) {
-                throw new Tasks.TaskModelError.BACKEND_ERROR ("Task list '%s' is no longer available in Google backend.", task_list_resource_extension.identity);
-            }
+            var gtasks_tasklist = (GData.TasksTasklist) yield gtasks_service.query_single_entry_async (
+                GData.TasksService.get_primary_authorization_domain (),
+                uri.printf (task_list_id),
+                null,
+                typeof (GData.TasksTasklist),
+                null
+            );
 
             gtasks_tasklist.title = display_name;
             gtasks_service.update_tasklist (gtasks_tasklist, null);
 
-            registry.refresh_backend_sync (collection_source.uid, null);
+            yield registry.refresh_backend (collection_source.uid, null);
 
         } else if (task_list.parent == "local-stub") {
             debug ("Local Rename '%s'", task_list.get_uid ());
