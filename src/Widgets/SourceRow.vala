@@ -83,6 +83,8 @@ public class Tasks.SourceRow : Gtk.ListBoxRow {
 
         add (revealer);
 
+        source.notify["connection-status"].connect (update_request);
+
         update_request ();
     }
 

@@ -332,7 +332,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     lock (source_rows) {
                         source_rows.foreach (source_row => {
                             source_row.key.set_connection_status (E.SourceConnectionStatus.CONNECTING);
-                            source_row.value.update_request ();
 
                             Tasks.Application.model.refresh_task_list.begin (source_row.key, null, (obj, res) => {
                                 try {
@@ -342,7 +341,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                                     source_row.key.set_connection_status (E.SourceConnectionStatus.DISCONNECTED);
                                     dialog_refresh_task_list_error (e, source_row.key, registry);
                                 }
-                                source_row.value.update_request ();
                             });
                             return true;
                         });
