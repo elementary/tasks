@@ -166,23 +166,59 @@ namespace Tasks.Util {
     //--- X-Property ---//
 
 
-    public unowned ICal.Property? get_icalcomponent_x_property (ICal.Component ical_component, string x_property_name) {
+    public ICal.Property? get_icalcomponent_x_property (ICal.Component ical_component, string x_property_name) {
         return get_ecalpropertybag_x_property (new ECal.ComponentPropertyBag.from_component (ical_component, (property) => {
             return property.isa () == ICal.PropertyKind.X_PROPERTY;
         }), x_property_name);
     }
 
-    public unowned ICal.Property? get_ecalpropertybag_x_property (ECal.ComponentPropertyBag ecal_propertybag, string x_property_name) {
-        unowned ICal.Property? property = null;
-
+    public ICal.Property? get_ecalpropertybag_x_property (ECal.ComponentPropertyBag ecal_propertybag, string x_property_name) {
         var ecal_propertybag_count = ecal_propertybag.get_count ();
+
         for (int i = 0; i < ecal_propertybag_count; i++) {
-            property = ecal_propertybag.get (i);
+            unowned ICal.Property? property = ecal_propertybag.get (i);
             if (property.isa () == ICal.PropertyKind.X_PROPERTY && property.get_x_name () == x_property_name) {
-                break;
+                var x_property = new ICal.Property (ICal.PropertyKind.X_PROPERTY);
+                x_property.set_x_name (x_property_name);
+
+                if (property.get_x () != null) {
+                    x_property.set_x (property.get_x ().dup ());
+                }
+
+                return x_property;
             }
         }
-        return property;
+        return null;
+    }
+
+
+    /**
+     * Returns the value of X-APPLE-SORT-ORDER property if set
+     */
+    public string? get_apple_sortorder_property_value (ECal.Component ecalcomponent) {
+        unowned ICal.Component? icalcomponent = ecalcomponent.get_icalcomponent ();
+        if (icalcomponent != null) {
+            var x_apple_sort_order_property = get_icalcomponent_x_property (icalcomponent, "X-APPLE-SORT-ORDER");
+
+            if (x_apple_sort_order_property != null ) {
+                return x_apple_sort_order_property.get_x ();
+            }
+        }
+        return null;
+    }
+
+    /**
+    * Calculates the number of seconds between the ECal.Component's
+    * creation date and the Cocoa/Webkit epoch (= 20010101T000000Z).
+    *
+    * The same value is calculated on iOS devices and used for sorting
+    * in case there is no X-APPLE-SORT-ORDER property value set.
+    *
+    * So this default value calculation ensures we achieve the same sort
+    * order of tasks like we have on iOS devices.
+    */
+    public ICal.Duration get_apple_sortorder_default_value (ECal.Component ecalcomponent) {
+        return ecalcomponent.get_created ().subtract (new ICal.Time.from_string ("20010101T000000Z"));
     }
 
 

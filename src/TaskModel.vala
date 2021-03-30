@@ -24,7 +24,6 @@ errordomain Tasks.TaskModelError {
     BACKEND_ERROR
 }
 
-
 public class Tasks.TaskModel : Object {
 
     public signal void task_list_added (E.Source task_list);
@@ -190,11 +189,79 @@ public class Tasks.TaskModel : Object {
                 registry.refresh_backend_sync (collection_source.uid, null);
                 break;
 
+            case "google":
+                var collection_source = registry.find_extension (collection_or_sibling, E.SOURCE_EXTENSION_COLLECTION);
+                var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+                var gtasks_service = new GData.TasksService (authorizer);
+
+                var gtasks_tasklist = new GData.TasksTasklist (null) {
+                    title = task_list.display_name
+                };
+
+                gtasks_service.insert_tasklist (gtasks_tasklist, null);
+                yield registry.refresh_backend (collection_source.uid, null);
+                break;
+
             case "local":
                 task_list.parent = "local-stub";
                 task_list_extension.backend_name = "local";
 
                 registry.commit_source_sync (task_list, null);
+                break;
+
+            default:
+                throw new Tasks.TaskModelError.BACKEND_ERROR ("Task list management for '%s' is not supported yet.".printf (backend_name));
+        }
+    }
+
+    public async void remove_task_list (E.Source task_list) throws Error {
+        var registry = get_registry_sync ();
+        var backend_name = get_collection_backend_name (task_list, registry);
+
+        switch (backend_name.down ()) {
+            case "webdav":
+                var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+                var collection_source_webdav_session = new E.WebDAVSession (collection_source);
+                var credentials_provider = new E.SourceCredentialsProvider (registry);
+
+                E.NamedParameters credentials;
+                credentials_provider.lookup_sync (collection_source, null, out credentials);
+                collection_source_webdav_session.credentials = credentials;
+
+                var task_list_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+
+                collection_source_webdav_session.delete_sync (
+                    task_list_webdav_extension.soup_uri.to_string (false),
+                    E.WEBDAV_DEPTH_THIS_AND_CHILDREN,
+                    null,
+                    null
+                );
+
+                registry.refresh_backend_sync (collection_source.uid, null);
+                break;
+            case "google":
+                var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+                var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+                var service = new GData.TasksService (authorizer);
+                var uri = "https://www.googleapis.com/tasks/v1/users/@me/lists/%s";
+                var id = ((E.SourceResource) task_list.get_extension (
+                    E.SOURCE_EXTENSION_RESOURCE
+                )).identity.replace ("gtasks::", "");
+
+                var tasklist = (GData.TasksTasklist) yield service.query_single_entry_async (
+                    GData.TasksService.get_primary_authorization_domain (),
+                    uri.printf (id),
+                    null,
+                    typeof (GData.TasksTasklist),
+                    null
+                );
+
+                service.delete_tasklist (tasklist, null);
+                yield registry.refresh_backend (collection_source.uid, null);
+                break;
+
+            case "local":
+                task_list.remove_sync (null);
                 break;
 
             default:
@@ -209,6 +276,7 @@ public class Tasks.TaskModel : Object {
 
             switch (backend_name.down ()) {
                 case "webdav": return true;
+                case "google": return true;
                 case "local": return true;
             }
 
@@ -218,7 +286,43 @@ public class Tasks.TaskModel : Object {
         return false;
     }
 
-    private string get_collection_backend_name (E.Source source, E.SourceRegistry registry) {
+    public bool is_remove_task_list_supported (E.Source source) {
+        try {
+            var registry = get_registry_sync ();
+            var backend_name = get_collection_backend_name (source, registry);
+
+            switch (backend_name.down ()) {
+                case "webdav": return true;
+                case "google": return !is_gtasks_default_task_list (source, registry);
+                case "local": return source.removable;
+            }
+
+        } catch (Error e) {
+            warning (e.message);
+        }
+        return false;
+    }
+
+    private bool is_gtasks_default_task_list (E.Source task_list, E.SourceRegistry registry) throws Error {
+        var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+        var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+        var service = new GData.TasksService (authorizer);
+        var id = ((E.SourceResource) task_list.get_extension (
+            E.SOURCE_EXTENSION_RESOURCE
+        )).identity.replace ("gtasks::", "");
+
+        var tasklist = (GData.TasksTasklist) service.query_single_entry (
+            GData.TasksService.get_primary_authorization_domain (),
+            "https://www.googleapis.com/tasks/v1/users/@me/lists/@default",
+            null,
+            typeof (GData.TasksTasklist),
+            null
+        );
+
+        return tasklist.id == id;
+    }
+
+    public string get_collection_backend_name (E.Source source, E.SourceRegistry registry) {
         string? backend_name = null;
 
         var collection_source = registry.find_extension (source, E.SOURCE_EXTENSION_COLLECTION);
@@ -347,26 +451,23 @@ public class Tasks.TaskModel : Object {
 
             var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
             var gtasks_service = new GData.TasksService (authorizer);
-            var task_list_resource_extension = (E.SourceResource) task_list.get_extension (E.SOURCE_EXTENSION_RESOURCE);
+            var uri = "https://www.googleapis.com/tasks/v1/users/@me/lists/%s";
+            var task_list_id = ((E.SourceResource) task_list.get_extension (
+                E.SOURCE_EXTENSION_RESOURCE
+            )).identity.replace ("gtasks::", "");
 
-            GData.TasksTasklist? gtasks_tasklist = null;
-
-            unowned GLib.List<GData.Entry> gtasks_all_tasklist_entries = gtasks_service.query_all_tasklists (null, null, null).get_entries ();
-            foreach (unowned GData.Entry gtask_tasklist_entry in gtasks_all_tasklist_entries) {
-                if ("gtasks::%s".printf (gtask_tasklist_entry.id) == task_list_resource_extension.identity) {
-                    gtasks_tasklist = (GData.TasksTasklist) gtask_tasklist_entry;
-                    break;
-                }
-            }
-
-            if (gtasks_tasklist == null) {
-                throw new Tasks.TaskModelError.BACKEND_ERROR ("Task list '%s' is no longer available in Google backend.", task_list_resource_extension.identity);
-            }
+            var gtasks_tasklist = (GData.TasksTasklist) yield gtasks_service.query_single_entry_async (
+                GData.TasksService.get_primary_authorization_domain (),
+                uri.printf (task_list_id),
+                null,
+                typeof (GData.TasksTasklist),
+                null
+            );
 
             gtasks_tasklist.title = display_name;
             gtasks_service.update_tasklist (gtasks_tasklist, null);
 
-            registry.refresh_backend_sync (collection_source.uid, null);
+            yield registry.refresh_backend (collection_source.uid, null);
 
         } else if (task_list.parent == "local-stub") {
             debug ("Local Rename '%s'", task_list.get_uid ());
@@ -379,41 +480,21 @@ public class Tasks.TaskModel : Object {
         }
     }
 
-    public void add_task (E.Source list, ECal.Component task) {
-        add_task_async.begin (list, task);
-    }
-
-    private async void add_task_async (E.Source list, ECal.Component task) {
-        ECal.Client client;
-        try {
-            client = get_client (list);
-        } catch (Error e) {
-            critical (e.message);
-            return;
-        }
-
+    public async void add_task (E.Source list, ECal.Component task) throws Error {
+        ECal.Client client = get_client (list);
         unowned ICal.Component comp = task.get_icalcomponent ();
+
         debug (@"Adding task '$(comp.get_uid())'");
 
-        try {
-            string? uid;
-            yield client.create_object (comp, ECal.OperationFlags.NONE, null, out uid);
-            if (uid != null) {
-                comp.set_uid (uid);
-            }
-        } catch (GLib.Error error) {
-            critical (error.message);
+        string? uid;
+        yield client.create_object (comp, ECal.OperationFlags.NONE, null, out uid);
+        if (uid != null) {
+            comp.set_uid (uid);
         }
     }
 
-    public void complete_task (E.Source list, ECal.Component task) {
-        ECal.Client client;
-        try {
-            client = get_client (list);
-        } catch (Error e) {
-            critical (e.message);
-            return;
-        }
+    public async void complete_task (E.Source list, ECal.Component task) throws Error {
+        ECal.Client client = get_client (list);
 
         unowned ICal.Component comp = task.get_icalcomponent ();
         var was_completed = comp.get_status () == ICal.PropertyStatus.COMPLETED;
@@ -426,7 +507,7 @@ public class Tasks.TaskModel : Object {
 
             task.set_completed (new ICal.Time.null_time ());
 
-            update_icalcomponent (client, comp, ECal.ObjModType.ONLY_THIS);
+            yield client.modify_object (comp, ECal.ObjModType.ONLY_THIS, ECal.OperationFlags.NONE, null);
 
         } else {
             debug (@"Completing $(task.is_instance() ? "instance" : "task") '$(comp.get_uid())'");
@@ -435,7 +516,7 @@ public class Tasks.TaskModel : Object {
             task.set_percent_complete (100);
             task.set_completed (new ICal.Time.today ());
 
-            update_icalcomponent (client, comp, ECal.ObjModType.THIS_AND_PRIOR);
+            yield client.modify_object (comp, ECal.ObjModType.THIS_AND_PRIOR, ECal.OperationFlags.NONE, null);
         }
 
         if (task.has_recurrences () && !was_completed) {
@@ -471,7 +552,8 @@ public class Tasks.TaskModel : Object {
                     });
                 }
 
-                update_icalcomponent (client, instance_comp, ECal.ObjModType.THIS_AND_FUTURE);
+                client.modify_object_sync (instance_comp, ECal.ObjModType.THIS_AND_FUTURE, ECal.OperationFlags.NONE, null);
+
                 return false; // only generate one instance
             };
 
@@ -479,51 +561,23 @@ public class Tasks.TaskModel : Object {
         }
     }
 
-    public void update_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) {
-        ECal.Client client;
-        try {
-            client = get_client (list);
-        } catch (Error e) {
-            critical (e.message);
-            return;
-        }
-
+    public async void update_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) throws Error {
+        ECal.Client client = get_client (list);
         unowned ICal.Component comp = task.get_icalcomponent ();
+
         debug (@"Updating task '$(comp.get_uid())' [mod_type=$(mod_type)]");
-        update_icalcomponent (client, comp, mod_type);
+        yield client.modify_object (comp, mod_type, ECal.OperationFlags.NONE, null);
     }
 
-    private void update_icalcomponent (ECal.Client client, ICal.Component comp, ECal.ObjModType mod_type) {
-        client.modify_object.begin (comp, mod_type, ECal.OperationFlags.NONE, null, (obj, res) => {
-            try {
-                client.modify_object.end (res);
-            } catch (Error e) {
-                warning (e.message);
-            }
-        });
-    }
-
-    public void remove_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) {
-        ECal.Client client;
-        try {
-            client = get_client (list);
-        } catch (Error e) {
-            critical (e.message);
-            return;
-        }
-
+    public async void remove_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) throws Error {
+        ECal.Client client = get_client (list);
         unowned ICal.Component comp = task.get_icalcomponent ();
+
         string uid = comp.get_uid ();
         string? rid = task.has_recurrences () ? null : task.get_recurid_as_string ();
-        debug (@"Removing task '$uid'");
 
-        client.remove_object.begin (uid, rid, mod_type, ECal.OperationFlags.NONE, null, (obj, results) => {
-            try {
-                client.remove_object.end (results);
-            } catch (Error e) {
-                warning (e.message);
-            }
-        });
+        debug (@"Removing task '$uid'");
+        yield client.remove_object (uid, rid, mod_type, ECal.OperationFlags.NONE, null);
     }
 
     private void debug_task (E.Source task_list, ECal.Component task) {

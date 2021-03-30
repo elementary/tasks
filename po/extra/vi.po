@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-09 21:31+0000\n"
-"PO-Revision-Date: 2020-10-07 05:14+0000\n"
+"POT-Creation-Date: 2021-03-23 06:29+0000\n"
+"PO-Revision-Date: 2021-03-07 04:21+0000\n"
 "Last-Translator: Trkien618 <hacngoctrungkien@gmail.com>\n"
 "Language-Team: Vietnamese <https://l10n.elementary.io/projects/tasks/extra/"
 "vi/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -25,7 +25,7 @@ msgstr "Các tác vụ"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "Đã đồng bộ hóa các công việc và lời nhắc"
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
@@ -33,6 +33,9 @@ msgid ""
 "Create and complete tasks, manage lists and sync them across your machines "
 "using calDav."
 msgstr ""
+"Tasks được thiết kế và xây dựng để giúp quản lý tất cả các công việc và lời "
+"nhắc của bạn. Tạo và hoàn thành nhiệm vụ, quản lý danh sách và đồng bộ hóa "
+"chúng trên các máy của bạn bằng calDav."
 
 #: data/tasks.appdata.xml.in:48
 msgid "elementary, Inc."

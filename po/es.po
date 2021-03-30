@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-09 21:31+0000\n"
-"PO-Revision-Date: 2020-11-21 13:15+0000\n"
+"POT-Creation-Date: 2021-03-23 06:29+0000\n"
+"PO-Revision-Date: 2021-03-03 23:58+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
 ">\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
@@ -31,26 +31,55 @@ msgstr "Editar nombre y apariencia"
 msgid "No Tasks"
 msgstr "No hay tareas"
 
-#: src/ListView.vala:210
-msgid "Renaming task list failed"
-msgstr "Falló el cambio de nombre de una lista de tareas"
+#: src/ListView.vala:198
+msgid "Adding task failed"
+msgstr "No se pudo agregar la tarea"
 
-#: src/ListView.vala:211 src/MainWindow.vala:256
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de listas de tareas no esté disponible o no se "
 "pueda modificar."
 
+#: src/ListView.vala:228
+msgid "Renaming task list failed"
+msgstr "Falló el cambio de nombre de una lista de tareas"
+
+#: src/ListView.vala:344
+msgid "Completing task failed"
+msgstr "No se pudo completar la tarea"
+
+#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr ""
+"Es posible que el registro de tareas no esté disponible o no se pueda "
+"escribir en él."
+
+#: src/ListView.vala:366
+msgid "Updating task failed"
+msgstr "Error al actualizar la tarea"
+
+#: src/ListView.vala:388
+msgid "Removing task failed"
+msgstr "No se pudo eliminar la tarea"
+
 #: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr "Tareas"
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr "Falló la creación de una lista de tareas nueva"
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "Lista nueva"
 
-#: src/MainWindow.vala:255
-msgid "Creating a new task list failed"
+#: src/MainWindow.vala:279
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Deleting the task list failed"
 msgstr "Falló la creación de una lista de tareas nueva"
 
 #: src/Util.vala:151
@@ -93,40 +122,40 @@ msgstr "Actualmente sin conexión al almacén de datos (posiblemente remoto)"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "El depósito de certificados SSL se rechazó para efectuar la conexión"
 
-#: src/Widgets/TaskRow.vala:120
+#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:126
+#: src/Widgets/TaskRow.vala:146
 #, c-format
 msgid "%s at %s"
 msgstr "%s a las %s"
 
-#: src/Widgets/TaskRow.vala:159
+#: src/Widgets/TaskRow.vala:180
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "Llegada: %s"
 
-#: src/Widgets/TaskRow.vala:162
+#: src/Widgets/TaskRow.vala:183
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "Partida: %s"
 
-#: src/Widgets/TaskRow.vala:216
+#: src/Widgets/TaskRow.vala:237
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Save Changes"
 msgstr "Guardar cambios"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Add Task"
 msgstr "Añadir tarea"
 
-#: src/Widgets/TaskRow.vala:271
+#: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
 msgstr "Eliminar tarea"
 

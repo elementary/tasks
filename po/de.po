@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-09 21:31+0000\n"
-"PO-Revision-Date: 2021-02-11 01:12+0000\n"
+"POT-Creation-Date: 2021-03-23 06:29+0000\n"
+"PO-Revision-Date: 2021-03-22 05:51+0000\n"
 "Last-Translator: Uwe S <saabisto@gmx.de>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/tasks/tasks/de/>\n"
 "Language: de\n"
@@ -30,28 +30,57 @@ msgstr "Name und Erscheinungsbild ändern"
 msgid "No Tasks"
 msgstr "Keine Aufgaben vorhanden"
 
-#: src/ListView.vala:210
-msgid "Renaming task list failed"
-msgstr "Umbenennen einer Aufgabenliste fehlgeschlagen"
+#: src/ListView.vala:198
+msgid "Adding task failed"
+msgstr "Hinzufügen der Aufgabe fehlgeschlagen"
 
-#: src/ListView.vala:211 src/MainWindow.vala:256
-#, fuzzy
+#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Die Aufgabenlistenverwaltung ist möglicherweise nicht erreichbar oder "
 "schreibgeschützt."
 
+#: src/ListView.vala:228
+msgid "Renaming task list failed"
+msgstr "Umbenennen einer Aufgabenliste fehlgeschlagen"
+
+#: src/ListView.vala:344
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Completing task failed"
+msgstr "Abschluss der Aufgabe fehlgeschlagen"
+
+#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
+#, fuzzy
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr ""
+"Die Aufgabenlistenverwaltung ist möglicherweise nicht erreichbar oder "
+"schreibgeschützt."
+
+#: src/ListView.vala:366
+msgid "Updating task failed"
+msgstr "Aktualisierung der Aufgabe fehlgeschlagen"
+
+#: src/ListView.vala:388
+msgid "Removing task failed"
+msgstr "Entfernen der Aufgabe fehlgeschlagen"
+
 #: src/MainWindow.vala:42
 msgid "Tasks"
 msgstr "Aufgaben"
 
-#: src/MainWindow.vala:232
+#: src/MainWindow.vala:224
+msgid "Creating a new task list failed"
+msgstr "Erstellen einer neuen Aufgabenliste gescheitert"
+
+#: src/MainWindow.vala:230
 msgid "New list"
 msgstr "Neue Liste"
 
-#: src/MainWindow.vala:255
-msgid "Creating a new task list failed"
-msgstr "Erstellen einer neuen Aufgabenliste gescheitert"
+#: src/MainWindow.vala:279
+msgid "Deleting the task list failed"
+msgstr "Löschen der Aufgabenliste fehlgeschlagen"
 
 #: src/Util.vala:151
 msgid "Today"
@@ -91,44 +120,43 @@ msgstr ""
 "Im Augenblick nicht mit der (möglicherweise entfernten) Datenbank verbunden"
 
 #: src/Widgets/SourceRow.vala:110
-#, fuzzy
 msgid "SSL certificate trust was rejected for the connection"
-msgstr "SSL-Zertifikat nicht vertrauenswürdig für die Verbindung"
+msgstr "SSL-Zertifikat für die Verbindung wurde abgelehnt"
 
-#: src/Widgets/TaskRow.vala:120
+#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:126
+#: src/Widgets/TaskRow.vala:146
 #, c-format
 msgid "%s at %s"
 msgstr "%s um %s"
 
-#: src/Widgets/TaskRow.vala:159
+#: src/Widgets/TaskRow.vala:180
 #, c-format
 msgid "Arriving: %s"
 msgstr "Ankunft: %s"
 
-#: src/Widgets/TaskRow.vala:162
+#: src/Widgets/TaskRow.vala:183
 #, c-format
 msgid "Leaving: %s"
 msgstr "Verlassen: %s"
 
-#: src/Widgets/TaskRow.vala:216
+#: src/Widgets/TaskRow.vala:237
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: src/Widgets/TaskRow.vala:218
+#: src/Widgets/TaskRow.vala:239
 msgid "Add Task"
 msgstr "Aufgabe hinzufügen"
 
-#: src/Widgets/TaskRow.vala:271
+#: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
 msgstr "Aufgabe löschen"
 
