@@ -18,7 +18,6 @@
 *
 */
 
-
 errordomain Tasks.TaskModelError {
     CLIENT_NOT_AVAILABLE,
     BACKEND_ERROR
@@ -66,6 +65,28 @@ public class Tasks.TaskModel : Object {
     private void create_task_list_client (E.Source task_list) {
         try {
             var client = (ECal.Client) ECal.Client.connect_sync (task_list, ECal.ClientSourceType.TASKS, -1, null);
+
+            get_registry.begin ((obj, res) => {
+                try {
+                    var registry = get_registry.end (res);
+                    if (get_collection_backend_name (task_list, registry) == "google") {
+                        var refresh = (E.SourceRefresh) task_list.get_extension (E.SOURCE_EXTENSION_REFRESH);
+                        Timeout.add_seconds (refresh.interval_minutes * 60 - 1, () => {
+                            if (!refresh.enabled) {
+                                return Source.REMOVE;
+                            }
+
+                            update_gtasks_tasklist.begin (task_list, client, registry);
+                            return Source.CONTINUE;
+                        });
+
+                        update_gtasks_tasklist.begin (task_list, client, registry);
+                    }
+                } catch (Error e) {
+                    warning ("cant get registry: %s", e.message);
+                }
+            });
+
             lock (task_list_client) {
                 task_list_client.insert (task_list.dup_uid (), client);
             }
@@ -491,6 +512,11 @@ public class Tasks.TaskModel : Object {
         if (uid != null) {
             comp.set_uid (uid);
         }
+
+        var registry = get_registry_sync ();
+        if (get_collection_backend_name (list, registry) == "google") {
+            yield update_gtasks_tasklist (list, client, registry);
+        }
     }
 
     public async void complete_task (E.Source list, ECal.Component task) throws Error {
@@ -559,6 +585,10 @@ public class Tasks.TaskModel : Object {
 
             client.generate_instances_for_object_sync (comp, start.as_timet (), end.as_timet (), null, recur_instance_callback);
         }
+
+        if (ECal.util_component_has_x_property (comp, "X-EVOLUTION-GTASKS-POSITION")) {
+            yield update_gtasks_tasklist (list, client, get_registry_sync ());
+        }
     }
 
     public async void update_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) throws Error {
@@ -567,6 +597,10 @@ public class Tasks.TaskModel : Object {
 
         debug (@"Updating task '$(comp.get_uid())' [mod_type=$(mod_type)]");
         yield client.modify_object (comp, mod_type, ECal.OperationFlags.NONE, null);
+
+        if (ECal.util_component_has_x_property (comp, "X-EVOLUTION-GTASKS-POSITION")) {
+            yield update_gtasks_tasklist (list, client, get_registry_sync ());
+        }
     }
 
     public async void remove_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) throws Error {
@@ -578,6 +612,10 @@ public class Tasks.TaskModel : Object {
 
         debug (@"Removing task '$uid'");
         yield client.remove_object (uid, rid, mod_type, ECal.OperationFlags.NONE, null);
+
+        if (ECal.util_component_has_x_property (comp, "X-EVOLUTION-GTASKS-POSITION")) {
+            yield update_gtasks_tasklist (list, client, get_registry_sync ());
+        }
     }
 
     private void debug_task (E.Source task_list, ECal.Component task) {
@@ -638,6 +676,62 @@ public class Tasks.TaskModel : Object {
                 views.remove (view);
             }
         }
+    }
+
+    private async void update_gtasks_tasklist (E.Source task_list, ECal.Client client, E.SourceRegistry registry) {
+        var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+        var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+        var service = new GData.TasksService (authorizer);
+
+        var id = ((E.SourceResource) task_list.get_extension (E.SOURCE_EXTENSION_RESOURCE)).identity;
+        id = id.replace ("gtasks::", "");
+
+        GData.TasksTasklist tasklist;
+        try {
+            tasklist = (GData.TasksTasklist) yield service.query_single_entry_async (
+                GData.TasksService.get_primary_authorization_domain (),
+                "https://www.googleapis.com/tasks/v1/users/@me/lists/%s".printf (id),
+                null,
+                typeof (GData.TasksTasklist),
+                null
+            );
+        } catch (Error e) {
+            warning ("can't get tasklist: %s", e.message);
+            return;
+        }
+
+        service.query_tasks_async.begin (tasklist, null, null, null, (obj, res) => {
+            try {
+                var tasks = service.query_async.end (res);
+
+                foreach (var entry in tasks.get_entries ()) {
+                    GData.TasksTask task = entry as GData.TasksTask;
+
+                    client.get_objects_for_uid.begin (task.id, null, (obj, res) => {
+                        try {
+                            SList<ECal.Component> comps;
+                            client.get_objects_for_uid.end (res, out comps);
+                            comps.foreach ((comp) => {
+                                if (Util.update_gtasks_position (comp, task.position)) {
+                                    client.modify_object.begin (
+                                        comp.get_icalcomponent (),
+                                        ECal.ObjModType.THIS,
+                                        ECal.OperationFlags.NONE,
+                                        null
+                                    );
+                                }
+                            });
+                        } catch (Error e) {
+                            warning ("can't update task '%s' position: %s", task.summary, e.message);
+                        }
+                    });
+                }
+
+                // client.refresh_sync ();
+            } catch (Error e) {
+                warning ("can't get tasklist '%s' tasks: %s", tasklist.title, e.message);
+            }
+        });
     }
 
     private void on_objects_added (E.Source task_list, ECal.Client client, SList<ICal.Component> objects, TasksAddedFunc on_tasks_added) {  // vala-lint=line-length
