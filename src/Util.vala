@@ -193,19 +193,21 @@ namespace Tasks.Util {
 
 
     /**
-     * Returns the value of X-EVOLUTION-GTASKS-POSITION property if set
+     * Returns the value of X-EVOLUTION-GTASKS-POSITION property if set,
+     * otherwise return "00000000000000000000"
      */
-    public string? get_gtasks_position_property_value (ECal.Component ecalcomponent) {
+    public string get_gtasks_position_property_value (ECal.Component ecalcomponent) {
         unowned ICal.Component? icalcomponent = ecalcomponent.get_icalcomponent ();
         if (icalcomponent != null) {
-            var gtasks_position = get_icalcomponent_x_property (icalcomponent, "X-EVOLUTION-GTASKS-POSITION");
+            var gtasks_position = ECal.util_component_dup_x_property (icalcomponent, "X-EVOLUTION-GTASKS-POSITION");
 
             if (gtasks_position != null) {
-                return gtasks_position.get_x ();
+                return gtasks_position;
             }
         }
 
-        return null;
+        // returns the default value for a task created without a position
+        return "00000000000000000000";
     }
 
     /**
