@@ -30,6 +30,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     public ECal.Component task { get; construct set; }
     public bool is_scheduled_view { get; construct; }
 
+    private const Gtk.TargetEntry[] TARGET_ENTRIES = {
+        { "GTK_LIST_BOX_ROW", Gtk.TargetFlags.SAME_APP, 0 }
+    };
+
     private bool created;
 
     private Tasks.DateTimePopover due_datetime_popover;
@@ -279,7 +283,14 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
         revealer.add (grid);
 
-        add (revealer);
+        var handle = new Gtk.EventBox () {
+            expand = true,
+            above_child = false
+        };
+        handle.add_events (Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK);
+        handle.add (revealer);
+
+        add (handle);
         margin_start = margin_end = 12;
 
         style_context = get_style_context ();
@@ -347,6 +358,8 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         notify["task"].connect (() => {
             update_request ();
         });
+
+        build_drag_and_drop ();
         update_request ();
     }
 
@@ -536,5 +549,66 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         }
 
         return created.is_valid_time ();
+    }
+
+    private void build_drag_and_drop () {
+        Gtk.drag_source_set (this, Gdk.ModifierType.BUTTON1_MASK, TARGET_ENTRIES, Gdk.DragAction.MOVE);
+        Gtk.drag_dest_set (this, Gtk.DestDefaults.ALL, TARGET_ENTRIES, Gdk.DragAction.MOVE);
+
+        drag_data_get.connect (on_drag_data_get);
+        drag_data_received.connect (on_drag_data_received);
+
+        drag_begin.connect (on_drag_begin);
+    }
+
+    private void on_drag_data_get (Gtk.Widget widget, Gdk.DragContext context,
+        Gtk.SelectionData selection_data, uint target_type, uint time) {
+
+        uchar[] data = new uchar[(sizeof (Gtk.ListBoxRow))];
+        ((Gtk.Widget[])data)[0] = widget;
+
+        selection_data.set (
+            Gdk.Atom.intern_static_string ("GTK_LIST_BOX_ROW"), 32, data
+        );
+    }
+
+    private void on_drag_data_received (Gdk.DragContext context, int x, int y,
+        Gtk.SelectionData selection_data, uint target_type, uint time) {
+
+        var data = ((Gtk.Widget[]) selection_data.get_data ())[0];
+        var source_row = (Gtk.ListBoxRow) data;
+        var target_row = this;
+
+        if (source_row == target_row) {
+            return;
+        }
+
+        var source_list = (Gtk.ListBox) source_row.parent;
+        var target_list = (Gtk.ListBox) target_row.parent;
+        var target_list_position = target_row.get_index ();
+
+        source_list.remove (source_row);
+        target_list.insert (source_row, target_list_position);
+    }
+
+    private void on_drag_begin (Gtk.Widget widget, Gdk.DragContext drag_context) {
+        var row = widget.get_ancestor (typeof (Gtk.ListBoxRow));
+
+        Gtk.Allocation row_alloc;
+        row.get_allocation (out row_alloc);
+
+        var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, row_alloc.width, row_alloc.height);
+        var cairo_context = new Cairo.Context (surface);
+
+        var style_context = row.get_style_context ();
+        style_context.add_class ("during-dnd");
+        row.draw_to_cairo_context (cairo_context);
+        style_context.remove_class ("during-dnd");
+
+        int drag_icon_x, drag_icon_y;
+        widget.translate_coordinates (row, 0, 0, out drag_icon_x, out drag_icon_y);
+        surface.set_device_offset (-drag_icon_x, -drag_icon_y);
+
+        Gtk.drag_set_icon_surface (drag_context, surface);
     }
 }
