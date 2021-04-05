@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 06:29+0000\n"
+"POT-Creation-Date: 2021-03-31 01:33+0000\n"
 "PO-Revision-Date: 2021-02-25 09:55+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
@@ -19,51 +19,51 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
+#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "待办事项"
 
-#: src/ListView.vala:101
+#: src/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "编辑名称与外观"
 
-#: src/ListView.vala:113
+#: src/ListView.vala:112
 msgid "No Tasks"
 msgstr "无待办事项"
 
-#: src/ListView.vala:198
+#: src/ListView.vala:187
 msgid "Adding task failed"
 msgstr "添加列表失败"
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "该列表的注册表不可用或者不能写入。"
 
-#: src/ListView.vala:228
+#: src/ListView.vala:220
 msgid "Renaming task list failed"
 msgstr "重命名列表失败"
 
-#: src/ListView.vala:344
+#: src/ListView.vala:336
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Completing task failed"
 msgstr "重命名列表失败"
 
-#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
+#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
 #, fuzzy
 #| msgid ""
 #| "The task list registry may be unavailable or unable to be written to."
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "该列表的注册表不可用或者不能写入。"
 
-#: src/ListView.vala:366
+#: src/ListView.vala:358
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Updating task failed"
 msgstr "重命名列表失败"
 
-#: src/ListView.vala:388
+#: src/ListView.vala:380
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Removing task failed"
@@ -127,40 +127,40 @@ msgstr "当前与（可能是远程的）数据服务器的连接断开"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "连接的 SSL 证书信任被拒"
 
-#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
+#: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:146
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
 msgstr "%s %s"
 
-#: src/Widgets/TaskRow.vala:180
+#: src/Widgets/TaskRow.vala:181
 #, c-format
 msgid "Arriving: %s"
 msgstr "到达时间：%s"
 
-#: src/Widgets/TaskRow.vala:183
+#: src/Widgets/TaskRow.vala:184
 #, c-format
 msgid "Leaving: %s"
 msgstr "离开时间：%s"
 
-#: src/Widgets/TaskRow.vala:237
+#: src/Widgets/TaskRow.vala:238
 msgid "Cancel"
 msgstr "取消"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Save Changes"
 msgstr "保存修改"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Add Task"
 msgstr "添加"
 
-#: src/Widgets/TaskRow.vala:292
+#: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "删除"
 

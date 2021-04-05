@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 06:29+0000\n"
-"PO-Revision-Date: 2021-03-21 17:42+0000\n"
+"POT-Creation-Date: 2021-03-31 01:33+0000\n"
+"PO-Revision-Date: 2021-04-03 03:45+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/tasks/uk/"
 ">\n"
@@ -20,46 +20,46 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
+#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "За розкладом"
 
-#: src/ListView.vala:101
+#: src/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "Змінити назву та вигляд"
 
-#: src/ListView.vala:113
+#: src/ListView.vala:112
 msgid "No Tasks"
 msgstr "Немає завдань"
 
-#: src/ListView.vala:198
+#: src/ListView.vala:187
 msgid "Adding task failed"
 msgstr "Не вдалося додати завдання"
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Реєстр переліку завдань може бути недоступним або неможливо записати до "
 "нього."
 
-#: src/ListView.vala:228
+#: src/ListView.vala:220
 msgid "Renaming task list failed"
 msgstr "Не вдалося перейменувати перелік завдань"
 
-#: src/ListView.vala:344
+#: src/ListView.vala:336
 msgid "Completing task failed"
 msgstr "Не вдалося позначити завдання виконаним"
 
-#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
+#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Реєстр завдань може бути недоступним або неможливо записати до нього."
 
-#: src/ListView.vala:366
+#: src/ListView.vala:358
 msgid "Updating task failed"
 msgstr "Не вдалося оновити завдання"
 
-#: src/ListView.vala:388
+#: src/ListView.vala:380
 msgid "Removing task failed"
 msgstr "Не вдалося вилучити завдання"
 
@@ -93,7 +93,7 @@ msgstr "Завтра"
 
 #: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
-msgstr "Змінити…"
+msgstr "Редагувати…"
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
@@ -119,40 +119,40 @@ msgstr "Зараз від'єднано від (можливо віддалено
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Не довірений SSL сертифікат для під'єднання, відхилено"
 
-#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
+#: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:146
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
 msgstr "%s о %s"
 
-#: src/Widgets/TaskRow.vala:180
+#: src/Widgets/TaskRow.vala:181
 #, c-format
 msgid "Arriving: %s"
 msgstr "Прибуття: %s"
 
-#: src/Widgets/TaskRow.vala:183
+#: src/Widgets/TaskRow.vala:184
 #, c-format
 msgid "Leaving: %s"
 msgstr "Відправлення: %s"
 
-#: src/Widgets/TaskRow.vala:237
+#: src/Widgets/TaskRow.vala:238
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Save Changes"
 msgstr "Зберегти зміни"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Add Task"
 msgstr "Додати завдання"
 
-#: src/Widgets/TaskRow.vala:292
+#: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "Видалти завдання"
 
