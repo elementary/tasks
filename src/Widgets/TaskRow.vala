@@ -23,6 +23,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
     public signal void task_completed (ECal.Component task);
     public signal void task_changed (ECal.Component task);
     public signal void task_removed (ECal.Component task);
+    public signal void unselect ();
 
     public bool completed { get; private set; }
     public E.Source source { get; construct; }
@@ -357,9 +358,9 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     private void cancel_edit () {
         if (created) {
-            move_focus (Gtk.DirectionType.TAB_BACKWARD);
+            unselect ();
         } else {
-            move_focus (Gtk.DirectionType.TAB_FORWARD);
+            unselect ();
             reset_create ();
         }
         var icalcomponent = task.get_icalcomponent ();

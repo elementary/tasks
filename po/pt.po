@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 06:29+0000\n"
+"POT-Creation-Date: 2021-04-03 03:48+0000\n"
 "PO-Revision-Date: 2021-03-21 17:42+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -19,46 +19,46 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
+#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "Agendado"
 
-#: src/ListView.vala:101
+#: src/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "Editar nome e aparência"
 
-#: src/ListView.vala:113
+#: src/ListView.vala:112
 msgid "No Tasks"
 msgstr "Sem tarefas"
 
-#: src/ListView.vala:198
+#: src/ListView.vala:187
 msgid "Adding task failed"
 msgstr "Falha ao adicionar tarefa"
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "O registo da lista de tarefas pode estar indisponível ou não pode ser "
 "gravado."
 
-#: src/ListView.vala:228
+#: src/ListView.vala:220
 msgid "Renaming task list failed"
 msgstr "Falha ao renomear lista de tarefas"
 
-#: src/ListView.vala:344
+#: src/ListView.vala:336
 msgid "Completing task failed"
 msgstr "Falha ao concluir tarefa"
 
-#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
+#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "O registo de tarefas pode estar indisponível ou não pode ser gravado."
 
-#: src/ListView.vala:366
+#: src/ListView.vala:358
 msgid "Updating task failed"
 msgstr "Falha ao atualizar tarefa"
 
-#: src/ListView.vala:388
+#: src/ListView.vala:380
 msgid "Removing task failed"
 msgstr "Falha ao remover tarefa"
 
@@ -118,40 +118,40 @@ msgstr "Atualmente desligado do armazenamento de dados (possivelmente remoto)"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "A confiança do certificado SSL foi rejeitada para a ligação"
 
-#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
+#: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:146
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
 msgstr "%s a %s"
 
-#: src/Widgets/TaskRow.vala:180
+#: src/Widgets/TaskRow.vala:181
 #, c-format
 msgid "Arriving: %s"
 msgstr "A chegar: %s"
 
-#: src/Widgets/TaskRow.vala:183
+#: src/Widgets/TaskRow.vala:184
 #, c-format
 msgid "Leaving: %s"
 msgstr "A sair: %s"
 
-#: src/Widgets/TaskRow.vala:237
+#: src/Widgets/TaskRow.vala:238
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Save Changes"
 msgstr "Guardar alterações"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Add Task"
 msgstr "Adicionar tarefa"
 
-#: src/Widgets/TaskRow.vala:292
+#: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "Eliminar tarefa"
 
