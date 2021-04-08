@@ -68,7 +68,6 @@ public class Tasks.ListView : Gtk.Grid {
 
     private Gtk.ListBox add_task_list;
     private Gtk.ListBox task_list;
-    private Tasks.TaskRow active_task_row;
 
     public ListView (E.Source? source) {
         Object (source: source);
@@ -126,8 +125,9 @@ public class Tasks.ListView : Gtk.Grid {
         placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
 
         add_task_list = new Gtk.ListBox () {
-            selection_mode = Gtk.SelectionMode.NONE,
-            margin_top = 24
+            margin_top = 24,
+            selection_mode = Gtk.SelectionMode.SINGLE,
+            activate_on_single_click = true
         };
         add_task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
@@ -158,7 +158,8 @@ public class Tasks.ListView : Gtk.Grid {
         }
 
         task_list = new Gtk.ListBox () {
-            selection_mode = Gtk.SelectionMode.NONE
+            selection_mode = Gtk.SelectionMode.MULTIPLE,
+            activate_on_single_click = true
         };
         task_list.set_filter_func (filter_function);
         task_list.set_placeholder (placeholder);
@@ -189,24 +190,12 @@ public class Tasks.ListView : Gtk.Grid {
 
         add_task_list.row_activated.connect ((row) => {
             var task_row = (Tasks.TaskRow) row;
-
-            if (active_task_row != null) {
-                active_task_row.reveal_child_request (false);
-            }
-
             task_row.reveal_child_request (true);
-            active_task_row = task_row;
         });
 
         task_list.row_activated.connect ((row) => {
             var task_row = (Tasks.TaskRow) row;
-
-            if (active_task_row != null) {
-                active_task_row.reveal_child_request (false);
-            }
-
             task_row.reveal_child_request (true);
-            active_task_row = task_row;
         });
 
         editable_title.changed.connect (() => {
@@ -393,6 +382,10 @@ public class Tasks.ListView : Gtk.Grid {
                         return GLib.Source.REMOVE;
                     });
                 });
+            });
+
+            task_row.unselect.connect (() => {
+                task_list.unselect_row (task_row);
             });
 
             task_list.add (task_row);

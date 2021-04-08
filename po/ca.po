@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 06:29+0000\n"
+"POT-Creation-Date: 2021-04-03 03:48+0000\n"
 "PO-Revision-Date: 2021-03-23 06:24+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/tasks/ca/"
@@ -19,46 +19,46 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:72 src/Widgets/ScheduledRow.vala:26
+#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "Planificat"
 
-#: src/ListView.vala:101
+#: src/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "Editeu-ne el nom i l'aparença"
 
-#: src/ListView.vala:113
+#: src/ListView.vala:112
 msgid "No Tasks"
 msgstr "Sense tasques"
 
-#: src/ListView.vala:198
+#: src/ListView.vala:187
 msgid "Adding task failed"
 msgstr "Ha fallat afegir-hi la tasca."
 
-#: src/ListView.vala:199 src/ListView.vala:229 src/MainWindow.vala:225
+#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "El registre de la llista de tasques pot no estar disponible o no s'hi pot "
 "escriure."
 
-#: src/ListView.vala:228
+#: src/ListView.vala:220
 msgid "Renaming task list failed"
 msgstr "Ha fallat canviar el nom de llista de tasques."
 
-#: src/ListView.vala:344
+#: src/ListView.vala:336
 msgid "Completing task failed"
 msgstr "Ha fallat completar la tasca."
 
-#: src/ListView.vala:345 src/ListView.vala:367 src/ListView.vala:389
+#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "El registre de tasques pot no estar disponible o no s'hi pot escriure."
 
-#: src/ListView.vala:366
+#: src/ListView.vala:358
 msgid "Updating task failed"
 msgstr "Ha fallat actualitzar la tasca."
 
-#: src/ListView.vala:388
+#: src/ListView.vala:380
 msgid "Removing task failed"
 msgstr "Ha fallat suprimir la tasca."
 
@@ -118,40 +118,40 @@ msgstr "Actualment desconnectat del magatzem de dades (possiblement remot)"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "S'ha rebutjat la confiança del certificat SSL per a la connexió."
 
-#: src/Widgets/TaskRow.vala:134 src/Widgets/TaskRow.vala:141
+#: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:146
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
 msgstr "%s a %s"
 
-#: src/Widgets/TaskRow.vala:180
+#: src/Widgets/TaskRow.vala:181
 #, c-format
 msgid "Arriving: %s"
 msgstr "Arribada: %s"
 
-#: src/Widgets/TaskRow.vala:183
+#: src/Widgets/TaskRow.vala:184
 #, c-format
 msgid "Leaving: %s"
 msgstr "Sortida: %s"
 
-#: src/Widgets/TaskRow.vala:237
+#: src/Widgets/TaskRow.vala:238
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Save Changes"
 msgstr "Desa els canvis"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Add Task"
 msgstr "Afegeix una tasca"
 
-#: src/Widgets/TaskRow.vala:292
+#: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "Suprimeix la tasca"
 

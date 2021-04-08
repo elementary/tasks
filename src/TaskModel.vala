@@ -293,7 +293,7 @@ public class Tasks.TaskModel : Object {
 
             switch (backend_name.down ()) {
                 case "webdav": return true;
-                case "google": return true;
+                case "google": return !is_gtasks_default_task_list (source, registry);
                 case "local": return source.removable;
             }
 
@@ -301,6 +301,25 @@ public class Tasks.TaskModel : Object {
             warning (e.message);
         }
         return false;
+    }
+
+    private bool is_gtasks_default_task_list (E.Source task_list, E.SourceRegistry registry) throws Error {
+        var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+        var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+        var service = new GData.TasksService (authorizer);
+        var id = ((E.SourceResource) task_list.get_extension (
+            E.SOURCE_EXTENSION_RESOURCE
+        )).identity.replace ("gtasks::", "");
+
+        var tasklist = (GData.TasksTasklist) service.query_single_entry (
+            GData.TasksService.get_primary_authorization_domain (),
+            "https://www.googleapis.com/tasks/v1/users/@me/lists/@default",
+            null,
+            typeof (GData.TasksTasklist),
+            null
+        );
+
+        return tasklist.id == id;
     }
 
     public string get_collection_backend_name (E.Source source, E.SourceRegistry registry) {
