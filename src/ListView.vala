@@ -277,6 +277,10 @@ public class Tasks.ListView : Gtk.Grid {
                 var gtask_position_a = Util.get_gtasks_position_property_value (row_a.task);
                 var gtask_position_b = Util.get_gtasks_position_property_value (row_b.task);
 
+                if (gtask_position_a == gtask_position_b) {
+                    return row_b.task.get_last_modified ().compare (row_a.task.get_last_modified ());
+                }
+
                 return gtask_position_a.collate (gtask_position_b);
             } else {
                 var apple_sortorder_a = Util.get_apple_sortorder_property_value (row_a.task);
