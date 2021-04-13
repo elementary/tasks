@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.tasks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-03 03:48+0000\n"
+"POT-Creation-Date: 2021-04-08 12:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,60 +17,60 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/ListView.vala:79 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr ""
 
-#: src/ListView.vala:100
+#: src/ListView.vala:108
 msgid "Edit Name and Appearance"
 msgstr ""
 
-#: src/ListView.vala:112
+#: src/ListView.vala:120
 msgid "No Tasks"
 msgstr ""
 
-#: src/ListView.vala:187
+#: src/ListView.vala:143
 msgid "Adding task failed"
 msgstr ""
 
-#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
-#: src/MainWindow.vala:280
+#: src/ListView.vala:144 src/ListView.vala:211 src/MainWindow.vala:247
+#: src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
-#: src/ListView.vala:220
+#: src/ListView.vala:210
 msgid "Renaming task list failed"
 msgstr ""
 
-#: src/ListView.vala:336
+#: src/ListView.vala:328
 msgid "Completing task failed"
 msgstr ""
 
-#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
+#: src/ListView.vala:329 src/ListView.vala:351 src/ListView.vala:373
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 
-#: src/ListView.vala:358
+#: src/ListView.vala:350
 msgid "Updating task failed"
 msgstr ""
 
-#: src/ListView.vala:380
+#: src/ListView.vala:372
 msgid "Removing task failed"
 msgstr ""
 
-#: src/MainWindow.vala:42
+#: src/MainWindow.vala:44
 msgid "Tasks"
 msgstr ""
 
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:246
 msgid "Creating a new task list failed"
 msgstr ""
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:252
 msgid "New list"
 msgstr ""
 
-#: src/MainWindow.vala:279
+#: src/MainWindow.vala:301
 msgid "Deleting the task list failed"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
