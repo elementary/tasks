@@ -17,44 +17,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/ListView.vala:79 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:79 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr ""
 
-#: src/ListView.vala:108
+#: src/Widgets/ListView.vala:108
 msgid "Edit Name and Appearance"
 msgstr ""
 
-#: src/ListView.vala:120
+#: src/Widgets/ListView.vala:120
 msgid "No Tasks"
 msgstr ""
 
-#: src/ListView.vala:143
+#: src/Widgets/ListView.vala:143
 msgid "Adding task failed"
 msgstr ""
 
-#: src/ListView.vala:144 src/ListView.vala:211 src/MainWindow.vala:247
+#: src/Widgets/ListView.vala:144 src/Widgets/ListView.vala:211 src/MainWindow.vala:247
 #: src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
-#: src/ListView.vala:210
+#: src/Widgets/ListView.vala:210
 msgid "Renaming task list failed"
 msgstr ""
 
-#: src/ListView.vala:328
+#: src/Widgets/ListView.vala:328
 msgid "Completing task failed"
 msgstr ""
 
-#: src/ListView.vala:329 src/ListView.vala:351 src/ListView.vala:373
+#: src/Widgets/ListView.vala:329 src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 
-#: src/ListView.vala:350
+#: src/Widgets/ListView.vala:350
 msgid "Updating task failed"
 msgstr ""
 
-#: src/ListView.vala:372
+#: src/Widgets/ListView.vala:372
 msgid "Removing task failed"
 msgstr ""
 
