@@ -47,12 +47,14 @@ public class Tasks.ListView : Gtk.Grid {
             critical (e.message);
         }
 
-        E.SourceRegistry? registry = null;
-        try {
-            registry = Application.model.get_registry_sync ();
-            is_gtasks = Application.model.get_collection_backend_name (source, registry) == "google";
-        } catch (Error e) {
-            warning ("unable to get the registry, assuming task list is not from gtasks");
+        if (source != null) {
+            E.SourceRegistry? registry = null;
+            try {
+                registry = Application.model.get_registry_sync ();
+                is_gtasks = Application.model.get_collection_backend_name (source, registry) == "google";
+            } catch (Error e) {
+                warning ("unable to get the registry, assuming task list is not from gtasks");
+            }
         }
     }
 
