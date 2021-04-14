@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.TaskRow : Gtk.ListBoxRow {
+public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
     public signal void task_completed (ECal.Component task);
     public signal void task_changed (ECal.Component task);
