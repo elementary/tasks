@@ -210,20 +210,6 @@ namespace Tasks.Util {
         return "00000000000000000000";
     }
 
-    public bool update_gtasks_position (ECal.Component ecalcomponent, string position) {
-        var icomp = ecalcomponent.get_icalcomponent ();
-        if (icomp != null) {
-            var icomp_position = ECal.util_component_dup_x_property (icomp, "X-EVOLUTION-GTASKS-POSITION");
-
-            if (icomp_position != position) {
-                ECal.util_component_set_x_property (icomp, "X-EVOLUTION-GTASKS-POSITION", position);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     /**
      * Returns the value of X-APPLE-SORT-ORDER property if set
      */
