@@ -1,5 +1,5 @@
 /*
-* Copyright 2020 elementary, Inc. (https://elementary.io)
+* Copyright 2021 elementary, Inc. (https://elementary.io)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -17,12 +17,12 @@
 * Boston, MA 02110-1301 USA
 */
 
-public class Tasks.DateTimePopover : Tasks.EntryPopover<GLib.DateTime?> {
+public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
     private Gtk.Calendar calendar;
     private Granite.Widgets.TimePicker timepicker;
     private Gtk.Revealer timepicker_revealer;
 
-    public DateTimePopover () {
+    public DateTime () {
         Object (
             icon_name: "office-calendar-symbolic",
             placeholder: _("Set Due")
