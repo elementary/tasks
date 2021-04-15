@@ -46,6 +46,16 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
         } catch (Error e) {
             critical (e.message);
         }
+
+        if (source != null) {
+            E.SourceRegistry? registry = null;
+            try {
+                registry = Application.model.get_registry_sync ();
+                is_gtasks = Application.model.get_collection_backend_name (source, registry) == "google";
+            } catch (Error e) {
+                warning ("unable to get the registry, assuming task list is not from gtasks");
+            }
+        }
     }
 
     public void remove_views () {
@@ -68,6 +78,7 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
 
     private Gtk.ListBox add_task_list;
     private Gtk.ListBox task_list;
+    private bool is_gtasks;
 
     public ListView (E.Source? source) {
         Object (source: source);
@@ -264,18 +275,28 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
         var row_b = (Tasks.Widgets.TaskRow) row2;
 
         if (row_a.completed == row_b.completed) {
-            var apple_sortorder_a = Util.get_apple_sortorder_property_value (row_a.task);
-            if (apple_sortorder_a == null) {
-                apple_sortorder_a = Util.get_apple_sortorder_default_value (row_a.task).as_int ().to_string ();
+            if (is_gtasks) {
+                var gtask_position_a = Util.get_gtasks_position_property_value (row_a.task);
+                var gtask_position_b = Util.get_gtasks_position_property_value (row_b.task);
+
+                if (gtask_position_a == gtask_position_b) {
+                    return row_b.task.get_last_modified ().compare (row_a.task.get_last_modified ());
+                }
+
+                return gtask_position_a.collate (gtask_position_b);
+            } else {
+                var apple_sortorder_a = Util.get_apple_sortorder_property_value (row_a.task);
+                if (apple_sortorder_a == null) {
+                    apple_sortorder_a = Util.get_apple_sortorder_default_value (row_a.task).as_int ().to_string ();
+                }
+
+                var apple_sortorder_b = Util.get_apple_sortorder_property_value (row_b.task);
+                if (apple_sortorder_b == null) {
+                    apple_sortorder_b = Util.get_apple_sortorder_default_value (row_b.task).as_int ().to_string ();
+                }
+
+                return apple_sortorder_a.collate (apple_sortorder_b);
             }
-
-            var apple_sortorder_b = Util.get_apple_sortorder_property_value (row_b.task);
-            if (apple_sortorder_b == null) {
-                apple_sortorder_b = Util.get_apple_sortorder_default_value (row_b.task).as_int ().to_string ();
-            }
-
-            return apple_sortorder_a.collate (apple_sortorder_b);
-
         } else if (row_a.completed && !row_b.completed) {
             return 1;
 
