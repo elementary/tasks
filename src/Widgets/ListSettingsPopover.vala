@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.ListSettingsPopover : Gtk.Popover {
+public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
     public E.Source source { get; set; }
 
     private Gtk.RadioButton color_button_red;
