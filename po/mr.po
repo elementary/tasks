@@ -19,53 +19,53 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 3.9.1\n"
 
-#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "अनुसूचित"
 
-#: src/ListView.vala:100
+#: src/Widgets/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "नाव आणि स्वरूप संपादित करा"
 
-#: src/ListView.vala:112
+#: src/Widgets/ListView.vala:112
 msgid "No Tasks"
 msgstr "कोणतीही कामे नाहीत"
 
-#: src/ListView.vala:187
+#: src/Widgets/ListView.vala:187
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Adding task failed"
 msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
 
-#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
+#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
 
-#: src/ListView.vala:220
+#: src/Widgets/ListView.vala:220
 msgid "Renaming task list failed"
 msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
 
-#: src/ListView.vala:336
+#: src/Widgets/ListView.vala:336
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Completing task failed"
 msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
 
-#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
+#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
 #, fuzzy
 #| msgid ""
 #| "The task list registry may be unavailable or unable to be written to."
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
 
-#: src/ListView.vala:358
+#: src/Widgets/ListView.vala:358
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Updating task failed"
 msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
 
-#: src/ListView.vala:380
+#: src/Widgets/ListView.vala:380
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Removing task failed"

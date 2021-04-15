@@ -18,51 +18,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "Geplant"
 
-#: src/ListView.vala:100
+#: src/Widgets/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "Name und Erscheinungsbild ändern"
 
-#: src/ListView.vala:112
+#: src/Widgets/ListView.vala:112
 msgid "No Tasks"
 msgstr "Keine Aufgaben vorhanden"
 
-#: src/ListView.vala:187
+#: src/Widgets/ListView.vala:187
 msgid "Adding task failed"
 msgstr "Hinzufügen der Aufgabe fehlgeschlagen"
 
-#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
+#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Die Aufgabenlistenverwaltung ist möglicherweise nicht erreichbar oder "
 "schreibgeschützt."
 
-#: src/ListView.vala:220
+#: src/Widgets/ListView.vala:220
 msgid "Renaming task list failed"
 msgstr "Umbenennen einer Aufgabenliste fehlgeschlagen"
 
-#: src/ListView.vala:336
+#: src/Widgets/ListView.vala:336
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Completing task failed"
 msgstr "Abschluss der Aufgabe fehlgeschlagen"
 
-#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
+#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
 #, fuzzy
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Die Aufgabenlistenverwaltung ist möglicherweise nicht erreichbar oder "
 "schreibgeschützt."
 
-#: src/ListView.vala:358
+#: src/Widgets/ListView.vala:358
 msgid "Updating task failed"
 msgstr "Aktualisierung der Aufgabe fehlgeschlagen"
 
-#: src/ListView.vala:380
+#: src/Widgets/ListView.vala:380
 msgid "Removing task failed"
 msgstr "Entfernen der Aufgabe fehlgeschlagen"
 
