@@ -19,7 +19,7 @@
 * Authored by: Corentin Noël <corentin@elementary.io>
 */
 
-public class Tasks.EditableLabel : Gtk.EventBox {
+public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
     public signal void changed ();
 
     private static Gtk.CssProvider label_provider;

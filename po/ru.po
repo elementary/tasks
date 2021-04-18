@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 01:33+0000\n"
+"POT-Creation-Date: 2021-04-03 03:48+0000\n"
 "PO-Revision-Date: 2021-03-22 00:48+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
@@ -20,44 +20,44 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "По расписанию"
 
-#: src/ListView.vala:100
+#: src/Widgets/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "Изменить название и внешний вид"
 
-#: src/ListView.vala:112
+#: src/Widgets/ListView.vala:112
 msgid "No Tasks"
 msgstr "Нет задач"
 
-#: src/ListView.vala:187
+#: src/Widgets/ListView.vala:187
 msgid "Adding task failed"
 msgstr "Не удалось добавить задачу"
 
-#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
+#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
-#: src/ListView.vala:220
+#: src/Widgets/ListView.vala:220
 msgid "Renaming task list failed"
 msgstr "Не удалось переименовать список задач"
 
-#: src/ListView.vala:336
+#: src/Widgets/ListView.vala:336
 msgid "Completing task failed"
 msgstr "Не удалось обозначить задачу выполненной"
 
-#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
+#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Реестр задач может быть недоступен или не может быть записан."
 
-#: src/ListView.vala:358
+#: src/Widgets/ListView.vala:358
 msgid "Updating task failed"
 msgstr "Не удалось обновить задачу"
 
-#: src/ListView.vala:380
+#: src/Widgets/ListView.vala:380
 msgid "Removing task failed"
 msgstr "Не удалось удалить задачу"
 

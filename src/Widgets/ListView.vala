@@ -18,8 +18,8 @@
 *
 */
 
-public class Tasks.ListView : Gtk.Grid {
-    public E.Source? source { get; set; }
+public class Tasks.Widgets.ListView : Gtk.Grid {
+    public E.Source? source { get; construct; }
 
     private Gee.Collection<ECal.ClientView> views;
 
@@ -46,9 +46,23 @@ public class Tasks.ListView : Gtk.Grid {
         } catch (Error e) {
             critical (e.message);
         }
+
+        if (source != null) {
+            E.SourceRegistry? registry = null;
+            try {
+                registry = Application.model.get_registry_sync ();
+                is_gtasks = Application.model.get_collection_backend_name (source, registry) == "google";
+            } catch (Error e) {
+                warning ("unable to get the registry, assuming task list is not from gtasks");
+            }
+        }
     }
 
-    private void remove_views () {
+    public void remove_views () {
+        foreach (unowned Gtk.Widget child in task_list.get_children ()) {
+            child.destroy ();
+        }
+
         lock (views) {
             foreach (ECal.ClientView view in views) {
                 Tasks.Application.model.destroy_task_list_view (view);
@@ -64,6 +78,11 @@ public class Tasks.ListView : Gtk.Grid {
 
     private Gtk.ListBox add_task_list;
     private Gtk.ListBox task_list;
+    private bool is_gtasks;
+
+    public ListView (E.Source? source) {
+        Object (source: source);
+    }
 
     construct {
         views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
@@ -92,7 +111,7 @@ public class Tasks.ListView : Gtk.Grid {
         title_stack.add (scheduled_title);
         title_stack.add (editable_title);
 
-        var list_settings_popover = new Tasks.ListSettingsPopover ();
+        var list_settings_popover = new Tasks.Widgets.ListSettingsPopover ();
 
         var settings_button = new Gtk.MenuButton () {
             margin_end = 24,
@@ -122,6 +141,32 @@ public class Tasks.ListView : Gtk.Grid {
             activate_on_single_click = true
         };
         add_task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
+
+        if (source != null) {
+            var add_task_row = new Tasks.Widgets.TaskRow.for_source (source);
+            add_task_row.task_changed.connect ((task) => {
+                Tasks.Application.model.add_task.begin (source, task, (obj, res) => {
+                    GLib.Idle.add (() => {
+                        try {
+                            Tasks.Application.model.add_task.end (res);
+                        } catch (Error e) {
+                            var error_dialog = new Granite.MessageDialog (
+                                _("Adding task failed"),
+                                _("The task list registry may be unavailable or unable to be written to."),
+                                new ThemedIcon ("dialog-error"),
+                                Gtk.ButtonsType.CLOSE
+                            );
+                            error_dialog.show_error_details (e.message);
+                            error_dialog.run ();
+                            error_dialog.destroy ();
+                        }
+
+                        return GLib.Source.REMOVE;
+                    });
+                });
+            });
+            add_task_list.add (add_task_row);
+        }
 
         task_list = new Gtk.ListBox () {
             selection_mode = Gtk.SelectionMode.MULTIPLE,
@@ -155,57 +200,13 @@ public class Tasks.ListView : Gtk.Grid {
         });
 
         add_task_list.row_activated.connect ((row) => {
-            var task_row = (Tasks.TaskRow) row;
+            var task_row = (Tasks.Widgets.TaskRow) row;
             task_row.reveal_child_request (true);
         });
 
         task_list.row_activated.connect ((row) => {
-            var task_row = (Tasks.TaskRow) row;
+            var task_row = (Tasks.Widgets.TaskRow) row;
             task_row.reveal_child_request (true);
-        });
-
-        notify["source"].connect (() => {
-            remove_views ();
-
-            foreach (unowned Gtk.Widget child in add_task_list.get_children ()) {
-                child.destroy ();
-            }
-
-            foreach (unowned Gtk.Widget child in task_list.get_children ()) {
-                child.destroy ();
-            }
-
-            if (source != null) {
-                var add_task_row = new Tasks.TaskRow.for_source (source);
-                add_task_row.task_changed.connect ((task) => {
-                    Tasks.Application.model.add_task.begin (source, task, (obj, res) => {
-                        GLib.Idle.add (() => {
-                            try {
-                                Tasks.Application.model.add_task.end (res);
-                            } catch (Error e) {
-                                var error_dialog = new Granite.MessageDialog (
-                                    _("Adding task failed"),
-                                    _("The task list registry may be unavailable or unable to be written to."),
-                                    new ThemedIcon ("dialog-error"),
-                                    Gtk.ButtonsType.CLOSE
-                                );
-                                error_dialog.show_error_details (e.message);
-                                error_dialog.run ();
-                                error_dialog.destroy ();
-                            }
-
-                            return GLib.Source.REMOVE;
-                        });
-                    });
-                });
-                add_task_row.unselect.connect (() => {
-                    add_task_list.unselect_row (add_task_row);
-                });
-                add_task_list.add (add_task_row);
-            }
-
-            update_request ();
-            show_all ();
         });
 
         editable_title.changed.connect (() => {
@@ -231,6 +232,8 @@ public class Tasks.ListView : Gtk.Grid {
                 });
             });
         });
+
+        show_all ();
     }
 
     public void update_request () {
@@ -246,8 +249,8 @@ public class Tasks.ListView : Gtk.Grid {
             Tasks.Application.set_task_color (source, editable_title);
 
             task_list.@foreach ((row) => {
-                if (row is Tasks.TaskRow) {
-                    var task_row = (row as Tasks.TaskRow);
+                if (row is Tasks.Widgets.TaskRow) {
+                    var task_row = (row as Tasks.Widgets.TaskRow);
                     task_row.update_request ();
                 }
             });
@@ -268,22 +271,32 @@ public class Tasks.ListView : Gtk.Grid {
 
     [CCode (instance_pos = -1)]
     private int sort_function (Gtk.ListBoxRow row1, Gtk.ListBoxRow row2) {
-        var row_a = (Tasks.TaskRow) row1;
-        var row_b = (Tasks.TaskRow) row2;
+        var row_a = (Tasks.Widgets.TaskRow) row1;
+        var row_b = (Tasks.Widgets.TaskRow) row2;
 
         if (row_a.completed == row_b.completed) {
-            var apple_sortorder_a = Util.get_apple_sortorder_property_value (row_a.task);
-            if (apple_sortorder_a == null) {
-                apple_sortorder_a = Util.get_apple_sortorder_default_value (row_a.task).as_int ().to_string ();
+            if (is_gtasks) {
+                var gtask_position_a = Util.get_gtasks_position_property_value (row_a.task);
+                var gtask_position_b = Util.get_gtasks_position_property_value (row_b.task);
+
+                if (gtask_position_a == gtask_position_b) {
+                    return row_b.task.get_last_modified ().compare (row_a.task.get_last_modified ());
+                }
+
+                return gtask_position_a.collate (gtask_position_b);
+            } else {
+                var apple_sortorder_a = Util.get_apple_sortorder_property_value (row_a.task);
+                if (apple_sortorder_a == null) {
+                    apple_sortorder_a = Util.get_apple_sortorder_default_value (row_a.task).as_int ().to_string ();
+                }
+
+                var apple_sortorder_b = Util.get_apple_sortorder_property_value (row_b.task);
+                if (apple_sortorder_b == null) {
+                    apple_sortorder_b = Util.get_apple_sortorder_default_value (row_b.task).as_int ().to_string ();
+                }
+
+                return apple_sortorder_a.collate (apple_sortorder_b);
             }
-
-            var apple_sortorder_b = Util.get_apple_sortorder_property_value (row_b.task);
-            if (apple_sortorder_b == null) {
-                apple_sortorder_b = Util.get_apple_sortorder_default_value (row_b.task).as_int ().to_string ();
-            }
-
-            return apple_sortorder_a.collate (apple_sortorder_b);
-
         } else if (row_a.completed && !row_b.completed) {
             return 1;
 
@@ -295,10 +308,10 @@ public class Tasks.ListView : Gtk.Grid {
     }
 
     private void header_function (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
-        if (source != null || !(lbrow is Tasks.TaskRow)) {
+        if (source != null || !(lbrow is Tasks.Widgets.TaskRow)) {
             return;
         }
-        var row = (Tasks.TaskRow) lbrow;
+        var row = (Tasks.Widgets.TaskRow) lbrow;
         unowned ICal.Component comp = row.task.get_icalcomponent ();
 
         if (comp.get_due ().is_null_time ()) {
@@ -306,7 +319,7 @@ public class Tasks.ListView : Gtk.Grid {
         }
 
         if (lbbefore != null) {
-            var before = (Tasks.TaskRow) lbbefore;
+            var before = (Tasks.Widgets.TaskRow) lbbefore;
             unowned ICal.Component comp_before = before.task.get_icalcomponent ();
 
             if (comp_before.get_due ().compare_date_only (comp.get_due ()) == 0) {
@@ -324,7 +337,7 @@ public class Tasks.ListView : Gtk.Grid {
 
     private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
-            var task_row = new Tasks.TaskRow.for_component (task, source, this.source == null);
+            var task_row = new Tasks.Widgets.TaskRow.for_component (task, source, this.source == null);
 
             task_row.task_completed.connect ((task) => {
                 Tasks.Application.model.complete_task.begin (source, task, (obj, res) => {
@@ -410,11 +423,11 @@ public class Tasks.ListView : Gtk.Grid {
     }
 
     private void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
-        Tasks.TaskRow task_row = null;
+        Tasks.Widgets.TaskRow task_row = null;
         var row_index = 0;
 
         do {
-            task_row = (Tasks.TaskRow) task_list.get_row_at_index (row_index);
+            task_row = (Tasks.Widgets.TaskRow) task_list.get_row_at_index (row_index);
 
             if (task_row != null) {
                 foreach (ECal.Component task in tasks) {
@@ -435,10 +448,10 @@ public class Tasks.ListView : Gtk.Grid {
     }
 
     private void on_tasks_removed (SList<ECal.ComponentId?> cids) {
-        unowned Tasks.TaskRow? task_row = null;
+        unowned Tasks.Widgets.TaskRow? task_row = null;
         var row_index = 0;
         do {
-            task_row = (Tasks.TaskRow) task_list.get_row_at_index (row_index);
+            task_row = (Tasks.Widgets.TaskRow) task_list.get_row_at_index (row_index);
 
             if (task_row != null) {
                 foreach (unowned ECal.ComponentId cid in cids) {

@@ -1,5 +1,5 @@
 /*
-* Copyright 2020 elementary, Inc. (https://elementary.io)
+* Copyright 2021 elementary, Inc. (https://elementary.io)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -17,7 +17,7 @@
 * Boston, MA 02110-1301 USA
 */
 
-public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
+public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
     public signal string? value_format (T value);
     public signal void value_changed (T value);
 
@@ -30,7 +30,7 @@ public abstract class Tasks.EntryPopover<T> : Gtk.EventBox {
     private static Gtk.CssProvider style_provider;
     private T value_on_popover_show;
 
-    protected EntryPopover (string placeholder, string? icon_name = null) {
+    protected Generic (string placeholder, string? icon_name = null) {
         Object (
             icon_name: icon_name,
             placeholder: placeholder

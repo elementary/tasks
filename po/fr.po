@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 01:33+0000\n"
+"POT-Creation-Date: 2021-04-03 03:48+0000\n"
 "PO-Revision-Date: 2021-03-22 12:14+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "Planifié"
 
-#: src/ListView.vala:100
+#: src/Widgets/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "Modifier le nom et l'apparence"
 
-#: src/ListView.vala:112
+#: src/Widgets/ListView.vala:112
 msgid "No Tasks"
 msgstr "Aucune tâche"
 
-#: src/ListView.vala:187
+#: src/Widgets/ListView.vala:187
 msgid "Adding task failed"
 msgstr "Échec de l'ajout de la tâche"
 
-#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
+#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des listes de tâches est probablement indisponible ou en lecture "
 "seule."
 
-#: src/ListView.vala:220
+#: src/Widgets/ListView.vala:220
 msgid "Renaming task list failed"
 msgstr "Échec du renommage de la liste des tâches"
 
-#: src/ListView.vala:336
+#: src/Widgets/ListView.vala:336
 msgid "Completing task failed"
 msgstr "Échec de complétion de la tâche"
 
-#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
+#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des tâches est probablement indisponible ou en lecture seule."
 
-#: src/ListView.vala:358
+#: src/Widgets/ListView.vala:358
 msgid "Updating task failed"
 msgstr "Échec de la mise à jour de la tâche"
 
-#: src/ListView.vala:380
+#: src/Widgets/ListView.vala:380
 msgid "Removing task failed"
 msgstr "Échec de la suppression de la tâche"
 

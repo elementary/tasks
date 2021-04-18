@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 01:33+0000\n"
+"POT-Creation-Date: 2021-04-03 03:48+0000\n"
 "PO-Revision-Date: 2021-03-23 18:09+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/tasks/he/>\n"
@@ -18,44 +18,44 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "מתוזמן"
 
-#: src/ListView.vala:100
+#: src/Widgets/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "עריכת השם והמראה"
 
-#: src/ListView.vala:112
+#: src/Widgets/ListView.vala:112
 msgid "No Tasks"
 msgstr "אין משימות"
 
-#: src/ListView.vala:187
+#: src/Widgets/ListView.vala:187
 msgid "Adding task failed"
 msgstr "הוספת המשימה נכשלה"
 
-#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
+#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "רשם רשימות המשימות כנראה אינו זמין או שלא ניתן לכתוב אליו."
 
-#: src/ListView.vala:220
+#: src/Widgets/ListView.vala:220
 msgid "Renaming task list failed"
 msgstr "שינוי שם רשימת המשימות נכשל"
 
-#: src/ListView.vala:336
+#: src/Widgets/ListView.vala:336
 msgid "Completing task failed"
 msgstr "השלמת המשימה נכשלה"
 
-#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
+#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "רשם המשימות כנראה אינו זמין או שלא ניתן לכתוב אליו."
 
-#: src/ListView.vala:358
+#: src/Widgets/ListView.vala:358
 msgid "Updating task failed"
 msgstr "עדכון המשימה נכשל"
 
-#: src/ListView.vala:380
+#: src/Widgets/ListView.vala:380
 msgid "Removing task failed"
 msgstr "הסרת המשימה נכשלה"
 

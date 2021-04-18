@@ -146,7 +146,7 @@ public class Tasks.TaskModel : Object {
 
             registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach ((task_list) => {
                 E.SourceTaskList task_list_extension = (E.SourceTaskList)task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);  // vala-lint=line-length
-                if (task_list_extension.selected == true && task_list.enabled == true) {
+                if (task_list_extension.selected == true && task_list.enabled == true && !task_list.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
                     registry.source_added (task_list);
                 }
             });

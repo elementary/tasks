@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.TaskRow : Gtk.ListBoxRow {
+public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
     public signal void task_completed (ECal.Component task);
     public signal void task_changed (ECal.Component task);
@@ -36,10 +36,10 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
 
     private bool created;
 
-    private Tasks.DateTimePopover due_datetime_popover;
+    private Tasks.Widgets.EntryPopover.DateTime due_datetime_popover;
     private Gtk.Revealer due_datetime_popover_revealer;
 
-    private Tasks.LocationPopover location_popover;
+    private Tasks.Widgets.EntryPopover.Location location_popover;
     private Gtk.Revealer location_popover_revealer;
 
     private Gtk.Stack state_stack;
@@ -109,7 +109,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
         summary_entry_context.add_class (Gtk.STYLE_CLASS_FLAT);
         summary_entry_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        due_datetime_popover = new Tasks.DateTimePopover ();
+        due_datetime_popover = new Tasks.Widgets.EntryPopover.DateTime ();
 
         if (is_gtask) {
             due_datetime_popover.hide_timepicker ();
@@ -165,7 +165,7 @@ public class Tasks.TaskRow : Gtk.ListBoxRow {
             }
         });
 
-        location_popover = new Tasks.LocationPopover ();
+        location_popover = new Tasks.Widgets.EntryPopover.Location ();
 
         location_popover_revealer = new Gtk.Revealer () {
             margin_end = 6,

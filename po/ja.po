@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 01:33+0000\n"
-"PO-Revision-Date: 2021-03-22 00:48+0000\n"
+"POT-Creation-Date: 2021-04-03 03:48+0000\n"
+"PO-Revision-Date: 2021-04-06 06:03+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
 ">\n"
@@ -19,44 +19,44 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "繰り返し設定のあるタスク"
 
-#: src/ListView.vala:100
+#: src/Widgets/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "名前や外観を変更します"
 
-#: src/ListView.vala:112
+#: src/Widgets/ListView.vala:112
 msgid "No Tasks"
 msgstr "タスクがありません"
 
-#: src/ListView.vala:187
+#: src/Widgets/ListView.vala:187
 msgid "Adding task failed"
 msgstr "タスクを追加できませんでした"
 
-#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
+#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
-msgstr "タスク一覧の登録ができないか、書き込みできない可能性があります。"
+msgstr "タスクリストの登録ができないか、書き込みできない可能性があります。"
 
-#: src/ListView.vala:220
+#: src/Widgets/ListView.vala:220
 msgid "Renaming task list failed"
-msgstr "タスクの名前を変更できませんでした"
+msgstr "タスクリストの名前を変更できませんでした"
 
-#: src/ListView.vala:336
+#: src/Widgets/ListView.vala:336
 msgid "Completing task failed"
 msgstr "タスクを完了済みとしてマークできませんでした"
 
-#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
+#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "タスクを登録できないか、書き込みできない可能性があります。"
 
-#: src/ListView.vala:358
+#: src/Widgets/ListView.vala:358
 msgid "Updating task failed"
 msgstr "タスクを更新できませんでした"
 
-#: src/ListView.vala:380
+#: src/Widgets/ListView.vala:380
 msgid "Removing task failed"
 msgstr "タスクを削除できませんでした"
 
@@ -66,15 +66,15 @@ msgstr "タスク"
 
 #: src/MainWindow.vala:224
 msgid "Creating a new task list failed"
-msgstr "新しいタスク一覧を作成できませんでした"
+msgstr "新しいタスクリストを作成できませんでした"
 
 #: src/MainWindow.vala:230
 msgid "New list"
-msgstr "新しい一覧"
+msgstr "新しいリスト"
 
 #: src/MainWindow.vala:279
 msgid "Deleting the task list failed"
-msgstr "タスク一覧を削除できませんでした"
+msgstr "タスクリストを削除できませんでした"
 
 #: src/Util.vala:151
 msgid "Today"
@@ -98,7 +98,7 @@ msgstr "完了したタスクを表示"
 
 #: src/Widgets/ListSettingsPopover.vala:125
 msgid "Delete List"
-msgstr "一覧を削除"
+msgstr "リストを削除"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"

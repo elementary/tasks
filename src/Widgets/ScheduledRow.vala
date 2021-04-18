@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.ScheduledRow : Gtk.ListBoxRow {
+public class Tasks.Widgets.ScheduledRow : Gtk.ListBoxRow {
 
     construct {
         var icon = new Gtk.Image.from_icon_name ("appointment", Gtk.IconSize.MENU);
