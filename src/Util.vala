@@ -191,6 +191,45 @@ namespace Tasks.Util {
         return null;
     }
 
+    public async bool swap_ecalcomponent_positions (
+        E.Source source_a, ECal.Component component_a,
+        E.Source source_b, ECal.Component component_b
+    ) throws Error {
+        var registry = yield Application.model.get_registry ();
+
+        var backend_name_a = Application.model.get_collection_backend_name (source_a, registry);
+        var backend_name_b = Application.model.get_collection_backend_name (source_b, registry);
+
+        if (backend_name_a != backend_name_b) {
+            return false;
+        }
+
+        debug ("swap_ecalcomponent_positions: %s <> %s", component_a.get_summary ().get_value (), component_b.get_summary ().get_value ());
+
+        switch (backend_name_a.down ()) {
+            case "webdav":
+                var value_a = get_apple_sortorder_property_value (component_a);
+                var value_b = get_apple_sortorder_property_value (component_b);
+
+                set_apple_sortorder_property_value (component_a, value_b);
+                set_apple_sortorder_property_value (component_b, value_a);
+
+                return true;
+
+            case "google":
+                var value_a = get_gtasks_position_property_value (component_a);
+                var value_b = get_gtasks_position_property_value (component_b);
+
+                set_gtasks_position_property_value (component_a, value_b);
+                set_gtasks_position_property_value (component_b, value_a);
+
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
 
     /**
      * Returns the value of X-EVOLUTION-GTASKS-POSITION property if set,
@@ -208,6 +247,13 @@ namespace Tasks.Util {
 
         // returns the default value for a task created without a position
         return "00000000000000000000";
+    }
+
+    public void set_gtasks_position_property_value (ECal.Component ecalcomponent, string? value) {
+        unowned ICal.Component? icalcomponent = ecalcomponent.get_icalcomponent ();
+        if (icalcomponent != null) {
+            ECal.util_component_set_x_property (icalcomponent, "X-EVOLUTION-GTASKS-POSITION", value);
+        }
     }
 
     /**
@@ -239,6 +285,12 @@ namespace Tasks.Util {
         return ecalcomponent.get_created ().subtract (new ICal.Time.from_string ("20010101T000000Z"));
     }
 
+    public void set_apple_sortorder_property_value (ECal.Component ecalcomponent, string? value) {
+        unowned ICal.Component? icalcomponent = ecalcomponent.get_icalcomponent ();
+        if (icalcomponent != null) {
+            ECal.util_component_set_x_property (icalcomponent, "X-APPLE-SORT-ORDER", value);
+        }
+    }
 
     //--- Location ---//
 

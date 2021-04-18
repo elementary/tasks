@@ -559,6 +559,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         drag_data_received.connect (on_drag_data_received);
 
         drag_begin.connect (on_drag_begin);
+        //drag_end.connect (on_drag_end);
     }
 
     private void on_drag_data_get (Gtk.Widget widget, Gdk.DragContext context,
@@ -576,7 +577,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         Gtk.SelectionData selection_data, uint target_type, uint time) {
 
         var data = ((Gtk.Widget[]) selection_data.get_data ())[0];
-        var source_row = (Gtk.ListBoxRow) data;
+        var source_row = (Tasks.Widgets.TaskRow) data;
         var target_row = this;
 
         if (source_row == target_row) {
@@ -585,10 +586,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         var source_list = (Gtk.ListBox) source_row.parent;
         var target_list = (Gtk.ListBox) target_row.parent;
+
         var target_list_position = target_row.get_index ();
 
         source_list.remove (source_row);
         target_list.insert (source_row, target_list_position);
+
+        Util.swap_ecalcomponent_positions.begin (source_row.source, source_row.task, target_row.source, target_row.task);
     }
 
     private void on_drag_begin (Gtk.Widget widget, Gdk.DragContext drag_context) {
@@ -611,4 +615,22 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         Gtk.drag_set_icon_surface (drag_context, surface);
     }
+
+    //  [CCode (instance_pos = -1)]
+    //  private void on_drag_end (Gtk.Widget widget, Gdk.DragContext drag_context) {
+    //      var row = widget.get_ancestor (typeof (Gtk.ListBoxRow));
+
+    //      if (this == row) {
+    //          return;
+    //      }
+
+    //      var source_list = (Gtk.ListBox) this.parent;
+    //      var target_list = (Gtk.ListBox) row.parent;
+
+    //      if (source_list == target_list) {
+    //          // Proof of Concept: Swap positions:
+    //      }
+    //      debug ("on_drag_end");
+    //      //drag_context.dra
+    //  }
 }
