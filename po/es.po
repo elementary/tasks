@@ -19,48 +19,48 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "Programadas"
 
-#: src/ListView.vala:100
+#: src/Widgets/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "Editar nombre y apariencia"
 
-#: src/ListView.vala:112
+#: src/Widgets/ListView.vala:112
 msgid "No Tasks"
 msgstr "No hay tareas"
 
-#: src/ListView.vala:187
+#: src/Widgets/ListView.vala:187
 msgid "Adding task failed"
 msgstr "No se pudo agregar la tarea"
 
-#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
+#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de listas de tareas no esté disponible o no se "
 "pueda modificar."
 
-#: src/ListView.vala:220
+#: src/Widgets/ListView.vala:220
 msgid "Renaming task list failed"
 msgstr "Falló el cambio de nombre de una lista de tareas"
 
-#: src/ListView.vala:336
+#: src/Widgets/ListView.vala:336
 msgid "Completing task failed"
 msgstr "No se pudo completar la tarea"
 
-#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
+#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de tareas no esté disponible o no se pueda "
 "escribir en él."
 
-#: src/ListView.vala:358
+#: src/Widgets/ListView.vala:358
 msgid "Updating task failed"
 msgstr "Error al actualizar la tarea"
 
-#: src/ListView.vala:380
+#: src/Widgets/ListView.vala:380
 msgid "Removing task failed"
 msgstr "No se pudo eliminar la tarea"
 

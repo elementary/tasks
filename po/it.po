@@ -19,42 +19,42 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "Programmate"
 
-#: src/ListView.vala:100
+#: src/Widgets/ListView.vala:100
 msgid "Edit Name and Appearance"
 msgstr "Modifica nome e aspetto"
 
-#: src/ListView.vala:112
+#: src/Widgets/ListView.vala:112
 msgid "No Tasks"
 msgstr "Nessuna attività"
 
-#: src/ListView.vala:187
+#: src/Widgets/ListView.vala:187
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Adding task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
+#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
 #: src/MainWindow.vala:280
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
 
-#: src/ListView.vala:220
+#: src/Widgets/ListView.vala:220
 msgid "Renaming task list failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/ListView.vala:336
+#: src/Widgets/ListView.vala:336
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Completing task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
+#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
 #, fuzzy
 #| msgid ""
 #| "The task list registry may be unavailable or unable to be written to."
@@ -63,13 +63,13 @@ msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
 
-#: src/ListView.vala:358
+#: src/Widgets/ListView.vala:358
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Updating task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/ListView.vala:380
+#: src/Widgets/ListView.vala:380
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Removing task failed"

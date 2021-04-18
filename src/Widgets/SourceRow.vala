@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.SourceRow : Gtk.ListBoxRow {
+public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
 
     private static Gtk.CssProvider listrow_provider;
