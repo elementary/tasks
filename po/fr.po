@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-03 03:48+0000\n"
+"POT-Creation-Date: 2021-04-15 23:14+0000\n"
 "PO-Revision-Date: 2021-03-22 12:14+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
@@ -18,67 +18,68 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "Planifié"
 
-#: src/Widgets/ListView.vala:100
+#: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
 msgstr "Modifier le nom et l'apparence"
 
-#: src/Widgets/ListView.vala:112
+#: src/Widgets/ListView.vala:131
 msgid "No Tasks"
 msgstr "Aucune tâche"
 
-#: src/Widgets/ListView.vala:187
+#: src/Widgets/ListView.vala:154
 msgid "Adding task failed"
 msgstr "Échec de l'ajout de la tâche"
 
-#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
-#: src/MainWindow.vala:280
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
+#: src/MainWindow.vala:247 src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des listes de tâches est probablement indisponible ou en lecture "
 "seule."
 
-#: src/Widgets/ListView.vala:220
+#: src/Widgets/ListView.vala:221
 msgid "Renaming task list failed"
 msgstr "Échec du renommage de la liste des tâches"
 
-#: src/Widgets/ListView.vala:336
+#: src/Widgets/ListView.vala:349
 msgid "Completing task failed"
 msgstr "Échec de complétion de la tâche"
 
-#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
+#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
+#: src/Widgets/ListView.vala:394
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des tâches est probablement indisponible ou en lecture seule."
 
-#: src/Widgets/ListView.vala:358
+#: src/Widgets/ListView.vala:371
 msgid "Updating task failed"
 msgstr "Échec de la mise à jour de la tâche"
 
-#: src/Widgets/ListView.vala:380
+#: src/Widgets/ListView.vala:393
 msgid "Removing task failed"
 msgstr "Échec de la suppression de la tâche"
 
-#: src/MainWindow.vala:42
+#: src/MainWindow.vala:44
 msgid "Tasks"
 msgstr "Tâches"
 
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:246
 msgid "Creating a new task list failed"
 msgstr "Échec de la création d'une nouvelle liste de tâches"
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:252
 msgid "New list"
 msgstr "Nouvelle liste"
 
-#: src/MainWindow.vala:279
+#: src/MainWindow.vala:301
 msgid "Deleting the task list failed"
 msgstr "Échec de la suppression de la liste de tâches"
 
-#: src/Util.vala:151
+#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Aujourd'hui"
 
@@ -93,6 +94,34 @@ msgstr "Demain"
 #: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
 msgstr "Modifier…"
+
+#: src/Widgets/EntryPopover/DateTime.vala:28
+msgid "Set Due"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Generic.vala:67
+msgid "Remove"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Location.vala:31
+msgid "Set Location"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Location.vala:56
+#, fuzzy
+#| msgid "Arriving: %s"
+msgid "Arriving"
+msgstr "Arrivée : %s"
+
+#: src/Widgets/EntryPopover/Location.vala:57
+#, fuzzy
+#| msgid "Leaving: %s"
+msgid "Leaving"
+msgstr "Départ : %s"
+
+#: src/Widgets/EntryPopover/Location.vala:60
+msgid "John Smith OR Example St."
+msgstr ""
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
