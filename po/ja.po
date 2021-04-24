@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-23 17:05+0000\n"
-"PO-Revision-Date: 2021-04-06 06:03+0000\n"
+"PO-Revision-Date: 2021-04-24 07:21+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
-">\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/>"
+"\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,31 +95,27 @@ msgstr "編集…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "期日を設定"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "削除"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "位置情報を設定"
 
 #: src/Widgets/EntryPopover/Location.vala:56
-#, fuzzy
-#| msgid "Arriving: %s"
 msgid "Arriving"
-msgstr "目的地: %s"
+msgstr "目的地"
 
 #: src/Widgets/EntryPopover/Location.vala:57
-#, fuzzy
-#| msgid "Leaving: %s"
 msgid "Leaving"
-msgstr "出発地: %s"
+msgstr "出発地"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "場所を入力"
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
