@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-03 03:48+0000\n"
+"POT-Creation-Date: 2021-04-23 17:05+0000\n"
 "PO-Revision-Date: 2021-03-07 04:21+0000\n"
 "Last-Translator: Trkien618 <hacngoctrungkien@gmail.com>\n"
 "Language-Team: Vietnamese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -19,67 +19,68 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "Thời gian biểu"
 
-#: src/Widgets/ListView.vala:100
+#: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
 msgstr "Chỉnh sửa tên và giao diện"
 
-#: src/Widgets/ListView.vala:112
+#: src/Widgets/ListView.vala:131
 msgid "No Tasks"
 msgstr "Không có tác vụ"
 
-#: src/Widgets/ListView.vala:187
+#: src/Widgets/ListView.vala:154
 msgid "Adding task failed"
 msgstr "Thêm tác vụ thất bại"
 
-#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
-#: src/MainWindow.vala:280
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
+#: src/MainWindow.vala:247 src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Sổ đăng ký danh sách tác vụ có thể không có sẵn hoặc không thể ghi vào."
 
-#: src/Widgets/ListView.vala:220
+#: src/Widgets/ListView.vala:221
 msgid "Renaming task list failed"
 msgstr "Đổi tên danh sách tác vụ thất bại"
 
-#: src/Widgets/ListView.vala:336
+#: src/Widgets/ListView.vala:349
 msgid "Completing task failed"
 msgstr "Hoàn thành tác vụ thất bại"
 
-#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
+#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
+#: src/Widgets/ListView.vala:394
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Sổ đăng ký tác vụ có thể không có sẵn hoặc không thể ghi vào."
 
-#: src/Widgets/ListView.vala:358
+#: src/Widgets/ListView.vala:371
 msgid "Updating task failed"
 msgstr "Cập nhật tác vụ thất bại"
 
-#: src/Widgets/ListView.vala:380
+#: src/Widgets/ListView.vala:393
 msgid "Removing task failed"
 msgstr "Loại bỏ tác vụ thất bại"
 
-#: src/MainWindow.vala:42
+#: src/MainWindow.vala:44
 msgid "Tasks"
 msgstr "Các tác vụ"
 
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:246
 msgid "Creating a new task list failed"
 msgstr "Tạo danh sách tác vụ mới không thành công"
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:252
 msgid "New list"
 msgstr "Danh sách mới"
 
-#: src/MainWindow.vala:279
+#: src/MainWindow.vala:301
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
 msgstr "Tạo danh sách tác vụ mới không thành công"
 
-#: src/Util.vala:151
+#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Hôm nay"
 
@@ -94,6 +95,34 @@ msgstr "Ngày mai"
 #: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
 msgstr "Chỉnh sửa…"
+
+#: src/Widgets/EntryPopover/DateTime.vala:28
+msgid "Set Due"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Generic.vala:67
+msgid "Remove"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Location.vala:31
+msgid "Set Location"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Location.vala:56
+#, fuzzy
+#| msgid "Arriving: %s"
+msgid "Arriving"
+msgstr "Đi đến: %s"
+
+#: src/Widgets/EntryPopover/Location.vala:57
+#, fuzzy
+#| msgid "Leaving: %s"
+msgid "Leaving"
+msgstr "Rời khỏi: %s"
+
+#: src/Widgets/EntryPopover/Location.vala:60
+msgid "John Smith OR Example St."
+msgstr ""
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
@@ -124,7 +153,7 @@ msgstr "Chứng chỉ SSL tin cậy đã bị từ chối kết nối"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
