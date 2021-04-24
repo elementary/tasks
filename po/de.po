@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-23 17:05+0000\n"
-"PO-Revision-Date: 2021-03-22 05:51+0000\n"
+"PO-Revision-Date: 2021-04-24 14:54+0000\n"
 "Last-Translator: Uwe S <saabisto@gmx.de>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/tasks/tasks/de/>\n"
 "Language: de\n"
@@ -46,14 +46,11 @@ msgid "Renaming task list failed"
 msgstr "Umbenennen einer Aufgabenliste fehlgeschlagen"
 
 #: src/Widgets/ListView.vala:349
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Completing task failed"
 msgstr "Abschluss der Aufgabe fehlgeschlagen"
 
 #: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
 #: src/Widgets/ListView.vala:394
-#, fuzzy
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Die Aufgabenlistenverwaltung ist möglicherweise nicht erreichbar oder "
@@ -105,27 +102,23 @@ msgstr ""
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "Entfernen"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "Ort festlegen"
 
 #: src/Widgets/EntryPopover/Location.vala:56
-#, fuzzy
-#| msgid "Arriving: %s"
 msgid "Arriving"
-msgstr "Ankunft: %s"
+msgstr "Ankunft"
 
 #: src/Widgets/EntryPopover/Location.vala:57
-#, fuzzy
-#| msgid "Leaving: %s"
 msgid "Leaving"
-msgstr "Verlassen: %s"
+msgstr "Verlassen"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "Michaela Mustermann ODER Beispielsstr."
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
