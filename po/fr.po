@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-23 17:05+0000\n"
-"PO-Revision-Date: 2021-03-22 12:14+0000\n"
+"POT-Creation-Date: 2021-04-24 14:56+0000\n"
+"PO-Revision-Date: 2021-04-25 19:26+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
 "Language: fr\n"
@@ -101,27 +101,23 @@ msgstr ""
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "Supprimer"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "Définir le lieu"
 
 #: src/Widgets/EntryPopover/Location.vala:56
-#, fuzzy
-#| msgid "Arriving: %s"
 msgid "Arriving"
-msgstr "Arrivée : %s"
+msgstr "Arrivée"
 
 #: src/Widgets/EntryPopover/Location.vala:57
-#, fuzzy
-#| msgid "Leaving: %s"
 msgid "Leaving"
-msgstr "Départ : %s"
+msgstr "Départ"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "Jean Dupont OU Avenue de Paris"
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
