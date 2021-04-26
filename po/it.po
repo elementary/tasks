@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-03 03:48+0000\n"
+"POT-Creation-Date: 2021-04-24 14:56+0000\n"
 "PO-Revision-Date: 2021-01-26 16:07+0000\n"
 "Last-Translator: Marco De Paolini <marco.depaolini@gmail.com>\n"
 "Language-Team: Italian <https://l10n.elementary.io/projects/tasks/tasks/it/"
@@ -19,42 +19,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "Programmate"
 
-#: src/ListView.vala:100
+#: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
 msgstr "Modifica nome e aspetto"
 
-#: src/ListView.vala:112
+#: src/Widgets/ListView.vala:131
 msgid "No Tasks"
 msgstr "Nessuna attività"
 
-#: src/ListView.vala:187
+#: src/Widgets/ListView.vala:154
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Adding task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
-#: src/MainWindow.vala:280
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
+#: src/MainWindow.vala:247 src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
 
-#: src/ListView.vala:220
+#: src/Widgets/ListView.vala:221
 msgid "Renaming task list failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/ListView.vala:336
+#: src/Widgets/ListView.vala:349
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Completing task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
+#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
+#: src/Widgets/ListView.vala:394
 #, fuzzy
 #| msgid ""
 #| "The task list registry may be unavailable or unable to be written to."
@@ -63,37 +64,37 @@ msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
 
-#: src/ListView.vala:358
+#: src/Widgets/ListView.vala:371
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Updating task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/ListView.vala:380
+#: src/Widgets/ListView.vala:393
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Removing task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/MainWindow.vala:42
+#: src/MainWindow.vala:44
 msgid "Tasks"
 msgstr "Attività"
 
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:246
 msgid "Creating a new task list failed"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:252
 msgid "New list"
 msgstr "Nuovo elenco"
 
-#: src/MainWindow.vala:279
+#: src/MainWindow.vala:301
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
 
-#: src/Util.vala:151
+#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Oggi"
 
@@ -108,6 +109,34 @@ msgstr "Domani"
 #: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
 msgstr "Modifica…"
+
+#: src/Widgets/EntryPopover/DateTime.vala:28
+msgid "Set Due"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Generic.vala:67
+msgid "Remove"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Location.vala:31
+msgid "Set Location"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Location.vala:56
+#, fuzzy
+#| msgid "Arriving: %s"
+msgid "Arriving"
+msgstr "Arrivo: %s"
+
+#: src/Widgets/EntryPopover/Location.vala:57
+#, fuzzy
+#| msgid "Leaving: %s"
+msgid "Leaving"
+msgstr "Partenza: %s"
+
+#: src/Widgets/EntryPopover/Location.vala:60
+msgid "John Smith OR Example St."
+msgstr ""
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
@@ -139,7 +168,7 @@ msgstr ""
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

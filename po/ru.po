@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-03 03:48+0000\n"
-"PO-Revision-Date: 2021-03-22 00:48+0000\n"
+"POT-Creation-Date: 2021-04-24 14:56+0000\n"
+"PO-Revision-Date: 2021-04-24 14:54+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
 ">\n"
@@ -20,64 +20,65 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "По расписанию"
 
-#: src/ListView.vala:100
+#: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
 msgstr "Изменить название и внешний вид"
 
-#: src/ListView.vala:112
+#: src/Widgets/ListView.vala:131
 msgid "No Tasks"
 msgstr "Нет задач"
 
-#: src/ListView.vala:187
+#: src/Widgets/ListView.vala:154
 msgid "Adding task failed"
 msgstr "Не удалось добавить задачу"
 
-#: src/ListView.vala:188 src/ListView.vala:221 src/MainWindow.vala:225
-#: src/MainWindow.vala:280
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
+#: src/MainWindow.vala:247 src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
-#: src/ListView.vala:220
+#: src/Widgets/ListView.vala:221
 msgid "Renaming task list failed"
 msgstr "Не удалось переименовать список задач"
 
-#: src/ListView.vala:336
+#: src/Widgets/ListView.vala:349
 msgid "Completing task failed"
 msgstr "Не удалось обозначить задачу выполненной"
 
-#: src/ListView.vala:337 src/ListView.vala:359 src/ListView.vala:381
+#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
+#: src/Widgets/ListView.vala:394
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Реестр задач может быть недоступен или не может быть записан."
 
-#: src/ListView.vala:358
+#: src/Widgets/ListView.vala:371
 msgid "Updating task failed"
 msgstr "Не удалось обновить задачу"
 
-#: src/ListView.vala:380
+#: src/Widgets/ListView.vala:393
 msgid "Removing task failed"
 msgstr "Не удалось удалить задачу"
 
-#: src/MainWindow.vala:42
+#: src/MainWindow.vala:44
 msgid "Tasks"
 msgstr "Задачи"
 
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:246
 msgid "Creating a new task list failed"
 msgstr "Не удалось создать список задач"
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:252
 msgid "New list"
 msgstr "Новый список"
 
-#: src/MainWindow.vala:279
+#: src/MainWindow.vala:301
 msgid "Deleting the task list failed"
 msgstr "Не удалось удалить список задач"
 
-#: src/Util.vala:151
+#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Сегодня"
 
@@ -92,6 +93,30 @@ msgstr "Завтра"
 #: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
 msgstr "Редактировать…"
+
+#: src/Widgets/EntryPopover/DateTime.vala:28
+msgid "Set Due"
+msgstr "Установить срок"
+
+#: src/Widgets/EntryPopover/Generic.vala:67
+msgid "Remove"
+msgstr "Удалить"
+
+#: src/Widgets/EntryPopover/Location.vala:31
+msgid "Set Location"
+msgstr "Указать местоположение"
+
+#: src/Widgets/EntryPopover/Location.vala:56
+msgid "Arriving"
+msgstr "Прибытие"
+
+#: src/Widgets/EntryPopover/Location.vala:57
+msgid "Leaving"
+msgstr "Отправление"
+
+#: src/Widgets/EntryPopover/Location.vala:60
+msgid "John Smith OR Example St."
+msgstr "Иван Иванов ИЛИ ул. Центральная."
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
@@ -122,7 +147,7 @@ msgstr "Ненадежный SSL сертификат для подключен�
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

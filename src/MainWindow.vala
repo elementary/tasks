@@ -22,6 +22,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     public const string ACTION_PREFIX = "win.";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
 
+    private const string SCHEDULED_LIST_UID = "scheduled";
+
     private const ActionEntry[] ACTION_ENTRIES = {
         { ACTION_DELETE_SELECTED_LIST, action_delete_selected_list }
     };
@@ -30,9 +32,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
     private uint configure_id;
     private Gtk.ListBox listbox;
-    private Gee.HashMap<E.Source, Tasks.SourceRow>? source_rows;
+    private Gee.HashMap<E.Source, Tasks.Widgets.SourceRow>? source_rows;
     private Gee.Collection<E.Source>? collection_sources;
-    private Tasks.ListView listview;
+    private Gtk.Stack listview_stack;
     private Gtk.ButtonBox add_tasklist_buttonbox;
 
     public MainWindow (Gtk.Application application) {
@@ -85,7 +87,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         listbox = new Gtk.ListBox ();
         listbox.set_sort_func (sort_function);
 
-        var scheduled_row = new Tasks.ScheduledRow ();
+        var scheduled_row = new Tasks.Widgets.ScheduledRow ();
         listbox.add (scheduled_row);
 
         var scrolledwindow = new Gtk.ScrolledWindow (null, null) {
@@ -120,11 +122,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
         sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);
 
-        listview = new Tasks.ListView ();
+        listview_stack = new Gtk.Stack ();
 
         var listview_grid = new Gtk.Grid ();
         listview_grid.attach (listview_header, 0, 0);
-        listview_grid.attach (listview, 0, 1);
+        listview_grid.attach (listview_stack, 0, 1);
 
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
         paned.pack1 (sidebar, false, false);
@@ -150,18 +152,31 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             listbox.row_selected.connect ((row) => {
                 if (row != null) {
-                    if (row is Tasks.SourceRow) {
-                        var source = ((Tasks.SourceRow) row).source;
-                        listview.source = source;
-                        Tasks.Application.settings.set_string ("selected-list", source.uid);
+                    Tasks.Widgets.ListView? listview;
 
-                        listview.add_view (source, "(contains? 'any' '')");
+                    if (row is Tasks.Widgets.SourceRow) {
+                        var source = ((Tasks.Widgets.SourceRow) row).source;
+                        var source_uid = source.dup_uid ();
 
+                        listview = (Tasks.Widgets.ListView) listview_stack.get_child_by_name (source_uid);
+                        if (listview == null) {
+                            listview = new Tasks.Widgets.ListView (source);
+                            listview_stack.add_named (listview, source_uid);
+                            listview.add_view (source, "(contains? 'any' '')");
+                        }
+
+                        listview_stack.set_visible_child_name (source_uid);
+                        Tasks.Application.settings.set_string ("selected-list", source_uid);
                         ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
 
-                    } else if (row is Tasks.ScheduledRow) {
-                        listview.source = null;
-                        Tasks.Application.settings.set_string ("selected-list", "scheduled");
+                    } else if (row is Tasks.Widgets.ScheduledRow) {
+                        listview = (Tasks.Widgets.ListView) listview_stack.get_child_by_name (SCHEDULED_LIST_UID);
+                        if (listview == null) {
+                            listview = new Tasks.Widgets.ListView (null);
+                            listview_stack.add_named (listview, SCHEDULED_LIST_UID);
+                        }
+
+                        listview.remove_views ();
 
                         var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
                         var query = "AND (NOT is-completed?) (has-start?)";
@@ -169,12 +184,18 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         sources.foreach ((source) => {
                             E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
-                            if (list.selected == true && source.enabled == true) {
+                            if (list.selected == true && source.enabled == true && !source.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
                                 listview.add_view (source, query);
                             }
                         });
 
+                        listview_stack.set_visible_child_name (SCHEDULED_LIST_UID);
+                        Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);
                         ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+                    }
+
+                    if (listview != null) {
+                        listview.update_request ();
                     }
 
                 } else {
@@ -182,27 +203,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     var first_row = listbox.get_row_at_index (0);
                     if (first_row != null) {
                         listbox.select_row (first_row);
-                    } else {
-                        listview.source = null;
-                    }
-                }
-            });
-
-            var last_selected_list = Application.settings.get_string ("selected-list");
-            var default_task_list = registry.default_task_list;
-            var task_lists = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
-
-            task_lists.foreach ((source) => {
-                E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-
-                if (list.selected == true && source.enabled == true) {
-                    add_source (source);
-
-                    if (last_selected_list == "" && default_task_list == source) {
-                        listbox.select_row (source_rows[source]);
-
-                    } else if (last_selected_list == source.uid) {
-                        listbox.select_row (source_rows[source]);
                     }
                 }
             });
@@ -214,8 +214,30 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 add_collection_source (collection_source);
             });
 
-            if (last_selected_list == "scheduled") {
+            var last_selected_list = Application.settings.get_string ("selected-list");
+
+            if (last_selected_list == SCHEDULED_LIST_UID) {
                 listbox.select_row (scheduled_row);
+                listbox.row_selected (scheduled_row);
+
+            } else {
+                var default_task_list = registry.default_task_list;
+                var task_lists = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
+
+                task_lists.foreach ((source) => {
+                    E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+                    if (list.selected == true && source.enabled == true && !source.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
+                        add_source (source);
+
+                        if (last_selected_list == "" && default_task_list == source) {
+                            listbox.select_row (source_rows[source]);
+
+                        } else if (last_selected_list == source.uid) {
+                            listbox.select_row (source_rows[source]);
+                        }
+                    }
+                });
             }
         });
     }
@@ -266,7 +288,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void action_delete_selected_list () {
-        var list_row = ((Tasks.SourceRow) listbox.get_selected_row ());
+        var list_row = ((Tasks.Widgets.SourceRow) listbox.get_selected_row ());
         var source = list_row.source;
 
         if (Tasks.Application.model.is_remove_task_list_supported (source)) {
@@ -289,12 +311,12 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void header_update_func (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow? lbbefore) {
-        if (!(lbrow is Tasks.SourceRow)) {
+        if (!(lbrow is Tasks.Widgets.SourceRow)) {
             return;
         }
-        var row = (Tasks.SourceRow) lbrow;
-        if (lbbefore != null && lbbefore is Tasks.SourceRow) {
-            var before = (Tasks.SourceRow) lbbefore;
+        var row = (Tasks.Widgets.SourceRow) lbrow;
+        if (lbbefore != null && lbbefore is Tasks.Widgets.SourceRow) {
+            var before = (Tasks.Widgets.SourceRow) lbbefore;
             if (row.source.parent == before.source.parent) {
                 return;
             }
@@ -310,12 +332,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
     [CCode (instance_pos = -1)]
     private int sort_function (Gtk.ListBoxRow lbrow, Gtk.ListBoxRow lbbefore) {
-        if (!(lbrow is Tasks.SourceRow)) {
+        if (!(lbrow is Tasks.Widgets.SourceRow)) {
             return -1;
         }
-        var row = (Tasks.SourceRow) lbrow;
-        var before = (Tasks.SourceRow) lbbefore;
-
+        var row = (Tasks.Widgets.SourceRow) lbrow;
+        var before = (Tasks.Widgets.SourceRow) lbbefore;
         if (row.source.parent == null || before.source.parent == null) {
             return -1;
         } else if (row.source.parent == before.source.parent) {
@@ -355,12 +376,12 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
     private void add_source (E.Source source) {
         if (source_rows == null) {
-            source_rows = new Gee.HashMap<E.Source, Tasks.SourceRow> ();
+            source_rows = new Gee.HashMap<E.Source, Tasks.Widgets.SourceRow> ();
         }
 
         debug ("Adding row '%s'", source.dup_display_name ());
         if (!source_rows.has_key (source)) {
-            source_rows[source] = new Tasks.SourceRow (source);
+            source_rows[source] = new Tasks.Widgets.SourceRow (source);
 
             listbox.add (source_rows[source]);
             Idle.add (() => {
@@ -384,7 +405,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         } else {
             source_rows[source].update_request ();
-            listview.update_request ();
+
+            var listview = (Tasks.Widgets.ListView) listview_stack.get_visible_child ();
+            if (listview != null) {
+                listview.update_request ();
+            }
 
             Idle.add (() => {
                 listbox.invalidate_sort ();

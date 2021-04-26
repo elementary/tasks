@@ -1,5 +1,5 @@
 /*
-* Copyright 2020 elementary, Inc. (https://elementary.io)
+* Copyright 2021 elementary, Inc. (https://elementary.io)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -17,7 +17,7 @@
 * Boston, MA 02110-1301 USA
 */
 
-public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
+public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
     private GtkChamplain.Embed map_embed;
     private Gtk.SearchEntry search_entry;
     private GLib.Cancellable search_cancellable;
@@ -25,7 +25,7 @@ public class Tasks.LocationPopover : Tasks.EntryPopover<Tasks.Location?> {
     private Marker point;
 
 
-    public LocationPopover () {
+    public Location () {
         Object (
             icon_name: "mark-location-symbolic",
             placeholder: _("Set Location")
