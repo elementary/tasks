@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 14:56+0000\n"
+"POT-Creation-Date: 2021-04-26 19:48+0000\n"
 "PO-Revision-Date: 2021-03-23 18:09+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/tasks/he/>\n"
@@ -149,7 +149,7 @@ msgstr "מהימנות אישור SSL נדחתה עבור החיבור"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
