@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-26 19:48+0000\n"
-"PO-Revision-Date: 2021-04-01 10:58+0000\n"
+"PO-Revision-Date: 2021-04-28 20:58+0000\n"
 "Last-Translator: Alvaro <alvaroaraoz_92@hotmail.com>\n"
-"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
-">\n"
+"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,31 +99,28 @@ msgstr "Editar…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "Fijar vencimiento"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "Eliminar"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "Escoger localización"
 
 #: src/Widgets/EntryPopover/Location.vala:56
-#, fuzzy
-#| msgid "Arriving: %s"
 msgid "Arriving"
-msgstr "Llegada: %s"
+msgstr "Llegada"
 
 #: src/Widgets/EntryPopover/Location.vala:57
-#, fuzzy
-#| msgid "Leaving: %s"
 msgid "Leaving"
-msgstr "Partida: %s"
+msgstr "Partida"
 
 #: src/Widgets/EntryPopover/Location.vala:60
+#, fuzzy
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "Francisco de Quevedo O Calle de Ejemplo"
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
