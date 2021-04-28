@@ -152,13 +152,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             listbox.row_selected.connect ((row) => {
                 if (row != null) {
-                    Tasks.Widgets.ListView? listview;
-
                     if (row is Tasks.Widgets.SourceRow) {
                         var source = ((Tasks.Widgets.SourceRow) row).source;
                         var source_uid = source.dup_uid ();
 
-                        listview = (Tasks.Widgets.ListView) listview_stack.get_child_by_name (source_uid);
+                        var listview = (Tasks.Widgets.ListView) listview_stack.get_child_by_name (source_uid);
                         if (listview == null) {
                             listview = new Tasks.Widgets.ListView (source);
                             listview_stack.add_named (listview, source_uid);
@@ -169,14 +167,16 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         Tasks.Application.settings.set_string ("selected-list", source_uid);
                         ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
 
+                        listview.update_request ();
+
                     } else if (row is Tasks.Widgets.ScheduledRow) {
-                        listview = (Tasks.Widgets.ListView) listview_stack.get_child_by_name (SCHEDULED_LIST_UID);
-                        if (listview == null) {
-                            listview = new Tasks.Widgets.ListView (null);
-                            listview_stack.add_named (listview, SCHEDULED_LIST_UID);
+                        var scheduled_listview = (Tasks.ScheduledListView) listview_stack.get_child_by_name (SCHEDULED_LIST_UID);
+                        if (scheduled_listview == null) {
+                            scheduled_listview = new Tasks.ScheduledListView ();
+                            listview_stack.add_named (scheduled_listview, SCHEDULED_LIST_UID);
                         }
 
-                        listview.remove_views ();
+                        scheduled_listview.remove_views ();
 
                         var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
                         var query = "AND (NOT is-completed?) (has-start?)";
@@ -185,17 +185,13 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                             E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
                             if (list.selected == true && source.enabled == true && !source.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
-                                listview.add_view (source, query);
+                                scheduled_listview.add_view (source, query);
                             }
                         });
 
                         listview_stack.set_visible_child_name (SCHEDULED_LIST_UID);
                         Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);
                         ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
-                    }
-
-                    if (listview != null) {
-                        listview.update_request ();
                     }
 
                 } else {

@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
+public class Tasks.Widgets.ScheduledTaskRow : Gtk.ListBoxRow {
 
     public signal void task_completed (ECal.Component task);
     public signal void task_changed (ECal.Component task);
@@ -51,18 +51,11 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
     private static Gtk.CssProvider taskrow_provider;
 
-    private TaskRow (ECal.Component task, E.Source source) {
+    private ScheduledTaskRow (ECal.Component task, E.Source source) {
         Object (task: task, source: source);
     }
 
-    public TaskRow.for_source (E.Source source) {
-        var task = new ECal.Component ();
-        task.set_new_vtype (ECal.ComponentVType.TODO);
-
-        Object (task: task, source: source);
-    }
-
-    public TaskRow.for_component (ECal.Component task, E.Source source) {
+    public ScheduledTaskRow.for_component (ECal.Component task, E.Source source) {
         Object (source: source, task: task);
     }
 
@@ -128,15 +121,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             }
 
             if (is_gtask) {
-                return _("%s").printf (Tasks.Util.get_relative_date (value));
+                return null;
 
             } else {
                 var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
                 var format = h24_settings.get_string ("clock-format");
 
-                ///TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-                return _("%s at %s").printf (
-                    Tasks.Util.get_relative_date (value),
+                return _("%s").printf (
                     value.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
                 );
             }
@@ -411,8 +402,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     }
 
     public void update_request () {
-        Tasks.Application.set_task_color (source, check);
-
         var default_due_datetime = new DateTime.now_local ().add_hours (1);
         default_due_datetime = default_due_datetime.add_minutes (-default_due_datetime.get_minute ());
         default_due_datetime = default_due_datetime.add_seconds (-default_due_datetime.get_seconds ());

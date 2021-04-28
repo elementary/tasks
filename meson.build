@@ -53,9 +53,11 @@ executable(
     'src/Widgets/EntryPopover/Location.vala',
     'src/Widgets/ListView.vala',
     'src/Widgets/ScheduledRow.vala',
+    'src/Widgets/ScheduledTaskRow.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskRow.vala',
     'src/Widgets/ListSettingsPopover.vala',
+    'src/ScheduledListView.vala',
     'src/TaskModel.vala',
     dependencies: tasks_deps,
     install : true
