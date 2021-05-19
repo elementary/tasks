@@ -507,7 +507,7 @@ public class Tasks.TaskModel : Object {
 
             task.set_completed (new ICal.Time.null_time ());
 
-            yield client.modify_object (comp, ECal.ObjModType.ONLY_THIS, ECal.OperationFlags.NONE, null);
+            yield client.modify_object (comp, ECal.ObjModType.THIS, ECal.OperationFlags.NONE, null);
 
         } else {
             debug (@"Completing $(task.is_instance() ? "instance" : "task") '$(comp.get_uid())'");
