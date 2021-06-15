@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-27 09:34+0000\n"
-"PO-Revision-Date: 2021-02-09 21:29+0000\n"
+"POT-Creation-Date: 2021-06-03 10:10+0000\n"
+"PO-Revision-Date: 2021-05-04 10:42+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://l10n.elementary.io/projects/tasks/tasks/fi/"
 ">\n"
@@ -32,10 +32,8 @@ msgid "No Tasks"
 msgstr "Ei tehtäviä"
 
 #: src/Widgets/ListView.vala:154
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Adding task failed"
-msgstr "Tehtäväluettelon nimeäminen uudelleen epäonnistui"
+msgstr "Tehtävän lisääminen epäonnistui"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
@@ -58,16 +56,12 @@ msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 
 #: src/Widgets/ListView.vala:371
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Updating task failed"
-msgstr "Tehtäväluettelon nimeäminen uudelleen epäonnistui"
+msgstr "Tehtävän päivittäminen epäonnistui"
 
 #: src/Widgets/ListView.vala:393
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Removing task failed"
-msgstr "Tehtäväluettelon nimeäminen uudelleen epäonnistui"
+msgstr "Tehtävän poistaminen epäonnistui"
 
 #: src/MainWindow.vala:44
 msgid "Tasks"
@@ -82,10 +76,8 @@ msgid "New list"
 msgstr "Uusi luettelo"
 
 #: src/MainWindow.vala:301
-#, fuzzy
-#| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
-msgstr "Uuden tehtäväluettelon luominen epäonnistui"
+msgstr "Tehtäväluettelon poistaminen epäonnistui"
 
 #: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
@@ -109,11 +101,11 @@ msgstr ""
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "Poista"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "Aseta sijainti"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
@@ -156,7 +148,7 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
