@@ -87,7 +87,8 @@ public class Tasks.Application : Gtk.Application {
             providers = new Gee.HashMap<string, Gtk.CssProvider> ();
         }
         var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-        var color = task_list.dup_color ();
+        // Ensure we get a valid CSS color, not including FF
+        var color = task_list.dup_color ().slice (0, 7);
         if (!providers.has_key (color)) {
             string style = """
                 @define-color colorAccent %s;
