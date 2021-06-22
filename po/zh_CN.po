@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 14:56+0000\n"
-"PO-Revision-Date: 2021-02-25 09:55+0000\n"
+"POT-Creation-Date: 2021-06-03 10:10+0000\n"
+"PO-Revision-Date: 2021-04-29 11:37+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "tasks/tasks/zh_Hans/>\n"
@@ -45,30 +45,21 @@ msgid "Renaming task list failed"
 msgstr "重命名列表失败"
 
 #: src/Widgets/ListView.vala:349
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Completing task failed"
-msgstr "重命名列表失败"
+msgstr "完成任务失败"
 
 #: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
 #: src/Widgets/ListView.vala:394
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr "该列表的注册表不可用或者不能写入。"
+msgstr "该任务的注册表不可用或者不能写入。"
 
 #: src/Widgets/ListView.vala:371
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Updating task failed"
-msgstr "重命名列表失败"
+msgstr "更新任务失败"
 
 #: src/Widgets/ListView.vala:393
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Removing task failed"
-msgstr "重命名列表失败"
+msgstr "移除任务失败"
 
 #: src/MainWindow.vala:44
 msgid "Tasks"
@@ -83,10 +74,8 @@ msgid "New list"
 msgstr "新列表"
 
 #: src/MainWindow.vala:301
-#, fuzzy
-#| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
-msgstr "创建新列表失败"
+msgstr "删除列表失败"
 
 #: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
@@ -106,31 +95,27 @@ msgstr "编辑…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "设置截止日期"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "设置位置"
 
 #: src/Widgets/EntryPopover/Location.vala:56
-#, fuzzy
-#| msgid "Arriving: %s"
 msgid "Arriving"
-msgstr "到达时间：%s"
+msgstr "到达时间"
 
 #: src/Widgets/EntryPopover/Location.vala:57
-#, fuzzy
-#| msgid "Leaving: %s"
 msgid "Leaving"
-msgstr "离开时间：%s"
+msgstr "离开时间"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "姓名或街道名称"
 
 #: src/Widgets/ListSettingsPopover.vala:104
 msgid "Show Completed"
@@ -161,7 +146,7 @@ msgstr "连接的 SSL 证书信任被拒"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 14:56+0000\n"
-"PO-Revision-Date: 2021-04-23 17:02+0000\n"
+"POT-Creation-Date: 2021-06-03 10:10+0000\n"
+"PO-Revision-Date: 2021-06-08 00:47+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/tasks/uk/"
 ">\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
-msgstr "За розкладом"
+msgstr "Заплановане"
 
 #: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
@@ -94,7 +94,7 @@ msgstr "Завтра"
 
 #: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
-msgstr "Редагувати…"
+msgstr "Змінити…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
@@ -149,7 +149,7 @@ msgstr "Не довірений SSL сертифікат для під'єдна�
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
