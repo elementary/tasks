@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-03 10:10+0000\n"
+"POT-Creation-Date: 2021-06-15 21:15+0000\n"
 "PO-Revision-Date: 2021-04-23 17:02+0000\n"
 "Last-Translator: Ciarán Ainsworth <ciaranainsworth@outlook.com>\n"
 "Language-Team: English (United Kingdom) <https://l10n.elementary.io/projects/"
@@ -37,6 +37,7 @@ msgstr "Adding task failed"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
+#: src/Widgets/ListSettingsPopover.vala:290
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "The task list registry may be unavailable or unable to be written to."
 
@@ -117,13 +118,19 @@ msgstr "Leaving"
 msgid "John Smith OR Example St."
 msgstr "John Smith OR Example St."
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "Show Completed"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:135
 msgid "Delete List"
 msgstr "Delete List"
+
+#: src/Widgets/ListSettingsPopover.vala:289
+#, fuzzy
+#| msgid "Deleting the task list failed"
+msgid "Updating the task list color failed"
+msgstr "Deleting the task list failed"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -146,7 +153,7 @@ msgstr "SSL certificate trust was rejected for the connection"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

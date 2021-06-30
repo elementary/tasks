@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-03 10:10+0000\n"
+"POT-Creation-Date: 2021-06-15 21:15+0000\n"
 "PO-Revision-Date: 2021-05-19 04:13+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
@@ -37,6 +37,7 @@ msgstr "No se pudo añadir la tarea"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
+#: src/Widgets/ListSettingsPopover.vala:290
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de listas de tareas no esté disponible o no se "
@@ -121,13 +122,19 @@ msgstr "Partida"
 msgid "John Smith OR Example St."
 msgstr "Francisco de Quevedo O Calle de Ejemplo"
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "Mostrar completadas"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:135
 msgid "Delete List"
 msgstr "Eliminar lista"
+
+#: src/Widgets/ListSettingsPopover.vala:289
+#, fuzzy
+#| msgid "Deleting the task list failed"
+msgid "Updating the task list color failed"
+msgstr "No se pudo eliminar la lista de tareas"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -150,7 +157,7 @@ msgstr "El depósito de certificados SSL se rechazó para efectuar la conexión"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
