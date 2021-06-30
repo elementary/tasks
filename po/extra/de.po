@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 21:15+0000\n"
+"POT-Creation-Date: 2021-06-30 17:31+0000\n"
 "PO-Revision-Date: 2020-10-27 22:15+0000\n"
 "Last-Translator: Uwe S <saabisto@gmx.de>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/tasks/extra/de/>\n"
@@ -28,9 +28,9 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
-"Tasks is designed and built to help manage all of your tasks and reminders. "
-"Create and complete tasks, manage lists and sync them across your machines "
-"using calDav."
+"Designed and built to help manage all of your tasks and reminders. Create "
+"and complete tasks, manage lists and sync them across your machines using "
+"CalDAV."
 msgstr ""
 
 #: data/tasks.appdata.xml.in:48
