@@ -523,8 +523,12 @@ public class Tasks.TaskModel : Object {
                         color
                     ));
 
+#if HAS_EDS_3_40
+                    collection_source_webdav_session.update_properties_sync (
+#else
                     E.webdav_session_update_properties_sync (
                         collection_source_webdav_session,
+#endif
                         source_webdav_extension.soup_uri.to_string (false),
                         changes,
                         null
