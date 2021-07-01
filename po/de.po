@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-30 21:44+0000\n"
-"PO-Revision-Date: 2021-05-06 23:29+0000\n"
+"PO-Revision-Date: 2021-07-01 11:16+0000\n"
 "Last-Translator: Uwe S <saabisto@gmx.de>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/tasks/tasks/de/>\n"
 "Language: de\n"
@@ -130,10 +130,8 @@ msgid "Delete List"
 msgstr "Liste löschen"
 
 #: src/Widgets/ListSettingsPopover.vala:289
-#, fuzzy
-#| msgid "Deleting the task list failed"
 msgid "Updating the task list color failed"
-msgstr "Löschen der Aufgabenliste fehlgeschlagen"
+msgstr "Aktualisierung der Aufgabenlistenfarbe fehlgeschlagen"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
