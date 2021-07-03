@@ -286,8 +286,8 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
 
     private void dialog_update_task_list_color_error (Error e) {
         var error_dialog = new Granite.MessageDialog (
-            _("Updating the task list color failed"),
-            _("The task list registry may be unavailable or unable to be written to."),
+            _("Could not change the task list color"),
+            _("The task list registry may be unavailable or write-protected."),
             new ThemedIcon ("dialog-error"),
             Gtk.ButtonsType.CLOSE
         );
