@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-03 16:42+0000\n"
 "PO-Revision-Date: 2021-07-06 09:32+0000\n"
-"Last-Translator: Dennis ten Hoove <dennistenhoove@protonmail.com>\n"
+"Last-Translator: Lieven Hanssen <lhanssen@freedommail.co>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/tasks/extra/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
-msgstr ""
+msgstr "Taken"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
@@ -32,6 +32,8 @@ msgid ""
 "and complete tasks, manage lists and sync them across your machines using "
 "CalDAV."
 msgstr ""
+"Ontworpen om al uw taken en herinneringen te beheren. Maak en rond taken af, "
+"beheer lijsten en synchroniseer ze tussen uw apparaten met behulp van CalDAV."
 
 #: data/tasks.appdata.xml.in:48
 msgid "elementary, Inc."
