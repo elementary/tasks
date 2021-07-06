@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-03 16:42+0000\n"
 "PO-Revision-Date: 2021-07-06 09:14+0000\n"
-"Last-Translator: Dennis ten Hoove <dennistenhoove@protonmail.com>\n"
+"Last-Translator: Lieven Hanssen <lhanssen@freedommail.co>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/tasks/tasks/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -152,7 +152,7 @@ msgstr "Momenteel niet verbonden met de (mogelijk externe) gegevensopslag"
 
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
-msgstr "SSL-certificaat vertrouwen werd verworpen voor de verbinding"
+msgstr "Betrouwbaarheid SSL-certificaat werd verworpen voor de verbinding"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
@@ -173,11 +173,11 @@ msgstr "Komt aan op: %s"
 #: src/Widgets/TaskRow.vala:184
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "Vertrekt op: %s"
 
 #: src/Widgets/TaskRow.vala:238
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 #: src/Widgets/TaskRow.vala:240
 msgid "Save Changes"
