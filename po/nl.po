@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-03 16:42+0000\n"
-"PO-Revision-Date: 2021-07-06 09:13+0000\n"
-"Last-Translator: Martin Stork <martin.stork95@gmail.com>\n"
+"PO-Revision-Date: 2021-07-06 09:14+0000\n"
+"Last-Translator: Dennis ten Hoove <dennistenhoove@protonmail.com>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/tasks/tasks/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -157,18 +157,18 @@ msgstr "SSL-certificaat vertrouwen werd verworpen voor de verbinding"
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s om %s"
 
 #: src/Widgets/TaskRow.vala:181
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "Komt aan op: %s"
 
 #: src/Widgets/TaskRow.vala:184
 #, c-format
@@ -181,7 +181,7 @@ msgstr ""
 
 #: src/Widgets/TaskRow.vala:240
 msgid "Save Changes"
-msgstr ""
+msgstr "Verandering Opslaan"
 
 #: src/Widgets/TaskRow.vala:240
 msgid "Add Task"
