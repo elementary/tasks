@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-01 23:36+0000\n"
+"POT-Creation-Date: 2021-07-03 16:42+0000\n"
 "PO-Revision-Date: 2021-07-01 11:16+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
@@ -36,7 +36,6 @@ msgstr "Échec de l'ajout de la tâche"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
-#: src/Widgets/ListSettingsPopover.vala:290
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des listes de tâches est probablement indisponible ou en lecture "
@@ -129,8 +128,19 @@ msgid "Delete List"
 msgstr "Supprimer la liste"
 
 #: src/Widgets/ListSettingsPopover.vala:289
-msgid "Updating the task list color failed"
+#, fuzzy
+#| msgid "Updating the task list color failed"
+msgid "Could not change the task list color"
 msgstr "Échec de la mise à jour de la couleur de la liste de tâches"
+
+#: src/Widgets/ListSettingsPopover.vala:290
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task list registry may be unavailable or write-protected."
+msgstr ""
+"Le registre des listes de tâches est probablement indisponible ou en lecture "
+"seule."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"

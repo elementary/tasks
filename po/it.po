@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-01 23:36+0000\n"
+"POT-Creation-Date: 2021-07-03 16:42+0000\n"
 "PO-Revision-Date: 2021-01-26 16:07+0000\n"
 "Last-Translator: Marco De Paolini <marco.depaolini@gmail.com>\n"
 "Language-Team: Italian <https://l10n.elementary.io/projects/tasks/tasks/it/"
@@ -39,7 +39,6 @@ msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
-#: src/Widgets/ListSettingsPopover.vala:290
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
@@ -150,8 +149,17 @@ msgstr "Cancella elenco"
 #: src/Widgets/ListSettingsPopover.vala:289
 #, fuzzy
 #| msgid "Creating a new task list failed"
-msgid "Updating the task list color failed"
+msgid "Could not change the task list color"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
+
+#: src/Widgets/ListSettingsPopover.vala:290
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task list registry may be unavailable or write-protected."
+msgstr ""
+"Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
+"può essere scritto."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-01 23:36+0000\n"
+"POT-Creation-Date: 2021-07-03 16:42+0000\n"
 "PO-Revision-Date: 2021-06-30 20:56+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/tasks/uk/"
@@ -38,7 +38,6 @@ msgstr "Не вдалося додати завдання"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
-#: src/Widgets/ListSettingsPopover.vala:290
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Реєстр списку завдань може бути недоступним або неможливо записати до нього."
@@ -129,8 +128,18 @@ msgid "Delete List"
 msgstr "Видалити список"
 
 #: src/Widgets/ListSettingsPopover.vala:289
-msgid "Updating the task list color failed"
+#, fuzzy
+#| msgid "Updating the task list color failed"
+msgid "Could not change the task list color"
 msgstr "Не вдалося оновити колір списку завдань"
+
+#: src/Widgets/ListSettingsPopover.vala:290
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task list registry may be unavailable or write-protected."
+msgstr ""
+"Реєстр списку завдань може бути недоступним або неможливо записати до нього."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
