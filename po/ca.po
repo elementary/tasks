@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 20:56+0000\n"
-"PO-Revision-Date: 2021-04-26 19:44+0000\n"
+"POT-Creation-Date: 2021-07-06 09:20+0000\n"
+"PO-Revision-Date: 2021-07-01 23:34+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/tasks/ca/"
 ">\n"
@@ -119,13 +119,28 @@ msgstr "Sortida"
 msgid "John Smith OR Example St."
 msgstr "Ona Garcia O Carrer Estret"
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "Mostra les fetes"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:135
 msgid "Delete List"
 msgstr "Suprimeix la llista"
+
+#: src/Widgets/ListSettingsPopover.vala:289
+#, fuzzy
+#| msgid "Updating the task list color failed"
+msgid "Could not change the task list color"
+msgstr "Ha fallat actualitzar el color de la llista de tasques."
+
+#: src/Widgets/ListSettingsPopover.vala:290
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task list registry may be unavailable or write-protected."
+msgstr ""
+"El registre de la llista de tasques pot no estar disponible o no s'hi pot "
+"escriure."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -148,7 +163,7 @@ msgstr "S'ha rebutjat la confiança del certificat SSL per a la connexió."
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

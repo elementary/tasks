@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 20:56+0000\n"
+"POT-Creation-Date: 2021-07-06 09:20+0000\n"
 "PO-Revision-Date: 2021-04-29 11:37+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
@@ -117,13 +117,26 @@ msgstr "离开时间"
 msgid "John Smith OR Example St."
 msgstr "姓名或街道名称"
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "显示已完成项"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:135
 msgid "Delete List"
 msgstr "删除列表"
+
+#: src/Widgets/ListSettingsPopover.vala:289
+#, fuzzy
+#| msgid "Deleting the task list failed"
+msgid "Could not change the task list color"
+msgstr "删除列表失败"
+
+#: src/Widgets/ListSettingsPopover.vala:290
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task list registry may be unavailable or write-protected."
+msgstr "该列表的注册表不可用或者不能写入。"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -146,7 +159,7 @@ msgstr "连接的 SSL 证书信任被拒"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

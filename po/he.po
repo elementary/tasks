@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 20:56+0000\n"
-"PO-Revision-Date: 2021-04-30 06:06+0000\n"
+"POT-Creation-Date: 2021-07-06 09:20+0000\n"
+"PO-Revision-Date: 2021-07-06 09:32+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/tasks/he/>\n"
 "Language: he\n"
@@ -116,13 +116,21 @@ msgstr "יציאה"
 msgid "John Smith OR Example St."
 msgstr "ישראל ישראלי או רחוב לדוגמה"
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "הצגת אלו שהושלמו"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:135
 msgid "Delete List"
 msgstr "מחיקת רשימה"
+
+#: src/Widgets/ListSettingsPopover.vala:289
+msgid "Could not change the task list color"
+msgstr "לא ניתן להחליף את צבע רשימת המשימות"
+
+#: src/Widgets/ListSettingsPopover.vala:290
+msgid "The task list registry may be unavailable or write-protected."
+msgstr "רשם רשימות המשימות כנראה אינו זמין או מוגן בפני כתיבה."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -145,7 +153,7 @@ msgstr "מהימנות אישור SSL נדחתה עבור החיבור"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

@@ -7,38 +7,41 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 20:56+0000\n"
-"PO-Revision-Date: 2019-08-02 13:43-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2021-07-06 09:20+0000\n"
+"PO-Revision-Date: 2021-07-06 11:26+0000\n"
+"Last-Translator: Lieven Hanssen <lhanssen@freedommail.co>\n"
+"Language-Team: Dutch <https://l10n.elementary.io/projects/tasks/extra/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
-msgstr ""
+msgstr "Taken"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "Gesynchroniseerde taken en herinneringen"
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
-"Tasks is designed and built to help manage all of your tasks and reminders. "
-"Create and complete tasks, manage lists and sync them across your machines "
-"using calDav."
+"Designed and built to help manage all of your tasks and reminders. Create "
+"and complete tasks, manage lists and sync them across your machines using "
+"CalDAV."
 msgstr ""
+"Ontworpen om al uw taken en herinneringen te beheren. Maak en rond taken af, "
+"beheer lijsten en synchroniseer ze tussen uw apparaten met behulp van CalDAV."
 
 #: data/tasks.appdata.xml.in:48
 msgid "elementary, Inc."
-msgstr ""
+msgstr "elementary, bv"
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
-msgstr ""
+msgstr "Creëer en volg de vooruitgang van taken"
 
 #: data/tasks.desktop.in:6
 msgid "io.elementary.tasks"
@@ -46,4 +49,4 @@ msgstr ""
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "Nog te doen;Herinneringen;"

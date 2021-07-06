@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 20:56+0000\n"
+"POT-Creation-Date: 2021-07-06 09:20+0000\n"
 "PO-Revision-Date: 2019-08-02 13:43-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -28,9 +28,9 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
-"Tasks is designed and built to help manage all of your tasks and reminders. "
-"Create and complete tasks, manage lists and sync them across your machines "
-"using calDav."
+"Designed and built to help manage all of your tasks and reminders. Create "
+"and complete tasks, manage lists and sync them across your machines using "
+"CalDAV."
 msgstr ""
 
 #: data/tasks.appdata.xml.in:48

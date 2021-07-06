@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 20:56+0000\n"
+"POT-Creation-Date: 2021-07-06 09:20+0000\n"
 "PO-Revision-Date: 2021-04-24 14:54+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
@@ -118,13 +118,26 @@ msgstr "Отправление"
 msgid "John Smith OR Example St."
 msgstr "Иван Иванов ИЛИ ул. Центральная."
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "Показать выполненные"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:135
 msgid "Delete List"
 msgstr "Удалить список"
+
+#: src/Widgets/ListSettingsPopover.vala:289
+#, fuzzy
+#| msgid "Deleting the task list failed"
+msgid "Could not change the task list color"
+msgstr "Не удалось удалить список задач"
+
+#: src/Widgets/ListSettingsPopover.vala:290
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task list registry may be unavailable or write-protected."
+msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -147,7 +160,7 @@ msgstr "Ненадежный SSL сертификат для подключен�
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

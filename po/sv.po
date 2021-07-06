@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 20:56+0000\n"
+"POT-Creation-Date: 2021-07-06 09:20+0000\n"
 "PO-Revision-Date: 2019-08-02 13:42-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -115,12 +115,20 @@ msgstr ""
 msgid "John Smith OR Example St."
 msgstr ""
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr ""
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:135
 msgid "Delete List"
+msgstr ""
+
+#: src/Widgets/ListSettingsPopover.vala:289
+msgid "Could not change the task list color"
+msgstr ""
+
+#: src/Widgets/ListSettingsPopover.vala:290
+msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 
 #: src/Widgets/SourceRow.vala:63
@@ -144,7 +152,7 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

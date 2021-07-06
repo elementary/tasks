@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-14 20:56+0000\n"
-"PO-Revision-Date: 2021-01-21 19:58+0000\n"
+"POT-Creation-Date: 2021-07-06 09:20+0000\n"
+"PO-Revision-Date: 2021-07-01 16:20+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
 "extra/nb/>\n"
@@ -26,22 +26,26 @@ msgstr "Gjøremål"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "Synkroniserte gjøremål og påminnelser"
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
-"Tasks is designed and built to help manage all of your tasks and reminders. "
-"Create and complete tasks, manage lists and sync them across your machines "
-"using calDav."
+"Designed and built to help manage all of your tasks and reminders. Create "
+"and complete tasks, manage lists and sync them across your machines using "
+"CalDAV."
 msgstr ""
+"Designet og bygd for å håndtere alle dine gjøremål og påminnelser. Opprett "
+"og fullfør gjøremål, håndter lister og synkroniser dem mellom maskinene dine "
+"med CalDAV."
 
 #: data/tasks.appdata.xml.in:48
+#, fuzzy
 msgid "elementary, Inc."
-msgstr ""
+msgstr "elementary, Inc."
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
-msgstr ""
+msgstr "Opprett og hold øye med gjøremålsfremdrift"
 
 #: data/tasks.desktop.in:6
 msgid "io.elementary.tasks"
@@ -49,4 +53,4 @@ msgstr ""
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "Gjøremål;Påminnelser;"
