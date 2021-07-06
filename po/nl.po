@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-03 16:42+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-07-06 09:13+0000\n"
+"Last-Translator: Dennis ten Hoove <dennistenhoove@protonmail.com>\n"
+"Language-Team: Dutch <https://l10n.elementary.io/projects/tasks/tasks/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
@@ -31,12 +32,14 @@ msgstr ""
 
 #: src/Widgets/ListView.vala:154
 msgid "Adding task failed"
-msgstr ""
+msgstr "Taak toevoegen mislukt"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
+"Het takenlijstregister is mogelijk onbeschikbaar of er kan niet naar worden "
+"geschreven."
 
 #: src/Widgets/ListView.vala:221
 msgid "Renaming task list failed"
@@ -44,12 +47,14 @@ msgstr ""
 
 #: src/Widgets/ListView.vala:349
 msgid "Completing task failed"
-msgstr ""
+msgstr "Afronden van taak mislukt"
 
 #: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
 #: src/Widgets/ListView.vala:394
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
+"Het takenregister is mogelijk onbeschikbaar of er kan niet naar worden "
+"geschreven."
 
 #: src/Widgets/ListView.vala:371
 msgid "Updating task failed"
@@ -57,7 +62,7 @@ msgstr ""
 
 #: src/Widgets/ListView.vala:393
 msgid "Removing task failed"
-msgstr ""
+msgstr "Taak verwijderen is mislukt"
 
 #: src/MainWindow.vala:44
 msgid "Tasks"
@@ -65,7 +70,7 @@ msgstr ""
 
 #: src/MainWindow.vala:246
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Het maken van een nieuwe takenlijst is mislukt"
 
 #: src/MainWindow.vala:252
 msgid "New list"
@@ -73,7 +78,7 @@ msgstr ""
 
 #: src/MainWindow.vala:301
 msgid "Deleting the task list failed"
-msgstr ""
+msgstr "Het verwijderen van de takenlijst is mislukt"
 
 #: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
@@ -113,7 +118,7 @@ msgstr ""
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "Janneke Schmidt OF Waalkadestraat"
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
@@ -141,11 +146,11 @@ msgstr ""
 
 #: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "Momenteel niet verbonden met de (mogelijk externe) gegevensopslag"
 
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "SSL-certificaat vertrouwen werd verworpen voor de verbinding"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
