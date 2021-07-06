@@ -37,7 +37,7 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:48
 msgid "elementary, Inc."
-msgstr "elementary, Inc."
+msgstr "elementary, bv"
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
