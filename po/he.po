@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-03 16:42+0000\n"
-"PO-Revision-Date: 2021-06-30 20:56+0000\n"
+"PO-Revision-Date: 2021-07-06 09:32+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/tasks/he/>\n"
 "Language: he\n"
@@ -125,17 +125,12 @@ msgid "Delete List"
 msgstr "מחיקת רשימה"
 
 #: src/Widgets/ListSettingsPopover.vala:289
-#, fuzzy
-#| msgid "Updating the task list color failed"
 msgid "Could not change the task list color"
-msgstr "עדכון צבע רשימת המשימות נכשל"
+msgstr "לא ניתן להחליף את צבע רשימת המשימות"
 
 #: src/Widgets/ListSettingsPopover.vala:290
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task list registry may be unavailable or write-protected."
-msgstr "רשם רשימות המשימות כנראה אינו זמין או שלא ניתן לכתוב אליו."
+msgstr "רשם רשימות המשימות כנראה אינו זמין או מוגן בפני כתיבה."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
