@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-06 09:20+0000\n"
-"PO-Revision-Date: 2021-07-01 11:16+0000\n"
+"PO-Revision-Date: 2021-07-07 04:17+0000\n"
 "Last-Translator: Uwe S <saabisto@gmx.de>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/tasks/tasks/de/>\n"
 "Language: de\n"
@@ -129,15 +129,10 @@ msgid "Delete List"
 msgstr "Liste löschen"
 
 #: src/Widgets/ListSettingsPopover.vala:289
-#, fuzzy
-#| msgid "Updating the task list color failed"
 msgid "Could not change the task list color"
-msgstr "Aktualisierung der Aufgabenlistenfarbe fehlgeschlagen"
+msgstr "Die Farbe der Aufgabenliste konnte nicht geändert werden"
 
 #: src/Widgets/ListSettingsPopover.vala:290
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 "Die Aufgabenlistenverwaltung ist möglicherweise nicht erreichbar oder "
