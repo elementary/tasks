@@ -111,7 +111,9 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
         color_grid.add (color_button_brown);
         color_grid.add (color_button_slate);
 
-        var show_completed_button = new Granite.SwitchModelButton (_("Show Completed"));
+        var show_completed_button = new Granite.SwitchModelButton (_("Show Completed")) {
+            margin_top = 3
+        };
 
         var delete_button = new Gtk.ModelButton () {
             action_name = MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST,
