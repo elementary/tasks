@@ -111,24 +111,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
         color_grid.add (color_button_brown);
         color_grid.add (color_button_slate);
 
-        var show_completed_label = new Gtk.Label (_("Show Completed")) {
-            hexpand = true,
-            xalign = 0
-        };
-
-        var show_completed_switch = new Gtk.Switch ();
-
-        var show_completed_grid = new Gtk.Grid () {
-            column_spacing = 6
-        };
-        show_completed_grid.add (show_completed_label);
-        show_completed_grid.add (show_completed_switch);
-
-        var show_completed_button = new Gtk.ModelButton () {
-            margin_top = 3
-        };
-        show_completed_button.get_child ().destroy ();
-        show_completed_button.add (show_completed_grid);
+        var show_completed_button = new Granite.SwitchModelButton (_("Show Completed"));
 
         var delete_button = new Gtk.ModelButton () {
             action_name = MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST,
@@ -212,12 +195,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             select_task_list_color (get_task_list_color (source));
         });
 
-        show_completed_button.button_release_event.connect (() => {
-            show_completed_switch.activate ();
-            return Gdk.EVENT_STOP;
-        });
-
-        Application.settings.bind ("show-completed", show_completed_switch, "active", GLib.SettingsBindFlags.DEFAULT);
+        Application.settings.bind ("show-completed", show_completed_button, "active", GLib.SettingsBindFlags.DEFAULT);
     }
 
     private void select_task_list_color (string color) {
