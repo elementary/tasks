@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-07 07:26+0000\n"
-"PO-Revision-Date: 2021-07-01 23:34+0000\n"
+"PO-Revision-Date: 2021-07-07 20:43+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/tasks/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/tasks/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -128,19 +128,14 @@ msgid "Delete List"
 msgstr "Suprimeix la llista"
 
 #: src/Widgets/ListSettingsPopover.vala:289
-#, fuzzy
-#| msgid "Updating the task list color failed"
 msgid "Could not change the task list color"
-msgstr "Ha fallat actualitzar el color de la llista de tasques."
+msgstr "No s'ha pogut canviar el color de la llista de tasques."
 
 #: src/Widgets/ListSettingsPopover.vala:290
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
-"El registre de la llista de tasques pot no estar disponible o no s'hi pot "
-"escriure."
+"És possible que el registre de la llista de tasques no estigui disponible o "
+"estigui protegit contra escriptura."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
