@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-07 07:26+0000\n"
-"PO-Revision-Date: 2021-05-19 04:13+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
-"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
-">\n"
+"PO-Revision-Date: 2021-07-15 15:31+0000\n"
+"Last-Translator: Alvaro <alvaroaraoz_92@hotmail.com>\n"
+"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -130,19 +130,14 @@ msgid "Delete List"
 msgstr "Eliminar lista"
 
 #: src/Widgets/ListSettingsPopover.vala:289
-#, fuzzy
-#| msgid "Deleting the task list failed"
 msgid "Could not change the task list color"
-msgstr "No se pudo eliminar la lista de tareas"
+msgstr "No se pudo cambiar el color de la lista de tareas"
 
 #: src/Widgets/ListSettingsPopover.vala:290
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
-"Es posible que el registro de listas de tareas no esté disponible o no se "
-"pueda modificar."
+"Es posible que el registro de la lista de tareas no esté disponible o esté "
+"protegido contra escritura."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
