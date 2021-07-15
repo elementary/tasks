@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-07 07:26+0000\n"
+"POT-Creation-Date: 2021-07-12 10:59+0000\n"
 "PO-Revision-Date: 2021-07-07 08:47+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
@@ -35,29 +35,29 @@ msgstr "タスクがありません"
 msgid "Adding task failed"
 msgstr "タスクを追加できませんでした"
 
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "タスクリストの登録ができないか、書き込みできない可能性があります。"
 
-#: src/Widgets/ListView.vala:221
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "タスクリストの名前を変更できませんでした"
 
-#: src/Widgets/ListView.vala:349
+#: src/Widgets/ListView.vala:350
 msgid "Completing task failed"
 msgstr "タスクを完了済みとしてマークできませんでした"
 
-#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
+#: src/Widgets/ListView.vala:395
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "タスクを登録できないか、書き込みできない可能性があります。"
 
-#: src/Widgets/ListView.vala:371
+#: src/Widgets/ListView.vala:372
 msgid "Updating task failed"
 msgstr "タスクを更新できませんでした"
 
-#: src/Widgets/ListView.vala:393
+#: src/Widgets/ListView.vala:394
 msgid "Removing task failed"
 msgstr "タスクを削除できませんでした"
 
@@ -156,7 +156,7 @@ msgstr "SSL 証明書が拒否されました"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

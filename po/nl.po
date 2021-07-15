@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-07 07:26+0000\n"
+"POT-Creation-Date: 2021-07-12 10:59+0000\n"
 "PO-Revision-Date: 2021-07-06 09:32+0000\n"
 "Last-Translator: Lieven Hanssen <lhanssen@freedommail.co>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/tasks/tasks/nl/>\n"
@@ -34,33 +34,33 @@ msgstr "Geen taken"
 msgid "Adding task failed"
 msgstr "Taak toevoegen mislukt"
 
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Het takenlijstregister is mogelijk onbeschikbaar of er kan niet naar worden "
 "geschreven."
 
-#: src/Widgets/ListView.vala:221
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "Het hernoemen van de takenlijst is mislukt"
 
-#: src/Widgets/ListView.vala:349
+#: src/Widgets/ListView.vala:350
 msgid "Completing task failed"
 msgstr "Afronden van taak mislukt"
 
-#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
+#: src/Widgets/ListView.vala:395
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Het takenregister is mogelijk onbeschikbaar of er kan niet naar worden "
 "geschreven."
 
-#: src/Widgets/ListView.vala:371
+#: src/Widgets/ListView.vala:372
 msgid "Updating task failed"
 msgstr "Taak bijwerken is mislukt"
 
-#: src/Widgets/ListView.vala:393
+#: src/Widgets/ListView.vala:394
 msgid "Removing task failed"
 msgstr "Taak verwijderen is mislukt"
 
@@ -159,7 +159,7 @@ msgstr "Betrouwbaarheid SSL-certificaat werd verworpen voor de verbinding"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
