@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-07 07:26+0000\n"
+"POT-Creation-Date: 2021-07-15 15:34+0000\n"
 "PO-Revision-Date: 2020-11-23 05:15+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/"
@@ -37,36 +37,36 @@ msgstr "कोणतीही कामे नाहीत"
 msgid "Adding task failed"
 msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
 
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
 
-#: src/Widgets/ListView.vala:221
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
 
-#: src/Widgets/ListView.vala:349
+#: src/Widgets/ListView.vala:350
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Completing task failed"
 msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
 
-#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
+#: src/Widgets/ListView.vala:395
 #, fuzzy
 #| msgid ""
 #| "The task list registry may be unavailable or unable to be written to."
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
 
-#: src/Widgets/ListView.vala:371
+#: src/Widgets/ListView.vala:372
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Updating task failed"
 msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
 
-#: src/Widgets/ListView.vala:393
+#: src/Widgets/ListView.vala:394
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Removing task failed"

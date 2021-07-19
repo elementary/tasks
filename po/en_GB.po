@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-07 07:26+0000\n"
-"PO-Revision-Date: 2021-07-06 08:18+0000\n"
+"POT-Creation-Date: 2021-07-15 15:34+0000\n"
+"PO-Revision-Date: 2021-07-18 00:53+0000\n"
 "Last-Translator: Ciarán Ainsworth <ciaranainsworth@outlook.com>\n"
 "Language-Team: English (United Kingdom) <https://l10n.elementary.io/projects/"
 "tasks/tasks/en_GB/>\n"
@@ -35,29 +35,29 @@ msgstr "No Tasks"
 msgid "Adding task failed"
 msgstr "Adding task failed"
 
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "The task list registry may be unavailable or unable to be written to."
 
-#: src/Widgets/ListView.vala:221
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "Renaming task list failed"
 
-#: src/Widgets/ListView.vala:349
+#: src/Widgets/ListView.vala:350
 msgid "Completing task failed"
 msgstr "Completing task failed"
 
-#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
+#: src/Widgets/ListView.vala:395
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "The task registry may be unavailable or unable to be written to."
 
-#: src/Widgets/ListView.vala:371
+#: src/Widgets/ListView.vala:372
 msgid "Updating task failed"
 msgstr "Updating task failed"
 
-#: src/Widgets/ListView.vala:393
+#: src/Widgets/ListView.vala:394
 msgid "Removing task failed"
 msgstr "Removing task failed"
 
@@ -126,17 +126,12 @@ msgid "Delete List"
 msgstr "Delete List"
 
 #: src/Widgets/ListSettingsPopover.vala:289
-#, fuzzy
-#| msgid "Updating the task list color failed"
 msgid "Could not change the task list color"
-msgstr "Updating the task list colour failed"
+msgstr "Could not change the task list colour"
 
 #: src/Widgets/ListSettingsPopover.vala:290
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task list registry may be unavailable or write-protected."
-msgstr "The task list registry may be unavailable or unable to be written to."
+msgstr "The task list registry may be unavailable or write-protected."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"

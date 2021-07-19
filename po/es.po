@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-07 07:26+0000\n"
-"PO-Revision-Date: 2021-05-19 04:13+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"POT-Creation-Date: 2021-07-15 15:34+0000\n"
+"PO-Revision-Date: 2021-07-15 15:31+0000\n"
+"Last-Translator: Alvaro <alvaroaraoz_92@hotmail.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
 ">\n"
 "Language: es\n"
@@ -35,33 +35,33 @@ msgstr "No hay tareas"
 msgid "Adding task failed"
 msgstr "No se pudo añadir la tarea"
 
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
 #: src/MainWindow.vala:247 src/MainWindow.vala:302
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de listas de tareas no esté disponible o no se "
 "pueda modificar."
 
-#: src/Widgets/ListView.vala:221
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "Falló el cambio de nombre de una lista de tareas"
 
-#: src/Widgets/ListView.vala:349
+#: src/Widgets/ListView.vala:350
 msgid "Completing task failed"
 msgstr "No se pudo completar la tarea"
 
-#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
+#: src/Widgets/ListView.vala:395
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de tareas no esté disponible o no se pueda "
 "escribir en este."
 
-#: src/Widgets/ListView.vala:371
+#: src/Widgets/ListView.vala:372
 msgid "Updating task failed"
 msgstr "Error al actualizar la tarea"
 
-#: src/Widgets/ListView.vala:393
+#: src/Widgets/ListView.vala:394
 msgid "Removing task failed"
 msgstr "No se pudo eliminar la tarea"
 
@@ -130,19 +130,14 @@ msgid "Delete List"
 msgstr "Eliminar lista"
 
 #: src/Widgets/ListSettingsPopover.vala:289
-#, fuzzy
-#| msgid "Deleting the task list failed"
 msgid "Could not change the task list color"
-msgstr "No se pudo eliminar la lista de tareas"
+msgstr "No se pudo cambiar el color de la lista de tareas"
 
 #: src/Widgets/ListSettingsPopover.vala:290
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
-"Es posible que el registro de listas de tareas no esté disponible o no se "
-"pueda modificar."
+"Es posible que el registro de la lista de tareas no esté disponible o esté "
+"protegido contra escritura."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
