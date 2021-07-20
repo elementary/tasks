@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-15 15:34+0000\n"
-"PO-Revision-Date: 2021-07-06 11:26+0000\n"
+"POT-Creation-Date: 2021-07-19 19:47+0000\n"
+"PO-Revision-Date: 2021-07-20 21:17+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/tasks/uk/"
 ">\n"
@@ -37,7 +37,7 @@ msgid "Adding task failed"
 msgstr "Не вдалося додати завдання"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:247 src/MainWindow.vala:302
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Реєстр списку завдань може бути недоступним або неможливо записати до нього."
@@ -67,15 +67,19 @@ msgstr "Не вдалося вилучити завдання"
 msgid "Tasks"
 msgstr "Завдання"
 
-#: src/MainWindow.vala:246
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr "Налаштування мережних облікових записів…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "Не вдалося створити список завдань"
 
-#: src/MainWindow.vala:252
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "Новий список"
 
-#: src/MainWindow.vala:301
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
 msgstr "Не вдалося видалити список завдань"
 
@@ -156,7 +160,7 @@ msgstr "Не довірений SSL сертифікат для під'єдна�
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

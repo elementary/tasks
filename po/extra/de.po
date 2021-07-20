@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-15 15:34+0000\n"
-"PO-Revision-Date: 2020-10-27 22:15+0000\n"
-"Last-Translator: Uwe S <saabisto@gmx.de>\n"
+"POT-Creation-Date: 2021-07-19 19:47+0000\n"
+"PO-Revision-Date: 2021-07-20 21:17+0000\n"
+"Last-Translator: supaeasy <ismo+github@wolffson.ch>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/tasks/extra/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -24,7 +24,7 @@ msgstr "Aufgaben"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "Synchronisierte Aufgaben und Erinnerungen"
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
@@ -32,6 +32,9 @@ msgid ""
 "and complete tasks, manage lists and sync them across your machines using "
 "CalDAV."
 msgstr ""
+"Designt und entworfen um all Ihre Aufgaben und Erinnerungen zu verwalten. "
+"Erstellen und Abschließen von Aufgaben, Listenverwaltung und "
+"Synchronisierung über all Ihre Geräte hinweg mittels CalDAV."
 
 #: data/tasks.appdata.xml.in:48
 msgid "elementary, Inc."
