@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-15 15:34+0000\n"
+"POT-Creation-Date: 2021-07-19 19:47+0000\n"
 "PO-Revision-Date: 2021-07-01 16:20+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
@@ -36,7 +36,7 @@ msgid "Adding task failed"
 msgstr "Kunne ikke legge til gjøremål"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:247 src/MainWindow.vala:302
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
 
@@ -66,15 +66,19 @@ msgstr "Kunne ikke fjerne gjøremål"
 msgid "Tasks"
 msgstr "Gjøremål"
 
-#: src/MainWindow.vala:246
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr ""
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "Opprettelse av nytt gjøremål mislyktes"
 
-#: src/MainWindow.vala:252
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "Ny liste"
 
-#: src/MainWindow.vala:301
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
 msgstr "Kunne ikke slette gjøremålsliste"
 
@@ -160,7 +164,7 @@ msgstr "Tiltro til SSL-sertifikat ble avslått for tilkoblingen"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
