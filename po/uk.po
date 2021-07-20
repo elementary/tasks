@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-19 19:47+0000\n"
-"PO-Revision-Date: 2021-07-06 11:26+0000\n"
+"PO-Revision-Date: 2021-07-20 21:17+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/tasks/uk/"
 ">\n"
@@ -69,7 +69,7 @@ msgstr "Завдання"
 
 #: src/MainWindow.vala:102
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "Налаштування мережних облікових записів…"
 
 #: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
