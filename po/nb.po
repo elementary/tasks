@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-19 19:47+0000\n"
-"PO-Revision-Date: 2021-07-01 16:20+0000\n"
+"PO-Revision-Date: 2021-07-20 21:17+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
 "tasks/nb/>\n"
@@ -67,8 +67,9 @@ msgid "Tasks"
 msgstr "Gjøremål"
 
 #: src/MainWindow.vala:102
+#, fuzzy
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "Innstillinger for netbaserte kontoer …"
 
 #: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
@@ -131,17 +132,12 @@ msgid "Delete List"
 msgstr "Slett liste"
 
 #: src/Widgets/ListSettingsPopover.vala:289
-#, fuzzy
-#| msgid "Deleting the task list failed"
 msgid "Could not change the task list color"
-msgstr "Kunne ikke oppdatere gjøremålslistefargen"
+msgstr "Kunne ikke endre gjøremålslistefargen"
 
 #: src/Widgets/ListSettingsPopover.vala:290
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task list registry may be unavailable or write-protected."
-msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
+msgstr "Gjøremålsregisteret kan være utilgjengelig eller skrivebeskyttet."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
