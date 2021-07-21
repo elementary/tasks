@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-19 19:47+0000\n"
-"PO-Revision-Date: 2021-07-07 08:47+0000\n"
+"POT-Creation-Date: 2021-07-20 22:36+0000\n"
+"PO-Revision-Date: 2021-07-21 06:02+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
 ">\n"
@@ -67,7 +67,7 @@ msgstr "タスク"
 
 #: src/MainWindow.vala:102
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "オンラインアカウントの設定…"
 
 #: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
@@ -160,7 +160,7 @@ msgstr "SSL 証明書が拒否されました"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
