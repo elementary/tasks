@@ -8,14 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-21 18:18+0000\n"
-"PO-Revision-Date: 2019-08-02 13:43-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-07-22 16:19+0000\n"
+"Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
+"Language-Team: English (Australia) <https://l10n.elementary.io/projects/"
+"tasks/extra/en_AU/>\n"
 "Language: en_AU\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -61,9 +63,8 @@ msgid "Create and track the progress of tasks"
 msgstr "Create and track the progress of tasks"
 
 #: data/tasks.desktop.in:6
-#, fuzzy
 msgid "io.elementary.tasks"
-msgstr "io.elementary.reminders"
+msgstr "io.elementary.tasks"
 
 #: data/tasks.desktop.in:7
 #, fuzzy
