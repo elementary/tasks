@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-21 18:18+0000\n"
-"PO-Revision-Date: 2021-07-01 23:34+0000\n"
+"PO-Revision-Date: 2021-07-22 16:19+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/extra/"
 "pt/>\n"
@@ -39,23 +39,23 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:18
 msgid "First release!"
-msgstr ""
+msgstr "Primeira versão!"
 
 #: data/tasks.appdata.xml.in:20
 msgid "Support the dark style"
-msgstr ""
+msgstr "Suporta o estilo escuro"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Add and remove task lists with custom colors"
-msgstr ""
+msgstr "Adicionar e remover listas de tarefas com cores personalizadas"
 
 #: data/tasks.appdata.xml.in:22
 msgid "See scheduled tasks from all lists at once"
-msgstr ""
+msgstr "Ver tarefas programadas de todas as listas ao mesmo tempo"
 
 #: data/tasks.appdata.xml.in:23
 msgid "Set due dates"
-msgstr ""
+msgstr "Definir datas de vencimento"
 
 #: data/tasks.appdata.xml.in:66
 msgid "elementary, Inc."
