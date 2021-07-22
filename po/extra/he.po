@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-21 18:18+0000\n"
-"PO-Revision-Date: 2021-06-30 23:01+0000\n"
+"PO-Revision-Date: 2021-07-22 06:09+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/extra/he/>\n"
 "Language: he\n"
@@ -37,11 +37,11 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:18
 msgid "First release!"
-msgstr ""
+msgstr "מהדורה ראשונה!"
 
 #: data/tasks.appdata.xml.in:20
 msgid "Support the dark style"
-msgstr ""
+msgstr "תמיכה בסגנון כהה"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Add and remove task lists with custom colors"
