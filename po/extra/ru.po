@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 14:56+0000\n"
-"PO-Revision-Date: 2021-03-02 19:02+0000\n"
+"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"PO-Revision-Date: 2021-07-24 14:22+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/extra/ru/"
 ">\n"
@@ -30,15 +30,35 @@ msgstr "Синхронизированые задачи и напоминани�
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
-"Tasks is designed and built to help manage all of your tasks and reminders. "
-"Create and complete tasks, manage lists and sync them across your machines "
-"using calDav."
+"Designed and built to help manage all of your tasks and reminders. Create "
+"and complete tasks, manage lists and sync them across your machines using "
+"CalDAV."
 msgstr ""
-"Задачи разработаны и построены для управления всеми вашими задачами и "
-"напоминаниями. Создавайте и выполняйте задачи, управляйте списками и "
-"синхронизируйте их на своих машинах с помощью calDav."
+"Разработано для управления всеми вашими задачами и напоминаниями. Создавайте "
+"и выполняйте задачи, управляйте списками и синхронизируйте их на своих "
+"машинах с помощью CalDAV."
 
-#: data/tasks.appdata.xml.in:48
+#: data/tasks.appdata.xml.in:18
+msgid "First release!"
+msgstr "Первый выпуск!"
+
+#: data/tasks.appdata.xml.in:20
+msgid "Support the dark style"
+msgstr "Поддержка темного стиля"
+
+#: data/tasks.appdata.xml.in:21
+msgid "Add and remove task lists with custom colors"
+msgstr "Добавление и удаление списков задач с пользовательскими цветами"
+
+#: data/tasks.appdata.xml.in:22
+msgid "See scheduled tasks from all lists at once"
+msgstr "Просмотр запланированных задач из всех списков одновременно"
+
+#: data/tasks.appdata.xml.in:23
+msgid "Set due dates"
+msgstr "Установка сроков выполнения"
+
+#: data/tasks.appdata.xml.in:66
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 

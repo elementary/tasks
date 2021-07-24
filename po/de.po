@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 14:56+0000\n"
-"PO-Revision-Date: 2021-04-24 14:54+0000\n"
-"Last-Translator: Uwe S <saabisto@gmx.de>\n"
+"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"PO-Revision-Date: 2021-07-20 21:17+0000\n"
+"Last-Translator: supaeasy <ismo+github@wolffson.ch>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/tasks/tasks/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -34,33 +34,33 @@ msgstr "Keine Aufgaben vorhanden"
 msgid "Adding task failed"
 msgstr "Hinzufügen der Aufgabe fehlgeschlagen"
 
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
-#: src/MainWindow.vala:247 src/MainWindow.vala:302
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Die Aufgabenlistenverwaltung ist möglicherweise nicht erreichbar oder "
 "schreibgeschützt."
 
-#: src/Widgets/ListView.vala:221
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "Umbenennen einer Aufgabenliste fehlgeschlagen"
 
-#: src/Widgets/ListView.vala:349
+#: src/Widgets/ListView.vala:350
 msgid "Completing task failed"
 msgstr "Abschluss der Aufgabe fehlgeschlagen"
 
-#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
+#: src/Widgets/ListView.vala:395
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Die Aufgabenlistenverwaltung ist möglicherweise nicht erreichbar oder "
 "schreibgeschützt."
 
-#: src/Widgets/ListView.vala:371
+#: src/Widgets/ListView.vala:372
 msgid "Updating task failed"
 msgstr "Aktualisierung der Aufgabe fehlgeschlagen"
 
-#: src/Widgets/ListView.vala:393
+#: src/Widgets/ListView.vala:394
 msgid "Removing task failed"
 msgstr "Entfernen der Aufgabe fehlgeschlagen"
 
@@ -68,15 +68,19 @@ msgstr "Entfernen der Aufgabe fehlgeschlagen"
 msgid "Tasks"
 msgstr "Aufgaben"
 
-#: src/MainWindow.vala:246
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr "Online-Kontoeinstellungen…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "Erstellen einer neuen Aufgabenliste gescheitert"
 
-#: src/MainWindow.vala:252
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "Neue Liste"
 
-#: src/MainWindow.vala:301
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
 msgstr "Löschen der Aufgabenliste fehlgeschlagen"
 
@@ -98,7 +102,7 @@ msgstr "Bearbeiten …"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "Fällig"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
@@ -120,13 +124,23 @@ msgstr "Verlassen"
 msgid "John Smith OR Example St."
 msgstr "Michaela Mustermann ODER Beispielsstr."
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "Abgeschlossene anzeigen"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:135
 msgid "Delete List"
 msgstr "Liste löschen"
+
+#: src/Widgets/ListSettingsPopover.vala:289
+msgid "Could not change the task list color"
+msgstr "Die Farbe der Aufgabenliste konnte nicht geändert werden"
+
+#: src/Widgets/ListSettingsPopover.vala:290
+msgid "The task list registry may be unavailable or write-protected."
+msgstr ""
+"Die Aufgabenlistenverwaltung ist möglicherweise nicht erreichbar oder "
+"schreibgeschützt."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"

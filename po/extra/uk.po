@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 14:56+0000\n"
-"PO-Revision-Date: 2020-12-23 13:16+0000\n"
+"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"PO-Revision-Date: 2021-07-22 16:19+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/extra/uk/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -30,15 +30,35 @@ msgstr "Синхронізовані завдання та нагадуванн�
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
-"Tasks is designed and built to help manage all of your tasks and reminders. "
-"Create and complete tasks, manage lists and sync them across your machines "
-"using calDav."
+"Designed and built to help manage all of your tasks and reminders. Create "
+"and complete tasks, manage lists and sync them across your machines using "
+"CalDAV."
 msgstr ""
-"Завдання розроблено та побудовано для керування всіма вашими завданнями та "
-"нагадуваннями. Створюйте та виконуйте завдання, керуйте списками та "
-"синхронізуйте їх на своїх машинах за допомогою calDav."
+"Створено для керування всіма вашими завданнями та нагадуваннями. Створюйте "
+"та виконуйте завдання, керуйте списками та синхронізуйте їх на своїх машинах "
+"за допомогою CalDAV."
 
-#: data/tasks.appdata.xml.in:48
+#: data/tasks.appdata.xml.in:18
+msgid "First release!"
+msgstr "Перший випуск!"
+
+#: data/tasks.appdata.xml.in:20
+msgid "Support the dark style"
+msgstr "Підтримка темного стилю"
+
+#: data/tasks.appdata.xml.in:21
+msgid "Add and remove task lists with custom colors"
+msgstr "Додавання та видалення списків завдань з власними кольоровими мітками"
+
+#: data/tasks.appdata.xml.in:22
+msgid "See scheduled tasks from all lists at once"
+msgstr "Переглядайте заплановані завдання з усіх списків відразу"
+
+#: data/tasks.appdata.xml.in:23
+msgid "Set due dates"
+msgstr "Встановлюйте терміни"
+
+#: data/tasks.appdata.xml.in:66
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 

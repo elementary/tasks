@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 14:56+0000\n"
-"PO-Revision-Date: 2021-04-23 20:04+0000\n"
-"Last-Translator: Ozgur Baskin <bebeto_baskin@yahoo.com>\n"
+"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"PO-Revision-Date: 2021-07-20 21:17+0000\n"
+"Last-Translator: Özgür Baskin <queeup@zoho.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/tasks/tasks/tr/"
 ">\n"
 "Language: tr\n"
@@ -35,29 +35,29 @@ msgstr "Görev Yok"
 msgid "Adding task failed"
 msgstr "Görev eklenemedi"
 
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
-#: src/MainWindow.vala:247 src/MainWindow.vala:302
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Görev listesi kayıt defteri kullanılamıyor veya yazılamıyor olabilir."
 
-#: src/Widgets/ListView.vala:221
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "Görev listesi yeniden adlandırılamadı"
 
-#: src/Widgets/ListView.vala:349
+#: src/Widgets/ListView.vala:350
 msgid "Completing task failed"
 msgstr "Görev tamamlanamadı"
 
-#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
+#: src/Widgets/ListView.vala:395
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Görev kayıt defteri kullanılamıyor veya yazılamıyor olabilir."
 
-#: src/Widgets/ListView.vala:371
+#: src/Widgets/ListView.vala:372
 msgid "Updating task failed"
 msgstr "Görev güncellenemedi"
 
-#: src/Widgets/ListView.vala:393
+#: src/Widgets/ListView.vala:394
 msgid "Removing task failed"
 msgstr "Görev kaldırılamadı"
 
@@ -65,15 +65,19 @@ msgstr "Görev kaldırılamadı"
 msgid "Tasks"
 msgstr "Görevler"
 
-#: src/MainWindow.vala:246
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr "Çevrimiçi Hesap Ayarları…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "Yeni bir görev listesi oluşturma başarısız oldu"
 
-#: src/MainWindow.vala:252
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "Yeni liste"
 
-#: src/MainWindow.vala:301
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
 msgstr "Görev listesi silinemedi"
 
@@ -117,13 +121,22 @@ msgstr "Ayrılınca"
 msgid "John Smith OR Example St."
 msgstr "Mustafa Kemal VEYA Atatürk Bul."
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "Tamamlananları Göster"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:135
 msgid "Delete List"
 msgstr "Listeyi Sil"
+
+#: src/Widgets/ListSettingsPopover.vala:289
+msgid "Could not change the task list color"
+msgstr "Görev listesi rengi değiştirilemedi"
+
+#: src/Widgets/ListSettingsPopover.vala:290
+msgid "The task list registry may be unavailable or write-protected."
+msgstr ""
+"Görev listesi kayıt defteri kullanılamıyor veya yazma korumalı olabilir."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"

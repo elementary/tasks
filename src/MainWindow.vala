@@ -101,8 +101,22 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         add_tasklist_buttonbox = new Gtk.ButtonBox (Gtk.Orientation.VERTICAL);
 
+        var online_accounts_button = new Gtk.ModelButton () {
+            text = _("Online Accounts Settings…")
+        };
+
+        var add_tasklist_grid = new Gtk.Grid () {
+            margin_top = 3,
+            margin_bottom = 3,
+            row_spacing = 3
+        };
+        add_tasklist_grid.attach (add_tasklist_buttonbox, 0, 0);
+        add_tasklist_grid.attach (new Gtk.Separator (Gtk.Orientation.HORIZONTAL), 0, 1);
+        add_tasklist_grid.attach (online_accounts_button, 0, 2);
+        add_tasklist_grid.show_all ();
+
         var add_tasklist_popover = new Gtk.Popover (null);
-        add_tasklist_popover.add (add_tasklist_buttonbox);
+        add_tasklist_popover.add (add_tasklist_grid);
 
         var add_tasklist_button = new Gtk.MenuButton () {
             label = ("Add Task List…"),
@@ -136,6 +150,14 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         paned.pack2 (listview_grid, true, false);
 
         add (paned);
+
+        online_accounts_button.clicked.connect (() => {
+            try {
+                AppInfo.launch_default_for_uri ("settings://accounts/online", null);
+            } catch (Error e) {
+                warning ("Failed to open account settings: %s", e.message);
+            }
+        });
 
         Tasks.Application.settings.bind ("pane-position", paned, "position", GLib.SettingsBindFlags.DEFAULT);
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 14:56+0000\n"
-"PO-Revision-Date: 2021-04-24 07:21+0000\n"
+"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"PO-Revision-Date: 2021-07-21 06:02+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
 ">\n"
@@ -35,29 +35,29 @@ msgstr "タスクがありません"
 msgid "Adding task failed"
 msgstr "タスクを追加できませんでした"
 
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
-#: src/MainWindow.vala:247 src/MainWindow.vala:302
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "タスクリストの登録ができないか、書き込みできない可能性があります。"
 
-#: src/Widgets/ListView.vala:221
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "タスクリストの名前を変更できませんでした"
 
-#: src/Widgets/ListView.vala:349
+#: src/Widgets/ListView.vala:350
 msgid "Completing task failed"
 msgstr "タスクを完了済みとしてマークできませんでした"
 
-#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
+#: src/Widgets/ListView.vala:395
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "タスクを登録できないか、書き込みできない可能性があります。"
 
-#: src/Widgets/ListView.vala:371
+#: src/Widgets/ListView.vala:372
 msgid "Updating task failed"
 msgstr "タスクを更新できませんでした"
 
-#: src/Widgets/ListView.vala:393
+#: src/Widgets/ListView.vala:394
 msgid "Removing task failed"
 msgstr "タスクを削除できませんでした"
 
@@ -65,15 +65,19 @@ msgstr "タスクを削除できませんでした"
 msgid "Tasks"
 msgstr "タスク"
 
-#: src/MainWindow.vala:246
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr "オンラインアカウントの設定…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "新しいタスクリストを作成できませんでした"
 
-#: src/MainWindow.vala:252
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "新しいリスト"
 
-#: src/MainWindow.vala:301
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
 msgstr "タスクリストを削除できませんでした"
 
@@ -117,13 +121,23 @@ msgstr "出発地"
 msgid "John Smith OR Example St."
 msgstr "場所を入力"
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "完了したタスクを表示"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:135
 msgid "Delete List"
 msgstr "リストを削除"
+
+#: src/Widgets/ListSettingsPopover.vala:289
+msgid "Could not change the task list color"
+msgstr "タスクリストの色を変更できませんでした"
+
+#: src/Widgets/ListSettingsPopover.vala:290
+msgid "The task list registry may be unavailable or write-protected."
+msgstr ""
+"タスクリストの登録が無効であるか、書き込み禁止に設定されている可能性がありま"
+"す。"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"

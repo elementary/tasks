@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 14:56+0000\n"
-"PO-Revision-Date: 2021-04-23 17:02+0000\n"
+"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"PO-Revision-Date: 2021-07-20 21:17+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/tasks/uk/"
 ">\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
-msgstr "За розкладом"
+msgstr "Заплановане"
 
 #: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
@@ -36,31 +36,30 @@ msgstr "Немає завдань"
 msgid "Adding task failed"
 msgstr "Не вдалося додати завдання"
 
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:222
-#: src/MainWindow.vala:247 src/MainWindow.vala:302
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
-"Реєстр переліку завдань може бути недоступним або неможливо записати до "
-"нього."
+"Реєстр списку завдань може бути недоступним або неможливо записати до нього."
 
-#: src/Widgets/ListView.vala:221
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
-msgstr "Не вдалося перейменувати перелік завдань"
+msgstr "Не вдалося перейменувати список завдань"
 
-#: src/Widgets/ListView.vala:349
+#: src/Widgets/ListView.vala:350
 msgid "Completing task failed"
 msgstr "Не вдалося позначити завдання виконаним"
 
-#: src/Widgets/ListView.vala:350 src/Widgets/ListView.vala:372
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
+#: src/Widgets/ListView.vala:395
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Реєстр завдань може бути недоступним або неможливо записати до нього."
 
-#: src/Widgets/ListView.vala:371
+#: src/Widgets/ListView.vala:372
 msgid "Updating task failed"
 msgstr "Не вдалося оновити завдання"
 
-#: src/Widgets/ListView.vala:393
+#: src/Widgets/ListView.vala:394
 msgid "Removing task failed"
 msgstr "Не вдалося вилучити завдання"
 
@@ -68,17 +67,21 @@ msgstr "Не вдалося вилучити завдання"
 msgid "Tasks"
 msgstr "Завдання"
 
-#: src/MainWindow.vala:246
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr "Налаштування мережних облікових записів…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
-msgstr "Не вдалося створити перелік завдань"
+msgstr "Не вдалося створити список завдань"
 
-#: src/MainWindow.vala:252
+#: src/MainWindow.vala:274
 msgid "New list"
-msgstr "Новий перелік"
+msgstr "Новий список"
 
-#: src/MainWindow.vala:301
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
-msgstr "Не вдалося втдалити перелік завдань"
+msgstr "Не вдалося видалити список завдань"
 
 #: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
@@ -94,7 +97,7 @@ msgstr "Завтра"
 
 #: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
-msgstr "Редагувати…"
+msgstr "Змінити…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
@@ -120,13 +123,21 @@ msgstr "Відправлення"
 msgid "John Smith OR Example St."
 msgstr "Іван Коваль АБО вул. Прикладна."
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "Показати виконані"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:135
 msgid "Delete List"
-msgstr "Видалити перелік"
+msgstr "Видалити список"
+
+#: src/Widgets/ListSettingsPopover.vala:289
+msgid "Could not change the task list color"
+msgstr "Не вдалося змінити колір списку завдань"
+
+#: src/Widgets/ListSettingsPopover.vala:290
+msgid "The task list registry may be unavailable or write-protected."
+msgstr "Реєстр списку завдань може бути недоступним або захищеним від запису."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
