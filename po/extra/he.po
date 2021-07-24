@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-07 07:26+0000\n"
-"PO-Revision-Date: 2021-06-30 23:01+0000\n"
+"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"PO-Revision-Date: 2021-07-22 16:19+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/extra/he/>\n"
 "Language: he\n"
@@ -35,7 +35,27 @@ msgstr ""
 "תוכננה ונבנתה כדי לסייע בניהול כל המשימות והתזכורות שלך. ליצור ולהשלים "
 "משימות, לנהל רשימות ולסנכרן אותן בין המכונות שלך באמצעות CalDAV."
 
-#: data/tasks.appdata.xml.in:48
+#: data/tasks.appdata.xml.in:18
+msgid "First release!"
+msgstr "מהדורה ראשונה!"
+
+#: data/tasks.appdata.xml.in:20
+msgid "Support the dark style"
+msgstr "תמיכה בסגנון כהה"
+
+#: data/tasks.appdata.xml.in:21
+msgid "Add and remove task lists with custom colors"
+msgstr "הוספה והסרה של רשימות משימות עם צבעים שהותאמו אישית"
+
+#: data/tasks.appdata.xml.in:22
+msgid "See scheduled tasks from all lists at once"
+msgstr "ניתן לצפות במשימות מתוזמנות מכל הרשימות בבת אחת"
+
+#: data/tasks.appdata.xml.in:23
+msgid "Set due dates"
+msgstr "ניתן להגדיר מועדי סיום"
+
+#: data/tasks.appdata.xml.in:66
 msgid "elementary, Inc."
 msgstr "elementary בע״מ"
 

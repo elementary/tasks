@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-07 07:26+0000\n"
-"PO-Revision-Date: 2021-07-02 04:09+0000\n"
+"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"PO-Revision-Date: 2021-07-22 16:19+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/extra/ja/"
 ">\n"
@@ -37,7 +37,28 @@ msgstr ""
 "を作成したり、完了済みとしてマークしたり、一覧を管理したり、CalDAV を使用して"
 "デバイス間で同期したりできます。"
 
-#: data/tasks.appdata.xml.in:48
+#: data/tasks.appdata.xml.in:18
+msgid "First release!"
+msgstr "最初のリリースです！"
+
+#: data/tasks.appdata.xml.in:20
+msgid "Support the dark style"
+msgstr "ダークスタイルへの対応"
+
+#: data/tasks.appdata.xml.in:21
+msgid "Add and remove task lists with custom colors"
+msgstr "カスタムカラーを設定したタスクリストの追加と削除に対応"
+
+#: data/tasks.appdata.xml.in:22
+msgid "See scheduled tasks from all lists at once"
+msgstr ""
+"すべてのタスクからスケジュールされたタスクを直感的に識別できるように表示"
+
+#: data/tasks.appdata.xml.in:23
+msgid "Set due dates"
+msgstr "期日を設定する機能を追加"
+
+#: data/tasks.appdata.xml.in:66
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
