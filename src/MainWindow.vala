@@ -116,7 +116,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         add_tasklist_popover.add (add_tasklist_grid);
 
         var add_tasklist_button = new Gtk.MenuButton () {
-            label = ("Add Task List…"),
+            label = _("Add Task List…"),
             image = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR),
             always_show_image = true,
             popover = add_tasklist_popover
