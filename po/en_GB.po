@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-15 15:34+0000\n"
-"PO-Revision-Date: 2021-07-18 00:53+0000\n"
+"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"PO-Revision-Date: 2021-07-21 12:24+0000\n"
 "Last-Translator: Ciarán Ainsworth <ciaranainsworth@outlook.com>\n"
 "Language-Team: English (United Kingdom) <https://l10n.elementary.io/projects/"
 "tasks/tasks/en_GB/>\n"
@@ -36,7 +36,7 @@ msgid "Adding task failed"
 msgstr "Adding task failed"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:247 src/MainWindow.vala:302
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "The task list registry may be unavailable or unable to be written to."
 
@@ -65,15 +65,19 @@ msgstr "Removing task failed"
 msgid "Tasks"
 msgstr "Tasks"
 
-#: src/MainWindow.vala:246
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr "Online Accounts Settings…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "Creating a new task list failed"
 
-#: src/MainWindow.vala:252
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "New list"
 
-#: src/MainWindow.vala:301
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
 msgstr "Deleting the task list failed"
 

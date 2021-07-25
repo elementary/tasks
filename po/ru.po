@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-15 15:34+0000\n"
-"PO-Revision-Date: 2021-04-24 14:54+0000\n"
+"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"PO-Revision-Date: 2021-07-24 14:22+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
 ">\n"
@@ -37,7 +37,7 @@ msgid "Adding task failed"
 msgstr "Не удалось добавить задачу"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:247 src/MainWindow.vala:302
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
@@ -66,15 +66,19 @@ msgstr "Не удалось удалить задачу"
 msgid "Tasks"
 msgstr "Задачи"
 
-#: src/MainWindow.vala:246
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr "Параметры онлайн аккаунтов…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "Не удалось создать список задач"
 
-#: src/MainWindow.vala:252
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "Новый список"
 
-#: src/MainWindow.vala:301
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
 msgstr "Не удалось удалить список задач"
 
@@ -127,17 +131,12 @@ msgid "Delete List"
 msgstr "Удалить список"
 
 #: src/Widgets/ListSettingsPopover.vala:289
-#, fuzzy
-#| msgid "Deleting the task list failed"
 msgid "Could not change the task list color"
-msgstr "Не удалось удалить список задач"
+msgstr "Не удалось изменить цвет списка задач"
 
 #: src/Widgets/ListSettingsPopover.vala:290
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task list registry may be unavailable or write-protected."
-msgstr "Журнал списка задач может быть недоступен или не может быть записан."
+msgstr "Журнал списка задач может быть недоступен или защищен от записи."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"

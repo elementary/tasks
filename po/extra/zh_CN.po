@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-15 15:34+0000\n"
+"POT-Creation-Date: 2021-07-23 16:55+0000\n"
 "PO-Revision-Date: 2021-01-25 07:20+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
@@ -41,7 +41,27 @@ msgstr ""
 "待办事项应用帮助您管理所有任务和提醒。使用 calDav 创建、完成待办事项，管理列"
 "表，跨设备同步。"
 
-#: data/tasks.appdata.xml.in:48
+#: data/tasks.appdata.xml.in:18
+msgid "First release!"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:20
+msgid "Support the dark style"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:21
+msgid "Add and remove task lists with custom colors"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:22
+msgid "See scheduled tasks from all lists at once"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:23
+msgid "Set due dates"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:66
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
