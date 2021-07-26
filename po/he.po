@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"POT-Creation-Date: 2021-07-25 13:32+0000\n"
 "PO-Revision-Date: 2021-07-20 10:06+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/tasks/he/>\n"
@@ -67,6 +67,10 @@ msgstr "משימות"
 #: src/MainWindow.vala:102
 msgid "Online Accounts Settings…"
 msgstr "הגדרות חשבונות מקוונים…"
+
+#: src/MainWindow.vala:119
+msgid "Add Task List…"
+msgstr "הוספת רשימת משימות…"
 
 #: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
@@ -157,7 +161,7 @@ msgstr "מהימנות אישור SSL נדחתה עבור החיבור"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
@@ -188,9 +192,6 @@ msgstr "הוספת משימה"
 #: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "מחיקת משימה"
-
-#~ msgid "Add Task List…"
-#~ msgstr "הוספת רשימת משימות…"
 
 #~ msgid "Schedule:"
 #~ msgstr "תזמון:"

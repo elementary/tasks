@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"POT-Creation-Date: 2021-07-25 13:32+0000\n"
 "PO-Revision-Date: 2021-07-06 09:32+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
@@ -70,6 +70,10 @@ msgstr "Tâches"
 #: src/MainWindow.vala:102
 msgid "Online Accounts Settings…"
 msgstr ""
+
+#: src/MainWindow.vala:119
+msgid "Add Task List…"
+msgstr "Ajouter une liste de tâche…"
 
 #: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
@@ -162,7 +166,7 @@ msgstr "Le certificat SSL à été rejeté pour la connexion"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
@@ -193,9 +197,6 @@ msgstr "Ajouter une tâche"
 #: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "Supprimer la tâche"
-
-#~ msgid "Add Task List…"
-#~ msgstr "Ajouter une liste de tâche…"
 
 #~ msgid "Schedule:"
 #~ msgstr "Planning :"
