@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-25 13:32+0000\n"
-"PO-Revision-Date: 2021-07-24 14:22+0000\n"
+"PO-Revision-Date: 2021-07-26 19:39+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
-"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,7 +72,7 @@ msgstr "Параметры онлайн аккаунтов…"
 
 #: src/MainWindow.vala:119
 msgid "Add Task List…"
-msgstr ""
+msgstr "Добавить список задач…"
 
 #: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
