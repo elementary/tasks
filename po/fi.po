@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"POT-Creation-Date: 2021-07-25 13:32+0000\n"
 "PO-Revision-Date: 2021-05-04 10:42+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://l10n.elementary.io/projects/tasks/tasks/fi/"
@@ -69,6 +69,10 @@ msgstr "Tehtävät"
 
 #: src/MainWindow.vala:102
 msgid "Online Accounts Settings…"
+msgstr ""
+
+#: src/MainWindow.vala:119
+msgid "Add Task List…"
 msgstr ""
 
 #: src/MainWindow.vala:268
@@ -162,7 +166,7 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

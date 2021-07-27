@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"POT-Creation-Date: 2021-07-25 13:32+0000\n"
 "PO-Revision-Date: 2021-03-07 04:21+0000\n"
 "Last-Translator: Trkien618 <hacngoctrungkien@gmail.com>\n"
 "Language-Team: Vietnamese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -69,6 +69,10 @@ msgstr "Các tác vụ"
 #: src/MainWindow.vala:102
 msgid "Online Accounts Settings…"
 msgstr ""
+
+#: src/MainWindow.vala:119
+msgid "Add Task List…"
+msgstr "Thêm danh sách tác vụ…"
 
 #: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
@@ -171,7 +175,7 @@ msgstr "Chứng chỉ SSL tin cậy đã bị từ chối kết nối"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
@@ -202,9 +206,6 @@ msgstr "Thêm tác vụ"
 #: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "Xoá tác vụ"
-
-#~ msgid "Add Task List…"
-#~ msgstr "Thêm danh sách tác vụ…"
 
 #~ msgid "Schedule:"
 #~ msgstr "Thời khoá biểu:"
