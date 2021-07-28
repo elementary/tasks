@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-25 13:32+0000\n"
+"POT-Creation-Date: 2021-07-27 18:55+0000\n"
 "PO-Revision-Date: 2021-07-28 03:11+0000\n"
 "Last-Translator: elSolus <tumbleweed@tuta.io>\n"
-"Language-Team: Punjabi <https://l10n.elementary.io/projects/tasks/tasks/pa/>"
-"\n"
+"Language-Team: Punjabi <https://l10n.elementary.io/projects/tasks/tasks/pa/"
+">\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,8 +39,7 @@ msgstr "ਕਾਰਜ ਜੋੜਨਾ ਨਾਕਾਮ ਰਿਹਾ"
 #: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
-"ਕਾਰਜ-ਸੂਚੀ ਦੀ ਰਜਿਸਟਰੀ ਨਾ-ਉਪਲਬਧ ਹੋ ਸਕਦੀ ਹੈ ਜਾਂ ਇਸ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ "
-"ਹੈ।"
+"ਕਾਰਜ-ਸੂਚੀ ਦੀ ਰਜਿਸਟਰੀ ਨਾ-ਉਪਲਬਧ ਹੋ ਸਕਦੀ ਹੈ ਜਾਂ ਇਸ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ ਹੈ।"
 
 #: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
@@ -53,8 +52,7 @@ msgstr "ਕਾਰਜ ਪੂਰਾ ਕਰਨਾ ਨਾਕਾਮ ਰਿਹਾ"
 #: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
 #: src/Widgets/ListView.vala:395
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
-"ਕਾਰਜ ਦੀ ਰਜਿਸਟਰੀ ਨਾ-ਉਪਲਬਧ ਹੋ ਸਕਦੀ ਹੈ ਜਾਂ ਇਸ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ ਹੈ।"
+msgstr "ਕਾਰਜ ਦੀ ਰਜਿਸਟਰੀ ਨਾ-ਉਪਲਬਧ ਹੋ ਸਕਦੀ ਹੈ ਜਾਂ ਇਸ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ ਹੈ।"
 
 #: src/Widgets/ListView.vala:372
 msgid "Updating task failed"
@@ -132,19 +130,18 @@ msgstr "ਮਿਸਾਲ ਵਜੋਂ ਸ੍ਰ. ਗੁਰਮੀਤ ਸਿੰਘ"
 msgid "Show Completed"
 msgstr "ਮੁਕੰਮਲ ਹੋਏ ਵਿਖਾਓ"
 
-#: src/Widgets/ListSettingsPopover.vala:135
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "ਸੂਚੀ ਮਿਟਾਓ"
 
-#: src/Widgets/ListSettingsPopover.vala:289
+#: src/Widgets/ListSettingsPopover.vala:269
 msgid "Could not change the task list color"
 msgstr "ਕਾਰਜ-ਸੂਚੀ ਦਾ ਰੰਗ ਬਦਲਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ"
 
-#: src/Widgets/ListSettingsPopover.vala:290
+#: src/Widgets/ListSettingsPopover.vala:270
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
-"ਕਾਰਜ-ਸੂਚੀ ਦੀ ਰਜਿਸਟਰੀ ਨਾ ਉਪਲਬਧ ਹੋ ਸਕਦੀ ਹੈ ਜਾਂ ਇਸ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ "
-"ਨਹੀਂ ਹੈ।"
+"ਕਾਰਜ-ਸੂਚੀ ਦੀ ਰਜਿਸਟਰੀ ਨਾ ਉਪਲਬਧ ਹੋ ਸਕਦੀ ਹੈ ਜਾਂ ਇਸ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ।"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -167,7 +164,7 @@ msgstr "ਕਨੈਕਸ਼ਨ ਲਈ ਐੱਸਐੱਸਐਲ (SSL) ਦਾ ਭ�
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

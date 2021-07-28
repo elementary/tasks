@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-25 13:32+0000\n"
+"POT-Creation-Date: 2021-07-27 18:55+0000\n"
 "PO-Revision-Date: 2021-07-20 21:17+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
@@ -131,15 +131,15 @@ msgstr "Ola Nordmann ELLER Eksempelgate"
 msgid "Show Completed"
 msgstr "Vis fullførte"
 
-#: src/Widgets/ListSettingsPopover.vala:135
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "Slett liste"
 
-#: src/Widgets/ListSettingsPopover.vala:289
+#: src/Widgets/ListSettingsPopover.vala:269
 msgid "Could not change the task list color"
 msgstr "Kunne ikke endre gjøremålslistefargen"
 
-#: src/Widgets/ListSettingsPopover.vala:290
+#: src/Widgets/ListSettingsPopover.vala:270
 msgid "The task list registry may be unavailable or write-protected."
 msgstr "Gjøremålsregisteret kan være utilgjengelig eller skrivebeskyttet."
 
@@ -164,7 +164,7 @@ msgstr "Tiltro til SSL-sertifikat ble avslått for tilkoblingen"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

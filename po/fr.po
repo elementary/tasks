@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-25 13:32+0000\n"
+"POT-Creation-Date: 2021-07-27 18:55+0000\n"
 "PO-Revision-Date: 2021-07-26 08:33+0000\n"
 "Last-Translator: Sébastien Boilève <sebastien.boileve@protonmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
@@ -131,15 +131,15 @@ msgstr "Jean Dupont OU Avenue de Paris"
 msgid "Show Completed"
 msgstr "Afficher les tâches complétées"
 
-#: src/Widgets/ListSettingsPopover.vala:135
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "Supprimer la liste"
 
-#: src/Widgets/ListSettingsPopover.vala:289
+#: src/Widgets/ListSettingsPopover.vala:269
 msgid "Could not change the task list color"
 msgstr "Impossible de modifier la couleur de la liste de tâches"
 
-#: src/Widgets/ListSettingsPopover.vala:290
+#: src/Widgets/ListSettingsPopover.vala:270
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 "Le registre des listes de tâches est probablement indisponible ou protégé en "
@@ -166,7 +166,7 @@ msgstr "Le certificat SSL à été rejeté pour la connexion"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

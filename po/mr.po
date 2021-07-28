@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-25 13:32+0000\n"
+"POT-Creation-Date: 2021-07-27 18:55+0000\n"
 "PO-Revision-Date: 2020-11-23 05:15+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/"
@@ -142,17 +142,17 @@ msgstr ""
 msgid "Show Completed"
 msgstr "पूर्ण झाले दर्शवा"
 
-#: src/Widgets/ListSettingsPopover.vala:135
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "यादी हटवा"
 
-#: src/Widgets/ListSettingsPopover.vala:289
+#: src/Widgets/ListSettingsPopover.vala:269
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Could not change the task list color"
 msgstr "नवीन कार्य सूची तयार करणे अयशस्वी झाले"
 
-#: src/Widgets/ListSettingsPopover.vala:290
+#: src/Widgets/ListSettingsPopover.vala:270
 #, fuzzy
 #| msgid ""
 #| "The task list registry may be unavailable or unable to be written to."
@@ -180,7 +180,7 @@ msgstr "कनेक्शनसाठी एसएसएल प्रमाण�
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
