@@ -13,6 +13,14 @@
     </p>
   </description>
   <releases>
+    <release version="6.0.1" date="2021-07-28" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="6.0.0" date="2021-07-19" urgency="medium">
       <description>
         <p>First release!</p>
