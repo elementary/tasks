@@ -17,6 +17,7 @@
       <description>
         <p>Improvements:</p>
         <ul>
+          <li>Fix the order of the scheduled view</li>
           <li>Updated translations</li>
         </ul>
       </description>
