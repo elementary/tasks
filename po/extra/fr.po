@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-27 18:55+0000\n"
+"POT-Creation-Date: 2021-07-29 22:16+0000\n"
 "PO-Revision-Date: 2021-07-30 20:33+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/extra/fr/>\n"
@@ -46,7 +46,8 @@ msgstr "Prise en charge du thème sombre"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Add and remove task lists with custom colors"
-msgstr "Ajoutez et supprimez des listes de tâche avec une couleur personnalisée"
+msgstr ""
+"Ajoutez et supprimez des listes de tâche avec une couleur personnalisée"
 
 #: data/tasks.appdata.xml.in:22
 msgid "See scheduled tasks from all lists at once"
