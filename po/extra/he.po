@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-02 19:24+0000\n"
-"PO-Revision-Date: 2021-07-22 16:19+0000\n"
+"PO-Revision-Date: 2021-08-04 13:21+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/extra/he/>\n"
 "Language: he\n"
@@ -37,15 +37,15 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:18
 msgid "Improvements:"
-msgstr ""
+msgstr "שיפורים:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "Fix the order of the scheduled view"
-msgstr ""
+msgstr "סדר התצוגה המתוזמנת תוקן"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Updated translations"
-msgstr ""
+msgstr "עודכנו תרגומים"
 
 #: data/tasks.appdata.xml.in:27
 msgid "First release!"
