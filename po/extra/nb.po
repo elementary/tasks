@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-29 22:16+0000\n"
+"POT-Creation-Date: 2021-08-02 19:24+0000\n"
 "PO-Revision-Date: 2021-07-01 16:20+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
@@ -39,26 +39,38 @@ msgstr ""
 "med CalDAV."
 
 #: data/tasks.appdata.xml.in:18
-msgid "First release!"
+msgid "Improvements:"
 msgstr ""
 
 #: data/tasks.appdata.xml.in:20
-msgid "Support the dark style"
+msgid "Fix the order of the scheduled view"
 msgstr ""
 
 #: data/tasks.appdata.xml.in:21
+msgid "Updated translations"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:27
+msgid "First release!"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:29
+msgid "Support the dark style"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:30
 msgid "Add and remove task lists with custom colors"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:22
+#: data/tasks.appdata.xml.in:31
 msgid "See scheduled tasks from all lists at once"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:23
+#: data/tasks.appdata.xml.in:32
 msgid "Set due dates"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:66
+#: data/tasks.appdata.xml.in:75
 #, fuzzy
 msgid "elementary, Inc."
 msgstr "elementary, Inc."

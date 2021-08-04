@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-29 22:16+0000\n"
+"POT-Creation-Date: 2021-08-02 19:24+0000\n"
 "PO-Revision-Date: 2021-07-22 16:19+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/extra/uk/"
@@ -39,26 +39,38 @@ msgstr ""
 "за допомогою CalDAV."
 
 #: data/tasks.appdata.xml.in:18
+msgid "Improvements:"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:20
+msgid "Fix the order of the scheduled view"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:21
+msgid "Updated translations"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:27
 msgid "First release!"
 msgstr "Перший випуск!"
 
-#: data/tasks.appdata.xml.in:20
+#: data/tasks.appdata.xml.in:29
 msgid "Support the dark style"
 msgstr "Підтримка темного стилю"
 
-#: data/tasks.appdata.xml.in:21
+#: data/tasks.appdata.xml.in:30
 msgid "Add and remove task lists with custom colors"
 msgstr "Додавання та видалення списків завдань з власними кольоровими мітками"
 
-#: data/tasks.appdata.xml.in:22
+#: data/tasks.appdata.xml.in:31
 msgid "See scheduled tasks from all lists at once"
 msgstr "Переглядайте заплановані завдання з усіх списків відразу"
 
-#: data/tasks.appdata.xml.in:23
+#: data/tasks.appdata.xml.in:32
 msgid "Set due dates"
 msgstr "Встановлюйте терміни"
 
-#: data/tasks.appdata.xml.in:66
+#: data/tasks.appdata.xml.in:75
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
