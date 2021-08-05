@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-02 19:24+0000\n"
-"PO-Revision-Date: 2021-07-23 13:54+0000\n"
+"PO-Revision-Date: 2021-08-05 15:11+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/extra/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/extra/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,15 +39,15 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:18
 msgid "Improvements:"
-msgstr ""
+msgstr "Millores:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "Fix the order of the scheduled view"
-msgstr ""
+msgstr "Correcció de l'ordre de la vista de programació"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Updated translations"
-msgstr ""
+msgstr "Traduccions actualitzades"
 
 #: data/tasks.appdata.xml.in:27
 msgid "First release!"
