@@ -4,6 +4,7 @@ runtime-version: '6'
 sdk: io.elementary.Sdk
 command: io.elementary.tasks
 finish-args:
+  - '--device=dri'
   - '--share=ipc'
   - '--share=network'
   - '--socket=fallback-x11'
