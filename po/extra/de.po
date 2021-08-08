@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-02 19:24+0000\n"
-"PO-Revision-Date: 2021-08-04 19:34+0000\n"
+"PO-Revision-Date: 2021-08-08 20:41+0000\n"
 "Last-Translator: supaeasy <ismo+github@wolffson.ch>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/tasks/extra/de/>\n"
 "Language: de\n"
@@ -42,7 +42,7 @@ msgstr "Verbesserungen:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "Fix the order of the scheduled view"
-msgstr ""
+msgstr "Reihenfolge in der geplanten Ansicht angepasst"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Updated translations"
