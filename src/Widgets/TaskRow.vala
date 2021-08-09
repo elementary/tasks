@@ -615,22 +615,4 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         Gtk.drag_set_icon_surface (drag_context, surface);
     }
-
-    //  [CCode (instance_pos = -1)]
-    //  private void on_drag_end (Gtk.Widget widget, Gdk.DragContext drag_context) {
-    //      var row = widget.get_ancestor (typeof (Gtk.ListBoxRow));
-
-    //      if (this == row) {
-    //          return;
-    //      }
-
-    //      var source_list = (Gtk.ListBox) this.parent;
-    //      var target_list = (Gtk.ListBox) row.parent;
-
-    //      if (source_list == target_list) {
-    //          // Proof of Concept: Swap positions:
-    //      }
-    //      debug ("on_drag_end");
-    //      //drag_context.dra
-    //  }
 }
