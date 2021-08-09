@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-03 03:48+0000\n"
-"PO-Revision-Date: 2021-03-22 00:48+0000\n"
+"POT-Creation-Date: 2021-08-07 00:53+0000\n"
+"PO-Revision-Date: 2021-07-26 19:39+0000\n"
 "Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
 ">\n"
@@ -20,64 +20,73 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "По расписанию"
 
-#: src/Widgets/ListView.vala:100
+#: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
 msgstr "Изменить название и внешний вид"
 
-#: src/Widgets/ListView.vala:112
+#: src/Widgets/ListView.vala:131
 msgid "No Tasks"
 msgstr "Нет задач"
 
-#: src/Widgets/ListView.vala:187
+#: src/Widgets/ListView.vala:154
 msgid "Adding task failed"
 msgstr "Не удалось добавить задачу"
 
-#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
-#: src/MainWindow.vala:280
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
-#: src/Widgets/ListView.vala:220
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "Не удалось переименовать список задач"
 
-#: src/Widgets/ListView.vala:336
+#: src/Widgets/ListView.vala:354
 msgid "Completing task failed"
 msgstr "Не удалось обозначить задачу выполненной"
 
-#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
+#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
+#: src/Widgets/ListView.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Реестр задач может быть недоступен или не может быть записан."
 
-#: src/Widgets/ListView.vala:358
+#: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
 msgstr "Не удалось обновить задачу"
 
-#: src/Widgets/ListView.vala:380
+#: src/Widgets/ListView.vala:398
 msgid "Removing task failed"
 msgstr "Не удалось удалить задачу"
 
-#: src/MainWindow.vala:42
+#: src/MainWindow.vala:44
 msgid "Tasks"
 msgstr "Задачи"
 
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr "Параметры онлайн аккаунтов…"
+
+#: src/MainWindow.vala:119
+msgid "Add Task List…"
+msgstr "Добавить список задач…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "Не удалось создать список задач"
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "Новый список"
 
-#: src/MainWindow.vala:279
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
 msgstr "Не удалось удалить список задач"
 
-#: src/Util.vala:151
+#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Сегодня"
 
@@ -93,13 +102,45 @@ msgstr "Завтра"
 msgid "Edit…"
 msgstr "Редактировать…"
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/EntryPopover/DateTime.vala:28
+msgid "Set Due"
+msgstr "Установить срок"
+
+#: src/Widgets/EntryPopover/Generic.vala:67
+msgid "Remove"
+msgstr "Удалить"
+
+#: src/Widgets/EntryPopover/Location.vala:31
+msgid "Set Location"
+msgstr "Указать местоположение"
+
+#: src/Widgets/EntryPopover/Location.vala:56
+msgid "Arriving"
+msgstr "Прибытие"
+
+#: src/Widgets/EntryPopover/Location.vala:57
+msgid "Leaving"
+msgstr "Отправление"
+
+#: src/Widgets/EntryPopover/Location.vala:60
+msgid "John Smith OR Example St."
+msgstr "Иван Иванов ИЛИ ул. Центральная."
+
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "Показать выполненные"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "Удалить список"
+
+#: src/Widgets/ListSettingsPopover.vala:269
+msgid "Could not change the task list color"
+msgstr "Не удалось изменить цвет списка задач"
+
+#: src/Widgets/ListSettingsPopover.vala:270
+msgid "The task list registry may be unavailable or write-protected."
+msgstr "Журнал списка задач может быть недоступен или защищен от записи."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"

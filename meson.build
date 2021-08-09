@@ -1,4 +1,8 @@
-project('io.elementary.tasks', 'vala', 'c')
+project(
+    'io.elementary.tasks', 'vala', 'c',
+    meson_version: '>= 0.49',
+    version: '6.0.1'
+)
 
 gnome = import('gnome')
 i18n = import('i18n')
@@ -12,7 +16,14 @@ gresource = gnome.compile_resources(
     source_dir: 'data'
 )
 
-add_project_arguments('-DLIBICAL_GLIB_UNSTABLE_API=1', language: 'c')
+config_data = configuration_data()
+config_data.set_quoted('LOCALEDIR', get_option('prefix') / get_option('localedir'))
+config_data.set_quoted('GETTEXT_PACKAGE', meson.project_name())
+config_file = configure_file(
+    input: 'src/Config.vala.in',
+    output: '@BASENAME@',
+    configuration: config_data
+)
 
 libecal_dep = dependency('libecal-2.0')
 
@@ -42,6 +53,7 @@ endif
 
 executable(
     meson.project_name(),
+    config_file,
     gresource,
     'src/Application.vala',
     'src/Location.vala',

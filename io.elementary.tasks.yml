@@ -1,9 +1,10 @@
 app-id: io.elementary.tasks
 runtime: io.elementary.Platform
-runtime-version: '0.1.0'
+runtime-version: '6'
 sdk: io.elementary.Sdk
 command: io.elementary.tasks
 finish-args:
+  - '--device=dri'
   - '--share=ipc'
   - '--share=network'
   - '--socket=fallback-x11'
@@ -76,7 +77,7 @@ modules:
     sources:
       - type: git
         url: https://gitlab.gnome.org/GNOME/evolution-data-server.git
-        tag: '3.40.0'
+        tag: '3.40.2'
     modules:
       - name: intltool
         cleanup:

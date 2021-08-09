@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-03 03:48+0000\n"
-"PO-Revision-Date: 2021-04-01 10:58+0000\n"
+"POT-Creation-Date: 2021-08-07 00:53+0000\n"
+"PO-Revision-Date: 2021-07-28 17:49+0000\n"
 "Last-Translator: Alvaro <alvaroaraoz_92@hotmail.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
 ">\n"
@@ -19,68 +19,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "Programadas"
 
-#: src/Widgets/ListView.vala:100
+#: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
 msgstr "Editar nombre y apariencia"
 
-#: src/Widgets/ListView.vala:112
+#: src/Widgets/ListView.vala:131
 msgid "No Tasks"
 msgstr "No hay tareas"
 
-#: src/Widgets/ListView.vala:187
+#: src/Widgets/ListView.vala:154
 msgid "Adding task failed"
-msgstr "No se pudo agregar la tarea"
+msgstr "No se pudo añadir la tarea"
 
-#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
-#: src/MainWindow.vala:280
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de listas de tareas no esté disponible o no se "
 "pueda modificar."
 
-#: src/Widgets/ListView.vala:220
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "Falló el cambio de nombre de una lista de tareas"
 
-#: src/Widgets/ListView.vala:336
+#: src/Widgets/ListView.vala:354
 msgid "Completing task failed"
 msgstr "No se pudo completar la tarea"
 
-#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
+#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
+#: src/Widgets/ListView.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de tareas no esté disponible o no se pueda "
-"escribir en él."
+"escribir en este."
 
-#: src/Widgets/ListView.vala:358
+#: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
 msgstr "Error al actualizar la tarea"
 
-#: src/Widgets/ListView.vala:380
+#: src/Widgets/ListView.vala:398
 msgid "Removing task failed"
 msgstr "No se pudo eliminar la tarea"
 
-#: src/MainWindow.vala:42
+#: src/MainWindow.vala:44
 msgid "Tasks"
 msgstr "Tareas"
 
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr "Configuración de cuentas en línea …"
+
+#: src/MainWindow.vala:119
+msgid "Add Task List…"
+msgstr "Añadir lista de tareas…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "Falló la creación de una lista de tareas nueva"
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "Lista nueva"
 
-#: src/MainWindow.vala:279
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
-msgstr "Fallo al eliminar la lista de tareas"
+msgstr "No se pudo eliminar la lista de tareas"
 
-#: src/Util.vala:151
+#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Hoy"
 
@@ -96,13 +105,47 @@ msgstr "Mañana"
 msgid "Edit…"
 msgstr "Editar…"
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/EntryPopover/DateTime.vala:28
+msgid "Set Due"
+msgstr "Fijar vencimiento"
+
+#: src/Widgets/EntryPopover/Generic.vala:67
+msgid "Remove"
+msgstr "Eliminar"
+
+#: src/Widgets/EntryPopover/Location.vala:31
+msgid "Set Location"
+msgstr "Definir ubicación"
+
+#: src/Widgets/EntryPopover/Location.vala:56
+msgid "Arriving"
+msgstr "Llegada"
+
+#: src/Widgets/EntryPopover/Location.vala:57
+msgid "Leaving"
+msgstr "Partida"
+
+#: src/Widgets/EntryPopover/Location.vala:60
+msgid "John Smith OR Example St."
+msgstr "Francisco de Quevedo O Calle de Ejemplo"
+
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "Mostrar completadas"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "Eliminar lista"
+
+#: src/Widgets/ListSettingsPopover.vala:269
+msgid "Could not change the task list color"
+msgstr "No se pudo cambiar el color de la lista de tareas"
+
+#: src/Widgets/ListSettingsPopover.vala:270
+msgid "The task list registry may be unavailable or write-protected."
+msgstr ""
+"Es posible que el registro de la lista de tareas no esté disponible o esté "
+"protegido contra escritura."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -156,9 +199,6 @@ msgstr "Añadir tarea"
 #: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "Eliminar tarea"
-
-#~ msgid "Add Task List…"
-#~ msgstr "Añadir lista de tareas…"
 
 #~ msgid "Schedule:"
 #~ msgstr "Programación:"

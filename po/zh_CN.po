@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-03 03:48+0000\n"
-"PO-Revision-Date: 2021-02-25 09:55+0000\n"
+"POT-Creation-Date: 2021-08-07 00:53+0000\n"
+"PO-Revision-Date: 2021-04-29 11:37+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "tasks/tasks/zh_Hans/>\n"
@@ -19,75 +19,73 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "待办事项"
 
-#: src/Widgets/ListView.vala:100
+#: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
 msgstr "编辑名称与外观"
 
-#: src/Widgets/ListView.vala:112
+#: src/Widgets/ListView.vala:131
 msgid "No Tasks"
 msgstr "无待办事项"
 
-#: src/Widgets/ListView.vala:187
+#: src/Widgets/ListView.vala:154
 msgid "Adding task failed"
 msgstr "添加列表失败"
 
-#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
-#: src/MainWindow.vala:280
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "该列表的注册表不可用或者不能写入。"
 
-#: src/Widgets/ListView.vala:220
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "重命名列表失败"
 
-#: src/Widgets/ListView.vala:336
-#, fuzzy
-#| msgid "Renaming task list failed"
+#: src/Widgets/ListView.vala:354
 msgid "Completing task failed"
-msgstr "重命名列表失败"
+msgstr "完成任务失败"
 
-#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
+#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
+#: src/Widgets/ListView.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr "该列表的注册表不可用或者不能写入。"
+msgstr "该任务的注册表不可用或者不能写入。"
 
-#: src/Widgets/ListView.vala:358
-#, fuzzy
-#| msgid "Renaming task list failed"
+#: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
-msgstr "重命名列表失败"
+msgstr "更新任务失败"
 
-#: src/Widgets/ListView.vala:380
-#, fuzzy
-#| msgid "Renaming task list failed"
+#: src/Widgets/ListView.vala:398
 msgid "Removing task failed"
-msgstr "重命名列表失败"
+msgstr "移除任务失败"
 
-#: src/MainWindow.vala:42
+#: src/MainWindow.vala:44
 msgid "Tasks"
 msgstr "待办事项"
 
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr ""
+
+#: src/MainWindow.vala:119
+msgid "Add Task List…"
+msgstr "添加列表…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "创建新列表失败"
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "新列表"
 
-#: src/MainWindow.vala:279
-#, fuzzy
-#| msgid "Creating a new task list failed"
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
-msgstr "创建新列表失败"
+msgstr "删除列表失败"
 
-#: src/Util.vala:151
+#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "今天"
 
@@ -103,13 +101,50 @@ msgstr "明天"
 msgid "Edit…"
 msgstr "编辑…"
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/EntryPopover/DateTime.vala:28
+msgid "Set Due"
+msgstr "设置截止日期"
+
+#: src/Widgets/EntryPopover/Generic.vala:67
+msgid "Remove"
+msgstr "移除"
+
+#: src/Widgets/EntryPopover/Location.vala:31
+msgid "Set Location"
+msgstr "设置位置"
+
+#: src/Widgets/EntryPopover/Location.vala:56
+msgid "Arriving"
+msgstr "到达时间"
+
+#: src/Widgets/EntryPopover/Location.vala:57
+msgid "Leaving"
+msgstr "离开时间"
+
+#: src/Widgets/EntryPopover/Location.vala:60
+msgid "John Smith OR Example St."
+msgstr "姓名或街道名称"
+
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "显示已完成项"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "删除列表"
+
+#: src/Widgets/ListSettingsPopover.vala:269
+#, fuzzy
+#| msgid "Deleting the task list failed"
+msgid "Could not change the task list color"
+msgstr "删除列表失败"
+
+#: src/Widgets/ListSettingsPopover.vala:270
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task list registry may be unavailable or write-protected."
+msgstr "该列表的注册表不可用或者不能写入。"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -163,9 +198,6 @@ msgstr "添加"
 #: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "删除"
-
-#~ msgid "Add Task List…"
-#~ msgstr "添加列表…"
 
 #, fuzzy
 #~ msgid "Schedule:"

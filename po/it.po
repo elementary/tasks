@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-03 03:48+0000\n"
+"POT-Creation-Date: 2021-08-07 00:53+0000\n"
 "PO-Revision-Date: 2021-01-26 16:07+0000\n"
 "Last-Translator: Marco De Paolini <marco.depaolini@gmail.com>\n"
 "Language-Team: Italian <https://l10n.elementary.io/projects/tasks/tasks/it/"
@@ -19,42 +19,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "Programmate"
 
-#: src/Widgets/ListView.vala:100
+#: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
 msgstr "Modifica nome e aspetto"
 
-#: src/Widgets/ListView.vala:112
+#: src/Widgets/ListView.vala:131
 msgid "No Tasks"
 msgstr "Nessuna attività"
 
-#: src/Widgets/ListView.vala:187
+#: src/Widgets/ListView.vala:154
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Adding task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
-#: src/MainWindow.vala:280
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
 
-#: src/Widgets/ListView.vala:220
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/Widgets/ListView.vala:336
+#: src/Widgets/ListView.vala:354
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Completing task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
+#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
+#: src/Widgets/ListView.vala:399
 #, fuzzy
 #| msgid ""
 #| "The task list registry may be unavailable or unable to be written to."
@@ -63,37 +64,45 @@ msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
 
-#: src/Widgets/ListView.vala:358
+#: src/Widgets/ListView.vala:376
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Updating task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/Widgets/ListView.vala:380
+#: src/Widgets/ListView.vala:398
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Removing task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/MainWindow.vala:42
+#: src/MainWindow.vala:44
 msgid "Tasks"
 msgstr "Attività"
 
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr ""
+
+#: src/MainWindow.vala:119
+msgid "Add Task List…"
+msgstr "Aggiungi un elenco attività…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "Nuovo elenco"
 
-#: src/MainWindow.vala:279
+#: src/MainWindow.vala:323
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
 
-#: src/Util.vala:151
+#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Oggi"
 
@@ -109,13 +118,56 @@ msgstr "Domani"
 msgid "Edit…"
 msgstr "Modifica…"
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/EntryPopover/DateTime.vala:28
+msgid "Set Due"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Generic.vala:67
+msgid "Remove"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Location.vala:31
+msgid "Set Location"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Location.vala:56
+#, fuzzy
+#| msgid "Arriving: %s"
+msgid "Arriving"
+msgstr "Arrivo: %s"
+
+#: src/Widgets/EntryPopover/Location.vala:57
+#, fuzzy
+#| msgid "Leaving: %s"
+msgid "Leaving"
+msgstr "Partenza: %s"
+
+#: src/Widgets/EntryPopover/Location.vala:60
+msgid "John Smith OR Example St."
+msgstr ""
+
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "Mostra quelle completate"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "Cancella elenco"
+
+#: src/Widgets/ListSettingsPopover.vala:269
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Could not change the task list color"
+msgstr "Creazione di un nuovo elenco di attività non riuscita"
+
+#: src/Widgets/ListSettingsPopover.vala:270
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task list registry may be unavailable or write-protected."
+msgstr ""
+"Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
+"può essere scritto."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -170,9 +222,6 @@ msgstr "Aggiungi attività"
 #: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "Cancella attività"
-
-#~ msgid "Add Task List…"
-#~ msgstr "Aggiungi un elenco attività…"
 
 #~ msgid "Schedule:"
 #~ msgstr "Programma:"

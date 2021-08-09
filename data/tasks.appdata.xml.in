@@ -8,13 +8,40 @@
   <summary>Synced tasks and reminders</summary>
   <description>
     <p>
-      Tasks is designed and built to help manage all of your tasks and reminders. Create and complete tasks, 
-      manage lists and sync them across your machines using calDav.
+      Designed and built to help manage all of your tasks and reminders.
+      Create and complete tasks, manage lists and sync them across your machines using CalDAV.
     </p>
   </description>
+  <releases>
+    <release version="6.0.1" date="2021-07-28" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Fix the order of the scheduled view</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="6.0.0" date="2021-07-19" urgency="medium">
+      <description>
+        <p>First release!</p>
+        <ul>
+          <li>Support the dark style</li>
+          <li>Add and remove task lists with custom colors</li>
+          <li>See scheduled tasks from all lists at once</li>
+          <li>Set due dates</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
   <provides>
     <binary>io.elementary.tasks</binary>
   </provides>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/elementary/tasks/master/data/screenshot.png</image>
+    </screenshot>
+  </screenshots>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>

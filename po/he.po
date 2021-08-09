@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-03 03:48+0000\n"
-"PO-Revision-Date: 2021-03-23 18:09+0000\n"
+"POT-Creation-Date: 2021-08-07 00:53+0000\n"
+"PO-Revision-Date: 2021-07-20 10:06+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/tasks/he/>\n"
 "Language: he\n"
@@ -18,64 +18,73 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:71 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "מתוזמן"
 
-#: src/Widgets/ListView.vala:100
+#: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
 msgstr "עריכת השם והמראה"
 
-#: src/Widgets/ListView.vala:112
+#: src/Widgets/ListView.vala:131
 msgid "No Tasks"
 msgstr "אין משימות"
 
-#: src/Widgets/ListView.vala:187
+#: src/Widgets/ListView.vala:154
 msgid "Adding task failed"
 msgstr "הוספת המשימה נכשלה"
 
-#: src/Widgets/ListView.vala:188 src/Widgets/ListView.vala:221 src/MainWindow.vala:225
-#: src/MainWindow.vala:280
+#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
+#: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "רשם רשימות המשימות כנראה אינו זמין או שלא ניתן לכתוב אליו."
 
-#: src/Widgets/ListView.vala:220
+#: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
 msgstr "שינוי שם רשימת המשימות נכשל"
 
-#: src/Widgets/ListView.vala:336
+#: src/Widgets/ListView.vala:354
 msgid "Completing task failed"
 msgstr "השלמת המשימה נכשלה"
 
-#: src/Widgets/ListView.vala:337 src/Widgets/ListView.vala:359 src/Widgets/ListView.vala:381
+#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
+#: src/Widgets/ListView.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "רשם המשימות כנראה אינו זמין או שלא ניתן לכתוב אליו."
 
-#: src/Widgets/ListView.vala:358
+#: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
 msgstr "עדכון המשימה נכשל"
 
-#: src/Widgets/ListView.vala:380
+#: src/Widgets/ListView.vala:398
 msgid "Removing task failed"
 msgstr "הסרת המשימה נכשלה"
 
-#: src/MainWindow.vala:42
+#: src/MainWindow.vala:44
 msgid "Tasks"
 msgstr "משימות"
 
-#: src/MainWindow.vala:224
+#: src/MainWindow.vala:102
+msgid "Online Accounts Settings…"
+msgstr "הגדרות חשבונות מקוונים…"
+
+#: src/MainWindow.vala:119
+msgid "Add Task List…"
+msgstr "הוספת רשימת משימות…"
+
+#: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
 msgstr "יצירת רשימת משימות חדשה נכשלה"
 
-#: src/MainWindow.vala:230
+#: src/MainWindow.vala:274
 msgid "New list"
 msgstr "רשימה חדשה"
 
-#: src/MainWindow.vala:279
+#: src/MainWindow.vala:323
 msgid "Deleting the task list failed"
 msgstr "מחיקת רשימת המשימות נכשלה"
 
-#: src/Util.vala:151
+#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "היום"
 
@@ -91,13 +100,45 @@ msgstr "מחר"
 msgid "Edit…"
 msgstr "עריכה…"
 
-#: src/Widgets/ListSettingsPopover.vala:104
+#: src/Widgets/EntryPopover/DateTime.vala:28
+msgid "Set Due"
+msgstr "הגדרת מועד סיום"
+
+#: src/Widgets/EntryPopover/Generic.vala:67
+msgid "Remove"
+msgstr "הסרה"
+
+#: src/Widgets/EntryPopover/Location.vala:31
+msgid "Set Location"
+msgstr "הגדרת מקום"
+
+#: src/Widgets/EntryPopover/Location.vala:56
+msgid "Arriving"
+msgstr "הגעה"
+
+#: src/Widgets/EntryPopover/Location.vala:57
+msgid "Leaving"
+msgstr "יציאה"
+
+#: src/Widgets/EntryPopover/Location.vala:60
+msgid "John Smith OR Example St."
+msgstr "ישראל ישראלי או רחוב לדוגמה"
+
+#: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "הצגת אלו שהושלמו"
 
-#: src/Widgets/ListSettingsPopover.vala:125
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "מחיקת רשימה"
+
+#: src/Widgets/ListSettingsPopover.vala:269
+msgid "Could not change the task list color"
+msgstr "לא ניתן להחליף את צבע רשימת המשימות"
+
+#: src/Widgets/ListSettingsPopover.vala:270
+msgid "The task list registry may be unavailable or write-protected."
+msgstr "רשם רשימות המשימות כנראה אינו זמין או מוגן בפני כתיבה."
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -151,9 +192,6 @@ msgstr "הוספת משימה"
 #: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "מחיקת משימה"
-
-#~ msgid "Add Task List…"
-#~ msgstr "הוספת רשימת משימות…"
 
 #~ msgid "Schedule:"
 #~ msgstr "תזמון:"

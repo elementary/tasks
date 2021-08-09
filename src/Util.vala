@@ -162,35 +162,6 @@ namespace Tasks.Util {
         }
     }
 
-
-    //--- X-Property ---//
-
-
-    public ICal.Property? get_icalcomponent_x_property (ICal.Component ical_component, string x_property_name) {
-        return get_ecalpropertybag_x_property (new ECal.ComponentPropertyBag.from_component (ical_component, (property) => {
-            return property.isa () == ICal.PropertyKind.X_PROPERTY;
-        }), x_property_name);
-    }
-
-    public ICal.Property? get_ecalpropertybag_x_property (ECal.ComponentPropertyBag ecal_propertybag, string x_property_name) {
-        var ecal_propertybag_count = ecal_propertybag.get_count ();
-
-        for (int i = 0; i < ecal_propertybag_count; i++) {
-            unowned ICal.Property? property = ecal_propertybag.get (i);
-            if (property.isa () == ICal.PropertyKind.X_PROPERTY && property.get_x_name () == x_property_name) {
-                var x_property = new ICal.Property (ICal.PropertyKind.X_PROPERTY);
-                x_property.set_x_name (x_property_name);
-
-                if (property.get_x () != null) {
-                    x_property.set_x (property.get_x ().dup ());
-                }
-
-                return x_property;
-            }
-        }
-        return null;
-    }
-
     public async bool swap_ecalcomponent_positions (
         E.Source source_a, ECal.Component component_a,
         E.Source source_b, ECal.Component component_b
@@ -262,11 +233,7 @@ namespace Tasks.Util {
     public string? get_apple_sortorder_property_value (ECal.Component ecalcomponent) {
         unowned ICal.Component? icalcomponent = ecalcomponent.get_icalcomponent ();
         if (icalcomponent != null) {
-            var x_apple_sort_order_property = get_icalcomponent_x_property (icalcomponent, "X-APPLE-SORT-ORDER");
-
-            if (x_apple_sort_order_property != null ) {
-                return x_apple_sort_order_property.get_x ();
-            }
+            return ECal.util_component_dup_x_property (icalcomponent, "X-APPLE-SORT-ORDER");
         }
         return null;
     }
@@ -318,14 +285,15 @@ namespace Tasks.Util {
         if (ecalcomponent.has_alarms ()) {
             var all_alarms = ecalcomponent.get_all_alarms ();
             foreach (unowned ECal.ComponentAlarm alarm in all_alarms) {
-                unowned ECal.ComponentPropertyBag alarm_property_bag = alarm.get_property_bag ();
+                var ical_component = new ICal.Component.valarm ();
+                alarm.fill_component (ical_component);
 
                 if (apple_proximity_property == null) {
-                    apple_proximity_property = get_ecalpropertybag_x_property (alarm_property_bag, "X-APPLE-PROXIMITY");
+                    apple_proximity_property = ECal.util_component_find_x_property (ical_component, "X-APPLE-PROXIMITY");
                 }
 
                 if (apple_location_property == null) {
-                    apple_location_property = get_ecalpropertybag_x_property (alarm_property_bag, "X-APPLE-STRUCTURED-LOCATION");
+                    apple_location_property = ECal.util_component_find_x_property (ical_component, "X-APPLE-STRUCTURED-LOCATION");
                 }
             }
         }
@@ -444,7 +412,10 @@ namespace Tasks.Util {
         if (ecalcomponent.has_alarms ()) {
             var all_alarms = ecalcomponent.get_all_alarms ();
             foreach (unowned ECal.ComponentAlarm alarm in all_alarms) {
-                if (null != get_ecalpropertybag_x_property (alarm.get_property_bag (), "X-APPLE-STRUCTURED-LOCATION")) {
+                var ical_component = new ICal.Component.valarm ();
+                alarm.fill_component (ical_component);
+
+                if (ECal.util_component_has_x_property (ical_component, "X-APPLE-STRUCTURED-LOCATION")) {
                     ecalcomponent.remove_alarm (alarm.get_uid ());
                 }
             }
