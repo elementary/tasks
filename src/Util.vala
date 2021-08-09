@@ -175,17 +175,25 @@ namespace Tasks.Util {
             return false;
         }
 
-        debug ("swap_ecalcomponent_positions: %s <> %s", component_a.get_summary ().get_value (), component_b.get_summary ().get_value ());
-
+        var swapped_positions = false;
         switch (backend_name_a.down ()) {
             case "webdav":
+            case "local":
                 var value_a = get_apple_sortorder_property_value (component_a);
+                if (value_a == null) {
+                    value_a = Util.get_apple_sortorder_default_value (component_a).as_int ().to_string ();
+                }
+
                 var value_b = get_apple_sortorder_property_value (component_b);
+                if (value_b == null) {
+                    value_b = Util.get_apple_sortorder_default_value (component_b).as_int ().to_string ();
+                }
 
                 set_apple_sortorder_property_value (component_a, value_b);
                 set_apple_sortorder_property_value (component_b, value_a);
 
-                return true;
+                swapped_positions = true;
+                break;
 
             case "google":
                 var value_a = get_gtasks_position_property_value (component_a);
@@ -194,11 +202,19 @@ namespace Tasks.Util {
                 set_gtasks_position_property_value (component_a, value_b);
                 set_gtasks_position_property_value (component_b, value_a);
 
-                return true;
+                swapped_positions = true;
+                break;
 
             default:
-                return false;
+                warning ("Manual sorting for backend '%s' is not supported.", backend_name_a);
+                break;
         }
+
+        if (swapped_positions) {
+            Application.model.update_task.begin (source_a, component_a, ECal.ObjModType.ALL);
+            Application.model.update_task.begin (source_b, component_b, ECal.ObjModType.ALL);
+        }
+        return swapped_positions;
     }
 
 
