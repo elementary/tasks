@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 00:53+0000\n"
+"POT-Creation-Date: 2021-08-09 19:13+0000\n"
 "PO-Revision-Date: 2021-08-05 15:11+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/extra/ca/"
@@ -37,39 +37,43 @@ msgstr ""
 "recordatoris. Creeu i completeu tasques, gestioneu-ne llistes i sincronitzeu-"
 "les en dispositius diferents mitjançant CalDAV."
 
-#: data/tasks.appdata.xml.in:18
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:27
 msgid "Improvements:"
 msgstr "Millores:"
 
 #: data/tasks.appdata.xml.in:20
-msgid "Fix the order of the scheduled view"
-msgstr "Correcció de l'ordre de la vista de programació"
+msgid "Fix crash on start with certain hardware"
+msgstr ""
 
-#: data/tasks.appdata.xml.in:21
+#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:30
 msgid "Updated translations"
 msgstr "Traduccions actualitzades"
 
-#: data/tasks.appdata.xml.in:27
+#: data/tasks.appdata.xml.in:29
+msgid "Fix the order of the scheduled view"
+msgstr "Correcció de l'ordre de la vista de programació"
+
+#: data/tasks.appdata.xml.in:36
 msgid "First release!"
 msgstr "Primera versió!"
 
-#: data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:38
 msgid "Support the dark style"
 msgstr "Admissió del tema fosc"
 
-#: data/tasks.appdata.xml.in:30
+#: data/tasks.appdata.xml.in:39
 msgid "Add and remove task lists with custom colors"
 msgstr "Afegiu i traieu llistes de tasques amb colors personalitzats."
 
-#: data/tasks.appdata.xml.in:31
+#: data/tasks.appdata.xml.in:40
 msgid "See scheduled tasks from all lists at once"
 msgstr "Vegeu les tasques programades de totes les llistes alhora."
 
-#: data/tasks.appdata.xml.in:32
+#: data/tasks.appdata.xml.in:41
 msgid "Set due dates"
 msgstr "Establiment de les dates de venciment"
 
-#: data/tasks.appdata.xml.in:75
+#: data/tasks.appdata.xml.in:84
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
