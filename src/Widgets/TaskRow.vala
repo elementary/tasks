@@ -45,7 +45,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Gtk.Stack state_stack;
     private Gtk.Image icon;
     private Gtk.CheckButton check;
+    private Gtk.EventBox event_box;
     private Gtk.Entry summary_entry;
+    private Gtk.Revealer drag_revealer;
     private Gtk.Label description_label;
     private Gtk.Revealer revealer;
     private Gtk.Revealer description_label_revealer;
@@ -108,6 +110,14 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         unowned Gtk.StyleContext summary_entry_context = summary_entry.get_style_context ();
         summary_entry_context.add_class (Gtk.STYLE_CLASS_FLAT);
         summary_entry_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        var drag_icon = new Gtk.Image.from_icon_name ("format-justify-fill-symbolic", Gtk.IconSize.BUTTON);
+
+        drag_revealer = new Gtk.Revealer () {
+            reveal_child = false,
+            transition_type = Gtk.RevealerTransitionType.SLIDE_LEFT
+        };
+        drag_revealer.add (drag_icon);
 
         due_datetime_popover = new Tasks.Widgets.EntryPopover.DateTime ();
 
@@ -274,6 +284,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         };
         grid.attach (state_stack, 0, 0);
         grid.attach (summary_entry, 1, 0);
+        grid.attach (drag_revealer, 2, 0);
         grid.attach (task_detail_revealer, 1, 1);
         grid.attach (task_form_revealer, 1, 2);
 
@@ -283,14 +294,19 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
         revealer.add (grid);
 
-        var handle = new Gtk.EventBox () {
+        event_box = new Gtk.EventBox () {
             expand = true,
             above_child = false
         };
-        handle.add_events (Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK);
-        handle.add (revealer);
+        event_box.add_events (
+            Gdk.EventMask.ENTER_NOTIFY_MASK |
+            Gdk.EventMask.LEAVE_NOTIFY_MASK |
+            Gdk.EventMask.BUTTON_PRESS_MASK |
+            Gdk.EventMask.BUTTON_RELEASE_MASK
+        );
+        event_box.add (revealer);
 
-        add (handle);
+        add (event_box);
         margin_start = margin_end = 12;
 
         style_context = get_style_context ();
@@ -427,6 +443,10 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             style_context.add_class ("collapsed");
             style_context.add_class (Granite.STYLE_CLASS_CARD);
 
+            if (drag_revealer.reveal_child) {
+                drag_revealer.reveal_child = false;
+            }
+
         } else {
             style_context.remove_class (Granite.STYLE_CLASS_CARD);
             style_context.remove_class ("collapsed");
@@ -552,10 +572,22 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     }
 
     private void build_drag_and_drop () {
-        Gtk.drag_source_set (this, Gdk.ModifierType.BUTTON1_MASK, TARGET_ENTRIES, Gdk.DragAction.MOVE);
+        event_box.enter_notify_event.connect ((event) => {
+            if (!is_scheduled_view && created && !task_form_revealer.reveal_child) {
+                drag_revealer.reveal_child = true;
+            }
+            return Gdk.EVENT_PROPAGATE;
+        });
+
+        event_box.leave_notify_event.connect ((event) => {
+            drag_revealer.reveal_child = false;
+            return Gdk.EVENT_PROPAGATE;
+        });
+
+        Gtk.drag_source_set (event_box, Gdk.ModifierType.BUTTON1_MASK, TARGET_ENTRIES, Gdk.DragAction.MOVE);
         Gtk.drag_dest_set (this, Gtk.DestDefaults.ALL, TARGET_ENTRIES, Gdk.DragAction.MOVE);
 
-        drag_data_get.connect (on_drag_data_get);
+        event_box.drag_data_get.connect (on_drag_data_get);
         drag_data_received.connect (on_drag_data_received);
 
         drag_begin.connect (on_drag_begin);
@@ -564,9 +596,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
     private void on_drag_data_get (Gtk.Widget widget, Gdk.DragContext context,
         Gtk.SelectionData selection_data, uint target_type, uint time) {
-
+        
         uchar[] data = new uchar[(sizeof (Gtk.ListBoxRow))];
-        ((Gtk.Widget[])data)[0] = widget;
+        ((Gtk.Widget[])data)[0] = widget.get_ancestor (typeof (Gtk.ListBoxRow));
 
         selection_data.set (
             Gdk.Atom.intern_static_string ("GTK_LIST_BOX_ROW"), 32, data
@@ -596,7 +628,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     }
 
     private void on_drag_begin (Gtk.Widget widget, Gdk.DragContext drag_context) {
-        var row = widget.get_ancestor (typeof (Gtk.ListBoxRow));
+        var row = (Tasks.Widgets.TaskRow) widget.get_ancestor (typeof (Gtk.ListBoxRow));
 
         Gtk.Allocation row_alloc;
         row.get_allocation (out row_alloc);
