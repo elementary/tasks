@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-09 19:13+0000\n"
-"PO-Revision-Date: 2021-07-22 16:19+0000\n"
+"PO-Revision-Date: 2021-08-14 02:05+0000\n"
 "Last-Translator: Özgür Baskin <queeup@zoho.com>\n"
-"Language-Team: Turkish <https://l10n.elementary.io/projects/tasks/extra/tr/"
-">\n"
+"Language-Team: Turkish <https://l10n.elementary.io/projects/tasks/extra/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,19 +40,19 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:27
 msgid "Improvements:"
-msgstr ""
+msgstr " "
 
 #: data/tasks.appdata.xml.in:20
 msgid "Fix crash on start with certain hardware"
-msgstr ""
+msgstr " "
 
 #: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:30
 msgid "Updated translations"
-msgstr ""
+msgstr " "
 
 #: data/tasks.appdata.xml.in:29
 msgid "Fix the order of the scheduled view"
-msgstr ""
+msgstr " "
 
 #: data/tasks.appdata.xml.in:36
 msgid "First release!"
