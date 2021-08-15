@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-12 17:36+0000\n"
-"PO-Revision-Date: 2021-07-20 21:17+0000\n"
+"PO-Revision-Date: 2021-08-15 14:26+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
 "tasks/nb/>\n"
@@ -69,11 +69,12 @@ msgstr "Gjøremål"
 #: src/MainWindow.vala:102
 #, fuzzy
 msgid "Online Accounts Settings…"
-msgstr "Innstillinger for netbaserte kontoer …"
+msgstr "Innstillinger for nettbaserte kontoer …"
 
 #: src/MainWindow.vala:119
+#, fuzzy
 msgid "Add Task List…"
-msgstr ""
+msgstr "Legg til gjøremålsliste …"
 
 #: src/MainWindow.vala:268
 msgid "Creating a new task list failed"
