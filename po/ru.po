@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-14 02:10+0000\n"
 "PO-Revision-Date: 2021-08-16 07:29+0000\n"
-"Last-Translator: asdffdsdaf <asdffdsdaf@gmail.com>\n"
+"Last-Translator: DartDeaDia <dartdeadia@protonmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/>"
 "\n"
 "Language: ru\n"
@@ -26,7 +26,7 @@ msgstr "По расписанию"
 
 #: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
-msgstr "Настройки списка"
+msgstr "Изменить имя и внешний вид"
 
 #: src/Widgets/ListView.vala:131
 msgid "No Tasks"
