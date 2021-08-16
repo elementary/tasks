@@ -63,7 +63,7 @@ executable(
     'src/Widgets/EntryPopover/DateTime.vala',
     'src/Widgets/EntryPopover/Generic.vala',
     'src/Widgets/EntryPopover/Location.vala',
-    'src/Widgets/ListView.vala',
+    'src/Widgets/TaskListGrid.vala',
     'src/Widgets/ScheduledRow.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskRow.vala',

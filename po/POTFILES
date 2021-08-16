@@ -1,5 +1,5 @@
 src/Application.vala
-src/Widgets/ListView.vala
+src/Widgets/TaskListGrid.vala
 src/MainWindow.vala
 src/Util.vala
 src/Widgets/EditableLabel.vala

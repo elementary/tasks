@@ -20,45 +20,45 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
+#: src/Widgets/TaskListGrid.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
 msgstr "По расписанию"
 
-#: src/Widgets/ListView.vala:119
+#: src/Widgets/TaskListGrid.vala:119
 msgid "Edit Name and Appearance"
 msgstr "Изменить имя и внешний вид"
 
-#: src/Widgets/ListView.vala:131
+#: src/Widgets/TaskListGrid.vala:131
 msgid "No Tasks"
 msgstr "Нет задач"
 
-#: src/Widgets/ListView.vala:154
+#: src/Widgets/TaskListGrid.vala:154
 msgid "Adding task failed"
 msgstr "Не удалось добавить задачу"
 
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
+#: src/Widgets/TaskListGrid.vala:155 src/Widgets/TaskListGrid.vala:223
 #: src/MainWindow.vala:269 src/MainWindow.vala:324
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
-#: src/Widgets/ListView.vala:222
+#: src/Widgets/TaskListGrid.vala:222
 msgid "Renaming task list failed"
 msgstr "Не удалось переименовать список задач"
 
-#: src/Widgets/ListView.vala:354
+#: src/Widgets/TaskListGrid.vala:354
 msgid "Completing task failed"
 msgstr "Не удалось обозначить задачу выполненной"
 
-#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
-#: src/Widgets/ListView.vala:399
+#: src/Widgets/TaskListGrid.vala:355 src/Widgets/TaskListGrid.vala:377
+#: src/Widgets/TaskListGrid.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Реестр задач может быть недоступен или не может быть записан."
 
-#: src/Widgets/ListView.vala:376
+#: src/Widgets/TaskListGrid.vala:376
 msgid "Updating task failed"
 msgstr "Не удалось обновить задачу"
 
-#: src/Widgets/ListView.vala:398
+#: src/Widgets/TaskListGrid.vala:398
 msgid "Removing task failed"
 msgstr "Не удалось удалить задачу"
 
