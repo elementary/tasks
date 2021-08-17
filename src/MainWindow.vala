@@ -184,7 +184,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         if (task_list_grid == null) {
                             task_list_grid = new Tasks.Widgets.TaskListGrid (source);
                             task_list_grid_stack.add_named (task_list_grid, source_uid);
-                            task_list_grid.add_view (source, "(contains? 'any' '')");
                         }
 
                         task_list_grid_stack.set_visible_child_name (source_uid);
@@ -192,24 +191,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
 
                     } else if (row is Tasks.Widgets.ScheduledRow) {
-                        task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
-                        if (task_list_grid == null) {
-                            task_list_grid = new Tasks.Widgets.TaskListGrid (null);
-                            task_list_grid_stack.add_named (task_list_grid, SCHEDULED_LIST_UID);
+                        var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListGrid) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
+                        if (scheduled_task_list_grid == null) {
+                            scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListGrid (registry);
+                            task_list_grid_stack.add_named (scheduled_task_list_grid, SCHEDULED_LIST_UID);
                         }
-
-                        task_list_grid.remove_views ();
-
-                        var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
-                        var query = "AND (NOT is-completed?) (has-start?)";
-
-                        sources.foreach ((source) => {
-                            E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-
-                            if (list.selected == true && source.enabled == true && !source.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
-                                task_list_grid.add_view (source, query);
-                            }
-                        });
 
                         task_list_grid_stack.set_visible_child_name (SCHEDULED_LIST_UID);
                         Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);
