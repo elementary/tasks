@@ -32,7 +32,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         Object (source: source);
     }
 
-    ~TaskListGrid(){
+    ~TaskListGrid () {
         if (view != null) {
             Tasks.Application.model.destroy_task_list_view (view);
         }

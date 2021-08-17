@@ -26,8 +26,8 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
 
     private Gtk.ListBox task_list;
 
-    public ScheduledTaskListGrid(E.SourceRegistry registry){
-        Object(registry: registry);
+    public ScheduledTaskListGrid (E.SourceRegistry registry) {
+        Object (registry: registry);
     }
 
     construct {
