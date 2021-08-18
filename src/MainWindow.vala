@@ -65,7 +65,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         }
 
         var sidebar_header = new Hdy.HeaderBar () {
-            decoration_layout = "close:",
             has_subtitle = false,
             show_close_button = true
         };
@@ -76,9 +75,14 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         var listview_header = new Hdy.HeaderBar () {
             has_subtitle = false,
-            decoration_layout = ":maximize",
             show_close_button = true
         };
+
+        // Create a header group that automatically assigns the right decoration controls to the
+        // right headerbar automatically
+        var header_group = new Hdy.HeaderGroup ();
+        header_group.add_header_bar (sidebar_header);
+        header_group.add_header_bar (listview_header);
 
         unowned Gtk.StyleContext listview_header_context = listview_header.get_style_context ();
         listview_header_context.add_class ("default-decoration");
