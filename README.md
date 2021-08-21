@@ -5,6 +5,33 @@
 
 ## Building and Installation
 
+### Build with Flatpak
+
+_Starting with elementary 6 Odin, Flatpak is the preferred build method._
+
+You'll need to install the following dependencies:
+
+```bash
+flatpak --user install flathub \
+  org.gnome.Sdk//3.38 \
+  io.elementary.BaseApp//juno-20.08
+```
+
+Run `flatpak-builder` to build:
+
+```bash
+flatpak-builder --force-clean build io.elementary.tasks.yml
+```
+
+To install, use `flatpak-builder --install`, then execute with `flatpak run io.elementary.tasks`:
+
+```bash
+flatpak-builder --install --user --force-clean build io.elementary.tasks.yml
+flatpak run io.elementary.tasks
+```
+
+### Build with Meson
+
 You'll need the following dependencies:
 * glib-2.0
 * gobject-2.0
