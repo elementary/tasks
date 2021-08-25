@@ -800,6 +800,10 @@ public class Tasks.TaskModel : Object {
         }
 
         E.NamedParameters credentials = new E.NamedParameters ();
+        if (source.has_extension (E.SOURCE_EXTENSION_AUTHENTICATION)) {
+            unowned var authentication_extension = (E.SourceAuthentication) source.get_extension (E.SOURCE_EXTENSION_AUTHENTICATION);
+            credentials.set (E.SOURCE_CREDENTIAL_USERNAME, authentication_extension.user);
+        }
         credentials.set (E.SOURCE_CREDENTIAL_PASSWORD, password);
 
         return credentials;
