@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 07:32+0000\n"
+"POT-Creation-Date: 2021-08-23 06:57+0000\n"
 "PO-Revision-Date: 2021-01-26 16:07+0000\n"
 "Last-Translator: Marco De Paolini <marco.depaolini@gmail.com>\n"
 "Language-Team: Italian <https://l10n.elementary.io/projects/tasks/tasks/it/"
@@ -38,7 +38,7 @@ msgid "Adding task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:269 src/MainWindow.vala:324
+#: src/MainWindow.vala:273 src/MainWindow.vala:328
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
@@ -80,23 +80,23 @@ msgstr "Cambio del nome dell'elenco di attività non riuscito"
 msgid "Tasks"
 msgstr "Attività"
 
-#: src/MainWindow.vala:102
+#: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
 msgstr ""
 
-#: src/MainWindow.vala:119
+#: src/MainWindow.vala:123
 msgid "Add Task List…"
 msgstr "Aggiungi un elenco attività…"
 
-#: src/MainWindow.vala:268
+#: src/MainWindow.vala:272
 msgid "Creating a new task list failed"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
 
-#: src/MainWindow.vala:274
+#: src/MainWindow.vala:278
 msgid "New list"
 msgstr "Nuovo elenco"
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:327
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
@@ -191,7 +191,7 @@ msgstr ""
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
