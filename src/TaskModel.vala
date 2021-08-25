@@ -800,11 +800,17 @@ public class Tasks.TaskModel : Object {
         }
 
         E.NamedParameters credentials = new E.NamedParameters ();
+        credentials.set (E.SOURCE_CREDENTIAL_PASSWORD, password);
+
         if (source.has_extension (E.SOURCE_EXTENSION_AUTHENTICATION)) {
             unowned var authentication_extension = (E.SourceAuthentication) source.get_extension (E.SOURCE_EXTENSION_AUTHENTICATION);
             credentials.set (E.SOURCE_CREDENTIAL_USERNAME, authentication_extension.user);
         }
-        credentials.set (E.SOURCE_CREDENTIAL_PASSWORD, password);
+
+        if (source.has_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND)) {
+            unowned var webdav_extension = (E.SourceWebdav) source.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+            credentials.set (E.SOURCE_CREDENTIAL_SSL_TRUST, webdav_extension.ssl_trust);
+        }
 
         return credentials;
     }
