@@ -19,6 +19,9 @@ finish-args:
   - '--talk-name=org.gnome.evolution.dataserver.Calendar8'
   - '--talk-name=org.gnome.evolution.dataserver.Sources5'
 
+  # Switchboard's Online Accounts DBus interface
+  - '--talk-name=io.elementary.switchboard.OnlineAccounts'
+
   - '--metadata=X-DConf=migrate-path=/io/elementary/tasks/'
 cleanup:
   - '/include'

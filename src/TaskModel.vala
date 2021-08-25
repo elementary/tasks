@@ -38,6 +38,7 @@ public class Tasks.TaskModel : Object {
     private Gee.Future<E.SourceRegistry> registry;
     private HashTable<string, ECal.Client> task_list_client;
     private HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> task_list_client_views;
+    private OnlineAccounts.DBusService? online_accounts_dbus_service = null;
 
     public async E.SourceRegistry get_registry () throws Error {
         return yield registry.wait_async ();
@@ -113,6 +114,22 @@ public class Tasks.TaskModel : Object {
 
         task_list_client = new HashTable<string, ECal.Client> (str_hash, str_equal);
         task_list_client_views = new HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> (direct_hash, direct_equal);  // vala-lint=line-length
+
+        Bus.get_proxy.begin<OnlineAccounts.DBusService> (
+            BusType.SESSION,
+            "io.elementary.switchboard.online-accounts",
+            "/io/elementary/switchboard/online_accounts",
+            DBusProxyFlags.NONE,
+            null,
+        (obj, res) => {
+            try {
+                online_accounts_dbus_service = Bus.get_proxy.end<OnlineAccounts.DBusService> (res);
+                debug ("Connected to credentials provider via DBus.");
+
+            } catch (Error e) {
+                warning ("Can't connect to credentials provider via DBus. Some operations may not work correctly within a sandboxed environment.");
+            }
+        });
     }
 
     private async void init_registry (Gee.Promise<E.SourceRegistry> promise) {
@@ -169,10 +186,8 @@ public class Tasks.TaskModel : Object {
             case "webdav":
                 var collection_source = registry.find_extension (collection_or_sibling, E.SOURCE_EXTENSION_COLLECTION);
                 var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-                var credentials_provider = new E.SourceCredentialsProvider (registry);
 
-                E.NamedParameters credentials;
-                credentials_provider.lookup_sync (collection_source, null, out credentials);
+                var credentials = lookup_credentials (collection_source);
                 collection_source_webdav_session.credentials = credentials;
 
                 var webdav_task_list_uri = yield discover_webdav_server_uri (credentials, collection_source);
@@ -223,10 +238,8 @@ public class Tasks.TaskModel : Object {
             case "webdav":
                 var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
                 var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-                var credentials_provider = new E.SourceCredentialsProvider (registry);
 
-                E.NamedParameters credentials;
-                credentials_provider.lookup_sync (collection_source, null, out credentials);
+                var credentials = lookup_credentials (collection_source);
                 collection_source_webdav_session.credentials = credentials;
 
                 var task_list_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
@@ -422,9 +435,7 @@ public class Tasks.TaskModel : Object {
             var collection_source_webdav_session = new E.WebDAVSession (collection_source);
             var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
-            var credentials_provider = new E.SourceCredentialsProvider (registry);
-            E.NamedParameters credentials;
-            credentials_provider.lookup_sync (collection_source, null, out credentials);
+            var credentials = lookup_credentials (collection_source);
             collection_source_webdav_session.credentials = credentials;
 
             var changes = new GLib.SList<E.WebDAVPropertyChange> ();
@@ -511,9 +522,7 @@ public class Tasks.TaskModel : Object {
                     var collection_source_webdav_session = new E.WebDAVSession (collection_source);
                     var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
-                    var credentials_provider = new E.SourceCredentialsProvider (registry);
-                    E.NamedParameters credentials;
-                    credentials_provider.lookup_sync (collection_source, null, out credentials);
+                    var credentials = lookup_credentials (collection_source);
                     collection_source_webdav_session.credentials = credentials;
 
                     var changes = new GLib.SList<E.WebDAVPropertyChange> ();
@@ -764,5 +773,35 @@ public class Tasks.TaskModel : Object {
         debug (@"Received $(cids.length()) removed task(s) for task list '%s'", task_list.dup_display_name ());
 
         on_tasks_removed (cids);
+    }
+
+    private E.NamedParameters lookup_credentials (E.Source source) throws Error {
+        string? password = null;
+        Error? lookup_error = null;
+
+        try {
+            E.secret_store_lookup_sync (source.uid, out password, null);
+        } catch (Error e) {
+            warning ("Error trying to lookup credentials in secret store: %s", e.message);
+            lookup_error = e;
+        }
+
+        if (password == null && online_accounts_dbus_service != null) {
+            try {
+                password = online_accounts_dbus_service.lookup_password (source.uid);
+            } catch (Error e) {
+                warning ("Error trying to lookup credentials via DBus: %s", e.message);
+                lookup_error = e;
+            }
+        }
+
+        if (lookup_error != null && password == null) {
+            throw lookup_error;
+        }
+
+        E.NamedParameters credentials = new E.NamedParameters ();
+        credentials.set (E.SOURCE_CREDENTIAL_PASSWORD, password);
+
+        return credentials;
     }
 }
