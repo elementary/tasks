@@ -20,7 +20,7 @@ finish-args:
   - '--talk-name=org.gnome.evolution.dataserver.Sources5'
 
   # Switchboard's Online Accounts DBus interface
-  - '--talk-name=io.elementary.switchboard.OnlineAccounts'
+  - '--talk-name=io.elementary.switchboard.online-accounts'
 
   - '--metadata=X-DConf=migrate-path=/io/elementary/tasks/'
 cleanup:
