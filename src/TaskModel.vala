@@ -788,7 +788,9 @@ public class Tasks.TaskModel : Object {
 
         if (password == null && online_accounts_dbus_service != null) {
             try {
-                password = online_accounts_dbus_service.lookup_password (source.uid);
+                var password_base64 = online_accounts_dbus_service.lookup_password (source.uid);
+                password = (string) Base64.decode (password_base64);
+
             } catch (Error e) {
                 warning ("Error trying to lookup credentials via DBus: %s", e.message);
                 lookup_error = e;
