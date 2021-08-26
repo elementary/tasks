@@ -220,7 +220,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         };
         task_detail_revealer.add (task_grid);
 
-        var description_textview = new Gtk.TextView () {
+        var description_textview = new Tasks.Widgets.HyperTextView () {
             border_width = 12,
             height_request = 140,
             accepts_tab = false
