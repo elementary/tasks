@@ -27,6 +27,9 @@ config_file = configure_file(
 
 libecal_dep = dependency('libecal-2.0')
 
+add_project_arguments('-DGOA_API_IS_SUBJECT_TO_CHANGE', language: 'c')
+goa_dep = dependency('goa-1.0')
+
 tasks_deps = [
     dependency('champlain-0.12'),
     dependency('champlain-gtk-0.12'),
@@ -34,6 +37,7 @@ tasks_deps = [
     dependency('clutter-gtk-1.0'),
     dependency('geocode-glib-1.0'),
     dependency('glib-2.0'),
+    goa_dep,
     dependency('gobject-2.0'),
     dependency('granite', version: '>=0.5'),
     dependency('gtk+-3.0'),

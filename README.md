@@ -16,6 +16,7 @@ You'll need the following dependencies:
 * libclutter-gtk-1.0-dev
 * libecal-2.0
 * libedataserver-1.2
+* libgoa-1.0-dev
 * libgdata-dev
 * libgeoclue-2-dev
 * libgeocode-glib-dev

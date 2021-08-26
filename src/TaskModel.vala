@@ -169,10 +169,8 @@ public class Tasks.TaskModel : Object {
             case "webdav":
                 var collection_source = registry.find_extension (collection_or_sibling, E.SOURCE_EXTENSION_COLLECTION);
                 var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-                var credentials_provider = new E.SourceCredentialsProvider (registry);
 
-                E.NamedParameters credentials;
-                credentials_provider.lookup_sync (collection_source, null, out credentials);
+                var credentials = yield lookup_credentials (collection_source, registry);
                 collection_source_webdav_session.credentials = credentials;
 
                 var webdav_task_list_uri = yield discover_webdav_server_uri (credentials, collection_source);
@@ -223,10 +221,8 @@ public class Tasks.TaskModel : Object {
             case "webdav":
                 var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
                 var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-                var credentials_provider = new E.SourceCredentialsProvider (registry);
 
-                E.NamedParameters credentials;
-                credentials_provider.lookup_sync (collection_source, null, out credentials);
+                var credentials = yield lookup_credentials (collection_source, registry);
                 collection_source_webdav_session.credentials = credentials;
 
                 var task_list_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
@@ -422,9 +418,7 @@ public class Tasks.TaskModel : Object {
             var collection_source_webdav_session = new E.WebDAVSession (collection_source);
             var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
-            var credentials_provider = new E.SourceCredentialsProvider (registry);
-            E.NamedParameters credentials;
-            credentials_provider.lookup_sync (collection_source, null, out credentials);
+            var credentials = yield lookup_credentials (collection_source, registry);
             collection_source_webdav_session.credentials = credentials;
 
             var changes = new GLib.SList<E.WebDAVPropertyChange> ();
@@ -511,9 +505,7 @@ public class Tasks.TaskModel : Object {
                     var collection_source_webdav_session = new E.WebDAVSession (collection_source);
                     var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
-                    var credentials_provider = new E.SourceCredentialsProvider (registry);
-                    E.NamedParameters credentials;
-                    credentials_provider.lookup_sync (collection_source, null, out credentials);
+                    var credentials = yield lookup_credentials (collection_source, registry);
                     collection_source_webdav_session.credentials = credentials;
 
                     var changes = new GLib.SList<E.WebDAVPropertyChange> ();
@@ -764,5 +756,45 @@ public class Tasks.TaskModel : Object {
         debug (@"Received $(cids.length()) removed task(s) for task list '%s'", task_list.dup_display_name ());
 
         on_tasks_removed (cids);
+    }
+
+    private async E.NamedParameters lookup_credentials (E.Source source, E.SourceRegistry registry, GLib.Cancellable? cancellable = null) throws Error {
+        var credentials = new E.NamedParameters ();
+
+        // var credentials_provider = new E.SourceCredentialsProvider (registry);
+        //yield credentials_provider.lookup (source, cancellable, out credentials);
+
+        if (credentials.get (E.SOURCE_CREDENTIAL_PASSWORD) == null) {
+            var goa_source = registry.find_extension (source, E.SOURCE_EXTENSION_GOA);
+
+            if (goa_source != null) {
+                unowned var goa_extension = (E.SourceGoa) goa_source.get_extension (E.SOURCE_EXTENSION_GOA);
+
+                var goa_client = yield new Goa.Client (cancellable);
+                var goa_object = goa_client.lookup_by_id (goa_extension.account_id);
+
+                warning ("GNOME Online Accounts: Object == null? %s", (goa_object == null ? "YES" : "NO"));
+                if (goa_object != null) {
+                    warning ("GNOME Online Accounts: Object.Account == null? %s", (goa_object.account == null ? "YES" : "NO"));
+                    if (goa_object.account != null) {
+                        warning ("GNOME Online Accounts: Object.Account.presentation_identity = %s", goa_object.account.presentation_identity);
+                    }
+                    string password;
+                    yield goa_object.password_based.call_get_password (E.SOURCE_CREDENTIAL_PASSWORD, cancellable, out password);
+
+                    credentials.set (E.SOURCE_CREDENTIAL_PASSWORD, password);
+
+                } else {
+                    var goa_objects = goa_client.get_accounts ();
+                    foreach (unowned var goa_obj in goa_objects) {
+                        warning ("Goa.Account known: %s: %s", goa_obj.account.identity, goa_obj.account.presentation_identity);
+                    }
+                }
+
+            } else {
+                warning ("goa_source == null");
+            }
+        }
+        return credentials;
     }
 }

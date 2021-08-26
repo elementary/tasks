@@ -19,6 +19,9 @@ finish-args:
   - '--talk-name=org.gnome.evolution.dataserver.Calendar8'
   - '--talk-name=org.gnome.evolution.dataserver.Sources5'
 
+  # GNOME Online Accounts DBus interfaces
+  - '--talk-name=org.gnome.OnlineAccounts'
+
   - '--metadata=X-DConf=migrate-path=/io/elementary/tasks/'
 cleanup:
   - '/include'
@@ -44,11 +47,19 @@ modules:
         url: https://github.com/libical/libical.git
         tag: v3.0.9
 
+  - name: libgoa
+    buildsystem: meson
+    config-opts:
+      - '-Dgoabackend=false'
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/gnome-online-accounts.git
+        tag: '3.40.0'
+
   - name: libgdata
     buildsystem: meson
     config-opts:
       - '-Dalways_build_tests=false'
-      - '-Dgoa=disabled'
     sources:
       - type: git
         url: https://gitlab.gnome.org/GNOME/libgdata.git
