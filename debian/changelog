@@ -1,3 +1,13 @@
+io.elementary.tasks (6.0.3) focal; urgency=medium
+
+  * Release 6.0.3 (#284)
+  * Update translation files
+  * Update translation template
+  * Gitignore: .flatpak-builder (#278)
+  * Automatically position window controls with Hdy.HeaderGroup (#277)
+
+ -- elementary, Inc. <builds@elementary.io>  Thu, 26 Aug 2021 21:37:11 +0000
+
 io.elementary.tasks (6.0.2) focal; urgency=medium
 
   * Release 6.0.2 (#266)
