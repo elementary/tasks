@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+flatpak remove --system -y io.elementary.tasks//stable
+
+#DEBHELPER#
+
+exit 0
