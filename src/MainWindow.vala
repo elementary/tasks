@@ -19,7 +19,8 @@
 */
 
 public class Tasks.MainWindow : Hdy.ApplicationWindow {
-    public const string ACTION_PREFIX = "win.";
+    public const string ACTION_GROUP_PREFIX = "win";
+    public const string ACTION_PREFIX = ACTION_GROUP_PREFIX + ".";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
 
     private const string SCHEDULED_LIST_UID = "scheduled";
