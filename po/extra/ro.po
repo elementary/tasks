@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-25 07:15+0000\n"
+"POT-Creation-Date: 2021-08-26 21:44+0000\n"
 "PO-Revision-Date: 2019-08-02 13:43-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -33,43 +33,45 @@ msgid ""
 "CalDAV."
 msgstr ""
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:27
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
+#: data/tasks.appdata.xml.in:35
 msgid "Improvements:"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:20
-msgid "Fix crash on start with certain hardware"
-msgstr ""
-
-#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:30
+#: data/tasks.appdata.xml.in:20 data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:38
 msgid "Updated translations"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:28
+msgid "Fix crash on start with certain hardware"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:37
 msgid "Fix the order of the scheduled view"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:36
+#: data/tasks.appdata.xml.in:44
 msgid "First release!"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:38
+#: data/tasks.appdata.xml.in:46
 msgid "Support the dark style"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:39
+#: data/tasks.appdata.xml.in:47
 msgid "Add and remove task lists with custom colors"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:40
+#: data/tasks.appdata.xml.in:48
 msgid "See scheduled tasks from all lists at once"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:41
+#: data/tasks.appdata.xml.in:49
 msgid "Set due dates"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:84
+#: data/tasks.appdata.xml.in:92
 msgid "elementary, Inc."
 msgstr ""
 
