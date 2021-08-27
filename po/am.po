@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-16 07:32+0000\n"
+"POT-Creation-Date: 2021-08-25 07:15+0000\n"
 "PO-Revision-Date: 2021-08-11 06:28+0000\n"
 "Last-Translator: carnage-mode <beta-stage@tutanota.com>\n"
 "Language-Team: Amharic <https://l10n.elementary.io/projects/tasks/tasks/am/"
@@ -37,7 +37,7 @@ msgid "Adding task failed"
 msgstr ""
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:269 src/MainWindow.vala:324
+#: src/MainWindow.vala:273 src/MainWindow.vala:328
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
@@ -66,23 +66,23 @@ msgstr ""
 msgid "Tasks"
 msgstr "ተግባራት"
 
-#: src/MainWindow.vala:102
+#: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
 msgstr ""
 
-#: src/MainWindow.vala:119
+#: src/MainWindow.vala:123
 msgid "Add Task List…"
 msgstr ""
 
-#: src/MainWindow.vala:268
+#: src/MainWindow.vala:272
 msgid "Creating a new task list failed"
 msgstr ""
 
-#: src/MainWindow.vala:274
+#: src/MainWindow.vala:278
 msgid "New list"
 msgstr "አዲስ ዝርዝር"
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:327
 msgid "Deleting the task list failed"
 msgstr ""
 
