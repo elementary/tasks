@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-28 14:10+0000\n"
-"PO-Revision-Date: 2021-08-28 14:42+0000\n"
+"PO-Revision-Date: 2021-08-28 17:48+0000\n"
 "Last-Translator: carnage-mode <beta-stage@tutanota.com>\n"
-"Language-Team: Amharic <https://l10n.elementary.io/projects/tasks/tasks/am/"
-">\n"
+"Language-Team: Amharic <https://l10n.elementary.io/projects/tasks/tasks/am/>"
+"\n"
 "Language: am\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr "ቀጠሮ የተያዘለት"
 
 #: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "ስም እና ገጽታውን ይቀይሩ"
 
 #: src/Widgets/ListView.vala:131
 msgid "No Tasks"
@@ -38,7 +38,7 @@ msgstr "ተግባር መጨመር አልተቻለም"
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
 #: src/MainWindow.vala:273 src/MainWindow.vala:328
 msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "ምናልባት የትግባር ዝርዝር መዝገቡን ለጊዜው ማግኘት ወይም መለወጥ አልተቻለም።"
 
 #: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
@@ -51,7 +51,7 @@ msgstr "ተግባሩን መጨረስ አልተቻለም"
 #: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
 #: src/Widgets/ListView.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "ምናልባት የትግባር ዝርዝር መዝገቡን ለጊዜው ማግኘት ወይም መለወጥ አልተቻለም።"
 
 #: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
@@ -67,7 +67,7 @@ msgstr "ተግባራት"
 
 #: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "የኦንላይን አካውንት ሴቲንጎች…"
 
 #: src/MainWindow.vala:123
 msgid "Add Task List…"
@@ -135,11 +135,11 @@ msgstr "ዝርዝሩን ያስወግዱ"
 
 #: src/Widgets/ListSettingsPopover.vala:269
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "የተግባር ዝርዝሩን ቀለም መቀየር አልተቻለም"
 
 #: src/Widgets/ListSettingsPopover.vala:270
 msgid "The task list registry may be unavailable or write-protected."
-msgstr ""
+msgstr "ምናልባት የትግባር ዝርዝር መዝገቡ ለጊዜው ሊገኝ አልተቻለም ወይም ከለውጥ የተጠበቀ ነው።"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -151,11 +151,11 @@ msgstr "የመግቢያ ማረጋገጫ በመጠበቅ ላይ"
 
 #: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "በአሁኑ ሰዓት (ምናልባት የርቀት ከሆነው) የምረጃ ቇት ጋር አልተገናኘም"
 
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "የSSL የእምነት ምስክሩ ለዚህ ግንኙነት ውድቅ ተደርጓል"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
@@ -171,12 +171,12 @@ msgstr "%s %s ላይ"
 #: src/Widgets/TaskRow.vala:181
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "መድረሻ፡ %s"
 
 #: src/Widgets/TaskRow.vala:184
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "መሄጃ፡ %s"
 
 #: src/Widgets/TaskRow.vala:238
 msgid "Cancel"
@@ -184,7 +184,7 @@ msgstr "ይሰርዙ"
 
 #: src/Widgets/TaskRow.vala:240
 msgid "Save Changes"
-msgstr ""
+msgstr "ለውጦቹን ሴቭ ያድርጉ"
 
 #: src/Widgets/TaskRow.vala:240
 msgid "Add Task"
