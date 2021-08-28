@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-26 21:44+0000\n"
-"PO-Revision-Date: 2021-08-28 13:05+0000\n"
+"PO-Revision-Date: 2021-08-28 14:05+0000\n"
 "Last-Translator: carnage-mode <beta-stage@tutanota.com>\n"
 "Language-Team: Amharic <https://l10n.elementary.io/projects/tasks/tasks/am/>"
 "\n"
@@ -28,12 +28,10 @@ msgid "Edit Name and Appearance"
 msgstr ""
 
 #: src/Widgets/ListView.vala:131
-#, fuzzy
 msgid "No Tasks"
 msgstr "ምንም ተግባር የለም"
 
 #: src/Widgets/ListView.vala:154
-#, fuzzy
 msgid "Adding task failed"
 msgstr "ተግባር መጨመር አልተቻለም"
 
@@ -57,7 +55,7 @@ msgstr ""
 
 #: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
-msgstr ""
+msgstr "ተግባሩን ማደስ አልተቻለም"
 
 #: src/Widgets/ListView.vala:398
 msgid "Removing task failed"
@@ -101,11 +99,11 @@ msgstr "ነገ"
 
 #: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
-msgstr ""
+msgstr "አርትዕ…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "ቀነ-ገደብ ያዘጋጁ"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
