@@ -319,7 +319,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         if (Tasks.Application.model.is_remove_task_list_supported (source)) {
             var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
-                _("Delete list “%s”?").printf (source.display_name),
+                _("Delete “%s”?").printf (source.display_name),
                 _("The list and all its tasks will be permanently deleted."),
                 "dialog-warning",
                 Gtk.ButtonsType.CANCEL
