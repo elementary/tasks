@@ -40,6 +40,11 @@ public class Tasks.Application : Gtk.Application {
             return;
         }
 
+        Intl.setlocale (LocaleCategory.ALL, "");
+        GLib.Intl.bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+        GLib.Intl.bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+        GLib.Intl.textdomain (GETTEXT_PACKAGE);
+
         var main_window = new MainWindow (this);
 
         int window_x, window_y;

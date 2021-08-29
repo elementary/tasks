@@ -7,22 +7,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
-"PO-Revision-Date: 2019-08-02 13:43-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2021-08-28 14:44+0000\n"
+"PO-Revision-Date: 2021-08-28 17:48+0000\n"
+"Last-Translator: carnage-mode <beta-stage@tutanota.com>\n"
+"Language-Team: Amharic <https://l10n.elementary.io/projects/tasks/extra/am/"
+">\n"
 "Language: am\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
-msgstr ""
+msgstr "ተግባራት"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "በሁሉም ዲቫይስዎቾ የሚገኙ ተግባራት እና ማስታወሻዎች"
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
@@ -30,34 +33,54 @@ msgid ""
 "and complete tasks, manage lists and sync them across your machines using "
 "CalDAV."
 msgstr ""
+"ያልዎትን ተግባራት እንዲከታተሉ እና ማስታወሻዎች እንዲይዙ ተብሎ የተዘጋጀ መተግበሪያ ነው። ተግባራት ፈጥረው ያጠናቁ፤ "
+"ዝርዝሮች ያስተዳድሩ፤ እንዲሁም በሁሉም ዲቫይስዎቾ CalDAVን በመጠቀም ያግኙዋቸው።"
 
-#: data/tasks.appdata.xml.in:18
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
+#: data/tasks.appdata.xml.in:35
+msgid "Improvements:"
+msgstr "ማሻሻያዎች:"
+
+#: data/tasks.appdata.xml.in:20 data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:38
+msgid "Updated translations"
+msgstr "የተሻሻሉ ትርጉሞች"
+
+#: data/tasks.appdata.xml.in:28
+msgid "Fix crash on start with certain hardware"
+msgstr "አንዳንድ ሃርድዌሮች ላይ የነበሩ ችግሮች ታርመዋል"
+
+#: data/tasks.appdata.xml.in:37
+msgid "Fix the order of the scheduled view"
+msgstr "የእቅዶች እይታው ቅደም ተከተል ተሻሽሏል"
+
+#: data/tasks.appdata.xml.in:44
 msgid "First release!"
-msgstr ""
+msgstr "የመጀመርያ ልቀት!"
 
-#: data/tasks.appdata.xml.in:20
+#: data/tasks.appdata.xml.in:46
 msgid "Support the dark style"
-msgstr ""
+msgstr "ጠቆር ያለ ስታይል ይቀበላል"
 
-#: data/tasks.appdata.xml.in:21
+#: data/tasks.appdata.xml.in:47
 msgid "Add and remove task lists with custom colors"
-msgstr ""
+msgstr "ተግባራትን መጨመርና ማስወገድ ከመረጡት ቀለም ጋር"
 
-#: data/tasks.appdata.xml.in:22
+#: data/tasks.appdata.xml.in:48
 msgid "See scheduled tasks from all lists at once"
-msgstr ""
+msgstr "በሁሉም ዘርዝሮች ውስጥ የሚገኙ ቀጠሮ የተያዘላቸውን ተግባሮች በአንዴ ይመልከቱ"
 
-#: data/tasks.appdata.xml.in:23
+#: data/tasks.appdata.xml.in:49
 msgid "Set due dates"
-msgstr ""
+msgstr "ቀነ-ገደቦች ያዘጋጁ"
 
-#: data/tasks.appdata.xml.in:66
+#: data/tasks.appdata.xml.in:92
 msgid "elementary, Inc."
-msgstr ""
+msgstr "elementary, Inc."
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
-msgstr ""
+msgstr "ተግባሮችን ይፍጠሩ እንዲሁም እድገታቸውን ይከታተሉ"
 
 #: data/tasks.desktop.in:6
 msgid "io.elementary.tasks"
@@ -65,4 +88,4 @@ msgstr ""
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "እቅዶች፤ማስታወሻዎች፤"

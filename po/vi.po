@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"POT-Creation-Date: 2021-08-28 14:44+0000\n"
 "PO-Revision-Date: 2021-03-07 04:21+0000\n"
 "Last-Translator: Trkien618 <hacngoctrungkien@gmail.com>\n"
 "Language-Team: Vietnamese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -36,7 +36,7 @@ msgid "Adding task failed"
 msgstr "Thêm tác vụ thất bại"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:269 src/MainWindow.vala:324
+#: src/MainWindow.vala:273 src/MainWindow.vala:328
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Sổ đăng ký danh sách tác vụ có thể không có sẵn hoặc không thể ghi vào."
@@ -45,20 +45,20 @@ msgstr ""
 msgid "Renaming task list failed"
 msgstr "Đổi tên danh sách tác vụ thất bại"
 
-#: src/Widgets/ListView.vala:350
+#: src/Widgets/ListView.vala:354
 msgid "Completing task failed"
 msgstr "Hoàn thành tác vụ thất bại"
 
-#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
-#: src/Widgets/ListView.vala:395
+#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
+#: src/Widgets/ListView.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Sổ đăng ký tác vụ có thể không có sẵn hoặc không thể ghi vào."
 
-#: src/Widgets/ListView.vala:372
+#: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
 msgstr "Cập nhật tác vụ thất bại"
 
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:398
 msgid "Removing task failed"
 msgstr "Loại bỏ tác vụ thất bại"
 
@@ -66,19 +66,23 @@ msgstr "Loại bỏ tác vụ thất bại"
 msgid "Tasks"
 msgstr "Các tác vụ"
 
-#: src/MainWindow.vala:102
+#: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
 msgstr ""
 
-#: src/MainWindow.vala:268
+#: src/MainWindow.vala:123
+msgid "Add Task List…"
+msgstr "Thêm danh sách tác vụ…"
+
+#: src/MainWindow.vala:272
 msgid "Creating a new task list failed"
 msgstr "Tạo danh sách tác vụ mới không thành công"
 
-#: src/MainWindow.vala:274
+#: src/MainWindow.vala:278
 msgid "New list"
 msgstr "Danh sách mới"
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:327
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
@@ -132,17 +136,17 @@ msgstr ""
 msgid "Show Completed"
 msgstr "Hiện Đã hoàn thành"
 
-#: src/Widgets/ListSettingsPopover.vala:135
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "Danh sách xoá bỏ"
 
-#: src/Widgets/ListSettingsPopover.vala:289
+#: src/Widgets/ListSettingsPopover.vala:269
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Could not change the task list color"
 msgstr "Tạo danh sách tác vụ mới không thành công"
 
-#: src/Widgets/ListSettingsPopover.vala:290
+#: src/Widgets/ListSettingsPopover.vala:270
 #, fuzzy
 #| msgid ""
 #| "The task list registry may be unavailable or unable to be written to."
@@ -171,7 +175,7 @@ msgstr "Chứng chỉ SSL tin cậy đã bị từ chối kết nối"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
@@ -202,9 +206,6 @@ msgstr "Thêm tác vụ"
 #: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "Xoá tác vụ"
-
-#~ msgid "Add Task List…"
-#~ msgstr "Thêm danh sách tác vụ…"
 
 #~ msgid "Schedule:"
 #~ msgstr "Thời khoá biểu:"

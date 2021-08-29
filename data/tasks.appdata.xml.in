@@ -13,6 +13,32 @@
     </p>
   </description>
   <releases>
+    <release version="6.0.3" date="2021-08-26" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="6.0.2" date="2021-08-09" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Fix crash on start with certain hardware</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="6.0.1" date="2021-07-28" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Fix the order of the scheduled view</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="6.0.0" date="2021-07-19" urgency="medium">
       <description>
         <p>First release!</p>

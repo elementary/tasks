@@ -276,7 +276,11 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
         var row_b = (Tasks.Widgets.TaskRow) row2;
 
         if (row_a.completed == row_b.completed) {
-            if (is_gtasks) {
+            if (source == null && row_a.task.get_due () != null && row_b.task.get_due () != null) {
+                // we are displaying the scheduled list, so we use the due date for sorting
+                return row_a.task.get_due ().get_value ().compare (row_b.task.get_due ().get_value ());
+
+            } else if (is_gtasks) {
                 var gtask_position_a = Util.get_gtasks_position_property_value (row_a.task);
                 var gtask_position_b = Util.get_gtasks_position_property_value (row_b.task);
 

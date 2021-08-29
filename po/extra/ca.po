@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
-"PO-Revision-Date: 2021-07-23 13:54+0000\n"
+"POT-Creation-Date: 2021-08-28 14:44+0000\n"
+"PO-Revision-Date: 2021-08-11 12:57+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/extra/ca/"
 ">\n"
@@ -37,27 +37,45 @@ msgstr ""
 "recordatoris. Creeu i completeu tasques, gestioneu-ne llistes i sincronitzeu-"
 "les en dispositius diferents mitjançant CalDAV."
 
-#: data/tasks.appdata.xml.in:18
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
+#: data/tasks.appdata.xml.in:35
+msgid "Improvements:"
+msgstr "Millores:"
+
+#: data/tasks.appdata.xml.in:20 data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:38
+msgid "Updated translations"
+msgstr "Traduccions actualitzades"
+
+#: data/tasks.appdata.xml.in:28
+msgid "Fix crash on start with certain hardware"
+msgstr "Correcció del bloqueig en iniciar amb cert maquinari"
+
+#: data/tasks.appdata.xml.in:37
+msgid "Fix the order of the scheduled view"
+msgstr "Correcció de l'ordre de la vista de programació"
+
+#: data/tasks.appdata.xml.in:44
 msgid "First release!"
 msgstr "Primera versió!"
 
-#: data/tasks.appdata.xml.in:20
+#: data/tasks.appdata.xml.in:46
 msgid "Support the dark style"
 msgstr "Admissió del tema fosc"
 
-#: data/tasks.appdata.xml.in:21
+#: data/tasks.appdata.xml.in:47
 msgid "Add and remove task lists with custom colors"
 msgstr "Afegiu i traieu llistes de tasques amb colors personalitzats."
 
-#: data/tasks.appdata.xml.in:22
+#: data/tasks.appdata.xml.in:48
 msgid "See scheduled tasks from all lists at once"
 msgstr "Vegeu les tasques programades de totes les llistes alhora."
 
-#: data/tasks.appdata.xml.in:23
+#: data/tasks.appdata.xml.in:49
 msgid "Set due dates"
 msgstr "Establiment de les dates de venciment"
 
-#: data/tasks.appdata.xml.in:66
+#: data/tasks.appdata.xml.in:92
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 

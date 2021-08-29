@@ -7,18 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
-"PO-Revision-Date: 2019-08-02 13:43-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2021-08-28 14:44+0000\n"
+"PO-Revision-Date: 2021-07-28 03:11+0000\n"
+"Last-Translator: elSolus <tumbleweed@tuta.io>\n"
+"Language-Team: Punjabi <https://l10n.elementary.io/projects/tasks/extra/pa/"
+">\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
-msgstr ""
+msgstr "ਕਾਰਜ"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
@@ -31,27 +34,45 @@ msgid ""
 "CalDAV."
 msgstr ""
 
-#: data/tasks.appdata.xml.in:18
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
+#: data/tasks.appdata.xml.in:35
+msgid "Improvements:"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:20 data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:38
+msgid "Updated translations"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:28
+msgid "Fix crash on start with certain hardware"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:37
+msgid "Fix the order of the scheduled view"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:44
 msgid "First release!"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:20
+#: data/tasks.appdata.xml.in:46
 msgid "Support the dark style"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:21
+#: data/tasks.appdata.xml.in:47
 msgid "Add and remove task lists with custom colors"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:22
+#: data/tasks.appdata.xml.in:48
 msgid "See scheduled tasks from all lists at once"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:23
+#: data/tasks.appdata.xml.in:49
 msgid "Set due dates"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:66
+#: data/tasks.appdata.xml.in:92
 msgid "elementary, Inc."
 msgstr ""
 

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
-"PO-Revision-Date: 2021-07-24 14:22+0000\n"
-"Last-Translator: DartDeaDia <jorydit@gmail.com>\n"
+"POT-Creation-Date: 2021-08-28 14:44+0000\n"
+"PO-Revision-Date: 2021-08-16 07:29+0000\n"
+"Last-Translator: DartDeaDia <dartdeadia@protonmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
 ">\n"
 "Language: ru\n"
@@ -26,7 +26,7 @@ msgstr "По расписанию"
 
 #: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
-msgstr "Изменить название и внешний вид"
+msgstr "Изменить имя и внешний вид"
 
 #: src/Widgets/ListView.vala:131
 msgid "No Tasks"
@@ -37,7 +37,7 @@ msgid "Adding task failed"
 msgstr "Не удалось добавить задачу"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:269 src/MainWindow.vala:324
+#: src/MainWindow.vala:273 src/MainWindow.vala:328
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
@@ -45,20 +45,20 @@ msgstr "Журнал списка задач может быть недосту�
 msgid "Renaming task list failed"
 msgstr "Не удалось переименовать список задач"
 
-#: src/Widgets/ListView.vala:350
+#: src/Widgets/ListView.vala:354
 msgid "Completing task failed"
 msgstr "Не удалось обозначить задачу выполненной"
 
-#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
-#: src/Widgets/ListView.vala:395
+#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
+#: src/Widgets/ListView.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Реестр задач может быть недоступен или не может быть записан."
 
-#: src/Widgets/ListView.vala:372
+#: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
 msgstr "Не удалось обновить задачу"
 
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:398
 msgid "Removing task failed"
 msgstr "Не удалось удалить задачу"
 
@@ -66,19 +66,23 @@ msgstr "Не удалось удалить задачу"
 msgid "Tasks"
 msgstr "Задачи"
 
-#: src/MainWindow.vala:102
+#: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
 msgstr "Параметры онлайн аккаунтов…"
 
-#: src/MainWindow.vala:268
+#: src/MainWindow.vala:123
+msgid "Add Task List…"
+msgstr "Добавить список задач…"
+
+#: src/MainWindow.vala:272
 msgid "Creating a new task list failed"
 msgstr "Не удалось создать список задач"
 
-#: src/MainWindow.vala:274
+#: src/MainWindow.vala:278
 msgid "New list"
 msgstr "Новый список"
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:327
 msgid "Deleting the task list failed"
 msgstr "Не удалось удалить список задач"
 
@@ -126,15 +130,15 @@ msgstr "Иван Иванов ИЛИ ул. Центральная."
 msgid "Show Completed"
 msgstr "Показать выполненные"
 
-#: src/Widgets/ListSettingsPopover.vala:135
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "Удалить список"
 
-#: src/Widgets/ListSettingsPopover.vala:289
+#: src/Widgets/ListSettingsPopover.vala:269
 msgid "Could not change the task list color"
 msgstr "Не удалось изменить цвет списка задач"
 
-#: src/Widgets/ListSettingsPopover.vala:290
+#: src/Widgets/ListSettingsPopover.vala:270
 msgid "The task list registry may be unavailable or write-protected."
 msgstr "Журнал списка задач может быть недоступен или защищен от записи."
 
@@ -159,7 +163,7 @@ msgstr "Ненадежный SSL сертификат для подключен�
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

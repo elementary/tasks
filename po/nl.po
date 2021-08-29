@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"POT-Creation-Date: 2021-08-28 14:44+0000\n"
 "PO-Revision-Date: 2021-07-06 09:32+0000\n"
 "Last-Translator: Lieven Hanssen <lhanssen@freedommail.co>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/tasks/tasks/nl/>\n"
@@ -35,7 +35,7 @@ msgid "Adding task failed"
 msgstr "Taak toevoegen mislukt"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:269 src/MainWindow.vala:324
+#: src/MainWindow.vala:273 src/MainWindow.vala:328
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Het takenlijstregister is mogelijk onbeschikbaar of er kan niet naar worden "
@@ -45,22 +45,22 @@ msgstr ""
 msgid "Renaming task list failed"
 msgstr "Het hernoemen van de takenlijst is mislukt"
 
-#: src/Widgets/ListView.vala:350
+#: src/Widgets/ListView.vala:354
 msgid "Completing task failed"
 msgstr "Afronden van taak mislukt"
 
-#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
-#: src/Widgets/ListView.vala:395
+#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
+#: src/Widgets/ListView.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Het takenregister is mogelijk onbeschikbaar of er kan niet naar worden "
 "geschreven."
 
-#: src/Widgets/ListView.vala:372
+#: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
 msgstr "Taak bijwerken is mislukt"
 
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:398
 msgid "Removing task failed"
 msgstr "Taak verwijderen is mislukt"
 
@@ -68,19 +68,23 @@ msgstr "Taak verwijderen is mislukt"
 msgid "Tasks"
 msgstr "Taken"
 
-#: src/MainWindow.vala:102
+#: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
 msgstr ""
 
-#: src/MainWindow.vala:268
+#: src/MainWindow.vala:123
+msgid "Add Task List…"
+msgstr ""
+
+#: src/MainWindow.vala:272
 msgid "Creating a new task list failed"
 msgstr "Het maken van een nieuwe takenlijst is mislukt"
 
-#: src/MainWindow.vala:274
+#: src/MainWindow.vala:278
 msgid "New list"
 msgstr "Nieuwe lijst"
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:327
 msgid "Deleting the task list failed"
 msgstr "Het verwijderen van de takenlijst is mislukt"
 
@@ -128,15 +132,15 @@ msgstr "Janneke Schmidt OF Waalkadestraat"
 msgid "Show Completed"
 msgstr "Toon afgeronde taken"
 
-#: src/Widgets/ListSettingsPopover.vala:135
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "Verwijder lijst"
 
-#: src/Widgets/ListSettingsPopover.vala:289
+#: src/Widgets/ListSettingsPopover.vala:269
 msgid "Could not change the task list color"
 msgstr "Kon kleur takenlijst niet wijzigen"
 
-#: src/Widgets/ListSettingsPopover.vala:290
+#: src/Widgets/ListSettingsPopover.vala:270
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 "Het takenlijstregister is mogelijkerwijs onbeschikbaar of kan niet naar "
@@ -163,7 +167,7 @@ msgstr "Betrouwbaarheid SSL-certificaat werd verworpen voor de verbinding"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

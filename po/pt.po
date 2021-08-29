@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
+"POT-Creation-Date: 2021-08-28 14:44+0000\n"
 "PO-Revision-Date: 2021-07-22 16:19+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -36,7 +36,7 @@ msgid "Adding task failed"
 msgstr "Falha ao adicionar tarefa"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:269 src/MainWindow.vala:324
+#: src/MainWindow.vala:273 src/MainWindow.vala:328
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "O registo da lista de tarefas pode estar indisponível ou não pode ser "
@@ -46,20 +46,20 @@ msgstr ""
 msgid "Renaming task list failed"
 msgstr "Falha ao renomear lista de tarefas"
 
-#: src/Widgets/ListView.vala:350
+#: src/Widgets/ListView.vala:354
 msgid "Completing task failed"
 msgstr "Falha ao concluir tarefa"
 
-#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
-#: src/Widgets/ListView.vala:395
+#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
+#: src/Widgets/ListView.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "O registo de tarefas pode estar indisponível ou não pode ser gravado."
 
-#: src/Widgets/ListView.vala:372
+#: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
 msgstr "Falha ao atualizar tarefa"
 
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:398
 msgid "Removing task failed"
 msgstr "Falha ao remover tarefa"
 
@@ -67,19 +67,23 @@ msgstr "Falha ao remover tarefa"
 msgid "Tasks"
 msgstr "Tarefas"
 
-#: src/MainWindow.vala:102
+#: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
 msgstr "Definições de contas oinline…"
 
-#: src/MainWindow.vala:268
+#: src/MainWindow.vala:123
+msgid "Add Task List…"
+msgstr "Adicionar lista de tarefas…"
+
+#: src/MainWindow.vala:272
 msgid "Creating a new task list failed"
 msgstr "Falha ao criar uma nova lista de tarefas"
 
-#: src/MainWindow.vala:274
+#: src/MainWindow.vala:278
 msgid "New list"
 msgstr "Nova lista"
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:327
 msgid "Deleting the task list failed"
 msgstr "Falha ao eliminar a lista de tarefas"
 
@@ -127,15 +131,15 @@ msgstr "Hugo Carvalho OU Rua Central"
 msgid "Show Completed"
 msgstr "Mostrar concluído"
 
-#: src/Widgets/ListSettingsPopover.vala:135
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "Eliminar lista"
 
-#: src/Widgets/ListSettingsPopover.vala:289
+#: src/Widgets/ListSettingsPopover.vala:269
 msgid "Could not change the task list color"
 msgstr "Não foi possível alterar a cor da lista de tarefas"
 
-#: src/Widgets/ListSettingsPopover.vala:290
+#: src/Widgets/ListSettingsPopover.vala:270
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 "O registo da lista de tarefas pode estar indisponível ou protegido contra a "
@@ -162,7 +166,7 @@ msgstr "A confiança do certificado SSL foi rejeitada para a ligação"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
@@ -193,9 +197,6 @@ msgstr "Adicionar tarefa"
 #: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
 msgstr "Eliminar tarefa"
-
-#~ msgid "Add Task List…"
-#~ msgstr "Adicionar lista de tarefas…"
 
 #~ msgid "Schedule:"
 #~ msgstr "Agenda:"

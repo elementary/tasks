@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
-"PO-Revision-Date: 2021-07-20 21:17+0000\n"
+"POT-Creation-Date: 2021-08-28 14:44+0000\n"
+"PO-Revision-Date: 2021-08-15 14:26+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
 "tasks/nb/>\n"
@@ -36,7 +36,7 @@ msgid "Adding task failed"
 msgstr "Kunne ikke legge til gjøremål"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:269 src/MainWindow.vala:324
+#: src/MainWindow.vala:273 src/MainWindow.vala:328
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
 
@@ -44,20 +44,20 @@ msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving.
 msgid "Renaming task list failed"
 msgstr "Klarte ikke å gi gjøremålslisten nytt navn"
 
-#: src/Widgets/ListView.vala:350
+#: src/Widgets/ListView.vala:354
 msgid "Completing task failed"
 msgstr "Kunne ikke fullføre gjøremål"
 
-#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
-#: src/Widgets/ListView.vala:395
+#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
+#: src/Widgets/ListView.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
 
-#: src/Widgets/ListView.vala:372
+#: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
 msgstr "Kunne ikke oppdatere gjøremålsl"
 
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:398
 msgid "Removing task failed"
 msgstr "Kunne ikke fjerne gjøremål"
 
@@ -66,20 +66,25 @@ msgstr "Kunne ikke fjerne gjøremål"
 msgid "Tasks"
 msgstr "Gjøremål"
 
-#: src/MainWindow.vala:102
+#: src/MainWindow.vala:106
 #, fuzzy
 msgid "Online Accounts Settings…"
-msgstr "Innstillinger for netbaserte kontoer …"
+msgstr "Innstillinger for nettbaserte kontoer …"
 
-#: src/MainWindow.vala:268
+#: src/MainWindow.vala:123
+#, fuzzy
+msgid "Add Task List…"
+msgstr "Legg til gjøremålsliste …"
+
+#: src/MainWindow.vala:272
 msgid "Creating a new task list failed"
 msgstr "Opprettelse av nytt gjøremål mislyktes"
 
-#: src/MainWindow.vala:274
+#: src/MainWindow.vala:278
 msgid "New list"
 msgstr "Ny liste"
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:327
 msgid "Deleting the task list failed"
 msgstr "Kunne ikke slette gjøremålsliste"
 
@@ -127,15 +132,15 @@ msgstr "Ola Nordmann ELLER Eksempelgate"
 msgid "Show Completed"
 msgstr "Vis fullførte"
 
-#: src/Widgets/ListSettingsPopover.vala:135
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
 msgstr "Slett liste"
 
-#: src/Widgets/ListSettingsPopover.vala:289
+#: src/Widgets/ListSettingsPopover.vala:269
 msgid "Could not change the task list color"
 msgstr "Kunne ikke endre gjøremålslistefargen"
 
-#: src/Widgets/ListSettingsPopover.vala:290
+#: src/Widgets/ListSettingsPopover.vala:270
 msgid "The task list registry may be unavailable or write-protected."
 msgstr "Gjøremålsregisteret kan være utilgjengelig eller skrivebeskyttet."
 
@@ -160,7 +165,7 @@ msgstr "Tiltro til SSL-sertifikat ble avslått for tilkoblingen"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

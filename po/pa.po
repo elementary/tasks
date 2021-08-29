@@ -7,182 +7,191 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 16:55+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2021-08-28 14:44+0000\n"
+"PO-Revision-Date: 2021-07-28 03:11+0000\n"
+"Last-Translator: elSolus <tumbleweed@tuta.io>\n"
+"Language-Team: Punjabi <https://l10n.elementary.io/projects/tasks/tasks/pa/"
+">\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
 msgid "Scheduled"
-msgstr ""
+msgstr "ਅੱਗੇ ਲਈ ਸਮਾਂ-ਬੱਧ"
 
 #: src/Widgets/ListView.vala:119
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "ਨਾਂ ਅਤੇ ਦਿੱਖ ਬਦਲੋ"
 
 #: src/Widgets/ListView.vala:131
 msgid "No Tasks"
-msgstr ""
+msgstr "ਕੋਈ ਕਾਰਜ ਨਹੀਂ ਹਨ"
 
 #: src/Widgets/ListView.vala:154
 msgid "Adding task failed"
-msgstr ""
+msgstr "ਕਾਰਜ ਜੋੜਨਾ ਨਾਕਾਮ ਰਿਹਾ"
 
 #: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:269 src/MainWindow.vala:324
+#: src/MainWindow.vala:273 src/MainWindow.vala:328
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
+"ਕਾਰਜ-ਸੂਚੀ ਦੀ ਰਜਿਸਟਰੀ ਨਾ-ਉਪਲਬਧ ਹੋ ਸਕਦੀ ਹੈ ਜਾਂ ਇਸ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ ਹੈ।"
 
 #: src/Widgets/ListView.vala:222
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "ਕਾਰਜ-ਸੂਚੀ ਦਾ ਨਾਂ ਬਦਲਣਾ ਨਾਕਾਮ ਰਿਹਾ"
 
-#: src/Widgets/ListView.vala:350
+#: src/Widgets/ListView.vala:354
 msgid "Completing task failed"
-msgstr ""
+msgstr "ਕਾਰਜ ਪੂਰਾ ਕਰਨਾ ਨਾਕਾਮ ਰਿਹਾ"
 
-#: src/Widgets/ListView.vala:351 src/Widgets/ListView.vala:373
-#: src/Widgets/ListView.vala:395
+#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
+#: src/Widgets/ListView.vala:399
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "ਕਾਰਜ ਦੀ ਰਜਿਸਟਰੀ ਨਾ-ਉਪਲਬਧ ਹੋ ਸਕਦੀ ਹੈ ਜਾਂ ਇਸ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ ਹੈ।"
 
-#: src/Widgets/ListView.vala:372
+#: src/Widgets/ListView.vala:376
 msgid "Updating task failed"
-msgstr ""
+msgstr "ਕਾਰਜ ਅਪਡੇਟ ਕਰਨਾ ਨਾਕਾਮ ਰਿਹਾ"
 
-#: src/Widgets/ListView.vala:394
+#: src/Widgets/ListView.vala:398
 msgid "Removing task failed"
-msgstr ""
+msgstr "ਕਾਰਜ ਹਟਾਉਣਾ ਨਾਕਾਮ ਰਿਹਾ"
 
 #: src/MainWindow.vala:44
 msgid "Tasks"
-msgstr ""
+msgstr "ਕਾਰਜ"
 
-#: src/MainWindow.vala:102
+#: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "ਆਨਲਾਈਨ ਖਾਤਿਆਂ ਦੀਆਂ ਸੈਟਿੰਗਾਂ…"
 
-#: src/MainWindow.vala:268
+#: src/MainWindow.vala:123
+msgid "Add Task List…"
+msgstr "ਕਾਰਜ-ਸੂਚੀ ਜੋੜੋ…"
+
+#: src/MainWindow.vala:272
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "ਨਵੀਂ ਕਾਰਜ-ਸੂਚੀ ਬਣਾਉਣਾ ਨਾਕਾਮ ਰਿਹਾ"
 
-#: src/MainWindow.vala:274
+#: src/MainWindow.vala:278
 msgid "New list"
-msgstr ""
+msgstr "ਨਵੀਂ ਸੂਚੀ"
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:327
 msgid "Deleting the task list failed"
-msgstr ""
+msgstr "ਕਾਰਜ-ਸੂਚੀ ਮਿਟਾਉਣਾ ਨਾਕਾਮ ਰਿਹਾ"
 
 #: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
-msgstr ""
+msgstr "ਅੱਜ"
 
 #: src/Util.vala:153
 msgid "Yesterday"
-msgstr ""
+msgstr "ਕੱਲ੍ਹ"
 
 #: src/Util.vala:155
 msgid "Tomorrow"
-msgstr ""
+msgstr "ਕੱਲ੍ਹ ਨੂੰ"
 
 #: src/Widgets/EditableLabel.vala:73
 msgid "Edit…"
-msgstr ""
+msgstr "ਸੰਪਾਦਨ ਕਰੋ…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "ਇਸਦੀ ਮਿਤੀ ਤੈਅ ਕਰੋ"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "ਹਟਾਓ"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "ਜਗ੍ਹਾ ਤੈਅ ਕਰੋ"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
-msgstr ""
+msgstr "ਪਹੁੰਚ ਰਿਹੈ"
 
 #: src/Widgets/EntryPopover/Location.vala:57
 msgid "Leaving"
-msgstr ""
+msgstr "ਛੱਡ ਰਿਹੈ"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "ਮਿਸਾਲ ਵਜੋਂ ਸ੍ਰ. ਗੁਰਮੀਤ ਸਿੰਘ"
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
-msgstr ""
+msgstr "ਮੁਕੰਮਲ ਹੋਏ ਵਿਖਾਓ"
 
-#: src/Widgets/ListSettingsPopover.vala:135
+#: src/Widgets/ListSettingsPopover.vala:120
 msgid "Delete List"
-msgstr ""
+msgstr "ਸੂਚੀ ਮਿਟਾਓ"
 
-#: src/Widgets/ListSettingsPopover.vala:289
+#: src/Widgets/ListSettingsPopover.vala:269
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "ਕਾਰਜ-ਸੂਚੀ ਦਾ ਰੰਗ ਬਦਲਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ"
 
-#: src/Widgets/ListSettingsPopover.vala:290
+#: src/Widgets/ListSettingsPopover.vala:270
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
+"ਕਾਰਜ-ਸੂਚੀ ਦੀ ਰਜਿਸਟਰੀ ਨਾ ਉਪਲਬਧ ਹੋ ਸਕਦੀ ਹੈ ਜਾਂ ਇਸ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ।"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
-msgstr ""
+msgstr "ਜੁੜ ਰਿਹੈ…"
 
 #: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "ਲਾਗਇਨ ਪਛਾਣ ਦੀ ਉਡੀਕ ਕਰ ਰਿਹੈ"
 
 #: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "ਹਾਲ ਦੀ ਘੜੀ ਡੇਟਾ ਸਟੋਰ (ਜਿਹੜਾ ਕਿ ਰਿਮੋਟ ਲੱਗਦੈ) ਨਾਲ਼ੋਂ ਕਨੈਕਸ਼ਨ ਟੁੱਟਿਆ ਹੋਇਐ"
 
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "ਕਨੈਕਸ਼ਨ ਲਈ ਐੱਸਐੱਸਐਲ (SSL) ਦਾ ਭਰੋਸਾ ਸਰਟੀਫ਼ਿਕੇਟ ਨਾ-ਮਨਜ਼ੂਰ ਕਰ ਦਿੱਤਾ ਗਿਐ"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s, %s ਵਜੇ"
 
 #: src/Widgets/TaskRow.vala:181
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "ਪਹੁੰਚ ਰਿਹੈ: %s"
 
 #: src/Widgets/TaskRow.vala:184
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "ਜਾ ਰਿਹੈ: %s"
 
 #: src/Widgets/TaskRow.vala:238
 msgid "Cancel"
-msgstr ""
+msgstr "ਰੱਦ ਕਰੋ"
 
 #: src/Widgets/TaskRow.vala:240
 msgid "Save Changes"
-msgstr ""
+msgstr "ਤਬਦੀਲੀਆਂ ਸਾਂਭੋ"
 
 #: src/Widgets/TaskRow.vala:240
 msgid "Add Task"
-msgstr ""
+msgstr "ਕਾਰਜ ਜੋੜੋ"
 
 #: src/Widgets/TaskRow.vala:293
 msgid "Delete Task"
-msgstr ""
+msgstr "ਕਾਰਜ ਮਿਟਾਓ"
