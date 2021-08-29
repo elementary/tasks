@@ -327,7 +327,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 transient_for = this
             };
 
-            unowned Gtk.Widget trash_button = message_dialog.add_button (_("Delete List…"), Gtk.ResponseType.YES);
+            unowned Gtk.Widget trash_button = message_dialog.add_button (_("Delete List"), Gtk.ResponseType.YES);
             trash_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
             Gtk.ResponseType response = (Gtk.ResponseType) message_dialog.run ();
             message_dialog.destroy ();

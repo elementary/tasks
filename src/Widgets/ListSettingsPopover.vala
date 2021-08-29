@@ -116,7 +116,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
         };
 
         var delete_list_accel_label = new Granite.AccelLabel.from_action_name (
-            _("Delete List"),
+            _("Delete List…"),
             MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST
         );
 
