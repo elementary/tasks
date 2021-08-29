@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-25 07:15+0000\n"
+"POT-Creation-Date: 2021-08-28 14:44+0000\n"
 "PO-Revision-Date: 2021-08-11 06:28+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/extra/uk/"
@@ -38,43 +38,45 @@ msgstr ""
 "та виконуйте завдання, керуйте списками та синхронізуйте їх на своїх машинах "
 "за допомогою CalDAV."
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:27
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
+#: data/tasks.appdata.xml.in:35
 msgid "Improvements:"
 msgstr "Вдосконалення:"
 
-#: data/tasks.appdata.xml.in:20
-msgid "Fix crash on start with certain hardware"
-msgstr "Виправлено збої під час запуску на певному обладнанні"
-
-#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:30
+#: data/tasks.appdata.xml.in:20 data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:38
 msgid "Updated translations"
 msgstr "Оновлено переклади"
 
-#: data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:28
+msgid "Fix crash on start with certain hardware"
+msgstr "Виправлено збої під час запуску на певному обладнанні"
+
+#: data/tasks.appdata.xml.in:37
 msgid "Fix the order of the scheduled view"
 msgstr "Виправлено подання порядку запланованих"
 
-#: data/tasks.appdata.xml.in:36
+#: data/tasks.appdata.xml.in:44
 msgid "First release!"
 msgstr "Перший випуск!"
 
-#: data/tasks.appdata.xml.in:38
+#: data/tasks.appdata.xml.in:46
 msgid "Support the dark style"
 msgstr "Підтримка темного стилю"
 
-#: data/tasks.appdata.xml.in:39
+#: data/tasks.appdata.xml.in:47
 msgid "Add and remove task lists with custom colors"
 msgstr "Додавання та видалення списків завдань з власними кольоровими мітками"
 
-#: data/tasks.appdata.xml.in:40
+#: data/tasks.appdata.xml.in:48
 msgid "See scheduled tasks from all lists at once"
 msgstr "Переглядайте заплановані завдання з усіх списків відразу"
 
-#: data/tasks.appdata.xml.in:41
+#: data/tasks.appdata.xml.in:49
 msgid "Set due dates"
 msgstr "Встановлюйте терміни"
 
-#: data/tasks.appdata.xml.in:84
+#: data/tasks.appdata.xml.in:92
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
