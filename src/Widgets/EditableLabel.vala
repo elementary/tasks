@@ -32,6 +32,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
     public string text { get; set; }
 
     public bool editing {
+        get { return entry.is_focus; }
         set {
             if (value) {
                 entry.text = text;

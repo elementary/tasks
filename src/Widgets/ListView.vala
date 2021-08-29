@@ -227,6 +227,13 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
         add_task_list.row_activated.connect (on_row_activated);
         task_list.row_activated.connect (on_row_activated);
 
+        editable_title.notify["editing"].connect (() => {
+            unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
+            if (win_action_map != null) {
+                ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (!editable_title.editing);
+            }
+        });
+
         editable_title.changed.connect (() => {
             Application.model.update_task_list_display_name.begin (source, editable_title.text, (obj, res) => {
                 GLib.Idle.add (() => {
