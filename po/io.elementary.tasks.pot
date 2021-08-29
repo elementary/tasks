@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.tasks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-28 14:44+0000\n"
+"POT-Creation-Date: 2021-08-29 20:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -160,7 +160,7 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
@@ -176,18 +176,18 @@ msgstr ""
 msgid "Leaving: %s"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:238
+#: src/Widgets/TaskRow.vala:239
 msgid "Cancel"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Save Changes"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Add Task"
 msgstr ""
 
-#: src/Widgets/TaskRow.vala:293
+#: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
 msgstr ""
