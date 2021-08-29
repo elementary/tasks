@@ -204,8 +204,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         };
         description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
+        // Should not use a transition that varies the width else label aligning and ellipsizing is incorrect.
         description_label_revealer = new Gtk.Revealer () {
-            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
+            transition_type = Gtk.RevealerTransitionType.CROSSFADE,
             reveal_child = false
         };
         description_label_revealer.add (description_label);
