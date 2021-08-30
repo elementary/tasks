@@ -19,7 +19,8 @@
 */
 
 public class Tasks.MainWindow : Hdy.ApplicationWindow {
-    public const string ACTION_PREFIX = "win.";
+    public const string ACTION_GROUP_PREFIX = "win";
+    public const string ACTION_PREFIX = ACTION_GROUP_PREFIX + ".";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
 
     private const string SCHEDULED_LIST_UID = "scheduled";
@@ -49,7 +50,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         Hdy.init ();
 
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "<Control>BackSpace";
-        action_accelerators[ACTION_DELETE_SELECTED_LIST] = "Delete";
 
         Gtk.IconTheme.get_default ().add_resource_path ("/io/elementary/tasks");
     }
@@ -318,18 +318,34 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         var source = list_row.source;
 
         if (Tasks.Application.model.is_remove_task_list_supported (source)) {
-            Tasks.Application.model.remove_task_list.begin (source, (obj, res) => {
-                try {
-                    Tasks.Application.model.remove_task_list.end (res);
-                } catch (Error e) {
-                    critical (e.message);
-                    show_error_dialog (
-                        _("Deleting the task list failed"),
-                        _("The task list registry may be unavailable or unable to be written to."),
-                        e
-                    );
-                }
-            });
+            var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                _("Delete “%s”?").printf (source.display_name),
+                _("The list and all its tasks will be permanently deleted."),
+                "dialog-warning",
+                Gtk.ButtonsType.CANCEL
+            ) {
+                transient_for = this
+            };
+
+            unowned Gtk.Widget trash_button = message_dialog.add_button (_("Delete List"), Gtk.ResponseType.YES);
+            trash_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+            Gtk.ResponseType response = (Gtk.ResponseType) message_dialog.run ();
+            message_dialog.destroy ();
+
+            if (response == Gtk.ResponseType.YES) {
+                Tasks.Application.model.remove_task_list.begin (source, (obj, res) => {
+                    try {
+                        Tasks.Application.model.remove_task_list.end (res);
+                    } catch (Error e) {
+                        critical (e.message);
+                        show_error_dialog (
+                            _("Deleting the task list failed"),
+                            _("The task list registry may be unavailable or unable to be written to."),
+                            e
+                        );
+                    }
+                });
+            }
 
         } else {
             Gdk.beep ();
