@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.tasks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-29 20:30+0000\n"
+"POT-Creation-Date: 2021-08-30 05:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,37 +29,37 @@ msgstr ""
 msgid "No Tasks"
 msgstr ""
 
-#: src/Widgets/ListView.vala:154
+#: src/Widgets/ListView.vala:156
 msgid "Adding task failed"
 msgstr ""
 
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:273 src/MainWindow.vala:328
+#: src/Widgets/ListView.vala:157 src/Widgets/ListView.vala:247
+#: src/MainWindow.vala:273 src/MainWindow.vala:343
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
-#: src/Widgets/ListView.vala:222
+#: src/Widgets/ListView.vala:246
 msgid "Renaming task list failed"
 msgstr ""
 
-#: src/Widgets/ListView.vala:354
+#: src/Widgets/ListView.vala:402
 msgid "Completing task failed"
 msgstr ""
 
-#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
-#: src/Widgets/ListView.vala:399
+#: src/Widgets/ListView.vala:403 src/Widgets/ListView.vala:425
+#: src/Widgets/ListView.vala:447
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 
-#: src/Widgets/ListView.vala:376
+#: src/Widgets/ListView.vala:424
 msgid "Updating task failed"
 msgstr ""
 
-#: src/Widgets/ListView.vala:398
+#: src/Widgets/ListView.vala:446
 msgid "Removing task failed"
 msgstr ""
 
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:45
 msgid "Tasks"
 msgstr ""
 
@@ -79,7 +79,20 @@ msgstr ""
 msgid "New list"
 msgstr ""
 
-#: src/MainWindow.vala:327
+#: src/MainWindow.vala:322
+#, c-format
+msgid "Delete “%s”?"
+msgstr ""
+
+#: src/MainWindow.vala:323
+msgid "The list and all its tasks will be permanently deleted."
+msgstr ""
+
+#: src/MainWindow.vala:330
+msgid "Delete List"
+msgstr ""
+
+#: src/MainWindow.vala:342
 msgid "Deleting the task list failed"
 msgstr ""
 
@@ -95,7 +108,7 @@ msgstr ""
 msgid "Tomorrow"
 msgstr ""
 
-#: src/Widgets/EditableLabel.vala:73
+#: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
 msgstr ""
 
@@ -127,15 +140,15 @@ msgstr ""
 msgid "Show Completed"
 msgstr ""
 
-#: src/Widgets/ListSettingsPopover.vala:120
-msgid "Delete List"
+#: src/Widgets/ListSettingsPopover.vala:119
+msgid "Delete List…"
 msgstr ""
 
-#: src/Widgets/ListSettingsPopover.vala:269
+#: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
 msgstr ""
 
-#: src/Widgets/ListSettingsPopover.vala:270
+#: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 
