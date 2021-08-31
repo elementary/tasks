@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.Widgets.ListView : Gtk.Grid {
+public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     public E.Source? source { get; construct; }
 
     private Gee.Collection<ECal.ClientView> views;
@@ -80,7 +80,7 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
     private Gtk.ListBox task_list;
     private bool is_gtasks;
 
-    public ListView (E.Source? source) {
+    public TaskListGrid (E.Source? source) {
         Object (source: source);
     }
 
