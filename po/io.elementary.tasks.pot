@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.tasks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-30 05:31+0000\n"
+"POT-Creation-Date: 2021-08-31 11:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,48 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
-msgid "Scheduled"
-msgstr ""
-
-#: src/Widgets/ListView.vala:119
-msgid "Edit Name and Appearance"
-msgstr ""
-
-#: src/Widgets/ListView.vala:131
-msgid "No Tasks"
-msgstr ""
-
-#: src/Widgets/ListView.vala:156
-msgid "Adding task failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:157 src/Widgets/ListView.vala:247
-#: src/MainWindow.vala:273 src/MainWindow.vala:343
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
-
-#: src/Widgets/ListView.vala:246
-msgid "Renaming task list failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:402
-msgid "Completing task failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:403 src/Widgets/ListView.vala:425
-#: src/Widgets/ListView.vala:447
-msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
-
-#: src/Widgets/ListView.vala:424
-msgid "Updating task failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:446
-msgid "Removing task failed"
-msgstr ""
 
 #: src/MainWindow.vala:45
 msgid "Tasks"
@@ -73,6 +31,11 @@ msgstr ""
 
 #: src/MainWindow.vala:272
 msgid "Creating a new task list failed"
+msgstr ""
+
+#: src/MainWindow.vala:273 src/MainWindow.vala:343
+#: src/Widgets/TaskListGrid.vala:157 src/Widgets/TaskListGrid.vala:247
+msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
 #: src/MainWindow.vala:278
@@ -152,6 +115,10 @@ msgstr ""
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/TaskListGrid.vala:90
+msgid "Scheduled"
+msgstr ""
+
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
 msgstr ""
@@ -168,12 +135,45 @@ msgstr ""
 msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 
+#: src/Widgets/TaskListGrid.vala:119
+msgid "Edit Name and Appearance"
+msgstr ""
+
+#: src/Widgets/TaskListGrid.vala:131
+msgid "No Tasks"
+msgstr ""
+
+#: src/Widgets/TaskListGrid.vala:156
+msgid "Adding task failed"
+msgstr ""
+
+#: src/Widgets/TaskListGrid.vala:246
+msgid "Renaming task list failed"
+msgstr ""
+
+#: src/Widgets/TaskListGrid.vala:402
+msgid "Completing task failed"
+msgstr ""
+
+#: src/Widgets/TaskListGrid.vala:403 src/Widgets/TaskListGrid.vala:425
+#: src/Widgets/TaskListGrid.vala:447
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr ""
+
+#: src/Widgets/TaskListGrid.vala:424
+msgid "Updating task failed"
+msgstr ""
+
+#: src/Widgets/TaskListGrid.vala:446
+msgid "Removing task failed"
+msgstr ""
+
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
 msgstr ""
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
