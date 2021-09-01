@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.Widgets.ListView : Gtk.Grid {
+public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     public E.Source? source { get; construct; }
 
     private Gee.Collection<ECal.ClientView> views;
@@ -80,7 +80,7 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
     private Gtk.ListBox task_list;
     private bool is_gtasks;
 
-    public ListView (E.Source? source) {
+    public TaskListGrid (E.Source? source) {
         Object (source: source);
     }
 
@@ -144,6 +144,8 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
 
         if (source != null) {
             var add_task_row = new Tasks.Widgets.TaskRow.for_source (source);
+            add_task_row.unselect.connect (on_row_unselect);
+
             add_task_row.task_changed.connect ((task) => {
                 Tasks.Application.model.add_task.begin (source, task, (obj, res) => {
                     GLib.Idle.add (() => {
@@ -195,19 +197,41 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
         });
 
         settings_button.toggled.connect (() => {
+            unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
+
             if (settings_button.active) {
                 list_settings_popover.source = source;
+
+                if (win_action_map != null) {
+                    ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
+                }
+
+            } else if (win_action_map != null) {
+                /*
+                * We can't immediate disable the action once the popover is closed,
+                * because this would lead to the action not beeing executed in case
+                * the popover was closed because the user clicked on the action.
+                * Therefore we wait a tiny bit using GLib.Idle to allow the action to
+                * be executed if needed.
+                */
+                GLib.Idle.add (() => {
+                    ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (
+                        add_task_list.get_selected_rows ().length () == 0 &&
+                        task_list.get_selected_rows ().length () == 0
+                    );
+                    return GLib.Source.REMOVE;
+                });
             }
         });
 
-        add_task_list.row_activated.connect ((row) => {
-            var task_row = (Tasks.Widgets.TaskRow) row;
-            task_row.reveal_child_request (true);
-        });
+        add_task_list.row_activated.connect (on_row_activated);
+        task_list.row_activated.connect (on_row_activated);
 
-        task_list.row_activated.connect ((row) => {
-            var task_row = (Tasks.Widgets.TaskRow) row;
-            task_row.reveal_child_request (true);
+        editable_title.notify["editing"].connect (() => {
+            unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
+            if (win_action_map != null) {
+                ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (!editable_title.editing);
+            }
         });
 
         editable_title.changed.connect (() => {
@@ -235,6 +259,29 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
         });
 
         show_all ();
+    }
+
+    private void on_row_activated (Gtk.ListBoxRow row) {
+        var task_row = (Tasks.Widgets.TaskRow) row;
+        task_row.reveal_child_request (true);
+
+        unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
+        if (win_action_map != null) {
+            ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+        }
+    }
+
+    private void on_row_unselect (Gtk.ListBoxRow row) {
+        if (row.parent is Gtk.ListBox) {
+            ((Gtk.ListBox) row.parent).unselect_row (row);
+        }
+
+        if (add_task_list.get_selected_rows ().length () == 0 && task_list.get_selected_rows ().length () == 0) {
+            unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
+            if (win_action_map != null) {
+                ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
+            }
+        }
     }
 
     public void update_request () {
@@ -343,6 +390,7 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
     private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
             var task_row = new Tasks.Widgets.TaskRow.for_component (task, source, this.source == null);
+            task_row.unselect.connect (on_row_unselect);
 
             task_row.task_completed.connect ((task) => {
                 Tasks.Application.model.complete_task.begin (source, task, (obj, res) => {
@@ -409,11 +457,6 @@ public class Tasks.Widgets.ListView : Gtk.Grid {
                     });
                 });
             });
-
-            task_row.unselect.connect (() => {
-                task_list.unselect_row (task_row);
-            });
-
             task_list.add (task_row);
 
             return true;

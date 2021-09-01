@@ -19,7 +19,8 @@
 */
 
 public class Tasks.MainWindow : Hdy.ApplicationWindow {
-    public const string ACTION_PREFIX = "win.";
+    public const string ACTION_GROUP_PREFIX = "win";
+    public const string ACTION_PREFIX = ACTION_GROUP_PREFIX + ".";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
 
     private const string SCHEDULED_LIST_UID = "scheduled";
@@ -34,7 +35,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     private Gtk.ListBox listbox;
     private Gee.HashMap<E.Source, Tasks.Widgets.SourceRow>? source_rows;
     private Gee.Collection<E.Source>? collection_sources;
-    private Gtk.Stack listview_stack;
+    private Gtk.Stack task_list_grid_stack;
     private Gtk.ButtonBox add_tasklist_buttonbox;
 
     public MainWindow (Gtk.Application application) {
@@ -49,7 +50,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         Hdy.init ();
 
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "<Control>BackSpace";
-        action_accelerators[ACTION_DELETE_SELECTED_LIST] = "Delete";
 
         Gtk.IconTheme.get_default ().add_resource_path ("/io/elementary/tasks");
     }
@@ -73,7 +73,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         sidebar_header_context.add_class ("default-decoration");
         sidebar_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
 
-        var listview_header = new Hdy.HeaderBar () {
+        var main_header = new Hdy.HeaderBar () {
             has_subtitle = false,
             show_close_button = true
         };
@@ -82,11 +82,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         // right headerbar automatically
         var header_group = new Hdy.HeaderGroup ();
         header_group.add_header_bar (sidebar_header);
-        header_group.add_header_bar (listview_header);
+        header_group.add_header_bar (main_header);
 
-        unowned Gtk.StyleContext listview_header_context = listview_header.get_style_context ();
-        listview_header_context.add_class ("default-decoration");
-        listview_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
+        unowned Gtk.StyleContext main_header_context = main_header.get_style_context ();
+        main_header_context.add_class ("default-decoration");
+        main_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
 
         listbox = new Gtk.ListBox ();
         listbox.set_sort_func (sort_function);
@@ -140,15 +140,15 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
         sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);
 
-        listview_stack = new Gtk.Stack ();
+        task_list_grid_stack = new Gtk.Stack ();
 
-        var listview_grid = new Gtk.Grid ();
-        listview_grid.attach (listview_header, 0, 0);
-        listview_grid.attach (listview_stack, 0, 1);
+        var main_grid = new Gtk.Grid ();
+        main_grid.attach (main_header, 0, 0);
+        main_grid.attach (task_list_grid_stack, 0, 1);
 
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
         paned.pack1 (sidebar, false, false);
-        paned.pack2 (listview_grid, true, false);
+        paned.pack2 (main_grid, true, false);
 
         add (paned);
 
@@ -178,31 +178,31 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             listbox.row_selected.connect ((row) => {
                 if (row != null) {
-                    Tasks.Widgets.ListView? listview;
+                    Tasks.Widgets.TaskListGrid? task_list_grid;
 
                     if (row is Tasks.Widgets.SourceRow) {
                         var source = ((Tasks.Widgets.SourceRow) row).source;
                         var source_uid = source.dup_uid ();
 
-                        listview = (Tasks.Widgets.ListView) listview_stack.get_child_by_name (source_uid);
-                        if (listview == null) {
-                            listview = new Tasks.Widgets.ListView (source);
-                            listview_stack.add_named (listview, source_uid);
-                            listview.add_view (source, "(contains? 'any' '')");
+                        task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
+                        if (task_list_grid == null) {
+                            task_list_grid = new Tasks.Widgets.TaskListGrid (source);
+                            task_list_grid_stack.add_named (task_list_grid, source_uid);
+                            task_list_grid.add_view (source, "(contains? 'any' '')");
                         }
 
-                        listview_stack.set_visible_child_name (source_uid);
+                        task_list_grid_stack.set_visible_child_name (source_uid);
                         Tasks.Application.settings.set_string ("selected-list", source_uid);
                         ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
 
                     } else if (row is Tasks.Widgets.ScheduledRow) {
-                        listview = (Tasks.Widgets.ListView) listview_stack.get_child_by_name (SCHEDULED_LIST_UID);
-                        if (listview == null) {
-                            listview = new Tasks.Widgets.ListView (null);
-                            listview_stack.add_named (listview, SCHEDULED_LIST_UID);
+                        task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
+                        if (task_list_grid == null) {
+                            task_list_grid = new Tasks.Widgets.TaskListGrid (null);
+                            task_list_grid_stack.add_named (task_list_grid, SCHEDULED_LIST_UID);
                         }
 
-                        listview.remove_views ();
+                        task_list_grid.remove_views ();
 
                         var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
                         var query = "AND (NOT is-completed?) (has-start?)";
@@ -211,17 +211,17 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                             E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
                             if (list.selected == true && source.enabled == true && !source.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
-                                listview.add_view (source, query);
+                                task_list_grid.add_view (source, query);
                             }
                         });
 
-                        listview_stack.set_visible_child_name (SCHEDULED_LIST_UID);
+                        task_list_grid_stack.set_visible_child_name (SCHEDULED_LIST_UID);
                         Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);
                         ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
                     }
 
-                    if (listview != null) {
-                        listview.update_request ();
+                    if (task_list_grid != null) {
+                        task_list_grid.update_request ();
                     }
 
                 } else {
@@ -318,18 +318,34 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         var source = list_row.source;
 
         if (Tasks.Application.model.is_remove_task_list_supported (source)) {
-            Tasks.Application.model.remove_task_list.begin (source, (obj, res) => {
-                try {
-                    Tasks.Application.model.remove_task_list.end (res);
-                } catch (Error e) {
-                    critical (e.message);
-                    show_error_dialog (
-                        _("Deleting the task list failed"),
-                        _("The task list registry may be unavailable or unable to be written to."),
-                        e
-                    );
-                }
-            });
+            var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                _("Delete “%s”?").printf (source.display_name),
+                _("The list and all its tasks will be permanently deleted."),
+                "dialog-warning",
+                Gtk.ButtonsType.CANCEL
+            ) {
+                transient_for = this
+            };
+
+            unowned Gtk.Widget trash_button = message_dialog.add_button (_("Delete List"), Gtk.ResponseType.YES);
+            trash_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+            Gtk.ResponseType response = (Gtk.ResponseType) message_dialog.run ();
+            message_dialog.destroy ();
+
+            if (response == Gtk.ResponseType.YES) {
+                Tasks.Application.model.remove_task_list.begin (source, (obj, res) => {
+                    try {
+                        Tasks.Application.model.remove_task_list.end (res);
+                    } catch (Error e) {
+                        critical (e.message);
+                        show_error_dialog (
+                            _("Deleting the task list failed"),
+                            _("The task list registry may be unavailable or unable to be written to."),
+                            e
+                        );
+                    }
+                });
+            }
 
         } else {
             Gdk.beep ();
@@ -429,9 +445,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         } else {
             source_rows[source].update_request ();
 
-            var listview = (Tasks.Widgets.ListView) listview_stack.get_visible_child ();
-            if (listview != null) {
-                listview.update_request ();
+            var task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_visible_child ();
+            if (task_list_grid != null) {
+                task_list_grid.update_request ();
             }
 
             Idle.add (() => {
