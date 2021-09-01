@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-01 13:39+0000\n"
-"PO-Revision-Date: 2021-07-26 01:08+0000\n"
+"PO-Revision-Date: 2021-09-01 15:59+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
-">\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/>"
+"\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgstr "オンラインアカウントの設定…"
 
 #: src/MainWindow.vala:123
 msgid "Add Task List…"
-msgstr "タスク一覧を追加…"
+msgstr "タスクリストを追加…"
 
 #: src/MainWindow.vala:272
 msgid "Creating a new task list failed"
@@ -47,11 +47,11 @@ msgstr "新しいリスト"
 #: src/MainWindow.vala:322
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "“%s”を削除しますか？"
 
 #: src/MainWindow.vala:323
 msgid "The list and all its tasks will be permanently deleted."
-msgstr ""
+msgstr "リストとそこに含まれるタスクは、完全に削除されます。"
 
 #: src/MainWindow.vala:330
 msgid "Delete List"
@@ -106,10 +106,8 @@ msgid "Show Completed"
 msgstr "完了したタスクを表示"
 
 #: src/Widgets/ListSettingsPopover.vala:119
-#, fuzzy
-#| msgid "Delete List"
 msgid "Delete List…"
-msgstr "リストを削除"
+msgstr "リストを削除…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
