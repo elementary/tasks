@@ -197,22 +197,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     } else if (row is Tasks.Widgets.ScheduledRow) {
                         var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListGrid) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
                         if (scheduled_task_list_grid == null) {
-                            scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListGrid ();
+                            scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListGrid (Tasks.Application.model);
                             task_list_grid_stack.add_named (scheduled_task_list_grid, SCHEDULED_LIST_UID);
                         }
-
-                        scheduled_task_list_grid.remove_views ();
-
-                        var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
-                        var query = "AND (NOT is-completed?) (has-start?)";
-
-                        sources.foreach ((source) => {
-                            E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
-
-                            if (list.selected == true && source.enabled == true && !source.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
-                                scheduled_task_list_grid.add_view (source, query);
-                            }
-                        });
 
                         task_list_grid_stack.set_visible_child_name (SCHEDULED_LIST_UID);
                         Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);

@@ -28,7 +28,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
      * https://gitlab.gnome.org/GNOME/evolution-data-server/-/blob/master/src/calendar/libedata-cal/e-cal-backend-sexp.c
      */
 
-    public void add_view (E.Source task_list, string query) {
+    private void add_view (E.Source task_list, string query) {
         try {
             var view = Tasks.Application.model.create_task_list_view (
                 task_list,
@@ -46,7 +46,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
         }
     }
 
-    public void remove_views () {
+    private void remove_views () {
         foreach (unowned Gtk.Widget child in task_list.get_children ()) {
             child.destroy ();
         }
@@ -59,8 +59,13 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
         }
     }
 
+    public Tasks.TaskModel model { get; construct; }
     private Gtk.Label scheduled_title;
     private Gtk.ListBox task_list;
+
+    public ScheduledTaskListGrid(Tasks.TaskModel model) {
+        Object (model: model);
+    }
 
     construct {
         views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
@@ -105,6 +110,27 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
         task_list.row_activated.connect (on_row_activated);
 
         show_all ();
+
+        model.get_registry.begin ((obj, res) => {
+            E.SourceRegistry registry;
+            try {
+                registry = model.get_registry.end (res);
+            } catch (Error e) {
+                critical (e.message);
+                return;
+            }
+
+            var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
+            var query = "AND (NOT is-completed?) (has-start?)";
+
+            sources.foreach ((source) => {
+                E.SourceTaskList list = (E.SourceTaskList) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+                if (list.selected == true && source.enabled == true && !source.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
+                    add_view (source, query);
+                }
+            });
+        });
     }
 
     private void on_row_activated (Gtk.ListBoxRow row) {
