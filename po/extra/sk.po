@@ -7,23 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-28 14:44+0000\n"
-"PO-Revision-Date: 2019-08-02 13:43-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2021-09-01 13:54+0000\n"
+"PO-Revision-Date: 2021-08-29 20:28+0000\n"
+"Last-Translator: JohnDumpling <john_dumpling@protonmail.com>\n"
+"Language-Team: Slovak <https://l10n.elementary.io/projects/tasks/extra/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
-msgstr ""
+msgstr "Úlohy"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "Synchronizované úlohy a pripomienky"
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
@@ -31,52 +32,55 @@ msgid ""
 "and complete tasks, manage lists and sync them across your machines using "
 "CalDAV."
 msgstr ""
+"Navrhnuté a vytvorené za účelom spravovania všetkých vašich úloh a "
+"pripomienok. Vytvárajte a dokončujte úlohy, spravujte zoznamy a "
+"synchronizujte ich s vašimi zariadeniami pomocou CalDAV."
 
 #: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
 #: data/tasks.appdata.xml.in:35
 msgid "Improvements:"
-msgstr ""
+msgstr "Vylepšenia:"
 
 #: data/tasks.appdata.xml.in:20 data/tasks.appdata.xml.in:29
 #: data/tasks.appdata.xml.in:38
 msgid "Updated translations"
-msgstr ""
+msgstr "Aktualizované preklady"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Fix crash on start with certain hardware"
-msgstr ""
+msgstr "Opravený pád pri spustení na určitom hardvéri"
 
 #: data/tasks.appdata.xml.in:37
 msgid "Fix the order of the scheduled view"
-msgstr ""
+msgstr "Opravené poradie zobrazenia naplánovaných úloh"
 
 #: data/tasks.appdata.xml.in:44
 msgid "First release!"
-msgstr ""
+msgstr "Prvé vydanie!"
 
 #: data/tasks.appdata.xml.in:46
 msgid "Support the dark style"
-msgstr ""
+msgstr "Podporuje tmavý štýl"
 
 #: data/tasks.appdata.xml.in:47
 msgid "Add and remove task lists with custom colors"
-msgstr ""
+msgstr "Pridávajte a odstraňujte zoznamy úloh s prispôsobenými farbami"
 
 #: data/tasks.appdata.xml.in:48
 msgid "See scheduled tasks from all lists at once"
-msgstr ""
+msgstr "Zobrazte naplánované úlohy zo všetkých zoznamov naraz"
 
 #: data/tasks.appdata.xml.in:49
 msgid "Set due dates"
-msgstr ""
+msgstr "Nastavujte dátumy konca platnosti"
 
 #: data/tasks.appdata.xml.in:92
 msgid "elementary, Inc."
-msgstr ""
+msgstr "elementary, Inc."
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
-msgstr ""
+msgstr "Vytvárajte a sledujte zostávajúce úlohy na dokončenie"
 
 #: data/tasks.desktop.in:6
 msgid "io.elementary.tasks"
@@ -84,4 +88,4 @@ msgstr ""
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "Plánovač;Pripomienky;"

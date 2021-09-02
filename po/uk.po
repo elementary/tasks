@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-28 14:44+0000\n"
-"PO-Revision-Date: 2021-07-20 21:17+0000\n"
+"POT-Creation-Date: 2021-09-01 13:54+0000\n"
+"PO-Revision-Date: 2021-09-01 13:51+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/tasks/uk/"
 ">\n"
@@ -20,50 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
-msgid "Scheduled"
-msgstr "Заплановане"
-
-#: src/Widgets/ListView.vala:119
-msgid "Edit Name and Appearance"
-msgstr "Змінити назву та вигляд"
-
-#: src/Widgets/ListView.vala:131
-msgid "No Tasks"
-msgstr "Немає завдань"
-
-#: src/Widgets/ListView.vala:154
-msgid "Adding task failed"
-msgstr "Не вдалося додати завдання"
-
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:273 src/MainWindow.vala:328
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
-"Реєстр списку завдань може бути недоступним або неможливо записати до нього."
-
-#: src/Widgets/ListView.vala:222
-msgid "Renaming task list failed"
-msgstr "Не вдалося перейменувати список завдань"
-
-#: src/Widgets/ListView.vala:354
-msgid "Completing task failed"
-msgstr "Не вдалося позначити завдання виконаним"
-
-#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
-#: src/Widgets/ListView.vala:399
-msgid "The task registry may be unavailable or unable to be written to."
-msgstr "Реєстр завдань може бути недоступним або неможливо записати до нього."
-
-#: src/Widgets/ListView.vala:376
-msgid "Updating task failed"
-msgstr "Не вдалося оновити завдання"
-
-#: src/Widgets/ListView.vala:398
-msgid "Removing task failed"
-msgstr "Не вдалося вилучити завдання"
-
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:45
 msgid "Tasks"
 msgstr "Завдання"
 
@@ -79,11 +36,30 @@ msgstr "Додати перелік завдань…"
 msgid "Creating a new task list failed"
 msgstr "Не вдалося створити список завдань"
 
+#: src/MainWindow.vala:273 src/MainWindow.vala:343
+#: src/Widgets/TaskListGrid.vala:157 src/Widgets/TaskListGrid.vala:247
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr ""
+"Реєстр списку завдань може бути недоступним або неможливо записати до нього."
+
 #: src/MainWindow.vala:278
 msgid "New list"
 msgstr "Новий список"
 
-#: src/MainWindow.vala:327
+#: src/MainWindow.vala:322
+#, c-format
+msgid "Delete “%s”?"
+msgstr "Видалити «%s»?"
+
+#: src/MainWindow.vala:323
+msgid "The list and all its tasks will be permanently deleted."
+msgstr "Список та всі завдання у ньому будуть назавжди видалені."
+
+#: src/MainWindow.vala:330
+msgid "Delete List"
+msgstr "Видалити список"
+
+#: src/MainWindow.vala:342
 msgid "Deleting the task list failed"
 msgstr "Не вдалося видалити список завдань"
 
@@ -99,7 +75,7 @@ msgstr "Вчора"
 msgid "Tomorrow"
 msgstr "Завтра"
 
-#: src/Widgets/EditableLabel.vala:73
+#: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
 msgstr "Змінити…"
 
@@ -131,17 +107,21 @@ msgstr "Іван Коваль АБО вул. Прикладна."
 msgid "Show Completed"
 msgstr "Показати виконані"
 
-#: src/Widgets/ListSettingsPopover.vala:120
-msgid "Delete List"
-msgstr "Видалити список"
+#: src/Widgets/ListSettingsPopover.vala:119
+msgid "Delete List…"
+msgstr "Видалити список…"
 
-#: src/Widgets/ListSettingsPopover.vala:269
+#: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
 msgstr "Не вдалося змінити колір списку завдань"
 
-#: src/Widgets/ListSettingsPopover.vala:270
+#: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
 msgstr "Реєстр списку завдань може бути недоступним або захищеним від запису."
+
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/TaskListGrid.vala:90
+msgid "Scheduled"
+msgstr "Заплановане"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -159,12 +139,45 @@ msgstr "Зараз від'єднано від (можливо віддалено
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Не довірений SSL сертифікат для під'єднання, відхилено"
 
+#: src/Widgets/TaskListGrid.vala:119
+msgid "Edit Name and Appearance"
+msgstr "Змінити назву та вигляд"
+
+#: src/Widgets/TaskListGrid.vala:131
+msgid "No Tasks"
+msgstr "Немає завдань"
+
+#: src/Widgets/TaskListGrid.vala:156
+msgid "Adding task failed"
+msgstr "Не вдалося додати завдання"
+
+#: src/Widgets/TaskListGrid.vala:246
+msgid "Renaming task list failed"
+msgstr "Не вдалося перейменувати список завдань"
+
+#: src/Widgets/TaskListGrid.vala:402
+msgid "Completing task failed"
+msgstr "Не вдалося позначити завдання виконаним"
+
+#: src/Widgets/TaskListGrid.vala:403 src/Widgets/TaskListGrid.vala:425
+#: src/Widgets/TaskListGrid.vala:447
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr "Реєстр завдань може бути недоступним або неможливо записати до нього."
+
+#: src/Widgets/TaskListGrid.vala:424
+msgid "Updating task failed"
+msgstr "Не вдалося оновити завдання"
+
+#: src/Widgets/TaskListGrid.vala:446
+msgid "Removing task failed"
+msgstr "Не вдалося вилучити завдання"
+
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
@@ -180,19 +193,19 @@ msgstr "Прибуття: %s"
 msgid "Leaving: %s"
 msgstr "Відправлення: %s"
 
-#: src/Widgets/TaskRow.vala:238
+#: src/Widgets/TaskRow.vala:239
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Save Changes"
 msgstr "Зберегти зміни"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Add Task"
 msgstr "Додати завдання"
 
-#: src/Widgets/TaskRow.vala:293
+#: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
 msgstr "Видалти завдання"
 

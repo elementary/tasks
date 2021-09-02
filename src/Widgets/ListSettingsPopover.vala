@@ -115,11 +115,16 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             margin_top = 3
         };
 
-        var delete_button = new Gtk.ModelButton () {
-            action_name = MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST,
-            text = _("Delete List")
-        };
-        delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+        var delete_list_accel_label = new Granite.AccelLabel.from_action_name (
+            _("Delete List…"),
+            MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST
+        );
+
+        var delete_list_menuitem = new Gtk.ModelButton ();
+        delete_list_menuitem.action_name = delete_list_accel_label.action_name;
+        delete_list_menuitem.get_child ().destroy ();
+        delete_list_menuitem.add (delete_list_accel_label);
+        delete_list_menuitem.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
         var grid = new Gtk.Grid () {
             orientation = Gtk.Orientation.VERTICAL,
@@ -128,7 +133,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
         grid.add (color_grid);
         grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
         grid.add (show_completed_button);
-        grid.add (delete_button);
+        grid.add (delete_list_menuitem);
         grid.show_all ();
 
         add (grid);
