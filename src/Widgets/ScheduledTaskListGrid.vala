@@ -20,7 +20,7 @@
 
 public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
     private Gee.Map<E.Source, ECal.ClientView> views;
-    private const string query = "AND (NOT is-completed?) (has-start?)";
+    private const string QUERY = "AND (NOT is-completed?) (has-start?)";
 
     /*
      * We need to pass a valid S-expression as query to guarantee the callback events are fired.
@@ -66,7 +66,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
     private Gtk.Label scheduled_title;
     private Gtk.ListBox task_list;
 
-    public ScheduledTaskListGrid(Tasks.TaskModel model) {
+    public ScheduledTaskListGrid (Tasks.TaskModel model) {
         Object (model: model);
     }
 
@@ -141,7 +141,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
         E.SourceTaskList list = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
         if (list.selected == true && task_list.enabled == true && !task_list.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
-            add_view (task_list, query);
+            add_view (task_list, QUERY);
         }
     }
 
