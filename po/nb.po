@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-28 14:44+0000\n"
+"POT-Creation-Date: 2021-09-01 13:54+0000\n"
 "PO-Revision-Date: 2021-08-15 14:26+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
@@ -19,49 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
-msgid "Scheduled"
-msgstr "Planlagt"
-
-#: src/Widgets/ListView.vala:119
-msgid "Edit Name and Appearance"
-msgstr "Rediger navn og utseende"
-
-#: src/Widgets/ListView.vala:131
-msgid "No Tasks"
-msgstr "Ingen gjøremål"
-
-#: src/Widgets/ListView.vala:154
-msgid "Adding task failed"
-msgstr "Kunne ikke legge til gjøremål"
-
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:273 src/MainWindow.vala:328
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
-
-#: src/Widgets/ListView.vala:222
-msgid "Renaming task list failed"
-msgstr "Klarte ikke å gi gjøremålslisten nytt navn"
-
-#: src/Widgets/ListView.vala:354
-msgid "Completing task failed"
-msgstr "Kunne ikke fullføre gjøremål"
-
-#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
-#: src/Widgets/ListView.vala:399
-msgid "The task registry may be unavailable or unable to be written to."
-msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
-
-#: src/Widgets/ListView.vala:376
-msgid "Updating task failed"
-msgstr "Kunne ikke oppdatere gjøremålsl"
-
-#: src/Widgets/ListView.vala:398
-msgid "Removing task failed"
-msgstr "Kunne ikke fjerne gjøremål"
-
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:45
 #, fuzzy
 msgid "Tasks"
 msgstr "Gjøremål"
@@ -80,11 +38,29 @@ msgstr "Legg til gjøremålsliste …"
 msgid "Creating a new task list failed"
 msgstr "Opprettelse av nytt gjøremål mislyktes"
 
+#: src/MainWindow.vala:273 src/MainWindow.vala:343
+#: src/Widgets/TaskListGrid.vala:157 src/Widgets/TaskListGrid.vala:247
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
+
 #: src/MainWindow.vala:278
 msgid "New list"
 msgstr "Ny liste"
 
-#: src/MainWindow.vala:327
+#: src/MainWindow.vala:322
+#, c-format
+msgid "Delete “%s”?"
+msgstr ""
+
+#: src/MainWindow.vala:323
+msgid "The list and all its tasks will be permanently deleted."
+msgstr ""
+
+#: src/MainWindow.vala:330
+msgid "Delete List"
+msgstr "Slett liste"
+
+#: src/MainWindow.vala:342
 msgid "Deleting the task list failed"
 msgstr "Kunne ikke slette gjøremålsliste"
 
@@ -100,7 +76,7 @@ msgstr "I går"
 msgid "Tomorrow"
 msgstr "I morgen"
 
-#: src/Widgets/EditableLabel.vala:73
+#: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
 msgstr "Rediger …"
 
@@ -132,17 +108,23 @@ msgstr "Ola Nordmann ELLER Eksempelgate"
 msgid "Show Completed"
 msgstr "Vis fullførte"
 
-#: src/Widgets/ListSettingsPopover.vala:120
-msgid "Delete List"
+#: src/Widgets/ListSettingsPopover.vala:119
+#, fuzzy
+#| msgid "Delete List"
+msgid "Delete List…"
 msgstr "Slett liste"
 
-#: src/Widgets/ListSettingsPopover.vala:269
+#: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
 msgstr "Kunne ikke endre gjøremålslistefargen"
 
-#: src/Widgets/ListSettingsPopover.vala:270
+#: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
 msgstr "Gjøremålsregisteret kan være utilgjengelig eller skrivebeskyttet."
+
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/TaskListGrid.vala:90
+msgid "Scheduled"
+msgstr "Planlagt"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -160,12 +142,45 @@ msgstr "Frakoblet fra datalager (antagelig annensteds hen)"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Tiltro til SSL-sertifikat ble avslått for tilkoblingen"
 
+#: src/Widgets/TaskListGrid.vala:119
+msgid "Edit Name and Appearance"
+msgstr "Rediger navn og utseende"
+
+#: src/Widgets/TaskListGrid.vala:131
+msgid "No Tasks"
+msgstr "Ingen gjøremål"
+
+#: src/Widgets/TaskListGrid.vala:156
+msgid "Adding task failed"
+msgstr "Kunne ikke legge til gjøremål"
+
+#: src/Widgets/TaskListGrid.vala:246
+msgid "Renaming task list failed"
+msgstr "Klarte ikke å gi gjøremålslisten nytt navn"
+
+#: src/Widgets/TaskListGrid.vala:402
+msgid "Completing task failed"
+msgstr "Kunne ikke fullføre gjøremål"
+
+#: src/Widgets/TaskListGrid.vala:403 src/Widgets/TaskListGrid.vala:425
+#: src/Widgets/TaskListGrid.vala:447
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
+
+#: src/Widgets/TaskListGrid.vala:424
+msgid "Updating task failed"
+msgstr "Kunne ikke oppdatere gjøremålsl"
+
+#: src/Widgets/TaskListGrid.vala:446
+msgid "Removing task failed"
+msgstr "Kunne ikke fjerne gjøremål"
+
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
@@ -181,18 +196,18 @@ msgstr "Ankommer: %s"
 msgid "Leaving: %s"
 msgstr "Forlater: %s"
 
-#: src/Widgets/TaskRow.vala:238
+#: src/Widgets/TaskRow.vala:239
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Save Changes"
 msgstr "Lagre endringer"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Add Task"
 msgstr "Legg til gjøremål"
 
-#: src/Widgets/TaskRow.vala:293
+#: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
 msgstr "Slett gjøremål"

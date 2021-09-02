@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-28 14:44+0000\n"
+"POT-Creation-Date: 2021-09-01 13:54+0000\n"
 "PO-Revision-Date: 2021-01-26 16:07+0000\n"
 "Last-Translator: Marco De Paolini <marco.depaolini@gmail.com>\n"
 "Language-Team: Italian <https://l10n.elementary.io/projects/tasks/tasks/it/"
@@ -19,64 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
-msgid "Scheduled"
-msgstr "Programmate"
-
-#: src/Widgets/ListView.vala:119
-msgid "Edit Name and Appearance"
-msgstr "Modifica nome e aspetto"
-
-#: src/Widgets/ListView.vala:131
-msgid "No Tasks"
-msgstr "Nessuna attività"
-
-#: src/Widgets/ListView.vala:154
-#, fuzzy
-#| msgid "Renaming task list failed"
-msgid "Adding task failed"
-msgstr "Cambio del nome dell'elenco di attività non riuscito"
-
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:273 src/MainWindow.vala:328
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
-"Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
-"può essere scritto."
-
-#: src/Widgets/ListView.vala:222
-msgid "Renaming task list failed"
-msgstr "Cambio del nome dell'elenco di attività non riuscito"
-
-#: src/Widgets/ListView.vala:354
-#, fuzzy
-#| msgid "Renaming task list failed"
-msgid "Completing task failed"
-msgstr "Cambio del nome dell'elenco di attività non riuscito"
-
-#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
-#: src/Widgets/ListView.vala:399
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
-msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
-"Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
-"può essere scritto."
-
-#: src/Widgets/ListView.vala:376
-#, fuzzy
-#| msgid "Renaming task list failed"
-msgid "Updating task failed"
-msgstr "Cambio del nome dell'elenco di attività non riuscito"
-
-#: src/Widgets/ListView.vala:398
-#, fuzzy
-#| msgid "Renaming task list failed"
-msgid "Removing task failed"
-msgstr "Cambio del nome dell'elenco di attività non riuscito"
-
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:45
 msgid "Tasks"
 msgstr "Attività"
 
@@ -92,11 +35,31 @@ msgstr "Aggiungi un elenco attività…"
 msgid "Creating a new task list failed"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
 
+#: src/MainWindow.vala:273 src/MainWindow.vala:343
+#: src/Widgets/TaskListGrid.vala:157 src/Widgets/TaskListGrid.vala:247
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr ""
+"Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
+"può essere scritto."
+
 #: src/MainWindow.vala:278
 msgid "New list"
 msgstr "Nuovo elenco"
 
-#: src/MainWindow.vala:327
+#: src/MainWindow.vala:322
+#, c-format
+msgid "Delete “%s”?"
+msgstr ""
+
+#: src/MainWindow.vala:323
+msgid "The list and all its tasks will be permanently deleted."
+msgstr ""
+
+#: src/MainWindow.vala:330
+msgid "Delete List"
+msgstr "Cancella elenco"
+
+#: src/MainWindow.vala:342
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
@@ -114,7 +77,7 @@ msgstr "Ieri"
 msgid "Tomorrow"
 msgstr "Domani"
 
-#: src/Widgets/EditableLabel.vala:73
+#: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
 msgstr "Modifica…"
 
@@ -150,17 +113,19 @@ msgstr ""
 msgid "Show Completed"
 msgstr "Mostra quelle completate"
 
-#: src/Widgets/ListSettingsPopover.vala:120
-msgid "Delete List"
+#: src/Widgets/ListSettingsPopover.vala:119
+#, fuzzy
+#| msgid "Delete List"
+msgid "Delete List…"
 msgstr "Cancella elenco"
 
-#: src/Widgets/ListSettingsPopover.vala:269
+#: src/Widgets/ListSettingsPopover.vala:274
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Could not change the task list color"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
 
-#: src/Widgets/ListSettingsPopover.vala:270
+#: src/Widgets/ListSettingsPopover.vala:275
 #, fuzzy
 #| msgid ""
 #| "The task list registry may be unavailable or unable to be written to."
@@ -168,6 +133,10 @@ msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
+
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/TaskListGrid.vala:90
+msgid "Scheduled"
+msgstr "Programmate"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -186,12 +155,58 @@ msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 "L'attendibilità del certificato SSL è stata rifiutata per la connessione"
 
+#: src/Widgets/TaskListGrid.vala:119
+msgid "Edit Name and Appearance"
+msgstr "Modifica nome e aspetto"
+
+#: src/Widgets/TaskListGrid.vala:131
+msgid "No Tasks"
+msgstr "Nessuna attività"
+
+#: src/Widgets/TaskListGrid.vala:156
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Adding task failed"
+msgstr "Cambio del nome dell'elenco di attività non riuscito"
+
+#: src/Widgets/TaskListGrid.vala:246
+msgid "Renaming task list failed"
+msgstr "Cambio del nome dell'elenco di attività non riuscito"
+
+#: src/Widgets/TaskListGrid.vala:402
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Completing task failed"
+msgstr "Cambio del nome dell'elenco di attività non riuscito"
+
+#: src/Widgets/TaskListGrid.vala:403 src/Widgets/TaskListGrid.vala:425
+#: src/Widgets/TaskListGrid.vala:447
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr ""
+"Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
+"può essere scritto."
+
+#: src/Widgets/TaskListGrid.vala:424
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Updating task failed"
+msgstr "Cambio del nome dell'elenco di attività non riuscito"
+
+#: src/Widgets/TaskListGrid.vala:446
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Removing task failed"
+msgstr "Cambio del nome dell'elenco di attività non riuscito"
+
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
@@ -207,19 +222,19 @@ msgstr "Arrivo: %s"
 msgid "Leaving: %s"
 msgstr "Partenza: %s"
 
-#: src/Widgets/TaskRow.vala:238
+#: src/Widgets/TaskRow.vala:239
 msgid "Cancel"
 msgstr "Annulla"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Save Changes"
 msgstr "Salva modifiche"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Add Task"
 msgstr "Aggiungi attività"
 
-#: src/Widgets/TaskRow.vala:293
+#: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
 msgstr "Cancella attività"
 

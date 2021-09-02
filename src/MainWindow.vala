@@ -359,6 +359,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         if (lbbefore != null && lbbefore is Tasks.Widgets.SourceRow) {
             var before = (Tasks.Widgets.SourceRow) lbbefore;
             if (row.source.parent == before.source.parent) {
+                row.set_header (null);
                 return;
             }
         }
