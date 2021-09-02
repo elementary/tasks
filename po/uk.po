@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-01 13:54+0000\n"
+"POT-Creation-Date: 2021-09-02 06:20+0000\n"
 "PO-Revision-Date: 2021-09-01 13:51+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/tasks/uk/"
@@ -32,34 +32,34 @@ msgstr "Налаштування мережних облікових запис�
 msgid "Add Task List…"
 msgstr "Додати перелік завдань…"
 
-#: src/MainWindow.vala:272
+#: src/MainWindow.vala:271
 msgid "Creating a new task list failed"
 msgstr "Не вдалося створити список завдань"
 
-#: src/MainWindow.vala:273 src/MainWindow.vala:343
-#: src/Widgets/TaskListGrid.vala:157 src/Widgets/TaskListGrid.vala:247
+#: src/MainWindow.vala:272 src/MainWindow.vala:342
+#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Реєстр списку завдань може бути недоступним або неможливо записати до нього."
 
-#: src/MainWindow.vala:278
+#: src/MainWindow.vala:277
 msgid "New list"
 msgstr "Новий список"
 
-#: src/MainWindow.vala:322
+#: src/MainWindow.vala:321
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Видалити «%s»?"
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:322
 msgid "The list and all its tasks will be permanently deleted."
 msgstr "Список та всі завдання у ньому будуть назавжди видалені."
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:329
 msgid "Delete List"
 msgstr "Видалити список"
 
-#: src/MainWindow.vala:342
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "Не вдалося видалити список завдань"
 
@@ -119,7 +119,7 @@ msgstr "Не вдалося змінити колір списку завдан�
 msgid "The task list registry may be unavailable or write-protected."
 msgstr "Реєстр списку завдань може бути недоступним або захищеним від запису."
 
-#: src/Widgets/ScheduledRow.vala:26 src/Widgets/TaskListGrid.vala:90
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
 msgid "Scheduled"
 msgstr "Заплановане"
 
@@ -139,45 +139,47 @@ msgstr "Зараз від'єднано від (можливо віддалено
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Не довірений SSL сертифікат для під'єднання, відхилено"
 
-#: src/Widgets/TaskListGrid.vala:119
-msgid "Edit Name and Appearance"
-msgstr "Змінити назву та вигляд"
-
-#: src/Widgets/TaskListGrid.vala:131
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
 msgid "No Tasks"
 msgstr "Немає завдань"
 
-#: src/Widgets/TaskListGrid.vala:156
-msgid "Adding task failed"
-msgstr "Не вдалося додати завдання"
-
-#: src/Widgets/TaskListGrid.vala:246
-msgid "Renaming task list failed"
-msgstr "Не вдалося перейменувати список завдань"
-
-#: src/Widgets/TaskListGrid.vala:402
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
 msgid "Completing task failed"
 msgstr "Не вдалося позначити завдання виконаним"
 
-#: src/Widgets/TaskListGrid.vala:403 src/Widgets/TaskListGrid.vala:425
-#: src/Widgets/TaskListGrid.vala:447
+#: src/Widgets/ScheduledTaskListGrid.vala:175
+#: src/Widgets/ScheduledTaskListGrid.vala:197
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
+#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Реєстр завдань може бути недоступним або неможливо записати до нього."
 
-#: src/Widgets/TaskListGrid.vala:424
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
 msgid "Updating task failed"
 msgstr "Не вдалося оновити завдання"
 
-#: src/Widgets/TaskListGrid.vala:446
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
 msgid "Removing task failed"
 msgstr "Не вдалося вилучити завдання"
+
+#: src/Widgets/TaskListGrid.vala:67
+msgid "Edit Name and Appearance"
+msgstr "Змінити назву та вигляд"
+
+#: src/Widgets/TaskListGrid.vala:98
+msgid "Adding task failed"
+msgstr "Не вдалося додати завдання"
+
+#: src/Widgets/TaskListGrid.vala:186
+msgid "Renaming task list failed"
+msgstr "Не вдалося перейменувати список завдань"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

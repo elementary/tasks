@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-01 13:54+0000\n"
+"POT-Creation-Date: 2021-09-02 06:20+0000\n"
 "PO-Revision-Date: 2021-08-29 20:28+0000\n"
 "Last-Translator: JohnDumpling <john_dumpling@protonmail.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/tasks/tasks/sk/>\n"
@@ -30,34 +30,34 @@ msgstr "Nastavenia online účtov…"
 msgid "Add Task List…"
 msgstr "Pridať zoznam úloh…"
 
-#: src/MainWindow.vala:272
+#: src/MainWindow.vala:271
 msgid "Creating a new task list failed"
 msgstr "Vytváranie nového zoznamu úloh sa nepodarilo"
 
-#: src/MainWindow.vala:273 src/MainWindow.vala:343
-#: src/Widgets/TaskListGrid.vala:157 src/Widgets/TaskListGrid.vala:247
+#: src/MainWindow.vala:272 src/MainWindow.vala:342
+#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Register zoznamu úloh môže byť nedostupný alebo sa naň nedajú písať údaje."
 
-#: src/MainWindow.vala:278
+#: src/MainWindow.vala:277
 msgid "New list"
 msgstr "Nový zoznam"
 
-#: src/MainWindow.vala:322
+#: src/MainWindow.vala:321
 #, c-format
 msgid "Delete “%s”?"
 msgstr ""
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:322
 msgid "The list and all its tasks will be permanently deleted."
 msgstr ""
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:329
 msgid "Delete List"
 msgstr "Vymazať zoznam"
 
-#: src/MainWindow.vala:342
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "Zmazanie zoznamu úloh sa nepodarilo"
 
@@ -120,7 +120,7 @@ msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 "Register zoznamu úloh môže byť nedostupný alebo dostupný len na čítanie."
 
-#: src/Widgets/ScheduledRow.vala:26 src/Widgets/TaskListGrid.vala:90
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
 msgid "Scheduled"
 msgstr "Naplánované"
 
@@ -140,45 +140,47 @@ msgstr "Momentálne odpojené od (pravdepodobne vzdialeného) úložiska dát"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "SSL certifikát bol odmietnutý kvôli pripojeniu"
 
-#: src/Widgets/TaskListGrid.vala:119
-msgid "Edit Name and Appearance"
-msgstr "Upraviť názov a vzhľad"
-
-#: src/Widgets/TaskListGrid.vala:131
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
 msgid "No Tasks"
 msgstr "Žiadne úlohy"
 
-#: src/Widgets/TaskListGrid.vala:156
-msgid "Adding task failed"
-msgstr "Pridanie úlohy sa nepodarilo"
-
-#: src/Widgets/TaskListGrid.vala:246
-msgid "Renaming task list failed"
-msgstr "Premenovanie zoznamu úloh sa nepodarilo"
-
-#: src/Widgets/TaskListGrid.vala:402
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
 msgid "Completing task failed"
 msgstr "Dokončenie úlohy sa nepodarilo"
 
-#: src/Widgets/TaskListGrid.vala:403 src/Widgets/TaskListGrid.vala:425
-#: src/Widgets/TaskListGrid.vala:447
+#: src/Widgets/ScheduledTaskListGrid.vala:175
+#: src/Widgets/ScheduledTaskListGrid.vala:197
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
+#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Register úloh môže byť nedostupný alebo sa naň nedajú písať údaje."
 
-#: src/Widgets/TaskListGrid.vala:424
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
 msgid "Updating task failed"
 msgstr "Aktualizovanie úlohy sa nepodarilo"
 
-#: src/Widgets/TaskListGrid.vala:446
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
 msgid "Removing task failed"
 msgstr "Odstránenie úlohy sa nepodarilo"
+
+#: src/Widgets/TaskListGrid.vala:67
+msgid "Edit Name and Appearance"
+msgstr "Upraviť názov a vzhľad"
+
+#: src/Widgets/TaskListGrid.vala:98
+msgid "Adding task failed"
+msgstr "Pridanie úlohy sa nepodarilo"
+
+#: src/Widgets/TaskListGrid.vala:186
+msgid "Renaming task list failed"
+msgstr "Premenovanie zoznamu úloh sa nepodarilo"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
