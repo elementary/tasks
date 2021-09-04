@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:49+0000\n"
-"PO-Revision-Date: 2021-08-16 07:29+0000\n"
+"PO-Revision-Date: 2021-09-04 11:58+0000\n"
 "Last-Translator: DartDeaDia <dartdeadia@protonmail.com>\n"
-"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,11 +48,11 @@ msgstr "Новый список"
 #: src/MainWindow.vala:321
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "Удалить «%s»?"
 
 #: src/MainWindow.vala:322
 msgid "The list and all its tasks will be permanently deleted."
-msgstr ""
+msgstr "Список и все задания в нём будут удалены навсегда."
 
 #: src/MainWindow.vala:329
 msgid "Delete List"
@@ -107,10 +107,8 @@ msgid "Show Completed"
 msgstr "Показать выполненные"
 
 #: src/Widgets/ListSettingsPopover.vala:119
-#, fuzzy
-#| msgid "Delete List"
 msgid "Delete List…"
-msgstr "Удалить список"
+msgstr "Удалить список…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
