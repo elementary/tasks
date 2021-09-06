@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 06:57+0000\n"
+"POT-Creation-Date: 2021-09-02 07:49+0000\n"
 "PO-Revision-Date: 2021-07-21 12:24+0000\n"
 "Last-Translator: Ciarán Ainsworth <ciaranainsworth@outlook.com>\n"
 "Language-Team: English (United Kingdom) <https://l10n.elementary.io/projects/"
@@ -19,49 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
-msgid "Scheduled"
-msgstr "Scheduled"
-
-#: src/Widgets/ListView.vala:119
-msgid "Edit Name and Appearance"
-msgstr "Edit Name and Appearance"
-
-#: src/Widgets/ListView.vala:131
-msgid "No Tasks"
-msgstr "No Tasks"
-
-#: src/Widgets/ListView.vala:154
-msgid "Adding task failed"
-msgstr "Adding task failed"
-
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:273 src/MainWindow.vala:328
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr "The task list registry may be unavailable or unable to be written to."
-
-#: src/Widgets/ListView.vala:222
-msgid "Renaming task list failed"
-msgstr "Renaming task list failed"
-
-#: src/Widgets/ListView.vala:354
-msgid "Completing task failed"
-msgstr "Completing task failed"
-
-#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
-#: src/Widgets/ListView.vala:399
-msgid "The task registry may be unavailable or unable to be written to."
-msgstr "The task registry may be unavailable or unable to be written to."
-
-#: src/Widgets/ListView.vala:376
-msgid "Updating task failed"
-msgstr "Updating task failed"
-
-#: src/Widgets/ListView.vala:398
-msgid "Removing task failed"
-msgstr "Removing task failed"
-
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:45
 msgid "Tasks"
 msgstr "Tasks"
 
@@ -73,15 +31,33 @@ msgstr "Online Accounts Settings…"
 msgid "Add Task List…"
 msgstr ""
 
-#: src/MainWindow.vala:272
+#: src/MainWindow.vala:271
 msgid "Creating a new task list failed"
 msgstr "Creating a new task list failed"
 
-#: src/MainWindow.vala:278
+#: src/MainWindow.vala:272 src/MainWindow.vala:342
+#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr "The task list registry may be unavailable or unable to be written to."
+
+#: src/MainWindow.vala:277
 msgid "New list"
 msgstr "New list"
 
-#: src/MainWindow.vala:327
+#: src/MainWindow.vala:321
+#, c-format
+msgid "Delete “%s”?"
+msgstr ""
+
+#: src/MainWindow.vala:322
+msgid "The list and all its tasks will be permanently deleted."
+msgstr ""
+
+#: src/MainWindow.vala:329
+msgid "Delete List"
+msgstr "Delete List"
+
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "Deleting the task list failed"
 
@@ -97,7 +73,7 @@ msgstr "Yesterday"
 msgid "Tomorrow"
 msgstr "Tomorrow"
 
-#: src/Widgets/EditableLabel.vala:73
+#: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
 msgstr "Edit…"
 
@@ -129,17 +105,23 @@ msgstr "John Smith OR Example St."
 msgid "Show Completed"
 msgstr "Show Completed"
 
-#: src/Widgets/ListSettingsPopover.vala:120
-msgid "Delete List"
+#: src/Widgets/ListSettingsPopover.vala:119
+#, fuzzy
+#| msgid "Delete List"
+msgid "Delete List…"
 msgstr "Delete List"
 
-#: src/Widgets/ListSettingsPopover.vala:269
+#: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
 msgstr "Could not change the task list colour"
 
-#: src/Widgets/ListSettingsPopover.vala:270
+#: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
 msgstr "The task list registry may be unavailable or write-protected."
+
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
+msgid "Scheduled"
+msgstr "Scheduled"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -156,6 +138,41 @@ msgstr "Currently disconnected from the (possibly remote) data store"
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "SSL certificate trust was rejected for the connection"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
+msgid "No Tasks"
+msgstr "No Tasks"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
+msgid "Completing task failed"
+msgstr "Completing task failed"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:175
+#: src/Widgets/ScheduledTaskListGrid.vala:197
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
+#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr "The task registry may be unavailable or unable to be written to."
+
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
+msgid "Updating task failed"
+msgstr "Updating task failed"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
+msgid "Removing task failed"
+msgstr "Removing task failed"
+
+#: src/Widgets/TaskListGrid.vala:67
+msgid "Edit Name and Appearance"
+msgstr "Edit Name and Appearance"
+
+#: src/Widgets/TaskListGrid.vala:98
+msgid "Adding task failed"
+msgstr "Adding task failed"
+
+#: src/Widgets/TaskListGrid.vala:186
+msgid "Renaming task list failed"
+msgstr "Renaming task list failed"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
@@ -178,19 +195,19 @@ msgstr "Arriving: %s"
 msgid "Leaving: %s"
 msgstr "Leaving: %s"
 
-#: src/Widgets/TaskRow.vala:238
+#: src/Widgets/TaskRow.vala:239
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Save Changes"
 msgstr "Save Changes"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Add Task"
 msgstr "Add Task"
 
-#: src/Widgets/TaskRow.vala:293
+#: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
 msgstr "Delete Task"
 

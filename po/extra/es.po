@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 06:57+0000\n"
-"PO-Revision-Date: 2021-07-28 17:49+0000\n"
-"Last-Translator: Alvaro <alvaroaraoz_92@hotmail.com>\n"
+"POT-Creation-Date: 2021-09-02 07:49+0000\n"
+"PO-Revision-Date: 2021-08-27 12:54+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/extra/es/"
 ">\n"
 "Language: es\n"
@@ -33,47 +33,49 @@ msgid ""
 "and complete tasks, manage lists and sync them across your machines using "
 "CalDAV."
 msgstr ""
-"Diseñado y construido para ayudar a administrar todas sus tareas y "
+"Diseñado y construido para ayudarle a gestionar todas sus tareas y "
 "recordatorios. Cree y complete tareas, administre listas y sincronícelas en "
-"sus máquinas usando CalDAV."
+"sus equipos mediante CalDAV."
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:27
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
+#: data/tasks.appdata.xml.in:35
 msgid "Improvements:"
-msgstr ""
+msgstr "Mejoras:"
 
-#: data/tasks.appdata.xml.in:20
-msgid "Fix crash on start with certain hardware"
-msgstr ""
-
-#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:30
-msgid "Updated translations"
-msgstr ""
-
-#: data/tasks.appdata.xml.in:29
-msgid "Fix the order of the scheduled view"
-msgstr ""
-
-#: data/tasks.appdata.xml.in:36
-msgid "First release!"
-msgstr "¡Primer lanzamiento!"
-
+#: data/tasks.appdata.xml.in:20 data/tasks.appdata.xml.in:29
 #: data/tasks.appdata.xml.in:38
+msgid "Updated translations"
+msgstr "Traducciones actualizadas"
+
+#: data/tasks.appdata.xml.in:28
+msgid "Fix crash on start with certain hardware"
+msgstr "Se corrige un cierre inesperado en determinados PC"
+
+#: data/tasks.appdata.xml.in:37
+msgid "Fix the order of the scheduled view"
+msgstr "Se arregla el orden de la vista de programación"
+
+#: data/tasks.appdata.xml.in:44
+msgid "First release!"
+msgstr "Versión inicial"
+
+#: data/tasks.appdata.xml.in:46
 msgid "Support the dark style"
-msgstr "Modo oscuro soportado"
+msgstr "Se admite el estilo oscuro"
 
-#: data/tasks.appdata.xml.in:39
+#: data/tasks.appdata.xml.in:47
 msgid "Add and remove task lists with custom colors"
-msgstr "Agregar y eliminar listas de tareas con colores personalizados"
+msgstr "Añada y elimine listas de tareas con colores personalizados"
 
-#: data/tasks.appdata.xml.in:40
+#: data/tasks.appdata.xml.in:48
 msgid "See scheduled tasks from all lists at once"
-msgstr "Ver tareas programadas de todas las listas a la vez"
+msgstr "Vea las tareas programadas de todas las listas a la vez"
 
-#: data/tasks.appdata.xml.in:41
+#: data/tasks.appdata.xml.in:49
 msgid "Set due dates"
-msgstr "Establecer fechas de vencimiento"
+msgstr "Establezca fechas de vencimiento"
 
-#: data/tasks.appdata.xml.in:84
+#: data/tasks.appdata.xml.in:92
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 

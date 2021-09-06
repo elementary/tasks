@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 06:57+0000\n"
-"PO-Revision-Date: 2021-08-11 06:28+0000\n"
+"POT-Creation-Date: 2021-09-02 07:49+0000\n"
+"PO-Revision-Date: 2021-09-01 15:59+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/extra/ja/"
 ">\n"
@@ -34,47 +34,49 @@ msgid ""
 "CalDAV."
 msgstr ""
 "タスクとリマインダーを一元に管理できるようデザイン・開発されています。タスク"
-"を作成したり、完了済みとしてマークしたり、一覧を管理したり、CalDAV を使用して"
-"デバイス間で同期したりできます。"
+"を作成したり、完了済みとしてマークしたり、リストを管理したり、CalDAV を使用し"
+"てデバイス間で同期したりできます。"
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:27
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
+#: data/tasks.appdata.xml.in:35
 msgid "Improvements:"
 msgstr "改善点:"
 
-#: data/tasks.appdata.xml.in:20
-msgid "Fix crash on start with certain hardware"
-msgstr "特定のハードウェア上で起動時にクラッシュする不具合を修正"
-
-#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:30
+#: data/tasks.appdata.xml.in:20 data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:38
 msgid "Updated translations"
 msgstr "翻訳の更新"
 
-#: data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:28
+msgid "Fix crash on start with certain hardware"
+msgstr "特定のハードウェア上で起動時にクラッシュする不具合を修正"
+
+#: data/tasks.appdata.xml.in:37
 msgid "Fix the order of the scheduled view"
 msgstr "スケジュールされたタスクの一覧の表示順序を修正"
 
-#: data/tasks.appdata.xml.in:36
+#: data/tasks.appdata.xml.in:44
 msgid "First release!"
 msgstr "最初のリリースです！"
 
-#: data/tasks.appdata.xml.in:38
+#: data/tasks.appdata.xml.in:46
 msgid "Support the dark style"
 msgstr "ダークスタイルへの対応"
 
-#: data/tasks.appdata.xml.in:39
+#: data/tasks.appdata.xml.in:47
 msgid "Add and remove task lists with custom colors"
 msgstr "カスタムカラーを設定したタスクリストの追加と削除に対応"
 
-#: data/tasks.appdata.xml.in:40
+#: data/tasks.appdata.xml.in:48
 msgid "See scheduled tasks from all lists at once"
 msgstr ""
 "すべてのタスクからスケジュールされたタスクを直感的に識別できるように表示"
 
-#: data/tasks.appdata.xml.in:41
+#: data/tasks.appdata.xml.in:49
 msgid "Set due dates"
 msgstr "期日を設定する機能を追加"
 
-#: data/tasks.appdata.xml.in:84
+#: data/tasks.appdata.xml.in:92
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 06:57+0000\n"
-"PO-Revision-Date: 2021-08-11 06:28+0000\n"
+"POT-Creation-Date: 2021-09-02 07:49+0000\n"
+"PO-Revision-Date: 2021-08-28 17:48+0000\n"
 "Last-Translator: carnage-mode <beta-stage@tutanota.com>\n"
 "Language-Team: Amharic <https://l10n.elementary.io/projects/tasks/tasks/am/"
 ">\n"
@@ -19,72 +19,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
-msgid "Scheduled"
-msgstr "ቀጠሮ የተያዘለት"
-
-#: src/Widgets/ListView.vala:119
-msgid "Edit Name and Appearance"
-msgstr ""
-
-#: src/Widgets/ListView.vala:131
-#, fuzzy
-msgid "No Tasks"
-msgstr "ምንም ተግባር የለም"
-
-#: src/Widgets/ListView.vala:154
-msgid "Adding task failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:273 src/MainWindow.vala:328
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
-
-#: src/Widgets/ListView.vala:222
-msgid "Renaming task list failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:354
-msgid "Completing task failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
-#: src/Widgets/ListView.vala:399
-msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
-
-#: src/Widgets/ListView.vala:376
-msgid "Updating task failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:398
-msgid "Removing task failed"
-msgstr ""
-
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:45
 msgid "Tasks"
 msgstr "ተግባራት"
 
 #: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "የኦንላይን አካውንት ሴቲንጎች…"
 
 #: src/MainWindow.vala:123
 msgid "Add Task List…"
-msgstr ""
+msgstr "የተግባር ዝርዝር ይጨምሩ…"
 
-#: src/MainWindow.vala:272
+#: src/MainWindow.vala:271
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "አዲስ የተግባር ዝርዝር መጨመር አልተቻለም"
 
-#: src/MainWindow.vala:278
+#: src/MainWindow.vala:272 src/MainWindow.vala:342
+#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr "ምናልባት የትግባር ዝርዝር መዝገቡን ለጊዜው ማግኘት ወይም መለወጥ አልተቻለም።"
+
+#: src/MainWindow.vala:277
 msgid "New list"
 msgstr "አዲስ ዝርዝር"
 
-#: src/MainWindow.vala:327
-msgid "Deleting the task list failed"
+#: src/MainWindow.vala:321
+#, c-format
+msgid "Delete “%s”?"
 msgstr ""
+
+#: src/MainWindow.vala:322
+msgid "The list and all its tasks will be permanently deleted."
+msgstr ""
+
+#: src/MainWindow.vala:329
+msgid "Delete List"
+msgstr "ዝርዝሩን ያስወግዱ"
+
+#: src/MainWindow.vala:341
+msgid "Deleting the task list failed"
+msgstr "የተግባር ዝርዝሩን ማስወገድ አልተቻለም"
 
 #: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
@@ -98,69 +73,109 @@ msgstr "ትላንት"
 msgid "Tomorrow"
 msgstr "ነገ"
 
-#: src/Widgets/EditableLabel.vala:73
+#: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
-msgstr ""
+msgstr "አርትዕ…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "ቀነ-ገደብ ያዘጋጁ"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "ይወገድ"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "ቦታ ይምረጡ"
 
 #: src/Widgets/EntryPopover/Location.vala:56
-#, fuzzy
 msgid "Arriving"
-msgstr "እየደረሰ ነው"
+msgstr "በመድረስ ላይ"
 
 #: src/Widgets/EntryPopover/Location.vala:57
 msgid "Leaving"
-msgstr ""
+msgstr "በመሄድ ላይ"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "አበበ ከበደ ወይም ምሳሌ ጎዳና"
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
-msgstr ""
+msgstr "የተጠናቀቁ ተግባራትን ይመልከቱ"
 
-#: src/Widgets/ListSettingsPopover.vala:120
-msgid "Delete List"
-msgstr ""
+#: src/Widgets/ListSettingsPopover.vala:119
+#, fuzzy
+#| msgid "Delete List"
+msgid "Delete List…"
+msgstr "ዝርዝሩን ያስወግዱ"
 
-#: src/Widgets/ListSettingsPopover.vala:269
+#: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "የተግባር ዝርዝሩን ቀለም መቀየር አልተቻለም"
 
-#: src/Widgets/ListSettingsPopover.vala:270
+#: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
-msgstr ""
+msgstr "ምናልባት የትግባር ዝርዝር መዝገቡ ለጊዜው ሊገኝ አልተቻለም ወይም ከለውጥ የተጠበቀ ነው።"
+
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
+msgid "Scheduled"
+msgstr "ቀጠሮ የተያዘለት"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
-msgstr ""
+msgstr "በማገናኘት ላይ…"
 
 #: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "የመግቢያ ማረጋገጫ በመጠበቅ ላይ"
 
 #: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "በአሁኑ ሰዓት (ምናልባት የርቀት ከሆነው) የምረጃ ቇት ጋር አልተገናኘም"
 
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "የSSL የእምነት ምስክሩ ለዚህ ግንኙነት ውድቅ ተደርጓል"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
+msgid "No Tasks"
+msgstr "ምንም ተግባር የለም"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
+msgid "Completing task failed"
+msgstr "ተግባሩን መጨረስ አልተቻለም"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:175
+#: src/Widgets/ScheduledTaskListGrid.vala:197
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
+#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr "ምናልባት የትግባር ዝርዝር መዝገቡን ለጊዜው ማግኘት ወይም መለወጥ አልተቻለም።"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
+msgid "Updating task failed"
+msgstr "ተግባሩን ማደስ አልተቻለም"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
+msgid "Removing task failed"
+msgstr "ተግባሩን ማጥፋት አልተቻለም"
+
+#: src/Widgets/TaskListGrid.vala:67
+msgid "Edit Name and Appearance"
+msgstr "ስም እና ገጽታውን ይቀይሩ"
+
+#: src/Widgets/TaskListGrid.vala:98
+msgid "Adding task failed"
+msgstr "ተግባር መጨመር አልተቻለም"
+
+#: src/Widgets/TaskListGrid.vala:186
+msgid "Renaming task list failed"
+msgstr "የተግባር ዝርዝሩን ስም መቀየር አልተቻለም"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
-#, fuzzy, c-format
+#, c-format
 msgid "%s"
 msgstr "%s"
 
@@ -168,30 +183,30 @@ msgstr "%s"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s %s ላይ"
 
 #: src/Widgets/TaskRow.vala:181
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "መድረሻ፡ %s"
 
 #: src/Widgets/TaskRow.vala:184
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "መሄጃ፡ %s"
 
-#: src/Widgets/TaskRow.vala:238
+#: src/Widgets/TaskRow.vala:239
 msgid "Cancel"
-msgstr ""
+msgstr "ይሰርዙ"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Save Changes"
-msgstr ""
+msgstr "ለውጦቹን ሴቭ ያድርጉ"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Add Task"
 msgstr "ተግባር ይጨምሩ"
 
-#: src/Widgets/TaskRow.vala:293
+#: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
-msgstr ""
+msgstr "ተግባሩን ያስወግዱ"

@@ -23,7 +23,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     public signal void task_completed (ECal.Component task);
     public signal void task_changed (ECal.Component task);
     public signal void task_removed (ECal.Component task);
-    public signal void unselect ();
+    public signal void unselect (Gtk.ListBoxRow row);
 
     public bool completed { get; private set; }
     public E.Source source { get; construct; }
@@ -204,8 +204,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         };
         description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
 
+        // Should not use a transition that varies the width else label aligning and ellipsizing is incorrect.
         description_label_revealer = new Gtk.Revealer () {
-            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
+            transition_type = Gtk.RevealerTransitionType.CROSSFADE,
             reveal_child = false
         };
         description_label_revealer.add (description_label);
@@ -318,7 +319,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         });
 
         summary_entry.grab_focus.connect (() => {
-            reveal_child_request (true);
+            activate ();
         });
 
         description_textview.button_press_event.connect ((sender, event) => {
@@ -357,10 +358,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     }
 
     private void cancel_edit () {
-        if (created) {
-            unselect ();
-        } else {
-            unselect ();
+        unselect (this);
+        if (!created) {
             reset_create ();
         }
         var icalcomponent = task.get_icalcomponent ();

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 06:57+0000\n"
-"PO-Revision-Date: 2021-08-25 07:12+0000\n"
+"POT-Creation-Date: 2021-09-02 07:49+0000\n"
+"PO-Revision-Date: 2021-09-03 03:07+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/tasks/tasks/hu/"
 ">\n"
@@ -19,177 +19,192 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
-msgid "Scheduled"
-msgstr "Ütemezett"
-
-#: src/Widgets/ListView.vala:119
-msgid "Edit Name and Appearance"
-msgstr ""
-
-#: src/Widgets/ListView.vala:131
-msgid "No Tasks"
-msgstr ""
-
-#: src/Widgets/ListView.vala:154
-msgid "Adding task failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:273 src/MainWindow.vala:328
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
-
-#: src/Widgets/ListView.vala:222
-msgid "Renaming task list failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:354
-msgid "Completing task failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
-#: src/Widgets/ListView.vala:399
-msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
-
-#: src/Widgets/ListView.vala:376
-msgid "Updating task failed"
-msgstr ""
-
-#: src/Widgets/ListView.vala:398
-msgid "Removing task failed"
-msgstr ""
-
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:45
 msgid "Tasks"
-msgstr ""
+msgstr "Feladatok"
 
 #: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "Online fiókok beállításai…"
 
 #: src/MainWindow.vala:123
 msgid "Add Task List…"
-msgstr ""
+msgstr "Feladatlista hozzáadása…"
 
-#: src/MainWindow.vala:272
+#: src/MainWindow.vala:271
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Új feladatlista létrehozása sikertelen"
 
-#: src/MainWindow.vala:278
+#: src/MainWindow.vala:272 src/MainWindow.vala:342
+#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr "A feladatok listája elérhetetlen vagy nem írható."
+
+#: src/MainWindow.vala:277
 msgid "New list"
-msgstr ""
+msgstr "Új lista"
 
-#: src/MainWindow.vala:327
+#: src/MainWindow.vala:321
+#, c-format
+msgid "Delete “%s”?"
+msgstr "\"%s\" törlése?"
+
+#: src/MainWindow.vala:322
+msgid "The list and all its tasks will be permanently deleted."
+msgstr "A lista és a rajta lévő feladatok véglegesen törölve lesznek."
+
+#: src/MainWindow.vala:329
+msgid "Delete List"
+msgstr "Lista törlése"
+
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
-msgstr ""
+msgstr "A feladatlista törlése sikertelen"
 
 #: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
-msgstr ""
+msgstr "Ma"
 
 #: src/Util.vala:153
 msgid "Yesterday"
-msgstr ""
+msgstr "Tegnap"
 
 #: src/Util.vala:155
 msgid "Tomorrow"
-msgstr ""
+msgstr "Holnap"
 
-#: src/Widgets/EditableLabel.vala:73
+#: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
-msgstr ""
+msgstr "Szerkesztés…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "Határidő beállítása"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "Eltávolítás"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "Hely beállítása"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
-msgstr ""
+msgstr "Érkezés"
 
 #: src/Widgets/EntryPopover/Location.vala:57
 msgid "Leaving"
-msgstr ""
+msgstr "Indulás"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "Kovács Jónás VAGY Példa utca"
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
-msgstr ""
+msgstr "Befejezettek mutatása"
 
-#: src/Widgets/ListSettingsPopover.vala:120
-msgid "Delete List"
-msgstr ""
+#: src/Widgets/ListSettingsPopover.vala:119
+msgid "Delete List…"
+msgstr "Lista törlése…"
 
-#: src/Widgets/ListSettingsPopover.vala:269
+#: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "A feladatlista színének megváltoztatása sikertelen"
 
-#: src/Widgets/ListSettingsPopover.vala:270
+#: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
-msgstr ""
+msgstr "A feladatlista elérhetetlen vagy írásvédett lehet."
+
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
+msgid "Scheduled"
+msgstr "Ütemezett"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
-msgstr ""
+msgstr "Kapcsolódás…"
 
 #: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "Várakozás a bejelentkezési adatokra"
 
 #: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "Jelenleg szétkapcsolva az (esetleg távoli) adattárolótól"
 
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "A kapcsolat megbízható SSL tanúsítványa vissza lett utasítva"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
+msgid "No Tasks"
+msgstr "Nincsenek feladatok"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
+msgid "Completing task failed"
+msgstr "Feladat befejezése sikertelen"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:175
+#: src/Widgets/ScheduledTaskListGrid.vala:197
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
+#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr "A feladatlista elérhetetlen vagy nem írható."
+
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
+msgid "Updating task failed"
+msgstr "Feladat frissítése sikertelen"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
+msgid "Removing task failed"
+msgstr "Feladat eltávolítása sikertelen"
+
+#: src/Widgets/TaskListGrid.vala:67
+msgid "Edit Name and Appearance"
+msgstr "Név és megjelenés módosítása"
+
+#: src/Widgets/TaskListGrid.vala:98
+msgid "Adding task failed"
+msgstr "Feladat hozzáadása meghiúsult"
+
+#: src/Widgets/TaskListGrid.vala:186
+msgid "Renaming task list failed"
+msgstr "A feladatlista átnevezése meghiúsult"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s %s-kor"
 
 #: src/Widgets/TaskRow.vala:181
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "Érkezés: %s"
 
 #: src/Widgets/TaskRow.vala:184
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "Indulás: %s"
 
-#: src/Widgets/TaskRow.vala:238
+#: src/Widgets/TaskRow.vala:239
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Save Changes"
-msgstr ""
+msgstr "Változtatások mentése"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Add Task"
-msgstr ""
+msgstr "Feladat hozzáadása"
 
-#: src/Widgets/TaskRow.vala:293
+#: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
-msgstr ""
+msgstr "Feladat törlése"

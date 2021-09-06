@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 06:57+0000\n"
+"POT-Creation-Date: 2021-09-02 07:49+0000\n"
 "PO-Revision-Date: 2021-08-20 18:58+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://l10n.elementary.io/projects/tasks/tasks/fi/"
@@ -19,51 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
-msgid "Scheduled"
-msgstr "Aikataulutettu"
-
-#: src/Widgets/ListView.vala:119
-msgid "Edit Name and Appearance"
-msgstr "Muokkaa nimeä ja ulkoasua"
-
-#: src/Widgets/ListView.vala:131
-msgid "No Tasks"
-msgstr "Ei tehtäviä"
-
-#: src/Widgets/ListView.vala:154
-msgid "Adding task failed"
-msgstr "Tehtävän lisääminen epäonnistui"
-
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:273 src/MainWindow.vala:328
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
-
-#: src/Widgets/ListView.vala:222
-msgid "Renaming task list failed"
-msgstr "Tehtäväluettelon nimeäminen uudelleen epäonnistui"
-
-#: src/Widgets/ListView.vala:354
-#, fuzzy
-#| msgid "Renaming task list failed"
-msgid "Completing task failed"
-msgstr "Tehtäväluettelon nimeäminen uudelleen epäonnistui"
-
-#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
-#: src/Widgets/ListView.vala:399
-msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
-
-#: src/Widgets/ListView.vala:376
-msgid "Updating task failed"
-msgstr "Tehtävän päivittäminen epäonnistui"
-
-#: src/Widgets/ListView.vala:398
-msgid "Removing task failed"
-msgstr "Tehtävän poistaminen epäonnistui"
-
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:45
 msgid "Tasks"
 msgstr "Tehtävät"
 
@@ -75,15 +31,33 @@ msgstr "Verkkotilien asetukset…"
 msgid "Add Task List…"
 msgstr "Lisää tehtäväluettelo…"
 
-#: src/MainWindow.vala:272
+#: src/MainWindow.vala:271
 msgid "Creating a new task list failed"
 msgstr "Uuden tehtäväluettelon luominen epäonnistui"
 
-#: src/MainWindow.vala:278
+#: src/MainWindow.vala:272 src/MainWindow.vala:342
+#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr ""
+
+#: src/MainWindow.vala:277
 msgid "New list"
 msgstr "Uusi luettelo"
 
-#: src/MainWindow.vala:327
+#: src/MainWindow.vala:321
+#, c-format
+msgid "Delete “%s”?"
+msgstr ""
+
+#: src/MainWindow.vala:322
+msgid "The list and all its tasks will be permanently deleted."
+msgstr ""
+
+#: src/MainWindow.vala:329
+msgid "Delete List"
+msgstr "Poista luettelo"
+
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "Tehtäväluettelon poistaminen epäonnistui"
 
@@ -99,7 +73,7 @@ msgstr "Eilen"
 msgid "Tomorrow"
 msgstr "Huomenna"
 
-#: src/Widgets/EditableLabel.vala:73
+#: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
 msgstr "Muokkaa…"
 
@@ -131,17 +105,23 @@ msgstr ""
 msgid "Show Completed"
 msgstr "Näytä valmistuneet"
 
-#: src/Widgets/ListSettingsPopover.vala:120
-msgid "Delete List"
+#: src/Widgets/ListSettingsPopover.vala:119
+#, fuzzy
+#| msgid "Delete List"
+msgid "Delete List…"
 msgstr "Poista luettelo"
 
-#: src/Widgets/ListSettingsPopover.vala:269
+#: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
 msgstr "Tehtäväluettelon värin muuttaminen epäonnistui"
 
-#: src/Widgets/ListSettingsPopover.vala:270
+#: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
+
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
+msgid "Scheduled"
+msgstr "Aikataulutettu"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -158,6 +138,43 @@ msgstr ""
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "SSL-varmenteen luottamus hylättiin yhteyden osalta"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
+msgid "No Tasks"
+msgstr "Ei tehtäviä"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
+#, fuzzy
+#| msgid "Renaming task list failed"
+msgid "Completing task failed"
+msgstr "Tehtäväluettelon nimeäminen uudelleen epäonnistui"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:175
+#: src/Widgets/ScheduledTaskListGrid.vala:197
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
+#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr ""
+
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
+msgid "Updating task failed"
+msgstr "Tehtävän päivittäminen epäonnistui"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
+msgid "Removing task failed"
+msgstr "Tehtävän poistaminen epäonnistui"
+
+#: src/Widgets/TaskListGrid.vala:67
+msgid "Edit Name and Appearance"
+msgstr "Muokkaa nimeä ja ulkoasua"
+
+#: src/Widgets/TaskListGrid.vala:98
+msgid "Adding task failed"
+msgstr "Tehtävän lisääminen epäonnistui"
+
+#: src/Widgets/TaskListGrid.vala:186
+msgid "Renaming task list failed"
+msgstr "Tehtäväluettelon nimeäminen uudelleen epäonnistui"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
@@ -180,18 +197,18 @@ msgstr "Saapuu: %s"
 msgid "Leaving: %s"
 msgstr "Lähtee: %s"
 
-#: src/Widgets/TaskRow.vala:238
+#: src/Widgets/TaskRow.vala:239
 msgid "Cancel"
 msgstr "Peru"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Save Changes"
 msgstr "Tallenna muutokset"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Add Task"
 msgstr "Lisää tehtävä"
 
-#: src/Widgets/TaskRow.vala:293
+#: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
 msgstr "Poista tehtävä"

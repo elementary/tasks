@@ -1,7 +1,7 @@
 project(
     'io.elementary.tasks', 'vala', 'c',
     meson_version: '>= 0.49',
-    version: '6.0.2'
+    version: '6.0.3'
 )
 
 gnome = import('gnome')
@@ -64,9 +64,10 @@ executable(
     'src/Widgets/EntryPopover/Generic.vala',
     'src/Widgets/EntryPopover/Location.vala',
     'src/Widgets/HyperTextView.vala',
-    'src/Widgets/ListView.vala',
     'src/Widgets/ScheduledRow.vala',
     'src/Widgets/SourceRow.vala',
+    'src/Widgets/ScheduledTaskListGrid.vala',
+    'src/Widgets/TaskListGrid.vala',
     'src/Widgets/TaskRow.vala',
     'src/Widgets/ListSettingsPopover.vala',
     'src/TaskModel.vala',

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 06:57+0000\n"
-"PO-Revision-Date: 2021-07-26 01:08+0000\n"
+"POT-Creation-Date: 2021-09-02 07:49+0000\n"
+"PO-Revision-Date: 2021-09-01 15:59+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
 ">\n"
@@ -19,49 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Widgets/ListView.vala:90 src/Widgets/ScheduledRow.vala:26
-msgid "Scheduled"
-msgstr "繰り返し設定のあるタスク"
-
-#: src/Widgets/ListView.vala:119
-msgid "Edit Name and Appearance"
-msgstr "名前や外観を変更します"
-
-#: src/Widgets/ListView.vala:131
-msgid "No Tasks"
-msgstr "タスクがありません"
-
-#: src/Widgets/ListView.vala:154
-msgid "Adding task failed"
-msgstr "タスクを追加できませんでした"
-
-#: src/Widgets/ListView.vala:155 src/Widgets/ListView.vala:223
-#: src/MainWindow.vala:273 src/MainWindow.vala:328
-msgid "The task list registry may be unavailable or unable to be written to."
-msgstr "タスクリストの登録ができないか、書き込みできない可能性があります。"
-
-#: src/Widgets/ListView.vala:222
-msgid "Renaming task list failed"
-msgstr "タスクリストの名前を変更できませんでした"
-
-#: src/Widgets/ListView.vala:354
-msgid "Completing task failed"
-msgstr "タスクを完了済みとしてマークできませんでした"
-
-#: src/Widgets/ListView.vala:355 src/Widgets/ListView.vala:377
-#: src/Widgets/ListView.vala:399
-msgid "The task registry may be unavailable or unable to be written to."
-msgstr "タスクを登録できないか、書き込みできない可能性があります。"
-
-#: src/Widgets/ListView.vala:376
-msgid "Updating task failed"
-msgstr "タスクを更新できませんでした"
-
-#: src/Widgets/ListView.vala:398
-msgid "Removing task failed"
-msgstr "タスクを削除できませんでした"
-
-#: src/MainWindow.vala:44
+#: src/MainWindow.vala:45
 msgid "Tasks"
 msgstr "タスク"
 
@@ -71,17 +29,35 @@ msgstr "オンラインアカウントの設定…"
 
 #: src/MainWindow.vala:123
 msgid "Add Task List…"
-msgstr "タスク一覧を追加…"
+msgstr "タスクリストを追加…"
 
-#: src/MainWindow.vala:272
+#: src/MainWindow.vala:271
 msgid "Creating a new task list failed"
 msgstr "新しいタスクリストを作成できませんでした"
 
-#: src/MainWindow.vala:278
+#: src/MainWindow.vala:272 src/MainWindow.vala:342
+#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
+msgid "The task list registry may be unavailable or unable to be written to."
+msgstr "タスクリストの登録ができないか、書き込みできない可能性があります。"
+
+#: src/MainWindow.vala:277
 msgid "New list"
 msgstr "新しいリスト"
 
-#: src/MainWindow.vala:327
+#: src/MainWindow.vala:321
+#, c-format
+msgid "Delete “%s”?"
+msgstr "“%s”を削除しますか？"
+
+#: src/MainWindow.vala:322
+msgid "The list and all its tasks will be permanently deleted."
+msgstr "リストとそこに含まれるタスクは、完全に削除されます。"
+
+#: src/MainWindow.vala:329
+msgid "Delete List"
+msgstr "リストを削除"
+
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "タスクリストを削除できませんでした"
 
@@ -97,7 +73,7 @@ msgstr "昨日"
 msgid "Tomorrow"
 msgstr "明日"
 
-#: src/Widgets/EditableLabel.vala:73
+#: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
 msgstr "編集…"
 
@@ -129,19 +105,23 @@ msgstr "場所を入力"
 msgid "Show Completed"
 msgstr "完了したタスクを表示"
 
-#: src/Widgets/ListSettingsPopover.vala:120
-msgid "Delete List"
-msgstr "リストを削除"
+#: src/Widgets/ListSettingsPopover.vala:119
+msgid "Delete List…"
+msgstr "リストを削除…"
 
-#: src/Widgets/ListSettingsPopover.vala:269
+#: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
 msgstr "タスクリストの色を変更できませんでした"
 
-#: src/Widgets/ListSettingsPopover.vala:270
+#: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 "タスクリストの登録が無効であるか、書き込み禁止に設定されている可能性がありま"
 "す。"
+
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
+msgid "Scheduled"
+msgstr "繰り返し設定のあるタスク"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
@@ -158,6 +138,41 @@ msgstr "(リモートの) データストアから切断されています"
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "SSL 証明書が拒否されました"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
+msgid "No Tasks"
+msgstr "タスクがありません"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
+msgid "Completing task failed"
+msgstr "タスクを完了済みとしてマークできませんでした"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:175
+#: src/Widgets/ScheduledTaskListGrid.vala:197
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
+#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr "タスクを登録できないか、書き込みできない可能性があります。"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
+msgid "Updating task failed"
+msgstr "タスクを更新できませんでした"
+
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
+msgid "Removing task failed"
+msgstr "タスクを削除できませんでした"
+
+#: src/Widgets/TaskListGrid.vala:67
+msgid "Edit Name and Appearance"
+msgstr "名前や外観を変更します"
+
+#: src/Widgets/TaskListGrid.vala:98
+msgid "Adding task failed"
+msgstr "タスクを追加できませんでした"
+
+#: src/Widgets/TaskListGrid.vala:186
+msgid "Renaming task list failed"
+msgstr "タスクリストの名前を変更できませんでした"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
@@ -180,19 +195,19 @@ msgstr "目的地: %s"
 msgid "Leaving: %s"
 msgstr "出発地: %s"
 
-#: src/Widgets/TaskRow.vala:238
+#: src/Widgets/TaskRow.vala:239
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Save Changes"
 msgstr "変更を保存"
 
-#: src/Widgets/TaskRow.vala:240
+#: src/Widgets/TaskRow.vala:241
 msgid "Add Task"
 msgstr "タスクを追加"
 
-#: src/Widgets/TaskRow.vala:293
+#: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
 msgstr "タスクを削除"
 

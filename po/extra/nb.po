@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 06:57+0000\n"
+"POT-Creation-Date: 2021-09-02 07:49+0000\n"
 "PO-Revision-Date: 2021-07-01 16:20+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
@@ -38,43 +38,45 @@ msgstr ""
 "og fullfør gjøremål, håndter lister og synkroniser dem mellom maskinene dine "
 "med CalDAV."
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:27
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
+#: data/tasks.appdata.xml.in:35
 msgid "Improvements:"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:20
-msgid "Fix crash on start with certain hardware"
-msgstr ""
-
-#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:30
+#: data/tasks.appdata.xml.in:20 data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:38
 msgid "Updated translations"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:28
+msgid "Fix crash on start with certain hardware"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:37
 msgid "Fix the order of the scheduled view"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:36
+#: data/tasks.appdata.xml.in:44
 msgid "First release!"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:38
+#: data/tasks.appdata.xml.in:46
 msgid "Support the dark style"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:39
+#: data/tasks.appdata.xml.in:47
 msgid "Add and remove task lists with custom colors"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:40
+#: data/tasks.appdata.xml.in:48
 msgid "See scheduled tasks from all lists at once"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:41
+#: data/tasks.appdata.xml.in:49
 msgid "Set due dates"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:84
+#: data/tasks.appdata.xml.in:92
 #, fuzzy
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
