@@ -28,6 +28,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     public bool completed { get; private set; }
     public E.Source source { get; construct; }
     public ECal.Component task { get; construct set; }
+    public string h24_clock_format { get; construct; }
     public bool is_scheduled_view { get; construct; }
 
     private bool created;
@@ -52,19 +53,19 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
     private static Gtk.CssProvider taskrow_provider;
 
-    private TaskRow (ECal.Component task, E.Source source) {
-        Object (task: task, source: source);
+    private TaskRow (ECal.Component task, E.Source source, string h24_clock_format) {
+        Object (task: task, source: source, h24_clock_format: h24_clock_format);
     }
 
-    public TaskRow.for_source (E.Source source) {
+    public TaskRow.for_source (E.Source source, string h24_clock_format) {
         var task = new ECal.Component ();
         task.set_new_vtype (ECal.ComponentVType.TODO);
 
         Object (task: task, source: source);
     }
 
-    public TaskRow.for_component (ECal.Component task, E.Source source, bool is_scheduled_view = false) {
-        Object (source: source, task: task, is_scheduled_view: is_scheduled_view);
+    public TaskRow.for_component (ECal.Component task, E.Source source, string h24_clock_format, bool is_scheduled_view = false) {
+        Object (source: source, task: task, h24_clock_format: h24_clock_format, is_scheduled_view: is_scheduled_view);
     }
 
     static construct {
@@ -135,18 +136,15 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
                     return _("%s").printf (Tasks.Util.get_relative_date (value));
                 }
             } else {
-                var h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
-                var format = h24_settings.get_string ("clock-format");
-
                 if (is_scheduled_view) {
                     return _("%s").printf (
-                        value.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                        value.format (Granite.DateTime.get_default_time_format (h24_clock_format.contains ("12h")))
                     );
                 } else {
                     ///TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
                     return _("%s at %s").printf (
                         Tasks.Util.get_relative_date (value),
-                        value.format (Granite.DateTime.get_default_time_format (format.contains ("12h")))
+                        value.format (Granite.DateTime.get_default_time_format (h24_clock_format.contains ("12h")))
                     );
                 }
             }

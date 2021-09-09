@@ -20,6 +20,7 @@
 
 public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
     private Gee.Collection<ECal.ClientView> views;
+    private string h24_clock_format;
 
     /*
      * We need to pass a valid S-expression as query to guarantee the callback events are fired.
@@ -64,6 +65,8 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
 
     construct {
         views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
+
+        h24_clock_format = Application.h24_settings.get_string ("clock-format");
 
         scheduled_title = new Gtk.Label (_("Scheduled")) {
             ellipsize = Pango.EllipsizeMode.END,
@@ -161,7 +164,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
 
     private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
-            var task_row = new Tasks.Widgets.TaskRow.for_component (task, source, true);
+            var task_row = new Tasks.Widgets.TaskRow.for_component (task, source, h24_clock_format, true);
             task_row.unselect.connect (on_row_unselect);
 
             task_row.task_completed.connect ((task) => {

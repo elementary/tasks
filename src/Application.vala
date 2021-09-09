@@ -20,6 +20,7 @@
 
 public class Tasks.Application : Gtk.Application {
     public static GLib.Settings settings;
+    public static GLib.Settings h24_settings;
     public static Tasks.TaskModel model;
 
     public Application () {
@@ -31,6 +32,7 @@ public class Tasks.Application : Gtk.Application {
 
     static construct {
         settings = new Settings ("io.elementary.tasks");
+        h24_settings = new GLib.Settings ("org.gnome.desktop.interface");
         model = new Tasks.TaskModel ();
     }
 

@@ -26,12 +26,15 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     private Gtk.ListBox add_task_list;
     private Gtk.ListBox task_list;
     private bool is_gtasks;
+    private string h24_clock_format;
 
     public TaskListGrid (E.Source source) {
         Object (source: source);
     }
 
     construct {
+        h24_clock_format = Application.h24_settings.get_string ("clock-format");
+
         try {
             view = Tasks.Application.model.create_task_list_view (
                 source,
@@ -85,7 +88,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         };
         add_task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
-        var add_task_row = new Tasks.Widgets.TaskRow.for_source (source);
+        var add_task_row = new Tasks.Widgets.TaskRow.for_source (source, h24_clock_format);
         add_task_row.unselect.connect (on_row_unselect);
 
         add_task_row.task_changed.connect ((task) => {
@@ -289,7 +292,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
     private void on_tasks_added (Gee.Collection<ECal.Component> tasks, E.Source source) {
         tasks.foreach ((task) => {
-            var task_row = new Tasks.Widgets.TaskRow.for_component (task, source, false);
+            var task_row = new Tasks.Widgets.TaskRow.for_component (task, source, h24_clock_format, false);
             task_row.unselect.connect (on_row_unselect);
 
             task_row.task_completed.connect ((task) => {
