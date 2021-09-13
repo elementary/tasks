@@ -198,6 +198,58 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             });
         });
 
+        /*for (var k = 0; k < 2500; k++) {
+            var task = new ECal.Component ();
+            task.set_new_vtype (ECal.ComponentVType.TODO);
+
+            unowned ICal.Component ical_task = task.get_icalcomponent ();
+
+            var null_icaltime = new ICal.Time.null_time ();
+            ical_task.set_due (null_icaltime);
+            ical_task.set_dtstart (null_icaltime);
+
+            Util.set_ecalcomponent_location (task, null);
+
+            // Clear the old description
+            int count = ical_task.count_properties (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+            for (int i = 0; i < count; i++) {
+                ICal.Property remove_prop;
+                remove_prop = ical_task.get_first_property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+                ical_task.remove_property (remove_prop);
+            }
+
+            // Add the new description - if we have any
+            var description = GLib.Uuid.string_random ().up ();
+            if (description != null && description.strip ().length > 0) {
+                var property = new ICal.Property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
+                property.set_description (description.strip ());
+                ical_task.add_property (property);
+            }
+            task.get_icalcomponent ().set_summary (GLib.Uuid.string_random ().up ());
+
+            Application.model.add_task.begin (source, task, (obj, res) => {
+                try {
+                    Application.model.add_task.end (res);
+
+                    if (GLib.Random.boolean ()) {
+                        Application.model.complete_task.begin (source, task, (obj, res) => {
+                            try {
+                                Application.model.complete_task.end (res);
+                            } catch (Error e) {
+                                warning ("Error completing task: %s", e.message);
+                            }
+                        });
+                    }
+
+                } catch (Error e) {
+                    warning ("Error creating task: %s", e.message);
+
+                } finally {
+                    debug ("k = %i", k);
+                }
+            });
+        }*/
+
         show_all ();
     }
 
