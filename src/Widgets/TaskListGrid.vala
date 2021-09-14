@@ -199,7 +199,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         if (show_completed) {
             set_view_for_query ("(contains? 'any' '')");
         } else {
-            set_view_for_query ("AND (NOT is-completed?) (contains? 'any' '')");
+            set_view_for_query ("NOT is-completed?");
         }
     }
 
