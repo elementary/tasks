@@ -20,7 +20,7 @@
 
 public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     public E.Source source { get; construct; }
-    private ECal.ClientView view;
+    private ECal.ClientView? view = null;
 
     private EditableLabel editable_title;
     private Gtk.ListBox add_task_list;
@@ -32,16 +32,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     construct {
-        try {
-            view = Tasks.Application.model.create_task_list_view (
-                source,
-                "(contains? 'any' '')",
-                on_tasks_added,
-                on_tasks_modified,
-                on_tasks_removed );
-        } catch (Error e) {
-            critical ("Error creating view for source %s: %s", source.display_name, e.message);
-        }
+        set_view_for_query ("AND (NOT is-completed?) (contains? 'any' '')");
 
         E.SourceRegistry? registry = null;
         try {
@@ -199,6 +190,23 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         });
 
         show_all ();
+    }
+
+    private void set_view_for_query (string query) {
+        if (view != null) {
+            Application.model.destroy_task_list_view (view);
+        }
+
+        try {
+            view = Tasks.Application.model.create_task_list_view (
+                source,
+                query,
+                on_tasks_added,
+                on_tasks_modified,
+                on_tasks_removed );
+        } catch (Error e) {
+            critical ("Error creating view with query for source %s[%s]: %s", source.display_name, query, e.message);
+        }
     }
 
     private void on_row_activated (Gtk.ListBoxRow row) {
