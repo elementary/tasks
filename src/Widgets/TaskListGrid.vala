@@ -191,11 +191,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     private void on_show_completed_changed (bool show_completed) {
-        var children = task_list.get_children ();
-        foreach (unowned var child in children) {
-            task_list.remove (child);
-        }
-
         if (show_completed) {
             set_view_for_query ("(contains? 'any' '')");
         } else {
@@ -204,6 +199,11 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     private void set_view_for_query (string query) {
+        var children = task_list.get_children ();
+        foreach (unowned var child in children) {
+            task_list.remove (child);
+        }
+
         if (view != null) {
             Application.model.destroy_task_list_view (view);
         }
