@@ -32,8 +32,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     construct {
-        set_view_for_query ("AND (NOT is-completed?) (contains? 'any' '')");
-
         E.SourceRegistry? registry = null;
         try {
             registry = Application.model.get_registry_sync ();
@@ -106,7 +104,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             selection_mode = Gtk.SelectionMode.MULTIPLE,
             activate_on_single_click = true
         };
-        task_list.set_filter_func (filter_function);
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
@@ -124,8 +121,9 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         attach (scrolled_window, 0, 2, 2);
 
         Application.settings.changed["show-completed"].connect (() => {
-            task_list.invalidate_filter ();
+            on_show_completed_changed (Application.settings.get_boolean ("show-completed"));
         });
+        on_show_completed_changed (Application.settings.get_boolean ("show-completed"));
 
         settings_button.toggled.connect (() => {
             unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
@@ -192,6 +190,19 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         show_all ();
     }
 
+    private void on_show_completed_changed (bool show_completed) {
+        var children = task_list.get_children ();
+        foreach (unowned var child in children) {
+            task_list.remove (child);
+        }
+
+        if (show_completed) {
+            set_view_for_query ("(contains? 'any' '')");
+        } else {
+            set_view_for_query ("AND (NOT is-completed?) (contains? 'any' '')");
+        }
+    }
+
     private void set_view_for_query (string query) {
         if (view != null) {
             Application.model.destroy_task_list_view (view);
@@ -243,18 +254,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
                 task_row.update_request ();
             }
         });
-    }
-
-    [CCode (instance_pos = -1)]
-    private bool filter_function (Gtk.ListBoxRow row) {
-        if (
-            Application.settings.get_boolean ("show-completed") == false &&
-            ((TaskRow) row).completed
-        ) {
-            return false;
-        }
-
-        return true;
     }
 
     [CCode (instance_pos = -1)]
