@@ -670,13 +670,13 @@ public class Tasks.TaskModel : Object {
                     ical_components.append (ical_component.clone ());
                 }
             }
-            
+
             if (ical_components.length () > 0) {
                 destination_create_success = yield destination_client.create_objects (ical_components, ECal.OperationFlags.NONE, null, null);
             }
 
             if (destination_create_success) {
-                var ecal_component_ids = new SList<ECal.ComponentId>();
+                var ecal_component_ids = new SList<ECal.ComponentId> ();
                 ecal_component_ids.append (new ECal.ComponentId (task_uid, null));
                 source_remove_success = yield source_client.remove_objects (ecal_component_ids, ECal.ObjModType.ALL, ECal.OperationFlags.NONE, null);
             }

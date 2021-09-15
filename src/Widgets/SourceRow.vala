@@ -155,7 +155,7 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
 
         var uri_scheme = "task://";
         var uris = selection_data.get_uris ();
-        
+
         foreach (var uri in uris) {
             string? source_uid = null;
             string? component_uid = null;
@@ -171,7 +171,7 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
 
             if (source_uid == null || component_uid == null) {
                 warning ("Can't handle drop data: Unexpected uri format: %s", uri);
-            
+
             } else if (source_uid == source.uid) {
                 debug ("Dropped task onto the same list, so we have nothing to do.");
 
