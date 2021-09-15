@@ -47,7 +47,3 @@ row entry.flat:focus {
 row:not(.card) entry.add-task {
     border-color: alpha (@text_color, 0.25);
 }
-
-row.during-dnd {
-    background-color: #FF0000;
-}

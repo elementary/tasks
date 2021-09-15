@@ -555,12 +555,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         event_box.drag_data_get.connect (on_drag_data_get);
         event_box.drag_data_delete.connect (on_drag_data_delete);
-        /*Gtk.drag_source_set (event_box, Gdk.ModifierType.BUTTON1_MASK, DRAG_AND_DROP_TARGET_ENTRIES, Gdk.DragAction.MOVE);
-        Gtk.drag_dest_set (this, Gtk.DestDefaults.ALL, DRAG_AND_DROP_TARGET_ENTRIES, Gdk.DragAction.MOVE);
-
-        event_box.drag_data_get.connect (on_drag_data_get);
-
-        drag_begin.connect (on_drag_begin);*/
     }
 
     private void on_drag_data_get (Gtk.Widget widget, Gdk.DragContext context, Gtk.SelectionData selection_data, uint target_type, uint time) {
@@ -569,6 +563,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     }
 
     private void on_drag_data_delete (Gdk.DragContext context) {
-        warning ("TaskRow.on_drag_data_delete!");
+        destroy ();
     }
 }
