@@ -83,7 +83,38 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
 
         add (revealer);
 
+        build_drag_and_drop ();
+
         update_request ();
+    }
+
+    private void build_drag_and_drop () {
+        Gtk.drag_dest_set (this, Gtk.DestDefaults.ALL, Application.DRAG_AND_DROP_TASK_DATA, Gdk.DragAction.MOVE);
+
+        drag_data_received.connect (on_drag_data_received);
+    }
+
+    private void on_drag_data_received (Gdk.DragContext context, int x, int y, Gtk.SelectionData selection_data, uint info, uint time) {
+        var success = false;
+
+        var uris = selection_data.get_uris ();
+        foreach (var uri in uris) {
+            /*string? source_uid = null;
+            string? component_uid = null;
+
+            uri.scanf ("task://%s/%s", ref source_uid, ref component_uid);
+
+            if (source_uid != null && component_uid != null) {
+                warning ("source_uid: %s, component_uid: %s", source_uid, component_uid);
+
+            } else {
+                warning ("Can't handle drop data: Unexpected uri format: ");
+            }*/
+        }
+
+        if (!success) {
+            warning ("how to abort drag...?");
+        }
     }
 
     public void update_request () {
