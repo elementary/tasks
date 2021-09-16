@@ -82,6 +82,7 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         revealer.add (grid);
 
         add (revealer);
+        get_style_context ().add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         build_drag_and_drop ();
 
@@ -91,8 +92,22 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     private void build_drag_and_drop () {
         Gtk.drag_dest_set (this, Gtk.DestDefaults.HIGHLIGHT | Gtk.DestDefaults.MOTION, Application.DRAG_AND_DROP_TASK_DATA, Gdk.DragAction.MOVE);
 
+        drag_motion.connect (on_drag_motion);
         drag_drop.connect (on_drag_drop);
         drag_data_received.connect (on_drag_data_received);
+        drag_leave.connect (on_drag_leave);
+    }
+
+    private bool on_drag_motion (Gdk.DragContext context, int x, int y, uint time) {
+        var style_context = get_style_context ();
+        if (!style_context.has_class ("drop-hover")) {
+            style_context.add_class ("drop-hover");
+        }
+        return true;
+    }
+
+    private void on_drag_leave (Gdk.DragContext context, uint time_) {
+        get_style_context ().remove_class ("drop-hover");
     }
 
     private Gee.HashMultiMap<string, string> received_drag_data;
