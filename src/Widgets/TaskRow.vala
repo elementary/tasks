@@ -553,8 +553,36 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private void build_drag_and_drop () {
         Gtk.drag_source_set (event_box, Gdk.ModifierType.BUTTON1_MASK, Application.DRAG_AND_DROP_TASK_DATA, Gdk.DragAction.MOVE);
 
+        event_box.drag_begin.connect (on_drag_begin);
         event_box.drag_data_get.connect (on_drag_data_get);
         event_box.drag_data_delete.connect (on_drag_data_delete);
+    }
+
+    private void on_drag_begin (Gdk.DragContext context) {
+        Gtk.Allocation alloc;
+        get_allocation (out alloc);
+
+        var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, alloc.width, alloc.height);
+        var cairo_context = new Cairo.Context (surface);
+
+        var style_context = get_style_context ();
+        var had_cards_class = style_context.has_class (Granite.STYLE_CLASS_CARD);
+
+        style_context.add_class ("drag-active");
+        if (had_cards_class) {
+            style_context.remove_class (Granite.STYLE_CLASS_CARD);
+        }
+        draw_to_cairo_context (cairo_context);
+        if (had_cards_class) {
+            style_context.add_class (Granite.STYLE_CLASS_CARD);
+        }
+        style_context.remove_class ("drag-active");
+
+        int drag_icon_x, drag_icon_y;
+        translate_coordinates (this, 0, 0, out drag_icon_x, out drag_icon_y);
+        surface.set_device_offset (-drag_icon_x, -drag_icon_y);
+
+        Gtk.drag_set_icon_surface (context, surface);
     }
 
     private void on_drag_data_get (Gtk.Widget widget, Gdk.DragContext context, Gtk.SelectionData selection_data, uint target_type, uint time) {
