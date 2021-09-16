@@ -551,6 +551,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     }
 
     private void build_drag_and_drop () {
+        if (!created || is_scheduled_view) {
+            return;
+        }
         Gtk.drag_source_set (event_box, Gdk.ModifierType.BUTTON1_MASK, Application.DRAG_AND_DROP_TASK_DATA, Gdk.DragAction.MOVE);
 
         event_box.drag_begin.connect (on_drag_begin);
