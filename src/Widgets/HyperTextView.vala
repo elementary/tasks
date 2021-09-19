@@ -199,6 +199,7 @@ public class Tasks.Widgets.HyperTextView : Gtk.TextView {
             if (!match_text.contains ("://") && match_text.contains ("@") && !match_text.has_prefix ("mailto:")) {
                 match_text = "mailto:" + match_text;
             }
+
             tag.set_data ("uri", match_text);
             buffer.apply_tag (tag, buffer_match_start_iter, buffer_match_end_iter);
 
@@ -229,6 +230,7 @@ public class Tasks.Widgets.HyperTextView : Gtk.TextView {
                     }
                 }
             }
+
             is_control_key_pressed = true;
         }
         return Gdk.EVENT_PROPAGATE;
@@ -240,6 +242,7 @@ public class Tasks.Widgets.HyperTextView : Gtk.TextView {
             if (is_control_key_pressed && window != null) {
                 window.cursor = new Gdk.Cursor.from_name (get_display (), "text");
             }
+
             is_control_key_pressed = false;
         }
         return Gdk.EVENT_PROPAGATE;
@@ -249,6 +252,7 @@ public class Tasks.Widgets.HyperTextView : Gtk.TextView {
         if (!is_control_key_pressed) {
             return Gdk.EVENT_PROPAGATE;
         }
+
         Gtk.TextIter text_iter;
         buffer.get_iter_at_mark (out text_iter, buffer.get_insert ());
 
@@ -271,9 +275,11 @@ public class Tasks.Widgets.HyperTextView : Gtk.TextView {
                     error_dialog.run ();
                     error_dialog.destroy ();
                 }
+
                 break;
             }
         }
+
         return Gdk.EVENT_PROPAGATE;
     }
 
@@ -312,6 +318,7 @@ public class Tasks.Widgets.HyperTextView : Gtk.TextView {
                 }
             }
         }
+
         return uri;
     }
 
