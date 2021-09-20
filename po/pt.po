@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-01 13:54+0000\n"
+"POT-Creation-Date: 2021-09-02 07:49+0000\n"
 "PO-Revision-Date: 2021-07-22 16:19+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -31,35 +31,35 @@ msgstr "Definições de contas oinline…"
 msgid "Add Task List…"
 msgstr "Adicionar lista de tarefas…"
 
-#: src/MainWindow.vala:272
+#: src/MainWindow.vala:271
 msgid "Creating a new task list failed"
 msgstr "Falha ao criar uma nova lista de tarefas"
 
-#: src/MainWindow.vala:273 src/MainWindow.vala:343
-#: src/Widgets/TaskListGrid.vala:157 src/Widgets/TaskListGrid.vala:247
+#: src/MainWindow.vala:272 src/MainWindow.vala:342
+#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "O registo da lista de tarefas pode estar indisponível ou não pode ser "
 "gravado."
 
-#: src/MainWindow.vala:278
+#: src/MainWindow.vala:277
 msgid "New list"
 msgstr "Nova lista"
 
-#: src/MainWindow.vala:322
+#: src/MainWindow.vala:321
 #, c-format
 msgid "Delete “%s”?"
 msgstr ""
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:322
 msgid "The list and all its tasks will be permanently deleted."
 msgstr ""
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:329
 msgid "Delete List"
 msgstr "Eliminar lista"
 
-#: src/MainWindow.vala:342
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "Falha ao eliminar a lista de tarefas"
 
@@ -123,7 +123,7 @@ msgstr ""
 "O registo da lista de tarefas pode estar indisponível ou protegido contra a "
 "gravação."
 
-#: src/Widgets/ScheduledRow.vala:26 src/Widgets/TaskListGrid.vala:90
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
 msgid "Scheduled"
 msgstr "Agendado"
 
@@ -143,38 +143,40 @@ msgstr "Atualmente desligado do armazenamento de dados (possivelmente remoto)"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "A confiança do certificado SSL foi rejeitada para a ligação"
 
-#: src/Widgets/TaskListGrid.vala:119
-msgid "Edit Name and Appearance"
-msgstr "Editar nome e aparência"
-
-#: src/Widgets/TaskListGrid.vala:131
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
 msgid "No Tasks"
 msgstr "Sem tarefas"
 
-#: src/Widgets/TaskListGrid.vala:156
-msgid "Adding task failed"
-msgstr "Falha ao adicionar tarefa"
-
-#: src/Widgets/TaskListGrid.vala:246
-msgid "Renaming task list failed"
-msgstr "Falha ao renomear lista de tarefas"
-
-#: src/Widgets/TaskListGrid.vala:402
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
 msgid "Completing task failed"
 msgstr "Falha ao concluir tarefa"
 
-#: src/Widgets/TaskListGrid.vala:403 src/Widgets/TaskListGrid.vala:425
-#: src/Widgets/TaskListGrid.vala:447
+#: src/Widgets/ScheduledTaskListGrid.vala:175
+#: src/Widgets/ScheduledTaskListGrid.vala:197
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
+#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "O registo de tarefas pode estar indisponível ou não pode ser gravado."
 
-#: src/Widgets/TaskListGrid.vala:424
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
 msgid "Updating task failed"
 msgstr "Falha ao atualizar tarefa"
 
-#: src/Widgets/TaskListGrid.vala:446
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
 msgid "Removing task failed"
 msgstr "Falha ao remover tarefa"
+
+#: src/Widgets/TaskListGrid.vala:67
+msgid "Edit Name and Appearance"
+msgstr "Editar nome e aparência"
+
+#: src/Widgets/TaskListGrid.vala:98
+msgid "Adding task failed"
+msgstr "Falha ao adicionar tarefa"
+
+#: src/Widgets/TaskListGrid.vala:186
+msgid "Renaming task list failed"
+msgstr "Falha ao renomear lista de tarefas"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format

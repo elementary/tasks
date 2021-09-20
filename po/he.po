@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-01 13:54+0000\n"
+"POT-Creation-Date: 2021-09-02 07:49+0000\n"
 "PO-Revision-Date: 2021-09-01 15:59+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/tasks/he/>\n"
@@ -30,33 +30,33 @@ msgstr "הגדרות חשבונות מקוונים…"
 msgid "Add Task List…"
 msgstr "הוספת רשימת משימות…"
 
-#: src/MainWindow.vala:272
+#: src/MainWindow.vala:271
 msgid "Creating a new task list failed"
 msgstr "יצירת רשימת משימות חדשה נכשלה"
 
-#: src/MainWindow.vala:273 src/MainWindow.vala:343
-#: src/Widgets/TaskListGrid.vala:157 src/Widgets/TaskListGrid.vala:247
+#: src/MainWindow.vala:272 src/MainWindow.vala:342
+#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "רשם רשימות המשימות כנראה אינו זמין או שלא ניתן לכתוב אליו."
 
-#: src/MainWindow.vala:278
+#: src/MainWindow.vala:277
 msgid "New list"
 msgstr "רשימה חדשה"
 
-#: src/MainWindow.vala:322
+#: src/MainWindow.vala:321
 #, c-format
 msgid "Delete “%s”?"
 msgstr "למחוק את „%s”?"
 
-#: src/MainWindow.vala:323
+#: src/MainWindow.vala:322
 msgid "The list and all its tasks will be permanently deleted."
 msgstr "הרשימה וכל המשימות שלה יימחקו לצמיתות."
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:329
 msgid "Delete List"
 msgstr "מחיקת רשימה"
 
-#: src/MainWindow.vala:342
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "מחיקת רשימת המשימות נכשלה"
 
@@ -116,7 +116,7 @@ msgstr "לא ניתן להחליף את צבע רשימת המשימות"
 msgid "The task list registry may be unavailable or write-protected."
 msgstr "רשם רשימות המשימות כנראה אינו זמין או מוגן בפני כתיבה."
 
-#: src/Widgets/ScheduledRow.vala:26 src/Widgets/TaskListGrid.vala:90
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
 msgid "Scheduled"
 msgstr "מתוזמן"
 
@@ -136,38 +136,40 @@ msgstr "אין תקשורת כרגע למאגר הנתונים (כנראה מר�
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "מהימנות אישור SSL נדחתה עבור החיבור"
 
-#: src/Widgets/TaskListGrid.vala:119
-msgid "Edit Name and Appearance"
-msgstr "עריכת השם והמראה"
-
-#: src/Widgets/TaskListGrid.vala:131
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
 msgid "No Tasks"
 msgstr "אין משימות"
 
-#: src/Widgets/TaskListGrid.vala:156
-msgid "Adding task failed"
-msgstr "הוספת המשימה נכשלה"
-
-#: src/Widgets/TaskListGrid.vala:246
-msgid "Renaming task list failed"
-msgstr "שינוי שם רשימת המשימות נכשל"
-
-#: src/Widgets/TaskListGrid.vala:402
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
 msgid "Completing task failed"
 msgstr "השלמת המשימה נכשלה"
 
-#: src/Widgets/TaskListGrid.vala:403 src/Widgets/TaskListGrid.vala:425
-#: src/Widgets/TaskListGrid.vala:447
+#: src/Widgets/ScheduledTaskListGrid.vala:175
+#: src/Widgets/ScheduledTaskListGrid.vala:197
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
+#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "רשם המשימות כנראה אינו זמין או שלא ניתן לכתוב אליו."
 
-#: src/Widgets/TaskListGrid.vala:424
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
 msgid "Updating task failed"
 msgstr "עדכון המשימה נכשל"
 
-#: src/Widgets/TaskListGrid.vala:446
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
 msgid "Removing task failed"
 msgstr "הסרת המשימה נכשלה"
+
+#: src/Widgets/TaskListGrid.vala:67
+msgid "Edit Name and Appearance"
+msgstr "עריכת השם והמראה"
+
+#: src/Widgets/TaskListGrid.vala:98
+msgid "Adding task failed"
+msgstr "הוספת המשימה נכשלה"
+
+#: src/Widgets/TaskListGrid.vala:186
+msgid "Renaming task list failed"
+msgstr "שינוי שם רשימת המשימות נכשל"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
