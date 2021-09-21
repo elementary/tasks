@@ -113,9 +113,6 @@ public class Tasks.TodayTaskMonitor : GLib.Object {
             if (due_icaltime.is_null_time () || !due_icaltime.is_valid_time ()) {
                 continue;
             }
-            debug ("[%s] Creating notification for task '%s'…",
-                format_ecal_component_id (task.get_id ()),
-                ical_component.get_summary ());
 
             var notification = new GLib.Notification (ical_component.get_summary ());
             if (ical_component.get_description () != null) {
@@ -126,15 +123,22 @@ public class Tasks.TodayTaskMonitor : GLib.Object {
                 task_notification.insert (task.get_id ().copy (), notification);
             }
 
-            var now_datetime = new GLib.DateTime.now_local ();
-            var due_datetime = Util.ical_to_date_time (due_icaltime);
+            var now_datetime = new GLib.DateTime.now_utc ();
+            var due_datetime = Util.ical_to_date_time (due_icaltime.convert_to_zone (ICal.Timezone.get_utc_timezone ()));
 
-            var timeout_in_seconds = due_datetime.difference (now_datetime) / 1000000;
-            if (timeout_in_seconds < 0) {
-                timeout_in_seconds = 0;
+            var timespan = due_datetime.difference (now_datetime) / 1000000;
+            if (timespan < 0) {
+                timespan = 0;
             }
+            uint timeout_in_seconds = (uint) timespan;
 
-            GLib.Timeout.add_seconds ((uint) timeout_in_seconds, () => {
+            debug ("[%s] Creating notification for task '%s' to be sent in %u seconds…",
+                format_ecal_component_id (task.get_id ()),
+                ical_component.get_summary (),
+                timeout_in_seconds
+            );
+
+            GLib.Timeout.add_seconds (timeout_in_seconds, () => {
                 send_notification (task.get_id ());
                 return GLib.Source.REMOVE;
             });
