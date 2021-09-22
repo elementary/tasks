@@ -151,7 +151,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
             }
         }
 
-        var due_date_time = Util.ical_to_date_time (comp.get_due ());
+        var due_date_time = Util.icaltime_to_datetime (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time));
         header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
         header_label.margin_start = 6;

@@ -364,7 +364,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         }
         var icalcomponent = task.get_icalcomponent ();
         summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
-        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time (icalcomponent.get_due ());
+        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.icaltime_to_datetime (icalcomponent.get_due ());
         location_popover.value = Util.get_ecalcomponent_location (task);
         reveal_child_request (false);
     }
@@ -373,7 +373,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         unowned ICal.Component ical_task = task.get_icalcomponent ();
 
         if (due_datetime_popover.value != null) {
-            var due_icaltime = Util.date_time_to_ical (due_datetime_popover.value, due_datetime_popover.value);
+            var due_icaltime = Util.datetimes_to_icaltime (due_datetime_popover.value, due_datetime_popover.value);
             ical_task.set_due (due_icaltime);
             ical_task.set_dtstart (due_icaltime);
         } else {
@@ -472,7 +472,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             if (ical_task.get_due ().is_null_time ()) {
                 due_datetime_popover_revealer.reveal_child = false;
             } else {
-                var due_datetime = Util.ical_to_date_time (ical_task.get_due ());
+                var due_datetime = Util.icaltime_to_datetime (ical_task.get_due ());
                 due_datetime_popover.value = due_datetime;
                 due_datetime_popover_revealer.reveal_child = true;
             }
