@@ -323,7 +323,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 "edit-delete",
                 Gtk.ButtonsType.CANCEL
             ) {
-                badge_icon = new ThemedIcon ("dialog-question");
+                badge_icon = new ThemedIcon ("dialog-question"),
                 transient_for = this
             };
 
