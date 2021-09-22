@@ -45,6 +45,7 @@ public class Tasks.TodayTaskMonitor : GLib.Object {
     public bool refresh_task_list_queries () {
         var task_lists = task_list_view.get_keys ();
         foreach (unowned var task_list in task_lists) {
+            debug ("[%s] Refreshing task list query…", task_list.display_name);
             modify_task_list (task_list);
         }
 
