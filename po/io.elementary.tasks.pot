@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.tasks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-22 18:32+0000\n"
+"POT-Creation-Date: 2021-09-22 21:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Creating a new task list failed"
 msgstr ""
 
-#: src/MainWindow.vala:272 src/MainWindow.vala:342
+#: src/MainWindow.vala:272 src/MainWindow.vala:344
 #: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
@@ -48,14 +48,16 @@ msgid "Delete “%s”?"
 msgstr ""
 
 #: src/MainWindow.vala:322
-msgid "The list and all its tasks will be permanently deleted."
+msgid ""
+"The list and all its tasks will be permanently deleted. If you've shared "
+"this list, other people will no longer have access."
 msgstr ""
 
-#: src/MainWindow.vala:329
-msgid "Delete List"
+#: src/MainWindow.vala:330
+msgid "Delete Anyway"
 msgstr ""
 
-#: src/MainWindow.vala:341
+#: src/MainWindow.vala:343
 msgid "Deleting the task list failed"
 msgstr ""
 
@@ -175,7 +177,7 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
