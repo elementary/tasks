@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 21:45+0000\n"
+"POT-Creation-Date: 2021-09-22 23:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,45 +32,69 @@ msgid ""
 "CalDAV."
 msgstr ""
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
-#: data/tasks.appdata.xml.in:35
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:31
+#: data/tasks.appdata.xml.in:39 data/tasks.appdata.xml.in:48
 msgid "Improvements:"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:20 data/tasks.appdata.xml.in:29
-#: data/tasks.appdata.xml.in:38
+#: data/tasks.appdata.xml.in:20
+msgid "Replace the Delete shortcut key with Ctrl + Backspace"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:21
+msgid "Add a confirmation dialog when deleting a task list"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:22
+msgid ""
+"Fix an issue where an account name header could be displayed multiple times "
+"in the sidebar"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:23
+msgid ""
+"Fix an issue with long descriptions being truncated at the beginning instead "
+"of the end"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:24
+msgid "Fix an issue where removing descriptions wasn't saved"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:25 data/tasks.appdata.xml.in:33
+#: data/tasks.appdata.xml.in:42 data/tasks.appdata.xml.in:51
 msgid "Updated translations"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:28
+#: data/tasks.appdata.xml.in:41
 msgid "Fix crash on start with certain hardware"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:37
+#: data/tasks.appdata.xml.in:50
 msgid "Fix the order of the scheduled view"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:44
+#: data/tasks.appdata.xml.in:57
 msgid "First release!"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:46
+#: data/tasks.appdata.xml.in:59
 msgid "Support the dark style"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:47
+#: data/tasks.appdata.xml.in:60
 msgid "Add and remove task lists with custom colors"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:48
+#: data/tasks.appdata.xml.in:61
 msgid "See scheduled tasks from all lists at once"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:49
+#: data/tasks.appdata.xml.in:62
 msgid "Set due dates"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:92
+#: data/tasks.appdata.xml.in:105
 msgid "elementary, Inc."
 msgstr ""
 
