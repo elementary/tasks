@@ -306,15 +306,17 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         if (Tasks.Application.model.is_remove_task_list_supported (source)) {
             var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
                 _("Delete “%s”?").printf (source.display_name),
-                _("The list and all its tasks will be permanently deleted."),
-                "dialog-warning",
+                _("The list and all its tasks will be permanently deleted. If you've shared this list, other people will no longer have access."),
+                "edit-delete",
                 Gtk.ButtonsType.CANCEL
             ) {
+                badge_icon = new ThemedIcon ("dialog-question"),
                 transient_for = this
             };
 
-            unowned Gtk.Widget trash_button = message_dialog.add_button (_("Delete List"), Gtk.ResponseType.YES);
+            unowned Gtk.Widget trash_button = message_dialog.add_button (_("Delete Anyway"), Gtk.ResponseType.YES);
             trash_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+
             Gtk.ResponseType response = (Gtk.ResponseType) message_dialog.run ();
             message_dialog.destroy ();
 

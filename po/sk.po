@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-02 06:20+0000\n"
-"PO-Revision-Date: 2021-08-29 20:28+0000\n"
+"POT-Creation-Date: 2021-09-02 07:49+0000\n"
+"PO-Revision-Date: 2021-09-14 21:19+0000\n"
 "Last-Translator: JohnDumpling <john_dumpling@protonmail.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/tasks/tasks/sk/>\n"
 "Language: sk\n"
@@ -47,11 +47,11 @@ msgstr "Nový zoznam"
 #: src/MainWindow.vala:321
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "Vymazať „%s“?"
 
 #: src/MainWindow.vala:322
 msgid "The list and all its tasks will be permanently deleted."
-msgstr ""
+msgstr "Tento zoznam a všetky jeho úlohy budú natrvalo odstránené."
 
 #: src/MainWindow.vala:329
 msgid "Delete List"
@@ -106,10 +106,8 @@ msgid "Show Completed"
 msgstr "Zobraziť dokončené"
 
 #: src/Widgets/ListSettingsPopover.vala:119
-#, fuzzy
-#| msgid "Delete List"
 msgid "Delete List…"
-msgstr "Vymazať zoznam"
+msgstr "Vymazať zoznam…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
@@ -180,7 +178,7 @@ msgstr "Premenovanie zoznamu úloh sa nepodarilo"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
