@@ -385,23 +385,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         Util.set_ecalcomponent_location (task, location_popover.value);
 
-        // Clear the old description
-        int count = ical_task.count_properties (ICal.PropertyKind.DESCRIPTION_PROPERTY);
-        for (int i = 0; i < count; i++) {
-            ICal.Property remove_prop;
-            remove_prop = ical_task.get_first_property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
-            ical_task.remove_property (remove_prop);
-        }
+        ical_task.set_summary (summary_entry.text);
+        ical_task.set_description (description_textbuffer.text);
 
-        // Add the new description - if we have any
-        var description = description_textbuffer.text;
-        if (description != null && description.strip ().length > 0) {
-            var property = new ICal.Property (ICal.PropertyKind.DESCRIPTION_PROPERTY);
-            property.set_description (description.strip ());
-            ical_task.add_property (property);
-        }
-
-        task.get_icalcomponent ().set_summary (summary_entry.text);
         task_changed (task);
     }
 
@@ -486,6 +472,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             }
 
             if (ical_task.get_description () == null) {
+                description_label.label = "";
                 description_label_revealer.reveal_child = false;
 
             } else {
@@ -495,6 +482,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
                     description_label.label = description;
                     description_label_revealer.reveal_child = true;
                 } else {
+                    description_label.label = "";
                     description_label_revealer.reveal_child = false;
                 }
             }
