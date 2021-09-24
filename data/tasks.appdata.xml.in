@@ -22,6 +22,7 @@
           <li>Fix an issue where an account name header could be displayed multiple times in the sidebar</li>
           <li>Fix an issue with long descriptions being truncated at the beginning instead of the end</li>
           <li>Fix an issue where removing descriptions wasn't saved</li>
+          <li>Fix an issue with placing the cursor in descriptions</li>
           <li>Updated translations</li>
         </ul>
       </description>
