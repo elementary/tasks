@@ -47,12 +47,6 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
 
-    container:
-      image: valalang/lint
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Lint
-        run: io.elementary.vala-lint -d .
+     - uses: actions/checkout@v2
+     - uses: elementary/actions/vala-lint@master
