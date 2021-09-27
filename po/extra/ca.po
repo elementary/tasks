@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-27 07:54+0000\n"
-"PO-Revision-Date: 2021-08-11 12:57+0000\n"
+"PO-Revision-Date: 2021-09-27 14:41+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/extra/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/extra/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,25 +39,27 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:18
 msgid "Fixes:"
-msgstr ""
+msgstr "Correccions:"
 
 #: data/tasks.appdata.xml.in:20
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr ""
+"Evita que les capçaleres dels noms del compte es mostrin diverses vegades a "
+"la barra lateral."
 
 #: data/tasks.appdata.xml.in:21
 msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr ""
+msgstr "Les descripcions llargues es truncen al final en lloc del principi."
 
 #: data/tasks.appdata.xml.in:22
 msgid "Removing descriptions is now saved"
-msgstr ""
+msgstr "Ara es desa l'eliminació de descripcions"
 
 #: data/tasks.appdata.xml.in:23
 msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
+msgstr "Situar el cursor a les descripcions funciona de manera coherent."
 
 #: data/tasks.appdata.xml.in:25 data/tasks.appdata.xml.in:36
 #: data/tasks.appdata.xml.in:44 data/tasks.appdata.xml.in:53
@@ -66,15 +68,15 @@ msgstr "Millores:"
 
 #: data/tasks.appdata.xml.in:27
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
+msgstr "Substitució de la tecla de drecera de Suprimeix per Ctrl + Retrocés"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Add a confirmation dialog when deleting a task list"
-msgstr ""
+msgstr "Addició d'un diàleg de confirmació quan suprimiu una llista de tasques"
 
 #: data/tasks.appdata.xml.in:29
 msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
+msgstr "Millora del rendiment de les llistes amb moltes tasques completades"
 
 #: data/tasks.appdata.xml.in:30 data/tasks.appdata.xml.in:38
 #: data/tasks.appdata.xml.in:47 data/tasks.appdata.xml.in:56
