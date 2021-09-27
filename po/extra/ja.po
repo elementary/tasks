@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-24 19:47+0000\n"
-"PO-Revision-Date: 2021-09-27 01:56+0000\n"
+"PO-Revision-Date: 2021-09-27 04:23+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/extra/ja/>"
 "\n"
@@ -57,7 +57,7 @@ msgstr "説明文を削除すると保存されるように修正"
 
 #: data/tasks.appdata.xml.in:23
 msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
+msgstr "タスクの説明欄をクリックした位置にカーソルが配置されるように修正"
 
 #: data/tasks.appdata.xml.in:25 data/tasks.appdata.xml.in:36
 #: data/tasks.appdata.xml.in:44 data/tasks.appdata.xml.in:53
@@ -66,15 +66,15 @@ msgstr "改善点:"
 
 #: data/tasks.appdata.xml.in:27
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
+msgstr "削除に使うショートカットキーを Delete から Ctrl + Backspace に変更"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Add a confirmation dialog when deleting a task list"
-msgstr ""
+msgstr "タスクの削除時に確認ダイアログを表示するように修正"
 
 #: data/tasks.appdata.xml.in:29
 msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
+msgstr "完了済みタスクが非常に多い環境におけるタスクリストのパフォーマンスを改善"
 
 #: data/tasks.appdata.xml.in:30 data/tasks.appdata.xml.in:38
 #: data/tasks.appdata.xml.in:47 data/tasks.appdata.xml.in:56
