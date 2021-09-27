@@ -1,3 +1,23 @@
+io.elementary.tasks (6.0.4) focal; urgency=medium
+
+  * Release 6.0.4 (#301)
+  * Update translation files
+  * Update translation template
+  * Add aarch64 architecture support to flatpak builds (#302)
+  * Fix cursor placing on focus (#293)
+  * Load only non-completed tasks by default (#295)
+  * Fixes an Issue when removing task description (#286)
+  * MainWindow: copy and icon for delete confirmation dialog (#300)
+  * Appdata: add release notes for 6.0.4 (#299)
+  * Separated Scheduled List View logic from Regular List View logic
+  * Copied TaskListGrid to ScheduledTaskListGrid
+  * Fix account header in sidebar
+  * Renamed ListView to TaskListGrid (#288)
+  * Avoid accidentally deleting a list (#279)
+  * Do not use transition that varies label width. (#252)
+
+ -- elementary, Inc. <builds@elementary.io>  Mon, 27 Sep 2021 20:37:47 +0000
+
 io.elementary.tasks (6.0.3) focal; urgency=medium
 
   * Release 6.0.3 (#284)
