@@ -15,13 +15,18 @@
   <releases>
     <release version="6.0.4" date="2021-09-21" urgency="medium">
       <description>
+        <p>Fixes:</p>
+        <ul>
+          <li>Prevent account name headers from being displayed multiple times in the sidebar</li>
+          <li>Long descriptions are truncated at the end instead of the beginning</li>
+          <li>Removing descriptions is now saved</li>
+          <li>Placing the cursor in descriptions works consistently</li>
+        </ul>
         <p>Improvements:</p>
         <ul>
           <li>Replace the Delete shortcut key with Ctrl + Backspace</li>
           <li>Add a confirmation dialog when deleting a task list</li>
-          <li>Fix an issue where an account name header could be displayed multiple times in the sidebar</li>
-          <li>Fix an issue with long descriptions being truncated at the beginning instead of the end</li>
-          <li>Fix an issue where removing descriptions wasn't saved</li>
+          <li>Improve performance in lists with lots of completed tasks</li>
           <li>Updated translations</li>
         </ul>
       </description>

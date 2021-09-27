@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-02 07:49+0000\n"
+"POT-Creation-Date: 2021-09-24 19:47+0000\n"
 "PO-Revision-Date: 2021-03-21 09:24+0000\n"
 "Last-Translator: Shukrullo Turgunov <shookrullo@gmail.com>\n"
 "Language-Team: Uzbek <https://l10n.elementary.io/projects/tasks/tasks/uz/>\n"
@@ -34,8 +34,8 @@ msgstr ""
 msgid "Creating a new task list failed"
 msgstr ""
 
-#: src/MainWindow.vala:272 src/MainWindow.vala:342
-#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
+#: src/MainWindow.vala:272 src/MainWindow.vala:344
+#: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
@@ -49,14 +49,18 @@ msgid "Delete “%s”?"
 msgstr ""
 
 #: src/MainWindow.vala:322
-msgid "The list and all its tasks will be permanently deleted."
+msgid ""
+"The list and all its tasks will be permanently deleted. If you've shared "
+"this list, other people will no longer have access."
 msgstr ""
 
-#: src/MainWindow.vala:329
-msgid "Delete List"
-msgstr "Roʻyxatni oʻchirish"
+#: src/MainWindow.vala:330
+#, fuzzy
+#| msgid "Delete Task"
+msgid "Delete Anyway"
+msgstr "Vazifani oʻchirish"
 
-#: src/MainWindow.vala:341
+#: src/MainWindow.vala:343
 #, fuzzy
 #| msgid "Adding task failed"
 msgid "Deleting the task list failed"
@@ -142,38 +146,38 @@ msgstr ""
 msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 
-#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
 msgstr "Vazifalar yoʻq"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
 msgstr ""
 
 #: src/Widgets/ScheduledTaskListGrid.vala:175
 #: src/Widgets/ScheduledTaskListGrid.vala:197
-#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
-#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:310
+#: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 
-#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
 msgstr ""
 
-#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
 msgstr ""
 
-#: src/Widgets/TaskListGrid.vala:67
+#: src/Widgets/TaskListGrid.vala:56
 msgid "Edit Name and Appearance"
 msgstr "Nomi va tashqi koʻrinishini oʻzgartirish"
 
-#: src/Widgets/TaskListGrid.vala:98
+#: src/Widgets/TaskListGrid.vala:87
 msgid "Adding task failed"
 msgstr "Vazifa qoʻshib boʻlmadi"
 
-#: src/Widgets/TaskListGrid.vala:186
+#: src/Widgets/TaskListGrid.vala:175
 msgid "Renaming task list failed"
 msgstr ""
 
@@ -182,7 +186,7 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
@@ -214,3 +218,6 @@ msgstr "Vazifa qoʻshish"
 #: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
 msgstr "Vazifani oʻchirish"
+
+#~ msgid "Delete List"
+#~ msgstr "Roʻyxatni oʻchirish"

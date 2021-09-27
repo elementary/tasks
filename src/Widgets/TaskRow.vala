@@ -335,14 +335,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             activate ();
         });
 
-        description_textview.button_press_event.connect ((sender, event) => {
-            if (event.type == Gdk.EventType.BUTTON_PRESS && !description_textview.has_focus) {
-                description_textview.grab_focus ();
-                return Gdk.EVENT_STOP;
-            }
-            return Gdk.EVENT_PROPAGATE;
-        });
-
         cancel_button.clicked.connect (() => {
             cancel_edit ();
         });

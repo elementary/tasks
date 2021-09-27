@@ -20,7 +20,7 @@
 
 public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     public E.Source source { get; construct; }
-    private ECal.ClientView view;
+    private ECal.ClientView? view = null;
 
     private EditableLabel editable_title;
     private Gtk.ListBox add_task_list;
@@ -32,17 +32,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     construct {
-        try {
-            view = Tasks.Application.model.create_task_list_view (
-                source,
-                "(contains? 'any' '')",
-                on_tasks_added,
-                on_tasks_modified,
-                on_tasks_removed );
-        } catch (Error e) {
-            critical ("Error creating view for source %s: %s", source.display_name, e.message);
-        }
-
         E.SourceRegistry? registry = null;
         try {
             registry = Application.model.get_registry_sync ();
@@ -115,7 +104,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             selection_mode = Gtk.SelectionMode.MULTIPLE,
             activate_on_single_click = true
         };
-        task_list.set_filter_func (filter_function);
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
@@ -133,8 +121,9 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         attach (scrolled_window, 0, 2, 2);
 
         Application.settings.changed["show-completed"].connect (() => {
-            task_list.invalidate_filter ();
+            on_show_completed_changed (Application.settings.get_boolean ("show-completed"));
         });
+        on_show_completed_changed (Application.settings.get_boolean ("show-completed"));
 
         settings_button.toggled.connect (() => {
             unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
@@ -201,6 +190,36 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         show_all ();
     }
 
+    private void on_show_completed_changed (bool show_completed) {
+        if (show_completed) {
+            set_view_for_query ("(contains? 'any' '')");
+        } else {
+            set_view_for_query ("NOT is-completed?");
+        }
+    }
+
+    private void set_view_for_query (string query) {
+        var children = task_list.get_children ();
+        foreach (unowned var child in children) {
+            task_list.remove (child);
+        }
+
+        if (view != null) {
+            Application.model.destroy_task_list_view (view);
+        }
+
+        try {
+            view = Tasks.Application.model.create_task_list_view (
+                source,
+                query,
+                on_tasks_added,
+                on_tasks_modified,
+                on_tasks_removed );
+        } catch (Error e) {
+            critical ("Error creating view with query for source %s[%s]: %s", source.display_name, query, e.message);
+        }
+    }
+
     private void on_row_activated (Gtk.ListBoxRow row) {
         var task_row = (Tasks.Widgets.TaskRow) row;
         task_row.reveal_child_request (true);
@@ -235,18 +254,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
                 task_row.update_request ();
             }
         });
-    }
-
-    [CCode (instance_pos = -1)]
-    private bool filter_function (Gtk.ListBoxRow row) {
-        if (
-            Application.settings.get_boolean ("show-completed") == false &&
-            ((TaskRow) row).completed
-        ) {
-            return false;
-        }
-
-        return true;
     }
 
     [CCode (instance_pos = -1)]
