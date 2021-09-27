@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-27 04:24+0000\n"
 "PO-Revision-Date: 2021-09-27 08:56+0000\n"
-"Last-Translator: DarkKnightComes <darkknightcomes@gmail.com>\n"
+"Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/tasks/tasks/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: src/MainWindow.vala:45
 msgid "Tasks"
-msgstr ""
+msgstr "Zadania"
 
 #: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
@@ -33,7 +33,7 @@ msgstr "Dodaj listę zadań…"
 
 #: src/MainWindow.vala:271
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Nie udało się stworzyć nowej listy zadań"
 
 #: src/MainWindow.vala:272 src/MainWindow.vala:344
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
@@ -42,22 +42,24 @@ msgstr "Rejestr listy zadań może być niedostępny lub nie można go edytować
 
 #: src/MainWindow.vala:277
 msgid "New list"
-msgstr ""
+msgstr "Nowa lista"
 
 #: src/MainWindow.vala:321
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "Czy chcesz usunąć „%s”?"
 
 #: src/MainWindow.vala:322
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"Ta lista i wszystkie zadania na niej zostaną na zawsze usunięte. Jeśli ta "
+"lista była udostępniona, inne osoby nie będą miały już do niej dostępu."
 
 #: src/MainWindow.vala:330
 msgid "Delete Anyway"
-msgstr ""
+msgstr "Usuń mimo to"
 
 #: src/MainWindow.vala:343
 msgid "Deleting the task list failed"
@@ -65,15 +67,15 @@ msgstr ""
 
 #: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
-msgstr ""
+msgstr "Dziś"
 
 #: src/Util.vala:153
 msgid "Yesterday"
-msgstr ""
+msgstr "Wczoraj"
 
 #: src/Util.vala:155
 msgid "Tomorrow"
-msgstr ""
+msgstr "Jutro"
 
 #: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
@@ -89,7 +91,7 @@ msgstr ""
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "Ustaw miejsce"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
