@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-27 07:54+0000\n"
-"PO-Revision-Date: 2021-09-04 17:08+0000\n"
+"PO-Revision-Date: 2021-09-27 14:41+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/tasks/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/tasks/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,18 +52,16 @@ msgid "Delete “%s”?"
 msgstr "Voleu suprimir %s?"
 
 #: src/MainWindow.vala:322
-#, fuzzy
-#| msgid "The list and all its tasks will be permanently deleted."
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
-msgstr "Se suprimiran permanentment la llista i totes les tasques incloses."
+msgstr ""
+"Se suprimiran permanentment la llista i totes les tasques incloses. Si l'heu "
+"compartida, les altres persones ja no hi tindran accés."
 
 #: src/MainWindow.vala:330
-#, fuzzy
-#| msgid "Delete Task"
 msgid "Delete Anyway"
-msgstr "Suprimeix la tasca"
+msgstr "Suprimeix-la tanmateix"
 
 #: src/MainWindow.vala:343
 msgid "Deleting the task list failed"
