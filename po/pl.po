@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-27 07:54+0000\n"
-"PO-Revision-Date: 2021-09-27 08:59+0000\n"
+"PO-Revision-Date: 2021-09-27 14:41+0000\n"
 "Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/tasks/tasks/pl/>\n"
 "Language: pl\n"
@@ -107,27 +107,28 @@ msgstr "Janina Kowalska LUB ul. Warszawska"
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
-msgstr ""
+msgstr "Pokaż wykonane"
 
 #: src/Widgets/ListSettingsPopover.vala:119
 msgid "Delete List…"
-msgstr ""
+msgstr "Usuń listę…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "Nie można zmienić koloru listy zadań"
 
 #: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
+"Rejestr listy zadań może być niedostępny lub zabezpieczony przed zapisem."
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
 msgid "Scheduled"
-msgstr ""
+msgstr "Zaplanowane"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
-msgstr ""
+msgstr "Łączenie…"
 
 #: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
@@ -158,34 +159,34 @@ msgstr "Rejestr zadań może być niedostępny lub nie można go edytować."
 
 #: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
-msgstr "Błąd aktualizacji zadania"
+msgstr "Aktualizowanie zadania nie powiodło się"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
-msgstr ""
+msgstr "Usuwanie zadania nie powiodło się"
 
 #: src/Widgets/TaskListGrid.vala:56
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "Edytuj nazwę i wygląd"
 
 #: src/Widgets/TaskListGrid.vala:87
 msgid "Adding task failed"
-msgstr ""
+msgstr "Dodawanie zadania nie powiodło się"
 
 #: src/Widgets/TaskListGrid.vala:175
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "Zmiana nazwy listy zadań nie powiodła się"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s o %s"
 
 #: src/Widgets/TaskRow.vala:181
 #, c-format
@@ -199,16 +200,16 @@ msgstr ""
 
 #: src/Widgets/TaskRow.vala:239
 msgid "Cancel"
-msgstr ""
+msgstr "Anuluj"
 
 #: src/Widgets/TaskRow.vala:241
 msgid "Save Changes"
-msgstr ""
+msgstr "Zapisz zmiany"
 
 #: src/Widgets/TaskRow.vala:241
 msgid "Add Task"
-msgstr ""
+msgstr "Dodaj zadanie"
 
 #: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
-msgstr ""
+msgstr "Usuń zadanie"
