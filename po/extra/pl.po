@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-27 07:54+0000\n"
-"PO-Revision-Date: 2021-09-27 08:56+0000\n"
-"Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
+"PO-Revision-Date: 2021-09-27 14:41+0000\n"
+"Last-Translator: Qnkacz <ufus09@gmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/tasks/extra/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "Zadania"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "Zsynchronizowane zadania oraz przypomnienia"
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
@@ -112,7 +112,7 @@ msgstr ""
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
-msgstr ""
+msgstr "Twórz oraz śledź progres zadań"
 
 #: data/tasks.desktop.in:6
 msgid "io.elementary.tasks"
@@ -120,4 +120,4 @@ msgstr ""
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "Do zrobienia;Przypomnienia;"
