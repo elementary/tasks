@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-02 07:49+0000\n"
+"POT-Creation-Date: 2021-09-27 09:00+0000\n"
 "PO-Revision-Date: 2021-09-01 15:59+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
@@ -34,8 +34,8 @@ msgstr "Ajouter une liste de tâche…"
 msgid "Creating a new task list failed"
 msgstr "Échec de la création d'une nouvelle liste de tâches"
 
-#: src/MainWindow.vala:272 src/MainWindow.vala:342
-#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
+#: src/MainWindow.vala:272 src/MainWindow.vala:344
+#: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des listes de tâches est probablement indisponible ou en lecture "
@@ -51,14 +51,20 @@ msgid "Delete “%s”?"
 msgstr "Supprimer « %s » ?"
 
 #: src/MainWindow.vala:322
-msgid "The list and all its tasks will be permanently deleted."
+#, fuzzy
+#| msgid "The list and all its tasks will be permanently deleted."
+msgid ""
+"The list and all its tasks will be permanently deleted. If you've shared "
+"this list, other people will no longer have access."
 msgstr "La liste et ses tâches seront définitivement supprimés."
 
-#: src/MainWindow.vala:329
-msgid "Delete List"
-msgstr "Supprimer la liste"
+#: src/MainWindow.vala:330
+#, fuzzy
+#| msgid "Delete Task"
+msgid "Delete Anyway"
+msgstr "Supprimer la tâche"
 
-#: src/MainWindow.vala:341
+#: src/MainWindow.vala:343
 msgid "Deleting the task list failed"
 msgstr "Échec de la suppression de la liste de tâches"
 
@@ -140,39 +146,39 @@ msgstr "Actuellement déconnecté de la base de données (possiblement distante)
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Le certificat SSL à été rejeté pour la connexion"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
 msgstr "Aucune tâche"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
 msgstr "Échec de complétion de la tâche"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:175
 #: src/Widgets/ScheduledTaskListGrid.vala:197
-#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
-#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:310
+#: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des tâches est probablement indisponible ou en lecture seule."
 
-#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
 msgstr "Échec de la mise à jour de la tâche"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
 msgstr "Échec de la suppression de la tâche"
 
-#: src/Widgets/TaskListGrid.vala:67
+#: src/Widgets/TaskListGrid.vala:56
 msgid "Edit Name and Appearance"
 msgstr "Modifier le nom et l'apparence"
 
-#: src/Widgets/TaskListGrid.vala:98
+#: src/Widgets/TaskListGrid.vala:87
 msgid "Adding task failed"
 msgstr "Échec de l'ajout de la tâche"
 
-#: src/Widgets/TaskListGrid.vala:186
+#: src/Widgets/TaskListGrid.vala:175
 msgid "Renaming task list failed"
 msgstr "Échec du renommage de la liste des tâches"
 
@@ -212,6 +218,9 @@ msgstr "Ajouter une tâche"
 #: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
 msgstr "Supprimer la tâche"
+
+#~ msgid "Delete List"
+#~ msgstr "Supprimer la liste"
 
 #~ msgid "Schedule:"
 #~ msgstr "Planning :"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-02 07:49+0000\n"
+"POT-Creation-Date: 2021-09-27 09:00+0000\n"
 "PO-Revision-Date: 2021-03-07 04:21+0000\n"
 "Last-Translator: Trkien618 <hacngoctrungkien@gmail.com>\n"
 "Language-Team: Vietnamese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -35,8 +35,8 @@ msgstr "Thêm danh sách tác vụ…"
 msgid "Creating a new task list failed"
 msgstr "Tạo danh sách tác vụ mới không thành công"
 
-#: src/MainWindow.vala:272 src/MainWindow.vala:342
-#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
+#: src/MainWindow.vala:272 src/MainWindow.vala:344
+#: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Sổ đăng ký danh sách tác vụ có thể không có sẵn hoặc không thể ghi vào."
@@ -51,14 +51,18 @@ msgid "Delete “%s”?"
 msgstr ""
 
 #: src/MainWindow.vala:322
-msgid "The list and all its tasks will be permanently deleted."
+msgid ""
+"The list and all its tasks will be permanently deleted. If you've shared "
+"this list, other people will no longer have access."
 msgstr ""
 
-#: src/MainWindow.vala:329
-msgid "Delete List"
-msgstr "Danh sách xoá bỏ"
+#: src/MainWindow.vala:330
+#, fuzzy
+#| msgid "Delete Task"
+msgid "Delete Anyway"
+msgstr "Xoá tác vụ"
 
-#: src/MainWindow.vala:341
+#: src/MainWindow.vala:343
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
@@ -152,38 +156,38 @@ msgstr "Hiện đã ngắt kết nối với kho dữ liệu (có thể đã ng�
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Chứng chỉ SSL tin cậy đã bị từ chối kết nối"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
 msgstr "Không có tác vụ"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
 msgstr "Hoàn thành tác vụ thất bại"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:175
 #: src/Widgets/ScheduledTaskListGrid.vala:197
-#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
-#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:310
+#: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Sổ đăng ký tác vụ có thể không có sẵn hoặc không thể ghi vào."
 
-#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
 msgstr "Cập nhật tác vụ thất bại"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
 msgstr "Loại bỏ tác vụ thất bại"
 
-#: src/Widgets/TaskListGrid.vala:67
+#: src/Widgets/TaskListGrid.vala:56
 msgid "Edit Name and Appearance"
 msgstr "Chỉnh sửa tên và giao diện"
 
-#: src/Widgets/TaskListGrid.vala:98
+#: src/Widgets/TaskListGrid.vala:87
 msgid "Adding task failed"
 msgstr "Thêm tác vụ thất bại"
 
-#: src/Widgets/TaskListGrid.vala:186
+#: src/Widgets/TaskListGrid.vala:175
 msgid "Renaming task list failed"
 msgstr "Đổi tên danh sách tác vụ thất bại"
 
@@ -223,6 +227,9 @@ msgstr "Thêm tác vụ"
 #: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
 msgstr "Xoá tác vụ"
+
+#~ msgid "Delete List"
+#~ msgstr "Danh sách xoá bỏ"
 
 #~ msgid "Schedule:"
 #~ msgstr "Thời khoá biểu:"
