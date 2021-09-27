@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-24 19:47+0000\n"
-"PO-Revision-Date: 2021-09-04 11:58+0000\n"
+"PO-Revision-Date: 2021-09-27 07:52+0000\n"
 "Last-Translator: Özgür Baskin <queeup@zoho.com>\n"
-"Language-Team: Turkish <https://l10n.elementary.io/projects/tasks/tasks/tr/"
-">\n"
+"Language-Team: Turkish <https://l10n.elementary.io/projects/tasks/tasks/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,18 +50,16 @@ msgid "Delete “%s”?"
 msgstr "“%s” silinsin mi?"
 
 #: src/MainWindow.vala:322
-#, fuzzy
-#| msgid "The list and all its tasks will be permanently deleted."
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
-msgstr "Liste ve tüm görevleri kalıcı olarak silinecek."
+msgstr ""
+"Liste ve tüm görevleri kalıcı olarak silinecek. Bu listeyi paylaştıysanız, "
+"diğer kişilerin artık erişimi olmayacaktır."
 
 #: src/MainWindow.vala:330
-#, fuzzy
-#| msgid "Delete Task"
 msgid "Delete Anyway"
-msgstr "Görevi Sil"
+msgstr "Yine de Sil"
 
 #: src/MainWindow.vala:343
 msgid "Deleting the task list failed"
