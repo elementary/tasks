@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-27 07:54+0000\n"
 "PO-Revision-Date: 2021-09-27 08:59+0000\n"
-"Last-Translator: DarkKnightComes <darkknightcomes@gmail.com>\n"
+"Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/tasks/tasks/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -139,11 +139,11 @@ msgstr "Obecnie rozłączono z (prawdopodobnie zdalnego) magazynu danych"
 
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
-msgstr "Zaufanie certyfikatu SSL zostało odrzucone dla połączenia"
+msgstr "Certyfikat zaufania SSL został odrzucony dla połączenia"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
-msgstr ""
+msgstr "Brak zadań"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
