@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-24 19:47+0000\n"
-"PO-Revision-Date: 2021-08-11 06:28+0000\n"
+"PO-Revision-Date: 2021-09-27 07:52+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/extra/he/>\n"
 "Language: he\n"
@@ -37,25 +37,25 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:18
 msgid "Fixes:"
-msgstr ""
+msgstr "תיקונים:"
 
 #: data/tasks.appdata.xml.in:20
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
-msgstr ""
+msgstr "מניעת הצגת כותרות שמות החשבונות מספר פעמים בסרגל הצד"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr ""
+msgstr "תיאורים ארוכים מקוצרים מהסוף במקום מההתחלה"
 
 #: data/tasks.appdata.xml.in:22
 msgid "Removing descriptions is now saved"
-msgstr ""
+msgstr "הסרת תיאורים נשמרת מעתה"
 
 #: data/tasks.appdata.xml.in:23
 msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
+msgstr "הצבת הסמן בתיאורים עובדת באופן אחיד"
 
 #: data/tasks.appdata.xml.in:25 data/tasks.appdata.xml.in:36
 #: data/tasks.appdata.xml.in:44 data/tasks.appdata.xml.in:53
@@ -64,15 +64,15 @@ msgstr "שיפורים:"
 
 #: data/tasks.appdata.xml.in:27
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
+msgstr "מקש קיצור Delete הוחלף ב־Ctrl + Backspace"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Add a confirmation dialog when deleting a task list"
-msgstr ""
+msgstr "הוספת חלונית אישור במחיקת רשימת משימות"
 
 #: data/tasks.appdata.xml.in:29
 msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
+msgstr "הביצועים ברשימות עם משימות רבות שבוצעו השתפרו"
 
 #: data/tasks.appdata.xml.in:30 data/tasks.appdata.xml.in:38
 #: data/tasks.appdata.xml.in:47 data/tasks.appdata.xml.in:56
