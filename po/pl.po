@@ -7,203 +7,209 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-02 07:49+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2021-09-27 20:37+0000\n"
+"PO-Revision-Date: 2021-09-27 14:41+0000\n"
+"Last-Translator: Oskar Rygasiewicz <fleepgames@gmail.com>\n"
+"Language-Team: Polish <https://l10n.elementary.io/projects/tasks/tasks/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: src/MainWindow.vala:45
 msgid "Tasks"
-msgstr ""
+msgstr "Zadania"
 
 #: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "Ustawienia kont online…"
 
 #: src/MainWindow.vala:123
 msgid "Add Task List…"
-msgstr ""
+msgstr "Dodaj listę zadań…"
 
 #: src/MainWindow.vala:271
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Nie udało się stworzyć nowej listy zadań"
 
-#: src/MainWindow.vala:272 src/MainWindow.vala:342
-#: src/Widgets/TaskListGrid.vala:99 src/Widgets/TaskListGrid.vala:187
+#: src/MainWindow.vala:272 src/MainWindow.vala:344
+#: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "Rejestr listy zadań może być niedostępny lub nie można go edytować."
 
 #: src/MainWindow.vala:277
 msgid "New list"
-msgstr ""
+msgstr "Nowa lista"
 
 #: src/MainWindow.vala:321
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "Czy chcesz usunąć „%s”?"
 
 #: src/MainWindow.vala:322
-msgid "The list and all its tasks will be permanently deleted."
+msgid ""
+"The list and all its tasks will be permanently deleted. If you've shared "
+"this list, other people will no longer have access."
 msgstr ""
+"Ta lista i wszystkie zadania na niej zostaną na zawsze usunięte. Jeśli ta "
+"lista była udostępniona, inne osoby nie będą miały już do niej dostępu."
 
-#: src/MainWindow.vala:329
-msgid "Delete List"
-msgstr ""
+#: src/MainWindow.vala:330
+msgid "Delete Anyway"
+msgstr "Usuń mimo to"
 
-#: src/MainWindow.vala:341
+#: src/MainWindow.vala:343
 msgid "Deleting the task list failed"
-msgstr ""
+msgstr "Usuwanie listy zadań nie powiodło się"
 
 #: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
-msgstr ""
+msgstr "Dziś"
 
 #: src/Util.vala:153
 msgid "Yesterday"
-msgstr ""
+msgstr "Wczoraj"
 
 #: src/Util.vala:155
 msgid "Tomorrow"
-msgstr ""
+msgstr "Jutro"
 
 #: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
-msgstr ""
+msgstr "Edytuj…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "Ustaw termin"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "Usuń"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "Ustaw miejsce"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
-msgstr ""
+msgstr "Przyjazd"
 
 #: src/Widgets/EntryPopover/Location.vala:57
 msgid "Leaving"
-msgstr ""
+msgstr "Odjazd"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "Janina Kowalska LUB ul. Warszawska"
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
-msgstr ""
+msgstr "Pokaż wykonane"
 
 #: src/Widgets/ListSettingsPopover.vala:119
 msgid "Delete List…"
-msgstr ""
+msgstr "Usuń listę…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "Nie można zmienić koloru listy zadań"
 
 #: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
+"Rejestr listy zadań może być niedostępny lub zabezpieczony przed zapisem."
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
 msgid "Scheduled"
-msgstr ""
+msgstr "Zaplanowane"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
-msgstr ""
+msgstr "Łączenie…"
 
 #: src/Widgets/SourceRow.vala:102
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "Oczekiwanie na dane logowania"
 
 #: src/Widgets/SourceRow.vala:106
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "Obecnie rozłączono z (prawdopodobnie zdalnego) magazynu danych"
 
 #: src/Widgets/SourceRow.vala:110
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "Certyfikat zaufania SSL został odrzucony dla połączenia"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:74
+#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
-msgstr ""
+msgstr "Brak zadań"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:302
+#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
-msgstr ""
+msgstr "Błąd kończenia zadania"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:175
 #: src/Widgets/ScheduledTaskListGrid.vala:197
-#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:303
-#: src/Widgets/TaskListGrid.vala:325 src/Widgets/TaskListGrid.vala:347
+#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:310
+#: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "Rejestr zadań może być niedostępny lub nie można go edytować."
 
-#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:324
+#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
-msgstr ""
+msgstr "Aktualizowanie zadania nie powiodło się"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:346
+#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
-msgstr ""
+msgstr "Usuwanie zadania nie powiodło się"
 
-#: src/Widgets/TaskListGrid.vala:67
+#: src/Widgets/TaskListGrid.vala:56
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "Edytuj nazwę i wygląd"
 
-#: src/Widgets/TaskListGrid.vala:98
+#: src/Widgets/TaskListGrid.vala:87
 msgid "Adding task failed"
-msgstr ""
+msgstr "Dodawanie zadania nie powiodło się"
 
-#: src/Widgets/TaskListGrid.vala:186
+#: src/Widgets/TaskListGrid.vala:175
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "Zmiana nazwy listy zadań nie powiodła się"
 
 #: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s o %s"
 
 #: src/Widgets/TaskRow.vala:181
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "Przyjazd: %s"
 
 #: src/Widgets/TaskRow.vala:184
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "Odjazd: %s"
 
 #: src/Widgets/TaskRow.vala:239
 msgid "Cancel"
-msgstr ""
+msgstr "Anuluj"
 
 #: src/Widgets/TaskRow.vala:241
 msgid "Save Changes"
-msgstr ""
+msgstr "Zapisz zmiany"
 
 #: src/Widgets/TaskRow.vala:241
 msgid "Add Task"
-msgstr ""
+msgstr "Dodaj zadanie"
 
 #: src/Widgets/TaskRow.vala:294
 msgid "Delete Task"
-msgstr ""
+msgstr "Usuń zadanie"
