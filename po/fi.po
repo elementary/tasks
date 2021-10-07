@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-27 20:37+0000\n"
-"PO-Revision-Date: 2021-08-20 18:58+0000\n"
+"POT-Creation-Date: 2021-10-01 06:16+0000\n"
+"PO-Revision-Date: 2021-10-04 14:41+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://l10n.elementary.io/projects/tasks/tasks/fi/"
 ">\n"
@@ -47,19 +47,19 @@ msgstr "Uusi luettelo"
 #: src/MainWindow.vala:321
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "Poistetaanko “%s”?"
 
 #: src/MainWindow.vala:322
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"Luettelo ja sen kaikki tehtävät poistetaan pysyvästi. Jos olet jakanut tämän "
+"luettelon, muilla ihmisillä ei ole enää pääsyä siihen."
 
 #: src/MainWindow.vala:330
-#, fuzzy
-#| msgid "Delete Task"
 msgid "Delete Anyway"
-msgstr "Poista tehtävä"
+msgstr "Poista silti"
 
 #: src/MainWindow.vala:343
 msgid "Deleting the task list failed"
@@ -110,10 +110,8 @@ msgid "Show Completed"
 msgstr "Näytä valmistuneet"
 
 #: src/Widgets/ListSettingsPopover.vala:119
-#, fuzzy
-#| msgid "Delete List"
 msgid "Delete List…"
-msgstr "Poista luettelo"
+msgstr "Poista luettelo…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
@@ -185,7 +183,7 @@ msgstr "Tehtäväluettelon nimeäminen uudelleen epäonnistui"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
