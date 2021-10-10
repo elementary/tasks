@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-01 06:16+0000\n"
-"PO-Revision-Date: 2021-09-27 19:48+0000\n"
+"PO-Revision-Date: 2021-10-11 07:55+0000\n"
 "Last-Translator: DartDeaDia <dartdeadia@protonmail.com>\n"
-"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/extra/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/extra/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,18 +47,20 @@ msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr ""
+"Предотвращение многократного отображения заголовков имен учетных записей на "
+"боковой панели"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr ""
+msgstr "Длинные описания укорачиваются в конце, а не в начале"
 
 #: data/tasks.appdata.xml.in:22
 msgid "Removing descriptions is now saved"
-msgstr ""
+msgstr "Удаление описаний теперь сохраняется"
 
 #: data/tasks.appdata.xml.in:23
 msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
+msgstr "Курсор в описаниях размещается последовательно"
 
 #: data/tasks.appdata.xml.in:25 data/tasks.appdata.xml.in:36
 #: data/tasks.appdata.xml.in:44 data/tasks.appdata.xml.in:53
@@ -67,7 +69,7 @@ msgstr "Улучшения:"
 
 #: data/tasks.appdata.xml.in:27
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
+msgstr "Замените сочетание клавиш Delete на Ctrl + Backspace"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Add a confirmation dialog when deleting a task list"
