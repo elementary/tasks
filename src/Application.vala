@@ -107,6 +107,12 @@ public class Tasks.Application : Gtk.Application {
         }
 
         main_window.present ();
+
+        window_removed.connect ((window) => {
+            if (window == main_window) {
+                main_window = null;
+            }
+        });
     }
 
     private static Gee.HashMap<string, Gtk.CssProvider>? providers;
