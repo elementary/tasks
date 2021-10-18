@@ -334,7 +334,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         save_button.clicked.connect (() => {
             save_task (task);
-            cancel_edit ();
+            cancel_edit (false);
         });
 
         notify["task"].connect (() => {
@@ -349,15 +349,19 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         task = empty_task;
     }
 
-    private void cancel_edit () {
+    private void cancel_edit (bool reload_values = true) {
         unselect (this);
         if (!created) {
             reset_create ();
         }
-        var icalcomponent = task.get_icalcomponent ();
-        summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
-        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.icaltime_to_datetime (icalcomponent.get_due ());
-        location_popover.value = Util.get_ecalcomponent_location (task);
+
+        if (reload_values) {
+            var icalcomponent = task.get_icalcomponent ();
+            summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
+            due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.icaltime_to_datetime (icalcomponent.get_due ());
+            location_popover.value = Util.get_ecalcomponent_location (task);
+        }
+
         reveal_child_request (false);
     }
 
