@@ -124,10 +124,10 @@ public class Tasks.TodayTaskMonitor : GLib.Object {
                 task_notification.insert (task.get_id ().copy (), notification);
             }
 
-            var now_datetime_local = new GLib.DateTime.now_local ();
-            var due_datetime_local = Util.icaltime_to_datetime (due_icaltime);
+            var now_datetime = new GLib.DateTime.now ();
+            var due_datetime = Util.icaltime_to_datetime (due_icaltime);
 
-            var timespan = due_datetime_local.difference (now_datetime_local) / 1000000;
+            var timespan = due_datetime.difference (now_datetime) / 1000000;
             if (timespan < 0) {
                 timespan = 0;
             }
