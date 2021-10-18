@@ -52,7 +52,13 @@ public class Tasks.Application : Gtk.Application {
         var quit_action = new SimpleAction ("quit", null);
         quit_action.activate.connect (() => {
             if (main_window != null) {
-                main_window.destroy ();
+                /** Gtk.Window.close triggers the Gtk.Window.delete_event
+                which we bind to further down below to set main_window = null.
+                This ensures we always get the same behaviour (set main_window = null),
+                regardless if we use the accelerator or the window close button in
+                the header bar to stop the application.
+                */
+                main_window.close ();
             }
         });
 
@@ -107,11 +113,9 @@ public class Tasks.Application : Gtk.Application {
         }
 
         main_window.present ();
-
-        window_removed.connect ((window) => {
-            if (window == main_window) {
-                main_window = null;
-            }
+        main_window.delete_event.connect ((event) => {
+            main_window = null;
+            return Gdk.EVENT_PROPAGATE;
         });
     }
 
