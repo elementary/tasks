@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-04 14:43+0000\n"
-"PO-Revision-Date: 2021-08-12 17:34+0000\n"
+"PO-Revision-Date: 2021-10-21 17:04+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/extra/fr/>\n"
 "Language: fr\n"
@@ -38,25 +38,30 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:18
 msgid "Fixes:"
-msgstr ""
+msgstr "Corrections :"
 
 #: data/tasks.appdata.xml.in:20
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr ""
+"Nous avons empêché le nom des comptes de s'afficher plusieurs fois dans la "
+"barre latérale"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr ""
+"Les descriptions longues sont désormais coupées à la fin plutôt qu'au début"
 
 #: data/tasks.appdata.xml.in:22
 msgid "Removing descriptions is now saved"
-msgstr ""
+msgstr "La suppression de description est désormais enregistrée"
 
 #: data/tasks.appdata.xml.in:23
 msgid "Placing the cursor in descriptions works consistently"
 msgstr ""
+"Placer le curseur au niveau de la description fonctionne désormais "
+"correctement"
 
 #: data/tasks.appdata.xml.in:25 data/tasks.appdata.xml.in:36
 #: data/tasks.appdata.xml.in:44 data/tasks.appdata.xml.in:53
@@ -65,15 +70,19 @@ msgstr "Améliorations :"
 
 #: data/tasks.appdata.xml.in:27
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
+msgstr "Remplacement du raccourci de suppression par Ctrl + Effacer"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr ""
+"Ajout d'une boîte de dialogue de confirmation lors de la suppression d'une "
+"liste de tâches"
 
 #: data/tasks.appdata.xml.in:29
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr ""
+"Amélioration des performances pour les listes avec de nombreuses tâches "
+"complétées"
 
 #: data/tasks.appdata.xml.in:30 data/tasks.appdata.xml.in:38
 #: data/tasks.appdata.xml.in:47 data/tasks.appdata.xml.in:56
