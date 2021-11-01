@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-29 09:13+0000\n"
+"POT-Creation-Date: 2021-11-01 03:23+0000\n"
 "PO-Revision-Date: 2021-11-01 03:21+0000\n"
 "Last-Translator: Yuchen Deng <loaden@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
@@ -53,7 +53,8 @@ msgstr "删除“%s”？"
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
-msgstr "该列表及其所有任务将被永久删除。 如果您已共享此列表，则其他人将无法再访问。"
+msgstr ""
+"该列表及其所有任务将被永久删除。 如果您已共享此列表，则其他人将无法再访问。"
 
 #: src/MainWindow.vala:330
 msgid "Delete Anyway"
@@ -179,7 +180,7 @@ msgstr "重命名列表失败"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
