@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-01 03:26+0000\n"
-"PO-Revision-Date: 2021-11-02 00:54+0000\n"
+"PO-Revision-Date: 2021-11-02 00:56+0000\n"
 "Last-Translator: XXTXTOP <xxtxtop@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "tasks/extra/zh_Hans/>\n"
@@ -92,19 +92,19 @@ msgstr "第一个版本!"
 
 #: data/tasks.appdata.xml.in:64
 msgid "Support the dark style"
-msgstr ""
+msgstr "支持深色风格"
 
 #: data/tasks.appdata.xml.in:65
 msgid "Add and remove task lists with custom colors"
-msgstr ""
+msgstr "使用自定义颜色添加和删除任务列表"
 
 #: data/tasks.appdata.xml.in:66
 msgid "See scheduled tasks from all lists at once"
-msgstr ""
+msgstr "同时查看所有列表中的计划任务"
 
 #: data/tasks.appdata.xml.in:67
 msgid "Set due dates"
-msgstr ""
+msgstr "设定截止日期"
 
 #: data/tasks.appdata.xml.in:110
 msgid "elementary, Inc."
