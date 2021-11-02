@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-01 03:26+0000\n"
 "PO-Revision-Date: 2021-11-02 00:56+0000\n"
-"Last-Translator: XXTXTOP <xxtxtop@gmail.com>\n"
+"Last-Translator: Yuchen Deng <loaden@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "tasks/extra/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -88,7 +88,7 @@ msgstr "修正预设视图的顺序"
 
 #: data/tasks.appdata.xml.in:62
 msgid "First release!"
-msgstr "第一个版本!"
+msgstr "第一次发布！"
 
 #: data/tasks.appdata.xml.in:64
 msgid "Support the dark style"
