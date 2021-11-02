@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-02 00:56+0000\n"
-"PO-Revision-Date: 2021-11-02 00:56+0000\n"
+"PO-Revision-Date: 2021-11-02 03:41+0000\n"
 "Last-Translator: Yuchen Deng <loaden@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
 "tasks/extra/zh_Hans/>\n"
@@ -38,25 +38,25 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:18
 msgid "Fixes:"
-msgstr ""
+msgstr "修复:"
 
 #: data/tasks.appdata.xml.in:20
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
-msgstr ""
+msgstr "防止在侧边栏中多次显示帐户名称标题"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr ""
+msgstr "长描述在末尾而不是开头被截断"
 
 #: data/tasks.appdata.xml.in:22
 msgid "Removing descriptions is now saved"
-msgstr ""
+msgstr "删除描述现在已保存"
 
 #: data/tasks.appdata.xml.in:23
 msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
+msgstr "描述中的光标效果保持一致"
 
 #: data/tasks.appdata.xml.in:25 data/tasks.appdata.xml.in:36
 #: data/tasks.appdata.xml.in:44 data/tasks.appdata.xml.in:53
@@ -65,15 +65,15 @@ msgstr "改进:"
 
 #: data/tasks.appdata.xml.in:27
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
+msgstr "用 Ctrl + Backspace 替换 Delete 快捷键"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Add a confirmation dialog when deleting a task list"
-msgstr ""
+msgstr "添加删除任务列表确认对话框"
 
 #: data/tasks.appdata.xml.in:29
 msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
+msgstr "提高具有大量已完成任务的列表的性能"
 
 #: data/tasks.appdata.xml.in:30 data/tasks.appdata.xml.in:38
 #: data/tasks.appdata.xml.in:47 data/tasks.appdata.xml.in:56
