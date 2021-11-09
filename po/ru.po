@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 19:57+0000\n"
+"POT-Creation-Date: 2021-11-04 21:27+0000\n"
 "PO-Revision-Date: 2021-09-27 19:48+0000\n"
 "Last-Translator: DartDeaDia <dartdeadia@protonmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
@@ -32,25 +32,25 @@ msgstr "Параметры онлайн аккаунтов…"
 msgid "Add Task List…"
 msgstr "Добавить список задач…"
 
-#: src/MainWindow.vala:271
+#: src/MainWindow.vala:258
 msgid "Creating a new task list failed"
 msgstr "Не удалось создать список задач"
 
-#: src/MainWindow.vala:272 src/MainWindow.vala:344
+#: src/MainWindow.vala:259 src/MainWindow.vala:331
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
-#: src/MainWindow.vala:277
+#: src/MainWindow.vala:264
 msgid "New list"
 msgstr "Новый список"
 
-#: src/MainWindow.vala:321
+#: src/MainWindow.vala:308
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Удалить «%s»?"
 
-#: src/MainWindow.vala:322
+#: src/MainWindow.vala:309
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -58,11 +58,11 @@ msgstr ""
 "Список и все задания в нём будут удалены навсегда. Если вы поделились этим "
 "списком с другими людьми, они потеряют к нему доступ."
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:317
 msgid "Delete Anyway"
 msgstr "Все равно удалить"
 
-#: src/MainWindow.vala:343
+#: src/MainWindow.vala:330
 msgid "Deleting the task list failed"
 msgstr "Не удалось удалить список задач"
 
@@ -122,7 +122,7 @@ msgstr "Не удалось изменить цвет списка задач"
 msgid "The task list registry may be unavailable or write-protected."
 msgstr "Журнал списка задач может быть недоступен или защищен от записи."
 
-#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
 msgstr "По расписанию"
 
@@ -142,26 +142,26 @@ msgstr "В настоящее время отключено от (возможн
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Ненадежный SSL сертификат для подключения, отклонено"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:63
+#: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
 msgstr "Нет задач"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:309
+#: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
 msgstr "Не удалось обозначить задачу выполненной"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:175
-#: src/Widgets/ScheduledTaskListGrid.vala:197
-#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:310
+#: src/Widgets/ScheduledTaskListGrid.vala:222
+#: src/Widgets/ScheduledTaskListGrid.vala:244
+#: src/Widgets/ScheduledTaskListGrid.vala:266 src/Widgets/TaskListGrid.vala:310
 #: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Реестр задач может быть недоступен или не может быть записан."
 
-#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:331
+#: src/Widgets/ScheduledTaskListGrid.vala:243 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
 msgstr "Не удалось обновить задачу"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:353
+#: src/Widgets/ScheduledTaskListGrid.vala:265 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
 msgstr "Не удалось удалить задачу"
 
@@ -182,7 +182,7 @@ msgstr "Не удалось переименовать список задач"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

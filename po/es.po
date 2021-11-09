@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 19:57+0000\n"
+"POT-Creation-Date: 2021-11-04 21:27+0000\n"
 "PO-Revision-Date: 2021-07-28 17:49+0000\n"
 "Last-Translator: Alvaro <alvaroaraoz_92@hotmail.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
@@ -31,39 +31,39 @@ msgstr "Configuración de cuentas en línea …"
 msgid "Add Task List…"
 msgstr "Añadir lista de tareas…"
 
-#: src/MainWindow.vala:271
+#: src/MainWindow.vala:258
 msgid "Creating a new task list failed"
 msgstr "Falló la creación de una lista de tareas nueva"
 
-#: src/MainWindow.vala:272 src/MainWindow.vala:344
+#: src/MainWindow.vala:259 src/MainWindow.vala:331
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de listas de tareas no esté disponible o no se "
 "pueda modificar."
 
-#: src/MainWindow.vala:277
+#: src/MainWindow.vala:264
 msgid "New list"
 msgstr "Lista nueva"
 
-#: src/MainWindow.vala:321
+#: src/MainWindow.vala:308
 #, c-format
 msgid "Delete “%s”?"
 msgstr ""
 
-#: src/MainWindow.vala:322
+#: src/MainWindow.vala:309
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:317
 #, fuzzy
 #| msgid "Delete Task"
 msgid "Delete Anyway"
 msgstr "Eliminar tarea"
 
-#: src/MainWindow.vala:343
+#: src/MainWindow.vala:330
 msgid "Deleting the task list failed"
 msgstr "No se pudo eliminar la lista de tareas"
 
@@ -127,7 +127,7 @@ msgstr ""
 "Es posible que el registro de la lista de tareas no esté disponible o esté "
 "protegido contra escritura."
 
-#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
 msgstr "Programadas"
 
@@ -147,28 +147,28 @@ msgstr "Actualmente sin conexión al almacén de datos (posiblemente remoto)"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "El depósito de certificados SSL se rechazó para efectuar la conexión"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:63
+#: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
 msgstr "No hay tareas"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:309
+#: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
 msgstr "No se pudo completar la tarea"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:175
-#: src/Widgets/ScheduledTaskListGrid.vala:197
-#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:310
+#: src/Widgets/ScheduledTaskListGrid.vala:222
+#: src/Widgets/ScheduledTaskListGrid.vala:244
+#: src/Widgets/ScheduledTaskListGrid.vala:266 src/Widgets/TaskListGrid.vala:310
 #: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de tareas no esté disponible o no se pueda "
 "escribir en este."
 
-#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:331
+#: src/Widgets/ScheduledTaskListGrid.vala:243 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
 msgstr "Error al actualizar la tarea"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:353
+#: src/Widgets/ScheduledTaskListGrid.vala:265 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
 msgstr "No se pudo eliminar la tarea"
 
@@ -189,7 +189,7 @@ msgstr "Falló el cambio de nombre de una lista de tareas"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"

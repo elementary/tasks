@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 19:57+0000\n"
+"POT-Creation-Date: 2021-11-04 21:27+0000\n"
 "PO-Revision-Date: 2021-09-27 01:56+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/"
@@ -31,25 +31,25 @@ msgstr "オンラインアカウントの設定…"
 msgid "Add Task List…"
 msgstr "タスクリストを追加…"
 
-#: src/MainWindow.vala:271
+#: src/MainWindow.vala:258
 msgid "Creating a new task list failed"
 msgstr "新しいタスクリストを作成できませんでした"
 
-#: src/MainWindow.vala:272 src/MainWindow.vala:344
+#: src/MainWindow.vala:259 src/MainWindow.vala:331
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "タスクリストの登録ができないか、書き込みできない可能性があります。"
 
-#: src/MainWindow.vala:277
+#: src/MainWindow.vala:264
 msgid "New list"
 msgstr "新しいリスト"
 
-#: src/MainWindow.vala:321
+#: src/MainWindow.vala:308
 #, c-format
 msgid "Delete “%s”?"
 msgstr "“%s”を削除しますか？"
 
-#: src/MainWindow.vala:322
+#: src/MainWindow.vala:309
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -57,11 +57,11 @@ msgstr ""
 "リストとそこに含まれるタスクは、完全に削除されます。このリストを共有している"
 "場合、共有相手はアクセスできなくなります。"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:317
 msgid "Delete Anyway"
 msgstr "了解して削除"
 
-#: src/MainWindow.vala:343
+#: src/MainWindow.vala:330
 msgid "Deleting the task list failed"
 msgstr "タスクリストを削除できませんでした"
 
@@ -123,7 +123,7 @@ msgstr ""
 "タスクリストの登録が無効であるか、書き込み禁止に設定されている可能性がありま"
 "す。"
 
-#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
 msgstr "繰り返し設定のあるタスク"
 
@@ -143,26 +143,26 @@ msgstr "(リモートの) データストアから切断されています"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "SSL 証明書が拒否されました"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:63
+#: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
 msgstr "タスクがありません"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:309
+#: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
 msgstr "タスクを完了済みとしてマークできませんでした"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:175
-#: src/Widgets/ScheduledTaskListGrid.vala:197
-#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:310
+#: src/Widgets/ScheduledTaskListGrid.vala:222
+#: src/Widgets/ScheduledTaskListGrid.vala:244
+#: src/Widgets/ScheduledTaskListGrid.vala:266 src/Widgets/TaskListGrid.vala:310
 #: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "タスクを登録できないか、書き込みできない可能性があります。"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:331
+#: src/Widgets/ScheduledTaskListGrid.vala:243 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
 msgstr "タスクを更新できませんでした"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:353
+#: src/Widgets/ScheduledTaskListGrid.vala:265 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
 msgstr "タスクを削除できませんでした"
 
@@ -183,7 +183,7 @@ msgstr "タスクリストの名前を変更できませんでした"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:147
 #, c-format
 msgid "%s at %s"
