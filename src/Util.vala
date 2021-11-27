@@ -85,24 +85,45 @@ namespace Tasks.Util {
     //--- Date and Time ---//
 
     /**
-     * Converts two datetimes to one TimeType. The first contains the date,
-     * its time settings are ignored. The second one contains the time itself.
+     * Converts two DateTimes representing a date and a time to one TimeType.
+     *
+     * The first contains the date; its time settings are ignored. The second
+     * one contains the time itself; its date settings are ignored. If the time
+     * is `null`, the resulting TimeType is of `DATE` type; if it is given, the
+     * TimeType is of `DATE-TIME` type.
+     *
+     * This also accepts an optional `timezone` argument. If it is given a
+     * timezone, the resulting TimeType will be relative to the given timezone.
+     * If it is `null`, the resulting TimeType will be "floating" with no
+     * timezone. If the argument is not given, it will default to the system
+     * timezone.
      */
-    public ICal.Time date_time_to_ical (DateTime date, DateTime? time_local, string? timezone = null) {
+     public ICal.Time datetimes_to_icaltime (GLib.DateTime date, GLib.DateTime? time_local,
+        ICal.Timezone? timezone = ECal.util_get_system_timezone ().copy ()) {
+
         var result = new ICal.Time.from_day_of_year (date.get_day_of_year (), date.get_year ());
 
-        if (time_local != null) {
-            if (timezone != null) {
-                result.set_timezone (ICal.Timezone.get_builtin_timezone (timezone));
-            } else {
-                result.set_timezone (ECal.util_get_system_timezone ());
-            }
-
-            result.set_is_date (false);
-            result.set_time (time_local.get_hour (), time_local.get_minute (), time_local.get_second ());
-        } else {
+        // Check if it's a date. If so, set is_date to true and fix the time to be sure.
+        // If it's not a date, first thing set is_date to false.
+        // Then, set the timezone.
+        // Then, set the time.
+        if (time_local == null) {
+            // Date type: ensure that everything corresponds to a date
             result.set_is_date (true);
             result.set_time (0, 0, 0);
+        } else {
+            // Includes time
+            // Set is_date first (otherwise timezone won't change)
+            result.set_is_date (false);
+
+            // Set timezone for the time to be relative to
+            // (doesn't affect DATE-type times)
+            result.set_timezone (timezone);
+
+            // Set the time with the updated time zone
+            result.set_time (time_local.get_hour (), time_local.get_minute (), time_local.get_second ());
+            debug (result.get_tzid ());
+            debug (result.as_ical_string ());
         }
 
         return result;
