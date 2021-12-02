@@ -356,7 +356,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         }
         var icalcomponent = task.get_icalcomponent ();
         summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
-        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time (icalcomponent.get_due ());
+        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time_local (icalcomponent.get_due ());
         location_popover.value = Util.get_ecalcomponent_location (task);
         reveal_child_request (false);
     }
@@ -450,7 +450,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             if (ical_task.get_due ().is_null_time ()) {
                 due_datetime_popover_revealer.reveal_child = false;
             } else {
-                var due_datetime = Util.ical_to_date_time (ical_task.get_due ());
+                var due_datetime = Util.ical_to_date_time_local (ical_task.get_due ());
                 due_datetime_popover.value = due_datetime;
                 due_datetime_popover_revealer.reveal_child = true;
             }
