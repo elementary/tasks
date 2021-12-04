@@ -364,16 +364,23 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private void save_task (ECal.Component task) {
         unowned ICal.Component ical_task = task.get_icalcomponent ();
 
-        if (due_datetime_popover.value != null) {
-            var due_icaltime = Util.datetimes_to_icaltime (due_datetime_popover.value, due_datetime_popover.value, null);
-            ical_task.set_due (due_icaltime);
-            ical_task.set_dtstart (due_icaltime);
+        ICal.Time new_icaltime;
+        if (due_datetime_popover.value == null) {
+            new_icaltime = new ICal.Time.null_time ();
         } else {
-            var null_icaltime = new ICal.Time.null_time ();
-
-            ical_task.set_due (null_icaltime);
-            ical_task.set_dtstart (null_icaltime);
+            var task_tz = ical_task.get_due ().get_timezone ();
+            if (task_tz != null) {
+                // If the task has a timezone, must convert from displayed local time
+                new_icaltime = Util.datetimes_to_icaltime (due_datetime_popover.value, due_datetime_popover.value, ECal.util_get_system_timezone ());
+                new_icaltime.convert_to_zone_inplace (task_tz);
+            } else {
+                // Use floating timezone if no timezone already exists
+                new_icaltime = Util.datetimes_to_icaltime (due_datetime_popover.value, due_datetime_popover.value, null);
+            }
         }
+
+        ical_task.set_due (new_icaltime);
+        ical_task.set_dtstart (new_icaltime);
 
         Util.set_ecalcomponent_location (task, location_popover.value);
 
