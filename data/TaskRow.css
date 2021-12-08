@@ -47,3 +47,10 @@ row entry.flat:focus {
 row:not(.card) entry.add-task {
     border-color: alpha (@text_color, 0.25);
 }
+
+row.drag-active {
+    background-color: @bg_color;
+    border: 1px solid @borders;
+    border-radius: 3px;
+    transition: none;
+}

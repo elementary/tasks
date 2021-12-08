@@ -33,3 +33,7 @@
 .sidebar image {
     color: @text_color;
 }
+
+.drop-hover {
+    background-color: @selected_bg_color;
+}

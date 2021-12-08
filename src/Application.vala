@@ -22,6 +22,10 @@ public class Tasks.Application : Gtk.Application {
     public static GLib.Settings settings;
     public static Tasks.TaskModel model;
 
+    public const Gtk.TargetEntry[] DRAG_AND_DROP_TASK_DATA = {
+        { "text/uri-list", Gtk.TargetFlags.SAME_APP | Gtk.TargetFlags.OTHER_WIDGET, 0 } // TODO: TEXT_URI
+    };
+
     public Application () {
         Object (
             application_id: "io.elementary.tasks",
