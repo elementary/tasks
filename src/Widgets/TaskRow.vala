@@ -38,6 +38,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Tasks.Widgets.EntryPopover.Location location_popover;
     private Gtk.Revealer location_popover_revealer;
 
+    private Gtk.EventBox event_box;
     private Gtk.Stack state_stack;
     private Gtk.Image icon;
     private Gtk.CheckButton check;
@@ -280,7 +281,17 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
         revealer.add (grid);
 
-        add (revealer);
+        event_box = new Gtk.EventBox () {
+            expand = true,
+            above_child = false
+        };
+        event_box.add_events (
+            Gdk.EventMask.BUTTON_PRESS_MASK |
+            Gdk.EventMask.BUTTON_RELEASE_MASK
+        );
+        event_box.add (revealer);
+
+        add (event_box);
         margin_start = margin_end = 12;
 
         style_context = get_style_context ();
@@ -303,6 +314,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
                 task_removed (task);
             });
         }
+
+        build_drag_and_drop ();
 
         check.toggled.connect (() => {
             if (task == null) {
@@ -515,5 +528,52 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         }
 
         return created.is_valid_time ();
+    }
+
+    private void build_drag_and_drop () {
+        if (!created || is_scheduled_view) {
+            return;
+        }
+        Gtk.drag_source_set (event_box, Gdk.ModifierType.BUTTON1_MASK, Application.DRAG_AND_DROP_TASK_DATA, Gdk.DragAction.MOVE);
+
+        event_box.drag_begin.connect (on_drag_begin);
+        event_box.drag_data_get.connect (on_drag_data_get);
+        event_box.drag_data_delete.connect (on_drag_data_delete);
+    }
+
+    private void on_drag_begin (Gdk.DragContext context) {
+        Gtk.Allocation alloc;
+        get_allocation (out alloc);
+
+        var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, alloc.width, alloc.height);
+        var cairo_context = new Cairo.Context (surface);
+
+        var style_context = get_style_context ();
+        var had_cards_class = style_context.has_class (Granite.STYLE_CLASS_CARD);
+
+        style_context.add_class ("drag-active");
+        if (had_cards_class) {
+            style_context.remove_class (Granite.STYLE_CLASS_CARD);
+        }
+        draw_to_cairo_context (cairo_context);
+        if (had_cards_class) {
+            style_context.add_class (Granite.STYLE_CLASS_CARD);
+        }
+        style_context.remove_class ("drag-active");
+
+        int drag_icon_x, drag_icon_y;
+        translate_coordinates (this, 0, 0, out drag_icon_x, out drag_icon_y);
+        surface.set_device_offset (-drag_icon_x, -drag_icon_y);
+
+        Gtk.drag_set_icon_surface (context, surface);
+    }
+
+    private void on_drag_data_get (Gtk.Widget widget, Gdk.DragContext context, Gtk.SelectionData selection_data, uint target_type, uint time) {
+        var task_uri = "task://%s/%s".printf (source.uid, task.get_uid ());
+        selection_data.set_uris ({ task_uri });
+    }
+
+    private void on_drag_data_delete (Gdk.DragContext context) {
+        destroy ();
     }
 }

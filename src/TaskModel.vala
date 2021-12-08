@@ -653,6 +653,38 @@ public class Tasks.TaskModel : Object {
         yield client.remove_object (uid, rid, mod_type, ECal.OperationFlags.NONE, null);
     }
 
+    public async bool move_task (E.Source source_list, E.Source destination_list, string task_uid) throws Error {
+        ECal.Client source_client = get_client (source_list);
+        var source_remove_success = false;
+
+        ECal.Client destination_client = get_client (destination_list);
+        var destination_create_success = false;
+
+        SList<ECal.Component> ecal_components;
+        if (yield source_client.get_objects_for_uid (task_uid, null, out ecal_components)) {
+            var ical_components = new SList<ICal.Component> ();
+            foreach (var ecal_component in ecal_components) {
+                unowned var ical_component = ecal_component.get_icalcomponent ();
+
+                if (ical_component != null) {
+                    ical_components.append (ical_component.clone ());
+                }
+            }
+
+            if (ical_components.length () > 0) {
+                destination_create_success = yield destination_client.create_objects (ical_components, ECal.OperationFlags.NONE, null, null);
+            }
+
+            if (destination_create_success) {
+                var ecal_component_ids = new SList<ECal.ComponentId> ();
+                ecal_component_ids.append (new ECal.ComponentId (task_uid, null));
+                source_remove_success = yield source_client.remove_objects (ecal_component_ids, ECal.ObjModType.ALL, ECal.OperationFlags.NONE, null);
+            }
+        }
+
+        return destination_create_success && source_remove_success;
+    }
+
     private void debug_task (E.Source task_list, ECal.Component task) {
         unowned ICal.Component comp = task.get_icalcomponent ();
         var task_summary = comp.get_summary ();

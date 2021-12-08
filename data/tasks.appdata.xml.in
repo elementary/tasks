@@ -17,6 +17,7 @@
       <description>
         <p>Features:</p>
         <ul>
+          <li>Drag and drop tasks between lists</li>
           <li>Follow email and web links in the task description with Control + Click</li>
         </ul>
         <p>Improvements:</p>
