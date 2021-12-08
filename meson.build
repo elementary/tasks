@@ -35,7 +35,7 @@ tasks_deps = [
     dependency('geocode-glib-1.0'),
     dependency('glib-2.0'),
     dependency('gobject-2.0'),
-    dependency('granite', version: '>=0.5'),
+    dependency('granite', version: '>=6.2.0'),
     dependency('gtk+-3.0'),
     libecal_dep,
     dependency('libedataserver-1.2'),
