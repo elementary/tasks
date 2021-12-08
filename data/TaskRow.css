@@ -49,8 +49,8 @@ row:not(.card) entry.add-task {
 }
 
 row.drag-active {
-    transition: none;
-    border: 1 solid alpha (@text_color, 0.25);
     background-color: @bg_color;
-    border-radius: 3;
+    border: 1px solid @borders;
+    border-radius: 3px;
+    transition: none;
 }
