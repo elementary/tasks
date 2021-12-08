@@ -369,7 +369,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         }
         var icalcomponent = task.get_icalcomponent ();
         summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
-        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time (icalcomponent.get_due ());
+        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time_local (icalcomponent.get_due ());
         location_popover.value = Util.get_ecalcomponent_location (task);
         reveal_child_request (false);
     }
@@ -377,16 +377,23 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private void save_task (ECal.Component task) {
         unowned ICal.Component ical_task = task.get_icalcomponent ();
 
-        if (due_datetime_popover.value != null) {
-            var due_icaltime = Util.date_time_to_ical (due_datetime_popover.value, due_datetime_popover.value);
-            ical_task.set_due (due_icaltime);
-            ical_task.set_dtstart (due_icaltime);
+        ICal.Time new_icaltime;
+        if (due_datetime_popover.value == null) {
+            new_icaltime = new ICal.Time.null_time ();
         } else {
-            var null_icaltime = new ICal.Time.null_time ();
-
-            ical_task.set_due (null_icaltime);
-            ical_task.set_dtstart (null_icaltime);
+            var task_tz = ical_task.get_due ().get_timezone ();
+            if (task_tz != null) {
+                // If the task has a timezone, must convert from displayed local time
+                new_icaltime = Util.datetimes_to_icaltime (due_datetime_popover.value, due_datetime_popover.value, ECal.util_get_system_timezone ());
+                new_icaltime.convert_to_zone_inplace (task_tz);
+            } else {
+                // Use floating timezone if no timezone already exists
+                new_icaltime = Util.datetimes_to_icaltime (due_datetime_popover.value, due_datetime_popover.value, null);
+            }
         }
+
+        ical_task.set_due (new_icaltime);
+        ical_task.set_dtstart (new_icaltime);
 
         Util.set_ecalcomponent_location (task, location_popover.value);
 
@@ -463,7 +470,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             if (ical_task.get_due ().is_null_time ()) {
                 due_datetime_popover_revealer.reveal_child = false;
             } else {
-                var due_datetime = Util.ical_to_date_time (ical_task.get_due ());
+                var due_datetime = Util.ical_to_date_time_local (ical_task.get_due ());
                 due_datetime_popover.value = due_datetime;
                 due_datetime_popover_revealer.reveal_child = true;
             }
