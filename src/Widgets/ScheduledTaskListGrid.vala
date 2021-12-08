@@ -19,7 +19,8 @@
 */
 
 public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
-    private Gee.Collection<ECal.ClientView> views;
+    private Gee.Map<E.Source, ECal.ClientView> views;
+    private const string QUERY = "AND (NOT is-completed?) (has-start?)";
 
     /*
      * We need to pass a valid S-expression as query to guarantee the callback events are fired.
@@ -28,17 +29,17 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
      * https://gitlab.gnome.org/GNOME/evolution-data-server/-/blob/master/src/calendar/libedata-cal/e-cal-backend-sexp.c
      */
 
-    public void add_view (E.Source task_list, string query) {
+    private void add_view (E.Source source, string query) {
         try {
-            var view = Tasks.Application.model.create_task_list_view (
-                task_list,
+            var view = model.create_task_list_view (
+                source,
                 query,
                 on_tasks_added,
                 on_tasks_modified,
                 on_tasks_removed );
 
             lock (views) {
-                views.add (view);
+                views.set (source, view);
             }
 
         } catch (Error e) {
@@ -46,24 +47,31 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
         }
     }
 
-    public void remove_views () {
-        foreach (unowned Gtk.Widget child in task_list.get_children ()) {
-            child.destroy ();
+    private void remove_view (E.Source source) {
+        foreach (unowned Gtk.Widget child in get_children ()) {
+            if (child is Tasks.Widgets.TaskRow && ((Tasks.Widgets.TaskRow) child).source == source) {
+                child.destroy ();
+            }
         }
 
         lock (views) {
-            foreach (ECal.ClientView view in views) {
-                Tasks.Application.model.destroy_task_list_view (view);
+            ECal.ClientView view;
+            if (views.unset (source, out view)) {
+                model.destroy_task_list_view (view);
             }
-            views.clear ();
         }
     }
 
+    public Tasks.TaskModel model { get; construct; }
     private Gtk.Label scheduled_title;
     private Gtk.ListBox task_list;
 
+    public ScheduledTaskListGrid (Tasks.TaskModel model) {
+        Object (model: model);
+    }
+
     construct {
-        views = new Gee.ArrayList<ECal.ClientView> ((Gee.EqualDataFunc<ECal.ClientView>?) direct_equal);
+        views = new Gee.HashMap<E.Source, ECal.ClientView> ();
 
         scheduled_title = new Gtk.Label (_("Scheduled")) {
             ellipsize = Pango.EllipsizeMode.END,
@@ -105,6 +113,45 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
         task_list.row_activated.connect (on_row_activated);
 
         show_all ();
+
+        model.task_list_added.connect (add_task_list);
+        model.task_list_modified.connect (modify_task_list);
+        model.task_list_removed.connect (remove_task_list);
+
+        model.get_registry.begin ((obj, res) => {
+            E.SourceRegistry registry;
+            try {
+                registry = model.get_registry.end (res);
+            } catch (Error e) {
+                critical (e.message);
+                return;
+            }
+
+            var sources = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
+            sources.foreach ((source) => {
+                add_task_list (source);
+            });
+        });
+    }
+
+    private void add_task_list (E.Source task_list) {
+        if (!task_list.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
+            return;
+        }
+        E.SourceTaskList list = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+
+        if (list.selected == true && task_list.enabled == true && !task_list.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
+            add_view (task_list, QUERY);
+        }
+    }
+
+    private void modify_task_list (E.Source task_list) {
+        remove_task_list (task_list);
+        add_task_list (task_list);
+    }
+
+    private void remove_task_list (E.Source task_list) {
+        remove_view (task_list);
     }
 
     private void on_row_activated (Gtk.ListBoxRow row) {
