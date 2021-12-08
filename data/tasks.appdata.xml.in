@@ -19,6 +19,11 @@
         <ul>
           <li>Follow email and web links in the task description with Control + Click</li>
         </ul>
+        <p>Improvements:</p>
+        <ul>
+          <li>Performance improvements</li>
+          <li>Updated translations</li>
+        </ul>
       </description>
     </release>
     <release version="6.0.4" date="2021-09-27" urgency="medium">
