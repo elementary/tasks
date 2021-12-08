@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-04 14:43+0000\n"
-"PO-Revision-Date: 2021-09-14 21:19+0000\n"
+"POT-Creation-Date: 2021-12-08 21:56+0000\n"
+"PO-Revision-Date: 2021-10-29 09:07+0000\n"
 "Last-Translator: JohnDumpling <john_dumpling@protonmail.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/tasks/tasks/sk/>\n"
 "Language: sk\n"
@@ -30,40 +30,38 @@ msgstr "Nastavenia online účtov…"
 msgid "Add Task List…"
 msgstr "Pridať zoznam úloh…"
 
-#: src/MainWindow.vala:271
+#: src/MainWindow.vala:258
 msgid "Creating a new task list failed"
 msgstr "Vytváranie nového zoznamu úloh sa nepodarilo"
 
-#: src/MainWindow.vala:272 src/MainWindow.vala:344
+#: src/MainWindow.vala:259 src/MainWindow.vala:331
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Register zoznamu úloh môže byť nedostupný alebo sa naň nedajú písať údaje."
 
-#: src/MainWindow.vala:277
+#: src/MainWindow.vala:264
 msgid "New list"
 msgstr "Nový zoznam"
 
-#: src/MainWindow.vala:321
+#: src/MainWindow.vala:308
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Vymazať „%s“?"
 
-#: src/MainWindow.vala:322
-#, fuzzy
-#| msgid "The list and all its tasks will be permanently deleted."
+#: src/MainWindow.vala:309
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
-msgstr "Tento zoznam a všetky jeho úlohy budú natrvalo odstránené."
+msgstr ""
+"Tento zoznam a všetky jeho úlohy budú natrvalo odstránené. Ak ste tento "
+"zoznam zdieľali, ostatní ľudia už nebudú mať k nemu prístup."
+
+#: src/MainWindow.vala:317
+msgid "Delete Anyway"
+msgstr "Napriek tomu vymazať"
 
 #: src/MainWindow.vala:330
-#, fuzzy
-#| msgid "Delete Task"
-msgid "Delete Anyway"
-msgstr "Vymazať úlohu"
-
-#: src/MainWindow.vala:343
 msgid "Deleting the task list failed"
 msgstr "Zmazanie zoznamu úloh sa nepodarilo"
 
@@ -124,7 +122,7 @@ msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 "Register zoznamu úloh môže byť nedostupný alebo dostupný len na čítanie."
 
-#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
 msgstr "Naplánované"
 
@@ -144,26 +142,26 @@ msgstr "Momentálne odpojené od (pravdepodobne vzdialeného) úložiska dát"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "SSL certifikát bol odmietnutý kvôli pripojeniu"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:63
+#: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
 msgstr "Žiadne úlohy"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:309
+#: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
 msgstr "Dokončenie úlohy sa nepodarilo"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:175
-#: src/Widgets/ScheduledTaskListGrid.vala:197
-#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:310
+#: src/Widgets/ScheduledTaskListGrid.vala:222
+#: src/Widgets/ScheduledTaskListGrid.vala:244
+#: src/Widgets/ScheduledTaskListGrid.vala:266 src/Widgets/TaskListGrid.vala:310
 #: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Register úloh môže byť nedostupný alebo sa naň nedajú písať údaje."
 
-#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:331
+#: src/Widgets/ScheduledTaskListGrid.vala:243 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
 msgstr "Aktualizovanie úlohy sa nepodarilo"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:353
+#: src/Widgets/ScheduledTaskListGrid.vala:265 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
 msgstr "Odstránenie úlohy sa nepodarilo"
 

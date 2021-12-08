@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-04 14:43+0000\n"
+"POT-Creation-Date: 2021-12-08 21:56+0000\n"
 "PO-Revision-Date: 2021-09-27 07:52+0000\n"
 "Last-Translator: Özgür Baskin <queeup@zoho.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/tasks/tasks/tr/"
@@ -31,25 +31,25 @@ msgstr "Çevrimiçi Hesap Ayarları…"
 msgid "Add Task List…"
 msgstr "Görev Listesi Ekle…"
 
-#: src/MainWindow.vala:271
+#: src/MainWindow.vala:258
 msgid "Creating a new task list failed"
 msgstr "Yeni bir görev listesi oluşturma başarısız oldu"
 
-#: src/MainWindow.vala:272 src/MainWindow.vala:344
+#: src/MainWindow.vala:259 src/MainWindow.vala:331
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Görev listesi kayıt defteri kullanılamıyor veya yazılamıyor olabilir."
 
-#: src/MainWindow.vala:277
+#: src/MainWindow.vala:264
 msgid "New list"
 msgstr "Yeni liste"
 
-#: src/MainWindow.vala:321
+#: src/MainWindow.vala:308
 #, c-format
 msgid "Delete “%s”?"
 msgstr "“%s” silinsin mi?"
 
-#: src/MainWindow.vala:322
+#: src/MainWindow.vala:309
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -57,11 +57,11 @@ msgstr ""
 "Liste ve tüm görevleri kalıcı olarak silinecek. Bu listeyi paylaştıysanız, "
 "diğer kişilerin artık erişimi olmayacaktır."
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:317
 msgid "Delete Anyway"
 msgstr "Yine de Sil"
 
-#: src/MainWindow.vala:343
+#: src/MainWindow.vala:330
 msgid "Deleting the task list failed"
 msgstr "Görev listesi silinemedi"
 
@@ -122,7 +122,7 @@ msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 "Görev listesi kayıt defteri kullanılamıyor veya yazma korumalı olabilir."
 
-#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
 msgstr "Zamanlanan Görevler"
 
@@ -142,26 +142,26 @@ msgstr "Şu anda (muhtemelen uzak) veri deposu bağlantısı kesik"
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Bağlantı için SSL sertifika güveni reddedildi"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:63
+#: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
 msgstr "Görev Yok"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:309
+#: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
 msgstr "Görev tamamlanamadı"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:175
-#: src/Widgets/ScheduledTaskListGrid.vala:197
-#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:310
+#: src/Widgets/ScheduledTaskListGrid.vala:222
+#: src/Widgets/ScheduledTaskListGrid.vala:244
+#: src/Widgets/ScheduledTaskListGrid.vala:266 src/Widgets/TaskListGrid.vala:310
 #: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Görev kayıt defteri kullanılamıyor veya yazılamıyor olabilir."
 
-#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:331
+#: src/Widgets/ScheduledTaskListGrid.vala:243 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
 msgstr "Görev güncellenemedi"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:353
+#: src/Widgets/ScheduledTaskListGrid.vala:265 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
 msgstr "Görev kaldırılamadı"
 

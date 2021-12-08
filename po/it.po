@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-04 14:43+0000\n"
+"POT-Creation-Date: 2021-12-08 21:56+0000\n"
 "PO-Revision-Date: 2021-01-26 16:07+0000\n"
 "Last-Translator: Marco De Paolini <marco.depaolini@gmail.com>\n"
 "Language-Team: Italian <https://l10n.elementary.io/projects/tasks/tasks/it/"
@@ -31,39 +31,39 @@ msgstr ""
 msgid "Add Task List…"
 msgstr "Aggiungi un elenco attività…"
 
-#: src/MainWindow.vala:271
+#: src/MainWindow.vala:258
 msgid "Creating a new task list failed"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
 
-#: src/MainWindow.vala:272 src/MainWindow.vala:344
+#: src/MainWindow.vala:259 src/MainWindow.vala:331
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
 
-#: src/MainWindow.vala:277
+#: src/MainWindow.vala:264
 msgid "New list"
 msgstr "Nuovo elenco"
 
-#: src/MainWindow.vala:321
+#: src/MainWindow.vala:308
 #, c-format
 msgid "Delete “%s”?"
 msgstr ""
 
-#: src/MainWindow.vala:322
+#: src/MainWindow.vala:309
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:317
 #, fuzzy
 #| msgid "Delete Task"
 msgid "Delete Anyway"
 msgstr "Cancella attività"
 
-#: src/MainWindow.vala:343
+#: src/MainWindow.vala:330
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
@@ -138,7 +138,7 @@ msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
 
-#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:68
+#: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
 msgstr "Programmate"
 
@@ -159,19 +159,19 @@ msgid "SSL certificate trust was rejected for the connection"
 msgstr ""
 "L'attendibilità del certificato SSL è stata rifiutata per la connessione"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:79 src/Widgets/TaskListGrid.vala:63
+#: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
 msgstr "Nessuna attività"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:174 src/Widgets/TaskListGrid.vala:309
+#: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Completing task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:175
-#: src/Widgets/ScheduledTaskListGrid.vala:197
-#: src/Widgets/ScheduledTaskListGrid.vala:219 src/Widgets/TaskListGrid.vala:310
+#: src/Widgets/ScheduledTaskListGrid.vala:222
+#: src/Widgets/ScheduledTaskListGrid.vala:244
+#: src/Widgets/ScheduledTaskListGrid.vala:266 src/Widgets/TaskListGrid.vala:310
 #: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 #, fuzzy
 #| msgid ""
@@ -181,13 +181,13 @@ msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
 
-#: src/Widgets/ScheduledTaskListGrid.vala:196 src/Widgets/TaskListGrid.vala:331
+#: src/Widgets/ScheduledTaskListGrid.vala:243 src/Widgets/TaskListGrid.vala:331
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Updating task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/Widgets/ScheduledTaskListGrid.vala:218 src/Widgets/TaskListGrid.vala:353
+#: src/Widgets/ScheduledTaskListGrid.vala:265 src/Widgets/TaskListGrid.vala:353
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Removing task failed"
