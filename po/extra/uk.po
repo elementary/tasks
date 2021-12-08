@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-08 22:18+0000\n"
-"PO-Revision-Date: 2021-12-03 16:03+0000\n"
+"PO-Revision-Date: 2021-12-08 22:28+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/extra/uk/"
 ">\n"
@@ -44,7 +44,7 @@ msgstr "Функції:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "Drag and drop tasks between lists"
-msgstr ""
+msgstr "Перетягування завдань між списками"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Follow email and web links in the task description with Control + Click"
@@ -60,7 +60,7 @@ msgstr "Вдосконалення:"
 
 #: data/tasks.appdata.xml.in:25
 msgid "Performance improvements"
-msgstr ""
+msgstr "Поліпшено швидкодію"
 
 #: data/tasks.appdata.xml.in:26 data/tasks.appdata.xml.in:44
 #: data/tasks.appdata.xml.in:52 data/tasks.appdata.xml.in:61
