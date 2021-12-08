@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-08 21:56+0000\n"
+"POT-Creation-Date: 2021-12-08 22:15+0000\n"
 "PO-Revision-Date: 2021-07-28 03:11+0000\n"
 "Last-Translator: elSolus <tumbleweed@tuta.io>\n"
 "Language-Team: Punjabi <https://l10n.elementary.io/projects/tasks/tasks/pa/"
@@ -133,15 +133,25 @@ msgstr "ਅੱਗੇ ਲਈ ਸਮਾਂ-ਬੱਧ"
 msgid "Connecting…"
 msgstr "ਜੁੜ ਰਿਹੈ…"
 
-#: src/Widgets/SourceRow.vala:102
+#: src/Widgets/SourceRow.vala:150
+#, fuzzy
+#| msgid "Removing task failed"
+msgid "Moving task failed"
+msgstr "ਕਾਰਜ ਹਟਾਉਣਾ ਨਾਕਾਮ ਰਿਹਾ"
+
+#: src/Widgets/SourceRow.vala:151
+msgid "There was an error while moving the task to the desired list."
+msgstr ""
+
+#: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
 msgstr "ਲਾਗਇਨ ਪਛਾਣ ਦੀ ਉਡੀਕ ਕਰ ਰਿਹੈ"
 
-#: src/Widgets/SourceRow.vala:106
+#: src/Widgets/SourceRow.vala:216
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr "ਹਾਲ ਦੀ ਘੜੀ ਡੇਟਾ ਸਟੋਰ (ਜਿਹੜਾ ਕਿ ਰਿਮੋਟ ਲੱਗਦੈ) ਨਾਲ਼ੋਂ ਕਨੈਕਸ਼ਨ ਟੁੱਟਿਆ ਹੋਇਐ"
 
-#: src/Widgets/SourceRow.vala:110
+#: src/Widgets/SourceRow.vala:220
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "ਕਨੈਕਸ਼ਨ ਲਈ ਐੱਸਐੱਸਐਲ (SSL) ਦਾ ਭਰੋਸਾ ਸਰਟੀਫ਼ਿਕੇਟ ਨਾ-ਮਨਜ਼ੂਰ ਕਰ ਦਿੱਤਾ ਗਿਐ"
 
@@ -180,40 +190,40 @@ msgstr "ਕਾਰਜ ਜੋੜਨਾ ਨਾਕਾਮ ਰਿਹਾ"
 msgid "Renaming task list failed"
 msgstr "ਕਾਰਜ-ਸੂਚੀ ਦਾ ਨਾਂ ਬਦਲਣਾ ਨਾਕਾਮ ਰਿਹਾ"
 
-#: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
+#: src/Widgets/TaskRow.vala:136 src/Widgets/TaskRow.vala:143
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:147
+#: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
 msgstr "%s, %s ਵਜੇ"
 
-#: src/Widgets/TaskRow.vala:181
+#: src/Widgets/TaskRow.vala:182
 #, c-format
 msgid "Arriving: %s"
 msgstr "ਪਹੁੰਚ ਰਿਹੈ: %s"
 
-#: src/Widgets/TaskRow.vala:184
+#: src/Widgets/TaskRow.vala:185
 #, c-format
 msgid "Leaving: %s"
 msgstr "ਜਾ ਰਿਹੈ: %s"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Cancel"
 msgstr "ਰੱਦ ਕਰੋ"
 
-#: src/Widgets/TaskRow.vala:241
+#: src/Widgets/TaskRow.vala:242
 msgid "Save Changes"
 msgstr "ਤਬਦੀਲੀਆਂ ਸਾਂਭੋ"
 
-#: src/Widgets/TaskRow.vala:241
+#: src/Widgets/TaskRow.vala:242
 msgid "Add Task"
 msgstr "ਕਾਰਜ ਜੋੜੋ"
 
-#: src/Widgets/TaskRow.vala:294
+#: src/Widgets/TaskRow.vala:305
 msgid "Delete Task"
 msgstr "ਕਾਰਜ ਮਿਟਾਓ"
 
