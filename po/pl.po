@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-09 06:11+0000\n"
-"PO-Revision-Date: 2021-09-27 14:41+0000\n"
-"Last-Translator: Oskar Rygasiewicz <fleepgames@gmail.com>\n"
+"PO-Revision-Date: 2021-12-09 11:56+0000\n"
+"Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/tasks/tasks/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -131,14 +131,12 @@ msgid "Connecting…"
 msgstr "Łączenie…"
 
 #: src/Widgets/SourceRow.vala:150
-#, fuzzy
-#| msgid "Removing task failed"
 msgid "Moving task failed"
-msgstr "Usuwanie zadania nie powiodło się"
+msgstr "Przenoszenie zadania nie powiodło się"
 
 #: src/Widgets/SourceRow.vala:151
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "Podczas przenoszenia zadania do wybranej listy wystąpił błąd."
 
 #: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
