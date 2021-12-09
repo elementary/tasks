@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 12:05+0000\n"
+"POT-Creation-Date: 2021-12-09 18:47+0000\n"
 "PO-Revision-Date: 2021-12-01 02:50+0000\n"
 "Last-Translator: JohnDumpling <john_dumpling@protonmail.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/tasks/extra/sk/>\n"
@@ -48,85 +48,89 @@ msgstr ""
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:23 data/tasks.appdata.xml.in:39
-#: data/tasks.appdata.xml.in:50 data/tasks.appdata.xml.in:58
-#: data/tasks.appdata.xml.in:67
+#: data/tasks.appdata.xml.in:23 data/tasks.appdata.xml.in:40
+#: data/tasks.appdata.xml.in:51 data/tasks.appdata.xml.in:59
+#: data/tasks.appdata.xml.in:68
 msgid "Improvements:"
 msgstr "Vylepšenia:"
 
 #: data/tasks.appdata.xml.in:25
+msgid "Improved time zone handling"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:26
 msgid "Performance improvements"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:26 data/tasks.appdata.xml.in:44
-#: data/tasks.appdata.xml.in:52 data/tasks.appdata.xml.in:61
-#: data/tasks.appdata.xml.in:70
+#: data/tasks.appdata.xml.in:27 data/tasks.appdata.xml.in:45
+#: data/tasks.appdata.xml.in:53 data/tasks.appdata.xml.in:62
+#: data/tasks.appdata.xml.in:71
 msgid "Updated translations"
 msgstr "Aktualizované preklady"
 
-#: data/tasks.appdata.xml.in:32
+#: data/tasks.appdata.xml.in:33
 msgid "Fixes:"
 msgstr "Opravy:"
 
-#: data/tasks.appdata.xml.in:34
+#: data/tasks.appdata.xml.in:35
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr "Zabránenie viacnásobnému zobrazovaniu názvov účtov v bočnom paneli"
 
-#: data/tasks.appdata.xml.in:35
+#: data/tasks.appdata.xml.in:36
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "Dlhé popisy sú automaticky skracované na konci namiesto na začiatku"
 
-#: data/tasks.appdata.xml.in:36
+#: data/tasks.appdata.xml.in:37
 msgid "Removing descriptions is now saved"
 msgstr "Odstraňovanie popisov sa automaticky ukladá"
 
-#: data/tasks.appdata.xml.in:37
+#: data/tasks.appdata.xml.in:38
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "Umiestňovanie kurzora do popisov funguje konzistentne"
 
-#: data/tasks.appdata.xml.in:41
+#: data/tasks.appdata.xml.in:42
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "Nahradenie skratky Delete za Ctrl + Backspace"
 
-#: data/tasks.appdata.xml.in:42
+#: data/tasks.appdata.xml.in:43
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr "Pridaný dialóg potvrdenia pri odstraňovaní zoznamu úloh"
 
-#: data/tasks.appdata.xml.in:43
+#: data/tasks.appdata.xml.in:44
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr "Vylepšenie výkonu v zoznamoch s veľkým množstvom dokončených úloh"
 
-#: data/tasks.appdata.xml.in:60
+#: data/tasks.appdata.xml.in:61
 msgid "Fix crash on start with certain hardware"
 msgstr "Opravený pád pri spustení na určitom hardvéri"
 
-#: data/tasks.appdata.xml.in:69
+#: data/tasks.appdata.xml.in:70
 msgid "Fix the order of the scheduled view"
 msgstr "Opravené poradie zobrazenia naplánovaných úloh"
 
-#: data/tasks.appdata.xml.in:76
+#: data/tasks.appdata.xml.in:77
 msgid "First release!"
 msgstr "Prvé vydanie!"
 
-#: data/tasks.appdata.xml.in:78
+#: data/tasks.appdata.xml.in:79
 msgid "Support the dark style"
 msgstr "Podporuje tmavý štýl"
 
-#: data/tasks.appdata.xml.in:79
+#: data/tasks.appdata.xml.in:80
 msgid "Add and remove task lists with custom colors"
 msgstr "Pridávajte a odstraňujte zoznamy úloh s prispôsobenými farbami"
 
-#: data/tasks.appdata.xml.in:80
+#: data/tasks.appdata.xml.in:81
 msgid "See scheduled tasks from all lists at once"
 msgstr "Zobrazte naplánované úlohy zo všetkých zoznamov naraz"
 
-#: data/tasks.appdata.xml.in:81
+#: data/tasks.appdata.xml.in:82
 msgid "Set due dates"
 msgstr "Nastavujte dátumy konca platnosti"
 
-#: data/tasks.appdata.xml.in:124
+#: data/tasks.appdata.xml.in:125
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
