@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-09 18:47+0000\n"
-"PO-Revision-Date: 2021-09-27 21:20+0000\n"
+"PO-Revision-Date: 2021-12-09 22:38+0000\n"
 "Last-Translator: Uwe S <saabisto@gmx.de>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/tasks/tasks/de/>\n"
 "Language: de\n"
@@ -133,14 +133,14 @@ msgid "Connecting…"
 msgstr "Verbinden …"
 
 #: src/Widgets/SourceRow.vala:150
-#, fuzzy
-#| msgid "Removing task failed"
 msgid "Moving task failed"
-msgstr "Entfernen der Aufgabe fehlgeschlagen"
+msgstr "Verschieben der Aufgabe fehlgeschlagen"
 
 #: src/Widgets/SourceRow.vala:151
 msgid "There was an error while moving the task to the desired list."
 msgstr ""
+"Beim Verschieben der Aufgabe in die gewünschte Liste ist ein Fehler "
+"aufgetreten."
 
 #: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
