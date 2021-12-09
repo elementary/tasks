@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-03 07:22+0000\n"
+"POT-Creation-Date: 2021-12-09 12:05+0000\n"
 "PO-Revision-Date: 2021-09-29 15:08+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/tasks/tasks/hu/"
@@ -65,15 +65,15 @@ msgstr "Törlés mindenképp"
 msgid "Deleting the task list failed"
 msgstr "A feladatlista törlése sikertelen"
 
-#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
+#: src/Util.vala:215 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Ma"
 
-#: src/Util.vala:153
+#: src/Util.vala:217
 msgid "Yesterday"
 msgstr "Tegnap"
 
-#: src/Util.vala:155
+#: src/Util.vala:219
 msgid "Tomorrow"
 msgstr "Holnap"
 
@@ -129,15 +129,25 @@ msgstr "Ütemezett"
 msgid "Connecting…"
 msgstr "Kapcsolódás…"
 
-#: src/Widgets/SourceRow.vala:102
+#: src/Widgets/SourceRow.vala:150
+#, fuzzy
+#| msgid "Removing task failed"
+msgid "Moving task failed"
+msgstr "Feladat eltávolítása sikertelen"
+
+#: src/Widgets/SourceRow.vala:151
+msgid "There was an error while moving the task to the desired list."
+msgstr ""
+
+#: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
 msgstr "Várakozás a bejelentkezési adatokra"
 
-#: src/Widgets/SourceRow.vala:106
+#: src/Widgets/SourceRow.vala:216
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr "Jelenleg szétkapcsolva az (esetleg távoli) adattárolótól"
 
-#: src/Widgets/SourceRow.vala:110
+#: src/Widgets/SourceRow.vala:220
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "A kapcsolat megbízható SSL tanúsítványa vissza lett utasítva"
 
@@ -176,40 +186,40 @@ msgstr "Feladat hozzáadása meghiúsult"
 msgid "Renaming task list failed"
 msgstr "A feladatlista átnevezése meghiúsult"
 
-#: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
+#: src/Widgets/TaskRow.vala:136 src/Widgets/TaskRow.vala:143
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:147
+#: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
 msgstr "%s %s-kor"
 
-#: src/Widgets/TaskRow.vala:181
+#: src/Widgets/TaskRow.vala:182
 #, c-format
 msgid "Arriving: %s"
 msgstr "Érkezés: %s"
 
-#: src/Widgets/TaskRow.vala:184
+#: src/Widgets/TaskRow.vala:185
 #, c-format
 msgid "Leaving: %s"
 msgstr "Indulás: %s"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Cancel"
 msgstr "Mégse"
 
-#: src/Widgets/TaskRow.vala:241
+#: src/Widgets/TaskRow.vala:242
 msgid "Save Changes"
 msgstr "Változtatások mentése"
 
-#: src/Widgets/TaskRow.vala:241
+#: src/Widgets/TaskRow.vala:242
 msgid "Add Task"
 msgstr "Feladat hozzáadása"
 
-#: src/Widgets/TaskRow.vala:294
+#: src/Widgets/TaskRow.vala:305
 msgid "Delete Task"
 msgstr "Feladat törlése"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-03 07:22+0000\n"
+"POT-Creation-Date: 2021-12-09 12:05+0000\n"
 "PO-Revision-Date: 2021-03-12 08:54+0000\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <https://l10n.elementary.io/projects/tasks/tasks/sr/"
@@ -68,15 +68,15 @@ msgstr "Обриши задатак"
 msgid "Deleting the task list failed"
 msgstr "Стварање новог списка заддатака није успело"
 
-#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
+#: src/Util.vala:215 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Данас"
 
-#: src/Util.vala:153
+#: src/Util.vala:217
 msgid "Yesterday"
 msgstr "Јуче"
 
-#: src/Util.vala:155
+#: src/Util.vala:219
 msgid "Tomorrow"
 msgstr "Сутра"
 
@@ -143,15 +143,25 @@ msgstr "Заказани"
 msgid "Connecting…"
 msgstr "Повезујем се…"
 
-#: src/Widgets/SourceRow.vala:102
+#: src/Widgets/SourceRow.vala:150
+#, fuzzy
+#| msgid "Removing task failed"
+msgid "Moving task failed"
+msgstr "Уклањање задатка није успело"
+
+#: src/Widgets/SourceRow.vala:151
+msgid "There was an error while moving the task to the desired list."
+msgstr ""
+
+#: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
 msgstr "Чекам на уверења пријављивања"
 
-#: src/Widgets/SourceRow.vala:106
+#: src/Widgets/SourceRow.vala:216
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr "Тренутно нисте повезани са (вероватно удаљеним) смештајем података"
 
-#: src/Widgets/SourceRow.vala:110
+#: src/Widgets/SourceRow.vala:220
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Поверење ССЛ уверења је одбачено за везу"
 
@@ -190,40 +200,40 @@ msgstr "Додавање задатка није успело"
 msgid "Renaming task list failed"
 msgstr "Преименовање списка задатка није успело"
 
-#: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
+#: src/Widgets/TaskRow.vala:136 src/Widgets/TaskRow.vala:143
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:147
+#: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
 msgstr "%s у %s"
 
-#: src/Widgets/TaskRow.vala:181
+#: src/Widgets/TaskRow.vala:182
 #, c-format
 msgid "Arriving: %s"
 msgstr "Стижем: %s"
 
-#: src/Widgets/TaskRow.vala:184
+#: src/Widgets/TaskRow.vala:185
 #, c-format
 msgid "Leaving: %s"
 msgstr "Напуштам: %s"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Cancel"
 msgstr "Откажи"
 
-#: src/Widgets/TaskRow.vala:241
+#: src/Widgets/TaskRow.vala:242
 msgid "Save Changes"
 msgstr "Сачувај измене"
 
-#: src/Widgets/TaskRow.vala:241
+#: src/Widgets/TaskRow.vala:242
 msgid "Add Task"
 msgstr "Додај задатак"
 
-#: src/Widgets/TaskRow.vala:294
+#: src/Widgets/TaskRow.vala:305
 msgid "Delete Task"
 msgstr "Обриши задатак"
 

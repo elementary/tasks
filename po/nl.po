@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-03 07:22+0000\n"
+"POT-Creation-Date: 2021-12-09 12:05+0000\n"
 "PO-Revision-Date: 2021-07-06 09:32+0000\n"
 "Last-Translator: Lieven Hanssen <lhanssen@freedommail.co>\n"
 "Language-Team: Dutch <https://l10n.elementary.io/projects/tasks/tasks/nl/>\n"
@@ -66,15 +66,15 @@ msgstr "Taak verwijderen"
 msgid "Deleting the task list failed"
 msgstr "Het verwijderen van de takenlijst is mislukt"
 
-#: src/Util.vala:151 src/Widgets/EntryPopover/DateTime.vala:56
+#: src/Util.vala:215 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Vandaag"
 
-#: src/Util.vala:153
+#: src/Util.vala:217
 msgid "Yesterday"
 msgstr "Gisteren"
 
-#: src/Util.vala:155
+#: src/Util.vala:219
 msgid "Tomorrow"
 msgstr "Morgen"
 
@@ -134,15 +134,25 @@ msgstr "Ingepland"
 msgid "Connecting…"
 msgstr "Bezig met verbinden…"
 
-#: src/Widgets/SourceRow.vala:102
+#: src/Widgets/SourceRow.vala:150
+#, fuzzy
+#| msgid "Removing task failed"
+msgid "Moving task failed"
+msgstr "Taak verwijderen is mislukt"
+
+#: src/Widgets/SourceRow.vala:151
+msgid "There was an error while moving the task to the desired list."
+msgstr ""
+
+#: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
 msgstr "Aan het wachten op inloggegevens"
 
-#: src/Widgets/SourceRow.vala:106
+#: src/Widgets/SourceRow.vala:216
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr "Momenteel niet verbonden met de (mogelijk externe) gegevensopslag"
 
-#: src/Widgets/SourceRow.vala:110
+#: src/Widgets/SourceRow.vala:220
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Betrouwbaarheid SSL-certificaat werd verworpen voor de verbinding"
 
@@ -183,40 +193,40 @@ msgstr "Taak toevoegen mislukt"
 msgid "Renaming task list failed"
 msgstr "Het hernoemen van de takenlijst is mislukt"
 
-#: src/Widgets/TaskRow.vala:135 src/Widgets/TaskRow.vala:142
+#: src/Widgets/TaskRow.vala:136 src/Widgets/TaskRow.vala:143
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:147
+#: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
 msgstr "%s om %s"
 
-#: src/Widgets/TaskRow.vala:181
+#: src/Widgets/TaskRow.vala:182
 #, c-format
 msgid "Arriving: %s"
 msgstr "Komt aan op: %s"
 
-#: src/Widgets/TaskRow.vala:184
+#: src/Widgets/TaskRow.vala:185
 #, c-format
 msgid "Leaving: %s"
 msgstr "Vertrekt op: %s"
 
-#: src/Widgets/TaskRow.vala:239
+#: src/Widgets/TaskRow.vala:240
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: src/Widgets/TaskRow.vala:241
+#: src/Widgets/TaskRow.vala:242
 msgid "Save Changes"
 msgstr "Veranderingen opslaan"
 
-#: src/Widgets/TaskRow.vala:241
+#: src/Widgets/TaskRow.vala:242
 msgid "Add Task"
 msgstr "Taak toevoegen"
 
-#: src/Widgets/TaskRow.vala:294
+#: src/Widgets/TaskRow.vala:305
 msgid "Delete Task"
 msgstr "Taak verwijderen"
 
