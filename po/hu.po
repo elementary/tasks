@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-10 09:28+0000\n"
+"POT-Creation-Date: 2021-12-10 09:31+0000\n"
 "PO-Revision-Date: 2021-09-29 15:08+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/tasks/tasks/hu/"
@@ -191,7 +191,7 @@ msgstr "A feladatlista átnevezése meghiúsult"
 msgid "%s"
 msgstr "%s"
 
-#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
