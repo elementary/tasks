@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-10 09:44+0000\n"
-"PO-Revision-Date: 2021-12-03 13:13+0000\n"
+"PO-Revision-Date: 2021-12-11 00:32+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/extra/fr/>\n"
 "Language: fr\n"
@@ -42,7 +42,7 @@ msgstr "Fonctionnalités :"
 
 #: data/tasks.appdata.xml.in:20
 msgid "Drag and drop tasks between lists"
-msgstr ""
+msgstr "Glissez-déposez les tâches entre les listes"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Follow email and web links in the task description with Control + Click"
@@ -58,11 +58,11 @@ msgstr "Améliorations :"
 
 #: data/tasks.appdata.xml.in:25
 msgid "Improved time zone handling"
-msgstr ""
+msgstr "Amélioration de la gestion du fuseau horaire"
 
 #: data/tasks.appdata.xml.in:26
 msgid "Performance improvements"
-msgstr ""
+msgstr "Amélioration des performances"
 
 #: data/tasks.appdata.xml.in:27 data/tasks.appdata.xml.in:45
 #: data/tasks.appdata.xml.in:53 data/tasks.appdata.xml.in:62
