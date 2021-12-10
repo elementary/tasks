@@ -21,11 +21,13 @@ public class Tasks.TodayTaskMonitor : GLib.Object {
 
     private Tasks.TaskModel model;
     private GLib.HashTable<E.Source, ECal.ClientView> task_list_view;
-    private GLib.HashTable<ECal.ComponentId, Notification> task_notification;
+    private GLib.HashTable<ECal.ComponentId, Notification> scheduled_task_notifications;
+    private GLib.HashTable<ECal.ComponentId, Notification> sent_task_notifications;
 
     construct {
         task_list_view = new GLib.HashTable<E.Source, ECal.ClientView> (E.Source.hash, E.Source.equal);
-        task_notification = new GLib.HashTable<ECal.ComponentId, GLib.Notification> (ECal.ComponentId.hash, ECal.ComponentId.equal);
+        scheduled_task_notifications = new GLib.HashTable<ECal.ComponentId, GLib.Notification> (ECal.ComponentId.hash, ECal.ComponentId.equal);
+        sent_task_notifications = new GLib.HashTable<ECal.ComponentId, GLib.Notification> (ECal.ComponentId.hash, ECal.ComponentId.equal);
     }
 
     public async void start () throws Error {
@@ -120,10 +122,6 @@ public class Tasks.TodayTaskMonitor : GLib.Object {
                 notification.set_body (ical_component.get_description ());
             }
 
-            lock (task_notification) {
-                task_notification.insert (task.get_id ().copy (), notification);
-            }
-
             var now_datetime = new GLib.DateTime.now ();
             var due_datetime = Util.ical_to_date_time_local (due_icaltime);
 
@@ -132,6 +130,16 @@ public class Tasks.TodayTaskMonitor : GLib.Object {
                 timespan = 0;
             }
             uint timeout_in_seconds = (uint) timespan;
+
+            /** Make sure we don't fire multiple notifications for the
+             * same task which was due in the past: */ 
+            if (timeout_in_seconds == 0 && sent_task_notifications.contains (task.get_id ())) {
+                continue;
+            }
+
+            lock (scheduled_task_notifications) {
+                scheduled_task_notifications.insert (task.get_id ().copy (), notification);
+            }
 
             debug ("[%s] Creating notification for task '%s' to be sent in %u seconds…",
                 format_ecal_component_id (task.get_id ()),
@@ -156,24 +164,35 @@ public class Tasks.TodayTaskMonitor : GLib.Object {
     }
 
     private void remove_tasks (SList<ECal.ComponentId?> cids) {
-        lock (task_notification) {
+        lock (scheduled_task_notifications) {
             foreach (var cid in cids) {
-                task_notification.remove (cid);
-                debug ("[%s] Removed notification for task.", format_ecal_component_id (cid));
+                scheduled_task_notifications.remove (cid);
+                debug ("[%s] Removed scheduled notification for task.", format_ecal_component_id (cid));
+            }
+        }
+
+        lock (sent_task_notifications) {
+            foreach (var cid in cids) {
+                sent_task_notifications.remove (cid);
+                debug ("[%s] Removed sent notification for task.", format_ecal_component_id (cid));
             }
         }
     }
 
     private void send_notification (ECal.ComponentId cid) {
-        lock (task_notification) {
+        lock (scheduled_task_notifications) {
             bool exists;
-            var notification = task_notification.take (cid, out exists);
+            var notification = scheduled_task_notifications.take (cid, out exists);
             if (exists) {
                 GLib.Application.get_default ().send_notification (
                     "%s-%u".printf (format_ecal_component_id (cid), GLib.Random.next_int ()),
                     notification
                 );
                 debug ("[%s] Sent notification for task.", format_ecal_component_id (cid));
+
+                lock (sent_task_notifications) {
+                    sent_task_notifications.insert (cid, notification);
+                }
             }
         }
     }
