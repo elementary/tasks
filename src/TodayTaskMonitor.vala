@@ -125,7 +125,7 @@ public class Tasks.TodayTaskMonitor : GLib.Object {
             }
 
             var now_datetime = new GLib.DateTime.now ();
-            var due_datetime = Util.icaltime_to_datetime (due_icaltime);
+            var due_datetime = Util.ical_to_date_time_local (due_icaltime);
 
             var timespan = due_datetime.difference (now_datetime) / 1000000;
             if (timespan < 0) {
