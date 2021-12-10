@@ -38,6 +38,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Tasks.Widgets.EntryPopover.Location location_popover;
     private Gtk.Revealer location_popover_revealer;
 
+    private Gtk.EventBox event_box;
     private Gtk.Stack state_stack;
     private Gtk.Image icon;
     private Gtk.CheckButton check;
@@ -221,7 +222,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         };
         task_detail_revealer.add (task_grid);
 
-        var description_textview = new Gtk.TextView () {
+        var description_textview = new Granite.HyperTextView () {
             border_width = 12,
             height_request = 140,
             accepts_tab = false
@@ -280,7 +281,17 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
         revealer.add (grid);
 
-        add (revealer);
+        event_box = new Gtk.EventBox () {
+            expand = true,
+            above_child = false
+        };
+        event_box.add_events (
+            Gdk.EventMask.BUTTON_PRESS_MASK |
+            Gdk.EventMask.BUTTON_RELEASE_MASK
+        );
+        event_box.add (revealer);
+
+        add (event_box);
         margin_start = margin_end = 12;
 
         style_context = get_style_context ();
@@ -303,6 +314,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
                 task_removed (task);
             });
         }
+
+        build_drag_and_drop ();
 
         check.toggled.connect (() => {
             if (task == null) {
@@ -364,23 +377,30 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         var icalcomponent = task.get_icalcomponent ();
         summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
         description_textbuffer.text = icalcomponent.get_description () == null ? "" : icalcomponent.get_description ();  // vala-lint=line-length
-        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.icaltime_to_datetime (icalcomponent.get_due ());  // vala-lint=line-length
+        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time_local (icalcomponent.get_due ());  // vala-lint=line-length
         location_popover.value = Util.get_ecalcomponent_location (task);
     }
 
     private void save_task (ECal.Component task) {
         unowned ICal.Component ical_task = task.get_icalcomponent ();
 
-        if (due_datetime_popover.value != null) {
-            var due_icaltime = Util.datetimes_to_icaltime (due_datetime_popover.value, due_datetime_popover.value);
-            ical_task.set_due (due_icaltime);
-            ical_task.set_dtstart (due_icaltime);
+        ICal.Time new_icaltime;
+        if (due_datetime_popover.value == null) {
+            new_icaltime = new ICal.Time.null_time ();
         } else {
-            var null_icaltime = new ICal.Time.null_time ();
-
-            ical_task.set_due (null_icaltime);
-            ical_task.set_dtstart (null_icaltime);
+            var task_tz = ical_task.get_due ().get_timezone ();
+            if (task_tz != null) {
+                // If the task has a timezone, must convert from displayed local time
+                new_icaltime = Util.datetimes_to_icaltime (due_datetime_popover.value, due_datetime_popover.value, ECal.util_get_system_timezone ());
+                new_icaltime.convert_to_zone_inplace (task_tz);
+            } else {
+                // Use floating timezone if no timezone already exists
+                new_icaltime = Util.datetimes_to_icaltime (due_datetime_popover.value, due_datetime_popover.value, null);
+            }
         }
+
+        ical_task.set_due (new_icaltime);
+        ical_task.set_dtstart (new_icaltime);
 
         Util.set_ecalcomponent_location (task, location_popover.value);
 
@@ -457,7 +477,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             if (ical_task.get_due ().is_null_time ()) {
                 due_datetime_popover_revealer.reveal_child = false;
             } else {
-                var due_datetime = Util.icaltime_to_datetime (ical_task.get_due ());
+                var due_datetime = Util.ical_to_date_time_local (ical_task.get_due ());
                 due_datetime_popover.value = due_datetime;
                 due_datetime_popover_revealer.reveal_child = true;
             }
@@ -522,5 +542,52 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         }
 
         return created.is_valid_time ();
+    }
+
+    private void build_drag_and_drop () {
+        if (!created || is_scheduled_view) {
+            return;
+        }
+        Gtk.drag_source_set (event_box, Gdk.ModifierType.BUTTON1_MASK, Application.DRAG_AND_DROP_TASK_DATA, Gdk.DragAction.MOVE);
+
+        event_box.drag_begin.connect (on_drag_begin);
+        event_box.drag_data_get.connect (on_drag_data_get);
+        event_box.drag_data_delete.connect (on_drag_data_delete);
+    }
+
+    private void on_drag_begin (Gdk.DragContext context) {
+        Gtk.Allocation alloc;
+        get_allocation (out alloc);
+
+        var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, alloc.width, alloc.height);
+        var cairo_context = new Cairo.Context (surface);
+
+        var style_context = get_style_context ();
+        var had_cards_class = style_context.has_class (Granite.STYLE_CLASS_CARD);
+
+        style_context.add_class ("drag-active");
+        if (had_cards_class) {
+            style_context.remove_class (Granite.STYLE_CLASS_CARD);
+        }
+        draw_to_cairo_context (cairo_context);
+        if (had_cards_class) {
+            style_context.add_class (Granite.STYLE_CLASS_CARD);
+        }
+        style_context.remove_class ("drag-active");
+
+        int drag_icon_x, drag_icon_y;
+        translate_coordinates (this, 0, 0, out drag_icon_x, out drag_icon_y);
+        surface.set_device_offset (-drag_icon_x, -drag_icon_y);
+
+        Gtk.drag_set_icon_surface (context, surface);
+    }
+
+    private void on_drag_data_get (Gtk.Widget widget, Gdk.DragContext context, Gtk.SelectionData selection_data, uint target_type, uint time) {
+        var task_uri = "task://%s/%s".printf (source.uid, task.get_uid ());
+        selection_data.set_uris ({ task_uri });
+    }
+
+    private void on_drag_data_delete (Gdk.DragContext context) {
+        destroy ();
     }
 }

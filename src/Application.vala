@@ -29,6 +29,10 @@ public class Tasks.Application : Gtk.Application {
     public static bool run_in_background = false;
     private MainWindow? main_window = null;
 
+    public const Gtk.TargetEntry[] DRAG_AND_DROP_TASK_DATA = {
+        { "text/uri-list", Gtk.TargetFlags.SAME_APP | Gtk.TargetFlags.OTHER_WIDGET, 0 } // TODO: TEXT_URI
+    };
+
     public Application () {
         Object (
             application_id: "io.elementary.tasks",
@@ -150,6 +154,8 @@ public class Tasks.Application : Gtk.Application {
     public static int main (string[] args) {
         GtkClutter.init (ref args);
         var app = new Application ();
-        return app.run (args);
+        int res = app.run (args);
+        ICal.Object.free_global_objects ();
+        return res;
     }
 }

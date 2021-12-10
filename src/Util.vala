@@ -122,6 +122,8 @@ namespace Tasks.Util {
 
             // Set the time with the updated time zone
             result.set_time (time_local.get_hour (), time_local.get_minute (), time_local.get_second ());
+            debug (result.get_tzid ());
+            debug (result.as_ical_string ());
         }
 
         return result;
@@ -193,15 +195,58 @@ namespace Tasks.Util {
     }
 
     /**
-     * Converts the given ICal.Time to a DateTime.
-     * XXX : Track next versions of evolution in order to convert ICal.Timezone to GLib.TimeZone with a dedicated function…
+     * Converts the given ICal.Time to a GLib.DateTime.
+     *
+     * XXX : Track next versions of evolution in order to convert ICal.Timezone
+     * to GLib.TimeZone with a dedicated function…
+     *
+     * **Note:** All timezone information in the original @date is lost.
+     * While this function attempts to convert the timezone data contained in
+     * @date to GLib, this process does not always work. You should never
+     * assume that the {@link GLib.TimeZone} contained in the resulting
+     * DateTime is correct. The wall-clock date and time are correct for the
+     * original timezone, however.
+     *
+     * For example, a timezone like `Western European Standard Time` is not
+     * easily representable in GLib. The resulting {@link GLib.TimeZone} is
+     * likely to be the system's local timezone, which is (probably) incorrect.
+     * However, if the event occurs at 8:15 AM on January 1, 2020, the time
+     * contained in the returned DateTime will be 8:15 AM on January 1, 2020
+     * in the local timezone. The wall clock time is correct, but the time
+     * zone is not.
      */
-     public GLib.DateTime icaltime_to_datetime (ICal.Time date) {
+     public GLib.DateTime ical_to_date_time (ICal.Time date) {
         int year, month, day, hour, minute, second;
         date.get_date (out year, out month, out day);
         date.get_time (out hour, out minute, out second);
         return new GLib.DateTime (icaltime_get_timezone (date), year, month,
             day, hour, minute, second);
+    }
+
+    /**
+     * Converts the given ICal.Time to a GLib.DateTime, represented in the
+     * system timezone.
+     *
+     * All timezone information in the original @date is lost. However, the
+     * {@link GLib.TimeZone} contained in the resulting DateTime is correct,
+     * since there is a well-defined local timezone between both libical and
+     * GLib.
+     */
+    public DateTime ical_to_date_time_local (ICal.Time date) {
+        assert (!date.is_null_time ());
+        var converted = ical_convert_to_local (date);
+        int year, month, day, hour, minute, second;
+        converted.get_date (out year, out month, out day);
+        converted.get_time (out hour, out minute, out second);
+        return new DateTime.local (year, month,
+            day, hour, minute, second);
+    }
+
+    /** Converts the given ICal.Time to the local (or system) timezone
+     */
+    public ICal.Time ical_convert_to_local (ICal.Time time) {
+        var system_tz = ECal.util_get_system_timezone ();
+        return time.convert_to_zone (system_tz);
     }
 
     /**
