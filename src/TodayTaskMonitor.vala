@@ -132,7 +132,7 @@ public class Tasks.TodayTaskMonitor : GLib.Object {
             uint timeout_in_seconds = (uint) timespan;
 
             /** Make sure we don't fire multiple notifications for the
-             * same task which was due in the past: */ 
+             * same task which was due in the past: */
             if (timeout_in_seconds == 0 && sent_task_notifications.contains (task.get_id ())) {
                 continue;
             }
