@@ -1,3 +1,18 @@
+io.elementary.tasks (6.1.0) focal; urgency=medium
+
+  * Release 6.1.0 (#316)
+  * Update translation files
+  * Update translation template
+  * Use floating timezones when saving timed tasks (#313)
+  * Drag Task to another List (#296)
+  * Granite.HyperTextView: Support for clickable hyperlinks in task
+    description (#314)
+  * Free libical cache before exiting the application (#311)
+  * Update io.elementary.tasks.yml (#310)
+  * Self contained scheduled list (#292)
+
+ -- elementary, Inc. <builds@elementary.io>  Mon, 13 Dec 2021 22:14:56 +0000
+
 io.elementary.tasks (6.0.4) focal; urgency=medium
 
   * Release 6.0.4 (#301)
