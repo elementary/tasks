@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 12:05+0000\n"
+"POT-Creation-Date: 2021-12-12 01:55+0000\n"
 "PO-Revision-Date: 2021-03-07 04:21+0000\n"
 "Last-Translator: Trkien618 <hacngoctrungkien@gmail.com>\n"
 "Language-Team: Vietnamese <https://l10n.elementary.io/projects/tasks/extra/"
@@ -54,85 +54,89 @@ msgstr ""
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:23 data/tasks.appdata.xml.in:39
-#: data/tasks.appdata.xml.in:50 data/tasks.appdata.xml.in:58
-#: data/tasks.appdata.xml.in:67
+#: data/tasks.appdata.xml.in:23 data/tasks.appdata.xml.in:40
+#: data/tasks.appdata.xml.in:51 data/tasks.appdata.xml.in:59
+#: data/tasks.appdata.xml.in:68
 msgid "Improvements:"
 msgstr ""
 
 #: data/tasks.appdata.xml.in:25
+msgid "Improved time zone handling"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:26
 msgid "Performance improvements"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:26 data/tasks.appdata.xml.in:44
-#: data/tasks.appdata.xml.in:52 data/tasks.appdata.xml.in:61
-#: data/tasks.appdata.xml.in:70
+#: data/tasks.appdata.xml.in:27 data/tasks.appdata.xml.in:45
+#: data/tasks.appdata.xml.in:53 data/tasks.appdata.xml.in:62
+#: data/tasks.appdata.xml.in:71
 msgid "Updated translations"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:32
+#: data/tasks.appdata.xml.in:33
 msgid "Fixes:"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:34
+#: data/tasks.appdata.xml.in:35
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:35
+#: data/tasks.appdata.xml.in:36
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:36
+#: data/tasks.appdata.xml.in:37
 msgid "Removing descriptions is now saved"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:37
+#: data/tasks.appdata.xml.in:38
 msgid "Placing the cursor in descriptions works consistently"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:41
+#: data/tasks.appdata.xml.in:42
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:42
+#: data/tasks.appdata.xml.in:43
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:43
+#: data/tasks.appdata.xml.in:44
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:60
+#: data/tasks.appdata.xml.in:61
 msgid "Fix crash on start with certain hardware"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:69
+#: data/tasks.appdata.xml.in:70
 msgid "Fix the order of the scheduled view"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:76
+#: data/tasks.appdata.xml.in:77
 msgid "First release!"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:78
+#: data/tasks.appdata.xml.in:79
 msgid "Support the dark style"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:79
+#: data/tasks.appdata.xml.in:80
 msgid "Add and remove task lists with custom colors"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:80
+#: data/tasks.appdata.xml.in:81
 msgid "See scheduled tasks from all lists at once"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:81
+#: data/tasks.appdata.xml.in:82
 msgid "Set due dates"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:124
+#: data/tasks.appdata.xml.in:125
 msgid "elementary, Inc."
 msgstr "Elementary, Inc."
 

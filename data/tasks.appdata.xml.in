@@ -22,6 +22,7 @@
         </ul>
         <p>Improvements:</p>
         <ul>
+          <li>Improved time zone handling</li>
           <li>Performance improvements</li>
           <li>Updated translations</li>
         </ul>
