@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:47+0000\n"
-"PO-Revision-Date: 2021-12-09 05:56+0000\n"
+"POT-Creation-Date: 2021-12-12 01:55+0000\n"
+"PO-Revision-Date: 2021-12-10 09:26+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/extra/ja/"
 ">\n"
@@ -59,7 +59,7 @@ msgstr "改善点:"
 
 #: data/tasks.appdata.xml.in:25
 msgid "Improved time zone handling"
-msgstr ""
+msgstr "タイムゾーンの処理を改善"
 
 #: data/tasks.appdata.xml.in:26
 msgid "Performance improvements"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:47+0000\n"
-"PO-Revision-Date: 2021-12-03 04:38+0000\n"
+"POT-Creation-Date: 2021-12-12 01:55+0000\n"
+"PO-Revision-Date: 2021-12-12 01:48+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://l10n.elementary.io/projects/tasks/extra/he/>\n"
 "Language: he\n"
@@ -41,7 +41,7 @@ msgstr "יכולות:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "Drag and drop tasks between lists"
-msgstr ""
+msgstr "אפשר לגרור ולהשליך משימות בין רשימות"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Follow email and web links in the task description with Control + Click"
@@ -55,11 +55,11 @@ msgstr "שיפורים:"
 
 #: data/tasks.appdata.xml.in:25
 msgid "Improved time zone handling"
-msgstr ""
+msgstr "טיפול משופר באזור זמן"
 
 #: data/tasks.appdata.xml.in:26
 msgid "Performance improvements"
-msgstr ""
+msgstr "שיפורי ביצועים"
 
 #: data/tasks.appdata.xml.in:27 data/tasks.appdata.xml.in:45
 #: data/tasks.appdata.xml.in:53 data/tasks.appdata.xml.in:62
