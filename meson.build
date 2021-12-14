@@ -58,6 +58,7 @@ executable(
     'src/Application.vala',
     'src/Location.vala',
     'src/MainWindow.vala',
+    'src/TodayTaskMonitor.vala',
     'src/Util.vala',
     'src/Widgets/EditableLabel.vala',
     'src/Widgets/EntryPopover/DateTime.vala',

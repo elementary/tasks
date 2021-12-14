@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Tasks Daemon
+Comment=Create notifications for due tasks
+Exec=io.elementary.tasks --background
+Icon=io.elementary.tasks
+Terminal=false
+Type=Application
+NoDisplay=true
+X-GNOME-AutoRestart=true
+X-GNOME-Autostart-Phase=Applications

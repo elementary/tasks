@@ -309,7 +309,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             button_box.set_child_secondary (delete_button, true);
 
             delete_button.clicked.connect (() => {
-                cancel_edit ();
+                end_editing ();
                 remove_request ();
                 task_removed (task);
             });
@@ -328,7 +328,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             if (created || (summary_entry.text != null && summary_entry.text.strip ().length > 0)) {
                 save_task (task);
             }
-            cancel_edit ();
+            end_editing ();
         });
 
         summary_entry.grab_focus.connect (() => {
@@ -336,18 +336,20 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         });
 
         cancel_button.clicked.connect (() => {
-            cancel_edit ();
+            reset_form ();
+            end_editing ();
         });
 
         key_release_event.connect ((event) => {
             if (event.keyval == Gdk.Key.Escape) {
-                cancel_edit ();
+                reset_form ();
+                end_editing ();
             }
         });
 
         save_button.clicked.connect (() => {
             save_task (task);
-            cancel_edit ();
+            end_editing ();
         });
 
         notify["task"].connect (() => {
@@ -356,22 +358,27 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         update_request ();
     }
 
-    private void reset_create () {
-        var empty_task = new ECal.Component ();
-        empty_task.set_new_vtype (ECal.ComponentVType.TODO);
-        task = empty_task;
+    private void end_editing () {
+        unselect (this);
+        reveal_child_request (false);
+
+        if (!created) {
+            reset_form ();
+        }
     }
 
-    private void cancel_edit () {
-        unselect (this);
+    private void reset_form () {
         if (!created) {
-            reset_create ();
+            var empty_task = new ECal.Component ();
+            empty_task.set_new_vtype (ECal.ComponentVType.TODO);
+            task = empty_task;
         }
+
         var icalcomponent = task.get_icalcomponent ();
         summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
-        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time_local (icalcomponent.get_due ());
+        description_textbuffer.text = icalcomponent.get_description () == null ? "" : icalcomponent.get_description ();  // vala-lint=line-length
+        due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time_local (icalcomponent.get_due ());  // vala-lint=line-length
         location_popover.value = Util.get_ecalcomponent_location (task);
-        reveal_child_request (false);
     }
 
     private void save_task (ECal.Component task) {

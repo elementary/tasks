@@ -19,8 +19,15 @@
 */
 
 public class Tasks.Application : Gtk.Application {
+    const OptionEntry[] OPTIONS = {
+        { "background", 'b', 0, OptionArg.NONE, out run_in_background, "Run the Application in background", null},
+        { null }
+    };
+
     public static GLib.Settings settings;
     public static Tasks.TaskModel model;
+    public static bool run_in_background = false;
+    private MainWindow? main_window = null;
 
     public const Gtk.TargetEntry[] DRAG_AND_DROP_TASK_DATA = {
         { "text/uri-list", Gtk.TargetFlags.SAME_APP | Gtk.TargetFlags.OTHER_WIDGET, 0 } // TODO: TEXT_URI
@@ -38,55 +45,81 @@ public class Tasks.Application : Gtk.Application {
         model = new Tasks.TaskModel ();
     }
 
-    protected override void activate () {
-        if (get_windows ().length () > 0) {
-            get_windows ().data.present ();
-            return;
-        }
-
+    construct {
         Intl.setlocale (LocaleCategory.ALL, "");
         GLib.Intl.bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
         GLib.Intl.bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
         GLib.Intl.textdomain (GETTEXT_PACKAGE);
 
-        var main_window = new MainWindow (this);
-
-        int window_x, window_y;
-        var rect = Gtk.Allocation ();
-
-        settings.get ("window-position", "(ii)", out window_x, out window_y);
-        settings.get ("window-size", "(ii)", out rect.width, out rect.height);
-
-        if (window_x != -1 || window_y != -1) {
-            main_window.move (window_x, window_y);
-        }
-
-        main_window.set_allocation (rect);
-
-        if (settings.get_boolean ("window-maximized")) {
-            main_window.maximize ();
-        }
-
-        main_window.show_all ();
+        add_main_option_entries (OPTIONS);
 
         var quit_action = new SimpleAction ("quit", null);
-
-        add_action (quit_action);
-        set_accels_for_action ("app.quit", {"<Control>q"});
-
         quit_action.activate.connect (() => {
             if (main_window != null) {
-                main_window.destroy ();
+                /** Gtk.Window.close triggers the Gtk.Window.delete_event
+                which we bind to further down below to set main_window = null.
+                This ensures we always get the same behaviour (set main_window = null),
+                regardless if we use the accelerator or the window close button in
+                the header bar to stop the application.
+                */
+                main_window.close ();
             }
         });
 
-        var granite_settings = Granite.Settings.get_default ();
-        var gtk_settings = Gtk.Settings.get_default ();
+        add_action (quit_action);
+        set_accels_for_action ("app.quit", {"<Control>q"});
+    }
 
-        gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+    protected override void activate () {
+        if (run_in_background) {
+            run_in_background = false;
+            new Tasks.TodayTaskMonitor ().start.begin ();
+            hold ();
+            return;
+        }
 
-        granite_settings.notify["prefers-color-scheme"].connect (() => {
+        if (get_windows ().length () > 0) {
+            get_windows ().data.present ();
+            return;
+        }
+
+        if (main_window == null) {
+            model.start.begin ();
+
+            main_window = new MainWindow (this);
+
+            int window_x, window_y;
+            var rect = Gtk.Allocation ();
+
+            settings.get ("window-position", "(ii)", out window_x, out window_y);
+            settings.get ("window-size", "(ii)", out rect.width, out rect.height);
+
+            if (window_x != -1 || window_y != -1) {
+                main_window.move (window_x, window_y);
+            }
+
+            main_window.set_allocation (rect);
+
+            if (settings.get_boolean ("window-maximized")) {
+                main_window.maximize ();
+            }
+
+            var granite_settings = Granite.Settings.get_default ();
+            var gtk_settings = Gtk.Settings.get_default ();
+
             gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+
+            granite_settings.notify["prefers-color-scheme"].connect (() => {
+                gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+            });
+
+            main_window.show_all ();
+        }
+
+        main_window.present ();
+        main_window.delete_event.connect ((event) => {
+            main_window = null;
+            return Gdk.EVENT_PROPAGATE;
         });
     }
 

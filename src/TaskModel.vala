@@ -107,12 +107,14 @@ public class Tasks.TaskModel : Object {
     }
 
     construct {
-        var promise = new Gee.Promise<E.SourceRegistry> ();
-        registry = promise.future;
-        init_registry.begin (promise);
-
         task_list_client = new HashTable<string, ECal.Client> (str_hash, str_equal);
         task_list_client_views = new HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> (direct_hash, direct_equal);  // vala-lint=line-length
+    }
+
+    public async void start () {
+        var promise = new Gee.Promise<E.SourceRegistry> ();
+        registry = promise.future;
+        yield init_registry (promise);
     }
 
     private async void init_registry (Gee.Promise<E.SourceRegistry> promise) {
