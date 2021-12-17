@@ -37,6 +37,7 @@ tasks_deps = [
     dependency('gobject-2.0'),
     # dependency('granite', version: '>=6.2.0'),
     dependency('gtk4'),
+    dependency('gee-0.8'),
     libecal_dep,
     dependency('libedataserver-1.2'),
     dependency('libgeoclue-2.0'),
