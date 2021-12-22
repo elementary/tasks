@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-12 01:55+0000\n"
+"POT-Creation-Date: 2021-12-22 16:12+0000\n"
 "PO-Revision-Date: 2021-12-22 16:12+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -70,15 +70,15 @@ msgstr "Eliminar tarefa"
 msgid "Deleting the task list failed"
 msgstr "Falha ao eliminar a lista de tarefas"
 
-#: src/Util.vala:215 src/Widgets/EntryPopover/DateTime.vala:56
+#: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Hoje"
 
-#: src/Util.vala:217
+#: src/Util.vala:267
 msgid "Yesterday"
 msgstr "Ontem"
 
-#: src/Util.vala:219
+#: src/Util.vala:269
 msgid "Tomorrow"
 msgstr "Amanhã"
 
@@ -200,7 +200,7 @@ msgstr "Falha ao renomear lista de tarefas"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"

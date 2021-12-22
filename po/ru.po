@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-12 01:55+0000\n"
+"POT-Creation-Date: 2021-12-22 16:12+0000\n"
 "PO-Revision-Date: 2021-12-11 00:32+0000\n"
 "Last-Translator: DartDeaDia <dartdeadia@protonmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
@@ -66,15 +66,15 @@ msgstr "Все равно удалить"
 msgid "Deleting the task list failed"
 msgstr "Не удалось удалить список задач"
 
-#: src/Util.vala:215 src/Widgets/EntryPopover/DateTime.vala:56
+#: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Сегодня"
 
-#: src/Util.vala:217
+#: src/Util.vala:267
 msgid "Yesterday"
 msgstr "Вчера"
 
-#: src/Util.vala:219
+#: src/Util.vala:269
 msgid "Tomorrow"
 msgstr "Завтра"
 
@@ -190,7 +190,7 @@ msgstr "Не удалось переименовать список задач"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
