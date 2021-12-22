@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-22 16:16+0000\n"
-"PO-Revision-Date: 2021-12-22 16:12+0000\n"
+"PO-Revision-Date: 2021-12-22 20:35+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/extra/"
 "pt/>\n"
@@ -58,11 +58,11 @@ msgstr "Melhorias:"
 
 #: data/tasks.appdata.xml.in:25
 msgid "Improved time zone handling"
-msgstr ""
+msgstr "Manuseamento melhorado do fuso horário"
 
 #: data/tasks.appdata.xml.in:26
 msgid "Performance improvements"
-msgstr ""
+msgstr "Melhorias de desempenho"
 
 #: data/tasks.appdata.xml.in:27 data/tasks.appdata.xml.in:45
 #: data/tasks.appdata.xml.in:53 data/tasks.appdata.xml.in:62
@@ -72,37 +72,41 @@ msgstr "Traduções atualizadas"
 
 #: data/tasks.appdata.xml.in:33
 msgid "Fixes:"
-msgstr ""
+msgstr "Correções:"
 
 #: data/tasks.appdata.xml.in:35
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr ""
+"Evita que os nomes das contas sejam apresentados várias vezes na barra "
+"lateral"
 
 #: data/tasks.appdata.xml.in:36
 msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr ""
+msgstr "Descrições longas são truncadas no fim em vez de no início"
 
 #: data/tasks.appdata.xml.in:37
 msgid "Removing descriptions is now saved"
-msgstr ""
+msgstr "A remoção de descrições é agora guardada"
 
 #: data/tasks.appdata.xml.in:38
 msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
+msgstr "Colocar o cursor em descrições funciona de forma consistente"
 
 #: data/tasks.appdata.xml.in:42
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
+msgstr "Substitui a tecla de atalho Delete por Ctrl + Backspace"
 
 #: data/tasks.appdata.xml.in:43
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr ""
+"Adiciona uma janela de diálogo de confirmação ao eliminar uma lista de "
+"tarefas"
 
 #: data/tasks.appdata.xml.in:44
 msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
+msgstr "Melhora o desempenho em listas com muitas tarefas concluídas"
 
 #: data/tasks.appdata.xml.in:61
 msgid "Fix crash on start with certain hardware"
