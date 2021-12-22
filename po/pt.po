@@ -58,7 +58,7 @@ msgid ""
 msgstr ""
 "A lista e todas as suas tarefas serão definitivamente eliminadas. Caso "
 "tenham sido partilhadas deixarão de ficar acessíveis aos restantes "
-"utilizadores"
+"utilizadores."
 
 #: src/MainWindow.vala:317
 #, fuzzy
