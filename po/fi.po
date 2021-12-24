@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-12 01:55+0000\n"
+"POT-Creation-Date: 2021-12-22 16:16+0000\n"
 "PO-Revision-Date: 2021-10-04 14:41+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://l10n.elementary.io/projects/tasks/tasks/fi/"
@@ -65,15 +65,15 @@ msgstr "Poista silti"
 msgid "Deleting the task list failed"
 msgstr "Tehtäväluettelon poistaminen epäonnistui"
 
-#: src/Util.vala:215 src/Widgets/EntryPopover/DateTime.vala:56
+#: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Tänään"
 
-#: src/Util.vala:217
+#: src/Util.vala:267
 msgid "Yesterday"
 msgstr "Eilen"
 
-#: src/Util.vala:219
+#: src/Util.vala:269
 msgid "Tomorrow"
 msgstr "Huomenna"
 
@@ -193,7 +193,7 @@ msgstr "Tehtäväluettelon nimeäminen uudelleen epäonnistui"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-12 01:55+0000\n"
-"PO-Revision-Date: 2021-07-22 16:19+0000\n"
+"POT-Creation-Date: 2021-12-22 16:16+0000\n"
+"PO-Revision-Date: 2021-12-22 20:35+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/tasks/"
 "pt/>\n"
@@ -49,33 +49,34 @@ msgstr "Nova lista"
 #: src/MainWindow.vala:308
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "Eliminar “%s”?"
 
 #: src/MainWindow.vala:309
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"A lista e todas as suas tarefas serão definitivamente eliminadas. Caso "
+"tenham sido partilhadas deixarão de ficar acessíveis aos restantes "
+"utilizadores."
 
 #: src/MainWindow.vala:317
-#, fuzzy
-#| msgid "Delete Task"
 msgid "Delete Anyway"
-msgstr "Eliminar tarefa"
+msgstr "Eliminar mesmo assim"
 
 #: src/MainWindow.vala:330
 msgid "Deleting the task list failed"
 msgstr "Falha ao eliminar a lista de tarefas"
 
-#: src/Util.vala:215 src/Widgets/EntryPopover/DateTime.vala:56
+#: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "Hoje"
 
-#: src/Util.vala:217
+#: src/Util.vala:267
 msgid "Yesterday"
 msgstr "Ontem"
 
-#: src/Util.vala:219
+#: src/Util.vala:269
 msgid "Tomorrow"
 msgstr "Amanhã"
 
@@ -112,10 +113,8 @@ msgid "Show Completed"
 msgstr "Mostrar concluído"
 
 #: src/Widgets/ListSettingsPopover.vala:119
-#, fuzzy
-#| msgid "Delete List"
 msgid "Delete List…"
-msgstr "Eliminar lista"
+msgstr "Eliminar lista…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
@@ -136,14 +135,12 @@ msgid "Connecting…"
 msgstr "A ligar…"
 
 #: src/Widgets/SourceRow.vala:150
-#, fuzzy
-#| msgid "Removing task failed"
 msgid "Moving task failed"
-msgstr "Falha ao remover tarefa"
+msgstr "Falha ao mover tarefa"
 
 #: src/Widgets/SourceRow.vala:151
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "Ocorreu um erro ao mover a tarefa para a lista desejada."
 
 #: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
@@ -197,7 +194,7 @@ msgstr "Falha ao renomear lista de tarefas"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"

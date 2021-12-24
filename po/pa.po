@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-12 01:55+0000\n"
+"POT-Creation-Date: 2021-12-22 16:16+0000\n"
 "PO-Revision-Date: 2021-07-28 03:11+0000\n"
 "Last-Translator: elSolus <tumbleweed@tuta.io>\n"
 "Language-Team: Punjabi <https://l10n.elementary.io/projects/tasks/tasks/pa/"
@@ -66,15 +66,15 @@ msgstr "ਕਾਰਜ ਮਿਟਾਓ"
 msgid "Deleting the task list failed"
 msgstr "ਕਾਰਜ-ਸੂਚੀ ਮਿਟਾਉਣਾ ਨਾਕਾਮ ਰਿਹਾ"
 
-#: src/Util.vala:215 src/Widgets/EntryPopover/DateTime.vala:56
+#: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
 msgstr "ਅੱਜ"
 
-#: src/Util.vala:217
+#: src/Util.vala:267
 msgid "Yesterday"
 msgstr "ਕੱਲ੍ਹ"
 
-#: src/Util.vala:219
+#: src/Util.vala:269
 msgid "Tomorrow"
 msgstr "ਕੱਲ੍ਹ ਨੂੰ"
 
@@ -195,7 +195,7 @@ msgstr "ਕਾਰਜ-ਸੂਚੀ ਦਾ ਨਾਂ ਬਦਲਣਾ ਨਾਕਾ�
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"

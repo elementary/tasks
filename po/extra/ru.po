@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-12 01:55+0000\n"
-"PO-Revision-Date: 2021-12-11 00:32+0000\n"
+"POT-Creation-Date: 2021-12-22 16:16+0000\n"
+"PO-Revision-Date: 2021-12-22 15:46+0000\n"
 "Last-Translator: DartDeaDia <dartdeadia@protonmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/extra/ru/"
 ">\n"
@@ -44,11 +44,13 @@ msgstr "Функции:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "Drag and drop tasks between lists"
-msgstr ""
+msgstr "Перетаскивание задач между списками"
 
 #: data/tasks.appdata.xml.in:21
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
+"Переход по ссылкам электронной почты и в описании задачь с помощью Control + "
+"Щелчок"
 
 #: data/tasks.appdata.xml.in:23 data/tasks.appdata.xml.in:40
 #: data/tasks.appdata.xml.in:51 data/tasks.appdata.xml.in:59
@@ -58,11 +60,11 @@ msgstr "Улучшения:"
 
 #: data/tasks.appdata.xml.in:25
 msgid "Improved time zone handling"
-msgstr ""
+msgstr "Улучшена обработка часовых поясов"
 
 #: data/tasks.appdata.xml.in:26
 msgid "Performance improvements"
-msgstr ""
+msgstr "Улучшение производительности"
 
 #: data/tasks.appdata.xml.in:27 data/tasks.appdata.xml.in:45
 #: data/tasks.appdata.xml.in:53 data/tasks.appdata.xml.in:62
