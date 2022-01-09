@@ -162,7 +162,7 @@ msgstr "Úkol se nepodařilo dokončit"
 #: src/Widgets/ScheduledTaskListGrid.vala:266 src/Widgets/TaskListGrid.vala:310
 #: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr "Registr úloh je nedostupný, nebo do něj nejde zapisovat."
+msgstr "Registr úkolů je nedostupný, nebo do něj nejde zapisovat."
 
 #: src/Widgets/ScheduledTaskListGrid.vala:243 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
