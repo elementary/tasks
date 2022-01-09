@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 21:23+0000\n"
-"PO-Revision-Date: 2022-01-09 21:23+0000\n"
+"PO-Revision-Date: 2022-01-09 21:24+0000\n"
 "Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
@@ -131,11 +131,11 @@ msgstr "Připojování…"
 
 #: src/Widgets/SourceRow.vala:150
 msgid "Moving task failed"
-msgstr ""
+msgstr "Přesun úkolu se nezdařil"
 
 #: src/Widgets/SourceRow.vala:151
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "Při přesouvání úkolu na požadovaný seznam došlo k chybě."
 
 #: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
