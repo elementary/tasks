@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 19:09+0000\n"
 "PO-Revision-Date: 2022-01-09 21:14+0000\n"
-"Last-Translator: Michal Grňo <m93a.cz@gmail.com>\n"
+"Last-Translator: hnklp <hynek.puta@seznam.cz>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr "Přidat seznam úkolů…"
 
 #: src/MainWindow.vala:258
 msgid "Creating a new task list failed"
-msgstr "Vytváření nového seznamu procesů selhalo"
+msgstr "Vytváření nového seznamu úloh selhalo"
 
 #: src/MainWindow.vala:259 src/MainWindow.vala:331
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
