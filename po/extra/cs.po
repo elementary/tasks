@@ -8,22 +8,23 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-27 16:25+0000\n"
-"PO-Revision-Date: 2019-08-02 13:43-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-01-09 19:06+0000\n"
+"Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
+"Language-Team: Czech <https://l10n.elementary.io/projects/tasks/extra/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
-msgstr ""
+msgstr "Úkoly"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "Synchronizované úkoly a připomínky"
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
@@ -31,10 +32,13 @@ msgid ""
 "and complete tasks, manage lists and sync them across your machines using "
 "CalDAV."
 msgstr ""
+"Navrženo a vytvořeno aby pomohlo spravovat veškeré vaše úkoly a připomínky. "
+"Vytvářejte a dokončujte úkoly, spravujte seznamy a synchronizujte je napříč "
+"svými zařízeními protokolem CalDAV."
 
 #: data/tasks.appdata.xml.in:18
 msgid "Features:"
-msgstr ""
+msgstr "Funkce:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "Drag and drop tasks between lists"
