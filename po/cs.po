@@ -143,7 +143,7 @@ msgstr "Čeká se na zadání přihlašovacích údajů"
 
 #: src/Widgets/SourceRow.vala:216
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr "Aktuálně odpojeno od (vzdáleného) úložiště dat"
+msgstr "Aktuálně odpojeno od (možná vzdáleného) úložiště dat"
 
 #: src/Widgets/SourceRow.vala:220
 msgid "SSL certificate trust was rejected for the connection"
