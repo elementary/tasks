@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 21:16+0000\n"
-"PO-Revision-Date: 2022-01-09 21:17+0000\n"
-"Last-Translator: hnklp <hynek.puta@seznam.cz>\n"
+"PO-Revision-Date: 2022-01-09 21:18+0000\n"
+"Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -119,11 +119,11 @@ msgstr "Nepodařilo se změnit barvu seznamu úkolů"
 #: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
-"Registr seznamu úloh je nejspíše nedostupný, nebo chráněný proti přepsání."
+"Registr seznamu úkolů je nejspíš nedostupný, nebo chráněný proti přepsání."
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
-msgstr ""
+msgstr "Naplánované"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
