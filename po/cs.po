@@ -151,7 +151,7 @@ msgstr "SSL certifikát byl pro toto připojení odmítnut"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
-msgstr "Žádné procesy"
+msgstr "Žádné úlohy"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
