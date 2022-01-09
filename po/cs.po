@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 19:09+0000\n"
 "PO-Revision-Date: 2022-01-09 21:15+0000\n"
-"Last-Translator: hnklp <hynek.puta@seznam.cz>\n"
+"Last-Translator: Michal Grňo <m93a.cz@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr "Přidat seznam úkolů…"
 
 #: src/MainWindow.vala:258
 msgid "Creating a new task list failed"
-msgstr "Vytváření nového seznamu úloh selhalo"
+msgstr "Vytvoření nového seznamu úkolů se nepodařilo"
 
 #: src/MainWindow.vala:259 src/MainWindow.vala:331
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
@@ -46,17 +46,19 @@ msgstr ""
 #: src/MainWindow.vala:308
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "Vymazat „%s“?"
 
 #: src/MainWindow.vala:309
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"Seznam a všechny úkoly v něm budou nadobro smazány. Pokud jste tento seznam "
+"sdíleli, ostatní k němu ztratí přístup."
 
 #: src/MainWindow.vala:317
 msgid "Delete Anyway"
-msgstr ""
+msgstr "Přesto smazat"
 
 #: src/MainWindow.vala:330
 msgid "Deleting the task list failed"
