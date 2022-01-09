@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 21:16+0000\n"
 "PO-Revision-Date: 2022-01-09 21:19+0000\n"
-"Last-Translator: hnklp <hynek.puta@seznam.cz>\n"
+"Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -143,7 +143,7 @@ msgstr "Čeká se na zadání přihlašovacích údajů"
 
 #: src/Widgets/SourceRow.vala:216
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr "Aktuálně odpojeno od (možná vzdáleného) úložiště dat"
+msgstr "V tuto chvíli odpojeno od (možná vzdáleného) úložiště dat"
 
 #: src/Widgets/SourceRow.vala:220
 msgid "SSL certificate trust was rejected for the connection"
@@ -151,7 +151,7 @@ msgstr ""
 
 #: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
-msgstr ""
+msgstr "Žádné procesy"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
