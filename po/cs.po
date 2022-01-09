@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 21:16+0000\n"
-"PO-Revision-Date: 2022-01-09 21:19+0000\n"
+"PO-Revision-Date: 2022-01-09 21:20+0000\n"
 "Last-Translator: hnklp <hynek.puta@seznam.cz>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
@@ -155,7 +155,7 @@ msgstr "Žádné úlohy"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
-msgstr ""
+msgstr "Úlohu nelze dokončit"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:222
 #: src/Widgets/ScheduledTaskListGrid.vala:244
