@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 21:16+0000\n"
 "PO-Revision-Date: 2022-01-09 21:18+0000\n"
-"Last-Translator: hnklp <hynek.puta@seznam.cz>\n"
+"Last-Translator: Jenda <bugwebcz@centrum.cz>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -123,7 +123,7 @@ msgstr ""
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
-msgstr "Naplánované"
+msgstr "Naplánováno"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
