@@ -106,7 +106,7 @@ msgstr ""
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
-msgstr ""
+msgstr "Ukázat kompletní"
 
 #: src/Widgets/ListSettingsPopover.vala:119
 msgid "Delete List…"
