@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 21:23+0000\n"
 "PO-Revision-Date: 2022-01-09 21:25+0000\n"
-"Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
+"Last-Translator: hnklp <hynek.puta@seznam.cz>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: src/MainWindow.vala:45
 msgid "Tasks"
-msgstr "Procesy"
+msgstr "Úlohy"
 
 #: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
