@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 19:09+0000\n"
 "PO-Revision-Date: 2022-01-09 21:16+0000\n"
-"Last-Translator: Darnell1ll <darnel1l@protonmail.com>\n"
+"Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -66,19 +66,19 @@ msgstr "Seznam úkolů se nepodařilo odstranit"
 
 #: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
-msgstr ""
+msgstr "Dnes"
 
 #: src/Util.vala:267
 msgid "Yesterday"
-msgstr ""
+msgstr "Včera"
 
 #: src/Util.vala:269
 msgid "Tomorrow"
-msgstr ""
+msgstr "Zítra"
 
 #: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
-msgstr ""
+msgstr "Upravit…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
