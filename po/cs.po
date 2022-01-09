@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 19:09+0000\n"
 "PO-Revision-Date: 2022-01-09 21:15+0000\n"
-"Last-Translator: Michal Grňo <m93a.cz@gmail.com>\n"
+"Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgstr ""
 
 #: src/MainWindow.vala:264
 msgid "New list"
-msgstr ""
+msgstr "Nový seznam"
 
 #: src/MainWindow.vala:308
 #, c-format
