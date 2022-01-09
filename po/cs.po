@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 19:09+0000\n"
 "PO-Revision-Date: 2022-01-09 21:16+0000\n"
-"Last-Translator: hnklp <hynek.puta@seznam.cz>\n"
+"Last-Translator: Darnell1ll <darnel1l@protonmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,7 @@ msgstr "Nastavit do"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "Odstranit"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
