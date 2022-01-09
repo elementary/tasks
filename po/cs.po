@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-09 19:09+0000\n"
-"PO-Revision-Date: 2022-01-09 19:06+0000\n"
+"PO-Revision-Date: 2022-01-09 21:14+0000\n"
 "Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
 "Language: cs\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: src/MainWindow.vala:258
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Vytváření nového seznamu procesů selhalo"
 
 #: src/MainWindow.vala:259 src/MainWindow.vala:331
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
