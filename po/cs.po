@@ -114,11 +114,11 @@ msgstr "Smazat seznam…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
-msgstr "Nelze změnit barvu seznamu úloh"
+msgstr "Nepodařilo se změnit barvu seznamu úkolů"
 
 #: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
-msgstr ""
+msgstr "Registr seznamu úkolů je nedostupný, nebo chráněný proti přepsání."
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
