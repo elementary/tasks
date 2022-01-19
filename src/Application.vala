@@ -75,7 +75,7 @@ public class Tasks.Application : Gtk.Application {
             model.start.begin ();
 
             var main_window = new MainWindow (this);
-            add_window(main_window);
+            add_window (main_window);
 
             int window_x, window_y;
             var rect = Gtk.Allocation ();
