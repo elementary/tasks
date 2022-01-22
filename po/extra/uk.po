@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-22 14:53+0000\n"
-"PO-Revision-Date: 2021-12-09 20:00+0000\n"
+"PO-Revision-Date: 2022-01-22 21:44+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/extra/uk/"
 ">\n"
@@ -43,10 +43,8 @@ msgid "Features:"
 msgstr "Функції:"
 
 #: data/tasks.appdata.xml.in:20
-#, fuzzy
-#| msgid "Add a confirmation dialog when deleting a task list"
 msgid "Send a notification when a task is due"
-msgstr "Додано запит підтвердження під час видалення списку завдань"
+msgstr "Надсилання сповіщення, коли завдання очікує виконання"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Drag and drop tasks between lists"
