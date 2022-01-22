@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-10 15:41+0000\n"
+"POT-Creation-Date: 2022-01-22 14:50+0000\n"
 "PO-Revision-Date: 2021-12-11 00:32+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/extra/fr/>\n"
@@ -36,45 +36,53 @@ msgstr ""
 "complétez des tâches, gérez des listes et synchronisez les entre vos "
 "différentes machine en utilisant CalDAV."
 
-#: data/tasks.appdata.xml.in:18
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
 msgid "Features:"
 msgstr "Fonctionnalités :"
 
 #: data/tasks.appdata.xml.in:20
+#, fuzzy
+#| msgid "Add a confirmation dialog when deleting a task list"
+msgid "Send a notification when a task is due"
+msgstr ""
+"Ajout d'une boîte de dialogue de confirmation lors de la suppression d'une "
+"liste de tâches"
+
+#: data/tasks.appdata.xml.in:28
 msgid "Drag and drop tasks between lists"
 msgstr "Glissez-déposez les tâches entre les listes"
 
-#: data/tasks.appdata.xml.in:21
+#: data/tasks.appdata.xml.in:29
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
 "Suivez les liens e-mail et Web dans la description des tâches avec Ctrl + "
 "Clic"
 
-#: data/tasks.appdata.xml.in:23 data/tasks.appdata.xml.in:40
-#: data/tasks.appdata.xml.in:51 data/tasks.appdata.xml.in:59
-#: data/tasks.appdata.xml.in:68
+#: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:48
+#: data/tasks.appdata.xml.in:59 data/tasks.appdata.xml.in:67
+#: data/tasks.appdata.xml.in:76
 msgid "Improvements:"
 msgstr "Améliorations :"
 
-#: data/tasks.appdata.xml.in:25
+#: data/tasks.appdata.xml.in:33
 msgid "Improved time zone handling"
 msgstr "Amélioration de la gestion du fuseau horaire"
 
-#: data/tasks.appdata.xml.in:26
+#: data/tasks.appdata.xml.in:34
 msgid "Performance improvements"
 msgstr "Amélioration des performances"
 
-#: data/tasks.appdata.xml.in:27 data/tasks.appdata.xml.in:45
-#: data/tasks.appdata.xml.in:53 data/tasks.appdata.xml.in:62
-#: data/tasks.appdata.xml.in:71
+#: data/tasks.appdata.xml.in:35 data/tasks.appdata.xml.in:53
+#: data/tasks.appdata.xml.in:61 data/tasks.appdata.xml.in:70
+#: data/tasks.appdata.xml.in:79
 msgid "Updated translations"
 msgstr "Mise à jour des traductions"
 
-#: data/tasks.appdata.xml.in:33
+#: data/tasks.appdata.xml.in:41
 msgid "Fixes:"
 msgstr "Corrections :"
 
-#: data/tasks.appdata.xml.in:35
+#: data/tasks.appdata.xml.in:43
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
@@ -82,67 +90,67 @@ msgstr ""
 "Nous avons empêché le nom des comptes de s'afficher plusieurs fois dans la "
 "barre latérale"
 
-#: data/tasks.appdata.xml.in:36
+#: data/tasks.appdata.xml.in:44
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr ""
 "Les descriptions longues sont désormais coupées à la fin plutôt qu'au début"
 
-#: data/tasks.appdata.xml.in:37
+#: data/tasks.appdata.xml.in:45
 msgid "Removing descriptions is now saved"
 msgstr "La suppression de description est désormais enregistrée"
 
-#: data/tasks.appdata.xml.in:38
+#: data/tasks.appdata.xml.in:46
 msgid "Placing the cursor in descriptions works consistently"
 msgstr ""
 "Placer le curseur au niveau de la description fonctionne désormais "
 "correctement"
 
-#: data/tasks.appdata.xml.in:42
+#: data/tasks.appdata.xml.in:50
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "Remplacement du raccourci de suppression par Ctrl + Effacer"
 
-#: data/tasks.appdata.xml.in:43
+#: data/tasks.appdata.xml.in:51
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr ""
 "Ajout d'une boîte de dialogue de confirmation lors de la suppression d'une "
 "liste de tâches"
 
-#: data/tasks.appdata.xml.in:44
+#: data/tasks.appdata.xml.in:52
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr ""
 "Amélioration des performances pour les listes avec de nombreuses tâches "
 "complétées"
 
-#: data/tasks.appdata.xml.in:61
+#: data/tasks.appdata.xml.in:69
 msgid "Fix crash on start with certain hardware"
 msgstr "Correction d'un plantage au démarrage avec certains matériels"
 
-#: data/tasks.appdata.xml.in:70
+#: data/tasks.appdata.xml.in:78
 msgid "Fix the order of the scheduled view"
 msgstr "Correction de l'ordre de la vue des tâches programmées"
 
-#: data/tasks.appdata.xml.in:77
+#: data/tasks.appdata.xml.in:85
 msgid "First release!"
 msgstr "Première version !"
 
-#: data/tasks.appdata.xml.in:79
+#: data/tasks.appdata.xml.in:87
 msgid "Support the dark style"
 msgstr "Prise en charge du thème sombre"
 
-#: data/tasks.appdata.xml.in:80
+#: data/tasks.appdata.xml.in:88
 msgid "Add and remove task lists with custom colors"
 msgstr ""
 "Ajoutez et supprimez des listes de tâche avec une couleur personnalisée"
 
-#: data/tasks.appdata.xml.in:81
+#: data/tasks.appdata.xml.in:89
 msgid "See scheduled tasks from all lists at once"
 msgstr "Consultez les tâches programmées pour toutes les listes à la fois"
 
-#: data/tasks.appdata.xml.in:82
+#: data/tasks.appdata.xml.in:90
 msgid "Set due dates"
 msgstr "Définissez des dates limites"
 
-#: data/tasks.appdata.xml.in:125
+#: data/tasks.appdata.xml.in:133
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
