@@ -27,7 +27,6 @@ public class Tasks.Application : Gtk.Application {
     public static GLib.Settings settings;
     public static Tasks.TaskModel model;
     public static bool run_in_background = false;
-    private MainWindow? main_window = null;
 
     public const Gtk.TargetEntry[] DRAG_AND_DROP_TASK_DATA = {
         { "text/uri-list", Gtk.TargetFlags.SAME_APP | Gtk.TargetFlags.OTHER_WIDGET, 0 } // TODO: TEXT_URI
@@ -55,14 +54,8 @@ public class Tasks.Application : Gtk.Application {
 
         var quit_action = new SimpleAction ("quit", null);
         quit_action.activate.connect (() => {
-            if (main_window != null) {
-                /** Gtk.Window.close triggers the Gtk.Window.delete_event
-                which we bind to further down below to set main_window = null.
-                This ensures we always get the same behaviour (set main_window = null),
-                regardless if we use the accelerator or the window close button in
-                the header bar to stop the application.
-                */
-                main_window.close ();
+            if (active_window != null) {
+                active_window.destroy ();
             }
         });
 
@@ -78,15 +71,11 @@ public class Tasks.Application : Gtk.Application {
             return;
         }
 
-        if (get_windows ().length () > 0) {
-            get_windows ().data.present ();
-            return;
-        }
-
-        if (main_window == null) {
+        if (active_window == null) {
             model.start.begin ();
 
-            main_window = new MainWindow (this);
+            var main_window = new MainWindow (this);
+            add_window (main_window);
 
             int window_x, window_y;
             var rect = Gtk.Allocation ();
@@ -116,11 +105,7 @@ public class Tasks.Application : Gtk.Application {
             main_window.show_all ();
         }
 
-        main_window.present ();
-        main_window.delete_event.connect ((event) => {
-            main_window = null;
-            return Gdk.EVENT_PROPAGATE;
-        });
+        active_window.present ();
     }
 
     private static Gee.HashMap<string, Gtk.CssProvider>? providers;
