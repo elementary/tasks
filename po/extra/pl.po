@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-22 14:53+0000\n"
-"PO-Revision-Date: 2021-12-11 12:30+0000\n"
+"PO-Revision-Date: 2022-01-23 11:29+0000\n"
 "Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/tasks/extra/pl/>\n"
 "Language: pl\n"
@@ -42,10 +42,8 @@ msgid "Features:"
 msgstr "Funkcje:"
 
 #: data/tasks.appdata.xml.in:20
-#, fuzzy
-#| msgid "Add a confirmation dialog when deleting a task list"
 msgid "Send a notification when a task is due"
-msgstr "Wyświetl okienko z potwierdzeniem przy usuwaniu listy zadań"
+msgstr "Wysyłanie powiadomienia przy nadchodzącym zadaniu"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Drag and drop tasks between lists"
