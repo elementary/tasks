@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-22 14:53+0000\n"
-"PO-Revision-Date: 2021-12-10 09:26+0000\n"
+"PO-Revision-Date: 2022-01-23 16:20+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/extra/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/extra/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,10 +42,8 @@ msgid "Features:"
 msgstr "Característiques:"
 
 #: data/tasks.appdata.xml.in:20
-#, fuzzy
-#| msgid "Add a confirmation dialog when deleting a task list"
 msgid "Send a notification when a task is due"
-msgstr "Addició d'un diàleg de confirmació quan suprimiu una llista de tasques"
+msgstr "Envieu una notificació quan s'hagi de fer una tasca"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Drag and drop tasks between lists"
