@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-23 16:28+0000\n"
-"PO-Revision-Date: 2021-12-22 15:46+0000\n"
-"Last-Translator: DartDeaDia <dartdeadia@protonmail.com>\n"
-"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/extra/ru/"
-">\n"
+"PO-Revision-Date: 2022-01-24 06:48+0000\n"
+"Last-Translator: asdffdsdaf <asdffdsdaf@gmail.com>\n"
+"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/extra/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,10 +43,8 @@ msgid "Features:"
 msgstr "Функции:"
 
 #: data/tasks.appdata.xml.in:20
-#, fuzzy
-#| msgid "Add a confirmation dialog when deleting a task list"
 msgid "Send a notification when a task is due"
-msgstr "Добавлено диалоговое окно подтверждения при удалении списка задач"
+msgstr "Отправка уведомления при достижении даты выполнения задачи"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Drag and drop tasks between lists"
