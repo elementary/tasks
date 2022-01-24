@@ -1,3 +1,13 @@
+io.elementary.tasks (6.2.0) focal; urgency=medium
+
+  * Release 6.2.0 (#324)
+  * Update translation files
+  * Update translation template
+  * Refactor: Use Gtk.Application.active_window (#323)
+  * Notifications (#298)
+
+ -- elementary, Inc. <builds@elementary.io>  Mon, 24 Jan 2022 20:24:13 +0000
+
 io.elementary.tasks (6.1.0) focal; urgency=medium
 
   * Release 6.1.0 (#316)
