@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-24 06:49+0000\n"
-"PO-Revision-Date: 2021-12-26 02:09+0000\n"
+"PO-Revision-Date: 2022-01-26 06:02+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/tasks/extra/hu/"
 ">\n"
@@ -36,11 +36,11 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
 msgid "Features:"
-msgstr ""
+msgstr "Funkciók:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "Send a notification when a task is due"
-msgstr ""
+msgstr "Értesítés küldése feladatok határidejénél"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Drag and drop tasks between lists"
