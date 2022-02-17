@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 16:30+0000\n"
 "PO-Revision-Date: 2022-02-17 15:23+0000\n"
-"Last-Translator: Jose Manuel Hernandez Farias <ing.josemhf@gmail.com>\n"
+"Last-Translator: trubiso <crishipohola@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/>"
 "\n"
 "Language: es\n"
@@ -49,7 +49,7 @@ msgstr "Lista nueva"
 #: src/MainWindow.vala:308
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "¿Eliminar \"%s\"?"
 
 #: src/MainWindow.vala:309
 msgid ""
@@ -114,10 +114,8 @@ msgid "Show Completed"
 msgstr "Mostrar completadas"
 
 #: src/Widgets/ListSettingsPopover.vala:119
-#, fuzzy
-#| msgid "Delete List"
 msgid "Delete List…"
-msgstr "Eliminar lista"
+msgstr "Eliminar lista…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
