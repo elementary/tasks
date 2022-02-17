@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 16:30+0000\n"
-"PO-Revision-Date: 2021-07-28 17:49+0000\n"
-"Last-Translator: Alvaro <alvaroaraoz_92@hotmail.com>\n"
-"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
-">\n"
+"PO-Revision-Date: 2022-02-17 15:23+0000\n"
+"Last-Translator: Jose Manuel Hernandez Farias <ing.josemhf@gmail.com>\n"
+"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,6 +56,8 @@ msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"La lista y todas sus tareas se eliminarán de forma permanente. Si ha "
+"compartido esta lista, otras personas ya no tendrán acceso."
 
 #: src/MainWindow.vala:317
 #, fuzzy
@@ -143,7 +145,7 @@ msgstr "No se pudo eliminar la tarea"
 
 #: src/Widgets/SourceRow.vala:151
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "Hubo un error al mover la tarea a la lista deseada."
 
 #: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
