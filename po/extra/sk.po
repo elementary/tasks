@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 16:30+0000\n"
-"PO-Revision-Date: 2021-12-01 02:50+0000\n"
+"PO-Revision-Date: 2022-03-02 13:27+0000\n"
 "Last-Translator: JohnDumpling <john_dumpling@protonmail.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/tasks/extra/sk/>\n"
 "Language: sk\n"
@@ -38,21 +38,21 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:26
 msgid "Features:"
-msgstr ""
+msgstr "Funkcie:"
 
 #: data/tasks.appdata.xml.in:20
-#, fuzzy
-#| msgid "Add a confirmation dialog when deleting a task list"
 msgid "Send a notification when a task is due"
-msgstr "Pridaný dialóg potvrdenia pri odstraňovaní zoznamu úloh"
+msgstr "Odoslať oznámenie, keď má úloha dátum splnenia dnes"
 
 #: data/tasks.appdata.xml.in:28
 msgid "Drag and drop tasks between lists"
-msgstr ""
+msgstr "Úlohy je možné presúvať medzi zoznamami"
 
 #: data/tasks.appdata.xml.in:29
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
+"E-maily a odkazy na web v popise úlohy je možné nasledovať podržaním klávesy "
+"Ctrl a kliknutím na ne myšou"
 
 #: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:48
 #: data/tasks.appdata.xml.in:59 data/tasks.appdata.xml.in:67
@@ -62,11 +62,11 @@ msgstr "Vylepšenia:"
 
 #: data/tasks.appdata.xml.in:33
 msgid "Improved time zone handling"
-msgstr ""
+msgstr "Vylepšené zaobchádzanie s časovými pásmami"
 
 #: data/tasks.appdata.xml.in:34
 msgid "Performance improvements"
-msgstr ""
+msgstr "Vylepšenia výkonu"
 
 #: data/tasks.appdata.xml.in:35 data/tasks.appdata.xml.in:53
 #: data/tasks.appdata.xml.in:61 data/tasks.appdata.xml.in:70
