@@ -9,6 +9,7 @@ i18n = import('i18n')
 
 add_project_arguments('-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()), language:'c')
 add_project_arguments('-DLIBICAL_GLIB_UNSTABLE_API=1', language: 'c')
+add_project_arguments('-DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED', language: 'c')
 
 gresource = gnome.compile_resources(
     'gresource',
@@ -28,19 +29,19 @@ config_file = configure_file(
 libecal_dep = dependency('libecal-2.0')
 
 tasks_deps = [
-    dependency('champlain-0.12'),
-    dependency('champlain-gtk-0.12'),
+    #dependency('champlain-0.12'),
+    #dependency('champlain-gtk-0.12'),
     dependency('clutter-1.0'),
-    dependency('clutter-gtk-1.0'),
+    #dependency('clutter-gtk-1.0'),
     dependency('geocode-glib-1.0'),
     dependency('glib-2.0'),
     dependency('gobject-2.0'),
-    dependency('granite', version: '>=6.2.0'),
-    dependency('gtk+-3.0'),
+    dependency('granite-7', version: '>=7.0.0'),
+    dependency('gtk4'),
     libecal_dep,
     dependency('libedataserver-1.2'),
     dependency('libgeoclue-2.0'),
-    dependency('libhandy-1', version: '>=0.90.0'),
+    dependency('libadwaita-1', version: '>=1.0.0'),
     dependency('libical-glib'),
     dependency('libgdata')
 ]
