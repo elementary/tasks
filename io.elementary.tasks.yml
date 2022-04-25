@@ -51,6 +51,38 @@ modules:
         url: https://gitlab.gnome.org/GNOME/libgdata.git
         tag: '0.17.13'
 
+  - name: sassc
+    sources:
+      - type: git
+        url: https://github.com/sass/sassc.git
+        tag: '3.6.1'
+      - type: script
+        dest-filename: autogen.sh
+        commands:
+          - autoreconf -si
+    modules:
+      sources:
+        - type: git
+          url: https://github.com/sass/libsass.git
+          tag: '3.6.4'
+        - type: script
+          dest-filename: autogen.sh
+          commands: autoreconf -si
+
+  - name: libadwaita
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/libadwaita.git
+        tag: '1.1.1'
+
+  - name: libshumate
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.gnome.org/GNOME/libshumate.git
+        # tag: '1.0.0.alpha.1'
+
   - name: evolution-data-server
     buildsystem: cmake-ninja
     cleanup:
@@ -83,13 +115,6 @@ modules:
           - type: archive
             url: https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz
             md5: 12e517cac2b57a0121cda351570f1e63
-
-  - name: champlain
-    buildsystem: meson
-    sources:
-      - type: git
-        url: https://gitlab.gnome.org/GNOME/libchamplain.git
-        tag: 'LIBCHAMPLAIN_0_12_20'
 
   - name: geocode-glib
     buildsystem: meson

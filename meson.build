@@ -29,8 +29,7 @@ config_file = configure_file(
 libecal_dep = dependency('libecal-2.0')
 
 tasks_deps = [
-    #dependency('champlain-0.12'),
-    #dependency('champlain-gtk-0.12'),
+    dependency('libshumate'),
     dependency('clutter-1.0'),
     #dependency('clutter-gtk-1.0'),
     dependency('geocode-glib-1.0'),
