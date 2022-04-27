@@ -13,6 +13,14 @@
     </p>
   </description>
   <releases>
+    <release version="6.3.0" date="2022-04-27" urgency="medium">
+      <description>
+        <p>Features:</p>
+        <ul>
+          <li>Add offline support for newly created task lists in case its available for the account</li>
+        </ul>
+      </description>
+    </release>
     <release version="6.2.0" date="2022-01-22" urgency="medium">
       <description>
         <p>Features:</p>
