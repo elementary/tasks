@@ -17,7 +17,7 @@
       <description>
         <p>Features:</p>
         <ul>
-          <li>Add offline support for newly created task lists in case its available for the account</li>
+          <li>Add offline support for newly created task lists in case its configured for the account</li>
         </ul>
       </description>
     </release>
