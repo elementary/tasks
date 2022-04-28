@@ -118,7 +118,7 @@ public class Tasks.TaskModel : Object {
         registry = promise.future;
         yield init_registry (promise);
         network_monitor.network_changed.connect (network_changed);
-    }    
+    }
 
     private async void init_registry (Gee.Promise<E.SourceRegistry> promise) {
         try {
@@ -180,7 +180,7 @@ public class Tasks.TaskModel : Object {
 
             if (network_available && registry.ready) {
                 /* Synchronizing the task list discovers task changes done on remote (more likely to happen) */
-                registry.value.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach(task_list => {
+                registry.value.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach (task_list => {
                     refresh_task_list.begin (task_list, null, (obj, res) => {
                         try {
                             refresh_task_list.end (res);
@@ -191,8 +191,8 @@ public class Tasks.TaskModel : Object {
                 });
 
                 /* Synchronizing the collection discovers task list changes done on remote (less likely to happen) */
-                registry.value.list_sources (E.SOURCE_EXTENSION_COLLECTION).foreach((collection_source) => {
-                    refresh_collection.begin  (collection_source, null, (obj, res) => {
+                registry.value.list_sources (E.SOURCE_EXTENSION_COLLECTION).foreach ((collection_source) => {
+                    refresh_collection.begin (collection_source, null, (obj, res) => {
                         try {
                             refresh_collection.end (res);
                         } catch (Error e) {
