@@ -13,6 +13,14 @@
     </p>
   </description>
   <releases>
+    <release version="6.3.0" date="2022-04-28" urgency="medium">
+      <description>
+        <p>Features:</p>
+        <ul>
+          <li>Automatically synchronize a task list whenever it is selected or the network becomes available again</li>
+        </ul>
+      </description>
+    </release>
     <release version="6.2.0" date="2022-01-22" urgency="medium">
       <description>
         <p>Features:</p>

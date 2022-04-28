@@ -184,6 +184,15 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         var source = ((Tasks.Widgets.SourceRow) row).source;
                         var source_uid = source.dup_uid ();
 
+                        /* Synchronizing the list whenever its selected discovers task changes done on remote (likely to happen when multiple devices are used) */
+                        Tasks.Application.model.refresh_task_list.begin (source, null, () => {
+                            try {
+                                Tasks.Application.model.refresh_task_list.end (res);
+                            } catch (Error e) {
+                                warning ("Error syncing task list '%s': %s", source.dup_display_name (), e.message);
+                            }
+                        });
+
                         task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
                         if (task_list_grid == null) {
                             task_list_grid = new Tasks.Widgets.TaskListGrid (source);
