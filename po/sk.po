@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 20:10+0000\n"
+"POT-Creation-Date: 2022-06-09 17:15+0000\n"
 "PO-Revision-Date: 2022-02-28 22:07+0000\n"
 "Last-Translator: JohnDumpling <john_dumpling@protonmail.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/tasks/tasks/sk/>\n"
@@ -30,26 +30,26 @@ msgstr "Nastavenia online účtov…"
 msgid "Add Task List…"
 msgstr "Pridať zoznam úloh…"
 
-#: src/MainWindow.vala:258
+#: src/MainWindow.vala:267
 msgid "Creating a new task list failed"
 msgstr "Vytváranie nového zoznamu úloh sa nepodarilo"
 
-#: src/MainWindow.vala:259 src/MainWindow.vala:331
+#: src/MainWindow.vala:268 src/MainWindow.vala:340
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Register zoznamu úloh môže byť nedostupný alebo sa naň nedajú písať údaje."
 
-#: src/MainWindow.vala:264
+#: src/MainWindow.vala:273
 msgid "New list"
 msgstr "Nový zoznam"
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:317
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Vymazať „%s“?"
 
-#: src/MainWindow.vala:309
+#: src/MainWindow.vala:318
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -57,11 +57,11 @@ msgstr ""
 "Tento zoznam a všetky jeho úlohy budú natrvalo odstránené. Ak ste tento "
 "zoznam zdieľali, ostatní ľudia už nebudú mať k nemu prístup."
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:326
 msgid "Delete Anyway"
 msgstr "Napriek tomu vymazať"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:339
 msgid "Deleting the task list failed"
 msgstr "Zmazanie zoznamu úloh sa nepodarilo"
 
@@ -190,7 +190,7 @@ msgstr "Premenovanie zoznamu úloh sa nepodarilo"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"

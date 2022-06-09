@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 20:10+0000\n"
+"POT-Creation-Date: 2022-06-09 17:15+0000\n"
 "PO-Revision-Date: 2021-03-21 09:24+0000\n"
 "Last-Translator: Shukrullo Turgunov <shookrullo@gmail.com>\n"
 "Language-Team: Uzbek <https://l10n.elementary.io/projects/tasks/tasks/uz/>\n"
@@ -30,37 +30,37 @@ msgstr ""
 msgid "Add Task List…"
 msgstr ""
 
-#: src/MainWindow.vala:258
+#: src/MainWindow.vala:267
 msgid "Creating a new task list failed"
 msgstr ""
 
-#: src/MainWindow.vala:259 src/MainWindow.vala:331
+#: src/MainWindow.vala:268 src/MainWindow.vala:340
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
-#: src/MainWindow.vala:264
+#: src/MainWindow.vala:273
 msgid "New list"
 msgstr "Yangi roʻyxat"
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:317
 #, c-format
 msgid "Delete “%s”?"
 msgstr ""
 
-#: src/MainWindow.vala:309
+#: src/MainWindow.vala:318
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:326
 #, fuzzy
 #| msgid "Delete Task"
 msgid "Delete Anyway"
 msgstr "Vazifani oʻchirish"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:339
 #, fuzzy
 #| msgid "Adding task failed"
 msgid "Deleting the task list failed"
@@ -196,7 +196,7 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
