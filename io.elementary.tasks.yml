@@ -1,6 +1,6 @@
 app-id: io.elementary.tasks
 runtime: io.elementary.Platform
-runtime-version: daily
+runtime-version: '7'
 sdk: io.elementary.Sdk
 command: io.elementary.tasks
 finish-args:
@@ -50,31 +50,6 @@ modules:
       - type: git
         url: https://gitlab.gnome.org/GNOME/libgdata.git
         tag: '0.17.13'
-
-  - name: sassc
-    sources:
-      - type: git
-        url: https://github.com/sass/sassc.git
-        tag: '3.6.1'
-      - type: script
-        dest-filename: autogen.sh
-        commands:
-          - autoreconf -si
-    modules:
-      sources:
-        - type: git
-          url: https://github.com/sass/libsass.git
-          tag: '3.6.4'
-        - type: script
-          dest-filename: autogen.sh
-          commands: autoreconf -si
-
-  - name: libadwaita
-    buildsystem: meson
-    sources:
-      - type: git
-        url: https://gitlab.gnome.org/GNOME/libadwaita.git
-        tag: '1.1.1'
 
   - name: libshumate
     buildsystem: meson

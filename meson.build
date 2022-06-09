@@ -29,8 +29,7 @@ config_file = configure_file(
 libecal_dep = dependency('libecal-2.0')
 
 tasks_deps = [
-    dependency('libshumate'),
-    dependency('clutter-1.0'),
+    # dependency('clutter-1.0'),
     #dependency('clutter-gtk-1.0'),
     dependency('geocode-glib-1.0'),
     dependency('glib-2.0'),
@@ -42,7 +41,8 @@ tasks_deps = [
     dependency('libgeoclue-2.0'),
     dependency('libadwaita-1', version: '>=1.0.0'),
     dependency('libical-glib'),
-    dependency('libgdata')
+    dependency('libgdata'),
+    dependency('shumate-0.0')
 ]
 
 if libecal_dep.version().version_compare('>=3.39.2')
