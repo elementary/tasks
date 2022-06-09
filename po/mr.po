@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 20:10+0000\n"
+"POT-Creation-Date: 2022-06-09 17:35+0000\n"
 "PO-Revision-Date: 2022-06-05 22:36+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
-"Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/>"
-"\n"
+"Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/"
+">\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,37 +31,37 @@ msgstr "ऑनलाइन खाती सेटिंग्ज …"
 msgid "Add Task List…"
 msgstr "कार्य यादी जोडा…"
 
-#: src/MainWindow.vala:258
+#: src/MainWindow.vala:267
 msgid "Creating a new task list failed"
 msgstr "नवीन कार्य सूची तयार करणे अयशस्वी झाले"
 
-#: src/MainWindow.vala:259 src/MainWindow.vala:331
+#: src/MainWindow.vala:268 src/MainWindow.vala:340
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
 
-#: src/MainWindow.vala:264
+#: src/MainWindow.vala:273
 msgid "New list"
 msgstr "नवीन यादी"
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:317
 #, c-format
 msgid "Delete “%s”?"
 msgstr "“%s” हटवायचे?"
 
-#: src/MainWindow.vala:309
+#: src/MainWindow.vala:318
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
-"सूची आणि त्याची सर्व कार्ये कायमची हटविली जातील. तुम्ही ही सूची शेअर केली "
-"असल्यास, इतर लोकांना यापुढे ही वापरायला मिळणार नाही."
+"सूची आणि त्याची सर्व कार्ये कायमची हटविली जातील. तुम्ही ही सूची शेअर केली असल्यास, इतर "
+"लोकांना यापुढे ही वापरायला मिळणार नाही."
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:326
 msgid "Delete Anyway"
 msgstr "तरीही हटवा"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:339
 msgid "Deleting the task list failed"
 msgstr "कार्य सूची हटवणे अयशस्वी झाले"
 

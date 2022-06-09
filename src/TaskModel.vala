@@ -36,6 +36,7 @@ public class Tasks.TaskModel : Object {
     public delegate void TasksRemovedFunc (SList<ECal.ComponentId?> cids);
 
     private Gee.Future<E.SourceRegistry> registry;
+    private NetworkMonitor network_monitor;
     private HashTable<string, ECal.Client> task_list_client;
     private HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> task_list_client_views;
 
@@ -62,6 +63,29 @@ public class Tasks.TaskModel : Object {
         }
 
         return client;
+    }
+
+    private void configure_task_list (E.Source task_list, E.SourceRegistry registry) throws Error {
+        var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+
+        if (collection_source != null) {
+            if (collection_source.has_extension (E.SOURCE_EXTENSION_OFFLINE)) {
+                unowned var collection_offline_extension = (E.SourceOffline) collection_source.get_extension (E.SOURCE_EXTENSION_OFFLINE);
+                unowned var task_list_offline_extension = (E.SourceOffline) task_list.get_extension (E.SOURCE_EXTENSION_OFFLINE);
+
+                task_list_offline_extension.stay_synchronized = collection_offline_extension.stay_synchronized;
+            }
+
+            if (collection_source.has_extension (E.SOURCE_EXTENSION_REFRESH)) {
+                unowned var collection_refresh_extension = (E.SourceRefresh) collection_source.get_extension (E.SOURCE_EXTENSION_REFRESH);
+                unowned var task_list_refresh_extension = (E.SourceRefresh) task_list.get_extension (E.SOURCE_EXTENSION_REFRESH);
+
+                task_list_refresh_extension.enabled = collection_refresh_extension.enabled;
+                task_list_refresh_extension.interval_minutes = collection_refresh_extension.interval_minutes;
+            }
+
+            registry.commit_source_sync (task_list, null);
+        }
     }
 
     private void create_task_list_client (E.Source task_list) {
@@ -109,12 +133,14 @@ public class Tasks.TaskModel : Object {
     construct {
         task_list_client = new HashTable<string, ECal.Client> (str_hash, str_equal);
         task_list_client_views = new HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> (direct_hash, direct_equal);  // vala-lint=line-length
+        network_monitor = NetworkMonitor.get_default ();
     }
 
     public async void start () {
         var promise = new Gee.Promise<E.SourceRegistry> ();
         registry = promise.future;
         yield init_registry (promise);
+        network_monitor.network_changed.connect (network_changed);
     }
 
     private async void init_registry (Gee.Promise<E.SourceRegistry> promise) {
@@ -122,8 +148,17 @@ public class Tasks.TaskModel : Object {
             var registry = yield new E.SourceRegistry (null);
 
             registry.source_added.connect ((task_list) => {
-                debug ("Adding task list '%s'", task_list.dup_display_name ());
+                debug ("Configuring task list '%s'…", task_list.dup_display_name ());
+
+                try {
+                    configure_task_list (task_list, registry);
+                } catch (Error e) {
+                    warning ("There was an error configuring the task list '%s': %s", task_list.dup_display_name (), e.message);
+                }
+
+                debug ("Adding task list '%s'…", task_list.dup_display_name ());
                 create_task_list_client (task_list);
+
                 task_list_added (task_list);
             });
 
@@ -132,7 +167,7 @@ public class Tasks.TaskModel : Object {
             });
 
             registry.source_removed.connect ((task_list) => {
-                debug ("Removing task list '%s'", task_list.dup_display_name ());
+                debug ("Removing task list '%s'…", task_list.dup_display_name ());
 
                 ECal.Client client;
                 try {
@@ -160,6 +195,67 @@ public class Tasks.TaskModel : Object {
             critical (e.message);
             promise.set_exception (e);
         }
+    }
+
+    private uint network_changed_debounce_timeout_id = 0;
+
+    private void network_changed (bool network_available) {
+        if (network_changed_debounce_timeout_id > 0) {
+            Source.remove (network_changed_debounce_timeout_id);
+            network_changed_debounce_timeout_id = 0;
+        }
+
+        network_changed_debounce_timeout_id = Timeout.add_seconds (2, () => {
+            network_changed_debounce_timeout_id = 0;
+
+            debug ("Network is available: '%s'", network_available.to_string ());
+
+            if (network_available && registry.ready) {
+                /* Synchronizing the task list discovers task changes done on remote (more likely to happen) */
+                registry.value.list_sources (E.SOURCE_EXTENSION_TASK_LIST).foreach (task_list => {
+                    refresh_task_list.begin (task_list, null, (obj, res) => {
+                        try {
+                            refresh_task_list.end (res);
+                        } catch (Error e) {
+                            warning ("Error syncing task list '%s': %s", task_list.dup_display_name (), e.message);
+                        }
+                    });
+                });
+
+                /* Synchronizing the collection discovers task list changes done on remote (less likely to happen) */
+                registry.value.list_sources (E.SOURCE_EXTENSION_COLLECTION).foreach ((collection_source) => {
+                    refresh_collection.begin (collection_source, null, (obj, res) => {
+                        try {
+                            refresh_collection.end (res);
+                        } catch (Error e) {
+                            warning ("Error syncing collection '%s': %s", collection_source.dup_display_name (), e.message);
+                        }
+                    });
+                });
+            }
+
+            return Source.REMOVE;
+        });
+    }
+
+    private async bool refresh_collection (E.Source collection_source, Cancellable? cancellable = null) throws Error {
+        if (network_monitor.network_available && registry.ready) {
+            debug ("Scheduling collection refresh '%s'…", collection_source.dup_display_name ());
+            return yield registry.value.refresh_backend (collection_source.dup_uid (), cancellable);
+        }
+        return false;
+    }
+
+    public async bool refresh_task_list (E.Source task_list, Cancellable? cancellable = null) throws Error {
+        if (network_monitor.network_available && task_list_client.contains (task_list.dup_uid ())) {
+            var client = task_list_client.get (task_list.dup_uid ());
+
+            if (client.check_refresh_supported ()) {
+                debug ("Scheduling task list refresh '%s'…", task_list.dup_display_name ());
+                return yield client.refresh (cancellable);
+            }
+        }
+        return false;
     }
 
     public async void add_task_list (E.Source task_list, E.Source collection_or_sibling) throws Error {

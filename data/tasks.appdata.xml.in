@@ -13,12 +13,12 @@
     </p>
   </description>
   <releases>
-    <release version="6.3.0" date="2022-05-16" urgency="medium">
+    <release version="6.3.0" date="2022-06-08" urgency="medium">
       <description>
         <p>Features:</p>
         <ul>
+          <li>Add offline support for newly created task lists in case its configured for the account</li>
           <li>Automatically synchronize a task list whenever it is selected or the network becomes available again</li>
-          <li>Added offline support for newly created task lists in case its available for the account</li>
         </ul>
       </description>
     </release>
