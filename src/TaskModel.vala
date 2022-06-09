@@ -65,6 +65,29 @@ public class Tasks.TaskModel : Object {
         return client;
     }
 
+    private void configure_task_list (E.Source task_list, E.SourceRegistry registry) throws Error {
+        var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
+
+        if (collection_source != null) {
+            if (collection_source.has_extension (E.SOURCE_EXTENSION_OFFLINE)) {
+                unowned var collection_offline_extension = (E.SourceOffline) collection_source.get_extension (E.SOURCE_EXTENSION_OFFLINE);
+                unowned var task_list_offline_extension = (E.SourceOffline) task_list.get_extension (E.SOURCE_EXTENSION_OFFLINE);
+
+                task_list_offline_extension.stay_synchronized = collection_offline_extension.stay_synchronized;
+            }
+
+            if (collection_source.has_extension (E.SOURCE_EXTENSION_REFRESH)) {
+                unowned var collection_refresh_extension = (E.SourceRefresh) collection_source.get_extension (E.SOURCE_EXTENSION_REFRESH);
+                unowned var task_list_refresh_extension = (E.SourceRefresh) task_list.get_extension (E.SOURCE_EXTENSION_REFRESH);
+
+                task_list_refresh_extension.enabled = collection_refresh_extension.enabled;
+                task_list_refresh_extension.interval_minutes = collection_refresh_extension.interval_minutes;
+            }
+
+            registry.commit_source_sync (task_list, null);
+        }
+    }
+
     private void create_task_list_client (E.Source task_list) {
         try {
             var client = (ECal.Client) ECal.Client.connect_sync (task_list, ECal.ClientSourceType.TASKS, -1, null);
@@ -125,8 +148,17 @@ public class Tasks.TaskModel : Object {
             var registry = yield new E.SourceRegistry (null);
 
             registry.source_added.connect ((task_list) => {
-                debug ("Adding task list '%s'", task_list.dup_display_name ());
+                debug ("Configuring task list '%s'…", task_list.dup_display_name ());
+
+                try {
+                    configure_task_list (task_list, registry);
+                } catch (Error e) {
+                    warning ("There was an error configuring the task list '%s': %s", task_list.dup_display_name (), e.message);
+                }
+
+                debug ("Adding task list '%s'…", task_list.dup_display_name ());
                 create_task_list_client (task_list);
+
                 task_list_added (task_list);
             });
 
@@ -135,7 +167,7 @@ public class Tasks.TaskModel : Object {
             });
 
             registry.source_removed.connect ((task_list) => {
-                debug ("Removing task list '%s'", task_list.dup_display_name ());
+                debug ("Removing task list '%s'…", task_list.dup_display_name ());
 
                 ECal.Client client;
                 try {
