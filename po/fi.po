@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 20:10+0000\n"
+"POT-Creation-Date: 2022-06-09 17:12+0000\n"
 "PO-Revision-Date: 2021-10-04 14:41+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://l10n.elementary.io/projects/tasks/tasks/fi/"
@@ -31,25 +31,25 @@ msgstr "Verkkotilien asetukset…"
 msgid "Add Task List…"
 msgstr "Lisää tehtäväluettelo…"
 
-#: src/MainWindow.vala:258
+#: src/MainWindow.vala:267
 msgid "Creating a new task list failed"
 msgstr "Uuden tehtäväluettelon luominen epäonnistui"
 
-#: src/MainWindow.vala:259 src/MainWindow.vala:331
+#: src/MainWindow.vala:268 src/MainWindow.vala:340
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 
-#: src/MainWindow.vala:264
+#: src/MainWindow.vala:273
 msgid "New list"
 msgstr "Uusi luettelo"
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:317
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Poistetaanko “%s”?"
 
-#: src/MainWindow.vala:309
+#: src/MainWindow.vala:318
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -57,11 +57,11 @@ msgstr ""
 "Luettelo ja sen kaikki tehtävät poistetaan pysyvästi. Jos olet jakanut tämän "
 "luettelon, muilla ihmisillä ei ole enää pääsyä siihen."
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:326
 msgid "Delete Anyway"
 msgstr "Poista silti"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:339
 msgid "Deleting the task list failed"
 msgstr "Tehtäväluettelon poistaminen epäonnistui"
 
@@ -193,7 +193,7 @@ msgstr "Tehtäväluettelon nimeäminen uudelleen epäonnistui"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"

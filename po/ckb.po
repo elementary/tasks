@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 20:10+0000\n"
+"POT-Creation-Date: 2022-06-09 17:12+0000\n"
 "PO-Revision-Date: 2022-04-01 20:05+0000\n"
 "Last-Translator: Aga Ismael <agaesmaeel@gmail.com>\n"
 "Language-Team: Kurdish (Central) <https://l10n.elementary.io/projects/tasks/"
@@ -31,26 +31,26 @@ msgstr "ڕێکخستنەکانی هەژمارە سەرهێڵییەکان…"
 msgid "Add Task List…"
 msgstr "زیادکردنی لیستی ئەرک…"
 
-#: src/MainWindow.vala:258
+#: src/MainWindow.vala:267
 msgid "Creating a new task list failed"
 msgstr "دروستکردنی لیستێکی نوێی ئەرکەکان شکستی هێنا"
 
-#: src/MainWindow.vala:259 src/MainWindow.vala:331
+#: src/MainWindow.vala:268 src/MainWindow.vala:340
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "تۆماری لیستی ئەرکەکان لەوانەیە بەردەست نەبێت یان نەتوانرێت هیچی بۆ بنووسرێت."
 
-#: src/MainWindow.vala:264
+#: src/MainWindow.vala:273
 msgid "New list"
 msgstr "لیستی تازە"
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:317
 #, c-format
 msgid "Delete “%s”?"
 msgstr "ڕەشکردنەوەی \"%s\"؟"
 
-#: src/MainWindow.vala:309
+#: src/MainWindow.vala:318
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -58,11 +58,11 @@ msgstr ""
 "لیستەکە و تەواوی ئەرکەکانی سەر ئەم لیستە بۆ هەمیشە دەسڕدرێنەوە. ئەگەر ئەم "
 "لیستەت لەگەڵ هەر کەسێک هاوبەشی پێ کردبێت، ئەوا چیتر دەستیان پێی ناگات."
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:326
 msgid "Delete Anyway"
 msgstr "بەهەر جۆرێک بێت، بیسڕەوە"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:339
 msgid "Deleting the task list failed"
 msgstr "سڕینەوەی لیستی ئەرک سەرکەوتوو نەبوو"
 
@@ -192,7 +192,7 @@ msgstr "ناونانەوەی لیستی ئەرک شکستی هێنا"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"

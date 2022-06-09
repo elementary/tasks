@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 20:10+0000\n"
+"POT-Creation-Date: 2022-06-09 17:12+0000\n"
 "PO-Revision-Date: 2021-07-28 03:11+0000\n"
 "Last-Translator: elSolus <tumbleweed@tuta.io>\n"
 "Language-Team: Punjabi <https://l10n.elementary.io/projects/tasks/tasks/pa/"
@@ -31,38 +31,38 @@ msgstr "ਆਨਲਾਈਨ ਖਾਤਿਆਂ ਦੀਆਂ ਸੈਟਿੰਗਾ
 msgid "Add Task List…"
 msgstr "ਕਾਰਜ-ਸੂਚੀ ਜੋੜੋ…"
 
-#: src/MainWindow.vala:258
+#: src/MainWindow.vala:267
 msgid "Creating a new task list failed"
 msgstr "ਨਵੀਂ ਕਾਰਜ-ਸੂਚੀ ਬਣਾਉਣਾ ਨਾਕਾਮ ਰਿਹਾ"
 
-#: src/MainWindow.vala:259 src/MainWindow.vala:331
+#: src/MainWindow.vala:268 src/MainWindow.vala:340
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "ਕਾਰਜ-ਸੂਚੀ ਦੀ ਰਜਿਸਟਰੀ ਨਾ-ਉਪਲਬਧ ਹੋ ਸਕਦੀ ਹੈ ਜਾਂ ਇਸ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ ਹੈ।"
 
-#: src/MainWindow.vala:264
+#: src/MainWindow.vala:273
 msgid "New list"
 msgstr "ਨਵੀਂ ਸੂਚੀ"
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:317
 #, c-format
 msgid "Delete “%s”?"
 msgstr ""
 
-#: src/MainWindow.vala:309
+#: src/MainWindow.vala:318
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:326
 #, fuzzy
 #| msgid "Delete Task"
 msgid "Delete Anyway"
 msgstr "ਕਾਰਜ ਮਿਟਾਓ"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:339
 msgid "Deleting the task list failed"
 msgstr "ਕਾਰਜ-ਸੂਚੀ ਮਿਟਾਉਣਾ ਨਾਕਾਮ ਰਿਹਾ"
 
@@ -195,7 +195,7 @@ msgstr "ਕਾਰਜ-ਸੂਚੀ ਦਾ ਨਾਂ ਬਦਲਣਾ ਨਾਕਾ�
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
