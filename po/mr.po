@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 20:10+0000\n"
-"PO-Revision-Date: 2020-11-23 05:15+0000\n"
+"POT-Creation-Date: 2022-06-12 00:57+0000\n"
+"PO-Revision-Date: 2022-06-05 22:36+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/"
 ">\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: src/MainWindow.vala:45
 msgid "Tasks"
@@ -25,47 +25,45 @@ msgstr "कामे"
 
 #: src/MainWindow.vala:106
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "ऑनलाइन खाती सेटिंग्ज …"
 
 #: src/MainWindow.vala:123
 msgid "Add Task List…"
 msgstr "कार्य यादी जोडा…"
 
-#: src/MainWindow.vala:258
+#: src/MainWindow.vala:267
 msgid "Creating a new task list failed"
 msgstr "नवीन कार्य सूची तयार करणे अयशस्वी झाले"
 
-#: src/MainWindow.vala:259 src/MainWindow.vala:331
+#: src/MainWindow.vala:268 src/MainWindow.vala:340
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
 
-#: src/MainWindow.vala:264
+#: src/MainWindow.vala:273
 msgid "New list"
 msgstr "नवीन यादी"
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:317
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "“%s” हटवायचे?"
 
-#: src/MainWindow.vala:309
+#: src/MainWindow.vala:318
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"सूची आणि त्याची सर्व कार्ये कायमची हटविली जातील. तुम्ही ही सूची शेअर केली असल्यास, इतर "
+"लोकांना यापुढे ही वापरायला मिळणार नाही."
 
-#: src/MainWindow.vala:317
-#, fuzzy
-#| msgid "Delete Task"
+#: src/MainWindow.vala:326
 msgid "Delete Anyway"
-msgstr "कार्य हटवा"
+msgstr "तरीही हटवा"
 
-#: src/MainWindow.vala:330
-#, fuzzy
-#| msgid "Creating a new task list failed"
+#: src/MainWindow.vala:339
 msgid "Deleting the task list failed"
-msgstr "नवीन कार्य सूची तयार करणे अयशस्वी झाले"
+msgstr "कार्य सूची हटवणे अयशस्वी झाले"
 
 #: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
@@ -85,50 +83,43 @@ msgstr "संपादित करा…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "अंतिम वेळ सेट करा"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "काढा"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "स्थान सेट करा"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
-msgstr ""
+msgstr "येत आहे"
 
 #: src/Widgets/EntryPopover/Location.vala:57
 msgid "Leaving"
-msgstr ""
+msgstr "सोडून जात आहे"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "जॉन स्मिथ किंवा उदाहरण सेंट."
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
 msgstr "पूर्ण झाले दर्शवा"
 
 #: src/Widgets/ListSettingsPopover.vala:119
-#, fuzzy
-#| msgid "Delete List"
 msgid "Delete List…"
-msgstr "यादी हटवा"
+msgstr "यादी हटवा…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
-#, fuzzy
-#| msgid "Creating a new task list failed"
 msgid "Could not change the task list color"
-msgstr "नवीन कार्य सूची तयार करणे अयशस्वी झाले"
+msgstr "कार्य सूचीचा रंग बदलू शकलो नाही"
 
 #: src/Widgets/ListSettingsPopover.vala:275
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task list registry may be unavailable or write-protected."
-msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
+msgstr "कार्य सूची नोंदणी अनुपलब्ध किंवा लेखन-संरक्षित असू शकते."
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
@@ -139,14 +130,12 @@ msgid "Connecting…"
 msgstr "कनेक्ट करीत आहे…"
 
 #: src/Widgets/SourceRow.vala:150
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Moving task failed"
-msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
+msgstr "कार्य हलविणे अयशस्वी"
 
 #: src/Widgets/SourceRow.vala:151
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "इच्छित सूचीमध्ये कार्य हलवताना त्रुटी आली."
 
 #: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
@@ -165,42 +154,31 @@ msgid "No Tasks"
 msgstr "कोणतीही कामे नाहीत"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Completing task failed"
-msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
+msgstr "कार्य पूर्ण करण्यात अयशस्वी"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:222
 #: src/Widgets/ScheduledTaskListGrid.vala:244
 #: src/Widgets/ScheduledTaskListGrid.vala:266 src/Widgets/TaskListGrid.vala:310
 #: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
+msgstr "कार्य रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
 
 #: src/Widgets/ScheduledTaskListGrid.vala:243 src/Widgets/TaskListGrid.vala:331
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Updating task failed"
-msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
+msgstr "कार्य अपडेट करणे अयशस्वी झाले"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:265 src/Widgets/TaskListGrid.vala:353
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Removing task failed"
-msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
+msgstr "कार्य काढणे अयशस्वी"
 
 #: src/Widgets/TaskListGrid.vala:56
 msgid "Edit Name and Appearance"
 msgstr "नाव आणि स्वरूप संपादित करा"
 
 #: src/Widgets/TaskListGrid.vala:87
-#, fuzzy
-#| msgid "Renaming task list failed"
 msgid "Adding task failed"
-msgstr "कार्य सूचीचे नाव बदलणे अयशस्वी झाले"
+msgstr "कार्य जोडणे अयशस्वी"
 
 #: src/Widgets/TaskListGrid.vala:175
 msgid "Renaming task list failed"
@@ -211,7 +189,7 @@ msgstr "कार्य सूचीचे नाव बदलणे अयश�
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
@@ -220,12 +198,12 @@ msgstr "%s वर %s"
 #: src/Widgets/TaskRow.vala:182
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "%s :येत आहे"
 
 #: src/Widgets/TaskRow.vala:185
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "%s : सोडत आहे"
 
 #: src/Widgets/TaskRow.vala:240
 msgid "Cancel"
