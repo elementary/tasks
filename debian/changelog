@@ -1,3 +1,13 @@
+io.elementary.tasks (6.3.0) focal; urgency=medium
+
+  * Release 6.3.0 (#332)
+  * Update translation files
+  * Update translation template
+  * CalDAV: Offline support for newly added task lists (#328)
+  * Auto refresh task lists and collections (#330)
+
+ -- elementary, Inc. <builds@elementary.io>  Tue, 14 Jun 2022 16:57:46 +0000
+
 io.elementary.tasks (6.2.0) focal; urgency=medium
 
   * Release 6.2.0 (#324)
