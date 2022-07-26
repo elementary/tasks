@@ -101,6 +101,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         scrolledwindow.add (listbox);
 
         add_tasklist_buttonbox = new Gtk.ButtonBox (Gtk.Orientation.VERTICAL);
+        add_tasklist_buttonbox.set_layout (Gtk.ButtonBoxStyle.EXPAND);
 
         var online_accounts_button = new Gtk.ModelButton () {
             text = _("Online Accounts Settings…")
