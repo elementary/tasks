@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-19 02:36+0000\n"
+"POT-Creation-Date: 2022-07-31 13:12+0000\n"
 "PO-Revision-Date: 2021-07-28 03:11+0000\n"
 "Last-Translator: elSolus <tumbleweed@tuta.io>\n"
 "Language-Team: Punjabi <https://l10n.elementary.io/projects/tasks/tasks/pa/"
@@ -23,46 +23,46 @@ msgstr ""
 msgid "Tasks"
 msgstr "ਕਾਰਜ"
 
-#: src/MainWindow.vala:106
+#: src/MainWindow.vala:108
 msgid "Online Accounts Settings…"
 msgstr "ਆਨਲਾਈਨ ਖਾਤਿਆਂ ਦੀਆਂ ਸੈਟਿੰਗਾਂ…"
 
-#: src/MainWindow.vala:123
+#: src/MainWindow.vala:125
 msgid "Add Task List…"
 msgstr "ਕਾਰਜ-ਸੂਚੀ ਜੋੜੋ…"
 
-#: src/MainWindow.vala:267
+#: src/MainWindow.vala:269
 msgid "Creating a new task list failed"
 msgstr "ਨਵੀਂ ਕਾਰਜ-ਸੂਚੀ ਬਣਾਉਣਾ ਨਾਕਾਮ ਰਿਹਾ"
 
-#: src/MainWindow.vala:268 src/MainWindow.vala:340
+#: src/MainWindow.vala:270 src/MainWindow.vala:342
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "ਕਾਰਜ-ਸੂਚੀ ਦੀ ਰਜਿਸਟਰੀ ਨਾ-ਉਪਲਬਧ ਹੋ ਸਕਦੀ ਹੈ ਜਾਂ ਇਸ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ ਹੈ।"
 
-#: src/MainWindow.vala:273
+#: src/MainWindow.vala:275
 msgid "New list"
 msgstr "ਨਵੀਂ ਸੂਚੀ"
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:319
 #, c-format
 msgid "Delete “%s”?"
 msgstr ""
 
-#: src/MainWindow.vala:318
+#: src/MainWindow.vala:320
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
 
-#: src/MainWindow.vala:326
+#: src/MainWindow.vala:328
 #, fuzzy
 #| msgid "Delete Task"
 msgid "Delete Anyway"
 msgstr "ਕਾਰਜ ਮਿਟਾਓ"
 
-#: src/MainWindow.vala:339
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "ਕਾਰਜ-ਸੂਚੀ ਮਿਟਾਉਣਾ ਨਾਕਾਮ ਰਿਹਾ"
 
@@ -195,7 +195,7 @@ msgstr "ਕਾਰਜ-ਸੂਚੀ ਦਾ ਨਾਂ ਬਦਲਣਾ ਨਾਕਾ�
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-19 02:36+0000\n"
+"POT-Creation-Date: 2022-07-31 13:12+0000\n"
 "PO-Revision-Date: 2022-06-19 02:33+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
@@ -24,35 +24,35 @@ msgstr ""
 msgid "Tasks"
 msgstr "Gjøremål"
 
-#: src/MainWindow.vala:106
+#: src/MainWindow.vala:108
 #, fuzzy
 msgid "Online Accounts Settings…"
 msgstr "Innstillinger for nettbaserte kontoer …"
 
-#: src/MainWindow.vala:123
+#: src/MainWindow.vala:125
 #, fuzzy
 msgid "Add Task List…"
 msgstr "Legg til gjøremålsliste …"
 
-#: src/MainWindow.vala:267
+#: src/MainWindow.vala:269
 msgid "Creating a new task list failed"
 msgstr "Opprettelse av nytt gjøremål mislyktes"
 
-#: src/MainWindow.vala:268 src/MainWindow.vala:340
+#: src/MainWindow.vala:270 src/MainWindow.vala:342
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
 
-#: src/MainWindow.vala:273
+#: src/MainWindow.vala:275
 msgid "New list"
 msgstr "Ny liste"
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:319
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Slett «%s»?"
 
-#: src/MainWindow.vala:318
+#: src/MainWindow.vala:320
 #, fuzzy
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
@@ -61,11 +61,11 @@ msgstr ""
 "Listen og alle dens gjøremål vil bli slettet for godt. Hvis du har delt "
 "denne listen med andre vil de miste tilgang til den."
 
-#: src/MainWindow.vala:326
+#: src/MainWindow.vala:328
 msgid "Delete Anyway"
 msgstr "Slett uansett"
 
-#: src/MainWindow.vala:339
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "Kunne ikke slette gjøremålsliste"
 
@@ -194,7 +194,7 @@ msgstr "Klarte ikke å gi gjøremålslisten nytt navn"
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"

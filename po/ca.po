@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-19 02:36+0000\n"
+"POT-Creation-Date: 2022-07-31 13:12+0000\n"
 "PO-Revision-Date: 2021-12-10 09:26+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/tasks/ca/"
@@ -23,35 +23,35 @@ msgstr ""
 msgid "Tasks"
 msgstr "Tasques"
 
-#: src/MainWindow.vala:106
+#: src/MainWindow.vala:108
 msgid "Online Accounts Settings…"
 msgstr "Paràmetres dels comptes en línia…"
 
-#: src/MainWindow.vala:123
+#: src/MainWindow.vala:125
 msgid "Add Task List…"
 msgstr "Afegeix una llista de tasques…"
 
-#: src/MainWindow.vala:267
+#: src/MainWindow.vala:269
 msgid "Creating a new task list failed"
 msgstr "Ha fallat crear una llista de tasques nova."
 
-#: src/MainWindow.vala:268 src/MainWindow.vala:340
+#: src/MainWindow.vala:270 src/MainWindow.vala:342
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "El registre de la llista de tasques pot no estar disponible o no s'hi pot "
 "escriure."
 
-#: src/MainWindow.vala:273
+#: src/MainWindow.vala:275
 msgid "New list"
 msgstr "Llista nova"
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:319
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Voleu suprimir %s?"
 
-#: src/MainWindow.vala:318
+#: src/MainWindow.vala:320
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -59,11 +59,11 @@ msgstr ""
 "Se suprimiran permanentment la llista i totes les tasques incloses. Si l'heu "
 "compartida, les altres persones ja no hi tindran accés."
 
-#: src/MainWindow.vala:326
+#: src/MainWindow.vala:328
 msgid "Delete Anyway"
 msgstr "Suprimeix-la tanmateix"
 
-#: src/MainWindow.vala:339
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "Ha fallat suprimir la llista de tasques."
 
@@ -193,7 +193,7 @@ msgstr "Ha fallat canviar el nom de llista de tasques."
 msgid "%s"
 msgstr "%s"
 
-#. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
+#. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
