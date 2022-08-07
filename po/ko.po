@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-01 21:40+0000\n"
-"PO-Revision-Date: 2022-08-05 15:30+0000\n"
-"Last-Translator: Kang Minsuk <linuxlovemin@gmail.com>\n"
+"PO-Revision-Date: 2022-08-07 13:51+0000\n"
+"Last-Translator: Jung-Kyu Park <bagjunggyu@gmail.com>\n"
 "Language-Team: Korean <https://l10n.elementary.io/projects/tasks/tasks/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: src/MainWindow.vala:45
 msgid "Tasks"
-msgstr ""
+msgstr "작업"
 
 #: src/MainWindow.vala:108
 msgid "Online Accounts Settings…"
@@ -28,16 +28,16 @@ msgstr "온라인 계정 설정…"
 
 #: src/MainWindow.vala:125
 msgid "Add Task List…"
-msgstr ""
+msgstr "작업 목록 추가…"
 
 #: src/MainWindow.vala:269
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "새 작업 목록 생성 실패"
 
 #: src/MainWindow.vala:270 src/MainWindow.vala:342
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "작업 목록 등록을 할 수 없거나 쓰지 못할 수 있습니다."
 
 #: src/MainWindow.vala:275
 msgid "New list"
@@ -46,7 +46,7 @@ msgstr "새 리스트"
 #: src/MainWindow.vala:319
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "“%s”삭제할까요?"
 
 #: src/MainWindow.vala:320
 msgid ""
