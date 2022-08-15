@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-07 20:42+0000\n"
-"PO-Revision-Date: 2021-12-11 00:32+0000\n"
-"Last-Translator: DartDeaDia <dartdeadia@protonmail.com>\n"
-"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
-">\n"
+"PO-Revision-Date: 2022-08-15 11:52+0000\n"
+"Last-Translator: lenemter <lenemter@gmail.com>\n"
+"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -120,7 +120,7 @@ msgstr "Не удалось изменить цвет списка задач"
 
 #: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
-msgstr "Журнал списка задач может быть недоступен или защищен от записи."
+msgstr "Журнал списка задач может быть недоступен или защищён от записи."
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
@@ -144,11 +144,11 @@ msgstr "Ожидание данных для входа"
 
 #: src/Widgets/SourceRow.vala:216
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr "В настоящее время отключено от (возможно, удаленного) хранилища данных"
+msgstr "В настоящее время отключено от (возможно, удалённого) хранилища данных"
 
 #: src/Widgets/SourceRow.vala:220
 msgid "SSL certificate trust was rejected for the connection"
-msgstr "Ненадежный SSL сертификат для подключения, отклонено"
+msgstr "Ненадёжный SSL сертификат для подключения, отклонено"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
