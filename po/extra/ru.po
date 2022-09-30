@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-10 01:18+0000\n"
-"PO-Revision-Date: 2022-08-15 11:52+0000\n"
+"PO-Revision-Date: 2022-09-30 14:23+0000\n"
 "Last-Translator: lenemter <lenemter@gmail.com>\n"
-"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/extra/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/extra/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,7 +85,7 @@ msgstr "Улучшена обработка часовых поясов"
 
 #: data/tasks.appdata.xml.in:43
 msgid "Performance improvements"
-msgstr "Улучшение производительности"
+msgstr "Улучшения производительности"
 
 #: data/tasks.appdata.xml.in:44 data/tasks.appdata.xml.in:62
 #: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:79
