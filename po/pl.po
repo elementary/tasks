@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 20:10+0000\n"
+"POT-Creation-Date: 2022-09-30 14:31+0000\n"
 "PO-Revision-Date: 2021-12-09 11:56+0000\n"
 "Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/tasks/tasks/pl/>\n"
@@ -23,33 +23,33 @@ msgstr ""
 msgid "Tasks"
 msgstr "Zadania"
 
-#: src/MainWindow.vala:106
+#: src/MainWindow.vala:108
 msgid "Online Accounts Settings…"
 msgstr "Ustawienia kont online…"
 
-#: src/MainWindow.vala:123
+#: src/MainWindow.vala:125
 msgid "Add Task List…"
 msgstr "Dodaj listę zadań…"
 
-#: src/MainWindow.vala:258
+#: src/MainWindow.vala:269
 msgid "Creating a new task list failed"
 msgstr "Nie udało się stworzyć nowej listy zadań"
 
-#: src/MainWindow.vala:259 src/MainWindow.vala:331
+#: src/MainWindow.vala:270 src/MainWindow.vala:342
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Rejestr listy zadań może być niedostępny lub nie można go edytować."
 
-#: src/MainWindow.vala:264
+#: src/MainWindow.vala:275
 msgid "New list"
 msgstr "Nowa lista"
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:319
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Czy chcesz usunąć „%s”?"
 
-#: src/MainWindow.vala:309
+#: src/MainWindow.vala:320
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -57,11 +57,11 @@ msgstr ""
 "Ta lista i wszystkie zadania na niej zostaną na zawsze usunięte. Jeśli ta "
 "lista była udostępniona, inne osoby nie będą miały już do niej dostępu."
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:328
 msgid "Delete Anyway"
 msgstr "Usuń mimo to"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "Usuwanie listy zadań nie powiodło się"
 

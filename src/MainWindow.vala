@@ -100,7 +100,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         };
         scrolledwindow.add (listbox);
 
-        add_tasklist_buttonbox = new Gtk.ButtonBox (Gtk.Orientation.VERTICAL);
+        add_tasklist_buttonbox = new Gtk.ButtonBox (Gtk.Orientation.VERTICAL) {
+            layout_style = Gtk.ButtonBoxStyle.EXPAND
+        };
 
         var online_accounts_button = new Gtk.ModelButton () {
             text = _("Online Accounts Settings…")
@@ -183,6 +185,15 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     if (row is Tasks.Widgets.SourceRow) {
                         var source = ((Tasks.Widgets.SourceRow) row).source;
                         var source_uid = source.dup_uid ();
+
+                        /* Synchronizing the list whenever its selected discovers task changes done on remote (likely to happen when multiple devices are used) */
+                        Tasks.Application.model.refresh_task_list.begin (source, null, () => {
+                            try {
+                                Tasks.Application.model.refresh_task_list.end (res);
+                            } catch (Error e) {
+                                warning ("Error syncing task list '%s': %s", source.dup_display_name (), e.message);
+                            }
+                        });
 
                         task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
                         if (task_list_grid == null) {
