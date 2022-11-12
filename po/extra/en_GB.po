@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 16:01+0000\n"
+"POT-Creation-Date: 2022-11-12 12:30+0000\n"
 "PO-Revision-Date: 2022-11-09 23:29+0000\n"
 "Last-Translator: Joel Jose <joel750jose@gmail.com>\n"
 "Language-Team: English (United Kingdom) <https://l10n.elementary.io/projects/"
@@ -66,7 +66,8 @@ msgstr "Drag and drop tasks between lists"
 
 #: data/tasks.appdata.xml.in:38
 msgid "Follow email and web links in the task description with Control + Click"
-msgstr "Follow email and web links in the task description with Control + Click"
+msgstr ""
+"Follow email and web links in the task description with Control + Click"
 
 #: data/tasks.appdata.xml.in:40 data/tasks.appdata.xml.in:57
 #: data/tasks.appdata.xml.in:68 data/tasks.appdata.xml.in:76
