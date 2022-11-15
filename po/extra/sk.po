@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 12:49+0000\n"
+"POT-Creation-Date: 2022-11-15 17:56+0000\n"
 "PO-Revision-Date: 2022-09-09 21:51+0000\n"
 "Last-Translator: JohnDumpling <john_dumpling@protonmail.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/tasks/extra/sk/>\n"
@@ -36,12 +36,28 @@ msgstr ""
 "pripomienok. Vytvárajte a dokončujte úlohy, spravujte zoznamy a "
 "synchronizujte ich s vašimi zariadeniami pomocou CalDAV."
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:27
-#: data/tasks.appdata.xml.in:35
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:53
+#: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
+#: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
+msgid "Improvements:"
+msgstr "Vylepšenia:"
+
+#: data/tasks.appdata.xml.in:20
+msgid "New app icon"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
+#: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
+#: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
+msgid "Updated translations"
+msgstr "Aktualizované preklady"
+
+#: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
+#: data/tasks.appdata.xml.in:48
 msgid "Features:"
 msgstr "Funkcie:"
 
-#: data/tasks.appdata.xml.in:20
+#: data/tasks.appdata.xml.in:33
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -49,7 +65,7 @@ msgstr ""
 "Pridaná offline podpora pre novovytvorené zoznamy úloh, ak je to tak "
 "nastavené pre konkrétny účet"
 
-#: data/tasks.appdata.xml.in:21
+#: data/tasks.appdata.xml.in:34
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -57,103 +73,91 @@ msgstr ""
 "Automaticky synchronizovať zoznam úloh vždy, keď je zvolený, alebo keď sa "
 "obnoví prístup na internet"
 
-#: data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:42
 msgid "Send a notification when a task is due"
 msgstr "Odoslať oznámenie, keď má úloha dátum splnenia dnes"
 
-#: data/tasks.appdata.xml.in:37
+#: data/tasks.appdata.xml.in:50
 msgid "Drag and drop tasks between lists"
 msgstr "Úlohy je možné presúvať medzi zoznamami"
 
-#: data/tasks.appdata.xml.in:38
+#: data/tasks.appdata.xml.in:51
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
 "E-maily a odkazy na web v popise úlohy je možné nasledovať podržaním klávesy "
 "Ctrl a kliknutím na ne myšou"
 
-#: data/tasks.appdata.xml.in:40 data/tasks.appdata.xml.in:57
-#: data/tasks.appdata.xml.in:68 data/tasks.appdata.xml.in:76
-#: data/tasks.appdata.xml.in:85
-msgid "Improvements:"
-msgstr "Vylepšenia:"
-
-#: data/tasks.appdata.xml.in:42
+#: data/tasks.appdata.xml.in:55
 msgid "Improved time zone handling"
 msgstr "Vylepšené zaobchádzanie s časovými pásmami"
 
-#: data/tasks.appdata.xml.in:43
+#: data/tasks.appdata.xml.in:56
 msgid "Performance improvements"
 msgstr "Vylepšenia výkonu"
 
-#: data/tasks.appdata.xml.in:44 data/tasks.appdata.xml.in:62
-#: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:79
-#: data/tasks.appdata.xml.in:88
-msgid "Updated translations"
-msgstr "Aktualizované preklady"
-
-#: data/tasks.appdata.xml.in:50
+#: data/tasks.appdata.xml.in:63
 msgid "Fixes:"
 msgstr "Opravy:"
 
-#: data/tasks.appdata.xml.in:52
+#: data/tasks.appdata.xml.in:65
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr "Zabránenie viacnásobnému zobrazovaniu názvov účtov v bočnom paneli"
 
-#: data/tasks.appdata.xml.in:53
+#: data/tasks.appdata.xml.in:66
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "Dlhé popisy sú automaticky skracované na konci namiesto na začiatku"
 
-#: data/tasks.appdata.xml.in:54
+#: data/tasks.appdata.xml.in:67
 msgid "Removing descriptions is now saved"
 msgstr "Odstraňovanie popisov sa automaticky ukladá"
 
-#: data/tasks.appdata.xml.in:55
+#: data/tasks.appdata.xml.in:68
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "Umiestňovanie kurzora do popisov funguje konzistentne"
 
-#: data/tasks.appdata.xml.in:59
+#: data/tasks.appdata.xml.in:72
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "Nahradenie skratky Delete za Ctrl + Backspace"
 
-#: data/tasks.appdata.xml.in:60
+#: data/tasks.appdata.xml.in:73
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr "Pridaný dialóg potvrdenia pri odstraňovaní zoznamu úloh"
 
-#: data/tasks.appdata.xml.in:61
+#: data/tasks.appdata.xml.in:74
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr "Vylepšenie výkonu v zoznamoch s veľkým množstvom dokončených úloh"
 
-#: data/tasks.appdata.xml.in:78
+#: data/tasks.appdata.xml.in:91
 msgid "Fix crash on start with certain hardware"
 msgstr "Opravený pád pri spustení na určitom hardvéri"
 
-#: data/tasks.appdata.xml.in:87
+#: data/tasks.appdata.xml.in:100
 msgid "Fix the order of the scheduled view"
 msgstr "Opravené poradie zobrazenia naplánovaných úloh"
 
-#: data/tasks.appdata.xml.in:94
+#: data/tasks.appdata.xml.in:107
 msgid "First release!"
 msgstr "Prvé vydanie!"
 
-#: data/tasks.appdata.xml.in:96
+#: data/tasks.appdata.xml.in:109
 msgid "Support the dark style"
 msgstr "Podporuje tmavý štýl"
 
-#: data/tasks.appdata.xml.in:97
+#: data/tasks.appdata.xml.in:110
 msgid "Add and remove task lists with custom colors"
 msgstr "Pridávajte a odstraňujte zoznamy úloh s prispôsobenými farbami"
 
-#: data/tasks.appdata.xml.in:98
+#: data/tasks.appdata.xml.in:111
 msgid "See scheduled tasks from all lists at once"
 msgstr "Zobrazte naplánované úlohy zo všetkých zoznamov naraz"
 
-#: data/tasks.appdata.xml.in:99
+#: data/tasks.appdata.xml.in:112
 msgid "Set due dates"
 msgstr "Nastavujte dátumy konca platnosti"
 
-#: data/tasks.appdata.xml.in:142
+#: data/tasks.appdata.xml.in:155
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 

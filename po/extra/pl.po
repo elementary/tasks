@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 12:49+0000\n"
+"POT-Creation-Date: 2022-11-15 17:56+0000\n"
 "PO-Revision-Date: 2022-06-10 08:11+0000\n"
 "Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/tasks/extra/pl/>\n"
@@ -37,12 +37,28 @@ msgstr ""
 "przypomnieniami. Twórz i kończ zadania, zarządzaj listami i synchronizuj je "
 "między twoimi maszynami przy użyciu CalDAV."
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:27
-#: data/tasks.appdata.xml.in:35
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:53
+#: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
+#: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
+msgid "Improvements:"
+msgstr "Ulepszenia:"
+
+#: data/tasks.appdata.xml.in:20
+msgid "New app icon"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
+#: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
+#: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
+msgid "Updated translations"
+msgstr "Zaktualizowano tłumaczenia"
+
+#: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
+#: data/tasks.appdata.xml.in:48
 msgid "Features:"
 msgstr "Funkcje:"
 
-#: data/tasks.appdata.xml.in:20
+#: data/tasks.appdata.xml.in:33
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -50,7 +66,7 @@ msgstr ""
 "Dodano wsparcie offline dla nowo utworzonych list zadań w przypadku "
 "odpowiedniej konfiguracji konta"
 
-#: data/tasks.appdata.xml.in:21
+#: data/tasks.appdata.xml.in:34
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -58,104 +74,92 @@ msgstr ""
 "Automatyczna synchronizacja listy zadań gdy jest zaznaczona lub gdy sieć "
 "znów staje się dostępna"
 
-#: data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:42
 msgid "Send a notification when a task is due"
 msgstr "Wysyłanie powiadomienia przy nadchodzącym zadaniu"
 
-#: data/tasks.appdata.xml.in:37
+#: data/tasks.appdata.xml.in:50
 msgid "Drag and drop tasks between lists"
 msgstr "Przeciąganie i upuszczanie zadań między listami"
 
-#: data/tasks.appdata.xml.in:38
+#: data/tasks.appdata.xml.in:51
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
 "Podążaj za adresami email i linkami sieciowymi w opisie zadania przy użyciu "
 "Control + Kliknięcie"
 
-#: data/tasks.appdata.xml.in:40 data/tasks.appdata.xml.in:57
-#: data/tasks.appdata.xml.in:68 data/tasks.appdata.xml.in:76
-#: data/tasks.appdata.xml.in:85
-msgid "Improvements:"
-msgstr "Ulepszenia:"
-
-#: data/tasks.appdata.xml.in:42
+#: data/tasks.appdata.xml.in:55
 msgid "Improved time zone handling"
 msgstr "Usprawniono obsługę stref czasowych"
 
-#: data/tasks.appdata.xml.in:43
+#: data/tasks.appdata.xml.in:56
 msgid "Performance improvements"
 msgstr "Ulepszenia wydajności"
 
-#: data/tasks.appdata.xml.in:44 data/tasks.appdata.xml.in:62
-#: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:79
-#: data/tasks.appdata.xml.in:88
-msgid "Updated translations"
-msgstr "Zaktualizowano tłumaczenia"
-
-#: data/tasks.appdata.xml.in:50
+#: data/tasks.appdata.xml.in:63
 msgid "Fixes:"
 msgstr "Poprawki:"
 
-#: data/tasks.appdata.xml.in:52
+#: data/tasks.appdata.xml.in:65
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr "Zapobiegaj wielokrotnemu wyświetlaniu nazwy konta w panelu bocznym"
 
-#: data/tasks.appdata.xml.in:53
+#: data/tasks.appdata.xml.in:66
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "Długie opisy są przycięte na końcu zamiast na początku"
 
-#: data/tasks.appdata.xml.in:54
+#: data/tasks.appdata.xml.in:67
 msgid "Removing descriptions is now saved"
 msgstr "Usuwanie opisów jest teraz zapisywane"
 
-#: data/tasks.appdata.xml.in:55
+#: data/tasks.appdata.xml.in:68
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "Ustawianie kursora w opisach działa teraz jednolicie"
 
-#: data/tasks.appdata.xml.in:59
+#: data/tasks.appdata.xml.in:72
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "Zamień skrót klawiszowy z Delete na Ctrl + Backspace"
 
-#: data/tasks.appdata.xml.in:60
+#: data/tasks.appdata.xml.in:73
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr "Wyświetl okienko z potwierdzeniem przy usuwaniu listy zadań"
 
-#: data/tasks.appdata.xml.in:61
+#: data/tasks.appdata.xml.in:74
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr "Popraw wydajność w listach z dużą ilością zakończonych zadań"
 
-#: data/tasks.appdata.xml.in:78
+#: data/tasks.appdata.xml.in:91
 msgid "Fix crash on start with certain hardware"
 msgstr ""
 "Napraw błąd uruchamiania występujący na niektórych konfiguracjach sprzętowych"
 
-#: data/tasks.appdata.xml.in:87
+#: data/tasks.appdata.xml.in:100
 msgid "Fix the order of the scheduled view"
 msgstr "Naprawiono kolejność widoku zaplanowanych"
 
-#: data/tasks.appdata.xml.in:94
+#: data/tasks.appdata.xml.in:107
 msgid "First release!"
 msgstr "Pierwsze wydanie!"
 
-#: data/tasks.appdata.xml.in:96
+#: data/tasks.appdata.xml.in:109
 msgid "Support the dark style"
 msgstr "Wsparcie dla trybu ciemnego"
 
-#: data/tasks.appdata.xml.in:97
+#: data/tasks.appdata.xml.in:110
 msgid "Add and remove task lists with custom colors"
 msgstr "Dodaj i usuń listy zadań z niestandardowymi kolorami"
 
-#: data/tasks.appdata.xml.in:98
+#: data/tasks.appdata.xml.in:111
 msgid "See scheduled tasks from all lists at once"
 msgstr "Zobacz zaplanowane zadania ze wszystkich list naraz"
 
-#: data/tasks.appdata.xml.in:99
+#: data/tasks.appdata.xml.in:112
 msgid "Set due dates"
 msgstr "Ustaw terminy"
 
-#: data/tasks.appdata.xml.in:142
+#: data/tasks.appdata.xml.in:155
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
