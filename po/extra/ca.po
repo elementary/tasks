@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 12:49+0000\n"
+"POT-Creation-Date: 2022-11-15 17:54+0000\n"
 "PO-Revision-Date: 2022-06-10 18:57+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/extra/ca/"
@@ -37,12 +37,28 @@ msgstr ""
 "recordatoris. Creeu i completeu tasques, gestioneu-ne llistes i sincronitzeu-"
 "les en dispositius diferents mitjançant CalDAV."
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:27
-#: data/tasks.appdata.xml.in:35
+#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:53
+#: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
+#: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
+msgid "Improvements:"
+msgstr "Millores:"
+
+#: data/tasks.appdata.xml.in:20
+msgid "New app icon"
+msgstr ""
+
+#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
+#: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
+#: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
+msgid "Updated translations"
+msgstr "Traduccions actualitzades"
+
+#: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
+#: data/tasks.appdata.xml.in:48
 msgid "Features:"
 msgstr "Característiques:"
 
-#: data/tasks.appdata.xml.in:20
+#: data/tasks.appdata.xml.in:33
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -50,7 +66,7 @@ msgstr ""
 "Addició de suport fora de línia per a les llistes de tasques de nova creació "
 "en cas que estigui configurada per al compte"
 
-#: data/tasks.appdata.xml.in:21
+#: data/tasks.appdata.xml.in:34
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -58,45 +74,33 @@ msgstr ""
 "Sincronitza automàticament una llista de tasques sempre que se la "
 "seleccioneu o la xarxa torni a estar disponible"
 
-#: data/tasks.appdata.xml.in:29
+#: data/tasks.appdata.xml.in:42
 msgid "Send a notification when a task is due"
 msgstr "Envieu una notificació quan s'hagi de fer una tasca"
 
-#: data/tasks.appdata.xml.in:37
+#: data/tasks.appdata.xml.in:50
 msgid "Drag and drop tasks between lists"
 msgstr "Arrossegueu i deixeu anar tasques entre llistes."
 
-#: data/tasks.appdata.xml.in:38
+#: data/tasks.appdata.xml.in:51
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
 "Seguiu el correu electrònic i els enllaços web a la descripció de "
 "l'esdeveniment amb Control + clic."
 
-#: data/tasks.appdata.xml.in:40 data/tasks.appdata.xml.in:57
-#: data/tasks.appdata.xml.in:68 data/tasks.appdata.xml.in:76
-#: data/tasks.appdata.xml.in:85
-msgid "Improvements:"
-msgstr "Millores:"
-
-#: data/tasks.appdata.xml.in:42
+#: data/tasks.appdata.xml.in:55
 msgid "Improved time zone handling"
 msgstr "Gestió millorada de la zona horària"
 
-#: data/tasks.appdata.xml.in:43
+#: data/tasks.appdata.xml.in:56
 msgid "Performance improvements"
 msgstr "Millores de rendiment"
 
-#: data/tasks.appdata.xml.in:44 data/tasks.appdata.xml.in:62
-#: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:79
-#: data/tasks.appdata.xml.in:88
-msgid "Updated translations"
-msgstr "Traduccions actualitzades"
-
-#: data/tasks.appdata.xml.in:50
+#: data/tasks.appdata.xml.in:63
 msgid "Fixes:"
 msgstr "Correccions:"
 
-#: data/tasks.appdata.xml.in:52
+#: data/tasks.appdata.xml.in:65
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
@@ -104,59 +108,59 @@ msgstr ""
 "Evita que les capçaleres dels noms del compte es mostrin diverses vegades a "
 "la barra lateral."
 
-#: data/tasks.appdata.xml.in:53
+#: data/tasks.appdata.xml.in:66
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "Les descripcions llargues es truncen al final en lloc del principi."
 
-#: data/tasks.appdata.xml.in:54
+#: data/tasks.appdata.xml.in:67
 msgid "Removing descriptions is now saved"
 msgstr "Ara es desa l'eliminació de descripcions"
 
-#: data/tasks.appdata.xml.in:55
+#: data/tasks.appdata.xml.in:68
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "Situar el cursor a les descripcions funciona de manera coherent."
 
-#: data/tasks.appdata.xml.in:59
+#: data/tasks.appdata.xml.in:72
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "Substitució de la tecla de drecera de Suprimeix per Ctrl + Retrocés"
 
-#: data/tasks.appdata.xml.in:60
+#: data/tasks.appdata.xml.in:73
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr "Addició d'un diàleg de confirmació quan suprimiu una llista de tasques"
 
-#: data/tasks.appdata.xml.in:61
+#: data/tasks.appdata.xml.in:74
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr "Millora del rendiment de les llistes amb moltes tasques completades"
 
-#: data/tasks.appdata.xml.in:78
+#: data/tasks.appdata.xml.in:91
 msgid "Fix crash on start with certain hardware"
 msgstr "Correcció del bloqueig en iniciar amb cert maquinari"
 
-#: data/tasks.appdata.xml.in:87
+#: data/tasks.appdata.xml.in:100
 msgid "Fix the order of the scheduled view"
 msgstr "Correcció de l'ordre de la vista de programació"
 
-#: data/tasks.appdata.xml.in:94
+#: data/tasks.appdata.xml.in:107
 msgid "First release!"
 msgstr "Primera versió!"
 
-#: data/tasks.appdata.xml.in:96
+#: data/tasks.appdata.xml.in:109
 msgid "Support the dark style"
 msgstr "Admissió del tema fosc"
 
-#: data/tasks.appdata.xml.in:97
+#: data/tasks.appdata.xml.in:110
 msgid "Add and remove task lists with custom colors"
 msgstr "Afegiu i traieu llistes de tasques amb colors personalitzats."
 
-#: data/tasks.appdata.xml.in:98
+#: data/tasks.appdata.xml.in:111
 msgid "See scheduled tasks from all lists at once"
 msgstr "Vegeu les tasques programades de totes les llistes alhora."
 
-#: data/tasks.appdata.xml.in:99
+#: data/tasks.appdata.xml.in:112
 msgid "Set due dates"
 msgstr "Establiment de les dates de venciment"
 
-#: data/tasks.appdata.xml.in:142
+#: data/tasks.appdata.xml.in:155
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
