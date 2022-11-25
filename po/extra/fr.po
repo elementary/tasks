@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-15 19:28+0000\n"
-"PO-Revision-Date: 2022-06-10 08:11+0000\n"
+"PO-Revision-Date: 2022-11-26 14:25+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/extra/fr/>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.14.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -44,7 +44,7 @@ msgstr "Améliorations :"
 
 #: data/tasks.appdata.xml.in:20
 msgid "New app icon"
-msgstr ""
+msgstr "Nouvelle icône de l'application"
 
 #: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
 #: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
