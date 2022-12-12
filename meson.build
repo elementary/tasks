@@ -32,7 +32,6 @@ tasks_deps = [
     dependency('champlain-gtk-0.12'),
     dependency('clutter-1.0'),
     dependency('clutter-gtk-1.0'),
-    dependency('geocode-glib-1.0'),
     dependency('glib-2.0'),
     dependency('gobject-2.0'),
     dependency('granite', version: '>=6.2.0'),
@@ -41,9 +40,16 @@ tasks_deps = [
     dependency('libedataserver-1.2'),
     dependency('libgeoclue-2.0'),
     dependency('libhandy-1', version: '>=0.90.0'),
-    dependency('libical-glib'),
-    dependency('libgdata')
+    dependency('libical-glib')
 ]
+
+if libecal_dep.version().version_compare('>=3.46.0')
+    add_project_arguments('--define=HAS_EDS_3_46', language: 'vala')
+    tasks_deps += dependency('geocode-glib-2.0')
+else
+    tasks_deps += dependency('libgdata')
+    tasks_deps += dependency('geocode-glib-1.0')
+endif
 
 if libecal_dep.version().version_compare('>=3.39.2')
     add_project_arguments('--define=HAS_EDS_3_40', language: 'vala')

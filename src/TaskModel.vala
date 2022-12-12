@@ -274,10 +274,22 @@ public class Tasks.TaskModel : Object {
                 collection_source_webdav_session.credentials = credentials;
 
                 var webdav_task_list_uri = yield discover_webdav_server_uri (credentials, collection_source);
+#if HAS_EDS_3_46
+                try {
+                    webdav_task_list_uri = GLib.Uri.parse_relative (webdav_task_list_uri, GLib.Uuid.string_random ().up (), GLib.UriFlags.NONE);
+                } catch (Error e) {
+                    critical ("Error parsing relative uri: %s", e.message);
+                }
+#else
                 webdav_task_list_uri.set_path (webdav_task_list_uri.get_path () + "/" + GLib.Uuid.string_random ().up ());
+#endif
 
                 collection_source_webdav_session.mkcalendar_sync (
+#if HAS_EDS_3_46
+                    webdav_task_list_uri.to_string (),
+#else
                     webdav_task_list_uri.to_string (false),
+#endif
                     task_list.display_name,
                     null,
                     task_list_extension.color,
@@ -290,6 +302,7 @@ public class Tasks.TaskModel : Object {
 
             case "google":
                 var collection_source = registry.find_extension (collection_or_sibling, E.SOURCE_EXTENSION_COLLECTION);
+#if !HAS_EDS_3_46
                 var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
                 var gtasks_service = new GData.TasksService (authorizer);
 
@@ -298,6 +311,15 @@ public class Tasks.TaskModel : Object {
                 };
 
                 gtasks_service.insert_tasklist (gtasks_tasklist, null);
+#else
+                var session = new E.GDataSession (collection_or_sibling);
+                try {
+                    Json.Object inserted_tasklist;
+                    session.tasklists_insert_sync (task_list.display_name, out inserted_tasklist, null);
+                } catch (Error e) {
+                    critical ("Error creating task list: %s", e.message);
+                }
+#endif
                 yield registry.refresh_backend (collection_source.uid, null);
                 break;
 
@@ -330,7 +352,11 @@ public class Tasks.TaskModel : Object {
                 var task_list_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
                 collection_source_webdav_session.delete_sync (
+#if HAS_EDS_3_46
+                    task_list_webdav_extension.uri.to_string (),
+#else
                     task_list_webdav_extension.soup_uri.to_string (false),
+#endif
                     E.WEBDAV_DEPTH_THIS_AND_CHILDREN,
                     null,
                     null
@@ -340,12 +366,13 @@ public class Tasks.TaskModel : Object {
                 break;
             case "google":
                 var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
-                var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
-                var service = new GData.TasksService (authorizer);
-                var uri = "https://www.googleapis.com/tasks/v1/users/@me/lists/%s";
                 var id = ((E.SourceResource) task_list.get_extension (
                     E.SOURCE_EXTENSION_RESOURCE
                 )).identity.replace ("gtasks::", "");
+#if !HAS_EDS_3_46
+                var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+                var service = new GData.TasksService (authorizer);
+                var uri = "https://www.googleapis.com/tasks/v1/users/@me/lists/%s";
 
                 var tasklist = (GData.TasksTasklist) yield service.query_single_entry_async (
                     GData.TasksService.get_primary_authorization_domain (),
@@ -356,6 +383,14 @@ public class Tasks.TaskModel : Object {
                 );
 
                 service.delete_tasklist (tasklist, null);
+#else
+                var session = new E.GDataSession (task_list);
+                try {
+                    session.tasklists_delete_sync (id, null);
+                } catch (Error e) {
+                    critical ("Error deleting task list: %s", e.message);
+                }
+#endif
                 yield registry.refresh_backend (collection_source.uid, null);
                 break;
 
@@ -404,11 +439,13 @@ public class Tasks.TaskModel : Object {
 
     private bool is_gtasks_default_task_list (E.Source task_list, E.SourceRegistry registry) throws Error {
         var collection_source = registry.find_extension (task_list, E.SOURCE_EXTENSION_COLLECTION);
-        var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
-        var service = new GData.TasksService (authorizer);
         var id = ((E.SourceResource) task_list.get_extension (
             E.SOURCE_EXTENSION_RESOURCE
         )).identity.replace ("gtasks::", "");
+
+#if !HAS_EDS_3_46
+        var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+        var service = new GData.TasksService (authorizer);
 
         var tasklist = (GData.TasksTasklist) service.query_single_entry (
             GData.TasksService.get_primary_authorization_domain (),
@@ -419,6 +456,19 @@ public class Tasks.TaskModel : Object {
         );
 
         return tasklist.id == id;
+#else
+        var session = new E.GDataSession (collection_source);
+        try {
+            Json.Object tasklist;
+            session.tasklists_get_sync ("@default", out tasklist, null);
+
+            return E.GData.tasklist_get_id (tasklist) == id;
+        } catch (Error e) {
+            critical ("Error deleting task list: %s", e.message);
+        }
+
+        return false;
+#endif
     }
 
     public string get_collection_backend_name (E.Source source, E.SourceRegistry registry) {
@@ -438,10 +488,18 @@ public class Tasks.TaskModel : Object {
         return backend_name == null ? "" : backend_name;
     }
 
+#if HAS_EDS_3_46
+    private async GLib.Uri discover_webdav_server_uri (E.NamedParameters credentials, E.Source collection_source) throws Error {
+#else
     private async Soup.URI discover_webdav_server_uri (E.NamedParameters credentials, E.Source collection_source) throws Error {
+#endif
         var collection_source_extension = (E.SourceCollection) collection_source.get_extension (E.SOURCE_EXTENSION_COLLECTION);
 
+#if HAS_EDS_3_46
+        GLib.Uri? webdav_server_uri = null;
+#else
         Soup.URI? webdav_server_uri = null;
+#endif
         GLib.Error? webdav_error = null;
 
 #if HAS_EDS_3_40
@@ -477,7 +535,21 @@ public class Tasks.TaskModel : Object {
 
                     if (webdav_discovered_sources.length () > 0) {
                         var webdav_discovered_source = webdav_discovered_sources.nth_data (0);
+#if HAS_EDS_3_46
+                        try {
+                            webdav_server_uri = GLib.Uri.parse (webdav_discovered_source.href, GLib.UriFlags.NONE);
+                        } catch (Error e) {
+                            critical ("Error parsing %s: %s", webdav_discovered_source.href, e.message);
+                        }
+
+                        try {
+                            webdav_server_uri = GLib.Uri.parse_relative (webdav_server_uri, "..", GLib.UriFlags.NONE);
+                        } catch (Error e) {
+                            critical ("Error parsing relative uri: %s", e.message);
+                        }
+#else
                         webdav_server_uri = new Soup.URI (webdav_discovered_source.href.dup ());
+#endif
                     }
 
 #if !HAS_EDS_3_40
@@ -488,12 +560,14 @@ public class Tasks.TaskModel : Object {
                         throw new Tasks.TaskModelError.BACKEND_ERROR ("Unable to resolve the WebDAV uri from backend.");
                     }
 
+#if !HAS_EDS_3_46
                     var uri_dir_path = webdav_server_uri.get_path ();
                     if (uri_dir_path.has_suffix ("/")) {
                         uri_dir_path = uri_dir_path.substring (0, uri_dir_path.length - 1);
                     }
                     uri_dir_path = uri_dir_path.substring (0, uri_dir_path.last_index_of ("/"));
                     webdav_server_uri.set_path (uri_dir_path);
+#endif
 
                 } catch (Error e) {
                     webdav_error = e;
@@ -538,22 +612,27 @@ public class Tasks.TaskModel : Object {
             E.webdav_session_update_properties_sync (
                 collection_source_webdav_session,
 #endif
+#if HAS_EDS_3_46
+                source_webdav_extension.uri.to_string (),
+#else
                 source_webdav_extension.soup_uri.to_string (false),
+#endif
                 changes,
                 null
             );
 
             registry.refresh_backend_sync (collection_source.uid, null);
 
-        } else if ("gtasks" == ((E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name && E.GDataOAuth2Authorizer.supported ()) {
+        } else if ("gtasks" == ((E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name && E.OAuth2Services.is_supported ()) {
             debug ("GTasks Rename '%s'", task_list.get_uid ());
 
-            var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
-            var gtasks_service = new GData.TasksService (authorizer);
-            var uri = "https://www.googleapis.com/tasks/v1/users/@me/lists/%s";
             var task_list_id = ((E.SourceResource) task_list.get_extension (
                 E.SOURCE_EXTENSION_RESOURCE
             )).identity.replace ("gtasks::", "");
+#if !HAS_EDS_3_46
+            var authorizer = (GData.Authorizer) new E.GDataOAuth2Authorizer (collection_source, typeof (GData.TasksService));
+            var gtasks_service = new GData.TasksService (authorizer);
+            var uri = "https://www.googleapis.com/tasks/v1/users/@me/lists/%s";
 
             var gtasks_tasklist = (GData.TasksTasklist) yield gtasks_service.query_single_entry_async (
                 GData.TasksService.get_primary_authorization_domain (),
@@ -565,6 +644,20 @@ public class Tasks.TaskModel : Object {
 
             gtasks_tasklist.title = display_name;
             gtasks_service.update_tasklist (gtasks_tasklist, null);
+#else
+            var session = new E.GDataSession (task_list);
+            try {
+                Json.Object tasklist;
+                var properties = new Json.Builder ();
+                properties.begin_object ();
+                properties.set_member_name ("title");
+                properties.add_string_value (display_name);
+                properties.end_object ();
+                session.tasklists_patch_sync (task_list_id, properties, out tasklist, null);
+            } catch (Error e) {
+                critical ("Error renaming task list: %s", e.message);
+            }
+#endif
 
             yield registry.refresh_backend (collection_source.uid, null);
 
@@ -627,7 +720,11 @@ public class Tasks.TaskModel : Object {
                     E.webdav_session_update_properties_sync (
                         collection_source_webdav_session,
 #endif
+#if HAS_EDS_3_46
+                        source_webdav_extension.uri.to_string (),
+#else
                         source_webdav_extension.soup_uri.to_string (false),
+#endif
                         changes,
                         null
                     );
