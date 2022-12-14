@@ -13,7 +13,20 @@
     </p>
   </description>
   <releases>
-    <release version="6.3.0" date="2022-06-08" urgency="medium">
+    <release version="6.3.1" date="2022-11-15" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>New app icon</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/tasks/issues/338">Extra space around new task lists in some locales</issue>
+      </issues>
+    </release>
+
+    <release version="6.3.0" date="2022-06-14" urgency="medium">
       <description>
         <p>Features:</p>
         <ul>
@@ -106,7 +119,7 @@
   </provides>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/elementary/tasks/master/data/screenshot.png</image>
+      <image>https://raw.githubusercontent.com/elementary/tasks/6.3.1/data/screenshot.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1">

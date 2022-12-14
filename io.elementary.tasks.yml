@@ -1,6 +1,6 @@
 app-id: io.elementary.tasks
 runtime: io.elementary.Platform
-runtime-version: '7'
+runtime-version: '7.1'
 sdk: io.elementary.Sdk
 command: io.elementary.tasks
 finish-args:
@@ -39,17 +39,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/libical/libical.git
-        tag: v3.0.9
-
-  - name: libgdata
-    buildsystem: meson
-    config-opts:
-      - '-Dalways_build_tests=false'
-      - '-Dgoa=disabled'
-    sources:
-      - type: git
-        url: https://gitlab.gnome.org/GNOME/libgdata.git
-        tag: '0.17.13'
+        tag: v3.0.16
 
   - name: libshumate
     buildsystem: meson
@@ -66,7 +56,7 @@ modules:
       - '/share/dbus-1/services'
     config-opts:
       - '-DCMAKE_BUILD_TYPE=RelWithDebInfo'
-      - '-DENABLE_GOOGLE=ON'
+      - '-DENABLE_GTK=ON'
       - '-DENABLE_VALA_BINDINGS=ON'
       - '-DENABLE_INTROSPECTION=ON'
       - '-DENABLE_GOA=OFF'
@@ -81,7 +71,9 @@ modules:
     sources:
       - type: git
         url: https://gitlab.gnome.org/GNOME/evolution-data-server.git
-        tag: '3.40.2'
+        tag: '3.46.2'
+      - type: patch
+        path: 'eds-gdatasession.patch'
     modules:
       - name: intltool
         cleanup:
@@ -96,10 +88,11 @@ modules:
     config-opts:
       - '-Denable-installed-tests=false'
       - '-Denable-gtk-doc=false'
+      - '-Dsoup2=false'
     sources:
       - type: git
         url: https://gitlab.gnome.org/GNOME/geocode-glib.git
-        tag: '3.26.2'
+        tag: '3.26.4'
 
   - name: tasks
     buildsystem: meson

@@ -1,7 +1,7 @@
 project(
     'io.elementary.tasks', 'vala', 'c',
     meson_version: '>= 0.49',
-    version: '6.2.0'
+    version: '6.3.1'
 )
 
 gnome = import('gnome')
@@ -29,9 +29,8 @@ config_file = configure_file(
 libecal_dep = dependency('libecal-2.0')
 
 tasks_deps = [
-    # dependency('clutter-1.0'),
-    #dependency('clutter-gtk-1.0'),
-    dependency('geocode-glib-1.0'),
+    dependency('champlain-0.12'),
+    dependency('champlain-gtk-0.12'),
     dependency('glib-2.0'),
     dependency('gobject-2.0'),
     dependency('granite-7', version: '>=7.0.0'),
@@ -39,11 +38,17 @@ tasks_deps = [
     libecal_dep,
     dependency('libedataserver-1.2'),
     dependency('libgeoclue-2.0'),
-    dependency('libadwaita-1', version: '>=1.0.0'),
-    dependency('libical-glib'),
-    dependency('libgdata'),
-    dependency('shumate-0.0')
+    dependency('shumate-0.0'),
+    dependency('libical-glib')
 ]
+
+if libecal_dep.version().version_compare('>=3.46.0')
+    add_project_arguments('--define=HAS_EDS_3_46', language: 'vala')
+    tasks_deps += dependency('geocode-glib-2.0')
+else
+    tasks_deps += dependency('libgdata')
+    tasks_deps += dependency('geocode-glib-1.0')
+endif
 
 if libecal_dep.version().version_compare('>=3.39.2')
     add_project_arguments('--define=HAS_EDS_3_40', language: 'vala')

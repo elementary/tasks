@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-12 00:57+0000\n"
-"PO-Revision-Date: 2021-12-11 00:32+0000\n"
-"Last-Translator: DartDeaDia <dartdeadia@protonmail.com>\n"
+"POT-Creation-Date: 2022-11-28 10:26+0000\n"
+"PO-Revision-Date: 2022-11-15 12:37+0000\n"
+"Last-Translator: lenemter <lenemter@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
 ">\n"
 "Language: ru\n"
@@ -18,39 +18,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.14.2\n"
 
 #: src/MainWindow.vala:45
 msgid "Tasks"
 msgstr "Задачи"
 
-#: src/MainWindow.vala:106
+#: src/MainWindow.vala:108
 msgid "Online Accounts Settings…"
 msgstr "Параметры онлайн аккаунтов…"
 
-#: src/MainWindow.vala:123
+#: src/MainWindow.vala:125
 msgid "Add Task List…"
 msgstr "Добавить список задач…"
 
-#: src/MainWindow.vala:267
+#: src/MainWindow.vala:269
 msgid "Creating a new task list failed"
 msgstr "Не удалось создать список задач"
 
-#: src/MainWindow.vala:268 src/MainWindow.vala:340
+#: src/MainWindow.vala:270 src/MainWindow.vala:342
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
-#: src/MainWindow.vala:273
+#: src/MainWindow.vala:275
 msgid "New list"
 msgstr "Новый список"
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:319
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Удалить «%s»?"
 
-#: src/MainWindow.vala:318
+#: src/MainWindow.vala:320
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -58,11 +58,11 @@ msgstr ""
 "Список и все задания в нём будут удалены навсегда. Если вы поделились этим "
 "списком с другими людьми, они потеряют к нему доступ."
 
-#: src/MainWindow.vala:326
+#: src/MainWindow.vala:328
 msgid "Delete Anyway"
 msgstr "Все равно удалить"
 
-#: src/MainWindow.vala:339
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "Не удалось удалить список задач"
 
@@ -120,7 +120,7 @@ msgstr "Не удалось изменить цвет списка задач"
 
 #: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
-msgstr "Журнал списка задач может быть недоступен или защищен от записи."
+msgstr "Журнал списка задач может быть недоступен или защищён от записи."
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
@@ -144,11 +144,11 @@ msgstr "Ожидание данных для входа"
 
 #: src/Widgets/SourceRow.vala:216
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr "В настоящее время отключено от (возможно, удаленного) хранилища данных"
+msgstr "В настоящее время отключено от (возможно, удалённого) хранилища данных"
 
 #: src/Widgets/SourceRow.vala:220
 msgid "SSL certificate trust was rejected for the connection"
-msgstr "Ненадежный SSL сертификат для подключения, отклонено"
+msgstr "Ненадёжный SSL сертификат для подключения, отклонено"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
@@ -212,7 +212,7 @@ msgstr "Отменить"
 
 #: src/Widgets/TaskRow.vala:242
 msgid "Save Changes"
-msgstr "Сохранить изменения"
+msgstr "Сохранить"
 
 #: src/Widgets/TaskRow.vala:242
 msgid "Add Task"

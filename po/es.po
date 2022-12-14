@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-12 00:57+0000\n"
+"POT-Creation-Date: 2022-11-28 10:26+0000\n"
 "PO-Revision-Date: 2022-02-17 15:23+0000\n"
 "Last-Translator: trubiso <crishipohola@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
@@ -23,35 +23,35 @@ msgstr ""
 msgid "Tasks"
 msgstr "Tareas"
 
-#: src/MainWindow.vala:106
+#: src/MainWindow.vala:108
 msgid "Online Accounts Settings…"
 msgstr "Configuración de cuentas en línea …"
 
-#: src/MainWindow.vala:123
+#: src/MainWindow.vala:125
 msgid "Add Task List…"
 msgstr "Añadir lista de tareas…"
 
-#: src/MainWindow.vala:267
+#: src/MainWindow.vala:269
 msgid "Creating a new task list failed"
 msgstr "Falló la creación de una lista de tareas nueva"
 
-#: src/MainWindow.vala:268 src/MainWindow.vala:340
+#: src/MainWindow.vala:270 src/MainWindow.vala:342
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Es posible que el registro de listas de tareas no esté disponible o no se "
 "pueda modificar."
 
-#: src/MainWindow.vala:273
+#: src/MainWindow.vala:275
 msgid "New list"
 msgstr "Lista nueva"
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:319
 #, c-format
 msgid "Delete “%s”?"
 msgstr "¿Eliminar \"%s\"?"
 
-#: src/MainWindow.vala:318
+#: src/MainWindow.vala:320
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -59,13 +59,13 @@ msgstr ""
 "La lista y todas sus tareas se eliminarán de forma permanente. Si ha "
 "compartido esta lista, otras personas ya no tendrán acceso."
 
-#: src/MainWindow.vala:326
+#: src/MainWindow.vala:328
 #, fuzzy
 #| msgid "Delete Task"
 msgid "Delete Anyway"
 msgstr "Eliminar tarea"
 
-#: src/MainWindow.vala:339
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "No se pudo eliminar la lista de tareas"
 
