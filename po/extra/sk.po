@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-14 20:32+0000\n"
-"PO-Revision-Date: 2022-09-09 21:51+0000\n"
+"PO-Revision-Date: 2022-12-26 20:25+0000\n"
 "Last-Translator: JohnDumpling <john_dumpling@protonmail.com>\n"
 "Language-Team: Slovak <https://l10n.elementary.io/projects/tasks/extra/sk/>\n"
 "Language: sk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.14.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -44,7 +44,7 @@ msgstr "Vylepšenia:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "New app icon"
-msgstr ""
+msgstr "Nová ikonka aplikácie"
 
 #: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
 #: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
