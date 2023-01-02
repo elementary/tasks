@@ -7,212 +7,216 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 20:10+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2022-12-14 20:32+0000\n"
+"PO-Revision-Date: 2022-08-07 19:29+0000\n"
+"Last-Translator: Jung-Kyu Park <bagjunggyu@gmail.com>\n"
+"Language-Team: Korean <https://l10n.elementary.io/projects/tasks/tasks/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.4.2\n"
 
 #: src/MainWindow.vala:45
 msgid "Tasks"
-msgstr ""
+msgstr "작업"
 
-#: src/MainWindow.vala:106
+#: src/MainWindow.vala:108
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "온라인 계정 설정…"
 
-#: src/MainWindow.vala:123
+#: src/MainWindow.vala:125
 msgid "Add Task List…"
-msgstr ""
+msgstr "작업 목록 추가…"
 
-#: src/MainWindow.vala:258
+#: src/MainWindow.vala:269
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "새 작업 목록 생성 실패"
 
-#: src/MainWindow.vala:259 src/MainWindow.vala:331
+#: src/MainWindow.vala:270 src/MainWindow.vala:342
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "작업 목록 등록을 할 수 없거나 쓰지 못할 수 있습니다."
 
-#: src/MainWindow.vala:264
+#: src/MainWindow.vala:275
 msgid "New list"
-msgstr ""
+msgstr "새 리스트"
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:319
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "“%s”삭제할까요?"
 
-#: src/MainWindow.vala:309
+#: src/MainWindow.vala:320
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"목록과 모든 작업이 영구적으로 삭제됩니다. 이 목록을 공유했다면 다른 사람들이 "
+"더 이상 접근할 수 없습니다."
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:328
 msgid "Delete Anyway"
-msgstr ""
+msgstr "어쨌든 삭제"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
-msgstr ""
+msgstr "작업 목록 삭제 실패"
 
 #: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
-msgstr ""
+msgstr "오늘"
 
 #: src/Util.vala:267
 msgid "Yesterday"
-msgstr ""
+msgstr "어제"
 
 #: src/Util.vala:269
 msgid "Tomorrow"
-msgstr ""
+msgstr "내일"
 
 #: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
-msgstr ""
+msgstr "편집…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "기한 설정"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "삭제"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "장소 설정"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
-msgstr ""
+msgstr "목적지"
 
 #: src/Widgets/EntryPopover/Location.vala:57
 msgid "Leaving"
-msgstr ""
+msgstr "출발지"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "김철수 또는 종로."
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
-msgstr ""
+msgstr "완료 표시"
 
 #: src/Widgets/ListSettingsPopover.vala:119
 msgid "Delete List…"
-msgstr ""
+msgstr "목록 삭제…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "작업 목록 색상을 변경할 수 없습니다"
 
 #: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
+"작업 목록 레지스트리를 사용할 수 없거나 쓰기 방지되어 있을 수 있습니다."
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
-msgstr ""
+msgstr "설정"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
-msgstr ""
+msgstr "연결 중…"
 
 #: src/Widgets/SourceRow.vala:150
 msgid "Moving task failed"
-msgstr ""
+msgstr "작업 이동 실패"
 
 #: src/Widgets/SourceRow.vala:151
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "작업을 원하는 목록으로 이동하는 동안 오류가 생겼습니다."
 
 #: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "로그인 자격 증명을 기다리는 중"
 
 #: src/Widgets/SourceRow.vala:216
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "현재 데이터 저장소 (원격일 가능성이 있는) 연결이 끊겼습니다"
 
 #: src/Widgets/SourceRow.vala:220
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "연결에 대한 SSL 인증서 인증이 거부되었습니다"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
-msgstr ""
+msgstr "작업 없음"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
-msgstr ""
+msgstr "작업 완료 실패"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:222
 #: src/Widgets/ScheduledTaskListGrid.vala:244
 #: src/Widgets/ScheduledTaskListGrid.vala:266 src/Widgets/TaskListGrid.vala:310
 #: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "작업 등록을 할 수 없거나 쓰지 못할 수 있습니다."
 
 #: src/Widgets/ScheduledTaskListGrid.vala:243 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
-msgstr ""
+msgstr "작업 업데이트 실패"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:265 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
-msgstr ""
+msgstr "작업 삭제 실패"
 
 #: src/Widgets/TaskListGrid.vala:56
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "이름 및 모양 편집"
 
 #: src/Widgets/TaskListGrid.vala:87
 msgid "Adding task failed"
-msgstr ""
+msgstr "작업 추가 실패"
 
 #: src/Widgets/TaskListGrid.vala:175
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "작업 목록 이름 변경 실패"
 
 #: src/Widgets/TaskRow.vala:136 src/Widgets/TaskRow.vala:143
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. /TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s %s"
 
 #: src/Widgets/TaskRow.vala:182
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "도착: %s"
 
 #: src/Widgets/TaskRow.vala:185
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "출발: %s"
 
 #: src/Widgets/TaskRow.vala:240
 msgid "Cancel"
-msgstr ""
+msgstr "취소"
 
 #: src/Widgets/TaskRow.vala:242
 msgid "Save Changes"
-msgstr ""
+msgstr "변경 사항 저장"
 
 #: src/Widgets/TaskRow.vala:242
 msgid "Add Task"
-msgstr ""
+msgstr "작업 추가"
 
 #: src/Widgets/TaskRow.vala:305
 msgid "Delete Task"
-msgstr ""
+msgstr "작업 삭제"

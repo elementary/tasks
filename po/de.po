@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-01 20:10+0000\n"
+"POT-Creation-Date: 2022-12-14 20:32+0000\n"
 "PO-Revision-Date: 2021-12-09 22:38+0000\n"
 "Last-Translator: Uwe S <saabisto@gmx.de>\n"
 "Language-Team: German <https://l10n.elementary.io/projects/tasks/tasks/de/>\n"
@@ -22,35 +22,35 @@ msgstr ""
 msgid "Tasks"
 msgstr "Aufgaben"
 
-#: src/MainWindow.vala:106
+#: src/MainWindow.vala:108
 msgid "Online Accounts Settings…"
 msgstr "Online-Kontoeinstellungen…"
 
-#: src/MainWindow.vala:123
+#: src/MainWindow.vala:125
 msgid "Add Task List…"
 msgstr "Aufgabenliste hinzufügen …"
 
-#: src/MainWindow.vala:258
+#: src/MainWindow.vala:269
 msgid "Creating a new task list failed"
 msgstr "Erstellen einer neuen Aufgabenliste gescheitert"
 
-#: src/MainWindow.vala:259 src/MainWindow.vala:331
+#: src/MainWindow.vala:270 src/MainWindow.vala:342
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Die Aufgabenlistenverwaltung ist möglicherweise nicht erreichbar oder "
 "schreibgeschützt."
 
-#: src/MainWindow.vala:264
+#: src/MainWindow.vala:275
 msgid "New list"
 msgstr "Neue Liste"
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:319
 #, c-format
 msgid "Delete “%s”?"
 msgstr "»%s« löschen?"
 
-#: src/MainWindow.vala:309
+#: src/MainWindow.vala:320
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -58,11 +58,11 @@ msgstr ""
 "Die Liste und alle enthaltenen Aufgaben werden dauerhaft gelöscht. Falls die "
 "Liste freigegeben worden war, haben andere keinen Zugriff mehr darauf."
 
-#: src/MainWindow.vala:317
+#: src/MainWindow.vala:328
 msgid "Delete Anyway"
 msgstr "Trotzdem löschen"
 
-#: src/MainWindow.vala:330
+#: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
 msgstr "Löschen der Aufgabenliste fehlgeschlagen"
 
