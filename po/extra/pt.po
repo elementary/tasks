@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-14 20:32+0000\n"
+"POT-Creation-Date: 2023-01-11 17:52+0000\n"
 "PO-Revision-Date: 2022-12-20 23:25+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/extra/"
@@ -169,10 +169,9 @@ msgstr "elementary, Inc."
 msgid "Create and track the progress of tasks"
 msgstr "Criar e acompanhar o progresso das tarefas"
 
-#: data/tasks.desktop.in:6
-msgid "io.elementary.tasks"
-msgstr "io.elementary.tasks"
-
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "Afazer;Lembretes;"
+
+#~ msgid "io.elementary.tasks"
+#~ msgstr "io.elementary.tasks"

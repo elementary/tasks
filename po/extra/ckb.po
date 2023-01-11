@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-14 20:32+0000\n"
+"POT-Creation-Date: 2023-01-11 17:52+0000\n"
 "PO-Revision-Date: 2022-07-31 13:11+0000\n"
 "Last-Translator: Aga Ismael <agaesmaeel@gmail.com>\n"
 "Language-Team: Kurdish (Central) <https://l10n.elementary.io/projects/tasks/"
@@ -164,10 +164,6 @@ msgstr "کۆمپانیای ئێلەمێنتەری هاوپشک."
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
 msgstr "ئەرک دروست بکە و چاودێری بەرەوپێش چوونی بکە"
-
-#: data/tasks.desktop.in:6
-msgid "io.elementary.tasks"
-msgstr ""
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
