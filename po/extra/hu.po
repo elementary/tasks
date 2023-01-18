@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
-"PO-Revision-Date: 2022-01-26 06:02+0000\n"
+"PO-Revision-Date: 2023-01-20 00:25+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/tasks/extra/hu/"
 ">\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.14.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -33,22 +33,25 @@ msgid ""
 "and complete tasks, manage lists and sync them across your machines using "
 "CalDAV."
 msgstr ""
+"Az összes feladatának és emlékeztetőjének kezelésére tervezve és készítve. "
+"Hozzon létre és hajtson végre feladatokat, kezeljen listákat és "
+"szinkronizálja azokat a készülékein CalDAV használatával."
 
 #: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:53
 #: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
 #: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
 msgid "Improvements:"
-msgstr ""
+msgstr "Fejlesztések:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "New app icon"
-msgstr ""
+msgstr "Új alkalmazásikon"
 
 #: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
 #: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
 #: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
 msgid "Updated translations"
-msgstr ""
+msgstr "Frissített Fordítások"
 
 #: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
 #: data/tasks.appdata.xml.in:48
