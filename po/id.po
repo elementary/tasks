@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
-"PO-Revision-Date: 2023-01-29 12:56+0000\n"
-"Last-Translator: Eri Hidayat <eriwhidayat@gmail.com>\n"
+"PO-Revision-Date: 2023-01-29 12:57+0000\n"
+"Last-Translator: ianz56 <ianperdiansah05@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/tasks/"
 "id/>\n"
 "Language: id\n"
@@ -185,23 +185,23 @@ msgstr "Gagal menambah tugas"
 
 #: src/Widgets/TaskListGrid.vala:175
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "Gagal mengganti nama daftar tugas"
 
 #: src/Widgets/TaskRow.vala:136 src/Widgets/TaskRow.vala:143
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s pada %s"
 
 #: src/Widgets/TaskRow.vala:182
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "Tiba:%s"
 
 #: src/Widgets/TaskRow.vala:185
 #, c-format
