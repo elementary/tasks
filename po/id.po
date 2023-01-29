@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
 "PO-Revision-Date: 2023-01-29 12:52+0000\n"
-"Last-Translator: Syaifur Rizal <openprojectrizal@gmail.com>\n"
+"Last-Translator: Eri Hidayat <eriwhidayat@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/tasks/"
 "id/>\n"
 "Language: id\n"
@@ -48,7 +48,7 @@ msgstr "Daftar baru"
 #: src/MainWindow.vala:319
 #, c-format
 msgid "Delete “%s”?"
-msgstr "Hapus \"%\"?"
+msgstr "Hapus \"%s\"?"
 
 #: src/MainWindow.vala:320
 msgid ""
