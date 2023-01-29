@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
-"PO-Revision-Date: 2023-01-29 12:48+0000\n"
-"Last-Translator: Eri Hidayat <eriwhidayat@gmail.com>\n"
+"PO-Revision-Date: 2023-01-29 12:52+0000\n"
+"Last-Translator: ianz56 <ianperdiansah05@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/tasks/"
 "id/>\n"
 "Language: id\n"
@@ -62,19 +62,19 @@ msgstr ""
 
 #: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
-msgstr ""
+msgstr "Gagal menghapus daftar tugas"
 
 #: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
-msgstr ""
+msgstr "Hari ini"
 
 #: src/Util.vala:267
 msgid "Yesterday"
-msgstr ""
+msgstr "Kemarin"
 
 #: src/Util.vala:269
 msgid "Tomorrow"
-msgstr ""
+msgstr "Besok"
 
 #: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
@@ -106,7 +106,7 @@ msgstr ""
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
-msgstr ""
+msgstr "Tampilkan Selesai"
 
 #: src/Widgets/ListSettingsPopover.vala:119
 msgid "Delete List…"
@@ -122,11 +122,11 @@ msgstr ""
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
-msgstr ""
+msgstr "Terjadwal"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
-msgstr ""
+msgstr "Menyambungkan. . ."
 
 #: src/Widgets/SourceRow.vala:150
 msgid "Moving task failed"
