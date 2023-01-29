@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
-"PO-Revision-Date: 2023-01-29 12:54+0000\n"
-"Last-Translator: Eri Hidayat <eriwhidayat@gmail.com>\n"
+"PO-Revision-Date: 2023-01-29 12:56+0000\n"
+"Last-Translator: ianz56 <ianperdiansah05@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/tasks/"
 "id/>\n"
 "Language: id\n"
@@ -149,38 +149,38 @@ msgstr "Saat ini terputus dari penyimpanan data (jarak jauh)"
 
 #: src/Widgets/SourceRow.vala:220
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "Kepercayaan sertifikat SSL ditolak untuk koneksi tersebut"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
-msgstr ""
+msgstr "Tidak Ada Tugas"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
-msgstr ""
+msgstr "Gagal menyelesaikan tugas"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:222
 #: src/Widgets/ScheduledTaskListGrid.vala:244
 #: src/Widgets/ScheduledTaskListGrid.vala:266 src/Widgets/TaskListGrid.vala:310
 #: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "Registri tugas mungkin tidak tersedia atau tidak dapat ditulis."
 
 #: src/Widgets/ScheduledTaskListGrid.vala:243 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
-msgstr ""
+msgstr "Gagal memperbarui tugas"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:265 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
-msgstr ""
+msgstr "Gagal menghapus tugas"
 
 #: src/Widgets/TaskListGrid.vala:56
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "Edit Nama dan Tampilan"
 
 #: src/Widgets/TaskListGrid.vala:87
 msgid "Adding task failed"
-msgstr ""
+msgstr "Gagal menambah tugas"
 
 #: src/Widgets/TaskListGrid.vala:175
 msgid "Renaming task list failed"
