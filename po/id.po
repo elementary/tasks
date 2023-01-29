@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
 "PO-Revision-Date: 2023-01-29 12:52+0000\n"
-"Last-Translator: ianz56 <ianperdiansah05@gmail.com>\n"
+"Last-Translator: Syaifur Rizal <openprojectrizal@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/tasks/"
 "id/>\n"
 "Language: id\n"
@@ -55,10 +55,12 @@ msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"Daftar dan semua tugas di dalamnya akan dihapus secara permanen. Jika Anda "
+"telah membagikan daftar ini, orang lain tidak akan lagi bisa mengaksesnya."
 
 #: src/MainWindow.vala:328
 msgid "Delete Anyway"
-msgstr ""
+msgstr "Tetap Hapus"
 
 #: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
@@ -78,31 +80,31 @@ msgstr "Besok"
 
 #: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
-msgstr ""
+msgstr "Ubah…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "Setel Jatuh Tempo"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "Hapus"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "Setel Lokasi"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
-msgstr ""
+msgstr "Tiba"
 
 #: src/Widgets/EntryPopover/Location.vala:57
 msgid "Leaving"
-msgstr ""
+msgstr "Meninggalkan"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "John Smith ATAU Jln. Contoh"
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
@@ -110,15 +112,16 @@ msgstr "Tampilkan Selesai"
 
 #: src/Widgets/ListSettingsPopover.vala:119
 msgid "Delete List…"
-msgstr ""
+msgstr "Hapus Daftar…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "Tidak dapat mengubah warna daftar tugas"
 
 #: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
+"Register daftar tugas mungkin tidak tersedia atau dilindungi dari penulisan."
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
