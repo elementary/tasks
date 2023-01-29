@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
-"PO-Revision-Date: 2023-01-29 12:57+0000\n"
+"PO-Revision-Date: 2023-01-30 13:25+0000\n"
 "Last-Translator: Eri Hidayat <eriwhidayat@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/tasks/"
 "id/>\n"
@@ -104,7 +104,7 @@ msgstr "Meninggalkan"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr "John Smith ATAU Jln. Contoh"
+msgstr "John Smith ATAU Jln. Contoh."
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
@@ -129,7 +129,7 @@ msgstr "Terjadwal"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
-msgstr "Menyambungkan. . ."
+msgstr "Menyambungkan…"
 
 #: src/Widgets/SourceRow.vala:150
 msgid "Moving task failed"
@@ -201,7 +201,7 @@ msgstr "%s pada %s"
 #: src/Widgets/TaskRow.vala:182
 #, c-format
 msgid "Arriving: %s"
-msgstr "Tiba:%s"
+msgstr "Tiba: %s"
 
 #: src/Widgets/TaskRow.vala:185
 #, c-format
