@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
 "PO-Revision-Date: 2023-01-29 12:54+0000\n"
-"Last-Translator: Syaifur Rizal <openprojectrizal@gmail.com>\n"
+"Last-Translator: ianz56 <ianperdiansah05@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/tasks/"
 "id/>\n"
 "Language: id\n"
@@ -141,7 +141,7 @@ msgstr ""
 
 #: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "Menunggu kredensial masuk"
 
 #: src/Widgets/SourceRow.vala:216
 msgid "Currently disconnected from the (possibly remote) data store"
