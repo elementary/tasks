@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
 "PO-Revision-Date: 2023-01-29 12:48+0000\n"
-"Last-Translator: Syaifur Rizal <openprojectrizal@gmail.com>\n"
+"Last-Translator: ianz56 <ianperdiansah05@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/tasks/"
 "id/>\n"
 "Language: id\n"
@@ -33,7 +33,7 @@ msgstr "Tambahkan Daftar Tugas…"
 
 #: src/MainWindow.vala:269
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Gagal membuat daftar tugas baru"
 
 #: src/MainWindow.vala:270 src/MainWindow.vala:342
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
@@ -43,7 +43,7 @@ msgstr ""
 
 #: src/MainWindow.vala:275
 msgid "New list"
-msgstr ""
+msgstr "Daftar baru"
 
 #: src/MainWindow.vala:319
 #, c-format
