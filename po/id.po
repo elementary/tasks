@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
 "PO-Revision-Date: 2023-01-29 12:54+0000\n"
-"Last-Translator: ianz56 <ianperdiansah05@gmail.com>\n"
+"Last-Translator: Eri Hidayat <eriwhidayat@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/tasks/"
 "id/>\n"
 "Language: id\n"
@@ -133,11 +133,11 @@ msgstr "Menyambungkan. . ."
 
 #: src/Widgets/SourceRow.vala:150
 msgid "Moving task failed"
-msgstr ""
+msgstr "Gagal memindahkan tugas"
 
 #: src/Widgets/SourceRow.vala:151
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "Ada galat ketika memindahkan tugas ke daftar yang dituju."
 
 #: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
