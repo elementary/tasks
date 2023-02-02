@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
-"PO-Revision-Date: 2021-12-11 00:32+0000\n"
+"PO-Revision-Date: 2023-02-03 20:25+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/tasks/tasks/hu/"
 ">\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.14.2\n"
 
 #: src/MainWindow.vala:45
 msgid "Tasks"
@@ -107,7 +107,7 @@ msgstr "Kovács Jónás VAGY Példa utca"
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
-msgstr "Befejezettek mutatása"
+msgstr "Befejezettek megjelenítése"
 
 #: src/Widgets/ListSettingsPopover.vala:119
 msgid "Delete List…"
