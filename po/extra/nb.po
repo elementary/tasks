@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
-"PO-Revision-Date: 2021-07-01 16:20+0000\n"
+"PO-Revision-Date: 2023-03-02 10:25+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
 "extra/nb/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.14.2\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 #, fuzzy
@@ -42,22 +42,22 @@ msgstr ""
 #: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
 #: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
 msgid "Improvements:"
-msgstr ""
+msgstr "Forbedringer:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "New app icon"
-msgstr ""
+msgstr "Nytt programikon"
 
 #: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
 #: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
 #: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
 msgid "Updated translations"
-msgstr ""
+msgstr "Oppdaterte oversettelser"
 
 #: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
 #: data/tasks.appdata.xml.in:48
 msgid "Features:"
-msgstr ""
+msgstr "Funksjoner:"
 
 #: data/tasks.appdata.xml.in:33
 msgid ""
@@ -73,11 +73,11 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:42
 msgid "Send a notification when a task is due"
-msgstr ""
+msgstr "Send en merknad når et gjøremål når sin frist"
 
 #: data/tasks.appdata.xml.in:50
 msgid "Drag and drop tasks between lists"
-msgstr ""
+msgstr "Dra og slipp gjøremål mellom lister"
 
 #: data/tasks.appdata.xml.in:51
 msgid "Follow email and web links in the task description with Control + Click"
@@ -85,15 +85,15 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:55
 msgid "Improved time zone handling"
-msgstr ""
+msgstr "Forbedret tidssonehåndtering"
 
 #: data/tasks.appdata.xml.in:56
 msgid "Performance improvements"
-msgstr ""
+msgstr "Ytelsesforbedringer"
 
 #: data/tasks.appdata.xml.in:63
 msgid "Fixes:"
-msgstr ""
+msgstr "Fikser:"
 
 #: data/tasks.appdata.xml.in:65
 msgid ""
@@ -135,11 +135,11 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:107
 msgid "First release!"
-msgstr ""
+msgstr "Første utgave."
 
 #: data/tasks.appdata.xml.in:109
 msgid "Support the dark style"
-msgstr ""
+msgstr "Støtte for mørk stil"
 
 #: data/tasks.appdata.xml.in:110
 msgid "Add and remove task lists with custom colors"
@@ -151,7 +151,7 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:112
 msgid "Set due dates"
-msgstr ""
+msgstr "Sett fristdatoer"
 
 #: data/tasks.appdata.xml.in:155
 #, fuzzy
