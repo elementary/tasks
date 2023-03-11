@@ -8,210 +8,216 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-03-11 09:32+0000\n"
+"Last-Translator: NorwayFun <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <https://l10n.elementary.io/projects/tasks/tasks/ka/>"
+"\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.2\n"
 
 #: src/MainWindow.vala:45
 msgid "Tasks"
-msgstr ""
+msgstr "Tasks"
 
 #: src/MainWindow.vala:108
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "ონლაინ ანგარიშების პარამეტრები…"
 
 #: src/MainWindow.vala:125
 msgid "Add Task List…"
-msgstr ""
+msgstr "ამოცანების სიის დამატება…"
 
 #: src/MainWindow.vala:269
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "ახალი ამოცანების სიის შექმნის შეცდომა"
 
 #: src/MainWindow.vala:270 src/MainWindow.vala:342
 #: src/Widgets/TaskListGrid.vala:88 src/Widgets/TaskListGrid.vala:176
 msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "ამოცანების სიის რეესტრი ხელმიუწვდომელია ან შიგნით ჩაწერა შეუძლებელია."
 
 #: src/MainWindow.vala:275
 msgid "New list"
-msgstr ""
+msgstr "ახალი სია"
 
 #: src/MainWindow.vala:319
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "წავშალო \"%s\"?"
 
 #: src/MainWindow.vala:320
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"სია და მისი ყველა ამოცანა სამუდამოდ წაიშლება. თუ თქვენ ეს სია გააზიარეთ, "
+"ხალხს მასთან წვდომა აღარ ექნება."
 
 #: src/MainWindow.vala:328
 msgid "Delete Anyway"
-msgstr ""
+msgstr "მაინც წაშლა"
 
 #: src/MainWindow.vala:341
 msgid "Deleting the task list failed"
-msgstr ""
+msgstr "ამოცანების სიის წაშლის შეცდომა"
 
 #: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:56
 msgid "Today"
-msgstr ""
+msgstr "დღეს"
 
 #: src/Util.vala:267
 msgid "Yesterday"
-msgstr ""
+msgstr "გუშინ"
 
 #: src/Util.vala:269
 msgid "Tomorrow"
-msgstr ""
+msgstr "ხვალ"
 
 #: src/Widgets/EditableLabel.vala:74
 msgid "Edit…"
-msgstr ""
+msgstr "ჩასწორება…"
 
 #: src/Widgets/EntryPopover/DateTime.vala:28
 msgid "Set Due"
-msgstr ""
+msgstr "დააყენეთ ვადა"
 
 #: src/Widgets/EntryPopover/Generic.vala:67
 msgid "Remove"
-msgstr ""
+msgstr "წაშლა"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "მდებარეობის დაყენება"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
-msgstr ""
+msgstr "ჩამოდის"
 
 #: src/Widgets/EntryPopover/Location.vala:57
 msgid "Leaving"
-msgstr ""
+msgstr "გადის"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "John Smith ან Example St."
 
 #: src/Widgets/ListSettingsPopover.vala:114
 msgid "Show Completed"
-msgstr ""
+msgstr "დასრულებულების ჩვენება"
 
 #: src/Widgets/ListSettingsPopover.vala:119
 msgid "Delete List…"
-msgstr ""
+msgstr "სიის წაშლა…"
 
 #: src/Widgets/ListSettingsPopover.vala:274
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "ამოცანების სიის ფერის შეცვლის შეცდომა"
 
 #: src/Widgets/ListSettingsPopover.vala:275
 msgid "The task list registry may be unavailable or write-protected."
-msgstr ""
+msgstr "ამოცანების სიის რეესტრი ხელმიუწვდომელი ან ჩაწერისგან დაცულია."
 
 #: src/Widgets/ScheduledRow.vala:26 src/Widgets/ScheduledTaskListGrid.vala:76
 msgid "Scheduled"
-msgstr ""
+msgstr "დაგეგმილია"
 
 #: src/Widgets/SourceRow.vala:63
 msgid "Connecting…"
-msgstr ""
+msgstr "დაკავშირება…"
 
 #: src/Widgets/SourceRow.vala:150
 msgid "Moving task failed"
-msgstr ""
+msgstr "ამოცანის გადატანის შეცდომა"
 
 #: src/Widgets/SourceRow.vala:151
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "შეცდომა ამოცანის სასურველ სიაში გადატანისას."
 
 #: src/Widgets/SourceRow.vala:212
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "ავტორიზაციის დეტალების მოლოდინი"
 
 #: src/Widgets/SourceRow.vala:216
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr ""
+"ამჟამად (დიდი შანსით დაშორებულ) მონაცემების საცავთან კავშირი დამყარებული არაა"
 
 #: src/Widgets/SourceRow.vala:220
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "SSL სერტიფიკატის ნდობა ამ დაკავშირებისთვის უარყოფილა"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:87 src/Widgets/TaskListGrid.vala:63
 msgid "No Tasks"
-msgstr ""
+msgstr "ამოცანების გარეშე"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:221 src/Widgets/TaskListGrid.vala:309
 msgid "Completing task failed"
-msgstr ""
+msgstr "ამოცანის დასრულების შეცდომა"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:222
 #: src/Widgets/ScheduledTaskListGrid.vala:244
 #: src/Widgets/ScheduledTaskListGrid.vala:266 src/Widgets/TaskListGrid.vala:310
 #: src/Widgets/TaskListGrid.vala:332 src/Widgets/TaskListGrid.vala:354
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "ამოცანების რეესტრი ხელმიუწვდომელია ან შიგნით ჩაწერა შეუძლებელია."
 
 #: src/Widgets/ScheduledTaskListGrid.vala:243 src/Widgets/TaskListGrid.vala:331
 msgid "Updating task failed"
-msgstr ""
+msgstr "ამოცანის განახლების შეცდომა"
 
 #: src/Widgets/ScheduledTaskListGrid.vala:265 src/Widgets/TaskListGrid.vala:353
 msgid "Removing task failed"
-msgstr ""
+msgstr "ამოცანის წაშლის შეცდომა"
 
 #: src/Widgets/TaskListGrid.vala:56
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "სახელისა და გარეგნობის ჩასწორება"
 
 #: src/Widgets/TaskListGrid.vala:87
 msgid "Adding task failed"
-msgstr ""
+msgstr "ამოცანის დამატების შეცდომა"
 
 #: src/Widgets/TaskListGrid.vala:175
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "ამოცანების სიის სახელის გადარქმევის შეცდომა"
 
 #: src/Widgets/TaskRow.vala:136 src/Widgets/TaskRow.vala:143
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:148
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s %s"
 
 #: src/Widgets/TaskRow.vala:182
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "ჩამოსვლა: %s"
 
 #: src/Widgets/TaskRow.vala:185
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "გასვლა: %s"
 
 #: src/Widgets/TaskRow.vala:240
 msgid "Cancel"
-msgstr ""
+msgstr "შეწყვეტა"
 
 #: src/Widgets/TaskRow.vala:242
 msgid "Save Changes"
-msgstr ""
+msgstr "ცვლილებების შენახვა"
 
 #: src/Widgets/TaskRow.vala:242
 msgid "Add Task"
-msgstr ""
+msgstr "ამოცანის დამატება"
 
 #: src/Widgets/TaskRow.vala:305
 msgid "Delete Task"
-msgstr ""
+msgstr "ამოცანის წაშლა"
