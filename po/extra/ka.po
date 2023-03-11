@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
-"PO-Revision-Date: 2023-03-11 09:32+0000\n"
+"PO-Revision-Date: 2023-03-12 10:25+0000\n"
 "Last-Translator: NorwayFun <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://l10n.elementary.io/projects/tasks/extra/ka/>"
 "\n"
@@ -25,7 +25,7 @@ msgstr "Tasks"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "ამოცანები და შეხსენებები სინქრონიზებულია"
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
@@ -38,22 +38,22 @@ msgstr ""
 #: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
 #: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
 msgid "Improvements:"
-msgstr ""
+msgstr "გაუმჯობესებები:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "New app icon"
-msgstr ""
+msgstr "ახალი აპის ხატულა"
 
 #: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
 #: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
 #: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
 msgid "Updated translations"
-msgstr ""
+msgstr "განახლებული თარგმანები"
 
 #: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
 #: data/tasks.appdata.xml.in:48
 msgid "Features:"
-msgstr ""
+msgstr "თვისებები:"
 
 #: data/tasks.appdata.xml.in:33
 msgid ""
@@ -85,11 +85,11 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:56
 msgid "Performance improvements"
-msgstr ""
+msgstr "წარმადობის გაუმჯობესებები"
 
 #: data/tasks.appdata.xml.in:63
 msgid "Fixes:"
-msgstr ""
+msgstr "შეცდომების გასწორებები:"
 
 #: data/tasks.appdata.xml.in:65
 msgid ""
@@ -103,7 +103,7 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:67
 msgid "Removing descriptions is now saved"
-msgstr ""
+msgstr "აღწერის წაშლა ახლა შენახულია"
 
 #: data/tasks.appdata.xml.in:68
 msgid "Placing the cursor in descriptions works consistently"
@@ -127,15 +127,15 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:100
 msgid "Fix the order of the scheduled view"
-msgstr ""
+msgstr "გეგმის ხედის მიმდევრობის გასწორება"
 
 #: data/tasks.appdata.xml.in:107
 msgid "First release!"
-msgstr ""
+msgstr "პირველი რელიზი!"
 
 #: data/tasks.appdata.xml.in:109
 msgid "Support the dark style"
-msgstr ""
+msgstr "ბნელი სტილის მხარდაჭერა"
 
 #: data/tasks.appdata.xml.in:110
 msgid "Add and remove task lists with custom colors"
@@ -147,15 +147,15 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:112
 msgid "Set due dates"
-msgstr ""
+msgstr "დააყენეთ ვადა"
 
 #: data/tasks.appdata.xml.in:155
 msgid "elementary, Inc."
-msgstr ""
+msgstr "elementary, Inc."
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
-msgstr ""
+msgstr "შექმენით და თვალყური ადევნეთ ამოცანების მიმდევრობას"
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
