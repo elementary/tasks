@@ -145,6 +145,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         task_list_grid_stack = new Gtk.Stack ();
 
         var main_grid = new Gtk.Grid ();
+        main_grid.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
         main_grid.attach (main_header, 0, 0);
         main_grid.attach (task_list_grid_stack, 0, 1);
 
