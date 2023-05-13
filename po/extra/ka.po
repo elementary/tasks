@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
-"PO-Revision-Date: 2023-03-12 10:25+0000\n"
+"PO-Revision-Date: 2023-05-14 05:06+0000\n"
 "Last-Translator: NorwayFun <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://l10n.elementary.io/projects/tasks/extra/ka/>"
 "\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -69,11 +69,11 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:42
 msgid "Send a notification when a task is due"
-msgstr ""
+msgstr "გაფრთხილების გაგზავნა ამოცანის ვადის ამოწურვისას"
 
 #: data/tasks.appdata.xml.in:50
 msgid "Drag and drop tasks between lists"
-msgstr ""
+msgstr "გადაათრიეთ და დააგდეთ ამოცანები სიებს შორის"
 
 #: data/tasks.appdata.xml.in:51
 msgid "Follow email and web links in the task description with Control + Click"
@@ -81,7 +81,7 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:55
 msgid "Improved time zone handling"
-msgstr ""
+msgstr "დროის სარტყელის გაუმჯობესებული მართვა"
 
 #: data/tasks.appdata.xml.in:56
 msgid "Performance improvements"
@@ -123,7 +123,7 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:91
 msgid "Fix crash on start with certain hardware"
-msgstr ""
+msgstr "გარკვეულ აპარატურაზე გაშვებისას ავარიის გასწორება"
 
 #: data/tasks.appdata.xml.in:100
 msgid "Fix the order of the scheduled view"
@@ -143,7 +143,7 @@ msgstr ""
 
 #: data/tasks.appdata.xml.in:111
 msgid "See scheduled tasks from all lists at once"
-msgstr ""
+msgstr "დაგეგმილი ამოცანების ყველა სიიდან ერთდროული ნახვა"
 
 #: data/tasks.appdata.xml.in:112
 msgid "Set due dates"
@@ -159,4 +159,4 @@ msgstr "შექმენით და თვალყური ადევნ
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "Todo;Reminders;გეგმები;შეხსენება;"
