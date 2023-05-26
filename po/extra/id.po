@@ -9,8 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
 "PO-Revision-Date: 2023-05-27 17:07+0000\n"
-"Last-Translator: Faisal Rachmadin <frachmadin@users.noreply.l10n.elementary."
-"io>\n"
+"Last-Translator: satrya <satrya99@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/extra/"
 "id/>\n"
 "Language: id\n"
@@ -160,11 +159,11 @@ msgstr "Tetapkan tanggal jatuh tempo"
 
 #: data/tasks.appdata.xml.in:155
 msgid "elementary, Inc."
-msgstr ""
+msgstr "elementary, Inc."
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
-msgstr ""
+msgstr "Buat dan lacak kemajuan tugas"
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
