@@ -8,8 +8,9 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-11 17:52+0000\n"
-"PO-Revision-Date: 2023-05-26 16:48+0000\n"
-"Last-Translator: satrya <satrya99@gmail.com>\n"
+"PO-Revision-Date: 2023-05-27 17:07+0000\n"
+"Last-Translator: Faisal Rachmadin <frachmadin@users.noreply.l10n.elementary."
+"io>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/extra/"
 "id/>\n"
 "Language: id\n"
@@ -25,7 +26,7 @@ msgstr "Tugas"
 
 #: data/tasks.appdata.xml.in:8
 msgid "Synced tasks and reminders"
-msgstr "Agenda dan pengingat yang disinkronkan"
+msgstr "Menyinkronkan tugas dan pengingat"
 
 #: data/tasks.appdata.xml.in:10
 msgid ""
@@ -33,121 +34,129 @@ msgid ""
 "and complete tasks, manage lists and sync them across your machines using "
 "CalDAV."
 msgstr ""
+"Dirancang dan dibuat untuk membantu mengelola semua tugas dan pengingat "
+"Anda. Buat dan selesaikan tugas, kelola daftar dan sinkronkan di seluruh "
+"mesin Anda menggunakan CalDAV."
 
 #: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:53
 #: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
 #: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
 msgid "Improvements:"
-msgstr ""
+msgstr "Peningkatan:"
 
 #: data/tasks.appdata.xml.in:20
 msgid "New app icon"
-msgstr ""
+msgstr "Ikon aplikasi baru"
 
 #: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
 #: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
 #: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
 msgid "Updated translations"
-msgstr ""
+msgstr "Pembaruan terjemahan"
 
 #: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
 #: data/tasks.appdata.xml.in:48
 msgid "Features:"
-msgstr ""
+msgstr "Fitur:"
 
 #: data/tasks.appdata.xml.in:33
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
 msgstr ""
+"Menambahkan dukungan luring untuk daftar tugas yang baru dibuat jika "
+"dikonfigurasi untuk akun"
 
 #: data/tasks.appdata.xml.in:34
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
 msgstr ""
+"Secara otomatis menyinkronkan daftar tugas setiap kali dipilih atau jaringan "
+"menjadi tersedia lagi"
 
 #: data/tasks.appdata.xml.in:42
 msgid "Send a notification when a task is due"
-msgstr ""
+msgstr "Mengirim pemberitahuan saat tugas jatuh tempo"
 
 #: data/tasks.appdata.xml.in:50
 msgid "Drag and drop tasks between lists"
-msgstr ""
+msgstr "Seret dan letakkan tugas di antara daftar"
 
 #: data/tasks.appdata.xml.in:51
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
+"Mengikuti surel dan tautan web dalam deskripsi tugas dengan Control + Klik"
 
 #: data/tasks.appdata.xml.in:55
 msgid "Improved time zone handling"
-msgstr ""
+msgstr "Penanganan zona waktu yang lebih baik"
 
 #: data/tasks.appdata.xml.in:56
 msgid "Performance improvements"
-msgstr ""
+msgstr "Peningkatan kinerja"
 
 #: data/tasks.appdata.xml.in:63
 msgid "Fixes:"
-msgstr ""
+msgstr "Perbaikan:"
 
 #: data/tasks.appdata.xml.in:65
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
-msgstr ""
+msgstr "Mencegah kepala nama akun ditampilkan beberapa kali di bilah sisi"
 
 #: data/tasks.appdata.xml.in:66
 msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr ""
+msgstr "Deskripsi panjang terpotong di akhir, bukan di awal"
 
 #: data/tasks.appdata.xml.in:67
 msgid "Removing descriptions is now saved"
-msgstr ""
+msgstr "Menghapus deskripsi sekarang disimpan"
 
 #: data/tasks.appdata.xml.in:68
 msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
+msgstr "Menempatkan kursor dalam deskripsi berfungsi secara konsisten"
 
 #: data/tasks.appdata.xml.in:72
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
+msgstr "Mengganti tombol pintasan Hapus dengan Ctrl + Backspace"
 
 #: data/tasks.appdata.xml.in:73
 msgid "Add a confirmation dialog when deleting a task list"
-msgstr ""
+msgstr "Menambahkan dialog konfirmasi saat menghapus daftar tugas"
 
 #: data/tasks.appdata.xml.in:74
 msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
+msgstr "Meningkatkan kinerja dalam daftar dengan banyak tugas yang diselesaikan"
 
 #: data/tasks.appdata.xml.in:91
 msgid "Fix crash on start with certain hardware"
-msgstr ""
+msgstr "Perbaikan kemogokan saat memulai dengan perangkat keras tertentu"
 
 #: data/tasks.appdata.xml.in:100
 msgid "Fix the order of the scheduled view"
-msgstr ""
+msgstr "Memperbaiki urutan tampilan terjadwal"
 
 #: data/tasks.appdata.xml.in:107
 msgid "First release!"
-msgstr ""
+msgstr "RIlis pertama!"
 
 #: data/tasks.appdata.xml.in:109
 msgid "Support the dark style"
-msgstr ""
+msgstr "Dukungan gaya gelap"
 
 #: data/tasks.appdata.xml.in:110
 msgid "Add and remove task lists with custom colors"
-msgstr ""
+msgstr "Menambahkan dan menghapus daftar tugas dengan warna kustom"
 
 #: data/tasks.appdata.xml.in:111
 msgid "See scheduled tasks from all lists at once"
-msgstr ""
+msgstr "Melihat tugas terjadwal dari semua daftar sekaligus"
 
 #: data/tasks.appdata.xml.in:112
 msgid "Set due dates"
-msgstr ""
+msgstr "Tetapkan tanggal jatuh tempo"
 
 #: data/tasks.appdata.xml.in:155
 msgid "elementary, Inc."
@@ -159,4 +168,4 @@ msgstr ""
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "Akan dilakukan; Pengingat;"
