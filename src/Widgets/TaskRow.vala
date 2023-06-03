@@ -38,6 +38,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Tasks.Widgets.EntryPopover.Location location_popover;
     private Gtk.Revealer location_popover_revealer;
 
+    private Tasks.Widgets.EntryPopover.Tag tag_popover;
+    private Gtk.Revealer tag_popover_revealer;
+
     private Gtk.EventBox event_box;
     private Gtk.Stack state_stack;
     private Gtk.Image icon;
@@ -198,6 +201,15 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             }
         });
 
+        tag_popover = new Tasks.Widgets.EntryPopover.Tag ();
+
+        tag_popover_revealer = new Gtk.Revealer () {
+            margin_end = 6,
+            reveal_child = false,
+            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT
+        };
+        tag_popover_revealer.add (tag_popover);
+
         description_label = new Gtk.Label (null) {
             xalign = 0,
             lines = 1,
@@ -215,6 +227,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         var task_grid = new Gtk.Grid ();
         task_grid.add (due_datetime_popover_revealer);
         task_grid.add (location_popover_revealer);
+        task_grid.add (tag_popover_revealer);
         task_grid.add (description_label_revealer);
 
         task_detail_revealer = new Gtk.Revealer () {
@@ -514,10 +527,12 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         description_label_revealer.reveal_child = value && description_label.label != null && description_label.label.strip ().length > 0;
         due_datetime_popover_revealer.reveal_child = !value || due_datetime_popover.value != null;
         location_popover_revealer.reveal_child = !value || location_popover.value != null;
+        tag_popover_revealer.reveal_child = !value || tag_popover.value != null;
 
         task_detail_revealer.reveal_child = description_label_revealer.reveal_child ||
             due_datetime_popover_revealer.reveal_child ||
-            location_popover_revealer.reveal_child;
+            location_popover_revealer.reveal_child ||
+            tag_popover_revealer.reveal_child;
     }
 
     private void remove_request () {
