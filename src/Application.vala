@@ -88,7 +88,6 @@ public class Tasks.Application : Gtk.Application {
         }
 
         active_window.present ();
-        warning ("Presented");
     }
 
     private static Gee.HashMap<string, Gtk.CssProvider>? providers;

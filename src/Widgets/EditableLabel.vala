@@ -62,16 +62,11 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
 
         valign = Gtk.Align.CENTER;
 
-        warning ("Adding controllers (EditableLabel)");
         var motion_controller = new Gtk.EventControllerMotion ();
         add_controller (motion_controller);
 
         var press_controller = new Gtk.GestureClick ();
         add_controller (press_controller);
-
-        var focus_controller = new Gtk.EventControllerFocus ();
-        entry.add_controller (focus_controller);
-        warning ("Added controllers (EditableLabel)");
 
         title = new Gtk.Label ("") {
             ellipsize = Pango.EllipsizeMode.END,
@@ -100,6 +95,9 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
             hexpand = true
         };
         entry.get_style_context ().add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        var focus_controller = new Gtk.EventControllerFocus ();
+        entry.add_controller (focus_controller);
 
         stack = new Gtk.Stack () {
             hhomogeneous = false,

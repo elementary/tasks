@@ -47,11 +47,9 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
         style_provider.load_from_resource ("io/elementary/tasks/EntryPopover.css");
     }
 
-    construct {
-        warning ("Adding controllers (Generic)");        
+    construct { 
         var motion_controller = new Gtk.EventControllerMotion ();
         add_controller (motion_controller);
-        warning ("Added controllers (Generic)");
 
         popover = new Gtk.Popover () {
             child = popover_button
