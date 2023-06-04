@@ -69,7 +69,6 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
         grid.attach (search_entry, 0, 0);
         grid.attach (location_mode, 0, 1);
         grid.attach (map_frame, 0, 2);
-        grid.show_all ();
 
         popover.add (grid);
         popover.show.connect (on_popover_show);

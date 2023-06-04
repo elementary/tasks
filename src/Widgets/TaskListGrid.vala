@@ -186,8 +186,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
                 });
             });
         });
-
-        show_all ();
     }
 
     private void on_show_completed_changed (bool show_completed) {
@@ -371,7 +369,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
         Idle.add (() => {
             task_list.invalidate_sort ();
-            task_list.show_all ();
 
             return Source.REMOVE;
         });

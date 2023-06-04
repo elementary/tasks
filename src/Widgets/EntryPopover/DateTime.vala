@@ -19,7 +19,7 @@
 
 public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
     private Gtk.Calendar calendar;
-    private Granite.Widgets.TimePicker timepicker;
+    private Granite.TimePicker timepicker;
     private Gtk.Revealer timepicker_revealer;
 
     public DateTime () {
@@ -63,7 +63,6 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
         grid.attach (today_separator, 0, 1);
         grid.attach (calendar, 0, 2);
         grid.attach (timepicker_revealer, 0, 3);
-        grid.show_all ();
 
         popover.add (grid);
 

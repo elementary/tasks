@@ -28,9 +28,9 @@ public class Tasks.Application : Gtk.Application {
     public static Tasks.TaskModel model;
     public static bool run_in_background = false;
 
-    public const Gtk.TargetEntry[] DRAG_AND_DROP_TASK_DATA = {
-        { "text/uri-list", Gtk.TargetFlags.SAME_APP | Gtk.TargetFlags.OTHER_WIDGET, 0 } // TODO: TEXT_URI
-    };
+    //  public Gtk.DropTarget[] DRAG_AND_DROP_TASK_DATA = {
+    //      { "text/uri-list", Gtk.TargetFlags.SAME_APP | Gtk.TargetFlags.OTHER_WIDGET, 0 } // TODO: TEXT_URI
+    //  };
 
     public Application () {
         Object (
@@ -75,7 +75,7 @@ public class Tasks.Application : Gtk.Application {
             model.start.begin ();
 
             var main_window = new MainWindow (this);
-            add_window (main_window);
+            //  add_window (main_window);
 
             int window_x, window_y;
             var rect = Gtk.Allocation ();
@@ -83,11 +83,11 @@ public class Tasks.Application : Gtk.Application {
             settings.get ("window-position", "(ii)", out window_x, out window_y);
             settings.get ("window-size", "(ii)", out rect.width, out rect.height);
 
-            if (window_x != -1 || window_y != -1) {
-                main_window.move (window_x, window_y);
-            }
+            //  if (window_x != -1 || window_y != -1) {
+            //      main_window.move (window_x, window_y);
+            //  }
 
-            main_window.set_allocation (rect);
+            //  main_window.set_allocation (rect);
 
             if (settings.get_boolean ("window-maximized")) {
                 main_window.maximize ();
@@ -101,8 +101,6 @@ public class Tasks.Application : Gtk.Application {
             granite_settings.notify["prefers-color-scheme"].connect (() => {
                 gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
             });
-
-            main_window.show_all ();
         }
 
         active_window.present ();
@@ -122,14 +120,14 @@ public class Tasks.Application : Gtk.Application {
                 @define-color accent_color %s;
             """.printf (color, color);
 
-            try {
-                var style_provider = new Gtk.CssProvider ();
-                style_provider.load_from_data (style, style.length);
+            //  try {
+            //      var style_provider = new Gtk.CssProvider ();
+            //      style_provider.load_from_data (style, style.length);
 
-                providers[color] = style_provider;
-            } catch (Error e) {
-                critical ("Unable to set color: %s", e.message);
-            }
+            //      providers[color] = style_provider;
+            //  } catch (Error e) {
+            //      critical ("Unable to set color: %s", e.message);
+            //  }
         }
 
         unowned Gtk.StyleContext style_context = widget.get_style_context ();
@@ -137,7 +135,6 @@ public class Tasks.Application : Gtk.Application {
     }
 
     public static int main (string[] args) {
-        GtkClutter.init (ref args);
         var app = new Application ();
         int res = app.run (args);
         ICal.Object.free_global_objects ();

@@ -19,7 +19,7 @@
 * Authored by: Corentin Noël <corentin@elementary.io>
 */
 
-public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
+public class Tasks.Widgets.EditableLabel : Gtk.Widget {
     public signal void changed ();
 
     private static Gtk.CssProvider label_provider;
@@ -27,7 +27,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
     private Gtk.Label title;
     private Gtk.Entry entry;
     private Gtk.Stack stack;
-    private Gtk.Grid grid;
+    private Gtk.Box box;
 
     public string text { get; set; }
 
@@ -44,7 +44,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
                     changed ();
                 }
 
-                stack.set_visible_child (grid);
+                stack.set_visible_child (box);
             }
         }
     }
@@ -60,9 +60,9 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
         style_context.add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         valign = Gtk.Align.CENTER;
-        events |= Gdk.EventMask.ENTER_NOTIFY_MASK;
-        events |= Gdk.EventMask.LEAVE_NOTIFY_MASK;
-        events |= Gdk.EventMask.BUTTON_PRESS_MASK;
+        //  events |= Gdk.EventMask.ENTER_NOTIFY_MASK;
+        //  events |= Gdk.EventMask.LEAVE_NOTIFY_MASK;
+        //  events |= Gdk.EventMask.BUTTON_PRESS_MASK;
 
         title = new Gtk.Label ("") {
             ellipsize = Pango.EllipsizeMode.END,
@@ -70,23 +70,22 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
         };
 
         var edit_button = new Gtk.Button () {
-            image = new Gtk.Image.from_icon_name ("edit-symbolic", Gtk.IconSize.MENU),
+            icon_name = "edit-symbolic",
             tooltip_text = _("Edit…")
         };
-        edit_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        edit_button.get_style_context ().add_class (Granite.STYLE_CLASS_FLAT);
 
         var button_revealer = new Gtk.Revealer () {
             valign = Gtk.Align.CENTER,
-            transition_type = Gtk.RevealerTransitionType.CROSSFADE
+            transition_type = Gtk.RevealerTransitionType.CROSSFADE,
+            child = edit_button
         };
-        button_revealer.add (edit_button);
 
-        grid = new Gtk.Grid () {
-            valign = Gtk.Align.CENTER,
-            column_spacing = 12
+        box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12) {
+            valign = Gtk.Align.CENTER
         };
-        grid.add (title);
-        grid.add (button_revealer);
+        box.append (title);
+        box.append (button_revealer);
 
         entry = new Gtk.Entry () {
             hexpand = true
@@ -97,10 +96,10 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
             hhomogeneous = false,
             transition_type = Gtk.StackTransitionType.CROSSFADE
         };
-        stack.add (grid);
-        stack.add (entry);
+        stack.add_child (box);
+        stack.add_child (entry);
 
-        add (stack);
+        stack.set_parent (this); // ?
 
         bind_property ("text", title, "label");
 

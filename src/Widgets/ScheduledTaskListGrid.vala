@@ -112,8 +112,6 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
 
         task_list.row_activated.connect (on_row_activated);
 
-        show_all ();
-
         model.task_list_added.connect (add_task_list);
         model.task_list_modified.connect (modify_task_list);
         model.task_list_removed.connect (remove_task_list);
@@ -283,7 +281,6 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
 
         Idle.add (() => {
             task_list.invalidate_sort ();
-            task_list.show_all ();
 
             return Source.REMOVE;
         });

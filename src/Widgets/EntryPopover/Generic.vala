@@ -17,7 +17,7 @@
 * Boston, MA 02110-1301 USA
 */
 
-public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
+public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
     public signal string? value_format (T value);
     public signal void value_changed (T value);
 
@@ -55,34 +55,34 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
         popover_button = new Gtk.MenuButton () {
             label = placeholder,
             popover = popover,
-            image = new Gtk.Image.from_icon_name (icon_name, Gtk.IconSize.BUTTON),
-            always_show_image = icon_name != null
+            icon_name = icon_name,
+            //  always_show_image = icon_name != null
         };
 
         unowned Gtk.StyleContext popover_button_context = popover_button.get_style_context ();
-        popover_button_context.add_class (Gtk.STYLE_CLASS_FLAT);
+        popover_button_context.add_class (Granite.STYLE_CLASS_FLAT);
         popover_button_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic", Gtk.IconSize.BUTTON) {
+        var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic") {
             tooltip_text = _("Remove")
         };
 
         unowned Gtk.StyleContext delete_button_context = delete_button.get_style_context ();
-        delete_button_context.add_class (Gtk.STYLE_CLASS_FLAT);
+        delete_button_context.add_class (Granite.STYLE_CLASS_FLAT);
         delete_button_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var delete_button_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
-            reveal_child = false
+            reveal_child = false,
+            child = delete_button
         };
-        delete_button_revealer.add (delete_button);
 
-        var button_box = new Gtk.Grid ();
-        button_box.add (popover_button);
-        button_box.add (delete_button_revealer);
+        var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        button_box.append (popover_button);
+        button_box.append (delete_button_revealer);
         button_box.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-        add (button_box);
+        button_box.set_parent (this); // ?
 
         delete_button.clicked.connect (() => {
             var value_has_changed = value != null;
