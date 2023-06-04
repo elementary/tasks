@@ -41,7 +41,8 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         }
 
         editable_title = new EditableLabel () {
-            margin_start = 24
+            margin_start = 24,
+            hexpand = true
         };
         editable_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
         editable_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
@@ -51,6 +52,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         var settings_button = new Gtk.MenuButton () {
             margin_end = 24,
             valign = Gtk.Align.CENTER,
+            hexpand = false,
             tooltip_text = _("Edit Name and Appearance"),
             popover = list_settings_popover,
             icon_name = "view-more-symbolic"
@@ -122,7 +124,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         on_show_completed_changed (Application.settings.get_boolean ("show-completed"));
 
         settings_button.activate.connect (() => {
-            unowned var application = (Gtk.Application) GLib.Application.get_default ();
+            unowned var main_window = (MainWindow) get_root ();
 
             // TODO:
             //  error: `Gtk.MenuButton.get_active' is not available in gtk4 4.6.6. Use gtk4 >= 4.10
@@ -130,11 +132,11 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             if (false) {
                 list_settings_popover.source = source;
 
-                if (application != null) {
-                    ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
+                if (main_window != null) {
+                    ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
                 }
 
-            } else if (application != null) {
+            } else if (main_window != null) {
                 /*
                 * We can't immediate disable the action once the popover is closed,
                 * because this would lead to the action not being executed in case
@@ -143,7 +145,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
                 * be executed if needed.
                 */
                 GLib.Idle.add (() => {
-                    ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (
+                    ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (
                         add_task_list.get_selected_rows ().length () == 0 &&
                         task_list.get_selected_rows ().length () == 0
                     );
@@ -156,9 +158,9 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         task_list.row_activated.connect (on_row_activated);
 
         editable_title.notify["editing"].connect (() => {
-            unowned var application = (Gtk.Application) GLib.Application.get_default ();
-            if (application != null) {
-                ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (!editable_title.editing);
+            unowned var main_window = (MainWindow) get_root ();
+            if (main_window != null) {
+                ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (!editable_title.editing);
             }
         });
 
@@ -221,9 +223,9 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         var task_row = (Tasks.Widgets.TaskRow) row;
         task_row.reveal_child_request (true);
 
-        unowned var application = (Gtk.Application) GLib.Application.get_default ();
-        if (application != null) {
-            ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+        unowned var main_window = (MainWindow) get_root ();
+        if (main_window != null) {
+            ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
         }
     }
 
@@ -233,9 +235,9 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         }
 
         if (add_task_list.get_selected_rows ().length () == 0 && task_list.get_selected_rows ().length () == 0) {
-            unowned var application = (Gtk.Application) GLib.Application.get_default ();
-            if (application != null) {
-                ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
+            unowned var main_window = (MainWindow) get_root ();
+            if (main_window != null) {
+                ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
             }
         }
     }

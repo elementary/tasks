@@ -159,9 +159,9 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
         var task_row = (Tasks.Widgets.TaskRow) row;
         task_row.reveal_child_request (true);
 
-        unowned var application = (Gtk.Application) GLib.Application.get_default ();
-        if (application != null) {
-            ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+        unowned var main_window = (MainWindow) get_root ();
+        if (main_window != null) {
+            ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
         }
     }
 
