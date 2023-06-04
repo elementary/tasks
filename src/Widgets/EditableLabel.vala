@@ -141,7 +141,6 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
     }
 
     ~EditableLabel () {
-        warning ("Destroying");
         get_last_child ().unparent ();
     }
 }
