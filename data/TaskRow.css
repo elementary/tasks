@@ -23,7 +23,7 @@ row {
 }
 
 row:focus:not(.card) {
-    background-color: shade (@base_color, 0.8);
+    background-color: shade(@base_color, 0.8);
 }
 
 row.card {

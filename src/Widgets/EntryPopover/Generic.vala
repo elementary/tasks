@@ -42,13 +42,16 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
     }
 
     static construct {
+        set_layout_manager_type (typeof (Gtk.BinLayout));
         style_provider = new Gtk.CssProvider ();
         style_provider.load_from_resource ("io/elementary/tasks/EntryPopover.css");
     }
 
     construct {
+        warning ("Adding controllers (Generic)");        
         var motion_controller = new Gtk.EventControllerMotion ();
         add_controller (motion_controller);
+        warning ("Added controllers (Generic)");
 
         popover = new Gtk.Popover () {
             child = popover_button
@@ -141,5 +144,9 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
                 return GLib.Source.REMOVE;
             });
         });
+    }
+
+    ~Generic () {
+        get_last_child ().unparent ();
     }
 }

@@ -50,6 +50,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
     }
 
     static construct {
+        set_layout_manager_type (typeof (Gtk.BinLayout));
         label_provider = new Gtk.CssProvider ();
         label_provider.load_from_resource ("io/elementary/tasks/EditableLabel.css");
     }
@@ -61,6 +62,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
 
         valign = Gtk.Align.CENTER;
 
+        warning ("Adding controllers (EditableLabel)");
         var motion_controller = new Gtk.EventControllerMotion ();
         add_controller (motion_controller);
 
@@ -69,6 +71,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
 
         var focus_controller = new Gtk.EventControllerFocus ();
         entry.add_controller (focus_controller);
+        warning ("Added controllers (EditableLabel)");
 
         title = new Gtk.Label ("") {
             ellipsize = Pango.EllipsizeMode.END,
@@ -121,10 +124,6 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
             editing = true;
         });
 
-        edit_button.clicked.connect (() => {
-            editing = true;
-        });
-
         entry.activate.connect (() => {
             if (stack.visible_child == entry) {
                 editing = false;
@@ -142,5 +141,9 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
         editing = true;
 
         return Gdk.EVENT_STOP;
+    }
+
+    ~EditableLabel () {
+        get_last_child ().unparent ();
     }
 }
