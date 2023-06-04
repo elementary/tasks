@@ -113,12 +113,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         actionbar.add_css_class (Granite.STYLE_CLASS_FLAT);
 
         var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        sidebar.add_css_class (Granite.STYLE_CLASS_SIDEBAR);
         sidebar.append (sidebar_header);
         sidebar.append (scrolledwindow);
         sidebar.append (actionbar);
-
-        unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
-        sidebar_style_context.add_class (Granite.STYLE_CLASS_SIDEBAR);
 
         var main_header = new Gtk.HeaderBar () {
             title_widget = new Gtk.Label (null),
@@ -178,65 +176,16 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             }
             listbox.set_header_func (header_update_func);
 
-            listbox.row_selected.connect ((row) => {
-                if (row != null) {
-                    Tasks.Widgets.TaskListGrid? task_list_grid;
+            listbox.row_selected.connect (on_listbox_row_selected);
 
-                    if (row is Tasks.Widgets.SourceRow) {
-                        var source = ((Tasks.Widgets.SourceRow) row).source;
-                        var source_uid = source.dup_uid ();
-
-                        /* Synchronizing the list whenever its selected discovers task changes done on remote (likely to happen when multiple devices are used) */
-                        Tasks.Application.model.refresh_task_list.begin (source, null, () => {
-                            try {
-                                Tasks.Application.model.refresh_task_list.end (res);
-                            } catch (Error e) {
-                                warning ("Error syncing task list '%s': %s", source.dup_display_name (), e.message);
-                            }
-                        });
-
-                        task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
-                        if (task_list_grid == null) {
-                            task_list_grid = new Tasks.Widgets.TaskListGrid (source);
-                            task_list_grid_stack.add_named (task_list_grid, source_uid);
-                        }
-
-                        task_list_grid_stack.set_visible_child_name (source_uid);
-                        Tasks.Application.settings.set_string ("selected-list", source_uid);
-                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
-
-                    } else if (row is Tasks.Widgets.ScheduledRow) {
-                        var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListGrid) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
-                        if (scheduled_task_list_grid == null) {
-                            scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListGrid (Tasks.Application.model);
-                            task_list_grid_stack.add_named (scheduled_task_list_grid, SCHEDULED_LIST_UID);
-                        }
-
-                        task_list_grid_stack.set_visible_child_name (SCHEDULED_LIST_UID);
-                        Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);
-                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
-                    }
-
-                    if (task_list_grid != null) {
-                        task_list_grid.update_request ();
-                    }
-
-                } else {
-                    ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
-                    var first_row = listbox.get_row_at_index (0);
-                    if (first_row != null) {
-                        listbox.select_row (first_row);
-                    }
-                }
-            });
-
+            
             add_collection_source (registry.ref_builtin_task_list ());
-
+            
             var task_list_collections = registry.list_sources (E.SOURCE_EXTENSION_COLLECTION);
             task_list_collections.foreach ((collection_source) => {
                 add_collection_source (collection_source);
             });
-
+            
             var last_selected_list = Application.settings.get_string ("selected-list");
 
             if (last_selected_list == SCHEDULED_LIST_UID) {
@@ -254,15 +203,75 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                         add_source (source);
 
                         if (last_selected_list == "" && default_task_list == source) {
+                            warning ("Selecting source for %s".printf (source.display_name));
+                            assert (source_rows[source] != null);
                             listbox.select_row (source_rows[source]);
+                            warning ("Done");
 
                         } else if (last_selected_list == source.uid) {
+                            warning ("Selecting source for %s".printf (source.display_name));
+                            assert (source_rows[source] != null);
                             listbox.select_row (source_rows[source]);
+                            warning ("Done");
                         }
                     }
                 });
             }
         });
+    }
+
+    private void on_listbox_row_selected (Gtk.ListBoxRow? row) {
+        warning ("Selecting row");
+        if (row != null) {
+            Tasks.Widgets.TaskListGrid? task_list_grid = null;
+
+            if (row is Tasks.Widgets.SourceRow) {
+                var source = ((Tasks.Widgets.SourceRow) row).source;
+                var source_uid = source.dup_uid ();
+
+                /* Synchronizing the list whenever its selected discovers task changes done on remote (likely to happen when multiple devices are used) */
+                Tasks.Application.model.refresh_task_list.begin (source, null, (obj, res) => {
+                    try {
+                        Tasks.Application.model.refresh_task_list.end (res);
+                    } catch (Error e) {
+                        warning ("Error syncing task list '%s': %s", source.dup_display_name (), e.message);
+                    }
+                });
+
+                task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
+                if (task_list_grid == null) {
+                    task_list_grid = new Tasks.Widgets.TaskListGrid (source);
+                    task_list_grid_stack.add_named (task_list_grid, source_uid);
+                }
+
+                task_list_grid_stack.set_visible_child_name (source_uid);
+                Tasks.Application.settings.set_string ("selected-list", source_uid);
+                warning ("What the fuck");
+                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
+                warning ("End it please");
+            } else if (row is Tasks.Widgets.ScheduledRow) {
+                var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListGrid) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
+                if (scheduled_task_list_grid == null) {
+                    scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListGrid (Tasks.Application.model);
+                    task_list_grid_stack.add_named (scheduled_task_list_grid, SCHEDULED_LIST_UID);
+                }
+
+                task_list_grid_stack.set_visible_child_name (SCHEDULED_LIST_UID);
+                Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);
+                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+            }
+
+            if (task_list_grid != null) {
+                task_list_grid.update_request ();
+            }
+
+        } else {
+            ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+            var first_row = listbox.get_row_at_index (0);
+            if (first_row != null) {
+                listbox.select_row (first_row);
+            }
+        }
     }
 
     private void add_new_list (E.Source collection_source) {
@@ -328,7 +337,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             };
 
             unowned Gtk.Widget trash_button = message_dialog.add_button (_("Delete Anyway"), Gtk.ResponseType.YES);
-            trash_button.get_style_context ().add_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
+            trash_button.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
             message_dialog.present ();
             message_dialog.response.connect ((response_id) => {
@@ -422,6 +431,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         debug ("Adding row '%s'", source.dup_display_name ());
         if (!source_rows.has_key (source)) {
+            warning ("Set source_rows for %s".printf (source.display_name));
             source_rows[source] = new Tasks.Widgets.SourceRow (source);
 
             listbox.append (source_rows[source]);

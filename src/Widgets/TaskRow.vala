@@ -49,7 +49,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Gtk.Revealer task_detail_revealer;
     private Gtk.Revealer task_form_revealer;
     private Gtk.TextBuffer description_textbuffer;
-    private unowned Gtk.StyleContext style_context;
 
     private static Gtk.CssProvider taskrow_provider;
 
@@ -88,7 +87,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         }
 
         icon = new Gtk.Image.from_icon_name ("list-add-symbolic");
-        icon.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
+        icon.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         check = new Gtk.CheckButton () {
             valign = Gtk.Align.CENTER
@@ -102,9 +101,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         summary_entry = new Gtk.Entry ();
 
-        unowned Gtk.StyleContext summary_entry_context = summary_entry.get_style_context ();
-        summary_entry_context.add_class (Granite.STYLE_CLASS_FLAT);
-        summary_entry_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        summary_entry.add_css_class (Granite.STYLE_CLASS_FLAT);
+        summary_entry.get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         due_datetime_popover = new Tasks.Widgets.EntryPopover.DateTime ();
 
@@ -120,13 +118,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         };
 
         due_datetime_popover.value_format.connect ((value) => {
-            due_datetime_popover.get_style_context ().remove_class ("error");
+            due_datetime_popover.remove_css_class ("error");
             if (value == null) {
                 return null;
             }
             var today = new GLib.DateTime.now_local ();
             if (today.compare (value) > 0 && !completed) {
-                due_datetime_popover.get_style_context ().add_class ("error");
+                due_datetime_popover.add_css_class ("error");
             }
 
             if (is_gtask) {
@@ -203,7 +201,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             lines = 1,
             ellipsize = Pango.EllipsizeMode.END
         };
-        description_label.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
+        description_label.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         // Should not use a transition that varies the width else label aligning and ellipsizing is incorrect.
         description_label_revealer = new Gtk.Revealer () {
@@ -240,7 +238,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         var cancel_button = new Gtk.Button.with_label (_("Cancel"));
 
         var save_button = new Gtk.Button.with_label (created ? _("Save Changes") : _("Add Task"));
-        save_button.get_style_context ().add_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);
+        save_button.add_css_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);
 
         var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             baseline_position = Gtk.BaselinePosition.CENTER,
@@ -296,16 +294,15 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         margin_start = 12;
         margin_end = 12;
 
-        style_context = get_style_context ();
-        style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
-        style_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        add_css_class (Granite.STYLE_CLASS_ROUNDED);
+        get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         if (created) {
             check.show ();
             state_stack.visible_child = check;
 
             var delete_button = new Gtk.Button.with_label (_("Delete Task"));
-            delete_button.get_style_context ().add_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
+            delete_button.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
             button_box.append (delete_button);
             button_box.append (delete_button);
@@ -419,12 +416,12 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         task_details_reveal_request (!value);
 
         if (value) {
-            style_context.add_class ("collapsed");
-            style_context.add_class (Granite.STYLE_CLASS_CARD);
+            add_css_class ("collapsed");
+            add_css_class (Granite.STYLE_CLASS_CARD);
 
         } else {
-            style_context.remove_class (Granite.STYLE_CLASS_CARD);
-            style_context.remove_class ("collapsed");
+            remove_css_class (Granite.STYLE_CLASS_CARD);
+            remove_css_class ("collapsed");
         }
     }
 
@@ -443,10 +440,10 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             completed = false;
             check.active = completed;
             summary_entry.text = "";
-            summary_entry.get_style_context ().remove_class (Granite.STYLE_CLASS_DIM_LABEL);
-            summary_entry.get_style_context ().add_class ("add-task");
+            summary_entry.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+            summary_entry.add_css_class ("add-task");
             task_detail_revealer.reveal_child = false;
-            task_detail_revealer.get_style_context ().remove_class (Granite.STYLE_CLASS_DIM_LABEL);
+            task_detail_revealer.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
             due_datetime_popover_revealer.reveal_child = false;
             //  location_popover_revealer.reveal_child = false;
@@ -468,14 +465,14 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             }
 
             summary_entry.text = ical_task.get_summary () == null ? "" : ical_task.get_summary ();
-            summary_entry.get_style_context ().remove_class ("add-task");
+            summary_entry.remove_css_class ("add-task");
 
             if (completed) {
-                summary_entry.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
-                task_detail_revealer.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
+                summary_entry.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+                task_detail_revealer.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
             } else {
-                summary_entry.get_style_context ().remove_class (Granite.STYLE_CLASS_DIM_LABEL);
-                task_detail_revealer.get_style_context ().remove_class (Granite.STYLE_CLASS_DIM_LABEL);
+                summary_entry.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+                task_detail_revealer.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
             }
 
             if (ical_task.get_due ().is_null_time ()) {

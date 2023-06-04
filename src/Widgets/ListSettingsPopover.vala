@@ -36,81 +36,71 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
     construct {
         color_button_blue = new Gtk.CheckButton ();
 
-        unowned Gtk.StyleContext color_button_blue_context = color_button_blue.get_style_context ();
-        color_button_blue_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_blue_context.add_class ("blue");
+        color_button_blue.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_blue.add_css_class ("blue");
 
         color_button_mint = new Gtk.CheckButton () {
             group = color_button_blue
         };
 
-        unowned Gtk.StyleContext color_button_mint_context = color_button_mint.get_style_context ();
-        color_button_mint_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_mint_context.add_class ("mint");
+        color_button_mint.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_mint.add_css_class ("mint");
 
         color_button_green = new Gtk.CheckButton () {
             group = color_button_blue
         };
 
-        unowned Gtk.StyleContext color_button_green_context = color_button_green.get_style_context ();
-        color_button_green_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_green_context.add_class ("green");
+        color_button_green.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_green.add_css_class ("green");
 
         color_button_yellow = new Gtk.CheckButton () {
             group = color_button_blue
         };
 
-        unowned Gtk.StyleContext color_button_yellow_context = color_button_yellow.get_style_context ();
-        color_button_yellow_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_yellow_context.add_class ("yellow");
+        color_button_yellow.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_yellow.add_css_class ("yellow");
 
         color_button_orange = new Gtk.CheckButton () {
             group = color_button_blue
         };
 
-        unowned Gtk.StyleContext color_button_orange_context = color_button_orange.get_style_context ();
-        color_button_orange_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_orange_context.add_class ("orange");
+        color_button_orange.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_orange.add_css_class ("orange");
 
         color_button_red = new Gtk.CheckButton () {
             group = color_button_blue
         };
 
-        unowned Gtk.StyleContext color_button_red_context = color_button_red.get_style_context ();
-        color_button_red_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_red_context.add_class ("red");
+        color_button_red.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_red.add_css_class ("red");
 
         color_button_pink = new Gtk.CheckButton () {
             group = color_button_blue
         };
 
-        unowned Gtk.StyleContext color_button_pink_context = color_button_pink.get_style_context ();
-        color_button_pink_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_pink_context.add_class ("pink");
+        color_button_pink.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_pink.add_css_class ("pink");
 
         color_button_purple = new Gtk.CheckButton () {
             group = color_button_blue
         };
 
-        unowned Gtk.StyleContext color_button_purple_context = color_button_purple.get_style_context ();
-        color_button_purple_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_purple_context.add_class ("purple");
+        color_button_purple.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_purple.add_css_class ("purple");
 
         color_button_brown = new Gtk.CheckButton () {
             group = color_button_blue
         };
 
-        unowned Gtk.StyleContext color_button_brown_context = color_button_brown.get_style_context ();
-        color_button_brown_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_brown_context.add_class ("brown");
+        color_button_brown.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_brown.add_css_class ("brown");
 
         color_button_slate = new Gtk.CheckButton () {
             group = color_button_blue
         };
 
-        unowned Gtk.StyleContext color_button_slate_context = color_button_slate.get_style_context ();
-        color_button_slate_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_slate_context.add_class ("slate");
+        color_button_slate.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_slate.add_css_class ("slate");
 
         color_button_none = new Gtk.CheckButton () {
             group = color_button_blue
@@ -142,11 +132,11 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST
         );
 
-        var delete_list_menuitem = new Gtk.Button ();
-        delete_list_menuitem.action_name = delete_list_accel_label.action_name;
-        delete_list_menuitem.get_child ().destroy ();
-        delete_list_menuitem.child = delete_list_accel_label;
-        delete_list_menuitem.get_style_context ().add_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
+        var delete_list_menuitem = new Gtk.Button () {
+            action_name = delete_list_accel_label.action_name,
+            child = delete_list_accel_label
+        };
+        delete_list_menuitem.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_top = 3,

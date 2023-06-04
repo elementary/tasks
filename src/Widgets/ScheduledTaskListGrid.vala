@@ -83,16 +83,14 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
             xalign = 0
         };
 
-        unowned Gtk.StyleContext scheduled_title_context = scheduled_title.get_style_context ();
-        scheduled_title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
-        scheduled_title_context.add_class (Granite.STYLE_CLASS_ACCENT);
+        scheduled_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
+        scheduled_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
 
         var placeholder = new Gtk.Label (_("No Tasks"));
         placeholder.show ();
 
-        unowned Gtk.StyleContext placeholder_context = placeholder.get_style_context ();
-        placeholder_context.add_class (Granite.STYLE_CLASS_DIM_LABEL);
-        placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+        placeholder.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+        placeholder.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
 
         task_list = new Gtk.ListBox () {
             selection_mode = Gtk.SelectionMode.MULTIPLE,
@@ -101,7 +99,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
         task_list.set_header_func (header_function);
-        task_list.get_style_context ().add_class (Granite.STYLE_CLASS_BACKGROUND);
+        task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow () {
             hexpand = true,

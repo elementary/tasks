@@ -56,9 +56,8 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
     }
 
     construct {
-        unowned Gtk.StyleContext style_context = get_style_context ();
-        style_context.add_class ("editable-label");
-        style_context.add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        add_css_class ("editable-label");
+        get_style_context ().add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         valign = Gtk.Align.CENTER;
 
@@ -77,7 +76,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
             icon_name = "edit-symbolic",
             tooltip_text = _("Edit…")
         };
-        edit_button.get_style_context ().add_class (Granite.STYLE_CLASS_FLAT);
+        edit_button.add_css_class (Granite.STYLE_CLASS_FLAT);
 
         var button_revealer = new Gtk.Revealer () {
             valign = Gtk.Align.CENTER,

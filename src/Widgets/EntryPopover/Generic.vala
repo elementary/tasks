@@ -62,17 +62,15 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
             //  always_show_image = icon_name != null
         };
 
-        unowned Gtk.StyleContext popover_button_context = popover_button.get_style_context ();
-        popover_button_context.add_class (Granite.STYLE_CLASS_FLAT);
-        popover_button_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        popover_button.add_css_class (Granite.STYLE_CLASS_FLAT);
+        popover_button.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic") {
             tooltip_text = _("Remove")
         };
 
-        unowned Gtk.StyleContext delete_button_context = delete_button.get_style_context ();
-        delete_button_context.add_class (Granite.STYLE_CLASS_FLAT);
-        delete_button_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        delete_button.add_css_class (Granite.STYLE_CLASS_FLAT);
+        delete_button.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var delete_button_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,

@@ -43,10 +43,8 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         editable_title = new EditableLabel () {
             margin_start = 24
         };
-
-        unowned Gtk.StyleContext title_context = editable_title.get_style_context ();
-        title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
-        title_context.add_class (Granite.STYLE_CLASS_ACCENT);
+        editable_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
+        editable_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
 
         var list_settings_popover = new Tasks.Widgets.ListSettingsPopover ();
 
@@ -57,22 +55,21 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             popover = list_settings_popover,
             icon_name = "view-more-symbolic"
         };
-        settings_button.get_style_context ().add_class (Granite.STYLE_CLASS_FLAT);
-        settings_button.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
+        settings_button.add_css_class (Granite.STYLE_CLASS_FLAT);
+        settings_button.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         var placeholder = new Gtk.Label (_("No Tasks"));
         placeholder.show ();
 
-        unowned Gtk.StyleContext placeholder_context = placeholder.get_style_context ();
-        placeholder_context.add_class (Granite.STYLE_CLASS_DIM_LABEL);
-        placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+        placeholder.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+        placeholder.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
 
         add_task_list = new Gtk.ListBox () {
             margin_top = 24,
             selection_mode = Gtk.SelectionMode.SINGLE,
             activate_on_single_click = true
         };
-        add_task_list.get_style_context ().add_class (Granite.STYLE_CLASS_BACKGROUND);
+        add_task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
 
         var add_task_row = new Tasks.Widgets.TaskRow.for_source (source);
         add_task_row.unselect.connect (on_row_unselect);
@@ -102,16 +99,16 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             selection_mode = Gtk.SelectionMode.MULTIPLE,
             activate_on_single_click = true
         };
+        task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
-        task_list.get_style_context ().add_class (Granite.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow () {
             hexpand = true,
             vexpand = true,
-            hscrollbar_policy = Gtk.PolicyType.NEVER
+            hscrollbar_policy = Gtk.PolicyType.NEVER,
+            child = task_list
         };
-        scrolled_window.child = task_list;
 
         column_spacing = 12;
         attach (editable_title, 0, 0);
@@ -124,43 +121,46 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         });
         on_show_completed_changed (Application.settings.get_boolean ("show-completed"));
 
-        //  settings_button.activate.connect (() => {
-        //      unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
+        settings_button.activate.connect (() => {
+            unowned var application = (Gtk.Application) GLib.Application.get_default ();
 
-        //      if (settings_button.active) {
-        //          list_settings_popover.source = source;
+            // TODO:
+            //  error: `Gtk.MenuButton.get_active' is not available in gtk4 4.6.6. Use gtk4 >= 4.10
+            //  if (settings_button.active) {
+            if (false) {
+                list_settings_popover.source = source;
 
-        //          if (win_action_map != null) {
-        //              ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
-        //          }
+                if (application != null) {
+                    ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
+                }
 
-        //      } else if (win_action_map != null) {
-        //          /*
-        //          * We can't immediate disable the action once the popover is closed,
-        //          * because this would lead to the action not beeing executed in case
-        //          * the popover was closed because the user clicked on the action.
-        //          * Therefore we wait a tiny bit using GLib.Idle to allow the action to
-        //          * be executed if needed.
-        //          */
-        //          GLib.Idle.add (() => {
-        //              ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (
-        //                  add_task_list.get_selected_rows ().length () == 0 &&
-        //                  task_list.get_selected_rows ().length () == 0
-        //              );
-        //              return GLib.Source.REMOVE;
-        //          });
-        //      }
-        //  });
+            } else if (application != null) {
+                /*
+                * We can't immediate disable the action once the popover is closed,
+                * because this would lead to the action not being executed in case
+                * the popover was closed because the user clicked on the action.
+                * Therefore we wait a tiny bit using GLib.Idle to allow the action to
+                * be executed if needed.
+                */
+                GLib.Idle.add (() => {
+                    ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (
+                        add_task_list.get_selected_rows ().length () == 0 &&
+                        task_list.get_selected_rows ().length () == 0
+                    );
+                    return GLib.Source.REMOVE;
+                });
+            }
+        });
 
         add_task_list.row_activated.connect (on_row_activated);
         task_list.row_activated.connect (on_row_activated);
 
-        //  editable_title.notify["editing"].connect (() => {
-        //      unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
-        //      if (win_action_map != null) {
-        //          ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (!editable_title.editing);
-        //      }
-        //  });
+        editable_title.notify["editing"].connect (() => {
+            unowned var application = (Gtk.Application) GLib.Application.get_default ();
+            if (application != null) {
+                ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (!editable_title.editing);
+            }
+        });
 
         editable_title.changed.connect (() => {
             Application.model.update_task_list_display_name.begin (source, editable_title.text, (obj, res) => {
@@ -221,10 +221,10 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         var task_row = (Tasks.Widgets.TaskRow) row;
         task_row.reveal_child_request (true);
 
-        //  unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
-        //  if (win_action_map != null) {
-        //      ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
-        //  }
+        unowned var application = (Gtk.Application) GLib.Application.get_default ();
+        if (application != null) {
+            ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+        }
     }
 
     private void on_row_unselect (Gtk.ListBoxRow row) {
@@ -232,12 +232,12 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             ((Gtk.ListBox) row.parent).unselect_row (row);
         }
 
-        //  if (add_task_list.get_selected_rows ().length () == 0 && task_list.get_selected_rows ().length () == 0) {
-        //      unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
-        //      if (win_action_map != null) {
-        //          ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
-        //      }
-        //  }
+        if (add_task_list.get_selected_rows ().length () == 0 && task_list.get_selected_rows ().length () == 0) {
+            unowned var application = (Gtk.Application) GLib.Application.get_default ();
+            if (application != null) {
+                ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
+            }
+        }
     }
 
     public void update_request () {

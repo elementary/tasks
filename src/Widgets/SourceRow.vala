@@ -43,9 +43,8 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
             valign = Gtk.Align.CENTER
         };
 
-        unowned Gtk.StyleContext source_color_context = source_color.get_style_context ();
-        source_color_context.add_class ("source-color");
-        source_color_context.add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        source_color.add_css_class ("source-color");
+        source_color.get_style_context ().add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         display_name_label = new Gtk.Label (source.display_name) {
             halign = Gtk.Align.START,
