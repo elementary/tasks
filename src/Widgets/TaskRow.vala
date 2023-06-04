@@ -100,7 +100,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         state_stack.add_child (check);
 
         summary_entry = new Gtk.Entry ();
-
         summary_entry.add_css_class (Granite.STYLE_CLASS_FLAT);
         summary_entry.get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
@@ -242,8 +241,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             baseline_position = Gtk.BaselinePosition.CENTER,
-            margin_top = 12,
-            spacing = 6
+            margin_top = 12
         };
         //  button_box.set_layout (Gtk.ButtonBoxStyle.END);
         button_box.append (cancel_button);
@@ -304,7 +302,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             var delete_button = new Gtk.Button.with_label (_("Delete Task"));
             delete_button.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
-            button_box.append (delete_button);
             button_box.append (delete_button);
 
             delete_button.clicked.connect (() => {
