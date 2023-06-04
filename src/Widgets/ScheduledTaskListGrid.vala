@@ -159,11 +159,10 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
         var task_row = (Tasks.Widgets.TaskRow) row;
         task_row.reveal_child_request (true);
 
-        //  ((Gtk.Window) get_root ()).get_application ().lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST).set_enabled (false);
-        //  unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
-        //  if (win_action_map != null) {
-            //  ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
-        //  }
+        unowned var application = (Gtk.Application) GLib.Application.get_default ();
+        if (application != null) {
+            ((SimpleAction) application.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+        }
     }
 
     private void on_row_unselect (Gtk.ListBoxRow row) {
@@ -201,9 +200,10 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
         }
 
         var due_date_time = Tasks.Util.ical_to_date_time_local (comp.get_due ());
-        var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time));
-        //  header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
-        header_label.margin_start = 6;
+        var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time)) {
+            margin_start = 6
+            //  ellipsize = Pango.EllipsizeMode.MIDDLE
+        };
 
         row.set_header (header_label);
     }

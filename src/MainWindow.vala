@@ -203,16 +203,12 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                         add_source (source);
 
                         if (last_selected_list == "" && default_task_list == source) {
-                            warning ("Selecting source for %s".printf (source.display_name));
                             assert (source_rows[source] != null);
                             listbox.select_row (source_rows[source]);
-                            warning ("Done");
 
                         } else if (last_selected_list == source.uid) {
-                            warning ("Selecting source for %s".printf (source.display_name));
                             assert (source_rows[source] != null);
                             listbox.select_row (source_rows[source]);
-                            warning ("Done");
                         }
                     }
                 });
@@ -221,7 +217,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void on_listbox_row_selected (Gtk.ListBoxRow? row) {
-        warning ("Selecting row");
         if (row != null) {
             Tasks.Widgets.TaskListGrid? task_list_grid = null;
 
@@ -238,7 +233,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                     }
                 });
 
-                task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
+                task_list_grid = (Tasks.Widgets.TaskListGrid?) task_list_grid_stack.get_child_by_name (source_uid);
                 if (task_list_grid == null) {
                     task_list_grid = new Tasks.Widgets.TaskListGrid (source);
                     task_list_grid_stack.add_named (task_list_grid, source_uid);
@@ -246,9 +241,8 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
                 task_list_grid_stack.set_visible_child_name (source_uid);
                 Tasks.Application.settings.set_string ("selected-list", source_uid);
-                warning ("What the fuck");
                 ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
-                warning ("End it please");
+
             } else if (row is Tasks.Widgets.ScheduledRow) {
                 var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListGrid) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
                 if (scheduled_task_list_grid == null) {
@@ -431,7 +425,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         debug ("Adding row '%s'", source.dup_display_name ());
         if (!source_rows.has_key (source)) {
-            warning ("Set source_rows for %s".printf (source.display_name));
             source_rows[source] = new Tasks.Widgets.SourceRow (source);
 
             listbox.append (source_rows[source]);

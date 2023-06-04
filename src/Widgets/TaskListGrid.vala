@@ -32,8 +32,8 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     construct {
-        E.SourceRegistry? registry = null;
         try {
+            E.SourceRegistry registry;
             registry = Application.model.get_registry_sync ();
             is_gtasks = Application.model.get_collection_backend_name (source, registry) == "google";
         } catch (Error e) {
