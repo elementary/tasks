@@ -30,7 +30,7 @@ entry-popover button {
 }
 
 entry-popover.error grid {
-    background: alpha (@error_color, 0.2);
+    background: alpha(@error_color, 0.2);
 }
 
 entry-popover.error button {
