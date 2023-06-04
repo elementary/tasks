@@ -133,7 +133,8 @@ public class Tasks.TaskModel : Object {
     construct {
         task_list_client = new HashTable<string, ECal.Client> (str_hash, str_equal);
         task_list_client_views = new HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> (direct_hash, direct_equal);  // vala-lint=line-length
-        network_monitor = NetworkMonitor.get_default ();
+        // Failed to initialize portal (GNetworkMonitorPortal) for gio-network-monitor: Not using portals
+        //  network_monitor = NetworkMonitor.get_default ();
     }
 
     public async void start () {

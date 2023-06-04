@@ -65,7 +65,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         var sidebar_header = new Gtk.HeaderBar () {
             title_widget = new Gtk.Label (null),
             show_title_buttons = true
-            //  show_close_button = true
         };
 
         unowned Gtk.StyleContext sidebar_header_context = sidebar_header.get_style_context ();
@@ -75,14 +74,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         var main_header = new Gtk.HeaderBar () {
             title_widget = new Gtk.Label (null),
             show_title_buttons = true
-            //  show_close_button = true
         };
-
-        // Create a header group that automatically assigns the right decoration controls to the
-        // right headerbar automatically
-        var header_group = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
-        header_group.append (sidebar_header);
-        header_group.append (main_header);
 
         unowned Gtk.StyleContext main_header_context = main_header.get_style_context ();
         main_header_context.add_class ("default-decoration");
@@ -107,17 +99,16 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             label = _("Online Accounts Settings…")
         };
 
-        var add_tasklist_grid = new Gtk.Grid () {
+        var add_tasklist_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 3) {
             margin_top = 3,
-            margin_bottom = 3,
-            row_spacing = 3
+            margin_bottom = 3
         };
-        add_tasklist_grid.attach (add_tasklist_buttonbox, 0, 0);
-        add_tasklist_grid.attach (new Gtk.Separator (Gtk.Orientation.HORIZONTAL), 0, 1);
-        add_tasklist_grid.attach (online_accounts_button, 0, 2);
+        add_tasklist_box.append (add_tasklist_buttonbox);
+        add_tasklist_box.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        add_tasklist_box.append (online_accounts_button);
 
         var add_tasklist_popover = new Gtk.Popover () {
-            child = add_tasklist_grid
+            child = add_tasklist_box
         };
 
         var add_tasklist_button = new Gtk.MenuButton () {
@@ -133,28 +124,32 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         unowned Gtk.StyleContext actionbar_style_context = actionbar.get_style_context ();
         actionbar_style_context.add_class (Granite.STYLE_CLASS_FLAT);
 
-        var sidebar = new Gtk.Grid ();
-        sidebar.attach (sidebar_header, 0, 0);
-        sidebar.attach (scrolledwindow, 0, 1);
-        sidebar.attach (actionbar, 0, 2);
+        var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        sidebar.append (sidebar_header);
+        sidebar.append (scrolledwindow);
+        sidebar.append (actionbar);
 
         unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
         sidebar_style_context.add_class (Granite.STYLE_CLASS_SIDEBAR);
 
         task_list_grid_stack = new Gtk.Stack ();
 
-        var main_grid = new Gtk.Grid ();
-        main_grid.get_style_context ().add_class (Granite.STYLE_CLASS_BACKGROUND);
-        main_grid.attach (main_header, 0, 0);
-        main_grid.attach (task_list_grid_stack, 0, 1);
+        var main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        main_box.get_style_context ().add_class (Granite.STYLE_CLASS_BACKGROUND);
+        main_box.append (main_header);
+        main_box.append (task_list_grid_stack);
 
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
         paned.start_child = sidebar; // (sidebar, false, false);
-        paned.end_child = main_grid; // (main_grid, true, false);
+        paned.end_child = main_box; // (main_box, true, false);
         paned.resize_end_child = true; // ???
 
-
         child = paned;
+
+        var settings = new GLib.Settings ("io.elementary.tasks");
+        settings.bind ("window-width", this, "default-width", SettingsBindFlags.DEFAULT);
+        settings.bind ("window-height", this, "default-height", SettingsBindFlags.DEFAULT);
+        settings.bind ("window-maximized", this, "maximized", SettingsBindFlags.DEFAULT);
 
         online_accounts_button.clicked.connect (() => {
             try {

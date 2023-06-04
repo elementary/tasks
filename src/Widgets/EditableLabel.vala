@@ -60,9 +60,15 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
         style_context.add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         valign = Gtk.Align.CENTER;
-        //  events |= Gdk.EventMask.ENTER_NOTIFY_MASK;
-        //  events |= Gdk.EventMask.LEAVE_NOTIFY_MASK;
-        //  events |= Gdk.EventMask.BUTTON_PRESS_MASK;
+
+        var motion_controller = new Gtk.EventControllerMotion ();
+        add_controller (motion_controller);
+
+        var press_controller = new Gtk.GestureClick ();
+        add_controller (press_controller);
+
+        var focus_controller = new Gtk.EventControllerFocus ();
+        entry.add_controller (focus_controller);
 
         title = new Gtk.Label ("") {
             ellipsize = Pango.EllipsizeMode.END,
@@ -103,25 +109,16 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
 
         bind_property ("text", title, "label");
 
-        enter_notify_event.connect ((event) => {
-            if (event.detail != Gdk.NotifyType.INFERIOR) {
-                button_revealer.reveal_child = true;
-            }
-
-            return Gdk.EVENT_PROPAGATE;
+        motion_controller.enter.connect ((x, y) => {
+            button_revealer.reveal_child = true;
         });
 
-        leave_notify_event.connect ((event) => {
-            if (event.detail != Gdk.NotifyType.INFERIOR) {
-                button_revealer.reveal_child = false;
-            }
-
-            return Gdk.EVENT_PROPAGATE;
+        motion_controller.leave.connect (() => {
+            button_revealer.reveal_child = false;
         });
 
-        button_press_event.connect ((event) => {
+        press_controller.pressed.connect ((n_press, x, y) => {
             editing = true;
-            return Gdk.EVENT_PROPAGATE;
         });
 
         edit_button.clicked.connect (() => {
@@ -134,15 +131,16 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
             }
         });
 
-        grab_focus.connect (() => {
-            editing = true;
-        });
-
-        entry.focus_out_event.connect ((event) => {
+        focus_controller.leave.connect (() => {
             if (stack.visible_child == entry) {
                 editing = false;
             }
-            return Gdk.EVENT_PROPAGATE;
         });
+    }
+
+    public override bool grab_focus () {
+        editing = true;
+
+        return Gdk.EVENT_STOP;
     }
 }

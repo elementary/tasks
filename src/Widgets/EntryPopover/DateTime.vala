@@ -31,44 +31,47 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
 
     construct {
         calendar = new Gtk.Calendar () {
-            margin = 6
+            margin_top = 6,
+            margin_bottom = 6,
+            margin_start = 6,
+            margin_end = 6
         };
-        calendar.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
+        calendar.get_style_context ().add_class (Granite.STYLE_CLASS_BACKGROUND);
 
-        timepicker = new Granite.Widgets.TimePicker () {
-            margin = 12,
-            margin_top = 0
+        timepicker = new Granite.TimePicker () {
+            margin_top = 12,
+            margin_bottom = 12,
+            margin_start = 12,
+            margin_end = 12
         };
 
         timepicker_revealer = new Gtk.Revealer () {
             reveal_child = true,
-            margin = 0
+            child = timepicker
         };
-
-        timepicker_revealer.add (timepicker);
 
         var today_separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL) {
             margin_bottom = 3,
             margin_top = 3
         };
 
-        var today_button = new Gtk.ModelButton () {
-            text = _("Today")
+        var today_button = new Gtk.Button () {
+            label = _("Today")
         };
 
-        var grid = new Gtk.Grid () {
+        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_top= 3
         };
-        grid.attach (today_button, 0, 0);
-        grid.attach (today_separator, 0, 1);
-        grid.attach (calendar, 0, 2);
-        grid.attach (timepicker_revealer, 0, 3);
+        box.append (today_button);
+        box.append (today_separator);
+        box.append (calendar);
+        box.append (timepicker_revealer);
 
-        popover.add (grid);
+        popover.child = box;
 
         popover.show.connect (on_popover_show);
 
-        today_button.button_release_event.connect (on_today_button_release_event);
+        today_button.clicked.connect (on_today_button_clicked);
         calendar.day_selected.connect (on_calendar_day_selected);
         timepicker.time_changed.connect (on_timepicker_time_changed);
     }
@@ -86,18 +89,18 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             value = selected_datetime;
         }
 
-        calendar.select_month (selected_datetime.get_month () - 1, selected_datetime.get_year ());
-        calendar.select_day (selected_datetime.get_day_of_month ());
+        calendar.select_day (selected_datetime);
+        //  calendar.select_month (selected_datetime.get_month () - 1, selected_datetime.get_year ());
+        //  calendar.select_day (selected_datetime.get_day_of_month ());
         timepicker.time = selected_datetime;
     }
 
-    private bool on_today_button_release_event () {
+    private void on_today_button_clicked () {
         var now_local = new GLib.DateTime.now_local ();
 
-        calendar.select_month (now_local.get_month () - 1, now_local.get_year ());
-        calendar.select_day (now_local.get_day_of_month ());
-
-        return Gdk.EVENT_STOP;
+        calendar.select_day (now_local);
+        //  calendar.select_month (now_local.get_month () - 1, now_local.get_year ());
+        //  calendar.select_day (now_local.get_day_of_month ());
     }
 
     private void on_calendar_day_selected () {

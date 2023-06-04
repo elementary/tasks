@@ -35,10 +35,10 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Tasks.Widgets.EntryPopover.DateTime due_datetime_popover;
     private Gtk.Revealer due_datetime_popover_revealer;
 
-    private Tasks.Widgets.EntryPopover.Location location_popover;
-    private Gtk.Revealer location_popover_revealer;
+    //  private Tasks.Widgets.EntryPopover.Location location_popover;
+    //  private Gtk.Revealer location_popover_revealer;
 
-    private Gtk.EventBox event_box;
+    //  private Gtk.EventBox event_box;
     private Gtk.Stack state_stack;
     private Gtk.Image icon;
     private Gtk.CheckButton check;
@@ -87,8 +87,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             warning ("unable to get the registry, assuming task is not from gtask");
         }
 
-        icon = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.MENU);
-        icon.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        icon = new Gtk.Image.from_icon_name ("list-add-symbolic");
+        icon.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         check = new Gtk.CheckButton () {
             valign = Gtk.Align.CENTER
@@ -97,13 +97,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         state_stack = new Gtk.Stack () {
             transition_type = Gtk.StackTransitionType.CROSSFADE
         };
-        state_stack.add (icon);
-        state_stack.add (check);
+        state_stack.add_child (icon);
+        state_stack.add_child (check);
 
         summary_entry = new Gtk.Entry ();
 
         unowned Gtk.StyleContext summary_entry_context = summary_entry.get_style_context ();
-        summary_entry_context.add_class (Gtk.STYLE_CLASS_FLAT);
+        summary_entry_context.add_class (Granite.STYLE_CLASS_FLAT);
         summary_entry_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         due_datetime_popover = new Tasks.Widgets.EntryPopover.DateTime ();
@@ -115,9 +115,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         due_datetime_popover_revealer = new Gtk.Revealer () {
             margin_end = 6,
             reveal_child = false,
-            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT
+            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
+            child = due_datetime_popover
         };
-        due_datetime_popover_revealer.add (due_datetime_popover);
 
         due_datetime_popover.value_format.connect ((value) => {
             due_datetime_popover.get_style_context ().remove_class ("error");
@@ -162,68 +162,68 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             }
         });
 
-        location_popover = new Tasks.Widgets.EntryPopover.Location ();
+        //  location_popover = new Tasks.Widgets.EntryPopover.Location ();
 
-        location_popover_revealer = new Gtk.Revealer () {
-            margin_end = 6,
-            reveal_child = false,
-            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT
-        };
-        location_popover_revealer.add (location_popover);
+        //  location_popover_revealer = new Gtk.Revealer () {
+        //      margin_end = 6,
+        //      reveal_child = false,
+        //      transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT
+        //  };
+        //  location_popover_revealer.add (location_popover);
 
-        location_popover.value_format.connect ((value) => {
-            if (value == null) {
-                return null;
-            }
-            var location = (value.display_name == null ? value.postal_address : value.display_name);
+        //  location_popover.value_format.connect ((value) => {
+        //      if (value == null) {
+        //          return null;
+        //      }
+        //      var location = (value.display_name == null ? value.postal_address : value.display_name);
 
-            switch (value.proximity) {
-                case Tasks.LocationProximity.ARRIVE:
-                    return _("Arriving: %s").printf (location);
+        //      switch (value.proximity) {
+        //          case Tasks.LocationProximity.ARRIVE:
+        //              return _("Arriving: %s").printf (location);
 
-                case Tasks.LocationProximity.DEPART:
-                    return _("Leaving: %s").printf (location);
+        //          case Tasks.LocationProximity.DEPART:
+        //              return _("Leaving: %s").printf (location);
 
-                default:
-                    return location;
-            }
-        });
+        //          default:
+        //              return location;
+        //      }
+        //  });
 
-        location_popover.value_changed.connect ((value) => {
-            if (!task_form_revealer.reveal_child) {
-                if (value == null) {
-                    location_popover_revealer.reveal_child = false;
-                }
-                save_task (task);
-            }
-        });
+        //  location_popover.value_changed.connect ((value) => {
+        //      if (!task_form_revealer.reveal_child) {
+        //          if (value == null) {
+        //              location_popover_revealer.reveal_child = false;
+        //          }
+        //          save_task (task);
+        //      }
+        //  });
 
         description_label = new Gtk.Label (null) {
             xalign = 0,
             lines = 1,
             ellipsize = Pango.EllipsizeMode.END
         };
-        description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        description_label.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         // Should not use a transition that varies the width else label aligning and ellipsizing is incorrect.
         description_label_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.CROSSFADE,
-            reveal_child = false
+            reveal_child = false,
+            child = description_label
         };
-        description_label_revealer.add (description_label);
 
-        var task_grid = new Gtk.Grid ();
-        task_grid.add (due_datetime_popover_revealer);
-        task_grid.add (location_popover_revealer);
-        task_grid.add (description_label_revealer);
+        var task_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        task_box.append (due_datetime_popover_revealer);
+        //  task_box.append (location_popover_revealer);
+        task_box.append (description_label_revealer);
 
         task_detail_revealer = new Gtk.Revealer () {
-            transition_type = Gtk.RevealerTransitionType.SLIDE_UP
+            transition_type = Gtk.RevealerTransitionType.SLIDE_UP,
+            child = task_box
         };
-        task_detail_revealer.add (task_grid);
 
         var description_textview = new Granite.HyperTextView () {
-            border_width = 12,
+            //  border_width = 12,
             height_request = 140,
             accepts_tab = false
         };
@@ -233,40 +233,41 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         description_textview.set_buffer (description_textbuffer);
 
         var description_frame = new Gtk.Frame (null) {
-            hexpand = true
+            hexpand = true,
+            child = description_textview
         };
-        description_frame.add (description_textview);
 
         var cancel_button = new Gtk.Button.with_label (_("Cancel"));
 
         var save_button = new Gtk.Button.with_label (created ? _("Save Changes") : _("Add Task"));
-        save_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+        save_button.get_style_context ().add_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);
 
-        var button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL) {
+        var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             baseline_position = Gtk.BaselinePosition.CENTER,
             margin_top = 12,
             spacing = 6
         };
-        button_box.set_layout (Gtk.ButtonBoxStyle.END);
-        button_box.add (cancel_button);
-        button_box.add (save_button);
+        //  button_box.set_layout (Gtk.ButtonBoxStyle.END);
+        button_box.append (cancel_button);
+        button_box.append (save_button);
 
-        var form_grid = new Gtk.Grid () {
-            column_spacing = 12,
-            row_spacing = 12,
-            margin_top = margin_bottom = 6
+        var form_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 12) {
+            margin_top = 6,
+            margin_bottom = 6
         };
-        form_grid.attach (description_frame, 0, 0);
-        form_grid.attach (button_box, 0, 1);
+        form_box.append (description_frame);
+        form_box.append (button_box);
 
         task_form_revealer = new Gtk.Revealer () {
-            transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN
+            transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN,
+            child = form_box
         };
-        task_form_revealer.add (form_grid);
 
         var grid = new Gtk.Grid () {
-            margin = 6,
-            margin_start = margin_end = 12,
+            margin_top = 6,
+            margin_bottom = 6,
+            margin_start = 12,
+            margin_end = 12,
             column_spacing = 6,
             row_spacing = 3
         };
@@ -276,23 +277,24 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         grid.attach (task_form_revealer, 1, 2);
 
         revealer = new Gtk.Revealer () {
-            reveal_child = true
+            reveal_child = true,
+            transition_type = Gtk.RevealerTransitionType.SLIDE_UP,
+            child = grid
         };
-        revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
-        revealer.add (grid);
 
-        event_box = new Gtk.EventBox () {
-            expand = true,
-            above_child = false
-        };
-        event_box.add_events (
-            Gdk.EventMask.BUTTON_PRESS_MASK |
-            Gdk.EventMask.BUTTON_RELEASE_MASK
-        );
-        event_box.add (revealer);
+        //  event_box = new Gtk.EventBox () {
+        //      expand = true,
+        //      above_child = false
+        //  };
+        //  event_box.add_events (
+        //      Gdk.EventMask.BUTTON_PRESS_MASK |
+        //      Gdk.EventMask.BUTTON_RELEASE_MASK
+        //  );
+        //  event_box.add (revealer);
 
-        add (event_box);
-        margin_start = margin_end = 12;
+        child = revealer;
+        margin_start = 12;
+        margin_end = 12;
 
         style_context = get_style_context ();
         style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
@@ -303,10 +305,10 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             state_stack.visible_child = check;
 
             var delete_button = new Gtk.Button.with_label (_("Delete Task"));
-            delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+            delete_button.get_style_context ().add_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
-            button_box.add (delete_button);
-            button_box.set_child_secondary (delete_button, true);
+            button_box.append (delete_button);
+            button_box.append (delete_button);
 
             delete_button.clicked.connect (() => {
                 end_editing ();
@@ -315,7 +317,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             });
         }
 
-        build_drag_and_drop ();
+        //  build_drag_and_drop ();
+
+        var key_controller = new Gtk.EventControllerKey ();
 
         check.toggled.connect (() => {
             if (task == null) {
@@ -331,17 +335,17 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             end_editing ();
         });
 
-        summary_entry.grab_focus.connect (() => {
-            activate ();
-        });
+        //  summary_entry.grab_focus.connect (() => {
+        //      activate ();
+        //  });
 
         cancel_button.clicked.connect (() => {
             reset_form ();
             end_editing ();
         });
 
-        key_release_event.connect ((event) => {
-            if (event.keyval == Gdk.Key.Escape) {
+        key_controller.key_released.connect ((keyval, keycode, state) => {
+            if (keyval == Gdk.Key.Escape) {
                 reset_form ();
                 end_editing ();
             }
@@ -378,7 +382,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
         description_textbuffer.text = icalcomponent.get_description () == null ? "" : icalcomponent.get_description ();  // vala-lint=line-length
         due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time_local (icalcomponent.get_due ());  // vala-lint=line-length
-        location_popover.value = Util.get_ecalcomponent_location (task);
+        //  location_popover.value = Util.get_ecalcomponent_location (task);
     }
 
     private void save_task (ECal.Component task) {
@@ -402,7 +406,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         ical_task.set_due (new_icaltime);
         ical_task.set_dtstart (new_icaltime);
 
-        Util.set_ecalcomponent_location (task, location_popover.value);
+        //  Util.set_ecalcomponent_location (task, location_popover.value);
 
         ical_task.set_summary (summary_entry.text);
         ical_task.set_description (description_textbuffer.text);
@@ -439,13 +443,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             completed = false;
             check.active = completed;
             summary_entry.text = "";
-            summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            summary_entry.get_style_context ().remove_class (Granite.STYLE_CLASS_DIM_LABEL);
             summary_entry.get_style_context ().add_class ("add-task");
             task_detail_revealer.reveal_child = false;
-            task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            task_detail_revealer.get_style_context ().remove_class (Granite.STYLE_CLASS_DIM_LABEL);
 
             due_datetime_popover_revealer.reveal_child = false;
-            location_popover_revealer.reveal_child = false;
+            //  location_popover_revealer.reveal_child = false;
 
             description_label_revealer.reveal_child = false;
             description_textbuffer.text = "";
@@ -467,11 +471,11 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             summary_entry.get_style_context ().remove_class ("add-task");
 
             if (completed) {
-                summary_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-                task_detail_revealer.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+                summary_entry.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
+                task_detail_revealer.get_style_context ().add_class (Granite.STYLE_CLASS_DIM_LABEL);
             } else {
-                summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
-                task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+                summary_entry.get_style_context ().remove_class (Granite.STYLE_CLASS_DIM_LABEL);
+                task_detail_revealer.get_style_context ().remove_class (Granite.STYLE_CLASS_DIM_LABEL);
             }
 
             if (ical_task.get_due ().is_null_time ()) {
@@ -482,13 +486,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
                 due_datetime_popover_revealer.reveal_child = true;
             }
 
-            var location = Util.get_ecalcomponent_location (task);
-            if (location == null) {
-                location_popover_revealer.reveal_child = false;
-            } else {
-                location_popover.value = location;
-                location_popover_revealer.reveal_child = true;
-            }
+            //  var location = Util.get_ecalcomponent_location (task);
+            //  if (location == null) {
+            //      location_popover_revealer.reveal_child = false;
+            //  } else {
+            //      location_popover.value = location;
+            //      location_popover_revealer.reveal_child = true;
+            //  }
 
             if (ical_task.get_description () == null) {
                 description_label.label = "";
@@ -513,11 +517,11 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private void task_details_reveal_request (bool value) {
         description_label_revealer.reveal_child = value && description_label.label != null && description_label.label.strip ().length > 0;
         due_datetime_popover_revealer.reveal_child = !value || due_datetime_popover.value != null;
-        location_popover_revealer.reveal_child = !value || location_popover.value != null;
+        //  location_popover_revealer.reveal_child = !value || location_popover.value != null;
 
         task_detail_revealer.reveal_child = description_label_revealer.reveal_child ||
-            due_datetime_popover_revealer.reveal_child ||
-            location_popover_revealer.reveal_child;
+            due_datetime_popover_revealer.reveal_child;
+            //  location_popover_revealer.reveal_child;
     }
 
     private void remove_request () {
@@ -544,50 +548,50 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         return created.is_valid_time ();
     }
 
-    private void build_drag_and_drop () {
-        if (!created || is_scheduled_view) {
-            return;
-        }
-        Gtk.drag_source_set (event_box, Gdk.ModifierType.BUTTON1_MASK, Application.DRAG_AND_DROP_TASK_DATA, Gdk.DragAction.MOVE);
+    //  private void build_drag_and_drop () {
+    //      if (!created || is_scheduled_view) {
+    //          return;
+    //      }
+    //      Gtk.drag_source_set (event_box, Gdk.ModifierType.BUTTON1_MASK, Application.DRAG_AND_DROP_TASK_DATA, Gdk.DragAction.MOVE);
 
-        event_box.drag_begin.connect (on_drag_begin);
-        event_box.drag_data_get.connect (on_drag_data_get);
-        event_box.drag_data_delete.connect (on_drag_data_delete);
-    }
+    //      event_box.drag_begin.connect (on_drag_begin);
+    //      event_box.drag_data_get.connect (on_drag_data_get);
+    //      event_box.drag_data_delete.connect (on_drag_data_delete);
+    //  }
 
-    private void on_drag_begin (Gdk.DragContext context) {
-        Gtk.Allocation alloc;
-        get_allocation (out alloc);
+    //  private void on_drag_begin (Gdk.DragContext context) {
+    //      Gtk.Allocation alloc;
+    //      get_allocation (out alloc);
 
-        var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, alloc.width, alloc.height);
-        var cairo_context = new Cairo.Context (surface);
+    //      var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, alloc.width, alloc.height);
+    //      var cairo_context = new Cairo.Context (surface);
 
-        var style_context = get_style_context ();
-        var had_cards_class = style_context.has_class (Granite.STYLE_CLASS_CARD);
+    //      var style_context = get_style_context ();
+    //      var had_cards_class = style_context.has_class (Granite.STYLE_CLASS_CARD);
 
-        style_context.add_class ("drag-active");
-        if (had_cards_class) {
-            style_context.remove_class (Granite.STYLE_CLASS_CARD);
-        }
-        draw_to_cairo_context (cairo_context);
-        if (had_cards_class) {
-            style_context.add_class (Granite.STYLE_CLASS_CARD);
-        }
-        style_context.remove_class ("drag-active");
+    //      style_context.add_class ("drag-active");
+    //      if (had_cards_class) {
+    //          style_context.remove_class (Granite.STYLE_CLASS_CARD);
+    //      }
+    //      draw_to_cairo_context (cairo_context);
+    //      if (had_cards_class) {
+    //          style_context.add_class (Granite.STYLE_CLASS_CARD);
+    //      }
+    //      style_context.remove_class ("drag-active");
 
-        int drag_icon_x, drag_icon_y;
-        translate_coordinates (this, 0, 0, out drag_icon_x, out drag_icon_y);
-        surface.set_device_offset (-drag_icon_x, -drag_icon_y);
+    //      int drag_icon_x, drag_icon_y;
+    //      translate_coordinates (this, 0, 0, out drag_icon_x, out drag_icon_y);
+    //      surface.set_device_offset (-drag_icon_x, -drag_icon_y);
 
-        Gtk.drag_set_icon_surface (context, surface);
-    }
+    //      Gtk.drag_set_icon_surface (context, surface);
+    //  }
 
-    private void on_drag_data_get (Gtk.Widget widget, Gdk.DragContext context, Gtk.SelectionData selection_data, uint target_type, uint time) {
-        var task_uri = "task://%s/%s".printf (source.uid, task.get_uid ());
-        selection_data.set_uris ({ task_uri });
-    }
+    //  private void on_drag_data_get (Gtk.Widget widget, Gdk.DragContext context, Gtk.SelectionData selection_data, uint target_type, uint time) {
+    //      var task_uri = "task://%s/%s".printf (source.uid, task.get_uid ());
+    //      selection_data.set_uris ({ task_uri });
+    //  }
 
-    private void on_drag_data_delete (Gdk.DragContext context) {
-        destroy ();
-    }
+    //  private void on_drag_data_delete (Gdk.DragContext context) {
+    //      destroy ();
+    //  }
 }

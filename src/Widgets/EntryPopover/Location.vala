@@ -61,16 +61,18 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
             hexpand = true
         };
 
-        var grid = new Gtk.Grid () {
-            margin = 12,
-            row_spacing = 12
+        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 12) {
+            margin_top = 12,
+            margin_bottom = 12,
+            margin_start = 12,
+            margin_end = 12            
         };
 
-        grid.attach (search_entry, 0, 0);
-        grid.attach (location_mode, 0, 1);
-        grid.attach (map_frame, 0, 2);
+        box.append (search_entry);
+        box.append (location_mode);
+        box.append (map_frame);
 
-        popover.add (grid);
+        popover.add (box);
         popover.show.connect (on_popover_show);
 
         notify["value"].connect (on_value_changed);

@@ -47,10 +47,12 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
     }
 
     construct {
-        events |= Gdk.EventMask.ENTER_NOTIFY_MASK
-            | Gdk.EventMask.LEAVE_NOTIFY_MASK;
+        var motion_controller = new Gtk.EventControllerMotion ();
+        add_controller (motion_controller);
 
-        popover = new Gtk.Popover (popover_button);
+        popover = new Gtk.Popover () {
+            child = popover_button
+        };
 
         popover_button = new Gtk.MenuButton () {
             label = placeholder,
@@ -92,7 +94,7 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
             }
         });
 
-        popover_button.clicked.connect (() => {
+        popover_button.activate.connect (() => {
             if (delete_button_revealer.reveal_child) {
                 delete_button_revealer.reveal_child = false;
             }
@@ -112,13 +114,13 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
             }
         });
 
-        enter_notify_event.connect (() => {
+        motion_controller.enter.connect ((x, y) => {
             if (value_format (value) != null) {
                 delete_button_revealer.reveal_child = true;
             }
         });
 
-        leave_notify_event.connect (() => {
+        motion_controller.leave.connect (() => {
             if (delete_button_revealer.reveal_child) {
                 delete_button_revealer.reveal_child = false;
             }

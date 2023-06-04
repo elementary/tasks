@@ -65,7 +65,7 @@ executable(
     'src/Widgets/EditableLabel.vala',
     'src/Widgets/EntryPopover/DateTime.vala',
     'src/Widgets/EntryPopover/Generic.vala',
-    'src/Widgets/EntryPopover/Location.vala',
+    # 'src/Widgets/EntryPopover/Location.vala',
     'src/Widgets/ScheduledRow.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/ScheduledTaskListGrid.vala',

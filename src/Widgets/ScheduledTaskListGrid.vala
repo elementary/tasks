@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
+public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
     private Gee.Map<E.Source, ECal.ClientView> views;
     private const string QUERY = "AND (NOT is-completed?) (has-start?)";
 
@@ -48,10 +48,13 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
     }
 
     private void remove_view (E.Source source) {
-        foreach (unowned Gtk.Widget child in get_children ()) {
+        unowned var child = get_first_child ();
+        while (child != null) {
             if (child is Tasks.Widgets.TaskRow && ((Tasks.Widgets.TaskRow) child).source == source) {
                 child.destroy ();
             }
+
+            child = child.get_next_sibling ();
         }
 
         lock (views) {
@@ -88,7 +91,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
         placeholder.show ();
 
         unowned Gtk.StyleContext placeholder_context = placeholder.get_style_context ();
-        placeholder_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        placeholder_context.add_class (Granite.STYLE_CLASS_DIM_LABEL);
         placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
 
         task_list = new Gtk.ListBox () {
@@ -98,17 +101,19 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
         task_list.set_header_func (header_function);
-        task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
+        task_list.get_style_context ().add_class (Granite.STYLE_CLASS_BACKGROUND);
 
-        var scrolled_window = new Gtk.ScrolledWindow (null, null) {
-            expand = true,
-            hscrollbar_policy = Gtk.PolicyType.NEVER
+        var scrolled_window = new Gtk.ScrolledWindow () {
+            hexpand = true,
+            vexpand = true,
+            hscrollbar_policy = Gtk.PolicyType.NEVER,
+            child = task_list
         };
-        scrolled_window.add (task_list);
 
-        column_spacing = 12;
-        attach (scheduled_title, 0, 0);
-        attach (scrolled_window, 0, 1);
+        orientation = Gtk.Orientation.VERTICAL;
+        spacing = 12;
+        append (scheduled_title);
+        append (scrolled_window);
 
         task_list.row_activated.connect (on_row_activated);
 
@@ -156,10 +161,11 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
         var task_row = (Tasks.Widgets.TaskRow) row;
         task_row.reveal_child_request (true);
 
-        unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
-        if (win_action_map != null) {
-            ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
-        }
+        //  ((Gtk.Window) get_root ()).get_application ().lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST).set_enabled (false);
+        //  unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
+        //  if (win_action_map != null) {
+            //  ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+        //  }
     }
 
     private void on_row_unselect (Gtk.ListBoxRow row) {
@@ -196,9 +202,9 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
             }
         }
 
-        var due_date_time = Util.ical_to_date_time_local (comp.get_due ());
+        var due_date_time = Tasks.Util.ical_to_date_time_local (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time));
-        header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
+        //  header_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
         header_label.margin_start = 6;
 
         row.set_header (header_label);
@@ -211,70 +217,64 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
 
             task_row.task_completed.connect ((task) => {
                 Tasks.Application.model.complete_task.begin (source, task, (obj, res) => {
-                    GLib.Idle.add (() => {
-                        try {
-                            Tasks.Application.model.complete_task.end (res);
-                        } catch (Error e) {
-                            var error_dialog = new Granite.MessageDialog (
-                                _("Completing task failed"),
-                                _("The task registry may be unavailable or unable to be written to."),
-                                new ThemedIcon ("dialog-error"),
-                                Gtk.ButtonsType.CLOSE
-                            );
-                            error_dialog.show_error_details (e.message);
-                            error_dialog.run ();
+                    try {
+                        Tasks.Application.model.complete_task.end (res);
+                    } catch (Error e) {
+                        var error_dialog = new Granite.MessageDialog (
+                            _("Completing task failed"),
+                            _("The task registry may be unavailable or unable to be written to."),
+                            new ThemedIcon ("dialog-error"),
+                            Gtk.ButtonsType.CLOSE
+                        );
+                        error_dialog.show_error_details (e.message);
+                        error_dialog.present ();
+                        error_dialog.response.connect (() => {
                             error_dialog.destroy ();
-                        }
-
-                        return GLib.Source.REMOVE;
-                    });
+                        });
+                    }
                 });
             });
 
             task_row.task_changed.connect ((task) => {
                 Tasks.Application.model.update_task.begin (source, task, ECal.ObjModType.THIS_AND_FUTURE, (obj, res) => {
-                    GLib.Idle.add (() => {
-                        try {
-                            Tasks.Application.model.update_task.end (res);
-                        } catch (Error e) {
-                            var error_dialog = new Granite.MessageDialog (
-                                _("Updating task failed"),
-                                _("The task registry may be unavailable or unable to be written to."),
-                                new ThemedIcon ("dialog-error"),
-                                Gtk.ButtonsType.CLOSE
-                            );
-                            error_dialog.show_error_details (e.message);
-                            error_dialog.run ();
+                    try {
+                        Tasks.Application.model.update_task.end (res);
+                    } catch (Error e) {
+                        var error_dialog = new Granite.MessageDialog (
+                            _("Updating task failed"),
+                            _("The task registry may be unavailable or unable to be written to."),
+                            new ThemedIcon ("dialog-error"),
+                            Gtk.ButtonsType.CLOSE
+                        );
+                        error_dialog.show_error_details (e.message);
+                        error_dialog.present ();
+                        error_dialog.response.connect (() => {
                             error_dialog.destroy ();
-                        }
-
-                        return GLib.Source.REMOVE;
-                    });
+                        });
+                    }
                 });
             });
 
             task_row.task_removed.connect ((task) => {
                 Tasks.Application.model.remove_task.begin (source, task, ECal.ObjModType.ALL, (obj, res) => {
-                    GLib.Idle.add (() => {
-                        try {
-                            Tasks.Application.model.remove_task.end (res);
-                        } catch (Error e) {
-                            var error_dialog = new Granite.MessageDialog (
-                                _("Removing task failed"),
-                                _("The task registry may be unavailable or unable to be written to."),
-                                new ThemedIcon ("dialog-error"),
-                                Gtk.ButtonsType.CLOSE
-                            );
-                            error_dialog.show_error_details (e.message);
-                            error_dialog.run ();
+                    try {
+                        Tasks.Application.model.remove_task.end (res);
+                    } catch (Error e) {
+                        var error_dialog = new Granite.MessageDialog (
+                            _("Removing task failed"),
+                            _("The task registry may be unavailable or unable to be written to."),
+                            new ThemedIcon ("dialog-error"),
+                            Gtk.ButtonsType.CLOSE
+                        );
+                        error_dialog.show_error_details (e.message);
+                        error_dialog.present ();
+                        error_dialog.response.connect (() => {
                             error_dialog.destroy ();
-                        }
-
-                        return GLib.Source.REMOVE;
-                    });
+                        });
+                    }
                 });
             });
-            task_list.add (task_row);
+            task_list.append (task_row);
 
             return true;
         });

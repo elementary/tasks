@@ -75,23 +75,7 @@ public class Tasks.Application : Gtk.Application {
             model.start.begin ();
 
             var main_window = new MainWindow (this);
-            //  add_window (main_window);
-
-            int window_x, window_y;
-            var rect = Gtk.Allocation ();
-
-            settings.get ("window-position", "(ii)", out window_x, out window_y);
-            settings.get ("window-size", "(ii)", out rect.width, out rect.height);
-
-            //  if (window_x != -1 || window_y != -1) {
-            //      main_window.move (window_x, window_y);
-            //  }
-
-            //  main_window.set_allocation (rect);
-
-            if (settings.get_boolean ("window-maximized")) {
-                main_window.maximize ();
-            }
+            add_window (main_window);
 
             var granite_settings = Granite.Settings.get_default ();
             var gtk_settings = Gtk.Settings.get_default ();
@@ -104,6 +88,7 @@ public class Tasks.Application : Gtk.Application {
         }
 
         active_window.present ();
+        warning ("Presented");
     }
 
     private static Gee.HashMap<string, Gtk.CssProvider>? providers;
@@ -120,14 +105,10 @@ public class Tasks.Application : Gtk.Application {
                 @define-color accent_color %s;
             """.printf (color, color);
 
-            //  try {
-            //      var style_provider = new Gtk.CssProvider ();
-            //      style_provider.load_from_data (style, style.length);
+            var style_provider = new Gtk.CssProvider ();
+            style_provider.load_from_data ((uint8[])style);
 
-            //      providers[color] = style_provider;
-            //  } catch (Error e) {
-            //      critical ("Unable to set color: %s", e.message);
-            //  }
+            providers[color] = style_provider;
         }
 
         unowned Gtk.StyleContext style_context = widget.get_style_context ();
