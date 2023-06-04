@@ -233,7 +233,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                     }
                 });
 
-                task_list_grid = (Tasks.Widgets.TaskListGrid?) task_list_grid_stack.get_child_by_name (source_uid);
+                task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
                 if (task_list_grid == null) {
                     task_list_grid = new Tasks.Widgets.TaskListGrid (source);
                     task_list_grid_stack.add_named (task_list_grid, source_uid);

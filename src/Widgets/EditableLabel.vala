@@ -29,7 +29,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
     private Gtk.Stack stack;
     private Gtk.Box box;
 
-    public string text { get; set; }
+    public string text { get; set; default = ""; }
 
     public bool editing {
         get { return stack.visible_child == entry; }
