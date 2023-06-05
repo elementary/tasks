@@ -22,8 +22,6 @@
 public class Tasks.Widgets.EditableLabel : Gtk.Widget {
     public signal void changed ();
 
-    private static Gtk.CssProvider label_provider;
-
     private Gtk.Label title;
     private Gtk.Entry entry;
     private Gtk.Stack stack;
@@ -49,18 +47,18 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
         }
     }
 
-    static construct {
+    class construct {
         set_layout_manager_type (typeof (Gtk.BinLayout));
-
-        label_provider = new Gtk.CssProvider ();
-        label_provider.load_from_resource ("io/elementary/tasks/EditableLabel.css");
-
         set_css_name ("editable-label");
     }
 
-    construct {
-        get_style_context ().add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    static construct {
+        var style_provider = new Gtk.CssProvider ();
+        style_provider.load_from_resource ("io/elementary/tasks/EditableLabel.css");
+        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
 
+    construct {
         valign = Gtk.Align.CENTER;
 
         title = new Gtk.Label ("") {
@@ -89,8 +87,6 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
         entry = new Gtk.Entry () {
             hexpand = true,
         };
-        entry.add_css_class ("editable-entry");
-        entry.get_style_context ().add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         stack = new Gtk.Stack () {
             hhomogeneous = false,

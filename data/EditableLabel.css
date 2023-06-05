@@ -25,3 +25,7 @@ editable-label entry {
     color: inherit;
     padding: 0;
 }
+
+editable-label entry text {
+    padding: 0;
+}
