@@ -28,6 +28,7 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
 
     private Gtk.MenuButton popover_button;
     private static Gtk.CssProvider style_provider;
+    private Gtk.Label label;
     private T value_on_popover_show;
 
     protected Generic (string placeholder, string? icon_name = null) {
@@ -53,11 +54,13 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
             child = popover_button
         };
 
+        label = new Gtk.Label (placeholder);
+
         var popover_button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
         if (icon_name != null) {
             popover_button_box.append (new Gtk.Image.from_icon_name (icon_name));
         }
-        popover_button_box.append (new Gtk.Label (placeholder));
+        popover_button_box.append (label);
         
         popover_button = new Gtk.MenuButton () {
             popover = popover,
@@ -117,14 +120,14 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
         notify["value"].connect (() => {
             var value_formatted = value_format (value);
             if (value_formatted == null) {
-                popover_button.label = placeholder;
+                label.label = placeholder;
 
                 if (delete_button_revealer.reveal_child) {
                     delete_button_revealer.reveal_child = false;
                 }
 
             } else {
-                popover_button.label = value_formatted;
+                label.label = value_formatted;
             }
         });
 
