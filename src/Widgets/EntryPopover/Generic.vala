@@ -40,16 +40,17 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
 
     class construct {
         set_css_name ("entry-popover");
+        set_layout_manager_type (typeof (Gtk.BinLayout));
     }
 
     static construct {
-        set_layout_manager_type (typeof (Gtk.BinLayout));
-
         style_provider = new Gtk.CssProvider ();
         style_provider.load_from_resource ("io/elementary/tasks/EntryPopover.css");
     }
 
     construct { 
+        get_style_context ().add_provider_for_display (Gdk.Display.get_default (), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    
         popover = new Gtk.Popover () {
             child = popover_button,
             autohide = true
@@ -68,13 +69,11 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
             child = popover_button_box,
             css_classes = { Granite.STYLE_CLASS_FLAT }
         };
-        popover_button.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic") {
             tooltip_text = _("Remove"),
-            css_classes = { Granite.STYLE_CLASS_FLAT }
+            css_classes = { Granite.STYLE_CLASS_FLAT, "delete-button" }
         };
-        delete_button.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var delete_button_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
@@ -82,8 +81,9 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
             child = delete_button
         };
 
-        var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
-        button_box.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0) {
+            css_classes = { "container" }
+        };
         button_box.append (popover_button);
         button_box.append (delete_button_revealer);
         button_box.set_parent (this);

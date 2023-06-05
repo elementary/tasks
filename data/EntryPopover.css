@@ -18,21 +18,28 @@
 *
 */
 
-entry-popover grid {
+entry-popover .container {
     border-radius: 3px;
     background: @SILVER_300;
 }
 
-entry-popover button {
+entry-popover menubutton {
+    background: transparent;
     color: @SILVER_900;
     font-size: 0.9em;
     font-weight: 600;
 }
 
-entry-popover.error grid {
+entry-popover menubutton * {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+entry-popover.error .container {
     background: alpha(@error_color, 0.2);
 }
 
-entry-popover.error button {
+entry-popover.error .delete-button {
     color: @error_color;
 }
