@@ -27,7 +27,6 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
     public T value { get; set; }
 
     private Gtk.MenuButton popover_button;
-    private static Gtk.CssProvider style_provider;
     private Gtk.Label label;
     private T value_on_popover_show;
 
@@ -44,13 +43,12 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
     }
 
     static construct {
-        style_provider = new Gtk.CssProvider ();
+        var style_provider = new Gtk.CssProvider ();
         style_provider.load_from_resource ("io/elementary/tasks/EntryPopover.css");
+        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
-    construct { 
-        get_style_context ().add_provider_for_display (Gdk.Display.get_default (), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-    
+    construct {
         popover = new Gtk.Popover () {
             child = popover_button,
             autohide = true
@@ -63,7 +61,7 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
             popover_button_box.append (new Gtk.Image.from_icon_name (icon_name));
         }
         popover_button_box.append (label);
-        
+
         popover_button = new Gtk.MenuButton () {
             popover = popover,
             child = popover_button_box,

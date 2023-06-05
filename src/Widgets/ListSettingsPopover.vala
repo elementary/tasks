@@ -138,7 +138,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             css_classes = { Granite.STYLE_CLASS_MENUITEM, Granite.STYLE_CLASS_DESTRUCTIVE_ACTION }
         };
         delete_list_menuitem.append (delete_list_accel_label);
-        
+
         var gesture_click = new Gtk.GestureClick ();
         delete_list_menuitem.add_controller (gesture_click);
         gesture_click.released.connect (() => {

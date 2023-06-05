@@ -182,14 +182,13 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
             listbox.row_selected.connect (on_listbox_row_selected);
 
-            
             add_collection_source (registry.ref_builtin_task_list ());
-            
+
             var task_list_collections = registry.list_sources (E.SOURCE_EXTENSION_COLLECTION);
             task_list_collections.foreach ((collection_source) => {
                 add_collection_source (collection_source);
             });
-            
+
             var last_selected_list = Application.settings.get_string ("selected-list");
 
             if (last_selected_list == SCHEDULED_LIST_UID) {

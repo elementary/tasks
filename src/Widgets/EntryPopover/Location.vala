@@ -65,7 +65,7 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
             margin_top = 12,
             margin_bottom = 12,
             margin_start = 12,
-            margin_end = 12            
+            margin_end = 12
         };
 
         box.append (search_entry);
