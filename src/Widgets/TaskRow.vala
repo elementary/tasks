@@ -73,7 +73,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
-        can_focus = false;
         created = calcomponent_created (task);
 
         // GTasks tasks only have date on due time, so only show the date
@@ -314,6 +313,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         //  build_drag_and_drop ();
 
         var key_controller = new Gtk.EventControllerKey ();
+        add_controller (key_controller);
 
         check.toggled.connect (() => {
             if (task == null) {
@@ -329,9 +329,11 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             end_editing ();
         });
 
-        //  summary_entry.grab_focus.connect (() => {
-        //      activate ();
-        //  });
+        var summary_entry_focus_controller = new Gtk.EventControllerFocus ();
+        summary_entry.add_controller (summary_entry_focus_controller);
+        summary_entry_focus_controller.enter.connect (() => {
+            activate ();
+        });
 
         cancel_button.clicked.connect (() => {
             reset_form ();
