@@ -241,22 +241,24 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             css_classes = { Granite.STYLE_CLASS_SUGGESTED_ACTION }
         };
 
-        var right_buttons_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6);
+        var right_buttons_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
+            halign = Gtk.Align.END
+        };
         right_buttons_box.append (cancel_button);
         right_buttons_box.append (save_button);
 
-        var button_box = new Gtk.ActionBar () {
+        var button_grid = new Gtk.Grid () {
             margin_top = 12,
-            css_classes = { Granite.STYLE_CLASS_BACKGROUND }
+            column_homogeneous = true
         };
-        button_box.pack_end (right_buttons_box);
+        button_grid.attach (right_buttons_box, 1, 0);
 
         var form_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 12) {
             margin_top = 6,
             margin_bottom = 6
         };
         form_box.append (description_frame);
-        form_box.append (button_box);
+        form_box.append (button_grid);
 
         task_form_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN,
@@ -307,7 +309,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
                 css_classes = { Granite.STYLE_CLASS_DESTRUCTIVE_ACTION }
             };
 
-            button_box.pack_start (delete_button);
+            button_grid.attach (delete_button, 0, 0);
 
             delete_button.clicked.connect (() => {
                 end_editing ();
