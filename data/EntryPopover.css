@@ -25,12 +25,12 @@ entry-popover .container {
 
 entry-popover menubutton {
     background: transparent;
-    color: @SILVER_900;
     font-size: 0.9em;
     font-weight: 600;
 }
 
 entry-popover menubutton button.toggle {
+    color: @SILVER_900;
     background: transparent;
     border: none;
     box-shadow: none;
@@ -38,11 +38,17 @@ entry-popover menubutton button.toggle {
 
 entry-popover .delete-button {
     padding: 0.4rem;
+    color: inherit;
 }
 
 entry-popover.error .container {
     background: alpha(@error_color, 0.2);
 }
+
+entry-popover.error menubutton button {
+    color: @error_color;
+}
+
 
 entry-popover.error .delete-button {
     color: @error_color;
