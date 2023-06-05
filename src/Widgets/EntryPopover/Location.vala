@@ -1,5 +1,5 @@
 /*
-* Copyright 2021 elementary, Inc. (https://elementary.io)
+* Copyright 2021-2023 elementary, Inc. (https://elementary.io)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -20,7 +20,7 @@
 public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
     //  private GtkChamplain.Embed map_embed;
     private Gtk.SearchEntry search_entry;
-    private GLib.Cancellable search_cancellable;
+    //  private GLib.Cancellable search_cancellable;
     //  private Granite.Widgets.ModeButton location_mode;
     //  private Marker point;
 

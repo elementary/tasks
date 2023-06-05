@@ -235,16 +235,19 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         var cancel_button = new Gtk.Button.with_label (_("Cancel"));
 
-        var save_button = new Gtk.Button.with_label (created ? _("Save Changes") : _("Add Task"));
-        save_button.add_css_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);
-
-        var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
-            baseline_position = Gtk.BaselinePosition.CENTER,
-            margin_top = 12
+        var save_button = new Gtk.Button.with_label (created ? _("Save Changes") : _("Add Task")) {
+            css_classes = { Granite.STYLE_CLASS_SUGGESTED_ACTION }
         };
-        //  button_box.set_layout (Gtk.ButtonBoxStyle.END);
-        button_box.append (cancel_button);
-        button_box.append (save_button);
+
+        var right_buttons_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6);
+        right_buttons_box.append (cancel_button);
+        right_buttons_box.append (save_button);
+
+        var button_box = new Gtk.ActionBar () {
+            margin_top = 12,
+            css_classes = { Granite.STYLE_CLASS_BACKGROUND }
+        };
+        button_box.pack_end (right_buttons_box);
 
         var form_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 12) {
             margin_top = 6,
@@ -298,10 +301,12 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             check.show ();
             state_stack.visible_child = check;
 
-            var delete_button = new Gtk.Button.with_label (_("Delete Task"));
-            delete_button.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
+            var delete_button = new Gtk.Button.with_label (_("Delete Task")) {
+                halign = Gtk.Align.START,
+                css_classes = { Granite.STYLE_CLASS_DESTRUCTIVE_ACTION }
+            };
 
-            button_box.append (delete_button);
+            button_box.pack_start (delete_button);
 
             delete_button.clicked.connect (() => {
                 end_editing ();
