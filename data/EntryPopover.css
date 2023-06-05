@@ -23,29 +23,26 @@ entry-popover .container {
     background: @SILVER_300;
 }
 
-entry-popover menubutton {
-    background: transparent;
-    font-size: 0.9em;
-    font-weight: 600;
-}
-
 entry-popover menubutton button.toggle {
-    color: @SILVER_900;
     background: transparent;
     border: none;
+    color: @SILVER_900;
+    font-size: 0.9em;
     box-shadow: none;
+    font-weight: 600;
 }
 
 entry-popover .delete-button {
     padding: 0.4rem;
-    color: inherit;
+    color: @SILVER_900;
 }
+
 
 entry-popover.error .container {
     background: alpha(@error_color, 0.2);
 }
 
-entry-popover.error menubutton button {
+entry-popover.error menubutton button.toggle {
     color: @error_color;
 }
 
