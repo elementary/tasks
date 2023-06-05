@@ -38,7 +38,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Tasks.Widgets.EntryPopover.Location location_popover;
     private Gtk.Revealer location_popover_revealer;
 
-    //  private Gtk.EventBox event_box;
     private Gtk.Stack state_stack;
     private Gtk.Image icon;
     private Gtk.CheckButton check;
@@ -284,16 +283,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             child = grid
         };
 
-        //  event_box = new Gtk.EventBox () {
-        //      expand = true,
-        //      above_child = false
-        //  };
-        //  event_box.add_events (
-        //      Gdk.EventMask.BUTTON_PRESS_MASK |
-        //      Gdk.EventMask.BUTTON_RELEASE_MASK
-        //  );
-        //  event_box.add (revealer);
-
         child = revealer;
         margin_start = 12;
         margin_end = 12;
@@ -318,7 +307,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             });
         }
 
-        //  build_drag_and_drop ();
+        build_drag_and_drop ();
 
         var key_controller = new Gtk.EventControllerKey ();
         add_controller (key_controller);
@@ -386,7 +375,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         summary_entry.text = icalcomponent.get_summary () == null ? "" : icalcomponent.get_summary ();  // vala-lint=line-length
         description_textbuffer.text = icalcomponent.get_description () == null ? "" : icalcomponent.get_description ();  // vala-lint=line-length
         due_datetime_popover.value = icalcomponent.get_due ().is_null_time () ? null : Util.ical_to_date_time_local (icalcomponent.get_due ());  // vala-lint=line-length
-        //  location_popover.value = Util.get_ecalcomponent_location (task);
+        location_popover.value = Util.get_ecalcomponent_location (task);
     }
 
     private void save_task (ECal.Component task) {
@@ -410,7 +399,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         ical_task.set_due (new_icaltime);
         ical_task.set_dtstart (new_icaltime);
 
-        //  Util.set_ecalcomponent_location (task, location_popover.value);
+        Util.set_ecalcomponent_location (task, location_popover.value);
 
         ical_task.set_summary (summary_entry.text);
         ical_task.set_description (description_textbuffer.text);
@@ -552,50 +541,52 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         return created.is_valid_time ();
     }
 
-    //  private void build_drag_and_drop () {
-    //      if (!created || is_scheduled_view) {
-    //          return;
-    //      }
-    //      Gtk.drag_source_set (event_box, Gdk.ModifierType.BUTTON1_MASK, Application.DRAG_AND_DROP_TASK_DATA, Gdk.DragAction.MOVE);
+    private void build_drag_and_drop () {
+        if (!created || is_scheduled_view) {
+            return;
+        }
 
-    //      event_box.drag_begin.connect (on_drag_begin);
-    //      event_box.drag_data_get.connect (on_drag_data_get);
-    //      event_box.drag_data_delete.connect (on_drag_data_delete);
-    //  }
+        var content = new Gdk.ContentProvider.for_value ("task://%s/%s".printf (source.uid, task.get_uid ()));
+        var drag_source = new Gtk.DragSource () {
+            content = content
+        };
+        add_controller (drag_source);
 
-    //  private void on_drag_begin (Gdk.DragContext context) {
-    //      Gtk.Allocation alloc;
-    //      get_allocation (out alloc);
+        drag_source.drag_begin.connect (on_drag_begin);
+        drag_source.drag_end.connect (on_drag_data_delete);
 
-    //      var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, alloc.width, alloc.height);
-    //      var cairo_context = new Cairo.Context (surface);
+        var drop_target = new Gtk.DropTarget (GLib.Type.STRING, Gdk.DragAction.MOVE);
+        add_controller (drop_target);
+    }
 
-    //      var style_context = get_style_context ();
-    //      var had_cards_class = style_context.has_class (Granite.STYLE_CLASS_CARD);
+    private void on_drag_begin (Gdk.Drag drag) {
+        Gtk.Allocation alloc;
+        get_allocation (out alloc);
 
-    //      style_context.add_class ("drag-active");
-    //      if (had_cards_class) {
-    //          style_context.remove_class (Granite.STYLE_CLASS_CARD);
-    //      }
-    //      draw_to_cairo_context (cairo_context);
-    //      if (had_cards_class) {
-    //          style_context.add_class (Granite.STYLE_CLASS_CARD);
-    //      }
-    //      style_context.remove_class ("drag-active");
+        //  var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, alloc.width, alloc.height);
+        //  var cairo_context = new Cairo.Context (surface);
 
-    //      int drag_icon_x, drag_icon_y;
-    //      translate_coordinates (this, 0, 0, out drag_icon_x, out drag_icon_y);
-    //      surface.set_device_offset (-drag_icon_x, -drag_icon_y);
+        unowned var style_context = get_style_context ();
+        var had_cards_class = style_context.has_class (Granite.STYLE_CLASS_CARD);
 
-    //      Gtk.drag_set_icon_surface (context, surface);
-    //  }
+        style_context.add_class ("drag-active");
+        if (had_cards_class) {
+            style_context.remove_class (Granite.STYLE_CLASS_CARD);
+        }
+        //  draw_to_cairo_context (cairo_context);
+        //  if (had_cards_class) {
+            //  style_context.add_class (Granite.STYLE_CLASS_CARD);
+        //  }
+        //  style_context.remove_class ("drag-active");
 
-    //  private void on_drag_data_get (Gtk.Widget widget, Gdk.DragContext context, Gtk.SelectionData selection_data, uint target_type, uint time) {
-    //      var task_uri = "task://%s/%s".printf (source.uid, task.get_uid ());
-    //      selection_data.set_uris ({ task_uri });
-    //  }
+        //  int drag_icon_x, drag_icon_y;
+        //  translate_coordinates (this, 0, 0, out drag_icon_x, out drag_icon_y);
+        //  surface.set_device_offset (-drag_icon_x, -drag_icon_y);
 
-    //  private void on_drag_data_delete (Gdk.DragContext context) {
-    //      destroy ();
-    //  }
+        //  Gtk.drag_set_icon_surface (context, surface);
+    }
+
+    private void on_drag_data_delete (Gdk.Drag drag, bool delete_data) {
+        destroy ();
+    }
 }
