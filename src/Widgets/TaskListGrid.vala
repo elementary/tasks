@@ -196,7 +196,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         while (child != null) {
             task_list.remove (child);
 
-            child = child.get_next_sibling ();
+            child = task_list.get_first_child ();
         }
 
         if (view != null) {

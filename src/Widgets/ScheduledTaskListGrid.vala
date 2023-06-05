@@ -48,13 +48,18 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
     }
 
     private void remove_view (E.Source source) {
+        Gtk.Widget[] children_for_removal = {};
         unowned var child = get_first_child ();
         while (child != null) {
             if (child is Tasks.Widgets.TaskRow && ((Tasks.Widgets.TaskRow) child).source == source) {
-                child.destroy ();
+                children_for_removal += child;
             }
 
             child = child.get_next_sibling ();
+        }
+
+        for (int i = 0; i < children_for_removal.length; i++) {
+            children_for_removal[i].destroy ();
         }
 
         lock (views) {
