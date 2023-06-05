@@ -126,7 +126,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
         delete_list_menuitem.append (delete_list_accel_label);
 
         delete_list_menuitem.clicked.connect (() => {
-            hide ();
+            popdown ();
 
             unowned var main_window = (Gtk.ApplicationWindow) get_root ();
             ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).activate (null);
