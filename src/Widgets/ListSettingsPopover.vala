@@ -125,13 +125,6 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
         delete_list_menuitem.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
         delete_list_menuitem.append (delete_list_accel_label);
 
-        delete_list_menuitem.clicked.connect (() => {
-            popdown ();
-
-            unowned var main_window = (Gtk.ApplicationWindow) get_root ();
-            ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).activate (null);
-        });
-
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_top = 3,
             margin_bottom = 3
@@ -201,6 +194,13 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             if (color_button_slate.active) {
                 update_task_list_color (source, "#667885");
             }
+        });
+
+        delete_list_menuitem.clicked.connect (() => {
+            popdown ();
+
+            unowned var main_window = (Gtk.ApplicationWindow) get_root ();
+            ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).activate (null);
         });
 
         notify["source"].connect (() => {

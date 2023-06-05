@@ -334,7 +334,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 transient_for = this
             };
 
-            unowned Gtk.Widget trash_button = message_dialog.add_button (_("Delete Anyway"), Gtk.ResponseType.YES);
+            unowned var trash_button = message_dialog.add_button (_("Delete Anyway"), Gtk.ResponseType.YES);
             trash_button.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
             message_dialog.present ();
