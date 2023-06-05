@@ -55,7 +55,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     construct {
         add_action_entries (ACTION_ENTRIES, this);
 
-        var application_instance = (Gtk.Application) GLib.Application.get_default ();
+        unowned var application_instance = (Gtk.Application) GLib.Application.get_default ();
         foreach (var action in action_accelerators.get_keys ()) {
             application_instance.set_accels_for_action (
                 ACTION_PREFIX + action, action_accelerators[action].to_array ()
@@ -70,11 +70,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         var sidebar_header = new Gtk.HeaderBar () {
             title_widget = new Gtk.Label (null),
-            show_title_buttons = false
+            show_title_buttons = false,
+            css_classes = { Granite.STYLE_CLASS_DEFAULT_DECORATION, Granite.STYLE_CLASS_FLAT }
         };
         sidebar_header.pack_start (new Gtk.WindowControls (Gtk.PackType.START));
-        sidebar_header.add_css_class (Granite.STYLE_CLASS_DEFAULT_DECORATION);
-        sidebar_header.add_css_class (Granite.STYLE_CLASS_FLAT);
 
         var scrolledwindow = new Gtk.ScrolledWindow () {
             hexpand = true,
@@ -202,7 +201,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 var task_lists = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
 
                 task_lists.foreach ((source) => {
-                    E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+                    unowned var list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
                     if (list.selected == true && source.enabled == true && !source.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
                         add_source (source);
@@ -279,7 +278,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         try {
             var new_source = new E.Source (null, null);
-            var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+            unowned var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
             new_source.display_name = _("New list");
             new_source_tasklist_extension.color = "#0e9a83";
 
@@ -321,7 +320,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void action_delete_selected_list () {
-        var list_row = ((Tasks.Widgets.SourceRow) listbox.get_selected_row ());
+        unowned var list_row = ((Tasks.Widgets.SourceRow) listbox.get_selected_row ());
         var source = list_row.source;
 
         if (Tasks.Application.model.is_remove_task_list_supported (source)) {
@@ -454,7 +453,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         } else {
             source_rows[source].update_request ();
 
-            var task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_visible_child ();
+            unowned var task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_visible_child ();
             if (task_list_grid != null) {
                 task_list_grid.update_request ();
             }

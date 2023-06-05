@@ -51,21 +51,17 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
 
     static construct {
         set_layout_manager_type (typeof (Gtk.BinLayout));
+
         label_provider = new Gtk.CssProvider ();
         label_provider.load_from_resource ("io/elementary/tasks/EditableLabel.css");
+
+        set_css_name ("editable-label");
     }
 
     construct {
-        add_css_class ("editable-label");
         get_style_context ().add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         valign = Gtk.Align.CENTER;
-
-        var motion_controller = new Gtk.EventControllerMotion ();
-        add_controller (motion_controller);
-
-        var press_controller = new Gtk.GestureClick ();
-        add_controller (press_controller);
 
         title = new Gtk.Label ("") {
             ellipsize = Pango.EllipsizeMode.END,
@@ -74,9 +70,9 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
 
         var edit_button = new Gtk.Button () {
             icon_name = "edit-symbolic",
-            tooltip_text = _("Edit…")
+            tooltip_text = _("Edit…"),
+            css_classes = { Granite.STYLE_CLASS_FLAT }
         };
-        edit_button.add_css_class (Granite.STYLE_CLASS_FLAT);
 
         var button_revealer = new Gtk.Revealer () {
             valign = Gtk.Align.CENTER,
@@ -91,12 +87,10 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
         box.append (button_revealer);
 
         entry = new Gtk.Entry () {
-            hexpand = true
+            hexpand = true,
         };
+        entry.add_css_class ("editable-entry");
         entry.get_style_context ().add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-        var focus_controller = new Gtk.EventControllerFocus ();
-        entry.add_controller (focus_controller);
 
         stack = new Gtk.Stack () {
             hhomogeneous = false,
@@ -104,10 +98,15 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
         };
         stack.add_child (box);
         stack.add_child (entry);
-
         stack.set_parent (this); // ?
 
         bind_property ("text", title, "label");
+
+        var motion_controller = new Gtk.EventControllerMotion ();
+        add_controller (motion_controller);
+
+        var press_controller = new Gtk.GestureClick ();
+        add_controller (press_controller);
 
         motion_controller.enter.connect ((x, y) => {
             button_revealer.reveal_child = true;
@@ -126,6 +125,10 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
                 editing = false;
             }
         });
+
+
+        var focus_controller = new Gtk.EventControllerFocus ();
+        entry.add_controller (focus_controller);
 
         focus_controller.leave.connect (() => {
             if (stack.visible_child == entry) {

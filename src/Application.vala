@@ -75,10 +75,9 @@ public class Tasks.Application : Gtk.Application {
             model.start.begin ();
 
             var main_window = new MainWindow (this);
-            add_window (main_window);
 
-            var granite_settings = Granite.Settings.get_default ();
-            var gtk_settings = Gtk.Settings.get_default ();
+            unowned var granite_settings = Granite.Settings.get_default ();
+            unowned var gtk_settings = Gtk.Settings.get_default ();
 
             gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
 
@@ -95,7 +94,7 @@ public class Tasks.Application : Gtk.Application {
         if (providers == null) {
             providers = new Gee.HashMap<string, Gtk.CssProvider> ();
         }
-        var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        unowned var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
         // Ensure we get a valid CSS color, not including FF
         var color = task_list.dup_color ().slice (0, 7);
         if (!providers.has_key (color)) {
