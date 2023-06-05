@@ -35,8 +35,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Tasks.Widgets.EntryPopover.DateTime due_datetime_popover;
     private Gtk.Revealer due_datetime_popover_revealer;
 
-    //  private Tasks.Widgets.EntryPopover.Location location_popover;
-    //  private Gtk.Revealer location_popover_revealer;
+    private Tasks.Widgets.EntryPopover.Location location_popover;
+    private Gtk.Revealer location_popover_revealer;
 
     //  private Gtk.EventBox event_box;
     private Gtk.Stack state_stack;
@@ -158,14 +158,14 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             }
         });
 
-        //  location_popover = new Tasks.Widgets.EntryPopover.Location ();
+        location_popover = new Tasks.Widgets.EntryPopover.Location ();
 
-        //  location_popover_revealer = new Gtk.Revealer () {
-        //      margin_end = 6,
-        //      reveal_child = false,
-        //      transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT
-        //  };
-        //  location_popover_revealer.add (location_popover);
+        location_popover_revealer = new Gtk.Revealer () {
+            margin_end = 6,
+            reveal_child = false,
+            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
+            child = location_popover
+        };
 
         //  location_popover.value_format.connect ((value) => {
         //      if (value == null) {
@@ -208,9 +208,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             child = description_label
         };
 
-        var task_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        var task_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 3);
         task_box.append (due_datetime_popover_revealer);
-        //  task_box.append (location_popover_revealer);
+        task_box.append (location_popover_revealer);
         task_box.append (description_label_revealer);
 
         task_detail_revealer = new Gtk.Revealer () {
