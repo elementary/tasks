@@ -34,9 +34,9 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             margin_top = 6,
             margin_bottom = 6,
             margin_start = 6,
-            margin_end = 6
+            margin_end = 6,
+            css_classes = { Granite.STYLE_CLASS_BACKGROUND }
         };
-        calendar.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
 
         timepicker = new Granite.TimePicker () {
             margin_top = 12,
@@ -55,12 +55,12 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             margin_top = 3
         };
 
-        var today_button = new Gtk.Button () {
-            label = _("Today")
+        var today_button = new Gtk.Button.with_label (_("Today")) {
+            css_classes = { Granite.STYLE_CLASS_FLAT }
         };
 
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
-            margin_top= 3
+            margin_top = 3
         };
         box.append (today_button);
         box.append (today_separator);
@@ -90,17 +90,11 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
         }
 
         calendar.select_day (selected_datetime);
-        //  calendar.select_month (selected_datetime.get_month () - 1, selected_datetime.get_year ());
-        //  calendar.select_day (selected_datetime.get_day_of_month ());
         timepicker.time = selected_datetime;
     }
 
     private void on_today_button_clicked () {
-        var now_local = new GLib.DateTime.now_local ();
-
-        calendar.select_day (now_local);
-        //  calendar.select_month (now_local.get_month () - 1, now_local.get_year ());
-        //  calendar.select_day (now_local.get_day_of_month ());
+        calendar.select_day (new GLib.DateTime.now_local ());
     }
 
     private void on_calendar_day_selected () {

@@ -102,7 +102,8 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         };
 
         var add_tasklist_button = new Gtk.MenuButton () {
-            popover = add_tasklist_popover
+            popover = add_tasklist_popover,
+            direction = Gtk.ArrowType.UP
         };
 
         var add_tasklist_button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);

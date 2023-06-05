@@ -1,5 +1,5 @@
 /*
-* Copyright 2021 elementary, Inc. (https://elementary.io)
+* Copyright 2021-2023 elementary, Inc. (https://elementary.io)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -43,33 +43,33 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
 
     static construct {
         set_layout_manager_type (typeof (Gtk.BinLayout));
+
         style_provider = new Gtk.CssProvider ();
         style_provider.load_from_resource ("io/elementary/tasks/EntryPopover.css");
     }
 
     construct { 
-        var motion_controller = new Gtk.EventControllerMotion ();
-        add_controller (motion_controller);
-
         popover = new Gtk.Popover () {
             child = popover_button
         };
 
+        var popover_button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        if (icon_name != null) {
+            popover_button_box.append (new Gtk.Image.from_icon_name (icon_name));
+        }
+        popover_button_box.append (new Gtk.Label (placeholder));
+        
         popover_button = new Gtk.MenuButton () {
-            label = placeholder,
             popover = popover,
-            icon_name = icon_name,
-            //  always_show_image = icon_name != null
+            child = popover_button_box,
+            css_classes = { Granite.STYLE_CLASS_FLAT }
         };
-
-        popover_button.add_css_class (Granite.STYLE_CLASS_FLAT);
         popover_button.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic") {
-            tooltip_text = _("Remove")
+            tooltip_text = _("Remove"),
+            css_classes = { Granite.STYLE_CLASS_FLAT }
         };
-
-        delete_button.add_css_class (Granite.STYLE_CLASS_FLAT);
         delete_button.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var delete_button_revealer = new Gtk.Revealer () {
@@ -79,47 +79,12 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
         };
 
         var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        button_box.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         button_box.append (popover_button);
         button_box.append (delete_button_revealer);
-        button_box.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-        button_box.set_parent (this); // ?
-
-        delete_button.clicked.connect (() => {
-            var value_has_changed = value != null;
-            value = null;
-            if (value_has_changed) {
-                value_changed (value);
-            }
-        });
+        button_box.set_parent (this);
 
         popover_button.activate.connect (() => {
-            if (delete_button_revealer.reveal_child) {
-                delete_button_revealer.reveal_child = false;
-            }
-        });
-
-        notify["value"].connect (() => {
-            var value_formatted = value_format (value);
-            if (value_formatted == null) {
-                popover_button.label = placeholder;
-
-                if (delete_button_revealer.reveal_child) {
-                    delete_button_revealer.reveal_child = false;
-                }
-
-            } else {
-                popover_button.label = value_formatted;
-            }
-        });
-
-        motion_controller.enter.connect ((x, y) => {
-            if (value_format (value) != null) {
-                delete_button_revealer.reveal_child = true;
-            }
-        });
-
-        motion_controller.leave.connect (() => {
             if (delete_button_revealer.reveal_child) {
                 delete_button_revealer.reveal_child = false;
             }
@@ -139,6 +104,43 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
                 }
                 return GLib.Source.REMOVE;
             });
+        });
+
+        delete_button.clicked.connect (() => {
+            var value_has_changed = value != null;
+            value = null;
+            if (value_has_changed) {
+                value_changed (value);
+            }
+        });
+
+        notify["value"].connect (() => {
+            var value_formatted = value_format (value);
+            if (value_formatted == null) {
+                popover_button.label = placeholder;
+
+                if (delete_button_revealer.reveal_child) {
+                    delete_button_revealer.reveal_child = false;
+                }
+
+            } else {
+                popover_button.label = value_formatted;
+            }
+        });
+
+        var motion_controller = new Gtk.EventControllerMotion ();
+        add_controller (motion_controller);
+
+        motion_controller.enter.connect ((x, y) => {
+            if (value_format (value) != null) {
+                delete_button_revealer.reveal_child = true;
+            }
+        });
+
+        motion_controller.leave.connect (() => {
+            if (delete_button_revealer.reveal_child) {
+                delete_button_revealer.reveal_child = false;
+            }
         });
     }
 

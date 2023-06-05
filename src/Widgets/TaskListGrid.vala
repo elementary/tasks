@@ -98,7 +98,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         add_task_list.append (add_task_row);
 
         task_list = new Gtk.ListBox () {
-            selection_mode = Gtk.SelectionMode.MULTIPLE,
+            selection_mode = Gtk.SelectionMode.SINGLE,
             activate_on_single_click = true
         };
         task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
