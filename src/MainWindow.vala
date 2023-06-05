@@ -31,7 +31,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
     private static Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
 
-    private uint configure_id;
     private Gtk.ListBox listbox;
     private Gee.HashMap<E.Source, Tasks.Widgets.SourceRow>? source_rows;
     private Gee.Collection<E.Source>? collection_sources;
@@ -482,32 +481,4 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             return Source.REMOVE;
         });
     }
-
-    //  public override bool configure_event (Gdk.EventConfigure event) {
-    //      if (configure_id != 0) {
-    //          GLib.Source.remove (configure_id);
-    //      }
-
-    //      configure_id = Timeout.add (100, () => {
-    //          configure_id = 0;
-
-    //          if (is_maximized) {
-    //              Tasks.Application.settings.set_boolean ("window-maximized", true);
-    //          } else {
-    //              Tasks.Application.settings.set_boolean ("window-maximized", false);
-
-    //              Gdk.Rectangle rect;
-    //              get_allocation (out rect);
-    //              Tasks.Application.settings.set ("window-size", "(ii)", rect.width, rect.height);
-
-    //              int root_x, root_y;
-    //              get_position (out root_x, out root_y);
-    //              Tasks.Application.settings.set ("window-position", "(ii)", root_x, root_y);
-    //          }
-
-    //          return false;
-    //      });
-
-    //      return base.configure_event (event);
-    //  }
 }
