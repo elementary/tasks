@@ -630,7 +630,7 @@ public class Tasks.TaskModel : Object {
         } else if ("gtasks" == ((E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name && E.OAuth2Services.is_supported ()) {
             debug ("GTasks Rename '%s'", task_list.get_uid ());
 
-            unowned var task_list_id = ((E.SourceResource) task_list.get_extension (
+            var task_list_id = ((E.SourceResource) task_list.get_extension (
                 E.SOURCE_EXTENSION_RESOURCE
             )).identity.replace ("gtasks::", "");
 #if !HAS_EDS_3_46
