@@ -49,6 +49,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Gtk.Revealer task_form_revealer;
     private Gtk.TextBuffer description_textbuffer;
 
+    private Gtk.DragSource drag_source;
+
     private TaskRow (ECal.Component task, E.Source source) {
         Object (task: task, source: source);
     }
@@ -546,44 +548,43 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             return;
         }
 
-        var content = new Gdk.ContentProvider.for_value ("task://%s/%s".printf (source.uid, task.get_uid ()));
-        var drag_source = new Gtk.DragSource () {
-            content = content
-        };
+        drag_source = new Gtk.DragSource ();
         add_controller (drag_source);
 
+        drag_source.prepare.connect (on_drag_prepare);
         drag_source.drag_begin.connect (on_drag_begin);
         drag_source.drag_end.connect (on_drag_data_delete);
     }
 
+    private int drag_offset_x;
+    private int drag_offset_y;
+    private bool had_cards_class;
+
+    private Gdk.ContentProvider? on_drag_prepare (double x, double y) {
+        drag_offset_x = (int) x;
+        drag_offset_y = (int) y;
+        return new Gdk.ContentProvider.for_value ("task://%s/%s".printf (source.uid, task.get_uid ()));
+    }
+
     private void on_drag_begin (Gdk.Drag drag) {
-        Gtk.Allocation alloc;
-        get_allocation (out alloc);
+        drag_source.set_icon (new Gtk.WidgetPaintable (this), drag_offset_x, drag_offset_y);
 
-        //  var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, alloc.width, alloc.height);
-        //  var cairo_context = new Cairo.Context (surface);
+        had_cards_class = has_css_class (Granite.STYLE_CLASS_CARD);
 
-        unowned var style_context = get_style_context ();
-        var had_cards_class = style_context.has_class (Granite.STYLE_CLASS_CARD);
-
-        style_context.add_class ("drag-active");
+        add_css_class ("drag-active");
         if (had_cards_class) {
-            style_context.remove_class (Granite.STYLE_CLASS_CARD);
+            remove_css_class (Granite.STYLE_CLASS_CARD);
         }
-        //  draw_to_cairo_context (cairo_context);
-        //  if (had_cards_class) {
-            //  style_context.add_class (Granite.STYLE_CLASS_CARD);
-        //  }
-        //  style_context.remove_class ("drag-active");
-
-        //  int drag_icon_x, drag_icon_y;
-        //  translate_coordinates (this, 0, 0, out drag_icon_x, out drag_icon_y);
-        //  surface.set_device_offset (-drag_icon_x, -drag_icon_y);
-
-        //  Gtk.drag_set_icon_surface (context, surface);
     }
 
     private void on_drag_data_delete (Gdk.Drag drag, bool delete_data) {
-        destroy ();
+        remove_css_class ("drag-active");
+        if (had_cards_class) {
+            add_css_class (Granite.STYLE_CLASS_CARD);
+        }
+
+        if (delete_data) {
+            destroy ();
+        }
     }
 }

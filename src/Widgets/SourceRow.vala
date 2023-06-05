@@ -88,11 +88,11 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     }
 
     private void build_drag_and_drop () {
-        var drop_target = new Gtk.DropTarget (GLib.Type.STRING, Gdk.DragAction.MOVE);
+        var drop_target = new Gtk.DropTarget (Type.STRING, Gdk.DragAction.MOVE);
         add_controller (drop_target);
 
         drop_target.drop.connect (on_drag_drop);
-        drop_target.enter.connect (on_drag_enter);
+        drop_target.motion.connect (on_drag_enter);
         drop_target.leave.connect (on_drag_leave);
     }
 
