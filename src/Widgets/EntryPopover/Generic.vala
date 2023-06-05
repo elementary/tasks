@@ -51,7 +51,8 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
 
     construct { 
         popover = new Gtk.Popover () {
-            child = popover_button
+            child = popover_button,
+            autohide = true
         };
 
         label = new Gtk.Label (placeholder);

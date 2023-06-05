@@ -34,8 +34,7 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             margin_top = 6,
             margin_bottom = 6,
             margin_start = 6,
-            margin_end = 6,
-            css_classes = { Granite.STYLE_CLASS_BACKGROUND }
+            margin_end = 6
         };
 
         timepicker = new Granite.TimePicker () {
