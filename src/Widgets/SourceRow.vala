@@ -91,24 +91,27 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         var drop_target = new Gtk.DropTarget (Type.STRING, Gdk.DragAction.MOVE);
         add_controller (drop_target);
 
+        drop_target.accept.connect (on_drop_accept);
         drop_target.drop.connect (on_drag_drop);
-        drop_target.motion.connect (on_drag_enter);
+        drop_target.enter.connect (on_drag_enter);
         drop_target.leave.connect (on_drag_leave);
+
+    }
+
+    private bool on_drop_accept (Gdk.Drop drop) {
+        return true;
     }
 
     private Gdk.DragAction on_drag_enter (double x, double y) {
-        warning ("Enter");
-        var style_context = get_style_context ();
-        if (!style_context.has_class ("drop-hover")) {
-            style_context.add_class ("drop-hover");
+        if (!has_css_class ("drop-hover")) {
+            add_css_class ("drop-hover");
         }
 
         return Gdk.DragAction.MOVE;
     }
 
     private void on_drag_leave () {
-        warning ("Leave");
-        get_style_context ().remove_class ("drop-hover");
+        remove_css_class ("drop-hover");
     }
 
     private Gee.HashMultiMap<string, string> received_drag_data;
