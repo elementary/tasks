@@ -29,3 +29,7 @@ editable-label entry {
 editable-label entry text {
     padding: 0;
 }
+
+editable-label button {
+    padding: 0.4rem;
+}

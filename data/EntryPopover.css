@@ -37,7 +37,7 @@ entry-popover menubutton button.toggle {
 }
 
 entry-popover .delete-button {
-    padding: 0.4em;
+    padding: 0.4rem;
 }
 
 entry-popover.error .container {
