@@ -19,7 +19,7 @@
 */
 
 public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
-    public E.Source source { get; set; }
+    public E.Source source { get; construct set; }
 
     private Gtk.CheckButton color_button_red;
     private Gtk.CheckButton color_button_orange;
@@ -33,77 +33,64 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
     private Gtk.CheckButton color_button_slate;
     private Gtk.CheckButton color_button_none;
 
+    public ListSettingsPopover (E.Source source) {
+        Object (source: source);
+    }
+
     construct {
         autohide = true;
 
-        color_button_blue = new Gtk.CheckButton ();
-
-        color_button_blue.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_blue.add_css_class ("blue");
+        color_button_blue = new Gtk.CheckButton () {
+            css_classes = { Granite.STYLE_CLASS_COLOR_BUTTON, "blue" }
+        };
 
         color_button_mint = new Gtk.CheckButton () {
-            group = color_button_blue
+            group = color_button_blue,
+            css_classes = { Granite.STYLE_CLASS_COLOR_BUTTON, "mint" }
         };
-
-        color_button_mint.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_mint.add_css_class ("mint");
 
         color_button_green = new Gtk.CheckButton () {
-            group = color_button_blue
+            group = color_button_blue,
+            css_classes = { Granite.STYLE_CLASS_COLOR_BUTTON, "green" }
         };
 
-        color_button_green.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_green.add_css_class ("green");
 
         color_button_yellow = new Gtk.CheckButton () {
-            group = color_button_blue
+            group = color_button_blue,
+            css_classes = { Granite.STYLE_CLASS_COLOR_BUTTON, "yellow" }
         };
-
-        color_button_yellow.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_yellow.add_css_class ("yellow");
 
         color_button_orange = new Gtk.CheckButton () {
-            group = color_button_blue
+            group = color_button_blue,
+            css_classes = { Granite.STYLE_CLASS_COLOR_BUTTON, "orange" }
         };
-
-        color_button_orange.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_orange.add_css_class ("orange");
 
         color_button_red = new Gtk.CheckButton () {
-            group = color_button_blue
+            group = color_button_blue,
+            css_classes = { Granite.STYLE_CLASS_COLOR_BUTTON, "red" }
         };
-
-        color_button_red.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_red.add_css_class ("red");
 
         color_button_pink = new Gtk.CheckButton () {
-            group = color_button_blue
+            group = color_button_blue,
+            css_classes = { Granite.STYLE_CLASS_COLOR_BUTTON, "pink" }
         };
-
-        color_button_pink.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_pink.add_css_class ("pink");
 
         color_button_purple = new Gtk.CheckButton () {
-            group = color_button_blue
+            group = color_button_blue,
+            css_classes = { Granite.STYLE_CLASS_COLOR_BUTTON, "purple" }
         };
-
-        color_button_purple.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_purple.add_css_class ("purple");
 
         color_button_brown = new Gtk.CheckButton () {
-            group = color_button_blue
+            group = color_button_blue,
+            css_classes = { Granite.STYLE_CLASS_COLOR_BUTTON, "brown" }
         };
-
-        color_button_brown.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_brown.add_css_class ("brown");
 
         color_button_slate = new Gtk.CheckButton () {
-            group = color_button_blue
+            group = color_button_blue,
+            css_classes = { Granite.STYLE_CLASS_COLOR_BUTTON, "slate" }
         };
 
-        color_button_slate.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_slate.add_css_class ("slate");
-
+        // FIXME: this CheckButton is unused
         color_button_none = new Gtk.CheckButton () {
             group = color_button_blue
         };
@@ -268,7 +255,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
 
     private string get_task_list_color (E.Source source) {
         if (source.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
-            var task_list = (E.SourceTaskList) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+            unowned var task_list = (E.SourceTaskList) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
             return task_list.dup_color ();
         }
         return "";

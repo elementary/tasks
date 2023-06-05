@@ -46,7 +46,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             css_classes = { Granite.STYLE_CLASS_H1_LABEL, Granite.STYLE_CLASS_ACCENT }
         };
 
-        var list_settings_popover = new Tasks.Widgets.ListSettingsPopover ();
+        var list_settings_popover = new Tasks.Widgets.ListSettingsPopover (source);
 
         var settings_button = new Gtk.MenuButton () {
             popover = list_settings_popover,

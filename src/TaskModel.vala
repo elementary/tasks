@@ -596,7 +596,7 @@ public class Tasks.TaskModel : Object {
             debug ("WebDAV Rename '%s'", task_list.get_uid ());
 
             var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-            var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+            unowned var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
             var credentials_provider = new E.SourceCredentialsProvider (registry);
             E.NamedParameters credentials;
@@ -630,7 +630,7 @@ public class Tasks.TaskModel : Object {
         } else if ("gtasks" == ((E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST)).backend_name && E.OAuth2Services.is_supported ()) {
             debug ("GTasks Rename '%s'", task_list.get_uid ());
 
-            var task_list_id = ((E.SourceResource) task_list.get_extension (
+            unowned var task_list_id = ((E.SourceResource) task_list.get_extension (
                 E.SOURCE_EXTENSION_RESOURCE
             )).identity.replace ("gtasks::", "");
 #if !HAS_EDS_3_46
@@ -680,7 +680,7 @@ public class Tasks.TaskModel : Object {
         if (!task_list.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
             throw new Tasks.TaskModelError.INVALID_ARGUMENT ("Changing the color is not supported by this source.");
         }
-        var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        unowned var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
         var previous_color = task_list_extension.dup_color ();
 
         var registry = get_registry_sync ();
@@ -704,7 +704,7 @@ public class Tasks.TaskModel : Object {
                     debug ("Update %s color for '%s'", backend_name, task_list.get_uid ());
 
                     var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-                    var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+                    unowned var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
                     var credentials_provider = new E.SourceCredentialsProvider (registry);
                     E.NamedParameters credentials;
