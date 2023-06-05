@@ -228,9 +228,9 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     public void remove_request () {
         revealer.reveal_child = false;
         GLib.Timeout.add (revealer.transition_duration, () => {
-            warning ("Here");
-            //  unparent ();
+            ((Gtk.ListBox) parent).remove (this);
             destroy ();
+
             return GLib.Source.REMOVE;
         });
     }
