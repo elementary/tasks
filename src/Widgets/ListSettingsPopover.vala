@@ -121,14 +121,11 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST
         );
 
-        var delete_list_menuitem = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0) {
-            css_classes = { Granite.STYLE_CLASS_MENUITEM, Granite.STYLE_CLASS_DESTRUCTIVE_ACTION }
-        };
+        var delete_list_menuitem = new Widgets.PopoverButton ();
+        delete_list_menuitem.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
         delete_list_menuitem.append (delete_list_accel_label);
 
-        var gesture_click = new Gtk.GestureClick ();
-        delete_list_menuitem.add_controller (gesture_click);
-        gesture_click.released.connect (() => {
+        delete_list_menuitem.clicked.connect (() => {
             hide ();
 
             unowned var main_window = (Gtk.ApplicationWindow) get_root ();

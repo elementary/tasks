@@ -54,13 +54,8 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             margin_top = 3
         };
 
-        var today_box_gesture_click = new Gtk.GestureClick ();
-
-        var today_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0) {
-            css_classes = { Granite.STYLE_CLASS_MENUITEM }
-        };
+        var today_box = new Widgets.PopoverButton ();
         today_box.append (new Gtk.Label (_("Today")) { hexpand = true, justify = Gtk.Justification.CENTER });
-        today_box.add_controller (today_box_gesture_click);
 
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_top = 3
@@ -74,7 +69,7 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
 
         popover.show.connect (on_popover_show);
 
-        today_box_gesture_click.released.connect (on_today_button_clicked);
+        today_box.clicked.connect (on_today_button_clicked);
         calendar.day_selected.connect (on_calendar_day_selected);
         timepicker.time_changed.connect (on_timepicker_time_changed);
     }
