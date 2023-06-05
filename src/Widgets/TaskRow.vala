@@ -50,8 +50,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Gtk.Revealer task_form_revealer;
     private Gtk.TextBuffer description_textbuffer;
 
-    private static Gtk.CssProvider taskrow_provider;
-
     private TaskRow (ECal.Component task, E.Source source) {
         Object (task: task, source: source);
     }
@@ -67,9 +65,14 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         Object (source: source, task: task, is_scheduled_view: is_scheduled_view);
     }
 
+    class construct {
+        set_css_name ("task-row");
+    }
+
     static construct {
-        taskrow_provider = new Gtk.CssProvider ();
-        taskrow_provider.load_from_resource ("io/elementary/tasks/TaskRow.css");
+        var style_provider = new Gtk.CssProvider ();
+        style_provider.load_from_resource ("io/elementary/tasks/TaskRow.css");
+        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     construct {
@@ -100,7 +103,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         summary_entry = new Gtk.Entry ();
         summary_entry.add_css_class (Granite.STYLE_CLASS_FLAT);
-        summary_entry.get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         due_datetime_popover = new Tasks.Widgets.EntryPopover.DateTime ();
 
@@ -295,7 +297,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         margin_end = 12;
 
         add_css_class (Granite.STYLE_CLASS_ROUNDED);
-        get_style_context ().add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         if (created) {
             check.show ();
