@@ -30,7 +30,7 @@ entry-popover menubutton {
     font-weight: 600;
 }
 
-entry-popover menubutton * {
+entry-popover menubutton button.toggle {
     background: transparent;
     border: none;
     box-shadow: none;
