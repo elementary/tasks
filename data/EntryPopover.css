@@ -36,6 +36,10 @@ entry-popover menubutton button.toggle {
     box-shadow: none;
 }
 
+entry-popover .delete-button {
+    padding: 0.4em;
+}
+
 entry-popover.error .container {
     background: alpha(@error_color, 0.2);
 }
