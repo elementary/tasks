@@ -102,11 +102,13 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         };
 
         var add_tasklist_button = new Gtk.MenuButton () {
-            label = _("Add Task List…"),
-            icon_name = "list-add-symbolic",
-            //  always_show_image = true,
             popover = add_tasklist_popover
         };
+
+        var add_tasklist_button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        add_tasklist_button_box.append (new Gtk.Image.from_icon_name ("list-add-symbolic"));
+        add_tasklist_button_box.append (new Gtk.Label (_("Add Task List…")));
+        add_tasklist_button.child = add_tasklist_button_box;
 
         var actionbar = new Gtk.ActionBar ();
         actionbar.pack_start (add_tasklist_button);
