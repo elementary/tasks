@@ -554,9 +554,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         drag_source.drag_begin.connect (on_drag_begin);
         drag_source.drag_end.connect (on_drag_data_delete);
-
-        var drop_target = new Gtk.DropTarget (GLib.Type.STRING, Gdk.DragAction.MOVE);
-        add_controller (drop_target);
     }
 
     private void on_drag_begin (Gdk.Drag drag) {

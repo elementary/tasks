@@ -28,10 +28,6 @@ public class Tasks.Application : Gtk.Application {
     public static Tasks.TaskModel model;
     public static bool run_in_background = false;
 
-    //  public Gtk.DropTarget[] DRAG_AND_DROP_TASK_DATA = {
-    //      { "text/uri-list", Gtk.TargetFlags.SAME_APP | Gtk.TargetFlags.OTHER_WIDGET, 0 } // TODO: TEXT_URI
-    //  };
-
     public Application () {
         Object (
             application_id: "io.elementary.tasks",
