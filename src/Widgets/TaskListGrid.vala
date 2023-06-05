@@ -42,36 +42,32 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
         editable_title = new EditableLabel () {
             margin_start = 24,
-            hexpand = true
+            hexpand = true,
+            css_classes = { Granite.STYLE_CLASS_H1_LABEL, Granite.STYLE_CLASS_ACCENT }
         };
-        editable_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
-        editable_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
 
         var list_settings_popover = new Tasks.Widgets.ListSettingsPopover ();
 
         var settings_button = new Gtk.MenuButton () {
+            popover = list_settings_popover,
             margin_end = 24,
             valign = Gtk.Align.CENTER,
             hexpand = false,
+            icon_name = "view-more-symbolic",
             tooltip_text = _("Edit Name and Appearance"),
-            popover = list_settings_popover,
-            icon_name = "view-more-symbolic"
+            css_classes = { Granite.STYLE_CLASS_FLAT, Granite.STYLE_CLASS_DIM_LABEL }
         };
-        settings_button.add_css_class (Granite.STYLE_CLASS_FLAT);
-        settings_button.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
-        var placeholder = new Gtk.Label (_("No Tasks"));
-        placeholder.show ();
-
-        placeholder.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
-        placeholder.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
+        var placeholder = new Gtk.Label (_("No Tasks")) {
+            css_classes = { Granite.STYLE_CLASS_DIM_LABEL, Granite.STYLE_CLASS_H2_LABEL}
+        };
 
         add_task_list = new Gtk.ListBox () {
             margin_top = 24,
             selection_mode = Gtk.SelectionMode.SINGLE,
-            activate_on_single_click = true
+            activate_on_single_click = true,
+            css_classes = { Granite.STYLE_CLASS_BACKGROUND }
         };
-        add_task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
 
         var add_task_row = new Tasks.Widgets.TaskRow.for_source (source);
         add_task_row.unselect.connect (on_row_unselect);
@@ -99,9 +95,9 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
         task_list = new Gtk.ListBox () {
             selection_mode = Gtk.SelectionMode.SINGLE,
-            activate_on_single_click = true
+            activate_on_single_click = true,
+            css_classes = { Granite.STYLE_CLASS_BACKGROUND }
         };
-        task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
 

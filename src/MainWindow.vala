@@ -101,38 +101,40 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             child = add_tasklist_box
         };
 
-        var add_tasklist_button = new Gtk.MenuButton () {
-            popover = add_tasklist_popover,
-            direction = Gtk.ArrowType.UP
-        };
-
         var add_tasklist_button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
         add_tasklist_button_box.append (new Gtk.Image.from_icon_name ("list-add-symbolic"));
         add_tasklist_button_box.append (new Gtk.Label (_("Add Task List…")));
-        add_tasklist_button.child = add_tasklist_button_box;
 
-        var actionbar = new Gtk.ActionBar ();
+        var add_tasklist_button = new Gtk.MenuButton () {
+            popover = add_tasklist_popover,
+            direction = Gtk.ArrowType.UP,
+            child = add_tasklist_button_box
+        };
+
+        var actionbar = new Gtk.ActionBar () {
+            css_classes = { Granite.STYLE_CLASS_FLAT }
+        };
         actionbar.pack_start (add_tasklist_button);
-        actionbar.add_css_class (Granite.STYLE_CLASS_FLAT);
 
-        var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-        sidebar.add_css_class (Granite.STYLE_CLASS_SIDEBAR);
+        var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
+            css_classes = { Granite.STYLE_CLASS_SIDEBAR }
+        };
         sidebar.append (sidebar_header);
         sidebar.append (scrolledwindow);
         sidebar.append (actionbar);
 
         var main_header = new Gtk.HeaderBar () {
             title_widget = new Gtk.Label (null),
-            show_title_buttons = false
+            show_title_buttons = false,
+            css_classes = { Granite.STYLE_CLASS_DEFAULT_DECORATION, Granite.STYLE_CLASS_FLAT }
         };
         main_header.pack_end (new Gtk.WindowControls (Gtk.PackType.END));
-        main_header.add_css_class (Granite.STYLE_CLASS_DEFAULT_DECORATION);
-        main_header.add_css_class (Granite.STYLE_CLASS_FLAT);
 
         task_list_grid_stack = new Gtk.Stack ();
 
-        var main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-        main_box.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
+        var main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
+            css_classes = { Granite.STYLE_CLASS_BACKGROUND }
+        };
         main_box.append (main_header);
         main_box.append (task_list_grid_stack);
 

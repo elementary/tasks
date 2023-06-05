@@ -167,32 +167,32 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             child = location_popover
         };
 
-        //  location_popover.value_format.connect ((value) => {
-        //      if (value == null) {
-        //          return null;
-        //      }
-        //      var location = (value.display_name == null ? value.postal_address : value.display_name);
+        location_popover.value_format.connect ((value) => {
+            if (value == null) {
+                return null;
+            }
+            var location = (value.display_name == null ? value.postal_address : value.display_name);
 
-        //      switch (value.proximity) {
-        //          case Tasks.LocationProximity.ARRIVE:
-        //              return _("Arriving: %s").printf (location);
+            switch (value.proximity) {
+                case Tasks.LocationProximity.ARRIVE:
+                    return _("Arriving: %s").printf (location);
 
-        //          case Tasks.LocationProximity.DEPART:
-        //              return _("Leaving: %s").printf (location);
+                case Tasks.LocationProximity.DEPART:
+                    return _("Leaving: %s").printf (location);
 
-        //          default:
-        //              return location;
-        //      }
-        //  });
+                default:
+                    return location;
+            }
+        });
 
-        //  location_popover.value_changed.connect ((value) => {
-        //      if (!task_form_revealer.reveal_child) {
-        //          if (value == null) {
-        //              location_popover_revealer.reveal_child = false;
-        //          }
-        //          save_task (task);
-        //      }
-        //  });
+        location_popover.value_changed.connect ((value) => {
+            if (!task_form_revealer.reveal_child) {
+                if (value == null) {
+                    location_popover_revealer.reveal_child = false;
+                }
+                save_task (task);
+            }
+        });
 
         description_label = new Gtk.Label (null) {
             xalign = 0,
@@ -445,7 +445,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             task_detail_revealer.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
             due_datetime_popover_revealer.reveal_child = false;
-            //  location_popover_revealer.reveal_child = false;
+            location_popover_revealer.reveal_child = false;
 
             description_label_revealer.reveal_child = false;
             description_textbuffer.text = "";
@@ -482,13 +482,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
                 due_datetime_popover_revealer.reveal_child = true;
             }
 
-            //  var location = Util.get_ecalcomponent_location (task);
-            //  if (location == null) {
-            //      location_popover_revealer.reveal_child = false;
-            //  } else {
-            //      location_popover.value = location;
-            //      location_popover_revealer.reveal_child = true;
-            //  }
+            var location = Util.get_ecalcomponent_location (task);
+            if (location == null) {
+                location_popover_revealer.reveal_child = false;
+            } else {
+                location_popover.value = location;
+                location_popover_revealer.reveal_child = true;
+            }
 
             if (ical_task.get_description () == null) {
                 description_label.label = "";
@@ -513,11 +513,11 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private void task_details_reveal_request (bool value) {
         description_label_revealer.reveal_child = value && description_label.label != null && description_label.label.strip ().length > 0;
         due_datetime_popover_revealer.reveal_child = !value || due_datetime_popover.value != null;
-        //  location_popover_revealer.reveal_child = !value || location_popover.value != null;
+        location_popover_revealer.reveal_child = !value || location_popover.value != null;
 
         task_detail_revealer.reveal_child = description_label_revealer.reveal_child ||
-            due_datetime_popover_revealer.reveal_child;
-            //  location_popover_revealer.reveal_child;
+            due_datetime_popover_revealer.reveal_child ||
+            location_popover_revealer.reveal_child;
     }
 
     private void remove_request () {
