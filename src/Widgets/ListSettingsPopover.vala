@@ -34,6 +34,8 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
     private Gtk.CheckButton color_button_none;
 
     construct {
+        autohide = true;
+
         color_button_blue = new Gtk.CheckButton ();
 
         color_button_blue.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
@@ -132,11 +134,19 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST
         );
 
-        var delete_list_menuitem = new Gtk.Button () {
-            action_name = delete_list_accel_label.action_name,
-            child = delete_list_accel_label
+        var delete_list_menuitem = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0) {
+            css_classes = { Granite.STYLE_CLASS_MENUITEM, Granite.STYLE_CLASS_DESTRUCTIVE_ACTION }
         };
-        delete_list_menuitem.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
+        delete_list_menuitem.append (delete_list_accel_label);
+        
+        var gesture_click = new Gtk.GestureClick ();
+        delete_list_menuitem.add_controller (gesture_click);
+        gesture_click.released.connect (() => {
+            hide ();
+
+            unowned var main_window = (Gtk.ApplicationWindow) get_root ();
+            ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).activate (null);
+        });
 
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_top = 3,
