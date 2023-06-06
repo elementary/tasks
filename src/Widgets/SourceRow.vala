@@ -129,7 +129,6 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     private bool on_drag_drop (GLib.Value value, double x, double y) {
         parse_data ((string) value);
 
-
         var drop_successful = false;
         if (received_drag_data != null && received_drag_data.size > 0) {
             drop_successful = true;

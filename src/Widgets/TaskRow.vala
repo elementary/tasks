@@ -562,12 +562,14 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         drag_source.prepare.connect (on_drag_prepare);
         drag_source.drag_begin.connect (on_drag_begin);
-        drag_source.drag_end.connect (on_drag_data_delete);
+        drag_source.drag_cancel.connect (on_drag_cancel);
+        drag_source.drag_end.connect (on_drag_end);
     }
 
     private int drag_offset_x;
     private int drag_offset_y;
     private bool had_cards_class;
+    private bool is_canceled;
 
     private Gdk.ContentProvider? on_drag_prepare (double x, double y) {
         drag_offset_x = (int) x;
@@ -580,6 +582,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         drag_source.set_icon (new Gtk.WidgetPaintable (this), drag_offset_x, drag_offset_y);
 
         had_cards_class = has_css_class (Granite.STYLE_CLASS_CARD);
+        is_canceled = false;
 
         add_css_class ("drag-active");
         if (had_cards_class) {
@@ -587,13 +590,21 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         }
     }
 
-    private void on_drag_data_delete (Gdk.Drag drag, bool delete_data) {
-        ((Gtk.ListBox) parent).remove (this);
-        destroy ();
+    private bool on_drag_cancel (Gdk.Drag drag, Gdk.DragCancelReason reason) {
+        is_canceled = true;
 
-        remove_css_class ("drag-active");
-        if (had_cards_class) {
-            add_css_class (Granite.STYLE_CLASS_CARD);
+        return true;
+    }
+
+    private void on_drag_end (Gdk.Drag drag, bool delete_data) {
+        if (is_canceled) {
+            remove_css_class ("drag-active");
+            if (had_cards_class) {
+                add_css_class (Granite.STYLE_CLASS_CARD);
+            }
+        } else {
+            ((Gtk.ListBox) parent).remove (this);
+            destroy ();
         }
     }
 }
