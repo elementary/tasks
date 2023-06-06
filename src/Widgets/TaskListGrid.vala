@@ -58,10 +58,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             css_classes = { Granite.STYLE_CLASS_FLAT, Granite.STYLE_CLASS_DIM_LABEL }
         };
 
-        var placeholder = new Gtk.Label (_("No Tasks")) {
-            css_classes = { Granite.STYLE_CLASS_DIM_LABEL, Granite.STYLE_CLASS_H2_LABEL}
-        };
-
         add_task_list = new Gtk.ListBox () {
             margin_top = 24,
             selection_mode = Gtk.SelectionMode.SINGLE,
@@ -93,13 +89,17 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         });
         add_task_list.append (add_task_row);
 
+        var placeholder = new Gtk.Label (_("No Tasks")) {
+            css_classes = { Granite.STYLE_CLASS_DIM_LABEL, Granite.STYLE_CLASS_H2_LABEL}
+        };
+
         task_list = new Gtk.ListBox () {
             selection_mode = Gtk.SelectionMode.SINGLE,
             activate_on_single_click = true,
             css_classes = { Granite.STYLE_CLASS_BACKGROUND }
         };
-        task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
+        task_list.set_placeholder (placeholder);
 
         var scrolled_window = new Gtk.ScrolledWindow () {
             hexpand = true,
