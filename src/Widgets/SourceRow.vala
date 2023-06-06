@@ -21,8 +21,6 @@
 public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
 
-    private static Gtk.CssProvider listrow_provider;
-
     private Gtk.Grid source_color;
     private Gtk.Image status_image;
     private Gtk.Label display_name_label;
@@ -34,17 +32,16 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     }
 
     static construct {
-        listrow_provider = new Gtk.CssProvider ();
-        listrow_provider.load_from_resource ("io/elementary/tasks/SourceRow.css");
+        var style_provider = new Gtk.CssProvider ();
+        style_provider.load_from_resource ("io/elementary/tasks/SourceRow.css");
+        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     construct {
         source_color = new Gtk.Grid () {
             valign = Gtk.Align.CENTER
         };
-
         source_color.add_css_class ("source-color");
-        source_color.get_style_context ().add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         display_name_label = new Gtk.Label (source.display_name) {
             halign = Gtk.Align.START,
@@ -55,7 +52,6 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         status_image = new Gtk.Image () {
             pixel_size = 16
         };
-        status_image.get_style_context ().add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var spinner = new Gtk.Spinner () {
             spinning = true,
@@ -80,7 +76,6 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         };
 
         child = revealer;
-        get_style_context ().add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         build_drag_and_drop ();
 

@@ -93,7 +93,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         icon.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         check = new Gtk.CheckButton () {
-            valign = Gtk.Align.CENTER
+            valign = Gtk.Align.CENTER,
+            css_classes = { "task-row-check" }
         };
 
         state_stack = new Gtk.Stack () {
@@ -425,7 +426,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
     public void update_request () {
         if (!is_scheduled_view) {
-            Tasks.Application.set_task_color (source, check);
+            // FIXME: check.get_first_child () is used because Gtk.StyleContext.add_provider works differently in Gtk4
+            // Also, it's deprecated now, so we need to use Gtk.StyleContext.add_provider_for_display
+            Tasks.Application.set_task_color (source, check.get_first_child ());
         }
 
         var default_due_datetime = new DateTime.now_local ().add_hours (1);
