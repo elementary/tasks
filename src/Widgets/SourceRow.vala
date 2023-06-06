@@ -116,10 +116,8 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
 
     private Gee.HashMultiMap<string, string> received_drag_data;
 
-    private async bool on_drag_drop_move_tasks () throws Error {
+    private async void on_drag_drop_move_tasks () throws Error {
         E.SourceRegistry registry = yield Application.model.get_registry ();
-        var move_successful = true;
-
         var source_uids = received_drag_data.get_keys ();
         foreach (var source_uid in source_uids) {
             var src_source = registry.ref_source (source_uid);
@@ -127,27 +125,26 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
             var component_uids = received_drag_data.get (source_uid);
             foreach (var component_uid in component_uids) {
                 if (!yield Application.model.move_task (src_source, source, component_uid)) {
-                    move_successful = false;
+                    warning ("Couldn't move task %s to %s", component_uid, source.uid);
                 }
             }
         }
-        return move_successful;
     }
 
     private bool on_drag_drop (GLib.Value value, double x, double y) {
         warning ("Drop");
-        var uri = (string) value;
-        drag_data_received (uri);
+
+        parse_data ((string) value);
+
 
         var drop_successful = false;
-        var move_successful = false;
-        if (uri != null) {
+        if (received_drag_data != null && received_drag_data.size > 0) {
             drop_successful = true;
 
             on_drag_drop_move_tasks.begin ((obj, res) => {
                 try {
-                    move_successful = on_drag_drop_move_tasks.end (res);
-
+                    on_drag_drop_move_tasks.end (res);
+                    warning ("Ended transferring tasks");
                 } catch (Error e) {
                     var error_dialog = new Granite.MessageDialog (
                         _("Moving task failed"),
@@ -160,7 +157,6 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
                     error_dialog.response.connect (() => {
                         error_dialog.destroy ();
                     });
-
                 }
             });
         }
@@ -168,7 +164,7 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         return drop_successful;
     }
 
-    private void drag_data_received (string uri) {
+    private void parse_data (string uri) {
         received_drag_data = new Gee.HashMultiMap<string,string> ();
 
         var uri_scheme = "task://";

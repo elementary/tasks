@@ -563,6 +563,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Gdk.ContentProvider? on_drag_prepare (double x, double y) {
         drag_offset_x = (int) x;
         drag_offset_y = (int) y;
+
         return new Gdk.ContentProvider.for_value ("task://%s/%s".printf (source.uid, task.get_uid ()));
     }
 
@@ -578,13 +579,14 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     }
 
     private void on_drag_data_delete (Gdk.Drag drag, bool delete_data) {
+        warning ("Data delete");
+
+        unparent ();
+        destroy ();
+
         remove_css_class ("drag-active");
         if (had_cards_class) {
             add_css_class (Granite.STYLE_CLASS_CARD);
-        }
-
-        if (delete_data) {
-            destroy ();
         }
     }
 }
