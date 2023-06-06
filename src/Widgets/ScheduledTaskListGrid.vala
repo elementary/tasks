@@ -59,6 +59,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
         }
 
         for (int i = 0; i < children_for_removal.length; i++) {
+            remove (children_for_removal[i]);
             children_for_removal[i].destroy ();
         }
 
