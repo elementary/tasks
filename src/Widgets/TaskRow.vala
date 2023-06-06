@@ -255,7 +255,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         var button_grid = new Gtk.Grid () {
             margin_top = 12,
-            column_homogeneous = true
+            column_homogeneous = true,
+            css_classes = { "button-box" }
         };
         button_grid.attach (right_buttons_box, 1, 0);
 

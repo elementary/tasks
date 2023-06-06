@@ -80,6 +80,10 @@ public class Tasks.Application : Gtk.Application {
             granite_settings.notify["prefers-color-scheme"].connect (() => {
                 gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
             });
+
+            var button_box_style_provider = new Gtk.CssProvider ();
+            button_box_style_provider.load_from_resource ("io/elementary/tasks/ButtonBox.css");
+            Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), button_box_style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         }
 
         active_window.present ();
