@@ -132,8 +132,6 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     }
 
     private bool on_drag_drop (GLib.Value value, double x, double y) {
-        warning ("Drop");
-
         parse_data ((string) value);
 
 
@@ -144,7 +142,6 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
             on_drag_drop_move_tasks.begin ((obj, res) => {
                 try {
                     on_drag_drop_move_tasks.end (res);
-                    warning ("Ended transferring tasks");
                 } catch (Error e) {
                     var error_dialog = new Granite.MessageDialog (
                         _("Moving task failed"),
