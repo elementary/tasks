@@ -147,7 +147,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         child = paned;
 
         // We need to hide the title area for the split headerbar
-        titlebar =  new Gtk.Grid () { visible = false };
+        titlebar = new Gtk.Grid () { visible = false };
 
         var settings = new GLib.Settings ("io.elementary.tasks");
         settings.bind ("window-width", this, "default-width", SettingsBindFlags.DEFAULT);
