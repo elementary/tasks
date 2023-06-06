@@ -24,6 +24,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
     private EditableLabel editable_title;
     private Gtk.ListBox add_task_list;
+    private Gtk.Label placeholder;
     private Gtk.ListBox task_list;
     private bool is_gtasks;
 
@@ -89,7 +90,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         });
         add_task_list.append (add_task_row);
 
-        var placeholder = new Gtk.Label (_("No Tasks")) {
+        placeholder = new Gtk.Label (_("No Tasks")) {
             css_classes = { Granite.STYLE_CLASS_DIM_LABEL, Granite.STYLE_CLASS_H2_LABEL}
         };
 
@@ -192,11 +193,18 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     private void set_view_for_query (string query) {
-        unowned var child = task_list.get_first_child ();
+        Gtk.Widget[] children_for_removal = {};
+        unowned var child = get_first_child ();
         while (child != null) {
-            task_list.remove (child);
+            if (child != placeholder) {
+                children_for_removal += child;
+            }
 
-            child = task_list.get_first_child ();
+            child = child.get_next_sibling ();
+        }
+
+        for (int i = 0; i < children_for_removal.length; i++) {
+            children_for_removal[i].destroy ();
         }
 
         if (view != null) {
