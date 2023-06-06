@@ -237,11 +237,15 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             child = description_textview
         };
 
+        var buttons_size_group = new Gtk.SizeGroup (Gtk.SizeGroupMode.HORIZONTAL);
+
         var cancel_button = new Gtk.Button.with_label (_("Cancel"));
+        buttons_size_group.add_widget (cancel_button);
 
         var save_button = new Gtk.Button.with_label (created ? _("Save Changes") : _("Add Task")) {
             css_classes = { Granite.STYLE_CLASS_SUGGESTED_ACTION }
         };
+        buttons_size_group.add_widget (save_button);
 
         var right_buttons_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             halign = Gtk.Align.END
@@ -300,6 +304,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
                 halign = Gtk.Align.START,
                 css_classes = { Granite.STYLE_CLASS_DESTRUCTIVE_ACTION }
             };
+            buttons_size_group.add_widget (delete_button);
 
             button_grid.attach (delete_button, 0, 0);
 
