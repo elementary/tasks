@@ -88,7 +88,7 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     }
 
     private void build_drag_and_drop () {
-        var drop_target = new Gtk.DropTarget (Type.STRING, Gdk.DragAction.MOVE);
+        var drop_target = new Gtk.DropTarget (typeof (string), Gdk.DragAction.COPY);
         add_controller (drop_target);
 
         drop_target.accept.connect (on_drop_accept);
@@ -107,7 +107,7 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
             add_css_class ("drop-hover");
         }
 
-        return Gdk.DragAction.MOVE;
+        return Gdk.DragAction.COPY;
     }
 
     private void on_drag_leave () {
@@ -135,6 +135,7 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     }
 
     private bool on_drag_drop (GLib.Value value, double x, double y) {
+        warning ("Drop");
         var uri = (string) value;
         drag_data_received (uri);
 
