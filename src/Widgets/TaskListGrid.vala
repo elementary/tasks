@@ -194,9 +194,10 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
     private void set_view_for_query (string query) {
         Gtk.Widget[] children_for_removal = {};
-        unowned var child = get_first_child ();
+        unowned var child = task_list.get_first_child ();
         while (child != null) {
             if (child != placeholder) {
+                var a = (Widgets.TaskRow) child;
                 children_for_removal += child;
             }
 
@@ -204,6 +205,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         }
 
         for (int i = 0; i < children_for_removal.length; i++) {
+            task_list.remove (children_for_removal[i]);
             children_for_removal[i].destroy ();
         }
 
@@ -377,7 +379,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     private void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
-        Tasks.Widgets.TaskRow task_row = null;
+        unowned Tasks.Widgets.TaskRow task_row = null;
         var row_index = 0;
 
         do {
