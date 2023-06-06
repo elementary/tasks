@@ -131,7 +131,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         task_list_grid_stack = new Gtk.Stack ();
 
         var main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
-            css_classes = { Granite.STYLE_CLASS_VIEW }
+            css_classes = { Granite.STYLE_CLASS_BACKGROUND }
         };
         main_box.append (main_header);
         main_box.append (task_list_grid_stack);
