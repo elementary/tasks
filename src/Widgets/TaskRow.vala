@@ -579,9 +579,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     }
 
     private void on_drag_data_delete (Gdk.Drag drag, bool delete_data) {
-        warning ("Data delete");
-
-        unparent ();
+        ((Gtk.ListBox) parent).remove (this);
         destroy ();
 
         remove_css_class ("drag-active");
