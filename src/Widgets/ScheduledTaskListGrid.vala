@@ -115,7 +115,6 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
         };
 
         orientation = Gtk.Orientation.VERTICAL;
-        spacing = 12;
         append (scheduled_title);
         append (scrolled_window);
 
