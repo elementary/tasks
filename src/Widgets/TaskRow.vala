@@ -1,22 +1,7 @@
 /*
-* Copyright 2019 elementary, Inc. (https://elementary.io)
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public
-* License along with this program; if not, write to the
-* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-* Boston, MA 02110-1301 USA
-*
-*/
+ * Copyright 2019-2023 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
@@ -212,15 +197,15 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         };
         description_label_revealer.add (description_label);
 
-        var task_grid = new Gtk.Grid ();
-        task_grid.add (due_datetime_popover_revealer);
-        task_grid.add (location_popover_revealer);
-        task_grid.add (description_label_revealer);
+        var task_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        task_box.add (due_datetime_popover_revealer);
+        task_box.add (location_popover_revealer);
+        task_box.add (description_label_revealer);
 
         task_detail_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_UP
         };
-        task_detail_revealer.add (task_grid);
+        task_detail_revealer.add (task_box);
 
         var description_textview = new Granite.HyperTextView () {
             border_width = 12,
@@ -251,22 +236,23 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         button_box.add (cancel_button);
         button_box.add (save_button);
 
-        var form_grid = new Gtk.Grid () {
-            column_spacing = 12,
-            row_spacing = 12,
-            margin_top = margin_bottom = 6
+        var form_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 12) {
+            margin_top = 6,
+            margin_bottom = 6
         };
-        form_grid.attach (description_frame, 0, 0);
-        form_grid.attach (button_box, 0, 1);
+        form_box.add (description_frame);
+        form_box.add (button_box);
 
         task_form_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN
         };
-        task_form_revealer.add (form_grid);
+        task_form_revealer.add (form_box);
 
         var grid = new Gtk.Grid () {
-            margin = 6,
-            margin_start = margin_end = 12,
+            margin_top = 6,
+            margin_bottom = 6,
+            margin_start = 12,
+            margin_end = 12,
             column_spacing = 6,
             row_spacing = 3
         };
@@ -282,7 +268,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         revealer.add (grid);
 
         event_box = new Gtk.EventBox () {
-            expand = true,
+            hexpand = true,
+            vexpand = true,
             above_child = false
         };
         event_box.add_events (

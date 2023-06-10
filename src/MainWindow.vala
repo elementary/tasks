@@ -1,22 +1,7 @@
 /*
-* Copyright 2019 elementary, Inc. (https://elementary.io)
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public
-* License along with this program; if not, write to the
-* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-* Boston, MA 02110-1301 USA
-*
-*/
+ * Copyright 2019-2023 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 public class Tasks.MainWindow : Hdy.ApplicationWindow {
     public const string ACTION_GROUP_PREFIX = "win";
@@ -95,7 +80,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         listbox.add (scheduled_row);
 
         var scrolledwindow = new Gtk.ScrolledWindow (null, null) {
-            expand = true,
+            hexpand = true,
+            vexpand = true,
             hscrollbar_policy = Gtk.PolicyType.NEVER
         };
         scrolledwindow.add (listbox);
@@ -108,18 +94,17 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             text = _("Online Accounts Settings…")
         };
 
-        var add_tasklist_grid = new Gtk.Grid () {
+        var add_tasklist_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 3) {
             margin_top = 3,
-            margin_bottom = 3,
-            row_spacing = 3
+            margin_bottom = 3
         };
-        add_tasklist_grid.attach (add_tasklist_buttonbox, 0, 0);
-        add_tasklist_grid.attach (new Gtk.Separator (Gtk.Orientation.HORIZONTAL), 0, 1);
-        add_tasklist_grid.attach (online_accounts_button, 0, 2);
-        add_tasklist_grid.show_all ();
+        add_tasklist_box.add (add_tasklist_buttonbox);
+        add_tasklist_box.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        add_tasklist_box.add (online_accounts_button);
+        add_tasklist_box.show_all ();
 
         var add_tasklist_popover = new Gtk.Popover (null);
-        add_tasklist_popover.add (add_tasklist_grid);
+        add_tasklist_popover.add (add_tasklist_box);
 
         var add_tasklist_button = new Gtk.MenuButton () {
             label = _("Add Task List…"),
@@ -134,24 +119,23 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         unowned Gtk.StyleContext actionbar_style_context = actionbar.get_style_context ();
         actionbar_style_context.add_class (Gtk.STYLE_CLASS_FLAT);
 
-        var sidebar = new Gtk.Grid ();
-        sidebar.attach (sidebar_header, 0, 0);
-        sidebar.attach (scrolledwindow, 0, 1);
-        sidebar.attach (actionbar, 0, 2);
+        var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        sidebar.get_style_context ().add_class (Gtk.STYLE_CLASS_SIDEBAR);
+        sidebar.add (sidebar_header);
+        sidebar.add (scrolledwindow);
+        sidebar.add (actionbar);
 
-        unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
-        sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);
 
         task_list_grid_stack = new Gtk.Stack ();
 
-        var main_grid = new Gtk.Grid ();
-        main_grid.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
-        main_grid.attach (main_header, 0, 0);
-        main_grid.attach (task_list_grid_stack, 0, 1);
+        var main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        main_box.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
+        main_box.add (main_header);
+        main_box.add (task_list_grid_stack);
 
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
         paned.pack1 (sidebar, false, false);
-        paned.pack2 (main_grid, true, false);
+        paned.pack2 (main_box, true, false);
 
         add (paned);
 
@@ -207,9 +191,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
 
                     } else if (row is Tasks.Widgets.ScheduledRow) {
-                        var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListGrid) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
+                        var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListBox) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
                         if (scheduled_task_list_grid == null) {
-                            scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListGrid (Tasks.Application.model);
+                            scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListBox (Tasks.Application.model);
                             task_list_grid_stack.add_named (scheduled_task_list_grid, SCHEDULED_LIST_UID);
                         }
 

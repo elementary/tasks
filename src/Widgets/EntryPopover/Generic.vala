@@ -1,21 +1,7 @@
 /*
-* Copyright 2021 elementary, Inc. (https://elementary.io)
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public
-* License along with this program; if not, write to the
-* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-* Boston, MA 02110-1301 USA
-*/
+ * Copyright 2021-2023 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
     public signal string? value_format (T value);
@@ -77,7 +63,7 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
         };
         delete_button_revealer.add (delete_button);
 
-        var button_box = new Gtk.Grid ();
+        var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
         button_box.add (popover_button);
         button_box.add (delete_button_revealer);
         button_box.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);

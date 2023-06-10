@@ -1,21 +1,7 @@
 /*
-* Copyright 2021 elementary, Inc. (https://elementary.io)
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public
-* License along with this program; if not, write to the
-* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-* Boston, MA 02110-1301 USA
-*/
+ * Copyright 2021-2023 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
     private Gtk.Calendar calendar;
@@ -31,18 +17,22 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
 
     construct {
         calendar = new Gtk.Calendar () {
-            margin = 6
+            margin_top = 6,
+            margin_bottom = 6,
+            margin_start = 6,
+            margin_end = 6
         };
         calendar.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         timepicker = new Granite.Widgets.TimePicker () {
-            margin = 12,
-            margin_top = 0
+            margin_top = 0,
+            margin_bottom = 12,
+            margin_start = 12,
+            margin_end = 12
         };
 
         timepicker_revealer = new Gtk.Revealer () {
-            reveal_child = true,
-            margin = 0
+            reveal_child = true
         };
 
         timepicker_revealer.add (timepicker);
@@ -56,16 +46,16 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             text = _("Today")
         };
 
-        var grid = new Gtk.Grid () {
-            margin_top= 3
+        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
+            margin_top = 3
         };
-        grid.attach (today_button, 0, 0);
-        grid.attach (today_separator, 0, 1);
-        grid.attach (calendar, 0, 2);
-        grid.attach (timepicker_revealer, 0, 3);
-        grid.show_all ();
+        box.add (today_button);
+        box.add (today_separator);
+        box.add (calendar);
+        box.add (timepicker_revealer);
+        box.show_all ();
 
-        popover.add (grid);
+        popover.add (box);
 
         popover.show.connect (on_popover_show);
 

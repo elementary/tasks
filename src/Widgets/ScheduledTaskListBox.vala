@@ -1,24 +1,9 @@
 /*
-* Copyright 2019 elementary, Inc. (https://elementary.io)
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public
-* License along with this program; if not, write to the
-* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-* Boston, MA 02110-1301 USA
-*
-*/
+ * Copyright 2019-2023 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
-public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
+public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
     private Gee.Map<E.Source, ECal.ClientView> views;
     private const string QUERY = "AND (NOT is-completed?) (has-start?)";
 
@@ -66,7 +51,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
     private Gtk.Label scheduled_title;
     private Gtk.ListBox task_list;
 
-    public ScheduledTaskListGrid (Tasks.TaskModel model) {
+    public ScheduledTaskListBox (Tasks.TaskModel model) {
         Object (model: model);
     }
 
@@ -101,18 +86,18 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow (null, null) {
-            expand = true,
+            hexpand = true,
+            vexpand = true,
             hscrollbar_policy = Gtk.PolicyType.NEVER
         };
         scrolled_window.add (task_list);
 
-        column_spacing = 12;
-        attach (scheduled_title, 0, 0);
-        attach (scrolled_window, 0, 1);
+        orientation = Gtk.Orientation.VERTICAL;
+        add (scheduled_title);
+        add (scrolled_window);
+        show_all ();
 
         task_list.row_activated.connect (on_row_activated);
-
-        show_all ();
 
         model.task_list_added.connect (add_task_list);
         model.task_list_modified.connect (modify_task_list);
