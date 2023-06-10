@@ -283,7 +283,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         revealer.add (grid);
 
         event_box = new Gtk.EventBox () {
-            expand = true,
+            hexpand = true,
+            vexpand = true,
             above_child = false
         };
         event_box.add_events (

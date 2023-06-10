@@ -95,7 +95,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         listbox.add (scheduled_row);
 
         var scrolledwindow = new Gtk.ScrolledWindow (null, null) {
-            expand = true,
+            hexpand = true,
+            vexpand = true,
             hscrollbar_policy = Gtk.PolicyType.NEVER
         };
         scrolledwindow.add (listbox);

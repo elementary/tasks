@@ -109,7 +109,8 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow (null, null) {
-            expand = true,
+            hexpand = true,
+            vexpand = true,
             hscrollbar_policy = Gtk.PolicyType.NEVER
         };
         scrolled_window.add (task_list);

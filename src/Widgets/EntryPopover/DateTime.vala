@@ -31,18 +31,22 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
 
     construct {
         calendar = new Gtk.Calendar () {
-            margin = 6
+            margin_top = 6,
+            margin_bottom = 6,
+            margin_start = 6,
+            margin_end = 6
         };
         calendar.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         timepicker = new Granite.Widgets.TimePicker () {
-            margin = 12,
-            margin_top = 0
+            margin_top = 0,
+            margin_bottom = 12,
+            margin_start = 12,
+            margin_end = 12
         };
 
         timepicker_revealer = new Gtk.Revealer () {
-            reveal_child = true,
-            margin = 0
+            reveal_child = true
         };
 
         timepicker_revealer.add (timepicker);
