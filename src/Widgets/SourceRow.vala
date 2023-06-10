@@ -67,19 +67,18 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         status_stack.add_named (status_image, "image");
         status_stack.add_named (spinner, "spinner");
 
-        var grid = new Gtk.Grid () {
-            column_spacing = 6,
+        var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             margin_start = 12,
             margin_end = 6
         };
-        grid.add (source_color);
-        grid.add (display_name_label);
-        grid.add (status_stack);
+        box.add (source_color);
+        box.add (display_name_label);
+        box.add (status_stack);
 
         revealer = new Gtk.Revealer () {
             reveal_child = true
         };
-        revealer.add (grid);
+        revealer.add (box);
 
         add (revealer);
         get_style_context ().add_provider (listrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);

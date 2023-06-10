@@ -27,7 +27,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
     private Gtk.Label title;
     private Gtk.Entry entry;
     private Gtk.Stack stack;
-    private Gtk.Grid grid;
+    private Gtk.Box box;
 
     public string text { get; set; }
 
@@ -44,7 +44,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
                     changed ();
                 }
 
-                stack.set_visible_child (grid);
+                stack.set_visible_child (box);
             }
         }
     }
@@ -81,12 +81,11 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
         };
         button_revealer.add (edit_button);
 
-        grid = new Gtk.Grid () {
-            valign = Gtk.Align.CENTER,
-            column_spacing = 12
+        box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12) {
+            valign = Gtk.Align.CENTER
         };
-        grid.add (title);
-        grid.add (button_revealer);
+        box.add (title);
+        box.add (button_revealer);
 
         entry = new Gtk.Entry () {
             hexpand = true
@@ -97,7 +96,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
             hhomogeneous = false,
             transition_type = Gtk.StackTransitionType.CROSSFADE
         };
-        stack.add (grid);
+        stack.add (box);
         stack.add (entry);
 
         add (stack);

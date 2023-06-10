@@ -18,7 +18,7 @@
 *
 */
 
-public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
+public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
     private Gee.Map<E.Source, ECal.ClientView> views;
     private const string QUERY = "AND (NOT is-completed?) (has-start?)";
 
@@ -66,7 +66,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
     private Gtk.Label scheduled_title;
     private Gtk.ListBox task_list;
 
-    public ScheduledTaskListGrid (Tasks.TaskModel model) {
+    public ScheduledTaskListBox (Tasks.TaskModel model) {
         Object (model: model);
     }
 
@@ -101,18 +101,18 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Grid {
         task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow (null, null) {
-            expand = true,
+            hexpand = true,
+            vexpand = true,
             hscrollbar_policy = Gtk.PolicyType.NEVER
         };
         scrolled_window.add (task_list);
 
-        column_spacing = 12;
-        attach (scheduled_title, 0, 0);
-        attach (scrolled_window, 0, 1);
+        orientation = Gtk.Orientation.VERTICAL;
+        add (scheduled_title);
+        add (scrolled_window);
+        show_all ();
 
         task_list.row_activated.connect (on_row_activated);
-
-        show_all ();
 
         model.task_list_added.connect (add_task_list);
         model.task_list_modified.connect (modify_task_list);

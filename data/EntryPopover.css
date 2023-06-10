@@ -18,7 +18,7 @@
 *
 */
 
-entry-popover grid {
+entry-popover box {
     border-radius: 3px;
     background: @SILVER_300;
 }
@@ -29,7 +29,7 @@ entry-popover button {
     font-weight: 600;
 }
 
-entry-popover.error grid {
+entry-popover.error box {
     background: alpha (@error_color, 0.2);
 }
 

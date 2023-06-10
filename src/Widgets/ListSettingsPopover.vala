@@ -96,20 +96,22 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
 
         color_button_none = new Gtk.RadioButton.from_widget (color_button_blue);
 
-        var color_grid = new Gtk.Grid () {
-            column_spacing = 6,
-            margin = 12
+        var color_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
+            margin_top = 12,
+            margin_bottom = 12,
+            margin_start = 12,
+            margin_end = 12
         };
-        color_grid.add (color_button_blue);
-        color_grid.add (color_button_mint);
-        color_grid.add (color_button_green);
-        color_grid.add (color_button_yellow);
-        color_grid.add (color_button_orange);
-        color_grid.add (color_button_red);
-        color_grid.add (color_button_pink);
-        color_grid.add (color_button_purple);
-        color_grid.add (color_button_brown);
-        color_grid.add (color_button_slate);
+        color_box.add (color_button_blue);
+        color_box.add (color_button_mint);
+        color_box.add (color_button_green);
+        color_box.add (color_button_yellow);
+        color_box.add (color_button_orange);
+        color_box.add (color_button_red);
+        color_box.add (color_button_pink);
+        color_box.add (color_button_purple);
+        color_box.add (color_button_brown);
+        color_box.add (color_button_slate);
 
         var show_completed_button = new Granite.SwitchModelButton (_("Show Completed")) {
             margin_top = 3
@@ -126,17 +128,17 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
         delete_list_menuitem.add (delete_list_accel_label);
         delete_list_menuitem.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
-        var grid = new Gtk.Grid () {
-            orientation = Gtk.Orientation.VERTICAL,
-            margin_top = margin_bottom = 3
+        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
+            margin_top = 3,
+            margin_bottom = 3
         };
-        grid.add (color_grid);
-        grid.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
-        grid.add (show_completed_button);
-        grid.add (delete_list_menuitem);
-        grid.show_all ();
+        box.add (color_box);
+        box.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        box.add (show_completed_button);
+        box.add (delete_list_menuitem);
+        box.show_all ();
 
-        add (grid);
+        add (box);
 
         color_button_red.toggled.connect (() => {
             if (color_button_red.active) {

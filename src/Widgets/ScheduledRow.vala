@@ -30,14 +30,13 @@ public class Tasks.Widgets.ScheduledRow : Gtk.ListBoxRow {
             margin_end = 9
         };
 
-        var grid = new Gtk.Grid () {
-            column_spacing = 6,
+        var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             margin_start = 12,
             margin_end = 6
         };
-        grid.add (icon);
-        grid.add (display_name_label);
+        box.add (icon);
+        box.add (display_name_label);
 
-        add (grid);
+        add (box);
     }
 }

@@ -56,16 +56,16 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             text = _("Today")
         };
 
-        var grid = new Gtk.Grid () {
-            margin_top= 3
+        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
+            margin_top = 3
         };
-        grid.attach (today_button, 0, 0);
-        grid.attach (today_separator, 0, 1);
-        grid.attach (calendar, 0, 2);
-        grid.attach (timepicker_revealer, 0, 3);
-        grid.show_all ();
+        box.add (today_button);
+        box.add (today_separator);
+        box.add (calendar);
+        box.add (timepicker_revealer);
+        box.show_all ();
 
-        popover.add (grid);
+        popover.add (box);
 
         popover.show.connect (on_popover_show);
 
