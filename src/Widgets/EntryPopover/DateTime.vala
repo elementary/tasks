@@ -55,7 +55,7 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
         };
 
         var today_box = new Widgets.PopoverButton ();
-        today_box.append (new Gtk.Label (_("Today")) { hexpand = true, justify = Gtk.Justification.CENTER });
+        today_box.append (new Gtk.Label (_("Today")));
 
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_top = 3
