@@ -69,8 +69,6 @@ public class Tasks.Application : Gtk.Application {
             gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
         });
 
-        Gtk.IconTheme.get_default ().add_resource_path ("/io/elementary/tasks");
-
         var quit_action = new SimpleAction ("quit", null);
         quit_action.activate.connect (() => {
             if (active_window != null) {
