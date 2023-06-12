@@ -128,7 +128,7 @@ public class Tasks.Application : Gtk.Application {
         try {
             if (!yield portal.request_background (
                 parent,
-                _("Tasks will automatically start when this device turns on and run when its window is closed so that it can send notifications about todays tasks."),
+                _("Tasks will automatically start when this device turns on and run when its window is closed so that it can send notifications for due tasks."),
                 (owned) command,
                 Xdp.BackgroundFlags.AUTOSTART,
                 null
