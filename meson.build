@@ -40,7 +40,9 @@ tasks_deps = [
     dependency('libedataserver-1.2'),
     dependency('libgeoclue-2.0'),
     dependency('libhandy-1', version: '>=0.90.0'),
-    dependency('libical-glib')
+    dependency('libical-glib'),
+    dependency('libportal'),
+    dependency('libportal-gtk3')
 ]
 
 if libecal_dep.version().version_compare('>=3.46.0')

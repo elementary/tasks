@@ -139,6 +139,12 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         add (paned);
 
+        delete_event.connect (() => {
+            ((Application)application).request_background.begin (() => destroy ());
+
+            return Gdk.EVENT_STOP;
+        });
+
         online_accounts_button.clicked.connect (() => {
             try {
                 AppInfo.launch_default_for_uri ("settings://accounts/online", null);
