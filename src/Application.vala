@@ -122,7 +122,7 @@ public class Tasks.Application : Gtk.Application {
         Xdp.Parent? parent = active_window != null ? Xdp.parent_new_gtk (active_window) : null;
 
         var command = new GenericArray<weak string> ();
-        command.add ("io.elementary.mail");
+        command.add ("io.elementary.tasks");
         command.add ("--background");
 
         try {
