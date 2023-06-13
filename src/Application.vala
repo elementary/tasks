@@ -60,13 +60,13 @@ public class Tasks.Application : Gtk.Application {
 
         Hdy.init ();
 
-        var granite_settings = Granite.Settings.get_default ();
-        var gtk_settings = Gtk.Settings.get_default ();
+        unowned var granite_settings = Granite.Settings.get_default ();
+        unowned var gtk_settings = Gtk.Settings.get_default ();
 
-        gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+        gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == DARK;
 
-        granite_settings.notify["prefers-color-scheme"].connect (() => {
-            gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+        granite_settings.notify["prefers-color-scheme"].connect ((obj) => {
+            gtk_settings.gtk_application_prefer_dark_theme = ((Granite.Settings) obj).prefers_color_scheme == DARK;
         });
 
         var quit_action = new SimpleAction ("quit", null);
