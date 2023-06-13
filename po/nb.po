@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-13 01:40+0000\n"
-"PO-Revision-Date: 2022-06-19 02:33+0000\n"
+"PO-Revision-Date: 2023-06-16 00:07+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
 "tasks/nb/>\n"
@@ -17,13 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #: src/Application.vala:137
 msgid ""
 "Tasks will automatically start when this device turns on and run when its "
 "window is closed so that it can send notifications for due tasks."
 msgstr ""
+"Gjøremål vil starte med enheten og kjøre selv når vinduet lukkes slik at det "
+"kan sende merknader om gjøremålsfrister."
 
 #: src/MainWindow.vala:30
 #, fuzzy
