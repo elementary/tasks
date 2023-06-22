@@ -32,21 +32,6 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
         }
     }
 
-    private void remove_view (E.Source source) {
-        foreach (unowned Gtk.Widget child in get_children ()) {
-            if (child is Tasks.Widgets.TaskRow && ((Tasks.Widgets.TaskRow) child).source == source) {
-                child.destroy ();
-            }
-        }
-
-        lock (views) {
-            ECal.ClientView view;
-            if (views.unset (source, out view)) {
-                model.destroy_task_list_view (view);
-            }
-        }
-    }
-
     public Tasks.TaskModel model { get; construct; }
     private Gtk.Label scheduled_title;
     private Gtk.ListBox task_list;
@@ -99,10 +84,6 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
 
         task_list.row_activated.connect (on_row_activated);
 
-        model.task_list_added.connect (add_task_list);
-        model.task_list_modified.connect (modify_task_list);
-        model.task_list_removed.connect (remove_task_list);
-
         model.get_registry.begin ((obj, res) => {
             E.SourceRegistry registry;
             try {
@@ -128,15 +109,6 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
         if (list.selected == true && task_list.enabled == true && !task_list.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
             add_view (task_list, QUERY);
         }
-    }
-
-    private void modify_task_list (E.Source task_list) {
-        remove_task_list (task_list);
-        add_task_list (task_list);
-    }
-
-    private void remove_task_list (E.Source task_list) {
-        remove_view (task_list);
     }
 
     private void on_row_activated (Gtk.ListBoxRow row) {
