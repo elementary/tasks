@@ -33,7 +33,7 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
     }
 
     private void remove_view (E.Source source) {
-        foreach (unowned Gtk.Widget child in get_children ()) {
+        foreach (unowned Gtk.Widget child in task_list.get_children ()) {
             if (child is Tasks.Widgets.TaskRow && ((Tasks.Widgets.TaskRow) child).source == source) {
                 child.destroy ();
             }
