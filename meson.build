@@ -36,7 +36,9 @@ tasks_deps = [
     dependency('libedataserver-1.2'),
     dependency('libgeoclue-2.0'),
     # dependency('shumate-1.0'),
-    dependency('libical-glib')
+    dependency('libical-glib'),
+    dependency('libportal'),
+    dependency('libportal-gtk4')
 ]
 
 if libecal_dep.version().version_compare('>=3.46.0')
@@ -70,7 +72,7 @@ executable(
     'src/Widgets/ListSettingsPopover.vala',
     'src/Widgets/PopoverButton.vala',
     'src/Widgets/ScheduledRow.vala',
-    'src/Widgets/ScheduledTaskListGrid.vala',
+    'src/Widgets/ScheduledTaskListBox.vala',
     'src/Widgets/SourceRow.vala',
     'src/Widgets/TaskListGrid.vala',
     'src/Widgets/TaskRow.vala',

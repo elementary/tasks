@@ -1,22 +1,7 @@
 /*
-* Copyright 2019 elementary, Inc. (https://elementary.io)
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public
-* License along with this program; if not, write to the
-* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-* Boston, MA 02110-1301 USA
-*
-*/
+ * Copyright 2019-2023 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
@@ -212,15 +197,26 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             child = description_label
         };
 
+<<<<<<< HEAD
         var task_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 3);
         task_box.append (due_datetime_popover_revealer);
         task_box.append (location_popover_revealer);
         task_box.append (description_label_revealer);
+=======
+        var task_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        task_box.add (due_datetime_popover_revealer);
+        task_box.add (location_popover_revealer);
+        task_box.add (description_label_revealer);
+>>>>>>> master
 
         task_detail_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_UP,
             child = task_box
         };
+<<<<<<< HEAD
+=======
+        task_detail_revealer.add (task_box);
+>>>>>>> master
 
         var description_textview = new Granite.HyperTextView () {
             //  border_width = 12,
@@ -264,13 +260,22 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             margin_top = 6,
             margin_bottom = 6
         };
+<<<<<<< HEAD
         form_box.append (description_frame);
         form_box.append (button_grid);
+=======
+        form_box.add (description_frame);
+        form_box.add (button_box);
+>>>>>>> master
 
         task_form_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN,
             child = form_box
         };
+<<<<<<< HEAD
+=======
+        task_form_revealer.add (form_box);
+>>>>>>> master
 
         var grid = new Gtk.Grid () {
             margin_top = 6,
@@ -291,9 +296,22 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             child = grid
         };
 
+<<<<<<< HEAD
         child = revealer;
         margin_start = 12;
         margin_end = 12;
+=======
+        event_box = new Gtk.EventBox () {
+            hexpand = true,
+            vexpand = true,
+            above_child = false
+        };
+        event_box.add_events (
+            Gdk.EventMask.BUTTON_PRESS_MASK |
+            Gdk.EventMask.BUTTON_RELEASE_MASK
+        );
+        event_box.add (revealer);
+>>>>>>> master
 
         add_css_class (Granite.STYLE_CLASS_ROUNDED);
 

@@ -28,6 +28,7 @@ public class Tasks.Application : Gtk.Application {
     public static Tasks.TaskModel model;
     public static bool run_in_background = false;
 
+    private bool first_activation = true;
     public Application () {
         Object (
             application_id: "io.elementary.tasks",
@@ -47,6 +48,21 @@ public class Tasks.Application : Gtk.Application {
         GLib.Intl.textdomain (GETTEXT_PACKAGE);
 
         add_main_option_entries (OPTIONS);
+    }
+
+    protected override void startup () {
+        base.startup ();
+
+        Hdy.init ();
+
+        unowned var granite_settings = Granite.Settings.get_default ();
+        unowned var gtk_settings = Gtk.Settings.get_default ();
+
+        gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == DARK;
+
+        granite_settings.notify["prefers-color-scheme"].connect ((obj) => {
+            gtk_settings.gtk_application_prefer_dark_theme = ((Granite.Settings) obj).prefers_color_scheme == DARK;
+        });
 
         var quit_action = new SimpleAction ("quit", null);
         quit_action.activate.connect (() => {
@@ -57,13 +73,19 @@ public class Tasks.Application : Gtk.Application {
 
         add_action (quit_action);
         set_accels_for_action ("app.quit", {"<Control>q"});
+
+        new Tasks.TodayTaskMonitor ().start.begin ();
     }
 
     protected override void activate () {
+        if (first_activation) {
+            first_activation = false;
+            hold ();
+        }
+
         if (run_in_background) {
             run_in_background = false;
-            new Tasks.TodayTaskMonitor ().start.begin ();
-            hold ();
+            request_background.begin ();
             return;
         }
 
@@ -87,6 +109,35 @@ public class Tasks.Application : Gtk.Application {
         }
 
         active_window.present ();
+    }
+
+    public async void request_background () {
+        var portal = new Xdp.Portal ();
+
+        Xdp.Parent? parent = active_window != null ? Xdp.parent_new_gtk (active_window) : null;
+
+        var command = new GenericArray<weak string> ();
+        command.add ("io.elementary.tasks");
+        command.add ("--background");
+
+        try {
+            if (!yield portal.request_background (
+                parent,
+                _("Tasks will automatically start when this device turns on and run when its window is closed so that it can send notifications for due tasks."),
+                (owned) command,
+                Xdp.BackgroundFlags.AUTOSTART,
+                null
+            )) {
+                release ();
+            }
+        } catch (Error e) {
+            if (e is IOError.CANCELLED) {
+                debug ("Request for autostart and background permissions denied: %s", e.message);
+                release ();
+            } else {
+                warning ("Failed to request autostart and background permissions: %s", e.message);
+            }
+        }
     }
 
     private static Gee.HashMap<string, Gtk.CssProvider>? providers;

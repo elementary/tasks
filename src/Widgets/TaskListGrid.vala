@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
 * Copyright 2019-2023 elementary, Inc. (https://elementary.io)
 *
 * This program is free software; you can redistribute it and/or
@@ -17,6 +18,11 @@
 * Boston, MA 02110-1301 USA
 *
 */
+=======
+ * Copyright 2019-2023 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+>>>>>>> master
 
 public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     public E.Source source { get; construct; }
@@ -102,11 +108,18 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         task_list.set_sort_func (sort_function);
         task_list.set_placeholder (placeholder);
 
+<<<<<<< HEAD
         var scrolled_window = new Gtk.ScrolledWindow () {
             hexpand = true,
             vexpand = true,
             hscrollbar_policy = Gtk.PolicyType.NEVER,
             child = task_list
+=======
+        var scrolled_window = new Gtk.ScrolledWindow (null, null) {
+            hexpand = true,
+            vexpand = true,
+            hscrollbar_policy = Gtk.PolicyType.NEVER
+>>>>>>> master
         };
 
         column_spacing = 12;

@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
 * Copyright 2019-2023 elementary, Inc. (https://elementary.io)
 *
 * This program is free software; you can redistribute it and/or
@@ -17,6 +18,11 @@
 * Boston, MA 02110-1301 USA
 *
 */
+=======
+ * Copyright 2019-2023 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+>>>>>>> master
 
 public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
@@ -66,14 +72,24 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
             margin_start = 12,
             margin_end = 6
         };
+<<<<<<< HEAD
         box.append (source_color);
         box.append (display_name_label);
         box.append (status_stack);
+=======
+        box.add (source_color);
+        box.add (display_name_label);
+        box.add (status_stack);
+>>>>>>> master
 
         revealer = new Gtk.Revealer () {
             reveal_child = true,
             child = box
         };
+<<<<<<< HEAD
+=======
+        revealer.add (box);
+>>>>>>> master
 
         child = revealer;
 

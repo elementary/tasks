@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-11 17:52+0000\n"
+"POT-Creation-Date: 2023-06-13 01:40+0000\n"
 "PO-Revision-Date: 2023-05-27 17:07+0000\n"
 "Last-Translator: satrya <satrya99@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/extra/"
@@ -127,7 +127,8 @@ msgstr "Menambahkan dialog konfirmasi saat menghapus daftar tugas"
 
 #: data/tasks.appdata.xml.in:74
 msgid "Improve performance in lists with lots of completed tasks"
-msgstr "Meningkatkan kinerja dalam daftar dengan banyak tugas yang diselesaikan"
+msgstr ""
+"Meningkatkan kinerja dalam daftar dengan banyak tugas yang diselesaikan"
 
 #: data/tasks.appdata.xml.in:91
 msgid "Fix crash on start with certain hardware"

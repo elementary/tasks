@@ -137,6 +137,16 @@ modules:
         url: https://download.gnome.org/sources/geocode-glib/3.26/geocode-glib-3.26.4.tar.xz
         sha256: 2d9a6826d158470449a173871221596da0f83ebdcff98b90c7049089056a37aa
 
+  - name: libportal
+    buildsystem: meson
+    config-opts:
+      - '-Ddocs=false'
+      - "-Dbackends=['gtk3']"
+    sources:
+      - type: archive
+        url: https://github.com/flatpak/libportal/releases/download/0.6/libportal-0.6.tar.xz
+        sha256: 88a12c3ba71bc31acff7238c280de697d609cebc50830c3766776ec35abc6566
+
   - name: tasks
     buildsystem: meson
     sources:

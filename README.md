@@ -20,6 +20,8 @@ You'll need the following dependencies:
 * libgeoclue-2-dev
 * libgeocode-glib-dev
 * libhandy-1-dev >= 0.90.0
+* libportal-dev
+* libportal-gtk3-dev
 * libical
 * meson
 * valac

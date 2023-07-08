@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD:src/Widgets/ScheduledTaskListGrid.vala
 * Copyright 2019-2023 elementary, Inc. (https://elementary.io)
 *
 * This program is free software; you can redistribute it and/or
@@ -19,6 +20,13 @@
 */
 
 public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
+=======
+ * Copyright 2019-2023 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
+>>>>>>> master:src/Widgets/ScheduledTaskListBox.vala
     private Gee.Map<E.Source, ECal.ClientView> views;
     private const string QUERY = "AND (NOT is-completed?) (has-start?)";
 
@@ -48,9 +56,13 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
     }
 
     private void remove_view (E.Source source) {
+<<<<<<< HEAD:src/Widgets/ScheduledTaskListGrid.vala
         Gtk.Widget[] children_for_removal = {};
         unowned var child = get_first_child ();
         while (child != null) {
+=======
+        foreach (unowned Gtk.Widget child in task_list.get_children ()) {
+>>>>>>> master:src/Widgets/ScheduledTaskListBox.vala
             if (child is Tasks.Widgets.TaskRow && ((Tasks.Widgets.TaskRow) child).source == source) {
                 children_for_removal += child;
             }
@@ -75,7 +87,7 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
     private Gtk.Label scheduled_title;
     private Gtk.ListBox task_list;
 
-    public ScheduledTaskListGrid (Tasks.TaskModel model) {
+    public ScheduledTaskListBox (Tasks.TaskModel model) {
         Object (model: model);
     }
 
@@ -107,16 +119,29 @@ public class Tasks.Widgets.ScheduledTaskListGrid : Gtk.Box {
         task_list.set_header_func (header_function);
         task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
 
+<<<<<<< HEAD:src/Widgets/ScheduledTaskListGrid.vala
         var scrolled_window = new Gtk.ScrolledWindow () {
             hexpand = true,
             vexpand = true,
             hscrollbar_policy = Gtk.PolicyType.NEVER,
             child = task_list
+=======
+        var scrolled_window = new Gtk.ScrolledWindow (null, null) {
+            hexpand = true,
+            vexpand = true,
+            hscrollbar_policy = Gtk.PolicyType.NEVER
+>>>>>>> master:src/Widgets/ScheduledTaskListBox.vala
         };
 
         orientation = Gtk.Orientation.VERTICAL;
+<<<<<<< HEAD:src/Widgets/ScheduledTaskListGrid.vala
         append (scheduled_title);
         append (scrolled_window);
+=======
+        add (scheduled_title);
+        add (scrolled_window);
+        show_all ();
+>>>>>>> master:src/Widgets/ScheduledTaskListBox.vala
 
         task_list.row_activated.connect (on_row_activated);
 

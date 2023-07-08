@@ -1,22 +1,7 @@
 /*
-* Copyright 2019-2023 elementary, Inc. (https://elementary.io)
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public
-* License as published by the Free Software Foundation; either
-* version 3 of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public
-* License along with this program; if not, write to the
-* Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-* Boston, MA 02110-1301 USA
-*
-*/
+ * Copyright 2019-2023 elementary, Inc. (https://elementary.io)
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 public class Tasks.MainWindow : Gtk.ApplicationWindow {
     public const string ACTION_GROUP_PREFIX = "win";
@@ -48,7 +33,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
     static construct {
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "<Control>BackSpace";
-
         Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/io/elementary/tasks");
     }
 
@@ -153,6 +137,12 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         settings.bind ("window-width", this, "default-width", SettingsBindFlags.DEFAULT);
         settings.bind ("window-height", this, "default-height", SettingsBindFlags.DEFAULT);
         settings.bind ("window-maximized", this, "maximized", SettingsBindFlags.DEFAULT);
+
+        delete_event.connect (() => {
+            ((Application)application).request_background.begin (() => destroy ());
+
+            return Gdk.EVENT_STOP;
+        });
 
         online_accounts_button.clicked.connect (() => {
             add_tasklist_popover.popdown ();
