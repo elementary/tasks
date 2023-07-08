@@ -197,26 +197,15 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             child = description_label
         };
 
-<<<<<<< HEAD
         var task_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 3);
         task_box.append (due_datetime_popover_revealer);
         task_box.append (location_popover_revealer);
         task_box.append (description_label_revealer);
-=======
-        var task_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
-        task_box.add (due_datetime_popover_revealer);
-        task_box.add (location_popover_revealer);
-        task_box.add (description_label_revealer);
->>>>>>> master
 
         task_detail_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_UP,
             child = task_box
         };
-<<<<<<< HEAD
-=======
-        task_detail_revealer.add (task_box);
->>>>>>> master
 
         var description_textview = new Granite.HyperTextView () {
             //  border_width = 12,
@@ -260,22 +249,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             margin_top = 6,
             margin_bottom = 6
         };
-<<<<<<< HEAD
         form_box.append (description_frame);
         form_box.append (button_grid);
-=======
-        form_box.add (description_frame);
-        form_box.add (button_box);
->>>>>>> master
 
         task_form_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN,
             child = form_box
         };
-<<<<<<< HEAD
-=======
-        task_form_revealer.add (form_box);
->>>>>>> master
 
         var grid = new Gtk.Grid () {
             margin_top = 6,
@@ -296,22 +276,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             child = grid
         };
 
-<<<<<<< HEAD
         child = revealer;
         margin_start = 12;
         margin_end = 12;
-=======
-        event_box = new Gtk.EventBox () {
-            hexpand = true,
-            vexpand = true,
-            above_child = false
-        };
-        event_box.add_events (
-            Gdk.EventMask.BUTTON_PRESS_MASK |
-            Gdk.EventMask.BUTTON_RELEASE_MASK
-        );
-        event_box.add (revealer);
->>>>>>> master
 
         add_css_class (Granite.STYLE_CLASS_ROUNDED);
 

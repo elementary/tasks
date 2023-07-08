@@ -53,8 +53,6 @@ public class Tasks.Application : Gtk.Application {
     protected override void startup () {
         base.startup ();
 
-        Hdy.init ();
-
         unowned var granite_settings = Granite.Settings.get_default ();
         unowned var gtk_settings = Gtk.Settings.get_default ();
 
@@ -92,7 +90,7 @@ public class Tasks.Application : Gtk.Application {
         if (active_window == null) {
             model.start.begin ();
 
-            var main_window = new MainWindow (this);
+            new MainWindow (this);
 
             unowned var granite_settings = Granite.Settings.get_default ();
             unowned var gtk_settings = Gtk.Settings.get_default ();

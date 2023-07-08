@@ -19,16 +19,9 @@ public class Tasks.Widgets.ScheduledRow : Gtk.ListBoxRow {
             margin_start = 12,
             margin_end = 6
         };
-<<<<<<< HEAD
         box.append (icon);
         box.append (display_name_label);
 
         child = box;
-=======
-        box.add (icon);
-        box.add (display_name_label);
-
-        add (box);
->>>>>>> master
     }
 }

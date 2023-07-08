@@ -138,7 +138,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         settings.bind ("window-height", this, "default-height", SettingsBindFlags.DEFAULT);
         settings.bind ("window-maximized", this, "maximized", SettingsBindFlags.DEFAULT);
 
-        delete_event.connect (() => {
+        close_request.connect (() => {
             ((Application)application).request_background.begin (() => destroy ());
 
             return Gdk.EVENT_STOP;
@@ -237,9 +237,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
 
             } else if (row is Tasks.Widgets.ScheduledRow) {
-                var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListGrid) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
+                var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListBox) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
                 if (scheduled_task_list_grid == null) {
-                    scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListGrid (Tasks.Application.model);
+                    scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListBox (Tasks.Application.model);
                     task_list_grid_stack.add_named (scheduled_task_list_grid, SCHEDULED_LIST_UID);
                 }
 
