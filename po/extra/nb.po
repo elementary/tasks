@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-13 01:40+0000\n"
-"PO-Revision-Date: 2023-03-02 10:25+0000\n"
+"PO-Revision-Date: 2023-07-09 13:07+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
 "extra/nb/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
 #, fuzzy
@@ -64,12 +64,16 @@ msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
 msgstr ""
+"Tillagt frakoblet støtte for nylig opprettede gjøremål i lister, i fall det "
+"er satt opp for kontoen"
 
 #: data/tasks.appdata.xml.in:34
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
 msgstr ""
+"Auto-synkroniser en gjøremålsliste når den velges, eller når nettverket blir "
+"tilgjengelig igjen"
 
 #: data/tasks.appdata.xml.in:42
 msgid "Send a notification when a task is due"
@@ -81,7 +85,7 @@ msgstr "Dra og slipp gjøremål mellom lister"
 
 #: data/tasks.appdata.xml.in:51
 msgid "Follow email and web links in the task description with Control + Click"
-msgstr ""
+msgstr "Følg e-post og vev-lenker i gjøremålsbeskrivelse med Ctrl + klikk"
 
 #: data/tasks.appdata.xml.in:55
 msgid "Improved time zone handling"
@@ -99,39 +103,41 @@ msgstr "Fikser:"
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
-msgstr ""
+msgstr "Forhindre kontonavnshoder fra visning flere ganger i sidefeltet"
 
 #: data/tasks.appdata.xml.in:66
 msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr ""
+msgstr "Lange beskrivelser forkortes på slutten istedenfor begynnelsen"
 
 #: data/tasks.appdata.xml.in:67
 msgid "Removing descriptions is now saved"
-msgstr ""
+msgstr "Fjerning av beskrivelser blir nå lagret"
 
 #: data/tasks.appdata.xml.in:68
 msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
+msgstr "Plassering av peker i beskrivelser fungerer alltid"
 
 #: data/tasks.appdata.xml.in:72
+#, fuzzy
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
+msgstr "Erstatt «Del»-snarveistast med Ctrl + rettetast"
 
 #: data/tasks.appdata.xml.in:73
 msgid "Add a confirmation dialog when deleting a task list"
-msgstr ""
+msgstr "Legg til bekreftelsesdialog ved sletting av en gjøremålsliste"
 
 #: data/tasks.appdata.xml.in:74
 msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
+msgstr "Forbedret ytelse i lister med mange fullførte gjøremål"
 
 #: data/tasks.appdata.xml.in:91
 msgid "Fix crash on start with certain hardware"
-msgstr ""
+msgstr "Fiks krasj ved oppstart for gitte maskinvarekombinasjoner"
 
 #: data/tasks.appdata.xml.in:100
+#, fuzzy
 msgid "Fix the order of the scheduled view"
-msgstr ""
+msgstr "Rekkefølge fikset i planleggingsvisning"
 
 #: data/tasks.appdata.xml.in:107
 msgid "First release!"
@@ -143,11 +149,11 @@ msgstr "Støtte for mørk stil"
 
 #: data/tasks.appdata.xml.in:110
 msgid "Add and remove task lists with custom colors"
-msgstr ""
+msgstr "Legg til og fjern gjøremålslister med egendefinerte farger"
 
 #: data/tasks.appdata.xml.in:111
 msgid "See scheduled tasks from all lists at once"
-msgstr ""
+msgstr "Vis planlagte gjøremål fra alle lister samtidig"
 
 #: data/tasks.appdata.xml.in:112
 msgid "Set due dates"
