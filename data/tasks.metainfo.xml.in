@@ -15,7 +15,7 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/elementary/tasks/6.3.1/data/screenshot.png</image>
+      <image>https://raw.githubusercontent.com/elementary/tasks/6.3.2/data/screenshot.png</image>
     </screenshot>
   </screenshots>
 
@@ -52,7 +52,7 @@
   <update_contact>contact_at_elementary.io</update_contact>
 
   <releases>
-    <release version="6.3.2" date="2023-07-19" urgency="medium">
+    <release version="6.3.2" date="2023-07-20" urgency="medium">
       <description>
         <p>Improvements:</p>
         <ul>
