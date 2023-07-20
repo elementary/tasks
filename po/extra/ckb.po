@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:27+0000\n"
+"POT-Creation-Date: 2023-07-20 18:48+0000\n"
 "PO-Revision-Date: 2022-07-31 13:11+0000\n"
 "Last-Translator: Aga Ismael <agaesmaeel@gmail.com>\n"
 "Language-Team: Kurdish (Central) <https://l10n.elementary.io/projects/tasks/"
@@ -41,26 +41,30 @@ msgstr ""
 msgid "elementary, Inc."
 msgstr "کۆمپانیای ئێلەمێنتەری هاوپشک."
 
-#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:94
-#: data/tasks.metainfo.xml.in:112
+#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
 msgid "Improvements:"
 msgstr "باشترکراوەکان:"
 
 #: data/tasks.metainfo.xml.in:59
-msgid "New app icon"
+msgid "Fix minor visual issues in dark mode"
 msgstr ""
 
-#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:98
-#: data/tasks.metainfo.xml.in:117
+#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
 msgid "Updated translations"
 msgstr "وەرگێڕانەکان نوێ کراونەوە"
 
-#: data/tasks.metainfo.xml.in:70 data/tasks.metainfo.xml.in:80
-#: data/tasks.metainfo.xml.in:89
+#: data/tasks.metainfo.xml.in:73
+msgid "New app icon"
+msgstr ""
+
+#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
+#: data/tasks.metainfo.xml.in:103
 msgid "Features:"
 msgstr "تایبتەمەندییەکان:"
 
-#: data/tasks.metainfo.xml.in:72
+#: data/tasks.metainfo.xml.in:86
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -68,7 +72,7 @@ msgstr ""
 "زیادکردنی پاڵپشتی دەرهێڵ بۆ لیستی تازە ئەرکە دروستکراوەکان لە دۆخێکدا کە بۆ "
 "هەژمارەکە ڕێکخراوە"
 
-#: data/tasks.metainfo.xml.in:73
+#: data/tasks.metainfo.xml.in:87
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -76,57 +80,57 @@ msgstr ""
 "هاوکاتکردنی خۆکارانەی لیستی ئەرک کاتێک دیاریکراوە یان پەیوەندی ئینتەرنێت "
 "دوبارە بەردەست دەبێت"
 
-#: data/tasks.metainfo.xml.in:82
+#: data/tasks.metainfo.xml.in:96
 msgid "Send a notification when a task is due"
 msgstr "ناردنی ئاگادارکەرەوە کە بەرواری ئەرکێک دێت"
 
-#: data/tasks.metainfo.xml.in:91
+#: data/tasks.metainfo.xml.in:105
 msgid "Drag and drop tasks between lists"
 msgstr "ڕاکێشکاری ئەرکەکان لە نێوان لیستەکاندا"
 
-#: data/tasks.metainfo.xml.in:92
+#: data/tasks.metainfo.xml.in:106
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr "کردنەوەی ئیمێڵ و بەستەرەکان لەناو فرۆزەی ئەرکەکاندا بە کۆنتڕۆڵ + کرتە"
 
-#: data/tasks.metainfo.xml.in:96
+#: data/tasks.metainfo.xml.in:110
 msgid "Improved time zone handling"
 msgstr "بەڕێوەبردنی ناوچەی کات باشتر کراوە"
 
-#: data/tasks.metainfo.xml.in:97
+#: data/tasks.metainfo.xml.in:111
 msgid "Performance improvements"
 msgstr "کارکردنی نەرمەکاڵا باشتر کراوە"
 
-#: data/tasks.metainfo.xml.in:105
+#: data/tasks.metainfo.xml.in:119
 msgid "Fixes:"
 msgstr "چاککراوەکان:"
 
-#: data/tasks.metainfo.xml.in:107
+#: data/tasks.metainfo.xml.in:121
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr "ڕێگری لە پشاندانی ناوی هێدەرەکان چەند جاریك لە سایدباڕدا"
 
-#: data/tasks.metainfo.xml.in:108
+#: data/tasks.metainfo.xml.in:122
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "فرۆزە درێژەکان لە کۆتاییەوە کورت دەکرێنەوە نەک لە سەرەتاوە"
 
-#: data/tasks.metainfo.xml.in:109
+#: data/tasks.metainfo.xml.in:123
 msgid "Removing descriptions is now saved"
 msgstr "سڕینەوەی فرۆزە ئێستا پاشەکەوت کراوە"
 
-#: data/tasks.metainfo.xml.in:110
+#: data/tasks.metainfo.xml.in:124
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "دانانی نیشاندەرەکە لە فرۆزەکانە بە بەردەوامی کار دەکات"
 
-#: data/tasks.metainfo.xml.in:114
+#: data/tasks.metainfo.xml.in:128
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "گۆڕینی قەدبڕی \"سڕینەوە\" بۆ کۆنتڕۆڵ و باک سپەیس"
 
-#: data/tasks.metainfo.xml.in:115
+#: data/tasks.metainfo.xml.in:129
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr "زیادکردنی دایەلۆگێکی دڵنیاکردنەوە لە کاتی سڕینەوە لیستێک"
 
-#: data/tasks.metainfo.xml.in:116
+#: data/tasks.metainfo.xml.in:130
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr ""
 "باشترکردنی کارکردنی نەرمەکاڵا کاتێک لیستی زۆرت هەیە و پڕن لە ئەرکی تەواو بوو"
