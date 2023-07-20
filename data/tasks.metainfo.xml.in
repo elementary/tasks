@@ -52,6 +52,20 @@
   <update_contact>contact_at_elementary.io</update_contact>
 
   <releases>
+    <release version="6.3.2" date="2023-07-19" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Fix minor visual issues in dark mode</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/tasks/issues/357">Use the background portal</issue>
+        <issue url="https://github.com/elementary/tasks/issues/359">Duplicated tasks in Scheduled view when changing color of the task list</issue>
+      </issues>
+    </release>
+
     <release version="6.3.1" date="2022-11-15" urgency="medium">
       <description>
         <p>Improvements:</p>
