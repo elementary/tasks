@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:27+0000\n"
+"POT-Creation-Date: 2023-07-20 18:48+0000\n"
 "PO-Revision-Date: 2022-12-20 23:25+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/extra/"
@@ -41,26 +41,30 @@ msgstr ""
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:94
-#: data/tasks.metainfo.xml.in:112
+#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
 msgid "Improvements:"
 msgstr "Melhorias:"
 
 #: data/tasks.metainfo.xml.in:59
-msgid "New app icon"
-msgstr "Novo ícone da aplicação"
+msgid "Fix minor visual issues in dark mode"
+msgstr ""
 
-#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:98
-#: data/tasks.metainfo.xml.in:117
+#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
 msgid "Updated translations"
 msgstr "Traduções atualizadas"
 
-#: data/tasks.metainfo.xml.in:70 data/tasks.metainfo.xml.in:80
-#: data/tasks.metainfo.xml.in:89
+#: data/tasks.metainfo.xml.in:73
+msgid "New app icon"
+msgstr "Novo ícone da aplicação"
+
+#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
+#: data/tasks.metainfo.xml.in:103
 msgid "Features:"
 msgstr "Funcionalidades:"
 
-#: data/tasks.metainfo.xml.in:72
+#: data/tasks.metainfo.xml.in:86
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -68,7 +72,7 @@ msgstr ""
 "Adiciona suporte offline para listas de tarefas recém-criadas no caso da sua "
 "configuração para a conta"
 
-#: data/tasks.metainfo.xml.in:73
+#: data/tasks.metainfo.xml.in:87
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -76,32 +80,32 @@ msgstr ""
 "Sincroniza automaticamente uma lista de tarefas sempre que esta for "
 "selecionada ou a rede voltar a estar disponível"
 
-#: data/tasks.metainfo.xml.in:82
+#: data/tasks.metainfo.xml.in:96
 msgid "Send a notification when a task is due"
 msgstr "Envia uma notificação quando uma tarefa está inativa"
 
-#: data/tasks.metainfo.xml.in:91
+#: data/tasks.metainfo.xml.in:105
 msgid "Drag and drop tasks between lists"
 msgstr "Arrastar e largar tarefas entre listas"
 
-#: data/tasks.metainfo.xml.in:92
+#: data/tasks.metainfo.xml.in:106
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
 "Segue o e-mail e as ligações web na descrição da tarefa com Control + Clique"
 
-#: data/tasks.metainfo.xml.in:96
+#: data/tasks.metainfo.xml.in:110
 msgid "Improved time zone handling"
 msgstr "Manuseamento melhorado do fuso horário"
 
-#: data/tasks.metainfo.xml.in:97
+#: data/tasks.metainfo.xml.in:111
 msgid "Performance improvements"
 msgstr "Melhorias de desempenho"
 
-#: data/tasks.metainfo.xml.in:105
+#: data/tasks.metainfo.xml.in:119
 msgid "Fixes:"
 msgstr "Correções:"
 
-#: data/tasks.metainfo.xml.in:107
+#: data/tasks.metainfo.xml.in:121
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
@@ -109,29 +113,29 @@ msgstr ""
 "Evita que os nomes das contas sejam apresentados várias vezes na barra "
 "lateral"
 
-#: data/tasks.metainfo.xml.in:108
+#: data/tasks.metainfo.xml.in:122
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "Descrições longas são truncadas no fim em vez de no início"
 
-#: data/tasks.metainfo.xml.in:109
+#: data/tasks.metainfo.xml.in:123
 msgid "Removing descriptions is now saved"
 msgstr "A remoção de descrições é agora guardada"
 
-#: data/tasks.metainfo.xml.in:110
+#: data/tasks.metainfo.xml.in:124
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "Colocar o cursor em descrições funciona de forma consistente"
 
-#: data/tasks.metainfo.xml.in:114
+#: data/tasks.metainfo.xml.in:128
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "Substitui a tecla de atalho Delete por Ctrl + Backspace"
 
-#: data/tasks.metainfo.xml.in:115
+#: data/tasks.metainfo.xml.in:129
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr ""
 "Adiciona uma janela de diálogo de confirmação ao eliminar uma lista de "
 "tarefas"
 
-#: data/tasks.metainfo.xml.in:116
+#: data/tasks.metainfo.xml.in:130
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr "Melhora o desempenho em listas com muitas tarefas concluídas"
 

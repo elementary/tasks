@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:27+0000\n"
+"POT-Creation-Date: 2023-07-20 18:48+0000\n"
 "PO-Revision-Date: 2023-07-09 13:07+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
@@ -43,26 +43,30 @@ msgstr ""
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:94
-#: data/tasks.metainfo.xml.in:112
+#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
 msgid "Improvements:"
 msgstr "Forbedringer:"
 
 #: data/tasks.metainfo.xml.in:59
-msgid "New app icon"
-msgstr "Nytt programikon"
+msgid "Fix minor visual issues in dark mode"
+msgstr ""
 
-#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:98
-#: data/tasks.metainfo.xml.in:117
+#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
 msgid "Updated translations"
 msgstr "Oppdaterte oversettelser"
 
-#: data/tasks.metainfo.xml.in:70 data/tasks.metainfo.xml.in:80
-#: data/tasks.metainfo.xml.in:89
+#: data/tasks.metainfo.xml.in:73
+msgid "New app icon"
+msgstr "Nytt programikon"
+
+#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
+#: data/tasks.metainfo.xml.in:103
 msgid "Features:"
 msgstr "Funksjoner:"
 
-#: data/tasks.metainfo.xml.in:72
+#: data/tasks.metainfo.xml.in:86
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -70,7 +74,7 @@ msgstr ""
 "Tillagt frakoblet støtte for nylig opprettede gjøremål i lister, i fall det "
 "er satt opp for kontoen"
 
-#: data/tasks.metainfo.xml.in:73
+#: data/tasks.metainfo.xml.in:87
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -78,58 +82,58 @@ msgstr ""
 "Auto-synkroniser en gjøremålsliste når den velges, eller når nettverket blir "
 "tilgjengelig igjen"
 
-#: data/tasks.metainfo.xml.in:82
+#: data/tasks.metainfo.xml.in:96
 msgid "Send a notification when a task is due"
 msgstr "Send en merknad når et gjøremål når sin frist"
 
-#: data/tasks.metainfo.xml.in:91
+#: data/tasks.metainfo.xml.in:105
 msgid "Drag and drop tasks between lists"
 msgstr "Dra og slipp gjøremål mellom lister"
 
-#: data/tasks.metainfo.xml.in:92
+#: data/tasks.metainfo.xml.in:106
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr "Følg e-post og vev-lenker i gjøremålsbeskrivelse med Ctrl + klikk"
 
-#: data/tasks.metainfo.xml.in:96
+#: data/tasks.metainfo.xml.in:110
 msgid "Improved time zone handling"
 msgstr "Forbedret tidssonehåndtering"
 
-#: data/tasks.metainfo.xml.in:97
+#: data/tasks.metainfo.xml.in:111
 msgid "Performance improvements"
 msgstr "Ytelsesforbedringer"
 
-#: data/tasks.metainfo.xml.in:105
+#: data/tasks.metainfo.xml.in:119
 msgid "Fixes:"
 msgstr "Fikser:"
 
-#: data/tasks.metainfo.xml.in:107
+#: data/tasks.metainfo.xml.in:121
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr "Forhindre kontonavnshoder fra visning flere ganger i sidefeltet"
 
-#: data/tasks.metainfo.xml.in:108
+#: data/tasks.metainfo.xml.in:122
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "Lange beskrivelser forkortes på slutten istedenfor begynnelsen"
 
-#: data/tasks.metainfo.xml.in:109
+#: data/tasks.metainfo.xml.in:123
 msgid "Removing descriptions is now saved"
 msgstr "Fjerning av beskrivelser blir nå lagret"
 
-#: data/tasks.metainfo.xml.in:110
+#: data/tasks.metainfo.xml.in:124
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "Plassering av peker i beskrivelser fungerer alltid"
 
-#: data/tasks.metainfo.xml.in:114
+#: data/tasks.metainfo.xml.in:128
 #, fuzzy
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "Erstatt «Del»-snarveistast med Ctrl + rettetast"
 
-#: data/tasks.metainfo.xml.in:115
+#: data/tasks.metainfo.xml.in:129
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr "Legg til bekreftelsesdialog ved sletting av en gjøremålsliste"
 
-#: data/tasks.metainfo.xml.in:116
+#: data/tasks.metainfo.xml.in:130
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr "Forbedret ytelse i lister med mange fullførte gjøremål"
 
