@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-20 18:48+0000\n"
-"PO-Revision-Date: 2022-11-27 14:16+0000\n"
+"PO-Revision-Date: 2023-07-21 11:48+0000\n"
 "Last-Translator: David M <rbndavid@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/extra/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.elementary.io/projects/tasks/extra/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -48,7 +48,7 @@ msgstr "Millores:"
 
 #: data/tasks.metainfo.xml.in:59
 msgid "Fix minor visual issues in dark mode"
-msgstr ""
+msgstr "Solució de problemes visuals menors en mode fosc"
 
 #: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
 #: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
