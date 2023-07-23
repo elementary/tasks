@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-20 18:48+0000\n"
-"PO-Revision-Date: 2022-11-23 10:41+0000\n"
+"PO-Revision-Date: 2023-07-23 07:07+0000\n"
 "Last-Translator: Marcin Serwin <marcin.serwin0@protonmail.com>\n"
 "Language-Team: Polish <https://l10n.elementary.io/projects/tasks/extra/pl/>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -48,7 +48,7 @@ msgstr "Ulepszenia:"
 
 #: data/tasks.metainfo.xml.in:59
 msgid "Fix minor visual issues in dark mode"
-msgstr ""
+msgstr "Poprawiono drobne problemy wizualne w trybie ciemnym"
 
 #: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
 #: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
