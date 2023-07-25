@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-20 18:48+0000\n"
-"PO-Revision-Date: 2023-07-09 13:07+0000\n"
+"PO-Revision-Date: 2023-07-26 20:07+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
 "extra/nb/>\n"
@@ -50,7 +50,7 @@ msgstr "Forbedringer:"
 
 #: data/tasks.metainfo.xml.in:59
 msgid "Fix minor visual issues in dark mode"
-msgstr ""
+msgstr "Fikset små visuelle problemer i mørk drakt"
 
 #: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
 #: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
