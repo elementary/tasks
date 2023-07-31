@@ -6,4 +6,6 @@ flatpak remove --system -y io.elementary.tasks//stable || true
 
 #DEBHELPER#
 
+rm /etc/xdg/autostart/io.elementary.tasks-daemon.desktop
+
 exit 0
