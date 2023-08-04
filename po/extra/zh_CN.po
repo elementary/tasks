@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-13 01:40+0000\n"
+"POT-Creation-Date: 2023-07-20 18:48+0000\n"
 "PO-Revision-Date: 2022-01-28 16:26+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
@@ -19,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
+#: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
 msgstr "待办事项"
 
-#: data/tasks.appdata.xml.in:8
+#: data/tasks.metainfo.xml.in:11
 msgid "Synced tasks and reminders"
 msgstr "已同步的待办事项和提醒"
 
-#: data/tasks.appdata.xml.in:10
+#: data/tasks.metainfo.xml.in:13
 msgid ""
 "Designed and built to help manage all of your tasks and reminders. Create "
 "and complete tasks, manage lists and sync them across your machines using "
@@ -36,126 +36,100 @@ msgstr ""
 "设计和构建，以帮助管理您的所有任务和提醒。使用CalDAV创建和完成任务，管理列表"
 "并在您的机器之间同步它们。"
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:53
-#: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
-#: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
+#: data/tasks.metainfo.xml.in:50
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
 msgid "Improvements:"
 msgstr "改进:"
 
-#: data/tasks.appdata.xml.in:20
-msgid "New app icon"
+#: data/tasks.metainfo.xml.in:59
+msgid "Fix minor visual issues in dark mode"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
-#: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
-#: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
+#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
 msgid "Updated translations"
 msgstr "更新的翻译"
 
-#: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
-#: data/tasks.appdata.xml.in:48
+#: data/tasks.metainfo.xml.in:73
+msgid "New app icon"
+msgstr ""
+
+#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
+#: data/tasks.metainfo.xml.in:103
 msgid "Features:"
 msgstr "功能："
 
-#: data/tasks.appdata.xml.in:33
+#: data/tasks.metainfo.xml.in:86
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:34
+#: data/tasks.metainfo.xml.in:87
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:42
+#: data/tasks.metainfo.xml.in:96
 #, fuzzy
 #| msgid "Add a confirmation dialog when deleting a task list"
 msgid "Send a notification when a task is due"
 msgstr "添加删除任务列表确认对话框"
 
-#: data/tasks.appdata.xml.in:50
+#: data/tasks.metainfo.xml.in:105
 msgid "Drag and drop tasks between lists"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:51
+#: data/tasks.metainfo.xml.in:106
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr "按下 Control 并单击以查看待办事项描述中的邮件和链接"
 
-#: data/tasks.appdata.xml.in:55
+#: data/tasks.metainfo.xml.in:110
 msgid "Improved time zone handling"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:56
+#: data/tasks.metainfo.xml.in:111
 msgid "Performance improvements"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:63
+#: data/tasks.metainfo.xml.in:119
 msgid "Fixes:"
 msgstr "修复:"
 
-#: data/tasks.appdata.xml.in:65
+#: data/tasks.metainfo.xml.in:121
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr "防止在侧边栏中多次显示帐户名称标题"
 
-#: data/tasks.appdata.xml.in:66
+#: data/tasks.metainfo.xml.in:122
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "长描述在末尾而不是开头被截断"
 
-#: data/tasks.appdata.xml.in:67
+#: data/tasks.metainfo.xml.in:123
 msgid "Removing descriptions is now saved"
 msgstr "删除描述现在已保存"
 
-#: data/tasks.appdata.xml.in:68
+#: data/tasks.metainfo.xml.in:124
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "描述中的光标效果保持一致"
 
-#: data/tasks.appdata.xml.in:72
+#: data/tasks.metainfo.xml.in:128
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "用 Ctrl + Backspace 替换 Delete 快捷键"
 
-#: data/tasks.appdata.xml.in:73
+#: data/tasks.metainfo.xml.in:129
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr "添加删除任务列表确认对话框"
 
-#: data/tasks.appdata.xml.in:74
+#: data/tasks.metainfo.xml.in:130
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr "提高具有大量已完成任务的列表的性能"
-
-#: data/tasks.appdata.xml.in:91
-msgid "Fix crash on start with certain hardware"
-msgstr "修复某些硬件启动时崩溃的问题"
-
-#: data/tasks.appdata.xml.in:100
-msgid "Fix the order of the scheduled view"
-msgstr "修正预设视图的顺序"
-
-#: data/tasks.appdata.xml.in:107
-msgid "First release!"
-msgstr "第一次发布！"
-
-#: data/tasks.appdata.xml.in:109
-msgid "Support the dark style"
-msgstr "支持深色风格"
-
-#: data/tasks.appdata.xml.in:110
-msgid "Add and remove task lists with custom colors"
-msgstr "使用自定义颜色添加和删除任务列表"
-
-#: data/tasks.appdata.xml.in:111
-msgid "See scheduled tasks from all lists at once"
-msgstr "同时查看所有列表中的计划任务"
-
-#: data/tasks.appdata.xml.in:112
-msgid "Set due dates"
-msgstr "设定截止日期"
-
-#: data/tasks.appdata.xml.in:155
-msgid "elementary, Inc."
-msgstr "elementary, Inc."
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
@@ -164,6 +138,27 @@ msgstr "创建并跟踪待办事项进度"
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "待办;备忘;"
+
+#~ msgid "Fix crash on start with certain hardware"
+#~ msgstr "修复某些硬件启动时崩溃的问题"
+
+#~ msgid "Fix the order of the scheduled view"
+#~ msgstr "修正预设视图的顺序"
+
+#~ msgid "First release!"
+#~ msgstr "第一次发布！"
+
+#~ msgid "Support the dark style"
+#~ msgstr "支持深色风格"
+
+#~ msgid "Add and remove task lists with custom colors"
+#~ msgstr "使用自定义颜色添加和删除任务列表"
+
+#~ msgid "See scheduled tasks from all lists at once"
+#~ msgstr "同时查看所有列表中的计划任务"
+
+#~ msgid "Set due dates"
+#~ msgstr "设定截止日期"
 
 #~ msgid "io.elementary.tasks"
 #~ msgstr "io.elementary.tasks"

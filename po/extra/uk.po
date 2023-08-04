@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-13 01:40+0000\n"
-"PO-Revision-Date: 2022-11-23 10:41+0000\n"
+"POT-Creation-Date: 2023-07-20 18:48+0000\n"
+"PO-Revision-Date: 2023-07-23 07:07+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://l10n.elementary.io/projects/tasks/extra/uk/"
 ">\n"
@@ -16,19 +16,19 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.14.2\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.17\n"
 
-#: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
+#: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
 msgstr "Завдання"
 
-#: data/tasks.appdata.xml.in:8
+#: data/tasks.metainfo.xml.in:11
 msgid "Synced tasks and reminders"
 msgstr "Синхронізовані завдання та нагадування"
 
-#: data/tasks.appdata.xml.in:10
+#: data/tasks.metainfo.xml.in:13
 msgid ""
 "Designed and built to help manage all of your tasks and reminders. Create "
 "and complete tasks, manage lists and sync them across your machines using "
@@ -38,28 +38,34 @@ msgstr ""
 "та виконуйте завдання, керуйте списками та синхронізуйте їх на своїх машинах "
 "за допомогою CalDAV."
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:53
-#: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
-#: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
+#: data/tasks.metainfo.xml.in:50
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
 msgid "Improvements:"
 msgstr "Вдосконалення:"
 
-#: data/tasks.appdata.xml.in:20
-msgid "New app icon"
-msgstr "Нова піктограма застосунку"
+#: data/tasks.metainfo.xml.in:59
+msgid "Fix minor visual issues in dark mode"
+msgstr "Виправлено незначні вади темного режиму"
 
-#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
-#: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
-#: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
+#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
 msgid "Updated translations"
 msgstr "Оновлено переклади"
 
-#: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
-#: data/tasks.appdata.xml.in:48
+#: data/tasks.metainfo.xml.in:73
+msgid "New app icon"
+msgstr "Нова піктограма застосунку"
+
+#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
+#: data/tasks.metainfo.xml.in:103
 msgid "Features:"
 msgstr "Функції:"
 
-#: data/tasks.appdata.xml.in:33
+#: data/tasks.metainfo.xml.in:86
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -67,7 +73,7 @@ msgstr ""
 "Додана офлайн-підтримка новостворених списків завдань, якщо їх налаштовано "
 "для облікового запису"
 
-#: data/tasks.appdata.xml.in:34
+#: data/tasks.metainfo.xml.in:87
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -75,33 +81,33 @@ msgstr ""
 "Автосинхронізація списку завдань, коли він вибраний, або мережа знову стає "
 "доступною"
 
-#: data/tasks.appdata.xml.in:42
+#: data/tasks.metainfo.xml.in:96
 msgid "Send a notification when a task is due"
 msgstr "Надсилання сповіщення, коли завдання очікує виконання"
 
-#: data/tasks.appdata.xml.in:50
+#: data/tasks.metainfo.xml.in:105
 msgid "Drag and drop tasks between lists"
 msgstr "Перетягування завдань між списками"
 
-#: data/tasks.appdata.xml.in:51
+#: data/tasks.metainfo.xml.in:106
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
 "Перехід за посиланнями електронної пошти та вебпосиланнями в описі завдань "
 "за допомогою Control + Клацання"
 
-#: data/tasks.appdata.xml.in:55
+#: data/tasks.metainfo.xml.in:110
 msgid "Improved time zone handling"
 msgstr "Удосконалено визначення часових поясів"
 
-#: data/tasks.appdata.xml.in:56
+#: data/tasks.metainfo.xml.in:111
 msgid "Performance improvements"
 msgstr "Поліпшено швидкодію"
 
-#: data/tasks.appdata.xml.in:63
+#: data/tasks.metainfo.xml.in:119
 msgid "Fixes:"
 msgstr "Виправлення:"
 
-#: data/tasks.appdata.xml.in:65
+#: data/tasks.metainfo.xml.in:121
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
@@ -109,62 +115,30 @@ msgstr ""
 "Запобігання багаторазовому показу заголовків імен облікових записів на "
 "бічній панелі"
 
-#: data/tasks.appdata.xml.in:66
+#: data/tasks.metainfo.xml.in:122
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "Довгі описи скорочуються в кінці, а не з початку"
 
-#: data/tasks.appdata.xml.in:67
+#: data/tasks.metainfo.xml.in:123
 msgid "Removing descriptions is now saved"
 msgstr "Вилучення опису тепер зберігаються"
 
-#: data/tasks.appdata.xml.in:68
+#: data/tasks.metainfo.xml.in:124
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "Курсор в описах розміщується послідовно"
 
-#: data/tasks.appdata.xml.in:72
+#: data/tasks.metainfo.xml.in:128
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "Видалення комбінацією клавіш Ctrl + Backspace замість клавіші Delete"
 
-#: data/tasks.appdata.xml.in:73
+#: data/tasks.metainfo.xml.in:129
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr "Додано запит підтвердження під час видалення списку завдань"
 
-#: data/tasks.appdata.xml.in:74
+#: data/tasks.metainfo.xml.in:130
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr ""
 "Поліпшено швидкодію роботи зі списками з великою кількістю виконаних завдань"
-
-#: data/tasks.appdata.xml.in:91
-msgid "Fix crash on start with certain hardware"
-msgstr "Виправлено збої під час запуску на певному обладнанні"
-
-#: data/tasks.appdata.xml.in:100
-msgid "Fix the order of the scheduled view"
-msgstr "Виправлено подання порядку запланованих"
-
-#: data/tasks.appdata.xml.in:107
-msgid "First release!"
-msgstr "Перший випуск!"
-
-#: data/tasks.appdata.xml.in:109
-msgid "Support the dark style"
-msgstr "Підтримка темного стилю"
-
-#: data/tasks.appdata.xml.in:110
-msgid "Add and remove task lists with custom colors"
-msgstr "Додавання та видалення списків завдань з власними кольоровими мітками"
-
-#: data/tasks.appdata.xml.in:111
-msgid "See scheduled tasks from all lists at once"
-msgstr "Переглядайте заплановані завдання з усіх списків відразу"
-
-#: data/tasks.appdata.xml.in:112
-msgid "Set due dates"
-msgstr "Встановлюйте терміни"
-
-#: data/tasks.appdata.xml.in:155
-msgid "elementary, Inc."
-msgstr "elementary, Inc."
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
@@ -173,6 +147,28 @@ msgstr "Створюйте та стежте за ходом виконання 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "завдання;нагадування;Todo;Reminders;"
+
+#~ msgid "Fix crash on start with certain hardware"
+#~ msgstr "Виправлено збої під час запуску на певному обладнанні"
+
+#~ msgid "Fix the order of the scheduled view"
+#~ msgstr "Виправлено подання порядку запланованих"
+
+#~ msgid "First release!"
+#~ msgstr "Перший випуск!"
+
+#~ msgid "Support the dark style"
+#~ msgstr "Підтримка темного стилю"
+
+#~ msgid "Add and remove task lists with custom colors"
+#~ msgstr ""
+#~ "Додавання та видалення списків завдань з власними кольоровими мітками"
+
+#~ msgid "See scheduled tasks from all lists at once"
+#~ msgstr "Переглядайте заплановані завдання з усіх списків відразу"
+
+#~ msgid "Set due dates"
+#~ msgstr "Встановлюйте терміни"
 
 #~ msgid "io.elementary.tasks"
 #~ msgstr "io.elementary.tasks"

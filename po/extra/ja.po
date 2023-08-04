@@ -7,27 +7,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-13 01:40+0000\n"
-"PO-Revision-Date: 2022-11-23 10:41+0000\n"
+"POT-Creation-Date: 2023-07-20 18:48+0000\n"
+"PO-Revision-Date: 2023-07-21 01:51+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
-"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/extra/ja/"
-">\n"
+"Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/extra/ja/>"
+"\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 4.17\n"
 
-#: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
+#: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
 msgstr "タスク"
 
-#: data/tasks.appdata.xml.in:8
+#: data/tasks.metainfo.xml.in:11
 msgid "Synced tasks and reminders"
 msgstr "タスクやリマインダーを同期できます"
 
-#: data/tasks.appdata.xml.in:10
+#: data/tasks.metainfo.xml.in:13
 msgid ""
 "Designed and built to help manage all of your tasks and reminders. Create "
 "and complete tasks, manage lists and sync them across your machines using "
@@ -37,28 +37,34 @@ msgstr ""
 "を作成したり、完了済みとしてマークしたり、リストを管理したり、CalDAV を使用し"
 "てデバイス間で同期したりできます。"
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:53
-#: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
-#: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
+#: data/tasks.metainfo.xml.in:50
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
 msgid "Improvements:"
 msgstr "改善点:"
 
-#: data/tasks.appdata.xml.in:20
-msgid "New app icon"
-msgstr "新しいアプリアイコン"
+#: data/tasks.metainfo.xml.in:59
+msgid "Fix minor visual issues in dark mode"
+msgstr "ダークモードでの軽微な視覚上の不具合を修正"
 
-#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
-#: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
-#: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
+#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
 msgid "Updated translations"
 msgstr "翻訳の更新"
 
-#: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
-#: data/tasks.appdata.xml.in:48
+#: data/tasks.metainfo.xml.in:73
+msgid "New app icon"
+msgstr "新しいアプリアイコン"
+
+#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
+#: data/tasks.metainfo.xml.in:103
 msgid "Features:"
 msgstr "機能:"
 
-#: data/tasks.appdata.xml.in:33
+#: data/tasks.metainfo.xml.in:86
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -66,7 +72,7 @@ msgstr ""
 "ローカルアカウント用に作成された場合を考慮し、新規作成したタスク一覧がオフラ"
 "インでも使用できる機能を追加"
 
-#: data/tasks.appdata.xml.in:34
+#: data/tasks.metainfo.xml.in:87
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -74,96 +80,63 @@ msgstr ""
 "タスク一覧を選択したりネットワークが再度利用可能になったりした場合に、自動的"
 "に同期するように修正"
 
-#: data/tasks.appdata.xml.in:42
+#: data/tasks.metainfo.xml.in:96
 msgid "Send a notification when a task is due"
 msgstr "タスクの期日になったら通知を表示するように修正"
 
-#: data/tasks.appdata.xml.in:50
+#: data/tasks.metainfo.xml.in:105
 msgid "Drag and drop tasks between lists"
 msgstr "リスト間でタスクをドラッグアンドドロップできる機能を追加"
 
-#: data/tasks.appdata.xml.in:51
+#: data/tasks.metainfo.xml.in:106
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
 "Ctrl + クリックでタスクの説明欄内のメールアドレスや Web リンクを開ける機能を"
 "追加"
 
-#: data/tasks.appdata.xml.in:55
+#: data/tasks.metainfo.xml.in:110
 msgid "Improved time zone handling"
 msgstr "タイムゾーンの処理を改善"
 
-#: data/tasks.appdata.xml.in:56
+#: data/tasks.metainfo.xml.in:111
 msgid "Performance improvements"
 msgstr "パフォーマンスの改善"
 
-#: data/tasks.appdata.xml.in:63
+#: data/tasks.metainfo.xml.in:119
 msgid "Fixes:"
 msgstr "修正点:"
 
-#: data/tasks.appdata.xml.in:65
+#: data/tasks.metainfo.xml.in:121
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr ""
 "サイドバーにアカウント名が複数回ヘッダーとして表示されてしまう不具合を修正"
 
-#: data/tasks.appdata.xml.in:66
+#: data/tasks.metainfo.xml.in:122
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "長い説明文の最初を省略するのではなく、最後を省略して表示するように修正"
 
-#: data/tasks.appdata.xml.in:67
+#: data/tasks.metainfo.xml.in:123
 msgid "Removing descriptions is now saved"
 msgstr "説明文を削除すると保存されるように修正"
 
-#: data/tasks.appdata.xml.in:68
+#: data/tasks.metainfo.xml.in:124
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "タスクの説明欄をクリックした位置にカーソルが配置されるように修正"
 
-#: data/tasks.appdata.xml.in:72
+#: data/tasks.metainfo.xml.in:128
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "削除に使うショートカットキーを Delete から Ctrl + Backspace に変更"
 
-#: data/tasks.appdata.xml.in:73
+#: data/tasks.metainfo.xml.in:129
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr "タスクの削除時に確認ダイアログを表示するように修正"
 
-#: data/tasks.appdata.xml.in:74
+#: data/tasks.metainfo.xml.in:130
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr ""
 "完了済みタスクが非常に多い環境におけるタスクリストのパフォーマンスを改善"
-
-#: data/tasks.appdata.xml.in:91
-msgid "Fix crash on start with certain hardware"
-msgstr "特定のハードウェア上で起動時にクラッシュする不具合を修正"
-
-#: data/tasks.appdata.xml.in:100
-msgid "Fix the order of the scheduled view"
-msgstr "スケジュールされたタスクの一覧の表示順序を修正"
-
-#: data/tasks.appdata.xml.in:107
-msgid "First release!"
-msgstr "最初のリリースです！"
-
-#: data/tasks.appdata.xml.in:109
-msgid "Support the dark style"
-msgstr "ダークスタイルへの対応"
-
-#: data/tasks.appdata.xml.in:110
-msgid "Add and remove task lists with custom colors"
-msgstr "カスタムカラーを設定したタスクリストの追加と削除に対応"
-
-#: data/tasks.appdata.xml.in:111
-msgid "See scheduled tasks from all lists at once"
-msgstr ""
-"すべてのタスクからスケジュールされたタスクを直感的に識別できるように表示"
-
-#: data/tasks.appdata.xml.in:112
-msgid "Set due dates"
-msgstr "期日を設定する機能を追加"
-
-#: data/tasks.appdata.xml.in:155
-msgid "elementary, Inc."
-msgstr "elementary, Inc."
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
@@ -172,6 +145,28 @@ msgstr "タスクの作成と進捗管理をします"
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "Todo;Reminders;リマインダー;"
+
+#~ msgid "Fix crash on start with certain hardware"
+#~ msgstr "特定のハードウェア上で起動時にクラッシュする不具合を修正"
+
+#~ msgid "Fix the order of the scheduled view"
+#~ msgstr "スケジュールされたタスクの一覧の表示順序を修正"
+
+#~ msgid "First release!"
+#~ msgstr "最初のリリースです！"
+
+#~ msgid "Support the dark style"
+#~ msgstr "ダークスタイルへの対応"
+
+#~ msgid "Add and remove task lists with custom colors"
+#~ msgstr "カスタムカラーを設定したタスクリストの追加と削除に対応"
+
+#~ msgid "See scheduled tasks from all lists at once"
+#~ msgstr ""
+#~ "すべてのタスクからスケジュールされたタスクを直感的に識別できるように表示"
+
+#~ msgid "Set due dates"
+#~ msgstr "期日を設定する機能を追加"
 
 #~ msgid "io.elementary.tasks"
 #~ msgstr "io.elementary.tasks"

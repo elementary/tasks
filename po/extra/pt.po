@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-13 01:40+0000\n"
+"POT-Creation-Date: 2023-07-20 18:48+0000\n"
 "PO-Revision-Date: 2022-12-20 23:25+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/extra/"
@@ -19,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.14.2\n"
 
-#: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
+#: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
 msgstr "Tarefas"
 
-#: data/tasks.appdata.xml.in:8
+#: data/tasks.metainfo.xml.in:11
 msgid "Synced tasks and reminders"
 msgstr "Tarefas e lembretes sincronizados"
 
-#: data/tasks.appdata.xml.in:10
+#: data/tasks.metainfo.xml.in:13
 msgid ""
 "Designed and built to help manage all of your tasks and reminders. Create "
 "and complete tasks, manage lists and sync them across your machines using "
@@ -37,28 +37,34 @@ msgstr ""
 "Crie e conclua tarefas, faça gestão de listas e sincronize-as nas suas "
 "máquinas usando o CalDAV."
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:53
-#: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
-#: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
+#: data/tasks.metainfo.xml.in:50
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
 msgid "Improvements:"
 msgstr "Melhorias:"
 
-#: data/tasks.appdata.xml.in:20
-msgid "New app icon"
-msgstr "Novo ícone da aplicação"
+#: data/tasks.metainfo.xml.in:59
+msgid "Fix minor visual issues in dark mode"
+msgstr ""
 
-#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
-#: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
-#: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
+#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
 msgid "Updated translations"
 msgstr "Traduções atualizadas"
 
-#: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
-#: data/tasks.appdata.xml.in:48
+#: data/tasks.metainfo.xml.in:73
+msgid "New app icon"
+msgstr "Novo ícone da aplicação"
+
+#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
+#: data/tasks.metainfo.xml.in:103
 msgid "Features:"
 msgstr "Funcionalidades:"
 
-#: data/tasks.appdata.xml.in:33
+#: data/tasks.metainfo.xml.in:86
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -66,7 +72,7 @@ msgstr ""
 "Adiciona suporte offline para listas de tarefas recém-criadas no caso da sua "
 "configuração para a conta"
 
-#: data/tasks.appdata.xml.in:34
+#: data/tasks.metainfo.xml.in:87
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -74,32 +80,32 @@ msgstr ""
 "Sincroniza automaticamente uma lista de tarefas sempre que esta for "
 "selecionada ou a rede voltar a estar disponível"
 
-#: data/tasks.appdata.xml.in:42
+#: data/tasks.metainfo.xml.in:96
 msgid "Send a notification when a task is due"
 msgstr "Envia uma notificação quando uma tarefa está inativa"
 
-#: data/tasks.appdata.xml.in:50
+#: data/tasks.metainfo.xml.in:105
 msgid "Drag and drop tasks between lists"
 msgstr "Arrastar e largar tarefas entre listas"
 
-#: data/tasks.appdata.xml.in:51
+#: data/tasks.metainfo.xml.in:106
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr ""
 "Segue o e-mail e as ligações web na descrição da tarefa com Control + Clique"
 
-#: data/tasks.appdata.xml.in:55
+#: data/tasks.metainfo.xml.in:110
 msgid "Improved time zone handling"
 msgstr "Manuseamento melhorado do fuso horário"
 
-#: data/tasks.appdata.xml.in:56
+#: data/tasks.metainfo.xml.in:111
 msgid "Performance improvements"
 msgstr "Melhorias de desempenho"
 
-#: data/tasks.appdata.xml.in:63
+#: data/tasks.metainfo.xml.in:119
 msgid "Fixes:"
 msgstr "Correções:"
 
-#: data/tasks.appdata.xml.in:65
+#: data/tasks.metainfo.xml.in:121
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
@@ -107,63 +113,31 @@ msgstr ""
 "Evita que os nomes das contas sejam apresentados várias vezes na barra "
 "lateral"
 
-#: data/tasks.appdata.xml.in:66
+#: data/tasks.metainfo.xml.in:122
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "Descrições longas são truncadas no fim em vez de no início"
 
-#: data/tasks.appdata.xml.in:67
+#: data/tasks.metainfo.xml.in:123
 msgid "Removing descriptions is now saved"
 msgstr "A remoção de descrições é agora guardada"
 
-#: data/tasks.appdata.xml.in:68
+#: data/tasks.metainfo.xml.in:124
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "Colocar o cursor em descrições funciona de forma consistente"
 
-#: data/tasks.appdata.xml.in:72
+#: data/tasks.metainfo.xml.in:128
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "Substitui a tecla de atalho Delete por Ctrl + Backspace"
 
-#: data/tasks.appdata.xml.in:73
+#: data/tasks.metainfo.xml.in:129
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr ""
 "Adiciona uma janela de diálogo de confirmação ao eliminar uma lista de "
 "tarefas"
 
-#: data/tasks.appdata.xml.in:74
+#: data/tasks.metainfo.xml.in:130
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr "Melhora o desempenho em listas com muitas tarefas concluídas"
-
-#: data/tasks.appdata.xml.in:91
-msgid "Fix crash on start with certain hardware"
-msgstr "Corrige a falha no início com determinado hardware"
-
-#: data/tasks.appdata.xml.in:100
-msgid "Fix the order of the scheduled view"
-msgstr "Corrigir a ordem de tarefas agendadas"
-
-#: data/tasks.appdata.xml.in:107
-msgid "First release!"
-msgstr "Primeira versão!"
-
-#: data/tasks.appdata.xml.in:109
-msgid "Support the dark style"
-msgstr "Suporta o estilo escuro"
-
-#: data/tasks.appdata.xml.in:110
-msgid "Add and remove task lists with custom colors"
-msgstr "Adicionar e remover listas de tarefas com cores personalizadas"
-
-#: data/tasks.appdata.xml.in:111
-msgid "See scheduled tasks from all lists at once"
-msgstr "Ver tarefas programadas de todas as listas ao mesmo tempo"
-
-#: data/tasks.appdata.xml.in:112
-msgid "Set due dates"
-msgstr "Definir datas de vencimento"
-
-#: data/tasks.appdata.xml.in:155
-msgid "elementary, Inc."
-msgstr "elementary, Inc."
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
@@ -172,6 +146,27 @@ msgstr "Criar e acompanhar o progresso das tarefas"
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "Afazer;Lembretes;"
+
+#~ msgid "Fix crash on start with certain hardware"
+#~ msgstr "Corrige a falha no início com determinado hardware"
+
+#~ msgid "Fix the order of the scheduled view"
+#~ msgstr "Corrigir a ordem de tarefas agendadas"
+
+#~ msgid "First release!"
+#~ msgstr "Primeira versão!"
+
+#~ msgid "Support the dark style"
+#~ msgstr "Suporta o estilo escuro"
+
+#~ msgid "Add and remove task lists with custom colors"
+#~ msgstr "Adicionar e remover listas de tarefas com cores personalizadas"
+
+#~ msgid "See scheduled tasks from all lists at once"
+#~ msgstr "Ver tarefas programadas de todas as listas ao mesmo tempo"
+
+#~ msgid "Set due dates"
+#~ msgstr "Definir datas de vencimento"
 
 #~ msgid "io.elementary.tasks"
 #~ msgstr "io.elementary.tasks"

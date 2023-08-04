@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-13 01:40+0000\n"
+"POT-Creation-Date: 2023-07-20 18:48+0000\n"
 "PO-Revision-Date: 2022-07-31 13:11+0000\n"
 "Last-Translator: Aga Ismael <agaesmaeel@gmail.com>\n"
 "Language-Team: Kurdish (Central) <https://l10n.elementary.io/projects/tasks/"
@@ -19,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: data/tasks.appdata.xml.in:7 data/tasks.desktop.in:3
+#: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
 msgstr "ئەرکەکان"
 
-#: data/tasks.appdata.xml.in:8
+#: data/tasks.metainfo.xml.in:11
 msgid "Synced tasks and reminders"
 msgstr "ئەرک و بیرخەرەوە هاوکات کراوەکان"
 
-#: data/tasks.appdata.xml.in:10
+#: data/tasks.metainfo.xml.in:13
 msgid ""
 "Designed and built to help manage all of your tasks and reminders. Create "
 "and complete tasks, manage lists and sync them across your machines using "
@@ -37,28 +37,34 @@ msgstr ""
 "بیرخەرەوەکانت. ئەرک دروست بکە و تەواوی بکە، لیستەکان بەڕێوەبەرە و هاوکاتیان "
 "بکە لەگەڵ هەموو ئامێرەکانی تر کە کاڵداڤ بەکار دەهێنن."
 
-#: data/tasks.appdata.xml.in:18 data/tasks.appdata.xml.in:53
-#: data/tasks.appdata.xml.in:70 data/tasks.appdata.xml.in:81
-#: data/tasks.appdata.xml.in:89 data/tasks.appdata.xml.in:98
+#: data/tasks.metainfo.xml.in:50
+msgid "elementary, Inc."
+msgstr "کۆمپانیای ئێلەمێنتەری هاوپشک."
+
+#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
 msgid "Improvements:"
 msgstr "باشترکراوەکان:"
 
-#: data/tasks.appdata.xml.in:20
-msgid "New app icon"
+#: data/tasks.metainfo.xml.in:59
+msgid "Fix minor visual issues in dark mode"
 msgstr ""
 
-#: data/tasks.appdata.xml.in:21 data/tasks.appdata.xml.in:57
-#: data/tasks.appdata.xml.in:75 data/tasks.appdata.xml.in:83
-#: data/tasks.appdata.xml.in:92 data/tasks.appdata.xml.in:101
+#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
 msgid "Updated translations"
 msgstr "وەرگێڕانەکان نوێ کراونەوە"
 
-#: data/tasks.appdata.xml.in:31 data/tasks.appdata.xml.in:40
-#: data/tasks.appdata.xml.in:48
+#: data/tasks.metainfo.xml.in:73
+msgid "New app icon"
+msgstr ""
+
+#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
+#: data/tasks.metainfo.xml.in:103
 msgid "Features:"
 msgstr "تایبتەمەندییەکان:"
 
-#: data/tasks.appdata.xml.in:33
+#: data/tasks.metainfo.xml.in:86
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -66,7 +72,7 @@ msgstr ""
 "زیادکردنی پاڵپشتی دەرهێڵ بۆ لیستی تازە ئەرکە دروستکراوەکان لە دۆخێکدا کە بۆ "
 "هەژمارەکە ڕێکخراوە"
 
-#: data/tasks.appdata.xml.in:34
+#: data/tasks.metainfo.xml.in:87
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -74,92 +80,60 @@ msgstr ""
 "هاوکاتکردنی خۆکارانەی لیستی ئەرک کاتێک دیاریکراوە یان پەیوەندی ئینتەرنێت "
 "دوبارە بەردەست دەبێت"
 
-#: data/tasks.appdata.xml.in:42
+#: data/tasks.metainfo.xml.in:96
 msgid "Send a notification when a task is due"
 msgstr "ناردنی ئاگادارکەرەوە کە بەرواری ئەرکێک دێت"
 
-#: data/tasks.appdata.xml.in:50
+#: data/tasks.metainfo.xml.in:105
 msgid "Drag and drop tasks between lists"
 msgstr "ڕاکێشکاری ئەرکەکان لە نێوان لیستەکاندا"
 
-#: data/tasks.appdata.xml.in:51
+#: data/tasks.metainfo.xml.in:106
 msgid "Follow email and web links in the task description with Control + Click"
 msgstr "کردنەوەی ئیمێڵ و بەستەرەکان لەناو فرۆزەی ئەرکەکاندا بە کۆنتڕۆڵ + کرتە"
 
-#: data/tasks.appdata.xml.in:55
+#: data/tasks.metainfo.xml.in:110
 msgid "Improved time zone handling"
 msgstr "بەڕێوەبردنی ناوچەی کات باشتر کراوە"
 
-#: data/tasks.appdata.xml.in:56
+#: data/tasks.metainfo.xml.in:111
 msgid "Performance improvements"
 msgstr "کارکردنی نەرمەکاڵا باشتر کراوە"
 
-#: data/tasks.appdata.xml.in:63
+#: data/tasks.metainfo.xml.in:119
 msgid "Fixes:"
 msgstr "چاککراوەکان:"
 
-#: data/tasks.appdata.xml.in:65
+#: data/tasks.metainfo.xml.in:121
 msgid ""
 "Prevent account name headers from being displayed multiple times in the "
 "sidebar"
 msgstr "ڕێگری لە پشاندانی ناوی هێدەرەکان چەند جاریك لە سایدباڕدا"
 
-#: data/tasks.appdata.xml.in:66
+#: data/tasks.metainfo.xml.in:122
 msgid "Long descriptions are truncated at the end instead of the beginning"
 msgstr "فرۆزە درێژەکان لە کۆتاییەوە کورت دەکرێنەوە نەک لە سەرەتاوە"
 
-#: data/tasks.appdata.xml.in:67
+#: data/tasks.metainfo.xml.in:123
 msgid "Removing descriptions is now saved"
 msgstr "سڕینەوەی فرۆزە ئێستا پاشەکەوت کراوە"
 
-#: data/tasks.appdata.xml.in:68
+#: data/tasks.metainfo.xml.in:124
 msgid "Placing the cursor in descriptions works consistently"
 msgstr "دانانی نیشاندەرەکە لە فرۆزەکانە بە بەردەوامی کار دەکات"
 
-#: data/tasks.appdata.xml.in:72
+#: data/tasks.metainfo.xml.in:128
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
 msgstr "گۆڕینی قەدبڕی \"سڕینەوە\" بۆ کۆنتڕۆڵ و باک سپەیس"
 
-#: data/tasks.appdata.xml.in:73
+#: data/tasks.metainfo.xml.in:129
 msgid "Add a confirmation dialog when deleting a task list"
 msgstr "زیادکردنی دایەلۆگێکی دڵنیاکردنەوە لە کاتی سڕینەوە لیستێک"
 
-#: data/tasks.appdata.xml.in:74
+#: data/tasks.metainfo.xml.in:130
 msgid "Improve performance in lists with lots of completed tasks"
 msgstr ""
 "باشترکردنی کارکردنی نەرمەکاڵا کاتێک لیستی زۆرت هەیە و پڕن لە ئەرکی تەواو بوو"
-
-#: data/tasks.appdata.xml.in:91
-msgid "Fix crash on start with certain hardware"
-msgstr "چاککردنی تێکچوون لە کاتی دەستپێکردن لەگەڵ هەندێک ڕەقەکاڵا"
-
-#: data/tasks.appdata.xml.in:100
-msgid "Fix the order of the scheduled view"
-msgstr "چاککردنی ڕیزی بینینی بەرنامە کراوەکان"
-
-#: data/tasks.appdata.xml.in:107
-msgid "First release!"
-msgstr "یەکەم وەشان!"
-
-#: data/tasks.appdata.xml.in:109
-msgid "Support the dark style"
-msgstr "پاڵپشتی کردنی ستایلی تاریک"
-
-#: data/tasks.appdata.xml.in:110
-msgid "Add and remove task lists with custom colors"
-msgstr "زیاد و کەمکردنی لیستەکان بە ڕەنگی تایبەتەوە"
-
-#: data/tasks.appdata.xml.in:111
-msgid "See scheduled tasks from all lists at once"
-msgstr "بینی هەموو ئەرکە بەرنامەکراوەکان لە هەموو لیستەکاندا بە جارێک"
-
-#: data/tasks.appdata.xml.in:112
-msgid "Set due dates"
-msgstr "دیاریکردنی دوا بەروارەکان"
-
-#: data/tasks.appdata.xml.in:155
-msgid "elementary, Inc."
-msgstr "کۆمپانیای ئێلەمێنتەری هاوپشک."
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
@@ -168,3 +142,24 @@ msgstr "ئەرک دروست بکە و چاودێری بەرەوپێش چوونی
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "دەکرێنەکان؛بیرخەرەوەکان;"
+
+#~ msgid "Fix crash on start with certain hardware"
+#~ msgstr "چاککردنی تێکچوون لە کاتی دەستپێکردن لەگەڵ هەندێک ڕەقەکاڵا"
+
+#~ msgid "Fix the order of the scheduled view"
+#~ msgstr "چاککردنی ڕیزی بینینی بەرنامە کراوەکان"
+
+#~ msgid "First release!"
+#~ msgstr "یەکەم وەشان!"
+
+#~ msgid "Support the dark style"
+#~ msgstr "پاڵپشتی کردنی ستایلی تاریک"
+
+#~ msgid "Add and remove task lists with custom colors"
+#~ msgstr "زیاد و کەمکردنی لیستەکان بە ڕەنگی تایبەتەوە"
+
+#~ msgid "See scheduled tasks from all lists at once"
+#~ msgstr "بینی هەموو ئەرکە بەرنامەکراوەکان لە هەموو لیستەکاندا بە جارێک"
+
+#~ msgid "Set due dates"
+#~ msgstr "دیاریکردنی دوا بەروارەکان"
