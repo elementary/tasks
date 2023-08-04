@@ -22,9 +22,8 @@ class Tasks.Widgets.PopoverButton : Gtk.Box {
     public signal void clicked ();
 
     construct {
-        orientation = Gtk.Orientation.HORIZONTAL;
-        spacing = 0;
-        css_classes = { Granite.STYLE_CLASS_MENUITEM };
+        orientation = HORIZONTAL;
+        add_css_class (Granite.STYLE_CLASS_MENUITEM);
 
         var gesture_click = new Gtk.GestureClick ();
         add_controller (gesture_click);

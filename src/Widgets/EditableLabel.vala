@@ -53,9 +53,9 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
 
         var edit_button = new Gtk.Button () {
             icon_name = "edit-symbolic",
-            tooltip_text = _("Edit…"),
-            css_classes = { Granite.STYLE_CLASS_FLAT }
+            tooltip_text = _("Edit…")
         };
+        edit_button.add_css_class (Granite.STYLE_CLASS_FLAT);
 
         var button_revealer = new Gtk.Revealer () {
             valign = Gtk.Align.CENTER,

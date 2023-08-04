@@ -78,9 +78,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         icon.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         check = new Gtk.CheckButton () {
-            valign = Gtk.Align.CENTER,
-            css_classes = { "task-row-check" }
+            valign = Gtk.Align.CENTER
         };
+        check.add_css_class ("task-row-check");
 
         state_stack = new Gtk.Stack () {
             transition_type = Gtk.StackTransitionType.CROSSFADE
@@ -227,9 +227,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         var cancel_button = new Gtk.Button.with_label (_("Cancel"));
         buttons_size_group.add_widget (cancel_button);
 
-        var save_button = new Gtk.Button.with_label (created ? _("Save Changes") : _("Add Task")) {
-            css_classes = { Granite.STYLE_CLASS_SUGGESTED_ACTION }
-        };
+        var save_button = new Gtk.Button.with_label (created ? _("Save Changes") : _("Add Task"));
+        save_button.add_css_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);
         buttons_size_group.add_widget (save_button);
 
         var right_buttons_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
@@ -240,9 +239,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         var button_grid = new Gtk.Grid () {
             margin_top = 12,
-            column_homogeneous = true,
-            css_classes = { "button-box" }
+            column_homogeneous = true
         };
+        button_grid.add_css_class ("button-box");
         button_grid.attach (right_buttons_box, 1, 0);
 
         var form_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 12) {
@@ -287,9 +286,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             state_stack.visible_child = check;
 
             var delete_button = new Gtk.Button.with_label (_("Delete Task")) {
-                halign = Gtk.Align.START,
-                css_classes = { Granite.STYLE_CLASS_DESTRUCTIVE_ACTION }
+                halign = Gtk.Align.START
             };
+            delete_button.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
             buttons_size_group.add_widget (delete_button);
 
             button_grid.attach (delete_button, 0, 0);

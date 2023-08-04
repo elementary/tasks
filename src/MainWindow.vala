@@ -54,9 +54,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         var sidebar_header = new Gtk.HeaderBar () {
             title_widget = new Gtk.Label (null),
-            show_title_buttons = false,
-            css_classes = { Granite.STYLE_CLASS_DEFAULT_DECORATION, Granite.STYLE_CLASS_FLAT }
+            show_title_buttons = false
         };
+        sidebar_header.add_css_class (Granite.STYLE_CLASS_DEFAULT_DECORATION);
+        sidebar_header.add_css_class (Granite.STYLE_CLASS_FLAT);
         sidebar_header.pack_start (new Gtk.WindowControls (Gtk.PackType.START));
 
         var scrolledwindow = new Gtk.ScrolledWindow () {
@@ -71,7 +72,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         var online_accounts_button = new Widgets.PopoverButton ();
         online_accounts_button.append (new Gtk.Label (_("Online Accounts Settings…")));
 
-        var add_tasklist_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 3) {
+        var add_tasklist_box = new Gtk.Box (VERTICAL, 3) {
             margin_top = 3,
             margin_bottom = 3
         };
@@ -93,30 +94,28 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             child = add_tasklist_button_box
         };
 
-        var actionbar = new Gtk.ActionBar () {
-            css_classes = { Granite.STYLE_CLASS_FLAT }
-        };
+        var actionbar = new Gtk.ActionBar ();
+        actionbar.add_css_class (Granite.STYLE_CLASS_FLAT);
         actionbar.pack_start (add_tasklist_button);
 
-        var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
-            css_classes = { Granite.STYLE_CLASS_SIDEBAR }
-        };
+        var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        sidebar.add_css_class (Granite.STYLE_CLASS_SIDEBAR);
         sidebar.append (sidebar_header);
         sidebar.append (scrolledwindow);
         sidebar.append (actionbar);
 
         var main_header = new Gtk.HeaderBar () {
             title_widget = new Gtk.Label (null),
-            show_title_buttons = false,
-            css_classes = { Granite.STYLE_CLASS_DEFAULT_DECORATION, Granite.STYLE_CLASS_FLAT }
+            show_title_buttons = false
         };
+        main_header.add_css_class (Granite.STYLE_CLASS_DEFAULT_DECORATION);
+        main_header.add_css_class (Granite.STYLE_CLASS_FLAT);
         main_header.pack_end (new Gtk.WindowControls (Gtk.PackType.END));
 
         task_list_grid_stack = new Gtk.Stack ();
 
-        var main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
-            css_classes = { Granite.STYLE_CLASS_BACKGROUND }
-        };
+        var main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        main_box.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
         main_box.append (main_header);
         main_box.append (task_list_grid_stack);
 

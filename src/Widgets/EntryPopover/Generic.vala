@@ -50,14 +50,15 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
 
         popover_button = new Gtk.MenuButton () {
             popover = popover,
-            child = popover_button_box,
-            css_classes = { Granite.STYLE_CLASS_FLAT }
+            child = popover_button_box
         };
+        popover_button.add_css_class (Granite.STYLE_CLASS_FLAT);
 
         var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic") {
-            tooltip_text = _("Remove"),
-            css_classes = { Granite.STYLE_CLASS_FLAT, "delete-button" }
+            tooltip_text = _("Remove")
         };
+        delete_button.add_css_class (Granite.STYLE_CLASS_FLAT);
+        delete_button.add_css_class ("delete-button");
 
         var delete_button_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
@@ -65,9 +66,8 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
             child = delete_button
         };
 
-        var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0) {
-            css_classes = { "container" }
-        };
+        var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
+        button_box.add_css_class ("container");
         button_box.append (popover_button);
         button_box.append (delete_button_revealer);
         button_box.set_parent (this);
