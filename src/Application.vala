@@ -65,7 +65,7 @@ public class Tasks.Application : Gtk.Application {
 
         gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == DARK;
 
-        granite_settings.notify["prefers-color-scheme"].connect ((obj) => {
+        granite_settings.notify["prefers-color-scheme"].connect ((obj, pspec) => {
             gtk_settings.gtk_application_prefer_dark_theme = ((Granite.Settings) obj).prefers_color_scheme == DARK;
         });
 
