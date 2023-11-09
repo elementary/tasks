@@ -3,21 +3,35 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-entry-popover box {
+entry-popover .container {
     border-radius: 3px;
     background: @SILVER_300;
 }
 
-entry-popover button {
+entry-popover menubutton button.toggle {
+    background: transparent;
+    border: none;
     color: @SILVER_900;
     font-size: 0.9em;
+    box-shadow: none;
     font-weight: 600;
 }
 
-entry-popover.error box {
-    background: alpha (@error_color, 0.2);
+entry-popover .delete-button {
+    padding: 0.4rem;
+    color: @SILVER_900;
 }
 
-entry-popover.error button {
+
+entry-popover.error .container {
+    background: alpha(@error_color, 0.2);
+}
+
+entry-popover.error menubutton button.toggle {
+    color: @error_color;
+}
+
+
+entry-popover.error .delete-button {
     color: @error_color;
 }

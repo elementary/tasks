@@ -28,12 +28,7 @@ public class Tasks.Application : Gtk.Application {
     public static Tasks.TaskModel model;
     public static bool run_in_background = false;
 
-    public const Gtk.TargetEntry[] DRAG_AND_DROP_TASK_DATA = {
-        { "text/uri-list", Gtk.TargetFlags.SAME_APP | Gtk.TargetFlags.OTHER_WIDGET, 0 } // TODO: TEXT_URI
-    };
-
     private bool first_activation = true;
-
     public Application () {
         Object (
             application_id: "io.elementary.tasks",
@@ -57,8 +52,6 @@ public class Tasks.Application : Gtk.Application {
 
     protected override void startup () {
         base.startup ();
-
-        Hdy.init ();
 
         unowned var granite_settings = Granite.Settings.get_default ();
         unowned var gtk_settings = Gtk.Settings.get_default ();
@@ -97,26 +90,20 @@ public class Tasks.Application : Gtk.Application {
         if (active_window == null) {
             model.start.begin ();
 
-            var main_window = new MainWindow (this);
-            add_window (main_window);
+            new MainWindow (this);
 
-            int window_x, window_y;
-            var rect = Gtk.Allocation ();
+            unowned var granite_settings = Granite.Settings.get_default ();
+            unowned var gtk_settings = Gtk.Settings.get_default ();
 
-            settings.get ("window-position", "(ii)", out window_x, out window_y);
-            settings.get ("window-size", "(ii)", out rect.width, out rect.height);
+            gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
 
-            if (window_x != -1 || window_y != -1) {
-                main_window.move (window_x, window_y);
-            }
+            granite_settings.notify["prefers-color-scheme"].connect (() => {
+                gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+            });
 
-            main_window.set_allocation (rect);
-
-            if (settings.get_boolean ("window-maximized")) {
-                main_window.maximize ();
-            }
-
-            main_window.show_all ();
+            var button_box_style_provider = new Gtk.CssProvider ();
+            button_box_style_provider.load_from_resource ("io/elementary/tasks/ButtonBox.css");
+            Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), button_box_style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
         }
 
         active_window.present ();
@@ -156,7 +143,7 @@ public class Tasks.Application : Gtk.Application {
         if (providers == null) {
             providers = new Gee.HashMap<string, Gtk.CssProvider> ();
         }
-        var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        unowned var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
         // Ensure we get a valid CSS color, not including FF
         var color = task_list.dup_color ().slice (0, 7);
         if (!providers.has_key (color)) {
@@ -165,14 +152,10 @@ public class Tasks.Application : Gtk.Application {
                 @define-color accent_color %s;
             """.printf (color, color);
 
-            try {
-                var style_provider = new Gtk.CssProvider ();
-                style_provider.load_from_data (style, style.length);
+            var style_provider = new Gtk.CssProvider ();
+            style_provider.load_from_data ((uint8[])style);
 
-                providers[color] = style_provider;
-            } catch (Error e) {
-                critical ("Unable to set color: %s", e.message);
-            }
+            providers[color] = style_provider;
         }
 
         unowned Gtk.StyleContext style_context = widget.get_style_context ();
@@ -180,7 +163,6 @@ public class Tasks.Application : Gtk.Application {
     }
 
     public static int main (string[] args) {
-        GtkClutter.init (ref args);
         var app = new Application ();
         int res = app.run (args);
         ICal.Object.free_global_objects ();

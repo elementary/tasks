@@ -1,5 +1,5 @@
 /*
-* Copyright 2019 elementary, Inc. (https://elementary.io)
+* Copyright 2023 elementary, Inc. (https://elementary.io)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -18,22 +18,16 @@
 *
 */
 
-.source-color {
-    background: @colorAccent;
-    border: 1px solid @borders;
-    border-radius: 50%;
-    box-shadow:
-        inset 0 1px 0 0 alpha(@inset_dark_color, 0.7),
-        inset 0 0 0 1px alpha(@inset_dark_color, 0.3),
-        0 1px 0 0 alpha(@bg_highlight_color, 0.3);
-    min-height: 14px;
-    min-width: 14px;
-}
+class Tasks.Widgets.PopoverButton : Gtk.Box {
+    public signal void clicked ();
 
-.sidebar image {
-    color: @text_color;
-}
+    construct {
+        orientation = HORIZONTAL;
+        add_css_class (Granite.STYLE_CLASS_MENUITEM);
 
-.drop-hover {
-    background-color: @selected_bg_color;
+        var gesture_click = new Gtk.GestureClick ();
+        add_controller (gesture_click);
+
+        gesture_click.released.connect (() => clicked ());
+    }
 }

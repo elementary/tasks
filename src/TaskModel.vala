@@ -36,7 +36,7 @@ public class Tasks.TaskModel : Object {
     public delegate void TasksRemovedFunc (SList<ECal.ComponentId?> cids);
 
     private Gee.Future<E.SourceRegistry> registry;
-    private NetworkMonitor network_monitor;
+    //  private NetworkMonitor network_monitor;
     private HashTable<string, ECal.Client> task_list_client;
     private HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> task_list_client_views;
 
@@ -133,14 +133,15 @@ public class Tasks.TaskModel : Object {
     construct {
         task_list_client = new HashTable<string, ECal.Client> (str_hash, str_equal);
         task_list_client_views = new HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> (direct_hash, direct_equal);  // vala-lint=line-length
-        network_monitor = NetworkMonitor.get_default ();
+        // Failed to initialize portal (GNetworkMonitorPortal) for gio-network-monitor: Not using portals
+        //  network_monitor = NetworkMonitor.get_default ();
     }
 
     public async void start () {
         var promise = new Gee.Promise<E.SourceRegistry> ();
         registry = promise.future;
         yield init_registry (promise);
-        network_monitor.network_changed.connect (network_changed);
+        //  network_monitor.network_changed.connect (network_changed);
     }
 
     private async void init_registry (Gee.Promise<E.SourceRegistry> promise) {
@@ -239,15 +240,18 @@ public class Tasks.TaskModel : Object {
     }
 
     private async bool refresh_collection (E.Source collection_source, Cancellable? cancellable = null) throws Error {
-        if (network_monitor.network_available && registry.ready) {
+        //  if (network_monitor.network_available && registry.ready) {
+        if (registry.ready) {
             debug ("Scheduling collection refresh '%s'…", collection_source.dup_display_name ());
             return yield registry.value.refresh_backend (collection_source.dup_uid (), cancellable);
         }
+
         return false;
     }
 
     public async bool refresh_task_list (E.Source task_list, Cancellable? cancellable = null) throws Error {
-        if (network_monitor.network_available && task_list_client.contains (task_list.dup_uid ())) {
+        //  if (network_monitor.network_available && task_list_client.contains (task_list.dup_uid ())) {
+        if (task_list_client.contains (task_list.dup_uid ())) {
             var client = task_list_client.get (task_list.dup_uid ());
 
             if (client.check_refresh_supported ()) {
@@ -592,7 +596,7 @@ public class Tasks.TaskModel : Object {
             debug ("WebDAV Rename '%s'", task_list.get_uid ());
 
             var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-            var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+            unowned var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
             var credentials_provider = new E.SourceCredentialsProvider (registry);
             E.NamedParameters credentials;
@@ -676,7 +680,7 @@ public class Tasks.TaskModel : Object {
         if (!task_list.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
             throw new Tasks.TaskModelError.INVALID_ARGUMENT ("Changing the color is not supported by this source.");
         }
-        var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        unowned var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
         var previous_color = task_list_extension.dup_color ();
 
         var registry = get_registry_sync ();
@@ -700,7 +704,7 @@ public class Tasks.TaskModel : Object {
                     debug ("Update %s color for '%s'", backend_name, task_list.get_uid ());
 
                     var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-                    var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+                    unowned var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
                     var credentials_provider = new E.SourceCredentialsProvider (registry);
                     E.NamedParameters credentials;

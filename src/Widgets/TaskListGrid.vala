@@ -9,6 +9,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
     private EditableLabel editable_title;
     private Gtk.ListBox add_task_list;
+    private Gtk.Label placeholder;
     private Gtk.ListBox task_list;
     private bool is_gtasks;
 
@@ -17,8 +18,8 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     construct {
-        E.SourceRegistry? registry = null;
         try {
+            E.SourceRegistry registry;
             registry = Application.model.get_registry_sync ();
             is_gtasks = Application.model.get_collection_backend_name (source, registry) == "google";
         } catch (Error e) {
@@ -26,79 +27,74 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         }
 
         editable_title = new EditableLabel () {
-            margin_start = 24
+            margin_start = 24,
+            hexpand = true
         };
+        editable_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
+        editable_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
 
-        unowned Gtk.StyleContext title_context = editable_title.get_style_context ();
-        title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
-        title_context.add_class (Granite.STYLE_CLASS_ACCENT);
-
-        var list_settings_popover = new Tasks.Widgets.ListSettingsPopover ();
+        var list_settings_popover = new Tasks.Widgets.ListSettingsPopover (source);
 
         var settings_button = new Gtk.MenuButton () {
+            popover = list_settings_popover,
             margin_end = 24,
             valign = Gtk.Align.CENTER,
-            tooltip_text = _("Edit Name and Appearance"),
-            popover = list_settings_popover,
-            image = new Gtk.Image.from_icon_name ("view-more-symbolic", Gtk.IconSize.MENU)
+            hexpand = false,
+            icon_name = "view-more-symbolic",
+            tooltip_text = _("Edit Name and Appearance")
         };
-        settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
-        settings_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-
-        var placeholder = new Gtk.Label (_("No Tasks"));
-        placeholder.show ();
-
-        unowned Gtk.StyleContext placeholder_context = placeholder.get_style_context ();
-        placeholder_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-        placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+        settings_button.add_css_class (Granite.STYLE_CLASS_FLAT);
+        settings_button.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         add_task_list = new Gtk.ListBox () {
             margin_top = 24,
             selection_mode = Gtk.SelectionMode.SINGLE,
             activate_on_single_click = true
         };
-        add_task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
+        add_task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
 
         var add_task_row = new Tasks.Widgets.TaskRow.for_source (source);
         add_task_row.unselect.connect (on_row_unselect);
 
         add_task_row.task_changed.connect ((task) => {
             Tasks.Application.model.add_task.begin (source, task, (obj, res) => {
-                GLib.Idle.add (() => {
-                    try {
-                        Tasks.Application.model.add_task.end (res);
-                    } catch (Error e) {
-                        var error_dialog = new Granite.MessageDialog (
-                            _("Adding task failed"),
-                            _("The task list registry may be unavailable or unable to be written to."),
-                            new ThemedIcon ("dialog-error"),
-                            Gtk.ButtonsType.CLOSE
-                        );
-                        error_dialog.show_error_details (e.message);
-                        error_dialog.run ();
+                try {
+                    Tasks.Application.model.add_task.end (res);
+                } catch (Error e) {
+                    var error_dialog = new Granite.MessageDialog (
+                        _("Adding task failed"),
+                        _("The task list registry may be unavailable or unable to be written to."),
+                        new ThemedIcon ("dialog-error"),
+                        Gtk.ButtonsType.CLOSE
+                    );
+                    error_dialog.show_error_details (e.message);
+                    error_dialog.present ();
+                    error_dialog.response.connect (() => {
                         error_dialog.destroy ();
-                    }
-
-                    return GLib.Source.REMOVE;
-                });
+                    });
+                }
             });
         });
-        add_task_list.add (add_task_row);
+        add_task_list.append (add_task_row);
+
+        placeholder = new Gtk.Label (_("No Tasks"));
+        placeholder.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+        placeholder.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
 
         task_list = new Gtk.ListBox () {
-            selection_mode = Gtk.SelectionMode.MULTIPLE,
+            selection_mode = Gtk.SelectionMode.SINGLE,
             activate_on_single_click = true
         };
-        task_list.set_placeholder (placeholder);
+        task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
         task_list.set_sort_func (sort_function);
-        task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
+        task_list.set_placeholder (placeholder);
 
-        var scrolled_window = new Gtk.ScrolledWindow (null, null) {
+        var scrolled_window = new Gtk.ScrolledWindow () {
             hexpand = true,
             vexpand = true,
-            hscrollbar_policy = Gtk.PolicyType.NEVER
+            hscrollbar_policy = Gtk.PolicyType.NEVER,
+            child = task_list
         };
-        scrolled_window.add (task_list);
 
         column_spacing = 12;
         attach (editable_title, 0, 0);
@@ -111,26 +107,29 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         });
         on_show_completed_changed (Application.settings.get_boolean ("show-completed"));
 
-        settings_button.toggled.connect (() => {
-            unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
+        settings_button.activate.connect (() => {
+            unowned var main_window = (MainWindow) get_root ();
 
-            if (settings_button.active) {
+            // TODO:
+            //  error: `Gtk.MenuButton.get_active' is not available in gtk4 4.6.6. Use gtk4 >= 4.10
+            //  if (settings_button.active) {
+            if (false) {
                 list_settings_popover.source = source;
 
-                if (win_action_map != null) {
-                    ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
+                if (main_window != null) {
+                    ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
                 }
 
-            } else if (win_action_map != null) {
+            } else if (main_window != null) {
                 /*
                 * We can't immediate disable the action once the popover is closed,
-                * because this would lead to the action not beeing executed in case
+                * because this would lead to the action not being executed in case
                 * the popover was closed because the user clicked on the action.
                 * Therefore we wait a tiny bit using GLib.Idle to allow the action to
                 * be executed if needed.
                 */
                 GLib.Idle.add (() => {
-                    ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (
+                    ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (
                         add_task_list.get_selected_rows ().length () == 0 &&
                         task_list.get_selected_rows ().length () == 0
                     );
@@ -143,37 +142,33 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         task_list.row_activated.connect (on_row_activated);
 
         editable_title.notify["editing"].connect (() => {
-            unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
-            if (win_action_map != null) {
-                ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (!editable_title.editing);
+            unowned var main_window = (MainWindow) get_root ();
+            if (main_window != null) {
+                ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (!editable_title.editing);
             }
         });
 
         editable_title.changed.connect (() => {
             Application.model.update_task_list_display_name.begin (source, editable_title.text, (obj, res) => {
-                GLib.Idle.add (() => {
-                    try {
-                        Application.model.update_task_list_display_name.end (res);
-                    } catch (Error e) {
-                        editable_title.text = source.display_name;
+                try {
+                    Application.model.update_task_list_display_name.end (res);
+                } catch (Error e) {
+                    editable_title.text = source.display_name;
 
-                        var error_dialog = new Granite.MessageDialog (
-                            _("Renaming task list failed"),
-                            _("The task list registry may be unavailable or unable to be written to."),
-                            new ThemedIcon ("dialog-error"),
-                            Gtk.ButtonsType.CLOSE
-                        );
-                        error_dialog.show_error_details (e.message);
-                        error_dialog.run ();
+                    var error_dialog = new Granite.MessageDialog (
+                        _("Renaming task list failed"),
+                        _("The task list registry may be unavailable or unable to be written to."),
+                        new ThemedIcon ("dialog-error"),
+                        Gtk.ButtonsType.CLOSE
+                    );
+                    error_dialog.show_error_details (e.message);
+                    error_dialog.present ();
+                    error_dialog.response.connect (() => {
                         error_dialog.destroy ();
-                    }
-
-                    return GLib.Source.REMOVE;
-                });
+                    });
+                }
             });
         });
-
-        show_all ();
     }
 
     private void on_show_completed_changed (bool show_completed) {
@@ -185,9 +180,19 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     private void set_view_for_query (string query) {
-        var children = task_list.get_children ();
-        foreach (unowned var child in children) {
-            task_list.remove (child);
+        Gtk.Widget[] children_for_removal = {};
+        unowned var child = task_list.get_first_child ();
+        while (child != null) {
+            if (child != placeholder) {
+                children_for_removal += child;
+            }
+
+            child = child.get_next_sibling ();
+        }
+
+        for (int i = 0; i < children_for_removal.length; i++) {
+            task_list.remove (children_for_removal[i]);
+            children_for_removal[i].destroy ();
         }
 
         if (view != null) {
@@ -210,9 +215,9 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         var task_row = (Tasks.Widgets.TaskRow) row;
         task_row.reveal_child_request (true);
 
-        unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
-        if (win_action_map != null) {
-            ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+        unowned var main_window = (MainWindow) get_root ();
+        if (main_window != null) {
+            ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
         }
     }
 
@@ -222,9 +227,9 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         }
 
         if (add_task_list.get_selected_rows ().length () == 0 && task_list.get_selected_rows ().length () == 0) {
-            unowned GLib.ActionMap win_action_map = (GLib.ActionMap) get_action_group (MainWindow.ACTION_GROUP_PREFIX);
-            if (win_action_map != null) {
-                ((SimpleAction) win_action_map.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
+            unowned var main_window = (MainWindow) get_root ();
+            if (main_window != null) {
+                ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
             }
         }
     }
@@ -234,12 +239,15 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
         Tasks.Application.set_task_color (source, editable_title);
 
-        task_list.@foreach ((row) => {
-            if (row is Tasks.Widgets.TaskRow) {
-                var task_row = (row as Tasks.Widgets.TaskRow);
+        unowned var child = task_list.get_first_child ();
+        while (child != null) {
+            if (child is Tasks.Widgets.TaskRow) {
+                unowned var task_row = (child as Tasks.Widgets.TaskRow);
                 task_row.update_request ();
             }
-        });
+
+            child = child.get_next_sibling ();
+        }
     }
 
     [CCode (instance_pos = -1)]
@@ -287,84 +295,77 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
             task_row.task_completed.connect ((task) => {
                 Tasks.Application.model.complete_task.begin (source, task, (obj, res) => {
-                    GLib.Idle.add (() => {
-                        try {
-                            Tasks.Application.model.complete_task.end (res);
-                        } catch (Error e) {
-                            var error_dialog = new Granite.MessageDialog (
-                                _("Completing task failed"),
-                                _("The task registry may be unavailable or unable to be written to."),
-                                new ThemedIcon ("dialog-error"),
-                                Gtk.ButtonsType.CLOSE
-                            );
-                            error_dialog.show_error_details (e.message);
-                            error_dialog.run ();
+                    try {
+                        Tasks.Application.model.complete_task.end (res);
+                    } catch (Error e) {
+                        var error_dialog = new Granite.MessageDialog (
+                            _("Completing task failed"),
+                            _("The task registry may be unavailable or unable to be written to."),
+                            new ThemedIcon ("dialog-error"),
+                            Gtk.ButtonsType.CLOSE
+                        );
+                        error_dialog.show_error_details (e.message);
+                        error_dialog.present ();
+                        error_dialog.response.connect (() => {
                             error_dialog.destroy ();
-                        }
-
-                        return GLib.Source.REMOVE;
-                    });
+                        });
+                    }
                 });
             });
 
             task_row.task_changed.connect ((task) => {
                 Tasks.Application.model.update_task.begin (source, task, ECal.ObjModType.THIS_AND_FUTURE, (obj, res) => {
-                    GLib.Idle.add (() => {
-                        try {
-                            Tasks.Application.model.update_task.end (res);
-                        } catch (Error e) {
-                            var error_dialog = new Granite.MessageDialog (
-                                _("Updating task failed"),
-                                _("The task registry may be unavailable or unable to be written to."),
-                                new ThemedIcon ("dialog-error"),
-                                Gtk.ButtonsType.CLOSE
-                            );
-                            error_dialog.show_error_details (e.message);
-                            error_dialog.run ();
+                    try {
+                        Tasks.Application.model.update_task.end (res);
+                    } catch (Error e) {
+                        var error_dialog = new Granite.MessageDialog (
+                            _("Updating task failed"),
+                            _("The task registry may be unavailable or unable to be written to."),
+                            new ThemedIcon ("dialog-error"),
+                            Gtk.ButtonsType.CLOSE
+                        );
+                        error_dialog.show_error_details (e.message);
+                        error_dialog.present ();
+                        error_dialog.response.connect (() => {
                             error_dialog.destroy ();
-                        }
-
-                        return GLib.Source.REMOVE;
-                    });
+                        });
+                    }
                 });
             });
 
             task_row.task_removed.connect ((task) => {
                 Tasks.Application.model.remove_task.begin (source, task, ECal.ObjModType.ALL, (obj, res) => {
-                    GLib.Idle.add (() => {
-                        try {
-                            Tasks.Application.model.remove_task.end (res);
-                        } catch (Error e) {
-                            var error_dialog = new Granite.MessageDialog (
-                                _("Removing task failed"),
-                                _("The task registry may be unavailable or unable to be written to."),
-                                new ThemedIcon ("dialog-error"),
-                                Gtk.ButtonsType.CLOSE
-                            );
-                            error_dialog.show_error_details (e.message);
-                            error_dialog.run ();
+                    try {
+                        Tasks.Application.model.remove_task.end (res);
+                    } catch (Error e) {
+                        var error_dialog = new Granite.MessageDialog (
+                            _("Removing task failed"),
+                            _("The task registry may be unavailable or unable to be written to."),
+                            new ThemedIcon ("dialog-error"),
+                            Gtk.ButtonsType.CLOSE
+                        );
+                        error_dialog.show_error_details (e.message);
+                        error_dialog.present ();
+                        error_dialog.response.connect (() => {
                             error_dialog.destroy ();
-                        }
-
-                        return GLib.Source.REMOVE;
-                    });
+                        });
+                    }
                 });
             });
-            task_list.add (task_row);
+            task_list.append (task_row);
 
             return true;
         });
 
         Idle.add (() => {
             task_list.invalidate_sort ();
-            task_list.show_all ();
 
             return Source.REMOVE;
         });
     }
 
     private void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
-        Tasks.Widgets.TaskRow task_row = null;
+        unowned Tasks.Widgets.TaskRow task_row = null;
         var row_index = 0;
 
         do {

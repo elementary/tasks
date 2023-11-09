@@ -4,17 +4,15 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
+public class Tasks.Widgets.EditableLabel : Gtk.Widget {
     public signal void changed ();
-
-    private static Gtk.CssProvider label_provider;
 
     private Gtk.Label title;
     private Gtk.Entry entry;
     private Gtk.Stack stack;
     private Gtk.Box box;
 
-    public string text { get; set; }
+    public string text { get; set; default = ""; }
 
     public bool editing {
         get { return stack.visible_child == entry; }
@@ -34,20 +32,19 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
         }
     }
 
+    class construct {
+        set_layout_manager_type (typeof (Gtk.BinLayout));
+        set_css_name ("editable-label");
+    }
+
     static construct {
-        label_provider = new Gtk.CssProvider ();
-        label_provider.load_from_resource ("io/elementary/tasks/EditableLabel.css");
+        var style_provider = new Gtk.CssProvider ();
+        style_provider.load_from_resource ("io/elementary/tasks/EditableLabel.css");
+        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     construct {
-        unowned Gtk.StyleContext style_context = get_style_context ();
-        style_context.add_class ("editable-label");
-        style_context.add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
         valign = Gtk.Align.CENTER;
-        events |= Gdk.EventMask.ENTER_NOTIFY_MASK;
-        events |= Gdk.EventMask.LEAVE_NOTIFY_MASK;
-        events |= Gdk.EventMask.BUTTON_PRESS_MASK;
 
         title = new Gtk.Label ("") {
             ellipsize = Pango.EllipsizeMode.END,
@@ -55,61 +52,52 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
         };
 
         var edit_button = new Gtk.Button () {
-            image = new Gtk.Image.from_icon_name ("edit-symbolic", Gtk.IconSize.MENU),
+            icon_name = "edit-symbolic",
             tooltip_text = _("Edit…")
         };
-        edit_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        edit_button.add_css_class (Granite.STYLE_CLASS_FLAT);
 
         var button_revealer = new Gtk.Revealer () {
             valign = Gtk.Align.CENTER,
-            transition_type = Gtk.RevealerTransitionType.CROSSFADE
+            transition_type = Gtk.RevealerTransitionType.CROSSFADE,
+            child = edit_button
         };
-        button_revealer.add (edit_button);
 
         box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12) {
             valign = Gtk.Align.CENTER
         };
-        box.add (title);
-        box.add (button_revealer);
+        box.append (title);
+        box.append (button_revealer);
 
         entry = new Gtk.Entry () {
-            hexpand = true
+            hexpand = true,
         };
-        entry.get_style_context ().add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         stack = new Gtk.Stack () {
             hhomogeneous = false,
             transition_type = Gtk.StackTransitionType.CROSSFADE
         };
-        stack.add (box);
-        stack.add (entry);
-
-        add (stack);
+        stack.add_child (box);
+        stack.add_child (entry);
+        stack.set_parent (this); // ?
 
         bind_property ("text", title, "label");
 
-        enter_notify_event.connect ((event) => {
-            if (event.detail != Gdk.NotifyType.INFERIOR) {
-                button_revealer.reveal_child = true;
-            }
+        var motion_controller = new Gtk.EventControllerMotion ();
+        add_controller (motion_controller);
 
-            return Gdk.EVENT_PROPAGATE;
+        var press_controller = new Gtk.GestureClick ();
+        add_controller (press_controller);
+
+        motion_controller.enter.connect ((x, y) => {
+            button_revealer.reveal_child = true;
         });
 
-        leave_notify_event.connect ((event) => {
-            if (event.detail != Gdk.NotifyType.INFERIOR) {
-                button_revealer.reveal_child = false;
-            }
-
-            return Gdk.EVENT_PROPAGATE;
+        motion_controller.leave.connect (() => {
+            button_revealer.reveal_child = false;
         });
 
-        button_press_event.connect ((event) => {
-            editing = true;
-            return Gdk.EVENT_PROPAGATE;
-        });
-
-        edit_button.clicked.connect (() => {
+        press_controller.pressed.connect ((n_press, x, y) => {
             editing = true;
         });
 
@@ -119,15 +107,24 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
             }
         });
 
-        grab_focus.connect (() => {
-            editing = true;
-        });
 
-        entry.focus_out_event.connect ((event) => {
+        var focus_controller = new Gtk.EventControllerFocus ();
+        entry.add_controller (focus_controller);
+
+        focus_controller.leave.connect (() => {
             if (stack.visible_child == entry) {
                 editing = false;
             }
-            return Gdk.EVENT_PROPAGATE;
         });
+    }
+
+    public override bool grab_focus () {
+        editing = true;
+
+        return Gdk.EVENT_STOP;
+    }
+
+    ~EditableLabel () {
+        get_last_child ().unparent ();
     }
 }
