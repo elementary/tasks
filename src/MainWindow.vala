@@ -475,9 +475,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 get_allocation (out rect);
                 Tasks.Application.settings.set ("window-size", "(ii)", rect.width, rect.height);
 
-                int root_x, root_y;
-                get_position (out root_x, out root_y);
-                Tasks.Application.settings.set ("window-position", "(ii)", root_x, root_y);
             }
 
             return false;
