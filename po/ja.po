@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-20 18:48+0000\n"
-"PO-Revision-Date: 2024-02-12 08:12+0000\n"
+"PO-Revision-Date: 2024-02-19 12:12+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/tasks/ja/>"
 "\n"
@@ -161,7 +161,7 @@ msgstr "SSL 証明書が拒否されました"
 
 #: src/Widgets/ScheduledTaskListBox.vala:72 src/Widgets/TaskListGrid.vala:48
 msgid "No Tasks"
-msgstr "タスクがありません"
+msgstr "タスクなし"
 
 #: src/Widgets/ScheduledTaskListBox.vala:206 src/Widgets/TaskListGrid.vala:295
 msgid "Completing task failed"
