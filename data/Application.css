@@ -67,6 +67,10 @@ row.task.drag-active {
     transition: none;
 }
 
+.button-box button {
+    min-width: 86px; /* https://github.com/elementary/granite/issues/577#issuecomment-1318979272 */
+}
+
 .source-color {
     background: @colorAccent;
     border: 1px solid @borders;
