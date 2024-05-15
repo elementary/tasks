@@ -538,18 +538,17 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, alloc.width, alloc.height);
         var cairo_context = new Cairo.Context (surface);
 
-        var style_context = get_style_context ();
-        var had_cards_class = style_context.has_class (Granite.STYLE_CLASS_CARD);
+        var had_cards_class = get_style_context ().has_class (Granite.STYLE_CLASS_CARD);
 
         get_style_context ().add_class ("drag-active");
         if (had_cards_class) {
-            style_context.remove_class (Granite.STYLE_CLASS_CARD);
+            get_style_context ().remove_class (Granite.STYLE_CLASS_CARD);
         }
         draw_to_cairo_context (cairo_context);
         if (had_cards_class) {
             get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
         }
-        style_context.remove_class ("drag-active");
+        get_style_context ().remove_class ("drag-active");
 
         int drag_icon_x, drag_icon_y;
         translate_coordinates (this, 0, 0, out drag_icon_x, out drag_icon_y);

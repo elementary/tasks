@@ -71,9 +71,8 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     }
 
     private bool on_drag_motion (Gdk.DragContext context, int x, int y, uint time) {
-        var style_context = get_style_context ();
-        if (!style_context.has_class ("drop-hover")) {
-            style_context.add_class ("drop-hover");
+        if (!get_style_context ().has_class ("drop-hover")) {
+            get_style_context ().add_class ("drop-hover");
         }
         return true;
     }

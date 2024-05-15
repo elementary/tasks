@@ -49,25 +49,21 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             has_subtitle = false,
             show_close_button = true
         };
-
-        unowned Gtk.StyleContext sidebar_header_context = sidebar_header.get_style_context ();
-        sidebar_header_context.add_class ("default-decoration");
-        sidebar_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
+        sidebar_header.get_style_context ().add_class ("default-decoration");
+        sidebar_header.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
         var main_header = new Hdy.HeaderBar () {
             has_subtitle = false,
             show_close_button = true
         };
+        main_header.get_style_context ().add_class ("default-decoration");
+        main_header.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
         // Create a header group that automatically assigns the right decoration controls to the
         // right headerbar automatically
         var header_group = new Hdy.HeaderGroup ();
         header_group.add_header_bar (sidebar_header);
         header_group.add_header_bar (main_header);
-
-        unowned Gtk.StyleContext main_header_context = main_header.get_style_context ();
-        main_header_context.add_class ("default-decoration");
-        main_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
 
         listbox = new Gtk.ListBox ();
         listbox.set_sort_func (sort_function);
@@ -111,9 +107,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         var actionbar = new Gtk.ActionBar ();
         actionbar.add (add_tasklist_button);
-
-        unowned Gtk.StyleContext actionbar_style_context = actionbar.get_style_context ();
-        actionbar_style_context.add_class (Gtk.STYLE_CLASS_FLAT);
+        actionbar.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
         var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
         sidebar.get_style_context ().add_class (Gtk.STYLE_CLASS_SIDEBAR);

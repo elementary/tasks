@@ -28,10 +28,8 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         editable_title = new EditableLabel () {
             margin_start = 24
         };
-
-        unowned Gtk.StyleContext title_context = editable_title.get_style_context ();
-        title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
-        title_context.add_class (Granite.STYLE_CLASS_ACCENT);
+        editable_title.get_style_context ().add_class (Granite.STYLE_CLASS_H1_LABEL);
+        editable_title.get_style_context ().add_class (Granite.STYLE_CLASS_ACCENT);
 
         var list_settings_popover = new Tasks.Widgets.ListSettingsPopover ();
 
@@ -47,10 +45,8 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
         var placeholder = new Gtk.Label (_("No Tasks"));
         placeholder.show ();
-
-        unowned Gtk.StyleContext placeholder_context = placeholder.get_style_context ();
-        placeholder_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-        placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+        placeholder.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        placeholder.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
         add_task_list = new Gtk.ListBox () {
             margin_top = 24,
