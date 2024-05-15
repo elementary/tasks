@@ -60,10 +60,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         sidebar_header.pack_start (new Gtk.WindowControls (Gtk.PackType.START));
 
         var scrolledwindow = new Gtk.ScrolledWindow () {
+            child = listbox,
             hexpand = true,
             vexpand = true,
-            hscrollbar_policy = Gtk.PolicyType.NEVER,
-            child = listbox
+            hscrollbar_policy = Gtk.PolicyType.NEVER
         };
 
         add_tasklist_buttonbox = new Gtk.Box (Gtk.Orientation.VERTICAL, 6); // TODO: check spacing
