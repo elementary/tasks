@@ -9,7 +9,7 @@ i18n = import('i18n')
 
 add_project_arguments('-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()), language:'c')
 add_project_arguments('-DLIBICAL_GLIB_UNSTABLE_API=1', language: 'c')
-add_project_arguments('-DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED', language: 'c')
+
 gresource = gnome.compile_resources(
     'gresource',
     join_paths('data', 'gresource.xml'),
