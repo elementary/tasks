@@ -58,9 +58,13 @@ public class Tasks.Application : Gtk.Application {
 
         gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == DARK;
 
-        granite_settings.notify["prefers-color-scheme"].connect ((obj) => {
+        granite_settings.notify["prefers-color-scheme"].connect ((obj, pspec) => {
             gtk_settings.gtk_application_prefer_dark_theme = ((Granite.Settings) obj).prefers_color_scheme == DARK;
         });
+
+        var button_box_style_provider = new Gtk.CssProvider ();
+        button_box_style_provider.load_from_resource ("io/elementary/tasks/ButtonBox.css");
+        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), button_box_style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var quit_action = new SimpleAction ("quit", null);
         quit_action.activate.connect (() => {
@@ -90,20 +94,22 @@ public class Tasks.Application : Gtk.Application {
         if (active_window == null) {
             model.start.begin ();
 
-            new MainWindow (this);
+            var main_window = new MainWindow (this);
+            add_window (main_window);
 
-            unowned var granite_settings = Granite.Settings.get_default ();
-            unowned var gtk_settings = Gtk.Settings.get_default ();
+            /*
+            * This is very finicky. Bind size after present else set_titlebar gives us bad sizes
+            * Set maximize after height/width else window is min size on unmaximize
+            * Bind maximize as SET else get get bad sizes
+            */
+            settings.bind ("window-height", main_window, "default-height", DEFAULT);
+            settings.bind ("window-width", main_window, "default-width", DEFAULT);
 
-            gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+            if (settings.get_boolean ("window-maximized")) {
+                main_window.maximize ();
+            }
 
-            granite_settings.notify["prefers-color-scheme"].connect (() => {
-                gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
-            });
-
-            var button_box_style_provider = new Gtk.CssProvider ();
-            button_box_style_provider.load_from_resource ("io/elementary/tasks/ButtonBox.css");
-            Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), button_box_style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            settings.bind ("window-maximized", main_window, "maximized", SET);
         }
 
         active_window.present ();

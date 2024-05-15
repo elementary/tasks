@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-20 18:48+0000\n"
-"PO-Revision-Date: 2023-07-21 01:51+0000\n"
+"PO-Revision-Date: 2024-05-09 13:13+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://l10n.elementary.io/projects/tasks/extra/ja/>"
 "\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.5\n"
 
 #: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -86,7 +86,7 @@ msgstr "タスクの期日になったら通知を表示するように修正"
 
 #: data/tasks.metainfo.xml.in:105
 msgid "Drag and drop tasks between lists"
-msgstr "リスト間でタスクをドラッグアンドドロップできる機能を追加"
+msgstr "リスト間でタスクをドラッグ & ドロップできる機能を追加"
 
 #: data/tasks.metainfo.xml.in:106
 msgid "Follow email and web links in the task description with Control + Click"
