@@ -37,12 +37,6 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
         set_css_name ("editable-label");
     }
 
-    static construct {
-        var style_provider = new Gtk.CssProvider ();
-        style_provider.load_from_resource ("io/elementary/tasks/EditableLabel.css");
-        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-    }
-
     construct {
         valign = Gtk.Align.CENTER;
 

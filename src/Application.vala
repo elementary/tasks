@@ -162,8 +162,7 @@ public class Tasks.Application : Gtk.Application {
             providers[color] = style_provider;
         }
 
-        unowned Gtk.StyleContext style_context = widget.get_style_context ();
-        style_context.add_provider (providers[color], Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        widget.get_style_context ().add_provider (providers[color], Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     public static int main (string[] args) {

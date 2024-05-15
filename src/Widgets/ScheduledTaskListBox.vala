@@ -78,8 +78,6 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
         scheduled_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
 
         var placeholder = new Gtk.Label (_("No Tasks"));
-        placeholder.show ();
-
         placeholder.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
         placeholder.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
 

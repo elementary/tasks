@@ -51,16 +51,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         Object (source: source, task: task, is_scheduled_view: is_scheduled_view);
     }
 
-    class construct {
-        set_css_name ("task-row");
-    }
-
-    static construct {
-        var style_provider = new Gtk.CssProvider ();
-        style_provider.load_from_resource ("io/elementary/tasks/TaskRow.css");
-        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-    }
-
     construct {
         created = calcomponent_created (task);
 
@@ -280,6 +270,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         margin_start = 12;
         margin_end = 12;
 
+        add_css_class ("task");
         add_css_class (Granite.STYLE_CLASS_ROUNDED);
 
         if (created) {

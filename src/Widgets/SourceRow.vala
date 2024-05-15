@@ -16,12 +16,6 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         Object (source: source);
     }
 
-    static construct {
-        var style_provider = new Gtk.CssProvider ();
-        style_provider.load_from_resource ("io/elementary/tasks/SourceRow.css");
-        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-    }
-
     construct {
         source_color = new Gtk.Grid () {
             valign = Gtk.Align.CENTER
