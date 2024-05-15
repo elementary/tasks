@@ -232,7 +232,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         buttons_size_group.add_widget (save_button);
 
         var right_buttons_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
-            halign = Gtk.Align.END
+            halign = Gtk.Align.END,
+            homogeneous = true
         };
         right_buttons_box.append (cancel_button);
         right_buttons_box.append (save_button);
