@@ -213,9 +213,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         description_textview.set_buffer (description_textbuffer);
 
         var description_frame = new Gtk.Frame (null) {
+            child = description_textview,
             hexpand = true
         };
-        description_frame.add (description_textview);
 
         var cancel_button = new Gtk.Button.with_label (_("Cancel"));
 
