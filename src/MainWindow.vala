@@ -33,7 +33,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
     static construct {
         action_accelerators[ACTION_DELETE_SELECTED_LIST] = "<Control>BackSpace";
-        Gtk.IconTheme.get_for_display (Gdk.Display.get_default ()).add_resource_path ("/io/elementary/tasks");
     }
 
     construct {
