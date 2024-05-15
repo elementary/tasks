@@ -35,6 +35,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Gtk.Revealer task_form_revealer;
     private Gtk.TextBuffer description_textbuffer;
 
+    private Gtk.EventControllerKey key_controller;
+
     private TaskRow (ECal.Component task, E.Source source) {
         Object (task: task, source: source);
     }
@@ -303,6 +305,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         build_drag_and_drop ();
 
+        key_controller = new Gtk.EventControllerKey (this);
+
         check.toggled.connect (() => {
             if (task == null) {
                 return;
@@ -326,8 +330,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             end_editing ();
         });
 
-        key_release_event.connect ((event) => {
-            if (event.keyval == Gdk.Key.Escape) {
+        key_controller.key_released.connect ((keyval, keycode, state) => {
+            if (keyval == Gdk.Key.Escape) {
                 reset_form ();
                 end_editing ();
             }
