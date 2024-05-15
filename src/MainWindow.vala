@@ -71,10 +71,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         var online_accounts_button = new Widgets.PopoverButton ();
         online_accounts_button.append (new Gtk.Label (_("Online Accounts Settings…")));
 
-        var add_tasklist_box = new Gtk.Box (VERTICAL, 3) {
-            margin_top = 3,
-            margin_bottom = 3
-        };
+        var add_tasklist_box = new Gtk.Box (VERTICAL, 0);
         add_tasklist_box.append (add_tasklist_buttonbox);
         add_tasklist_box.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
         add_tasklist_box.append (online_accounts_button);
@@ -82,6 +79,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         add_tasklist_popover = new Gtk.Popover () {
             child = add_tasklist_box
         };
+        add_tasklist_popover.add_css_class (Granite.STYLE_CLASS_MENU);
 
         var add_tasklist_button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
         add_tasklist_button_box.append (new Gtk.Image.from_icon_name ("list-add-symbolic"));
