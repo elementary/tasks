@@ -53,6 +53,8 @@ public class Tasks.Application : Gtk.Application {
     protected override void startup () {
         base.startup ();
 
+        Granite.init ();
+
         unowned var granite_settings = Granite.Settings.get_default ();
         unowned var gtk_settings = Gtk.Settings.get_default ();
 
@@ -61,10 +63,6 @@ public class Tasks.Application : Gtk.Application {
         granite_settings.notify["prefers-color-scheme"].connect ((obj, pspec) => {
             gtk_settings.gtk_application_prefer_dark_theme = ((Granite.Settings) obj).prefers_color_scheme == DARK;
         });
-
-        var button_box_style_provider = new Gtk.CssProvider ();
-        button_box_style_provider.load_from_resource ("io/elementary/tasks/ButtonBox.css");
-        Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), button_box_style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var quit_action = new SimpleAction ("quit", null);
         quit_action.activate.connect (() => {
