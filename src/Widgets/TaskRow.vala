@@ -34,9 +34,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Gtk.Revealer task_detail_revealer;
     private Gtk.Revealer task_form_revealer;
     private Gtk.TextBuffer description_textbuffer;
-    private unowned Gtk.StyleContext style_context;
-
-    private static Gtk.CssProvider taskrow_provider;
 
     private TaskRow (ECal.Component task, E.Source source) {
         Object (task: task, source: source);
@@ -51,11 +48,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
     public TaskRow.for_component (ECal.Component task, E.Source source, bool is_scheduled_view = false) {
         Object (source: source, task: task, is_scheduled_view: is_scheduled_view);
-    }
-
-    static construct {
-        taskrow_provider = new Gtk.CssProvider ();
-        taskrow_provider.load_from_resource ("io/elementary/tasks/TaskRow.css");
     }
 
     construct {
@@ -87,9 +79,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         summary_entry = new Gtk.Entry ();
 
-        unowned Gtk.StyleContext summary_entry_context = summary_entry.get_style_context ();
-        summary_entry_context.add_class (Gtk.STYLE_CLASS_FLAT);
-        summary_entry_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        summary_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
         due_datetime_popover = new Tasks.Widgets.EntryPopover.DateTime ();
 
@@ -281,9 +271,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         add (event_box);
         margin_start = margin_end = 12;
 
-        style_context = get_style_context ();
-        style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
-        style_context.add_provider (taskrow_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        get_style_context ().add_class ("task");
+        get_style_context ().add_class (Granite.STYLE_CLASS_ROUNDED);
 
         if (created) {
             check.show ();
@@ -402,12 +391,12 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         task_details_reveal_request (!value);
 
         if (value) {
-            style_context.add_class ("collapsed");
-            style_context.add_class (Granite.STYLE_CLASS_CARD);
+            get_style_context ().add_class ("collapsed");
+            get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
 
         } else {
-            style_context.remove_class (Granite.STYLE_CLASS_CARD);
-            style_context.remove_class ("collapsed");
+            get_style_context ().remove_class (Granite.STYLE_CLASS_CARD);
+            get_style_context ().remove_class ("collapsed");
         }
     }
 
@@ -552,13 +541,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         var style_context = get_style_context ();
         var had_cards_class = style_context.has_class (Granite.STYLE_CLASS_CARD);
 
-        style_context.add_class ("drag-active");
+        get_style_context ().add_class ("drag-active");
         if (had_cards_class) {
             style_context.remove_class (Granite.STYLE_CLASS_CARD);
         }
         draw_to_cairo_context (cairo_context);
         if (had_cards_class) {
-            style_context.add_class (Granite.STYLE_CLASS_CARD);
+            get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
         }
         style_context.remove_class ("drag-active");
 

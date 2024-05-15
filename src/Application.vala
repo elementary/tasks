@@ -69,6 +69,11 @@ public class Tasks.Application : Gtk.Application {
             gtk_settings.gtk_application_prefer_dark_theme = ((Granite.Settings) obj).prefers_color_scheme == DARK;
         });
 
+        var css_provider = new Gtk.CssProvider ();
+        css_provider.load_from_resource ("io/elementary/tasks/Application.css");
+
+        Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
         var quit_action = new SimpleAction ("quit", null);
         quit_action.activate.connect (() => {
             if (active_window != null) {

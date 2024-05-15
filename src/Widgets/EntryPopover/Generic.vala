@@ -13,7 +13,6 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
     public T value { get; set; }
 
     private Gtk.MenuButton popover_button;
-    private static Gtk.CssProvider style_provider;
     private T value_on_popover_show;
 
     protected Generic (string placeholder, string? icon_name = null) {
@@ -25,11 +24,6 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
 
     class construct {
         set_css_name ("entry-popover");
-    }
-
-    static construct {
-        style_provider = new Gtk.CssProvider ();
-        style_provider.load_from_resource ("io/elementary/tasks/EntryPopover.css");
     }
 
     construct {
@@ -44,18 +38,12 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
             image = new Gtk.Image.from_icon_name (icon_name, Gtk.IconSize.BUTTON),
             always_show_image = icon_name != null
         };
-
-        unowned Gtk.StyleContext popover_button_context = popover_button.get_style_context ();
-        popover_button_context.add_class (Gtk.STYLE_CLASS_FLAT);
-        popover_button_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        popover_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
         var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic", Gtk.IconSize.BUTTON) {
             tooltip_text = _("Remove")
         };
-
-        unowned Gtk.StyleContext delete_button_context = delete_button.get_style_context ();
-        delete_button_context.add_class (Gtk.STYLE_CLASS_FLAT);
-        delete_button_context.add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
         var delete_button_revealer = new Gtk.Revealer () {
             transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
@@ -66,7 +54,6 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
         var button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
         button_box.add (popover_button);
         button_box.add (delete_button_revealer);
-        button_box.get_style_context ().add_provider (style_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         add (button_box);
 
