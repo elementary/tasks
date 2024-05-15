@@ -21,7 +21,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     private Gee.HashMap<E.Source, Tasks.Widgets.SourceRow>? source_rows;
     private Gee.Collection<E.Source>? collection_sources;
     private Gtk.Stack task_list_grid_stack;
-    private Gtk.ButtonBox add_tasklist_buttonbox;
+    private Gtk.Box add_tasklist_buttonbox;
 
     public MainWindow (Gtk.Application application) {
         Object (
@@ -76,38 +76,43 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         listbox.add (scheduled_row);
 
         var scrolledwindow = new Gtk.ScrolledWindow (null, null) {
+            child = listbox,
             hexpand = true,
             vexpand = true,
             hscrollbar_policy = Gtk.PolicyType.NEVER
         };
-        scrolledwindow.add (listbox);
 
-        add_tasklist_buttonbox = new Gtk.ButtonBox (Gtk.Orientation.VERTICAL) {
-            layout_style = Gtk.ButtonBoxStyle.EXPAND
-        };
+        add_tasklist_buttonbox = new Gtk.Box (VERTICAL, 3);
 
         var online_accounts_button = new Gtk.ModelButton () {
             text = _("Online Accounts Settings…")
         };
 
-        var add_tasklist_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 3) {
+        var add_tasklist_box = new Gtk.Box (VERTICAL, 3) {
             margin_top = 3,
             margin_bottom = 3
         };
         add_tasklist_box.add (add_tasklist_buttonbox);
-        add_tasklist_box.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        add_tasklist_box.add (new Gtk.Separator (HORIZONTAL));
         add_tasklist_box.add (online_accounts_button);
         add_tasklist_box.show_all ();
 
-        var add_tasklist_popover = new Gtk.Popover (null);
-        add_tasklist_popover.add (add_tasklist_box);
+        var add_tasklist_popover = new Gtk.Popover (null) {
+            child = add_tasklist_box
+        };
+
+        var add_list_label = new Gtk.Label (_("Add Task List…"));
+
+        var add_list_button_box = new Gtk.Box (HORIZONTAL, 0);
+        add_list_button_box.add (new Gtk.Image.from_icon_name ("list-add-symbolic", SMALL_TOOLBAR));
+        add_list_button_box.add (add_list_label);
 
         var add_tasklist_button = new Gtk.MenuButton () {
-            label = _("Add Task List…"),
-            image = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR),
-            always_show_image = true,
+            child = add_list_button_box,
             popover = add_tasklist_popover
         };
+
+        add_list_label.mnemonic_widget = add_tasklist_button;
 
         var actionbar = new Gtk.ActionBar ();
         actionbar.add (add_tasklist_button);
@@ -115,25 +120,24 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         unowned Gtk.StyleContext actionbar_style_context = actionbar.get_style_context ();
         actionbar_style_context.add_class (Gtk.STYLE_CLASS_FLAT);
 
-        var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        var sidebar = new Gtk.Box (VERTICAL, 0);
         sidebar.get_style_context ().add_class (Gtk.STYLE_CLASS_SIDEBAR);
         sidebar.add (sidebar_header);
         sidebar.add (scrolledwindow);
         sidebar.add (actionbar);
 
-
         task_list_grid_stack = new Gtk.Stack ();
 
-        var main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        var main_box = new Gtk.Box (VERTICAL, 0);
         main_box.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
         main_box.add (main_header);
         main_box.add (task_list_grid_stack);
 
-        var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
+        var paned = new Gtk.Paned (HORIZONTAL);
         paned.pack1 (sidebar, false, false);
         paned.pack2 (main_box, true, false);
 
-        add (paned);
+        child = paned;
 
         delete_event.connect (() => {
             ((Application)application).request_background.begin (() => destroy ());
@@ -290,8 +294,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 transient_for = this
             };
             error_dialog.show_error_details (error_message);
-            error_dialog.run ();
-            error_dialog.destroy ();
+            error_dialog.present ();
+            error_dialog.response.connect (error_dialog.destroy);
 
             return GLib.Source.REMOVE;
         });
@@ -315,23 +319,26 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             unowned Gtk.Widget trash_button = message_dialog.add_button (_("Delete Anyway"), Gtk.ResponseType.YES);
             trash_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
-            Gtk.ResponseType response = (Gtk.ResponseType) message_dialog.run ();
-            message_dialog.destroy ();
+            message_dialog.response.connect ((response) => {
+                if (response == Gtk.ResponseType.YES) {
+                    Tasks.Application.model.remove_task_list.begin (source, (obj, res) => {
+                        try {
+                            Tasks.Application.model.remove_task_list.end (res);
+                        } catch (Error e) {
+                            critical (e.message);
+                            show_error_dialog (
+                                _("Deleting the task list failed"),
+                                _("The task list registry may be unavailable or unable to be written to."),
+                                e
+                            );
+                        }
+                    });
+                }
 
-            if (response == Gtk.ResponseType.YES) {
-                Tasks.Application.model.remove_task_list.begin (source, (obj, res) => {
-                    try {
-                        Tasks.Application.model.remove_task_list.end (res);
-                    } catch (Error e) {
-                        critical (e.message);
-                        show_error_dialog (
-                            _("Deleting the task list failed"),
-                            _("The task list registry may be unavailable or unable to be written to."),
-                            e
-                        );
-                    }
-                });
-            }
+                message_dialog.destroy ();
+            });
+
+            message_dialog.present ();
 
         } else {
             Gdk.beep ();
