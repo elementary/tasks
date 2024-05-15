@@ -64,17 +64,13 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
             margin_bottom = 24,
             xalign = 0
         };
-
-        unowned Gtk.StyleContext scheduled_title_context = scheduled_title.get_style_context ();
-        scheduled_title_context.add_class (Granite.STYLE_CLASS_H1_LABEL);
-        scheduled_title_context.add_class (Granite.STYLE_CLASS_ACCENT);
+        scheduled_title.get_style_context ().add_class (Granite.STYLE_CLASS_H1_LABEL);
+        scheduled_title.get_style_context ().add_class (Granite.STYLE_CLASS_ACCENT);
 
         var placeholder = new Gtk.Label (_("No Tasks"));
         placeholder.show ();
-
-        unowned Gtk.StyleContext placeholder_context = placeholder.get_style_context ();
-        placeholder_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-        placeholder_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+        placeholder.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        placeholder.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
 
         task_list = new Gtk.ListBox () {
             selection_mode = Gtk.SelectionMode.MULTIPLE,

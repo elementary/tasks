@@ -20,64 +20,44 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
 
     construct {
         color_button_blue = new Gtk.RadioButton (null);
-
-        unowned Gtk.StyleContext color_button_blue_context = color_button_blue.get_style_context ();
-        color_button_blue_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_blue_context.add_class ("blue");
+        color_button_blue.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_blue.get_style_context ().add_class ("blue");
 
         color_button_mint = new Gtk.RadioButton.from_widget (color_button_blue);
-
-        unowned Gtk.StyleContext color_button_mint_context = color_button_mint.get_style_context ();
-        color_button_mint_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_mint_context.add_class ("mint");
+        color_button_mint.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_mint.get_style_context ().add_class ("mint");
 
         color_button_green = new Gtk.RadioButton.from_widget (color_button_blue);
-
-        unowned Gtk.StyleContext color_button_green_context = color_button_green.get_style_context ();
-        color_button_green_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_green_context.add_class ("green");
+        color_button_green.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_green.get_style_context ().add_class ("green");
 
         color_button_yellow = new Gtk.RadioButton.from_widget (color_button_blue);
-
-        unowned Gtk.StyleContext color_button_yellow_context = color_button_yellow.get_style_context ();
-        color_button_yellow_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_yellow_context.add_class ("yellow");
+        color_button_yellow.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_yellow.get_style_context ().add_class ("yellow");
 
         color_button_orange = new Gtk.RadioButton.from_widget (color_button_blue);
-
-        unowned Gtk.StyleContext color_button_orange_context = color_button_orange.get_style_context ();
-        color_button_orange_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_orange_context.add_class ("orange");
+        color_button_orange.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_orange.get_style_context ().add_class ("orange");
 
         color_button_red = new Gtk.RadioButton.from_widget (color_button_blue);
-
-        unowned Gtk.StyleContext color_button_red_context = color_button_red.get_style_context ();
-        color_button_red_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_red_context.add_class ("red");
+        color_button_red.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_red.get_style_context ().add_class ("red");
 
         color_button_pink = new Gtk.RadioButton.from_widget (color_button_blue);
-
-        unowned Gtk.StyleContext color_button_pink_context = color_button_pink.get_style_context ();
-        color_button_pink_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_pink_context.add_class ("pink");
+        color_button_pink.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_pink.get_style_context ().add_class ("pink");
 
         color_button_purple = new Gtk.RadioButton.from_widget (color_button_blue);
-
-        unowned Gtk.StyleContext color_button_purple_context = color_button_purple.get_style_context ();
-        color_button_purple_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_purple_context.add_class ("purple");
+        color_button_purple.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_purple.get_style_context ().add_class ("purple");
 
         color_button_brown = new Gtk.RadioButton.from_widget (color_button_blue);
-
-        unowned Gtk.StyleContext color_button_brown_context = color_button_brown.get_style_context ();
-        color_button_brown_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_brown_context.add_class ("brown");
+        color_button_brown.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_brown.get_style_context ().add_class ("brown");
 
         color_button_slate = new Gtk.RadioButton.from_widget (color_button_blue);
-
-        unowned Gtk.StyleContext color_button_slate_context = color_button_slate.get_style_context ();
-        color_button_slate_context.add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_slate_context.add_class ("slate");
+        color_button_slate.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_slate.get_style_context ().add_class ("slate");
 
         color_button_none = new Gtk.RadioButton.from_widget (color_button_blue);
 
