@@ -7,8 +7,6 @@
 public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
     public signal void changed ();
 
-    private static Gtk.CssProvider label_provider;
-
     private Gtk.Label title;
     private Gtk.Entry entry;
     private Gtk.Stack stack;
@@ -34,16 +32,11 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
         }
     }
 
-    static construct {
-        label_provider = new Gtk.CssProvider ();
-        label_provider.load_from_resource ("io/elementary/tasks/EditableLabel.css");
+    class construct {
+        set_css_name ("editable-label");
     }
 
     construct {
-        unowned Gtk.StyleContext style_context = get_style_context ();
-        style_context.add_class ("editable-label");
-        style_context.add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
         valign = Gtk.Align.CENTER;
         events |= Gdk.EventMask.ENTER_NOTIFY_MASK;
         events |= Gdk.EventMask.LEAVE_NOTIFY_MASK;
@@ -75,7 +68,6 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
         entry = new Gtk.Entry () {
             hexpand = true
         };
-        entry.get_style_context ().add_provider (label_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         stack = new Gtk.Stack () {
             hhomogeneous = false,
