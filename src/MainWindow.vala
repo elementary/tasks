@@ -45,12 +45,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             );
         }
 
-        listbox = new Gtk.ListBox ();
-        listbox.set_sort_func (sort_function);
-
-        var scheduled_row = new Tasks.Widgets.ScheduledRow ();
-        listbox.append (scheduled_row);
-
         var sidebar_header = new Gtk.HeaderBar () {
             title_widget = new Gtk.Label (null),
             show_title_buttons = false
@@ -58,6 +52,20 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         sidebar_header.add_css_class (Granite.STYLE_CLASS_DEFAULT_DECORATION);
         sidebar_header.add_css_class (Granite.STYLE_CLASS_FLAT);
         sidebar_header.pack_start (new Gtk.WindowControls (Gtk.PackType.START));
+
+        var main_header = new Gtk.HeaderBar () {
+            title_widget = new Gtk.Label (null),
+            show_title_buttons = false
+        };
+        main_header.add_css_class (Granite.STYLE_CLASS_DEFAULT_DECORATION);
+        main_header.add_css_class (Granite.STYLE_CLASS_FLAT);
+        main_header.pack_end (new Gtk.WindowControls (Gtk.PackType.END));
+
+        listbox = new Gtk.ListBox ();
+        listbox.set_sort_func (sort_function);
+
+        var scheduled_row = new Tasks.Widgets.ScheduledRow ();
+        listbox.append (scheduled_row);
 
         var scrolledwindow = new Gtk.ScrolledWindow () {
             child = listbox,
@@ -101,14 +109,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         sidebar.append (scrolledwindow);
         sidebar.append (actionbar);
 
-        var main_header = new Gtk.HeaderBar () {
-            title_widget = new Gtk.Label (null),
-            show_title_buttons = false
-        };
-        main_header.add_css_class (Granite.STYLE_CLASS_DEFAULT_DECORATION);
-        main_header.add_css_class (Granite.STYLE_CLASS_FLAT);
-        main_header.pack_end (new Gtk.WindowControls (Gtk.PackType.END));
-
         task_list_grid_stack = new Gtk.Stack ();
 
         var main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
@@ -128,11 +128,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         // We need to hide the title area for the split headerbar
         titlebar = new Gtk.Grid () { visible = false };
-
-        var settings = new GLib.Settings ("io.elementary.tasks");
-        settings.bind ("window-width", this, "default-width", SettingsBindFlags.DEFAULT);
-        settings.bind ("window-height", this, "default-height", SettingsBindFlags.DEFAULT);
-        settings.bind ("window-maximized", this, "maximized", SettingsBindFlags.DEFAULT);
 
         close_request.connect (() => {
             ((Application)application).request_background.begin (() => destroy ());
@@ -361,7 +356,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         }
 
         var header_label = new Granite.HeaderLabel (Util.get_esource_collection_display_name (row.source)) {
-            //  ellipsize = Pango.EllipsizeMode.MIDDLE,
             margin_start = 6
         };
 

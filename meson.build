@@ -35,7 +35,7 @@ tasks_deps = [
     libecal_dep,
     dependency('libedataserver-1.2'),
     dependency('libgeoclue-2.0'),
-    # dependency('shumate-1.0'),
+    dependency('shumate-1.0'),
     dependency('libical-glib'),
     dependency('libportal'),
     dependency('libportal-gtk4')
