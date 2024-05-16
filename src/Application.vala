@@ -157,7 +157,7 @@ public class Tasks.Application : Gtk.Application {
             """.printf (color, color);
 
             var style_provider = new Gtk.CssProvider ();
-            style_provider.load_from_data ((uint8[])style);
+            style_provider.load_from_string (style);
 
             providers[color] = style_provider;
         }
