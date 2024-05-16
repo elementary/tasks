@@ -26,10 +26,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             warning ("unable to get the registry, assuming task list is not from gtasks");
         }
 
-        editable_title = new EditableLabel () {
-            margin_start = 24,
-            hexpand = true
-        };
+        editable_title = new EditableLabel ();
         editable_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
         editable_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
 
@@ -37,13 +34,25 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
         var settings_button = new Gtk.MenuButton () {
             popover = list_settings_popover,
-            margin_end = 24,
-            valign = Gtk.Align.CENTER,
-            hexpand = false,
+            valign = START,
+            halign = END,
+            hexpand = true,
             icon_name = "view-more-symbolic",
             tooltip_text = _("Edit Name and Appearance")
         };
-        settings_button.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+
+        var window_controls = new Gtk.WindowControls (END) {
+            valign = START
+        };
+
+        var header_box = new Gtk.Box (HORIZONTAL, 0) {
+            margin_top = 6,
+            margin_end = 6,
+            margin_start = 24
+        };
+        header_box.append (editable_title);
+        header_box.append (settings_button);
+        header_box.append (window_controls);
 
         add_task_list = new Gtk.ListBox () {
             margin_top = 24,
@@ -98,13 +107,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         var main_box = new Gtk.Box (VERTICAL, 12);
         main_box.append (add_task_list);
         main_box.append (scrolled_window);
-
-        var window_controls = new Gtk.WindowControls (END);
-
-        var header_box = new Gtk.Box (HORIZONTAL, 0);
-        header_box.append (editable_title);
-        header_box.append (settings_button);
-        header_box.append (window_controls);
 
         var toolbar_view = new Adw.ToolbarView () {
             content = main_box
