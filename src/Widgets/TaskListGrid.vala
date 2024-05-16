@@ -95,11 +95,23 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             child = task_list
         };
 
-        column_spacing = 12;
-        attach (editable_title, 0, 0);
-        attach (settings_button, 1, 0);
-        attach (add_task_list, 0, 1, 2);
-        attach (scrolled_window, 0, 2, 2);
+        var main_box = new Gtk.Box (VERTICAL, 12);
+        main_box.append (add_task_list);
+        main_box.append (scrolled_window);
+
+        var window_controls = new Gtk.WindowControls (END);
+
+        var header_box = new Gtk.Box (HORIZONTAL, 0);
+        header_box.append (editable_title);
+        header_box.append (settings_button);
+        header_box.append (window_controls);
+
+        var toolbar_view = new Adw.ToolbarView () {
+            content = main_box
+        };
+        toolbar_view.add_top_bar (header_box);
+
+        attach (toolbar_view, 0, 0);
 
         Application.settings.changed["show-completed"].connect (() => {
             on_show_completed_changed (Application.settings.get_boolean ("show-completed"));

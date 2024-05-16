@@ -33,6 +33,7 @@ tasks_deps = [
     dependency('granite-7', version: '>=7.0.0'),
     dependency('gtk4'),
     libecal_dep,
+    dependency('libadwaita-1'),
     dependency('libedataserver-1.2'),
     dependency('libgeoclue-2.0'),
     dependency('shumate-1.0'),
