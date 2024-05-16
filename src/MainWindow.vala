@@ -38,7 +38,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     construct {
         add_action_entries (ACTION_ENTRIES, this);
 
-        var application_instance = (Gtk.Application) GLib.Application.get_default ();
+        unowned var application_instance = (Gtk.Application) GLib.Application.get_default ();
         foreach (var action in action_accelerators.get_keys ()) {
             application_instance.set_accels_for_action (
                 ACTION_PREFIX + action, action_accelerators[action].to_array ()
@@ -233,7 +233,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 var task_lists = registry.list_sources (E.SOURCE_EXTENSION_TASK_LIST);
 
                 task_lists.foreach ((source) => {
-                    E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+                    unowned var list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
                     if (list.selected == true && source.enabled == true && !source.has_extension (E.SOURCE_EXTENSION_COLLECTION)) {
                         add_source (source);
@@ -256,7 +256,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         try {
             var new_source = new E.Source (null, null);
-            var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+            unowned var new_source_tasklist_extension = (E.SourceTaskList) new_source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
             new_source.display_name = _("New list");
             new_source_tasklist_extension.color = "#0e9a83";
 
@@ -296,7 +296,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void action_delete_selected_list () {
-        var list_row = ((Tasks.Widgets.SourceRow) listbox.get_selected_row ());
+        unowned var list_row = ((Tasks.Widgets.SourceRow) listbox.get_selected_row ());
         var source = list_row.source;
 
         if (Tasks.Application.model.is_remove_task_list_supported (source)) {
@@ -310,7 +310,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 transient_for = this
             };
 
-            unowned Gtk.Widget trash_button = message_dialog.add_button (_("Delete Anyway"), Gtk.ResponseType.YES);
+            unowned var trash_button = message_dialog.add_button (_("Delete Anyway"), Gtk.ResponseType.YES);
             trash_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
             message_dialog.response.connect ((response) => {
@@ -421,7 +421,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void update_source (E.Source source) {
-        E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        unowned var list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
         if (list.selected != true || source.enabled != true) {
             remove_source (source);
@@ -432,7 +432,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         } else {
             source_rows[source].update_request ();
 
-            var task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_visible_child ();
+            unowned var task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_visible_child ();
             if (task_list_grid != null) {
                 task_list_grid.update_request ();
             }
