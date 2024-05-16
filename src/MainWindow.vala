@@ -81,7 +81,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         var add_tasklist_box = new Gtk.Box (VERTICAL, 0);
         add_tasklist_box.append (add_tasklist_buttonbox);
-        add_tasklist_box.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        add_tasklist_box.append (new Gtk.Separator (HORIZONTAL));
         add_tasklist_box.append (online_accounts_button);
 
         add_tasklist_popover = new Gtk.Popover () {
@@ -120,7 +120,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         main_box.append (main_header);
         main_box.append (task_list_grid_stack);
 
-        var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL) {
+        var paned = new Gtk.Paned (HORIZONTAL) {
             start_child = sidebar,
             end_child = main_box,
             resize_start_child = false,
