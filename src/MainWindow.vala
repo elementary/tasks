@@ -74,7 +74,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             hscrollbar_policy = Gtk.PolicyType.NEVER
         };
 
-        add_tasklist_buttonbox = new Gtk.Box (Gtk.Orientation.VERTICAL, 6); // TODO: check spacing
+        add_tasklist_buttonbox = new Gtk.Box (VERTICAL, 3);
 
         var online_accounts_button = new Widgets.PopoverButton ();
         online_accounts_button.append (new Gtk.Label (_("Online Accounts Settings…")));
@@ -89,21 +89,25 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         };
         add_tasklist_popover.add_css_class (Granite.STYLE_CLASS_MENU);
 
-        var add_tasklist_button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
-        add_tasklist_button_box.append (new Gtk.Image.from_icon_name ("list-add-symbolic"));
-        add_tasklist_button_box.append (new Gtk.Label (_("Add Task List…")));
+        var add_list_label = new Gtk.Label (_("Add Task List…"));
+
+        var add_list_button_box = new Gtk.Box (HORIZONTAL, 0);
+        add_list_button_box.append (new Gtk.Image.from_icon_name ("list-add-symbolic"));
+        add_list_button_box.append (add_list_label);
 
         var add_tasklist_button = new Gtk.MenuButton () {
             popover = add_tasklist_popover,
-            direction = Gtk.ArrowType.UP,
-            child = add_tasklist_button_box
+            direction = UP,
+            child = add_list_button_box
         };
+
+        add_list_label.mnemonic_widget = add_tasklist_button;
 
         var actionbar = new Gtk.ActionBar ();
         actionbar.add_css_class (Granite.STYLE_CLASS_FLAT);
         actionbar.pack_start (add_tasklist_button);
 
-        var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        var sidebar = new Gtk.Box (VERTICAL, 0);
         sidebar.add_css_class (Granite.STYLE_CLASS_SIDEBAR);
         sidebar.append (sidebar_header);
         sidebar.append (scrolledwindow);
@@ -111,7 +115,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         task_list_grid_stack = new Gtk.Stack ();
 
-        var main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        var main_box = new Gtk.Box (VERTICAL, 0);
         main_box.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
         main_box.append (main_header);
         main_box.append (task_list_grid_stack);
@@ -291,9 +295,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             };
             error_dialog.show_error_details (error_message);
             error_dialog.present ();
-            error_dialog.response.connect (() => {
-                error_dialog.destroy ();
-            });
+            error_dialog.response.connect (error_dialog.destroy);
 
             return GLib.Source.REMOVE;
         });
@@ -317,9 +319,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             unowned var trash_button = message_dialog.add_button (_("Delete Anyway"), Gtk.ResponseType.YES);
             trash_button.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
-            message_dialog.present ();
-            message_dialog.response.connect ((response_id) => {
-                var response = (Gtk.ResponseType) response_id;
+            message_dialog.response.connect ((response) => {
                 if (response == Gtk.ResponseType.YES) {
                     Tasks.Application.model.remove_task_list.begin (source, (obj, res) => {
                         try {
@@ -337,6 +337,8 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
                 message_dialog.destroy ();
             });
+
+            message_dialog.present ();
         } else {
             Gdk.Display.get_default ().beep ();
         }

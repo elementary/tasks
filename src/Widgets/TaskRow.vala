@@ -88,10 +88,10 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         }
 
         due_datetime_popover_revealer = new Gtk.Revealer () {
+            child = due_datetime_popover,
             margin_end = 6,
             reveal_child = false,
-            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
-            child = due_datetime_popover
+            transition_type = SLIDE_RIGHT
         };
 
         due_datetime_popover.value_format.connect ((value) => {
@@ -140,10 +140,10 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         location_popover = new Tasks.Widgets.EntryPopover.Location ();
 
         location_popover_revealer = new Gtk.Revealer () {
+            child = location_popover,
             margin_end = 6,
             reveal_child = false,
-            transition_type = Gtk.RevealerTransitionType.SLIDE_RIGHT,
-            child = location_popover
+            transition_type = SLIDE_RIGHT
         };
 
         location_popover.value_format.connect ((value) => {
@@ -182,23 +182,26 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         // Should not use a transition that varies the width else label aligning and ellipsizing is incorrect.
         description_label_revealer = new Gtk.Revealer () {
-            transition_type = Gtk.RevealerTransitionType.CROSSFADE,
-            reveal_child = false,
-            child = description_label
+            child = description_label,
+            transition_type = CROSSFADE,
+            reveal_child = false
         };
 
-        var task_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 3);
+        var task_box = new Gtk.Box (HORIZONTAL, 0);
         task_box.append (due_datetime_popover_revealer);
         task_box.append (location_popover_revealer);
         task_box.append (description_label_revealer);
 
         task_detail_revealer = new Gtk.Revealer () {
-            transition_type = Gtk.RevealerTransitionType.SLIDE_UP,
-            child = task_box
+            child = task_box,
+            transition_type = SLIDE_UP
         };
 
         var description_textview = new Granite.HyperTextView () {
-            //  border_width = 12,
+            top_margin = 12,
+            right_margin = 12,
+            bottom_margin = 12,
+            left_margin = 12,
             height_request = 140,
             accepts_tab = false
         };
@@ -208,43 +211,39 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         description_textview.set_buffer (description_textbuffer);
 
         var description_frame = new Gtk.Frame (null) {
-            hexpand = true,
-            child = description_textview
+            child = description_textview,
+            hexpand = true
         };
 
-        var buttons_size_group = new Gtk.SizeGroup (Gtk.SizeGroupMode.HORIZONTAL);
-
         var cancel_button = new Gtk.Button.with_label (_("Cancel"));
-        buttons_size_group.add_widget (cancel_button);
 
         var save_button = new Gtk.Button.with_label (created ? _("Save Changes") : _("Add Task"));
         save_button.add_css_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);
-        buttons_size_group.add_widget (save_button);
 
-        var right_buttons_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
-            halign = Gtk.Align.END,
+        var right_buttons_box = new Gtk.Box (HORIZONTAL, 6) {
+            hexpand = true,
+            halign = END,
             homogeneous = true
         };
         right_buttons_box.append (cancel_button);
         right_buttons_box.append (save_button);
 
-        var button_grid = new Gtk.Grid () {
-            margin_top = 12,
-            column_homogeneous = true
+        var button_box = new Gtk.Box (HORIZONTAL, 6) {
+            margin_top = 12
         };
-        button_grid.add_css_class ("button-box");
-        button_grid.attach (right_buttons_box, 1, 0);
+        button_box.add_css_class ("button-box");
+        button_box.append (right_buttons_box);
 
-        var form_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 12) {
+        var form_box = new Gtk.Box (VERTICAL, 12) {
             margin_top = 6,
             margin_bottom = 6
         };
         form_box.append (description_frame);
-        form_box.append (button_grid);
+        form_box.append (button_box);
 
         task_form_revealer = new Gtk.Revealer () {
-            transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN,
-            child = form_box
+            child = form_box,
+            transition_type = SLIDE_DOWN
         };
 
         var grid = new Gtk.Grid () {
@@ -261,9 +260,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         grid.attach (task_form_revealer, 1, 2);
 
         revealer = new Gtk.Revealer () {
+            child = grid,
             reveal_child = true,
-            transition_type = Gtk.RevealerTransitionType.SLIDE_UP,
-            child = grid
+            transition_type = SLIDE_UP
         };
 
         child = revealer;
@@ -278,12 +277,11 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             state_stack.visible_child = check;
 
             var delete_button = new Gtk.Button.with_label (_("Delete Task")) {
-                halign = Gtk.Align.START
+                halign = START
             };
             delete_button.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
-            buttons_size_group.add_widget (delete_button);
 
-            button_grid.attach (delete_button, 0, 0);
+            button_box.prepend (delete_button);
 
             delete_button.clicked.connect (() => {
                 end_editing ();
