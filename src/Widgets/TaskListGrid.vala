@@ -26,10 +26,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             warning ("unable to get the registry, assuming task list is not from gtasks");
         }
 
-        editable_title = new EditableLabel () {
-            margin_start = 24,
-            hexpand = true
-        };
+        editable_title = new EditableLabel ();
         editable_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
         editable_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
 
@@ -37,13 +34,25 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
         var settings_button = new Gtk.MenuButton () {
             popover = list_settings_popover,
-            margin_end = 24,
-            valign = Gtk.Align.CENTER,
-            hexpand = false,
+            valign = START,
+            halign = END,
+            hexpand = true,
             icon_name = "view-more-symbolic",
             tooltip_text = _("Edit Name and Appearance")
         };
-        settings_button.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+
+        var window_controls = new Gtk.WindowControls (END) {
+            valign = START
+        };
+
+        var header_box = new Gtk.Box (HORIZONTAL, 0) {
+            margin_top = 6,
+            margin_end = 6,
+            margin_start = 24
+        };
+        header_box.append (editable_title);
+        header_box.append (settings_button);
+        header_box.append (window_controls);
 
         add_task_list = new Gtk.ListBox () {
             margin_top = 24,
@@ -95,11 +104,16 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             child = task_list
         };
 
-        column_spacing = 12;
-        attach (editable_title, 0, 0);
-        attach (settings_button, 1, 0);
-        attach (add_task_list, 0, 1, 2);
-        attach (scrolled_window, 0, 2, 2);
+        var main_box = new Gtk.Box (VERTICAL, 12);
+        main_box.append (add_task_list);
+        main_box.append (scrolled_window);
+
+        var toolbar_view = new Adw.ToolbarView () {
+            content = main_box
+        };
+        toolbar_view.add_top_bar (header_box);
+
+        attach (toolbar_view, 0, 0);
 
         Application.settings.changed["show-completed"].connect (() => {
             on_show_completed_changed (Application.settings.get_boolean ("show-completed"));
