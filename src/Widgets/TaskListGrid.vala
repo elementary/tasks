@@ -43,7 +43,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             icon_name = "view-more-symbolic",
             tooltip_text = _("Edit Name and Appearance")
         };
-        settings_button.add_css_class (Granite.STYLE_CLASS_FLAT);
         settings_button.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         add_task_list = new Gtk.ListBox () {

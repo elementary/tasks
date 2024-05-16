@@ -42,15 +42,14 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
         popover_button_box.append (label);
 
         popover_button = new Gtk.MenuButton () {
+            has_frame = false,
             popover = popover,
             child = popover_button_box
         };
-        popover_button.add_css_class (Granite.STYLE_CLASS_FLAT);
 
         var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic") {
             tooltip_text = _("Remove")
         };
-        delete_button.add_css_class (Granite.STYLE_CLASS_FLAT);
         delete_button.add_css_class ("delete-button");
 
         var delete_button_revealer = new Gtk.Revealer () {
