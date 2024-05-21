@@ -175,9 +175,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     private void set_view_for_query (string query) {
-        while (task_list.get_row_at_index (0) != null) {
-            task_list.remove (task_list.get_row_at_index (0));
-        }
+        task_list.remove_all ();
 
         if (view != null) {
             Application.model.destroy_task_list_view (view);
