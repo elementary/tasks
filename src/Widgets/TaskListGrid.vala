@@ -27,8 +27,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         }
 
         editable_title = new EditableLabel () {
-            margin_start = 24,
-            hexpand = true
+            margin_start = 24
         };
         editable_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
         editable_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
@@ -36,18 +35,18 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         var list_settings_popover = new Tasks.Widgets.ListSettingsPopover (source);
 
         var settings_button = new Gtk.MenuButton () {
-            popover = list_settings_popover,
-            margin_end = 24,
-            valign = Gtk.Align.CENTER,
-            hexpand = false,
+            halign = END,
             icon_name = "view-more-symbolic",
-            tooltip_text = _("Edit Name and Appearance")
+            margin_end = 24,
+            popover = list_settings_popover,
+            tooltip_text = _("Edit Name and Appearance"),
+            valign = CENTER
         };
         settings_button.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         add_task_list = new Gtk.ListBox () {
             margin_top = 24,
-            selection_mode = Gtk.SelectionMode.SINGLE,
+            selection_mode = SINGLE,
             activate_on_single_click = true
         };
         add_task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
@@ -81,12 +80,12 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         placeholder.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
 
         task_list = new Gtk.ListBox () {
-            selection_mode = Gtk.SelectionMode.SINGLE,
+            selection_mode = MULTIPLE,
             activate_on_single_click = true
         };
-        task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
-        task_list.set_sort_func (sort_function);
         task_list.set_placeholder (placeholder);
+        task_list.set_sort_func (sort_function);
+        task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow () {
             hexpand = true,
@@ -109,10 +108,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         settings_button.activate.connect (() => {
             unowned var main_window = (MainWindow) get_root ();
 
-            // TODO:
-            //  error: `Gtk.MenuButton.get_active' is not available in gtk4 4.6.6. Use gtk4 >= 4.10
-            //  if (settings_button.active) {
-            if (false) {
+            if (settings_button.active) {
                 list_settings_popover.source = source;
 
                 if (main_window != null) {
@@ -179,19 +175,8 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     private void set_view_for_query (string query) {
-        Gtk.Widget[] children_for_removal = {};
-        unowned var child = task_list.get_first_child ();
-        while (child != null) {
-            if (child != placeholder) {
-                children_for_removal += child;
-            }
-
-            child = child.get_next_sibling ();
-        }
-
-        for (int i = 0; i < children_for_removal.length; i++) {
-            task_list.remove (children_for_removal[i]);
-            children_for_removal[i].destroy ();
+        while (task_list.get_row_at_index (0) != null) {
+            task_list.remove (task_list.get_row_at_index (0));
         }
 
         if (view != null) {
