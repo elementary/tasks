@@ -425,7 +425,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     }
 
     private void update_source (E.Source source) {
-        E.SourceTaskList list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        unowned var list = (E.SourceTaskList)source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
 
         if (list.selected != true || source.enabled != true) {
             remove_source (source);
