@@ -210,7 +210,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         }
 
         if (add_task_list.get_selected_rows ().length () == 0 && task_list.get_selected_rows ().length () == 0) {
-            unowned var main_window = (Gtk.ApplicationWindow) ((Gtk.Application) GLib.Application.get_default ()).active_window;
+            unowned var main_window = (Gtk.ApplicationWindow) get_toplevel ();
             ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (true);
         }
     }
