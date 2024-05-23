@@ -360,7 +360,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
     }
 
     private void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
-        Tasks.Widgets.TaskRow task_row = null;
+        unowned Tasks.Widgets.TaskRow task_row = null;
         var row_index = 0;
 
         do {

@@ -260,7 +260,7 @@ public class Tasks.TaskModel : Object {
 
     public async void add_task_list (E.Source task_list, E.Source collection_or_sibling) throws Error {
         var registry = get_registry_sync ();
-        var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        unowned var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
         var backend_name = get_collection_backend_name (collection_or_sibling, registry);
 
         switch (backend_name.down ()) {
@@ -592,7 +592,7 @@ public class Tasks.TaskModel : Object {
             debug ("WebDAV Rename '%s'", task_list.get_uid ());
 
             var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-            var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+            unowned var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
             var credentials_provider = new E.SourceCredentialsProvider (registry);
             E.NamedParameters credentials;
@@ -676,7 +676,7 @@ public class Tasks.TaskModel : Object {
         if (!task_list.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
             throw new Tasks.TaskModelError.INVALID_ARGUMENT ("Changing the color is not supported by this source.");
         }
-        var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        unowned var task_list_extension = (E.SourceTaskList) task_list.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
         var previous_color = task_list_extension.dup_color ();
 
         var registry = get_registry_sync ();
@@ -700,7 +700,7 @@ public class Tasks.TaskModel : Object {
                     debug ("Update %s color for '%s'", backend_name, task_list.get_uid ());
 
                     var collection_source_webdav_session = new E.WebDAVSession (collection_source);
-                    var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
+                    unowned var source_webdav_extension = (E.SourceWebdav) task_list.get_extension (E.SOURCE_EXTENSION_WEBDAV_BACKEND);
 
                     var credentials_provider = new E.SourceCredentialsProvider (registry);
                     E.NamedParameters credentials;
@@ -750,7 +750,7 @@ public class Tasks.TaskModel : Object {
 
     public async void add_task (E.Source list, ECal.Component task) throws Error {
         ECal.Client client = get_client (list);
-        unowned ICal.Component comp = task.get_icalcomponent ();
+        unowned var comp = task.get_icalcomponent ();
 
         debug (@"Adding task '$(comp.get_uid())'");
 
@@ -764,7 +764,7 @@ public class Tasks.TaskModel : Object {
     public async void complete_task (E.Source list, ECal.Component task) throws Error {
         ECal.Client client = get_client (list);
 
-        unowned ICal.Component comp = task.get_icalcomponent ();
+        unowned var comp = task.get_icalcomponent ();
         var was_completed = comp.get_status () == ICal.PropertyStatus.COMPLETED;
 
         if (was_completed) {
@@ -831,7 +831,7 @@ public class Tasks.TaskModel : Object {
 
     public async void update_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) throws Error {
         ECal.Client client = get_client (list);
-        unowned ICal.Component comp = task.get_icalcomponent ();
+        unowned var comp = task.get_icalcomponent ();
 
         debug (@"Updating task '$(comp.get_uid())' [mod_type=$(mod_type)]");
         yield client.modify_object (comp, mod_type, ECal.OperationFlags.NONE, null);
@@ -839,7 +839,7 @@ public class Tasks.TaskModel : Object {
 
     public async void remove_task (E.Source list, ECal.Component task, ECal.ObjModType mod_type) throws Error {
         ECal.Client client = get_client (list);
-        unowned ICal.Component comp = task.get_icalcomponent ();
+        unowned var comp = task.get_icalcomponent ();
 
         string uid = comp.get_uid ();
         string? rid = task.has_recurrences () ? null : task.get_recurid_as_string ();
@@ -881,7 +881,7 @@ public class Tasks.TaskModel : Object {
     }
 
     private void debug_task (E.Source task_list, ECal.Component task) {
-        unowned ICal.Component comp = task.get_icalcomponent ();
+        unowned var comp = task.get_icalcomponent ();
         var task_summary = comp.get_summary ();
         var task_uid = comp.get_uid ();
         var task_list_display_name = task_list.dup_display_name ();
