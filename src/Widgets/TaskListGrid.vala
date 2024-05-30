@@ -9,7 +9,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
 
     private EditableLabel editable_title;
     private Gtk.ListBox add_task_list;
-    private Gtk.Label placeholder;
     private Gtk.ListBox task_list;
     private bool is_gtasks;
 
@@ -77,7 +76,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         });
         add_task_list.append (add_task_row);
 
-        placeholder = new Gtk.Label (_("No Tasks"));
+        var placeholder = new Gtk.Label (_("No Tasks"));
         placeholder.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
         placeholder.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
 
@@ -93,7 +92,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             child = task_list,
             hexpand = true,
             vexpand = true,
-            hscrollbar_policy = Gtk.PolicyType.NEVER,
+            hscrollbar_policy = Gtk.PolicyType.NEVER
         };
 
         column_spacing = 12;
