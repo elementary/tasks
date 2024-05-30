@@ -81,11 +81,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         placeholder.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
         placeholder.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
 
-        var placeholder = new Gtk.Label (_("No Tasks"));
-        placeholder.show ();
-        placeholder.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
-        placeholder.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
-
         task_list = new Gtk.ListBox () {
             selection_mode = MULTIPLE,
             activate_on_single_click = true
