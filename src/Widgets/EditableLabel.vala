@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2023 elementary, Inc. (https://elementary.io)
+ * Copyright 2016-2024 elementary, Inc. (https://elementary.io)
  * Copyright 2016 Corentin Noël <corentin@elementary.io>
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
@@ -10,7 +10,6 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
     private Gtk.Label title;
     private Gtk.Entry entry;
     private Gtk.Stack stack;
-    private Gtk.Box box;
 
     public string text { get; set; default = ""; }
 
@@ -27,7 +26,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
                     changed ();
                 }
 
-                stack.set_visible_child (box);
+                stack.set_visible_child (title);
             }
         }
     }
@@ -38,28 +37,12 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
     }
 
     construct {
-        valign = Gtk.Align.CENTER;
+        valign = CENTER;
 
         title = new Gtk.Label ("") {
-            ellipsize = Pango.EllipsizeMode.END,
+            ellipsize = END,
             xalign = 0
         };
-
-        var edit_button = new Gtk.Button.from_icon_name ("edit-symbolic") {
-            tooltip_text = _("Edit…")
-        };
-
-        var button_revealer = new Gtk.Revealer () {
-            valign = Gtk.Align.CENTER,
-            transition_type = Gtk.RevealerTransitionType.CROSSFADE,
-            child = edit_button
-        };
-
-        box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12) {
-            valign = Gtk.Align.CENTER
-        };
-        box.append (title);
-        box.append (button_revealer);
 
         entry = new Gtk.Entry () {
             hexpand = true,
@@ -67,29 +50,32 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
 
         stack = new Gtk.Stack () {
             hhomogeneous = false,
-            transition_type = Gtk.StackTransitionType.CROSSFADE
+            transition_type = CROSSFADE
         };
-        stack.add_child (box);
+        stack.add_child (title);
         stack.add_child (entry);
-        stack.set_parent (this); // ?
+        stack.set_parent (this);
 
         bind_property ("text", title, "label");
 
-        var motion_controller = new Gtk.EventControllerMotion ();
+        var motion_controller = new Gtk.EventControllerMotion () {
+            propagation_phase = CAPTURE
+        };
+
+        var click_gesture = new Gtk.GestureClick ();
+
+        add_controller (click_gesture);
         add_controller (motion_controller);
 
-        var press_controller = new Gtk.GestureClick ();
-        add_controller (press_controller);
-
-        motion_controller.enter.connect ((x, y) => {
-            button_revealer.reveal_child = true;
+        motion_controller.enter.connect (() => {
+            set_cursor (new Gdk.Cursor.from_name ("text", null));
         });
 
         motion_controller.leave.connect (() => {
-            button_revealer.reveal_child = false;
+            set_cursor (new Gdk.Cursor.from_name ("default", null));
         });
 
-        press_controller.pressed.connect ((n_press, x, y) => {
+        click_gesture.released.connect (() => {
             editing = true;
         });
 
@@ -98,7 +84,6 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
                 editing = false;
             }
         });
-
 
         var focus_controller = new Gtk.EventControllerFocus ();
         entry.add_controller (focus_controller);
@@ -110,13 +95,13 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
         });
     }
 
+    ~EditableLabel () {
+        get_first_child ().unparent ();
+    }
+
     public override bool grab_focus () {
         editing = true;
 
         return Gdk.EVENT_STOP;
-    }
-
-    ~EditableLabel () {
-        get_last_child ().unparent ();
     }
 }

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:48+0000\n"
+"POT-Creation-Date: 2024-06-05 14:48+0000\n"
 "PO-Revision-Date: 2023-06-16 00:07+0000\n"
 "Last-Translator: lenemter <lenemter@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
@@ -16,11 +16,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.17\n"
 
-#: src/Application.vala:137
+#: src/Application.vala:134
 msgid ""
 "Tasks will automatically start when this device turns on and run when its "
 "window is closed so that it can send notifications for due tasks."
@@ -33,33 +33,33 @@ msgstr ""
 msgid "Tasks"
 msgstr "Задачи"
 
-#: src/MainWindow.vala:90
+#: src/MainWindow.vala:84
 msgid "Online Accounts Settings…"
 msgstr "Параметры онлайн-аккаунтов…"
 
-#: src/MainWindow.vala:106
+#: src/MainWindow.vala:100
 msgid "Add Task List…"
 msgstr "Добавить список задач…"
 
-#: src/MainWindow.vala:256
+#: src/MainWindow.vala:254
 msgid "Creating a new task list failed"
 msgstr "Не удалось создать список задач"
 
-#: src/MainWindow.vala:257 src/MainWindow.vala:329
-#: src/Widgets/TaskListGrid.vala:73 src/Widgets/TaskListGrid.vala:162
+#: src/MainWindow.vala:255 src/MainWindow.vala:325
+#: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
-#: src/MainWindow.vala:262
+#: src/MainWindow.vala:260
 msgid "New list"
 msgstr "Новый список"
 
-#: src/MainWindow.vala:306
+#: src/MainWindow.vala:304
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Удалить «%s»?"
 
-#: src/MainWindow.vala:307
+#: src/MainWindow.vala:305
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -67,11 +67,11 @@ msgstr ""
 "Список и все задания в нём будут удалены навсегда. Если вы поделились этим "
 "списком с другими людьми, они потеряют к нему доступ."
 
-#: src/MainWindow.vala:315
+#: src/MainWindow.vala:313
 msgid "Delete Anyway"
 msgstr "Всё равно удалить"
 
-#: src/MainWindow.vala:328
+#: src/MainWindow.vala:324
 msgid "Deleting the task list failed"
 msgstr "Не удалось удалить список задач"
 
@@ -87,15 +87,11 @@ msgstr "Вчера"
 msgid "Tomorrow"
 msgstr "Завтра"
 
-#: src/Widgets/EditableLabel.vala:59
-msgid "Edit…"
-msgstr "Редактировать…"
-
 #: src/Widgets/EntryPopover/DateTime.vala:14
 msgid "Set Due"
 msgstr "Установить срок"
 
-#: src/Widgets/EntryPopover/Generic.vala:53
+#: src/Widgets/EntryPopover/Generic.vala:44
 msgid "Remove"
 msgstr "Удалить"
 
@@ -115,19 +111,19 @@ msgstr "Отправление"
 msgid "John Smith OR Example St."
 msgstr "Иван Иванов ИЛИ ул. Центральная."
 
-#: src/Widgets/ListSettingsPopover.vala:101
+#: src/Widgets/ListSettingsPopover.vala:81
 msgid "Show Completed"
 msgstr "Показать выполненные"
 
-#: src/Widgets/ListSettingsPopover.vala:106
+#: src/Widgets/ListSettingsPopover.vala:86
 msgid "Delete List…"
 msgstr "Удалить список…"
 
-#: src/Widgets/ListSettingsPopover.vala:261
+#: src/Widgets/ListSettingsPopover.vala:241
 msgid "Could not change the task list color"
 msgstr "Не удалось изменить цвет списка задач"
 
-#: src/Widgets/ListSettingsPopover.vala:262
+#: src/Widgets/ListSettingsPopover.vala:242
 msgid "The task list registry may be unavailable or write-protected."
 msgstr "Журнал списка задач может быть недоступен или защищён от записи."
 
@@ -135,50 +131,50 @@ msgstr "Журнал списка задач может быть недосту�
 msgid "Scheduled"
 msgstr "По расписанию"
 
-#: src/Widgets/SourceRow.vala:48
+#: src/Widgets/SourceRow.vala:37
 msgid "Connecting…"
 msgstr "Подключение…"
 
-#: src/Widgets/SourceRow.vala:134
+#: src/Widgets/SourceRow.vala:121
 msgid "Moving task failed"
 msgstr "Не удалось переместить задачу"
 
-#: src/Widgets/SourceRow.vala:135
+#: src/Widgets/SourceRow.vala:122
 msgid "There was an error while moving the task to the desired list."
 msgstr "При перемещении списка произошла ошибка."
 
-#: src/Widgets/SourceRow.vala:196
+#: src/Widgets/SourceRow.vala:183
 msgid "Waiting for login credentials"
 msgstr "Ожидание данных для входа"
 
-#: src/Widgets/SourceRow.vala:200
+#: src/Widgets/SourceRow.vala:187
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr "В настоящее время отключено от (возможно, удалённого) хранилища данных"
 
-#: src/Widgets/SourceRow.vala:204
+#: src/Widgets/SourceRow.vala:191
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Ненадёжный SSL сертификат для подключения, отклонено"
 
-#: src/Widgets/ScheduledTaskListBox.vala:72 src/Widgets/TaskListGrid.vala:48
+#: src/Widgets/ScheduledTaskListBox.vala:70 src/Widgets/TaskListGrid.vala:79
 msgid "No Tasks"
 msgstr "Нет задач"
 
-#: src/Widgets/ScheduledTaskListBox.vala:206 src/Widgets/TaskListGrid.vala:295
+#: src/Widgets/ScheduledTaskListBox.vala:202 src/Widgets/TaskListGrid.vala:281
 msgid "Completing task failed"
 msgstr "Не удалось обозначить задачу выполненной"
 
-#: src/Widgets/ScheduledTaskListBox.vala:207
-#: src/Widgets/ScheduledTaskListBox.vala:229
-#: src/Widgets/ScheduledTaskListBox.vala:251 src/Widgets/TaskListGrid.vala:296
-#: src/Widgets/TaskListGrid.vala:318 src/Widgets/TaskListGrid.vala:340
+#: src/Widgets/ScheduledTaskListBox.vala:203
+#: src/Widgets/ScheduledTaskListBox.vala:225
+#: src/Widgets/ScheduledTaskListBox.vala:247 src/Widgets/TaskListGrid.vala:282
+#: src/Widgets/TaskListGrid.vala:304 src/Widgets/TaskListGrid.vala:326
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Реестр задач может быть недоступен или не может быть записан."
 
-#: src/Widgets/ScheduledTaskListBox.vala:228 src/Widgets/TaskListGrid.vala:317
+#: src/Widgets/ScheduledTaskListBox.vala:224 src/Widgets/TaskListGrid.vala:303
 msgid "Updating task failed"
 msgstr "Не удалось обновить задачу"
 
-#: src/Widgets/ScheduledTaskListBox.vala:250 src/Widgets/TaskListGrid.vala:339
+#: src/Widgets/ScheduledTaskListBox.vala:246 src/Widgets/TaskListGrid.vala:325
 msgid "Removing task failed"
 msgstr "Не удалось удалить задачу"
 
@@ -186,50 +182,53 @@ msgstr "Не удалось удалить задачу"
 msgid "Edit Name and Appearance"
 msgstr "Изменить имя и внешний вид"
 
-#: src/Widgets/TaskListGrid.vala:72
+#: src/Widgets/TaskListGrid.vala:63
 msgid "Adding task failed"
 msgstr "Не удалось добавить задачу"
 
-#: src/Widgets/TaskListGrid.vala:161
+#: src/Widgets/TaskListGrid.vala:152
 msgid "Renaming task list failed"
 msgstr "Не удалось переименовать список задач"
 
-#: src/Widgets/TaskRow.vala:121 src/Widgets/TaskRow.vala:128
+#: src/Widgets/TaskRow.vala:113 src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:133
+#: src/Widgets/TaskRow.vala:125
 #, c-format
 msgid "%s at %s"
 msgstr "%s в %s"
 
-#: src/Widgets/TaskRow.vala:167
+#: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
 msgstr "Прибытие: %s"
 
-#: src/Widgets/TaskRow.vala:170
+#: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
 msgstr "Отправление: %s"
 
-#: src/Widgets/TaskRow.vala:225
+#: src/Widgets/TaskRow.vala:220
 msgid "Cancel"
 msgstr "Отменить"
 
-#: src/Widgets/TaskRow.vala:227
+#: src/Widgets/TaskRow.vala:222
 msgid "Save Changes"
 msgstr "Сохранить"
 
-#: src/Widgets/TaskRow.vala:227
+#: src/Widgets/TaskRow.vala:222
 msgid "Add Task"
 msgstr "Добавить задачу"
 
 #: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
 msgstr "Удалить задачу"
+
+#~ msgid "Edit…"
+#~ msgstr "Редактировать…"
 
 #~ msgid "Delete List"
 #~ msgstr "Удалить список"
