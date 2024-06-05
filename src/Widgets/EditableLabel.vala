@@ -45,7 +45,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.Widget {
         };
 
         entry = new Gtk.Entry () {
-            hexpand = true,
+            hexpand = true
         };
 
         stack = new Gtk.Stack () {
