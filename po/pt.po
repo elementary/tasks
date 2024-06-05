@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:48+0000\n"
+"POT-Creation-Date: 2024-06-05 14:48+0000\n"
 "PO-Revision-Date: 2024-03-26 22:13+0000\n"
 "Last-Translator: Joao Pinheiro <joaolopespinheiro@gmail.com>\n"
 "Language-Team: Portuguese <https://l10n.elementary.io/projects/tasks/tasks/"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0.2\n"
 
-#: src/Application.vala:137
+#: src/Application.vala:134
 msgid ""
 "Tasks will automatically start when this device turns on and run when its "
 "window is closed so that it can send notifications for due tasks."
@@ -32,35 +32,35 @@ msgstr ""
 msgid "Tasks"
 msgstr "Tarefas"
 
-#: src/MainWindow.vala:90
+#: src/MainWindow.vala:84
 msgid "Online Accounts Settings…"
 msgstr "Definições de contas oinline…"
 
-#: src/MainWindow.vala:106
+#: src/MainWindow.vala:100
 msgid "Add Task List…"
 msgstr "Adicionar lista de tarefas…"
 
-#: src/MainWindow.vala:256
+#: src/MainWindow.vala:254
 msgid "Creating a new task list failed"
 msgstr "Falha ao criar uma nova lista de tarefas"
 
-#: src/MainWindow.vala:257 src/MainWindow.vala:329
-#: src/Widgets/TaskListGrid.vala:73 src/Widgets/TaskListGrid.vala:162
+#: src/MainWindow.vala:255 src/MainWindow.vala:325
+#: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "O registo da lista de tarefas pode estar indisponível ou não pode ser "
 "gravado."
 
-#: src/MainWindow.vala:262
+#: src/MainWindow.vala:260
 msgid "New list"
 msgstr "Nova lista"
 
-#: src/MainWindow.vala:306
+#: src/MainWindow.vala:304
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Eliminar “%s”?"
 
-#: src/MainWindow.vala:307
+#: src/MainWindow.vala:305
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -69,11 +69,11 @@ msgstr ""
 "tenham sido partilhadas deixarão de ficar acessíveis aos restantes "
 "utilizadores."
 
-#: src/MainWindow.vala:315
+#: src/MainWindow.vala:313
 msgid "Delete Anyway"
 msgstr "Eliminar mesmo assim"
 
-#: src/MainWindow.vala:328
+#: src/MainWindow.vala:324
 msgid "Deleting the task list failed"
 msgstr "Falha ao eliminar a lista de tarefas"
 
@@ -89,15 +89,11 @@ msgstr "Ontem"
 msgid "Tomorrow"
 msgstr "Amanhã"
 
-#: src/Widgets/EditableLabel.vala:59
-msgid "Edit…"
-msgstr "Editar…"
-
 #: src/Widgets/EntryPopover/DateTime.vala:14
 msgid "Set Due"
 msgstr "Definir prazo"
 
-#: src/Widgets/EntryPopover/Generic.vala:53
+#: src/Widgets/EntryPopover/Generic.vala:44
 msgid "Remove"
 msgstr "Remover"
 
@@ -117,19 +113,19 @@ msgstr "A sair"
 msgid "John Smith OR Example St."
 msgstr "Hugo Carvalho OU Rua Central"
 
-#: src/Widgets/ListSettingsPopover.vala:101
+#: src/Widgets/ListSettingsPopover.vala:81
 msgid "Show Completed"
 msgstr "Mostrar concluído"
 
-#: src/Widgets/ListSettingsPopover.vala:106
+#: src/Widgets/ListSettingsPopover.vala:86
 msgid "Delete List…"
 msgstr "Eliminar lista…"
 
-#: src/Widgets/ListSettingsPopover.vala:261
+#: src/Widgets/ListSettingsPopover.vala:241
 msgid "Could not change the task list color"
 msgstr "Não foi possível alterar a cor da lista de tarefas"
 
-#: src/Widgets/ListSettingsPopover.vala:262
+#: src/Widgets/ListSettingsPopover.vala:242
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 "O registo da lista de tarefas pode estar indisponível ou protegido contra a "
@@ -139,50 +135,50 @@ msgstr ""
 msgid "Scheduled"
 msgstr "Agendado"
 
-#: src/Widgets/SourceRow.vala:48
+#: src/Widgets/SourceRow.vala:37
 msgid "Connecting…"
 msgstr "A ligar…"
 
-#: src/Widgets/SourceRow.vala:134
+#: src/Widgets/SourceRow.vala:121
 msgid "Moving task failed"
 msgstr "Falha ao mover tarefa"
 
-#: src/Widgets/SourceRow.vala:135
+#: src/Widgets/SourceRow.vala:122
 msgid "There was an error while moving the task to the desired list."
 msgstr "Ocorreu um erro ao mover a tarefa para a lista desejada."
 
-#: src/Widgets/SourceRow.vala:196
+#: src/Widgets/SourceRow.vala:183
 msgid "Waiting for login credentials"
 msgstr "À espera de credenciais de início de sessão"
 
-#: src/Widgets/SourceRow.vala:200
+#: src/Widgets/SourceRow.vala:187
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr "Atualmente desligado do armazenamento de dados (possivelmente remoto)"
 
-#: src/Widgets/SourceRow.vala:204
+#: src/Widgets/SourceRow.vala:191
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "A confiança do certificado SSL foi rejeitada para a ligação"
 
-#: src/Widgets/ScheduledTaskListBox.vala:72 src/Widgets/TaskListGrid.vala:48
+#: src/Widgets/ScheduledTaskListBox.vala:70 src/Widgets/TaskListGrid.vala:79
 msgid "No Tasks"
 msgstr "Sem tarefas"
 
-#: src/Widgets/ScheduledTaskListBox.vala:206 src/Widgets/TaskListGrid.vala:295
+#: src/Widgets/ScheduledTaskListBox.vala:202 src/Widgets/TaskListGrid.vala:281
 msgid "Completing task failed"
 msgstr "Falha ao concluir tarefa"
 
-#: src/Widgets/ScheduledTaskListBox.vala:207
-#: src/Widgets/ScheduledTaskListBox.vala:229
-#: src/Widgets/ScheduledTaskListBox.vala:251 src/Widgets/TaskListGrid.vala:296
-#: src/Widgets/TaskListGrid.vala:318 src/Widgets/TaskListGrid.vala:340
+#: src/Widgets/ScheduledTaskListBox.vala:203
+#: src/Widgets/ScheduledTaskListBox.vala:225
+#: src/Widgets/ScheduledTaskListBox.vala:247 src/Widgets/TaskListGrid.vala:282
+#: src/Widgets/TaskListGrid.vala:304 src/Widgets/TaskListGrid.vala:326
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "O registo de tarefas pode estar indisponível ou não pode ser gravado."
 
-#: src/Widgets/ScheduledTaskListBox.vala:228 src/Widgets/TaskListGrid.vala:317
+#: src/Widgets/ScheduledTaskListBox.vala:224 src/Widgets/TaskListGrid.vala:303
 msgid "Updating task failed"
 msgstr "Falha ao atualizar tarefa"
 
-#: src/Widgets/ScheduledTaskListBox.vala:250 src/Widgets/TaskListGrid.vala:339
+#: src/Widgets/ScheduledTaskListBox.vala:246 src/Widgets/TaskListGrid.vala:325
 msgid "Removing task failed"
 msgstr "Falha ao remover tarefa"
 
@@ -190,50 +186,53 @@ msgstr "Falha ao remover tarefa"
 msgid "Edit Name and Appearance"
 msgstr "Editar nome e aparência"
 
-#: src/Widgets/TaskListGrid.vala:72
+#: src/Widgets/TaskListGrid.vala:63
 msgid "Adding task failed"
 msgstr "Falha ao adicionar tarefa"
 
-#: src/Widgets/TaskListGrid.vala:161
+#: src/Widgets/TaskListGrid.vala:152
 msgid "Renaming task list failed"
 msgstr "Falha ao renomear lista de tarefas"
 
-#: src/Widgets/TaskRow.vala:121 src/Widgets/TaskRow.vala:128
+#: src/Widgets/TaskRow.vala:113 src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:133
+#: src/Widgets/TaskRow.vala:125
 #, c-format
 msgid "%s at %s"
 msgstr "%s a %s"
 
-#: src/Widgets/TaskRow.vala:167
+#: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
 msgstr "A chegar: %s"
 
-#: src/Widgets/TaskRow.vala:170
+#: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
 msgstr "A sair: %s"
 
-#: src/Widgets/TaskRow.vala:225
+#: src/Widgets/TaskRow.vala:220
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/Widgets/TaskRow.vala:227
+#: src/Widgets/TaskRow.vala:222
 msgid "Save Changes"
 msgstr "Guardar alterações"
 
-#: src/Widgets/TaskRow.vala:227
+#: src/Widgets/TaskRow.vala:222
 msgid "Add Task"
 msgstr "Adicionar tarefa"
 
 #: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
 msgstr "Eliminar tarefa"
+
+#~ msgid "Edit…"
+#~ msgstr "Editar…"
 
 #~ msgid "Delete List"
 #~ msgstr "Eliminar lista"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:48+0000\n"
+"POT-Creation-Date: 2024-06-05 14:48+0000\n"
 "PO-Revision-Date: 2022-01-09 21:27+0000\n"
 "Last-Translator: p-bo <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://l10n.elementary.io/projects/tasks/tasks/cs/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Application.vala:137
+#: src/Application.vala:134
 msgid ""
 "Tasks will automatically start when this device turns on and run when its "
 "window is closed so that it can send notifications for due tasks."
@@ -28,33 +28,33 @@ msgstr ""
 msgid "Tasks"
 msgstr "Úkoly"
 
-#: src/MainWindow.vala:90
+#: src/MainWindow.vala:84
 msgid "Online Accounts Settings…"
 msgstr "Nastavení online účtů…"
 
-#: src/MainWindow.vala:106
+#: src/MainWindow.vala:100
 msgid "Add Task List…"
 msgstr "Přidat seznam úkolů…"
 
-#: src/MainWindow.vala:256
+#: src/MainWindow.vala:254
 msgid "Creating a new task list failed"
 msgstr "Vytvoření nového seznamu úkolů se nepodařilo"
 
-#: src/MainWindow.vala:257 src/MainWindow.vala:329
-#: src/Widgets/TaskListGrid.vala:73 src/Widgets/TaskListGrid.vala:162
+#: src/MainWindow.vala:255 src/MainWindow.vala:325
+#: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Registr seznamu úloh je nedostupný, nebo do něj nejde zapisovat."
 
-#: src/MainWindow.vala:262
+#: src/MainWindow.vala:260
 msgid "New list"
 msgstr "Nový seznam"
 
-#: src/MainWindow.vala:306
+#: src/MainWindow.vala:304
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Vymazat „%s“?"
 
-#: src/MainWindow.vala:307
+#: src/MainWindow.vala:305
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -62,11 +62,11 @@ msgstr ""
 "Seznam a všechny úkoly v něm budou nadobro smazány. Pokud jste tento seznam "
 "sdíleli, ostatní k němu ztratí přístup."
 
-#: src/MainWindow.vala:315
+#: src/MainWindow.vala:313
 msgid "Delete Anyway"
 msgstr "Přesto smazat"
 
-#: src/MainWindow.vala:328
+#: src/MainWindow.vala:324
 msgid "Deleting the task list failed"
 msgstr "Seznam úkolů se nepodařilo odstranit"
 
@@ -82,15 +82,11 @@ msgstr "Včera"
 msgid "Tomorrow"
 msgstr "Zítra"
 
-#: src/Widgets/EditableLabel.vala:59
-msgid "Edit…"
-msgstr "Upravit…"
-
 #: src/Widgets/EntryPopover/DateTime.vala:14
 msgid "Set Due"
 msgstr "Nastavit do"
 
-#: src/Widgets/EntryPopover/Generic.vala:53
+#: src/Widgets/EntryPopover/Generic.vala:44
 msgid "Remove"
 msgstr "Odstranit"
 
@@ -110,19 +106,19 @@ msgstr "Odchod"
 msgid "John Smith OR Example St."
 msgstr "Jan Novák NEBO Příčná ul."
 
-#: src/Widgets/ListSettingsPopover.vala:101
+#: src/Widgets/ListSettingsPopover.vala:81
 msgid "Show Completed"
 msgstr "Ukázat dokončené"
 
-#: src/Widgets/ListSettingsPopover.vala:106
+#: src/Widgets/ListSettingsPopover.vala:86
 msgid "Delete List…"
 msgstr "Smazat seznam…"
 
-#: src/Widgets/ListSettingsPopover.vala:261
+#: src/Widgets/ListSettingsPopover.vala:241
 msgid "Could not change the task list color"
 msgstr "Nepodařilo se změnit barvu seznamu úkolů"
 
-#: src/Widgets/ListSettingsPopover.vala:262
+#: src/Widgets/ListSettingsPopover.vala:242
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
 "Registr seznamu úkolů je nejspíš nedostupný, nebo chráněný proti přepsání."
@@ -131,50 +127,50 @@ msgstr ""
 msgid "Scheduled"
 msgstr "Naplánováno"
 
-#: src/Widgets/SourceRow.vala:48
+#: src/Widgets/SourceRow.vala:37
 msgid "Connecting…"
 msgstr "Připojování…"
 
-#: src/Widgets/SourceRow.vala:134
+#: src/Widgets/SourceRow.vala:121
 msgid "Moving task failed"
 msgstr "Přesun úkolu se nezdařil"
 
-#: src/Widgets/SourceRow.vala:135
+#: src/Widgets/SourceRow.vala:122
 msgid "There was an error while moving the task to the desired list."
 msgstr "Při přesouvání úkolu na požadovaný seznam došlo k chybě."
 
-#: src/Widgets/SourceRow.vala:196
+#: src/Widgets/SourceRow.vala:183
 msgid "Waiting for login credentials"
 msgstr "Čeká se na zadání přihlašovacích údajů"
 
-#: src/Widgets/SourceRow.vala:200
+#: src/Widgets/SourceRow.vala:187
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr "V tuto chvíli odpojeno od (možná vzdáleného) úložiště dat"
 
-#: src/Widgets/SourceRow.vala:204
+#: src/Widgets/SourceRow.vala:191
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "SSL certifikát byl pro toto připojení odmítnut"
 
-#: src/Widgets/ScheduledTaskListBox.vala:72 src/Widgets/TaskListGrid.vala:48
+#: src/Widgets/ScheduledTaskListBox.vala:70 src/Widgets/TaskListGrid.vala:79
 msgid "No Tasks"
 msgstr "Žádné úkoly"
 
-#: src/Widgets/ScheduledTaskListBox.vala:206 src/Widgets/TaskListGrid.vala:295
+#: src/Widgets/ScheduledTaskListBox.vala:202 src/Widgets/TaskListGrid.vala:281
 msgid "Completing task failed"
 msgstr "Úkol se nepodařilo dokončit"
 
-#: src/Widgets/ScheduledTaskListBox.vala:207
-#: src/Widgets/ScheduledTaskListBox.vala:229
-#: src/Widgets/ScheduledTaskListBox.vala:251 src/Widgets/TaskListGrid.vala:296
-#: src/Widgets/TaskListGrid.vala:318 src/Widgets/TaskListGrid.vala:340
+#: src/Widgets/ScheduledTaskListBox.vala:203
+#: src/Widgets/ScheduledTaskListBox.vala:225
+#: src/Widgets/ScheduledTaskListBox.vala:247 src/Widgets/TaskListGrid.vala:282
+#: src/Widgets/TaskListGrid.vala:304 src/Widgets/TaskListGrid.vala:326
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr "Registr úkolů není dostupný, nebo do něj nejde zapisovat."
 
-#: src/Widgets/ScheduledTaskListBox.vala:228 src/Widgets/TaskListGrid.vala:317
+#: src/Widgets/ScheduledTaskListBox.vala:224 src/Widgets/TaskListGrid.vala:303
 msgid "Updating task failed"
 msgstr "Aktualizace úkolu se nepodařila"
 
-#: src/Widgets/ScheduledTaskListBox.vala:250 src/Widgets/TaskListGrid.vala:339
+#: src/Widgets/ScheduledTaskListBox.vala:246 src/Widgets/TaskListGrid.vala:325
 msgid "Removing task failed"
 msgstr "Odstranění úkolu se nepodařilo"
 
@@ -182,47 +178,50 @@ msgstr "Odstranění úkolu se nepodařilo"
 msgid "Edit Name and Appearance"
 msgstr "Upravit název a zobrazení"
 
-#: src/Widgets/TaskListGrid.vala:72
+#: src/Widgets/TaskListGrid.vala:63
 msgid "Adding task failed"
 msgstr "Přidání úkolu se nepodařilo"
 
-#: src/Widgets/TaskListGrid.vala:161
+#: src/Widgets/TaskListGrid.vala:152
 msgid "Renaming task list failed"
 msgstr "Přejmenování seznamu úkolů se nepodařilo"
 
-#: src/Widgets/TaskRow.vala:121 src/Widgets/TaskRow.vala:128
+#: src/Widgets/TaskRow.vala:113 src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:133
+#: src/Widgets/TaskRow.vala:125
 #, c-format
 msgid "%s at %s"
 msgstr "%s v %s"
 
-#: src/Widgets/TaskRow.vala:167
+#: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
 msgstr "Příchod: %s"
 
-#: src/Widgets/TaskRow.vala:170
+#: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
 msgstr "Odchod: %s"
 
-#: src/Widgets/TaskRow.vala:225
+#: src/Widgets/TaskRow.vala:220
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: src/Widgets/TaskRow.vala:227
+#: src/Widgets/TaskRow.vala:222
 msgid "Save Changes"
 msgstr "Uložit změny"
 
-#: src/Widgets/TaskRow.vala:227
+#: src/Widgets/TaskRow.vala:222
 msgid "Add Task"
 msgstr "Přidat úkol"
 
 #: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
 msgstr "Odstranit úkol"
+
+#~ msgid "Edit…"
+#~ msgstr "Upravit…"
