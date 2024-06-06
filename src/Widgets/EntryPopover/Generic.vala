@@ -12,7 +12,6 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
     public string placeholder { get; construct; }
     public T value { get; set; }
 
-    private Gtk.MenuButton popover_button;
     private T value_on_popover_show;
 
     private Gtk.EventControllerMotion motion_controller;
@@ -29,7 +28,7 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
     }
 
     construct {
-        popover = new Gtk.Popover (popover_button);
+        popover = new Gtk.Popover (null);
 
         var label = new Gtk.Label (placeholder);
 
@@ -39,7 +38,7 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
         }
         popover_button_box.add (label);
 
-        popover_button = new Gtk.MenuButton () {
+        var popover_button = new Gtk.MenuButton () {
             child = popover_button_box,
             popover = popover,
             always_show_image = icon_name != null
