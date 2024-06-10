@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
+public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Box {
     public signal string? value_format (T value);
     public signal void value_changed (T value);
 
