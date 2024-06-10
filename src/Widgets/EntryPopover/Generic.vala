@@ -59,7 +59,6 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
         };
 
         var button_box = new Gtk.Box (HORIZONTAL, 0);
-        button_box.add_css_class ("container");
         button_box.append (popover_button);
         button_box.append (delete_button_revealer);
         button_box.set_parent (this);

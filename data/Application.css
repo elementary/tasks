@@ -15,13 +15,13 @@ editable-label entry text {
     padding: 0;
 }
 
-entry-popover .container {
+entry-popover > box {
     border-radius: 3px;
     background: @SILVER_300;
     color: @SILVER_900;
 }
 
-entry-popover .container button {
+entry-popover > box button {
     background: transparent;
     border: none;
     color: inherit;
@@ -30,7 +30,7 @@ entry-popover .container button {
     font-weight: 600;
 }
 
-entry-popover.error .container {
+entry-popover.error > box {
     background: alpha(@error_color, 0.2);
     color: @error_color;
 }
