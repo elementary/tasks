@@ -15,39 +15,23 @@ editable-label entry text {
     padding: 0;
 }
 
-editable-label button {
-    padding: 0.4rem;
-}
-
 entry-popover .container {
     border-radius: 3px;
     background: @SILVER_300;
+    color: @SILVER_900;
 }
 
-entry-popover menubutton button.toggle {
+entry-popover .container button {
     background: transparent;
     border: none;
-    color: @SILVER_900;
+    color: inherit;
     font-size: 0.9em;
     box-shadow: none;
     font-weight: 600;
 }
 
-entry-popover .delete-button {
-    padding: 0.4rem;
-    color: @SILVER_900;
-}
-
-
 entry-popover.error .container {
     background: alpha(@error_color, 0.2);
-}
-
-entry-popover.error menubutton button.toggle {
-    color: @error_color;
-}
-
-entry-popover.error .delete-button {
     color: @error_color;
 }
 
