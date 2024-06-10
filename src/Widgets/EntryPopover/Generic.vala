@@ -122,28 +122,6 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
                 return GLib.Source.REMOVE;
             });
         });
-
-        delete_button.clicked.connect (() => {
-            var value_has_changed = value != null;
-            value = null;
-            if (value_has_changed) {
-                value_changed (value);
-            }
-        });
-
-        notify["value"].connect (() => {
-            var value_formatted = value_format (value);
-            if (value_formatted == null) {
-                label.label = placeholder;
-
-                if (delete_button_revealer.reveal_child) {
-                    delete_button_revealer.reveal_child = false;
-                }
-
-            } else {
-                label.label = value_formatted;
-            }
-        });
     }
 
     ~Generic () {
