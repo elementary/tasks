@@ -163,57 +163,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             }
             listbox.set_header_func (header_update_func);
 
-            listbox.row_selected.connect ((row) => {
-                if (row != null) {
-                    Tasks.Widgets.TaskListGrid? task_list_grid;
-
-                    if (row is Tasks.Widgets.SourceRow) {
-                        var source = ((Tasks.Widgets.SourceRow) row).source;
-                        var source_uid = source.dup_uid ();
-
-                        /* Synchronizing the list whenever its selected discovers task changes done on remote (likely to happen when multiple devices are used) */
-                        Tasks.Application.model.refresh_task_list.begin (source, null, () => {
-                            try {
-                                Tasks.Application.model.refresh_task_list.end (res);
-                            } catch (Error e) {
-                                warning ("Error syncing task list '%s': %s", source.dup_display_name (), e.message);
-                            }
-                        });
-
-                        task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
-                        if (task_list_grid == null) {
-                            task_list_grid = new Tasks.Widgets.TaskListGrid (source);
-                            task_list_grid_stack.add_named (task_list_grid, source_uid);
-                        }
-
-                        task_list_grid_stack.set_visible_child_name (source_uid);
-                        Tasks.Application.settings.set_string ("selected-list", source_uid);
-                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
-
-                    } else if (row is Tasks.Widgets.ScheduledRow) {
-                        var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListBox) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
-                        if (scheduled_task_list_grid == null) {
-                            scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListBox (Tasks.Application.model);
-                            task_list_grid_stack.add_named (scheduled_task_list_grid, SCHEDULED_LIST_UID);
-                        }
-
-                        task_list_grid_stack.set_visible_child_name (SCHEDULED_LIST_UID);
-                        Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);
-                        ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
-                    }
-
-                    if (task_list_grid != null) {
-                        task_list_grid.update_request ();
-                    }
-
-                } else {
-                    ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
-                    var first_row = listbox.get_row_at_index (0);
-                    if (first_row != null) {
-                        listbox.select_row (first_row);
-                    }
-                }
-            });
+            listbox.row_selected.connect (on_listbox_row_selected);
 
             add_collection_source (registry.ref_builtin_task_list ());
 
@@ -248,6 +198,58 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                 });
             }
         });
+    }
+
+    private void on_listbox_row_selected (Gtk.ListBoxRow? row) {
+        if (row != null) {
+            Tasks.Widgets.TaskListGrid? task_list_grid = null;
+
+            if (row is Tasks.Widgets.SourceRow) {
+                var source = ((Tasks.Widgets.SourceRow) row).source;
+                var source_uid = source.dup_uid ();
+
+                /* Synchronizing the list whenever its selected discovers task changes done on remote (likely to happen when multiple devices are used) */
+                Tasks.Application.model.refresh_task_list.begin (source, null, (obj, res) => {
+                    try {
+                        Tasks.Application.model.refresh_task_list.end (res);
+                    } catch (Error e) {
+                        warning ("Error syncing task list '%s': %s", source.dup_display_name (), e.message);
+                    }
+                });
+
+                task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
+                if (task_list_grid == null) {
+                    task_list_grid = new Tasks.Widgets.TaskListGrid (source);
+                    task_list_grid_stack.add_named (task_list_grid, source_uid);
+                }
+
+                task_list_grid_stack.set_visible_child_name (source_uid);
+                Tasks.Application.settings.set_string ("selected-list", source_uid);
+                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
+
+            } else if (row is Tasks.Widgets.ScheduledRow) {
+                var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListBox) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
+                if (scheduled_task_list_grid == null) {
+                    scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListBox (Tasks.Application.model);
+                    task_list_grid_stack.add_named (scheduled_task_list_grid, SCHEDULED_LIST_UID);
+                }
+
+                task_list_grid_stack.set_visible_child_name (SCHEDULED_LIST_UID);
+                Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);
+                ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+            }
+
+            if (task_list_grid != null) {
+                task_list_grid.update_request ();
+            }
+
+        } else {
+            ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
+            var first_row = listbox.get_row_at_index (0);
+            if (first_row != null) {
+                listbox.select_row (first_row);
+            }
+        }
     }
 
     private void add_new_list (E.Source collection_source) {
