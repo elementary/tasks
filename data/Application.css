@@ -22,11 +22,8 @@ entry-popover > box {
 }
 
 entry-popover > box button {
-    background: transparent;
-    border: none;
     color: inherit;
     font-size: 0.9em;
-    box-shadow: none;
     font-weight: 600;
 }
 
