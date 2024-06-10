@@ -40,8 +40,7 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.EventBox {
 
         var popover_button = new Gtk.MenuButton () {
             child = popover_button_box,
-            popover = popover,
-            always_show_image = icon_name != null
+            popover = popover
         };
         popover_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
