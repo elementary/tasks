@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-20 18:48+0000\n"
 "PO-Revision-Date: 2024-06-13 07:02+0000\n"
-"Last-Translator: Italo Felipe Capasso Ballesteros <edwood.grant@gmail.com>\n"
+"Last-Translator: AlexMedina Software <alex.carcamo@alumnos.upla.cl>\n"
 "Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/extra/es/>"
 "\n"
 "Language: es\n"
@@ -62,7 +62,7 @@ msgstr "Se ha agregado un nuevo icono de aplicación"
 #: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
 #: data/tasks.metainfo.xml.in:103
 msgid "Features:"
-msgstr ""
+msgstr "Características:"
 
 #: data/tasks.metainfo.xml.in:86
 msgid ""
@@ -97,15 +97,15 @@ msgstr ""
 
 #: data/tasks.metainfo.xml.in:110
 msgid "Improved time zone handling"
-msgstr ""
+msgstr "Se ha mejorado la gestión de las zonas horarias"
 
 #: data/tasks.metainfo.xml.in:111
 msgid "Performance improvements"
-msgstr ""
+msgstr "Mejoras en el rendimiento"
 
 #: data/tasks.metainfo.xml.in:119
 msgid "Fixes:"
-msgstr ""
+msgstr "Correcciones:"
 
 #: data/tasks.metainfo.xml.in:121
 msgid ""
@@ -117,15 +117,16 @@ msgstr ""
 
 #: data/tasks.metainfo.xml.in:122
 msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr ""
+msgstr "Las descripciones largas se truncan al final en lugar de al principio"
 
 #: data/tasks.metainfo.xml.in:123
 msgid "Removing descriptions is now saved"
-msgstr ""
+msgstr "Ahora se guarda la eliminación de las descripciones"
 
 #: data/tasks.metainfo.xml.in:124
 msgid "Placing the cursor in descriptions works consistently"
 msgstr ""
+"La colocación del cursor en las descripciones funciona de forma coherente"
 
 #: data/tasks.metainfo.xml.in:128
 msgid "Replace the Delete shortcut key with Ctrl + Backspace"
