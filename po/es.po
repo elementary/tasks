@@ -8,22 +8,25 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-05 14:48+0000\n"
-"PO-Revision-Date: 2022-02-17 15:23+0000\n"
-"Last-Translator: trubiso <crishipohola@gmail.com>\n"
-"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/"
-">\n"
+"PO-Revision-Date: 2024-06-13 07:02+0000\n"
+"Last-Translator: Italo Felipe Capasso Ballesteros <edwood.grant@gmail.com>\n"
+"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/tasks/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 5.5.5\n"
 
 #: src/Application.vala:134
 msgid ""
 "Tasks will automatically start when this device turns on and run when its "
 "window is closed so that it can send notifications for due tasks."
 msgstr ""
+"Tareas se iniciará automáticamente cuando este equipo se encienda y seguirá "
+"ejecutándose cuando cierre esta ventana para poder enviar notificaciones de "
+"tareas pendientes."
 
 #: src/MainWindow.vala:30
 msgid "Tasks"
@@ -39,7 +42,7 @@ msgstr "Añadir lista de tareas…"
 
 #: src/MainWindow.vala:254
 msgid "Creating a new task list failed"
-msgstr "Falló la creación de una lista de tareas nueva"
+msgstr "No se pudo crear una nueva lista de tareas"
 
 #: src/MainWindow.vala:255 src/MainWindow.vala:325
 #: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
@@ -55,7 +58,7 @@ msgstr "Lista nueva"
 #: src/MainWindow.vala:304
 #, c-format
 msgid "Delete “%s”?"
-msgstr "¿Eliminar \"%s\"?"
+msgstr "¿Desea eliminar «%s»?"
 
 #: src/MainWindow.vala:305
 msgid ""
@@ -66,10 +69,8 @@ msgstr ""
 "compartido esta lista, otras personas ya no tendrán acceso."
 
 #: src/MainWindow.vala:313
-#, fuzzy
-#| msgid "Delete Task"
 msgid "Delete Anyway"
-msgstr "Eliminar tarea"
+msgstr "Eliminar de todos modos"
 
 #: src/MainWindow.vala:324
 msgid "Deleting the task list failed"
@@ -89,7 +90,7 @@ msgstr "Mañana"
 
 #: src/Widgets/EntryPopover/DateTime.vala:14
 msgid "Set Due"
-msgstr "Fijar vencimiento"
+msgstr "Establecer fecha límite"
 
 #: src/Widgets/EntryPopover/Generic.vala:44
 msgid "Remove"
@@ -97,7 +98,7 @@ msgstr "Eliminar"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr "Definir ubicación"
+msgstr "Establecer ubicación"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
@@ -109,7 +110,7 @@ msgstr "Partida"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr "Francisco de Quevedo O Calle de Ejemplo"
+msgstr "Juan Pérez o Calle de ejemplo"
 
 #: src/Widgets/ListSettingsPopover.vala:81
 msgid "Show Completed"
@@ -145,11 +146,11 @@ msgstr "No se pudo eliminar la tarea"
 
 #: src/Widgets/SourceRow.vala:122
 msgid "There was an error while moving the task to the desired list."
-msgstr "Hubo un error al mover la tarea a la lista deseada."
+msgstr "Se produjo un error al mover la tarea a la lista deseada."
 
 #: src/Widgets/SourceRow.vala:183
 msgid "Waiting for login credentials"
-msgstr "Esperando datos de acceso"
+msgstr "Esperando credenciales de acceso"
 
 #: src/Widgets/SourceRow.vala:187
 msgid "Currently disconnected from the (possibly remote) data store"
@@ -157,11 +158,11 @@ msgstr "Actualmente sin conexión al almacén de datos (posiblemente remoto)"
 
 #: src/Widgets/SourceRow.vala:191
 msgid "SSL certificate trust was rejected for the connection"
-msgstr "El depósito de certificados SSL se rechazó para efectuar la conexión"
+msgstr "El certificado de confianza SSL fue rechazado al efectuar la conexión"
 
 #: src/Widgets/ScheduledTaskListBox.vala:70 src/Widgets/TaskListGrid.vala:79
 msgid "No Tasks"
-msgstr "No hay tareas"
+msgstr "Sin tareas"
 
 #: src/Widgets/ScheduledTaskListBox.vala:202 src/Widgets/TaskListGrid.vala:281
 msgid "Completing task failed"
@@ -178,7 +179,7 @@ msgstr ""
 
 #: src/Widgets/ScheduledTaskListBox.vala:224 src/Widgets/TaskListGrid.vala:303
 msgid "Updating task failed"
-msgstr "Error al actualizar la tarea"
+msgstr "No se pudo actualizar la tarea"
 
 #: src/Widgets/ScheduledTaskListBox.vala:246 src/Widgets/TaskListGrid.vala:325
 msgid "Removing task failed"
@@ -194,7 +195,7 @@ msgstr "No se pudo añadir la tarea"
 
 #: src/Widgets/TaskListGrid.vala:152
 msgid "Renaming task list failed"
-msgstr "Falló el cambio de nombre de una lista de tareas"
+msgstr "No se pudo cambiar el nombre de la lista de tareas"
 
 #: src/Widgets/TaskRow.vala:113 src/Widgets/TaskRow.vala:120
 #, c-format
