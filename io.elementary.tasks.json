@@ -56,18 +56,17 @@
             ],
             "config-opts": [
                 "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
-                "-DENABLE_GTK=ON",
-                "-DENABLE_VALA_BINDINGS=ON",
-                "-DENABLE_INTROSPECTION=ON",
-                "-DENABLE_GOA=OFF",
                 "-DENABLE_CANBERRA=OFF",
-                "-DWITH_LIBDB=OFF",
-                "-DENABLE_WEATHER=OFF",
-                "-DWITH_OPENLDAP=OFF",
-                "-DENABLE_INSTALLED_TESTS=OFF",
-                "-DENABLE_GTK=OFF",
-                "-DENABLE_GTK_DOC=OFF",
                 "-DENABLE_EXAMPLES=OFF"
+                "-DENABLE_GOA=OFF",
+                "-DENABLE_GTK_DOC=OFF",
+                "-DENABLE_GTK=OFF",
+                "-DENABLE_INSTALLED_TESTS=OFF",
+                "-DENABLE_INTROSPECTION=ON",
+                "-DENABLE_VALA_BINDINGS=ON",
+                "-DENABLE_WEATHER=OFF",
+                "-DWITH_LIBDB=OFF",
+                "-DWITH_OPENLDAP=OFF",
             ],
             "sources": [
                 {
@@ -178,18 +177,22 @@
             ]
         },
         {
-            "name": "geocode-glib",
+            "name": "geocode-glib-2.0",
             "buildsystem": "meson",
             "config-opts": [
-                "-Denable-installed-tests=false",
                 "-Denable-gtk-doc=false",
+                "-Denable-installed-tests=false",
                 "-Dsoup2=false"
             ],
             "sources": [
                 {
-                    "type": "archive",
                     "url": "https://download.gnome.org/sources/geocode-glib/3.26/geocode-glib-3.26.4.tar.xz",
-                    "sha256": "2d9a6826d158470449a173871221596da0f83ebdcff98b90c7049089056a37aa"
+                    "sha256": "2d9a6826d158470449a173871221596da0f83ebdcff98b90c7049089056a37aa",
+                    "type": "archive",
+                    "x-checker-data": {
+                        "type": "gnome",
+                        "name": "geocode-glib"
+                    }
                 }
             ]
         },
