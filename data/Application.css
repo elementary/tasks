@@ -11,22 +11,20 @@ editable-label entry {
     padding: 0;
 }
 
-entry-popover box {
+entry-popover > box {
     border-radius: 3px;
     background: @SILVER_300;
+    color: @SILVER_900;
 }
 
-entry-popover button {
-    color: @SILVER_900;
+entry-popover > box button {
+    color: inherit;
     font-size: 0.9em;
     font-weight: 600;
 }
 
-entry-popover.error box {
+entry-popover.error > box {
     background: alpha(@error_color, 0.2);
-}
-
-entry-popover.error button {
     color: @error_color;
 }
 
