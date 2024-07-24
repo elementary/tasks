@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2022-03-07 13:10+0000\n"
 "Last-Translator: Özgür Baskin <queeup@zoho.com>\n"
 "Language-Team: Turkish <https://l10n.elementary.io/projects/tasks/extra/tr/"
@@ -38,98 +38,47 @@ msgstr ""
 "tamamlayın, listeleri yönetin ve bunları makineleriniz arasında senkronize "
 "edin."
 
-#: data/tasks.metainfo.xml.in:50
+#: data/tasks.metainfo.xml.in:51
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
-#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
+#: data/tasks.metainfo.xml.in:59 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:85
 msgid "Improvements:"
 msgstr "İyileştirmeler:"
 
-#: data/tasks.metainfo.xml.in:59
-msgid "Fix minor visual issues in dark mode"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
-#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
+#: data/tasks.metainfo.xml.in:61 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:88
 msgid "Updated translations"
 msgstr "Çeviriler güncellendi"
 
 #: data/tasks.metainfo.xml.in:73
+msgid "Fix minor visual issues in dark mode"
+msgstr ""
+
+#: data/tasks.metainfo.xml.in:87
 msgid "New app icon"
 msgstr ""
 
-#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
-#: data/tasks.metainfo.xml.in:103
+#: data/tasks.metainfo.xml.in:98 data/tasks.metainfo.xml.in:108
 msgid "Features:"
 msgstr "Özellikler:"
 
-#: data/tasks.metainfo.xml.in:86
+#: data/tasks.metainfo.xml.in:100
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
 msgstr ""
 
-#: data/tasks.metainfo.xml.in:87
+#: data/tasks.metainfo.xml.in:101
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
 msgstr ""
 
-#: data/tasks.metainfo.xml.in:96
+#: data/tasks.metainfo.xml.in:110
 msgid "Send a notification when a task is due"
 msgstr "Görev zamanı geldiğinde bildirim gönder"
-
-#: data/tasks.metainfo.xml.in:105
-msgid "Drag and drop tasks between lists"
-msgstr "Listeler arasında görevleri sürükleyip bırakın"
-
-#: data/tasks.metainfo.xml.in:106
-msgid "Follow email and web links in the task description with Control + Click"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:110
-msgid "Improved time zone handling"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:111
-msgid "Performance improvements"
-msgstr "Performans iyileştirmeleri"
-
-#: data/tasks.metainfo.xml.in:119
-msgid "Fixes:"
-msgstr "Düzeltmeler:"
-
-#: data/tasks.metainfo.xml.in:121
-msgid ""
-"Prevent account name headers from being displayed multiple times in the "
-"sidebar"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:122
-msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:123
-msgid "Removing descriptions is now saved"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:124
-msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:128
-msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:129
-msgid "Add a confirmation dialog when deleting a task list"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:130
-msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
@@ -138,6 +87,15 @@ msgstr "Görevler oluşturun ve ilerlemelerini izleyin"
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "Yapılacak;Yapılacaklar;Hatırlatma;Hatırlatmalar;Todo;Reminders;"
+
+#~ msgid "Drag and drop tasks between lists"
+#~ msgstr "Listeler arasında görevleri sürükleyip bırakın"
+
+#~ msgid "Performance improvements"
+#~ msgstr "Performans iyileştirmeleri"
+
+#~ msgid "Fixes:"
+#~ msgstr "Düzeltmeler:"
 
 #~ msgid "First release!"
 #~ msgstr "İlk sürüm!"
