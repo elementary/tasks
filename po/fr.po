@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2023-07-20 15:23+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/tasks/fr/>\n"
@@ -39,27 +39,27 @@ msgstr "Paramètres des comptes en ligne…"
 msgid "Add Task List…"
 msgstr "Ajouter une liste de tâche…"
 
-#: src/MainWindow.vala:254
+#: src/MainWindow.vala:256
 msgid "Creating a new task list failed"
 msgstr "Échec de la création d'une nouvelle liste de tâches"
 
-#: src/MainWindow.vala:255 src/MainWindow.vala:325
+#: src/MainWindow.vala:257 src/MainWindow.vala:327
 #: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Le registre des listes de tâches est probablement indisponible ou en lecture "
 "seule."
 
-#: src/MainWindow.vala:260
+#: src/MainWindow.vala:262
 msgid "New list"
 msgstr "Nouvelle liste"
 
-#: src/MainWindow.vala:304
+#: src/MainWindow.vala:306
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Supprimer « %s » ?"
 
-#: src/MainWindow.vala:305
+#: src/MainWindow.vala:307
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -67,11 +67,11 @@ msgstr ""
 "La liste et ses tâches seront définitivement supprimés. Si vous avez partagé "
 "cette liste, plus personne n'y aura accès."
 
-#: src/MainWindow.vala:313
+#: src/MainWindow.vala:315
 msgid "Delete Anyway"
 msgstr "Supprimer quand même"
 
-#: src/MainWindow.vala:324
+#: src/MainWindow.vala:326
 msgid "Deleting the task list failed"
 msgstr "Échec de la suppression de la liste de tâches"
 
@@ -91,7 +91,7 @@ msgstr "Demain"
 msgid "Set Due"
 msgstr "Définir l'échéance"
 
-#: src/Widgets/EntryPopover/Generic.vala:44
+#: src/Widgets/EntryPopover/Generic.vala:50
 msgid "Remove"
 msgstr "Supprimer"
 

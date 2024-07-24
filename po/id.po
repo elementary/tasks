@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2023-05-23 19:07+0000\n"
 "Last-Translator: Faisal Rachmadin <frachmadin@users.noreply.l10n.elementary."
 "io>\n"
@@ -38,25 +38,25 @@ msgstr "Pengaturan Akun Daring…"
 msgid "Add Task List…"
 msgstr "Tambah Daftar Tugas…"
 
-#: src/MainWindow.vala:254
+#: src/MainWindow.vala:256
 msgid "Creating a new task list failed"
 msgstr "Gagal membuat daftar tugas baru"
 
-#: src/MainWindow.vala:255 src/MainWindow.vala:325
+#: src/MainWindow.vala:257 src/MainWindow.vala:327
 #: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Registri daftar tugas mungkin tidak tersedia atau tidak dapat ditulis."
 
-#: src/MainWindow.vala:260
+#: src/MainWindow.vala:262
 msgid "New list"
 msgstr "Daftar baru"
 
-#: src/MainWindow.vala:304
+#: src/MainWindow.vala:306
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Hapus “%s”?"
 
-#: src/MainWindow.vala:305
+#: src/MainWindow.vala:307
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -64,11 +64,11 @@ msgstr ""
 "Daftar dan semua tugas di dalamnya akan dihapus secara permanen. Jika Anda "
 "telah membagikan daftar ini, orang lain tidak akan lagi bisa mengaksesnya."
 
-#: src/MainWindow.vala:313
+#: src/MainWindow.vala:315
 msgid "Delete Anyway"
 msgstr "Hapus Saja"
 
-#: src/MainWindow.vala:324
+#: src/MainWindow.vala:326
 msgid "Deleting the task list failed"
 msgstr "Gagal menghapus daftar tugas"
 
@@ -88,7 +88,7 @@ msgstr "Besok"
 msgid "Set Due"
 msgstr "Setel Jatuh Tempo"
 
-#: src/Widgets/EntryPopover/Generic.vala:44
+#: src/Widgets/EntryPopover/Generic.vala:50
 msgid "Remove"
 msgstr "Hapus"
 
