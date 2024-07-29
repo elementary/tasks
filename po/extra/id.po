@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2023-05-27 17:07+0000\n"
 "Last-Translator: satrya <satrya99@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.elementary.io/projects/tasks/extra/"
@@ -37,34 +37,33 @@ msgstr ""
 "Anda. Buat dan selesaikan tugas, kelola daftar dan sinkronkan di seluruh "
 "mesin Anda menggunakan CalDAV."
 
-#: data/tasks.metainfo.xml.in:50
+#: data/tasks.metainfo.xml.in:51
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
-#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
+#: data/tasks.metainfo.xml.in:59 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:85
 msgid "Improvements:"
 msgstr "Peningkatan:"
 
-#: data/tasks.metainfo.xml.in:59
-msgid "Fix minor visual issues in dark mode"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
-#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
+#: data/tasks.metainfo.xml.in:61 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:88
 msgid "Updated translations"
 msgstr "Pembaruan terjemahan"
 
 #: data/tasks.metainfo.xml.in:73
+msgid "Fix minor visual issues in dark mode"
+msgstr ""
+
+#: data/tasks.metainfo.xml.in:87
 msgid "New app icon"
 msgstr "Ikon aplikasi baru"
 
-#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
-#: data/tasks.metainfo.xml.in:103
+#: data/tasks.metainfo.xml.in:98 data/tasks.metainfo.xml.in:108
 msgid "Features:"
 msgstr "Fitur:"
 
-#: data/tasks.metainfo.xml.in:86
+#: data/tasks.metainfo.xml.in:100
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -72,7 +71,7 @@ msgstr ""
 "Menambahkan dukungan luring untuk daftar tugas yang baru dibuat jika "
 "dikonfigurasi untuk akun"
 
-#: data/tasks.metainfo.xml.in:87
+#: data/tasks.metainfo.xml.in:101
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -80,61 +79,9 @@ msgstr ""
 "Secara otomatis menyinkronkan daftar tugas setiap kali dipilih atau jaringan "
 "menjadi tersedia lagi"
 
-#: data/tasks.metainfo.xml.in:96
+#: data/tasks.metainfo.xml.in:110
 msgid "Send a notification when a task is due"
 msgstr "Mengirim pemberitahuan saat tugas jatuh tempo"
-
-#: data/tasks.metainfo.xml.in:105
-msgid "Drag and drop tasks between lists"
-msgstr "Seret dan letakkan tugas di antara daftar"
-
-#: data/tasks.metainfo.xml.in:106
-msgid "Follow email and web links in the task description with Control + Click"
-msgstr ""
-"Mengikuti surel dan tautan web dalam deskripsi tugas dengan Control + Klik"
-
-#: data/tasks.metainfo.xml.in:110
-msgid "Improved time zone handling"
-msgstr "Penanganan zona waktu yang lebih baik"
-
-#: data/tasks.metainfo.xml.in:111
-msgid "Performance improvements"
-msgstr "Peningkatan kinerja"
-
-#: data/tasks.metainfo.xml.in:119
-msgid "Fixes:"
-msgstr "Perbaikan:"
-
-#: data/tasks.metainfo.xml.in:121
-msgid ""
-"Prevent account name headers from being displayed multiple times in the "
-"sidebar"
-msgstr "Mencegah kepala nama akun ditampilkan beberapa kali di bilah sisi"
-
-#: data/tasks.metainfo.xml.in:122
-msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr "Deskripsi panjang terpotong di akhir, bukan di awal"
-
-#: data/tasks.metainfo.xml.in:123
-msgid "Removing descriptions is now saved"
-msgstr "Menghapus deskripsi sekarang disimpan"
-
-#: data/tasks.metainfo.xml.in:124
-msgid "Placing the cursor in descriptions works consistently"
-msgstr "Menempatkan kursor dalam deskripsi berfungsi secara konsisten"
-
-#: data/tasks.metainfo.xml.in:128
-msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr "Mengganti tombol pintasan Hapus dengan Ctrl + Backspace"
-
-#: data/tasks.metainfo.xml.in:129
-msgid "Add a confirmation dialog when deleting a task list"
-msgstr "Menambahkan dialog konfirmasi saat menghapus daftar tugas"
-
-#: data/tasks.metainfo.xml.in:130
-msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
-"Meningkatkan kinerja dalam daftar dengan banyak tugas yang diselesaikan"
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
@@ -143,6 +90,47 @@ msgstr "Buat dan lacak kemajuan tugas"
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "Akan dilakukan; Pengingat;"
+
+#~ msgid "Drag and drop tasks between lists"
+#~ msgstr "Seret dan letakkan tugas di antara daftar"
+
+#~ msgid ""
+#~ "Follow email and web links in the task description with Control + Click"
+#~ msgstr ""
+#~ "Mengikuti surel dan tautan web dalam deskripsi tugas dengan Control + Klik"
+
+#~ msgid "Improved time zone handling"
+#~ msgstr "Penanganan zona waktu yang lebih baik"
+
+#~ msgid "Performance improvements"
+#~ msgstr "Peningkatan kinerja"
+
+#~ msgid "Fixes:"
+#~ msgstr "Perbaikan:"
+
+#~ msgid ""
+#~ "Prevent account name headers from being displayed multiple times in the "
+#~ "sidebar"
+#~ msgstr "Mencegah kepala nama akun ditampilkan beberapa kali di bilah sisi"
+
+#~ msgid "Long descriptions are truncated at the end instead of the beginning"
+#~ msgstr "Deskripsi panjang terpotong di akhir, bukan di awal"
+
+#~ msgid "Removing descriptions is now saved"
+#~ msgstr "Menghapus deskripsi sekarang disimpan"
+
+#~ msgid "Placing the cursor in descriptions works consistently"
+#~ msgstr "Menempatkan kursor dalam deskripsi berfungsi secara konsisten"
+
+#~ msgid "Replace the Delete shortcut key with Ctrl + Backspace"
+#~ msgstr "Mengganti tombol pintasan Hapus dengan Ctrl + Backspace"
+
+#~ msgid "Add a confirmation dialog when deleting a task list"
+#~ msgstr "Menambahkan dialog konfirmasi saat menghapus daftar tugas"
+
+#~ msgid "Improve performance in lists with lots of completed tasks"
+#~ msgstr ""
+#~ "Meningkatkan kinerja dalam daftar dengan banyak tugas yang diselesaikan"
 
 #~ msgid "Fix crash on start with certain hardware"
 #~ msgstr "Perbaikan kemogokan saat memulai dengan perangkat keras tertentu"

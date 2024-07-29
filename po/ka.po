@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2024-01-14 19:11+0000\n"
 "Last-Translator: NorwayFun <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://l10n.elementary.io/projects/tasks/tasks/ka/"
@@ -40,25 +40,25 @@ msgstr "ონლაინ ანგარიშების პარამე�
 msgid "Add Task List…"
 msgstr "ამოცანების სიის დამატება…"
 
-#: src/MainWindow.vala:254
+#: src/MainWindow.vala:256
 msgid "Creating a new task list failed"
 msgstr "ახალი ამოცანების სიის შექმნის შეცდომა"
 
-#: src/MainWindow.vala:255 src/MainWindow.vala:325
+#: src/MainWindow.vala:257 src/MainWindow.vala:327
 #: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "ამოცანების სიის რეესტრი ხელმიუწვდომელია ან შიგნით ჩაწერა შეუძლებელია."
 
-#: src/MainWindow.vala:260
+#: src/MainWindow.vala:262
 msgid "New list"
 msgstr "ახალი სია"
 
-#: src/MainWindow.vala:304
+#: src/MainWindow.vala:306
 #, c-format
 msgid "Delete “%s”?"
 msgstr "წავშალო \"%s\"?"
 
-#: src/MainWindow.vala:305
+#: src/MainWindow.vala:307
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -66,11 +66,11 @@ msgstr ""
 "სია და მისი ყველა ამოცანა სამუდამოდ წაიშლება. თუ თქვენ ეს სია გააზიარეთ, "
 "ხალხს მასთან წვდომა აღარ ექნება."
 
-#: src/MainWindow.vala:313
+#: src/MainWindow.vala:315
 msgid "Delete Anyway"
 msgstr "მაინც წაშლა"
 
-#: src/MainWindow.vala:324
+#: src/MainWindow.vala:326
 msgid "Deleting the task list failed"
 msgstr "ამოცანების სიის წაშლის შეცდომა"
 
@@ -90,7 +90,7 @@ msgstr "ხვალ"
 msgid "Set Due"
 msgstr "დააყენეთ ვადა"
 
-#: src/Widgets/EntryPopover/Generic.vala:44
+#: src/Widgets/EntryPopover/Generic.vala:50
 msgid "Remove"
 msgstr "წაშლა"
 

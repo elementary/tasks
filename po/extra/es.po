@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2024-06-13 07:02+0000\n"
 "Last-Translator: AlexMedina Software <alex.carcamo@alumnos.upla.cl>\n"
-"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/extra/es/>"
-"\n"
+"Language-Team: Spanish <https://l10n.elementary.io/projects/tasks/extra/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,34 +37,33 @@ msgstr ""
 "recordatorios. Cree y complete tareas, administre listas y sincronícelas en "
 "sus equipos mediante CalDAV."
 
-#: data/tasks.metainfo.xml.in:50
+#: data/tasks.metainfo.xml.in:51
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
-#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
+#: data/tasks.metainfo.xml.in:59 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:85
 msgid "Improvements:"
 msgstr "Mejoras:"
 
-#: data/tasks.metainfo.xml.in:59
-msgid "Fix minor visual issues in dark mode"
-msgstr "Se corrigieron error visuales menores en modo oscuro"
-
-#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
-#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
+#: data/tasks.metainfo.xml.in:61 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:88
 msgid "Updated translations"
 msgstr "Traducciones actualizadas"
 
 #: data/tasks.metainfo.xml.in:73
+msgid "Fix minor visual issues in dark mode"
+msgstr "Se corrigieron error visuales menores en modo oscuro"
+
+#: data/tasks.metainfo.xml.in:87
 msgid "New app icon"
 msgstr "Se ha agregado un nuevo icono de aplicación"
 
-#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
-#: data/tasks.metainfo.xml.in:103
+#: data/tasks.metainfo.xml.in:98 data/tasks.metainfo.xml.in:108
 msgid "Features:"
 msgstr "Características:"
 
-#: data/tasks.metainfo.xml.in:86
+#: data/tasks.metainfo.xml.in:100
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -72,7 +71,7 @@ msgstr ""
 "Se agregó un modo sin conexión para las listas de tareas recién creadas en "
 "caso de que esté configurado para la cuenta"
 
-#: data/tasks.metainfo.xml.in:87
+#: data/tasks.metainfo.xml.in:101
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -80,66 +79,10 @@ msgstr ""
 "Las listas de tareas ahora se sincronizan automáticamente si se seleccionan "
 "o la red vuelve a estar disponible"
 
-#: data/tasks.metainfo.xml.in:96
+#: data/tasks.metainfo.xml.in:110
 msgid "Send a notification when a task is due"
 msgstr ""
 "Ahora se envía una notificación cuando una tarea cumpla su tiempo límite"
-
-#: data/tasks.metainfo.xml.in:105
-msgid "Drag and drop tasks between lists"
-msgstr "Ahora se pueden arrastrar y soltar tareas entre listas"
-
-#: data/tasks.metainfo.xml.in:106
-msgid "Follow email and web links in the task description with Control + Click"
-msgstr ""
-"Se pueden seguir los enlaces de correo electrónico y web en la descripción "
-"de la tarea con Ctrl + Clic"
-
-#: data/tasks.metainfo.xml.in:110
-msgid "Improved time zone handling"
-msgstr "Se ha mejorado la gestión de las zonas horarias"
-
-#: data/tasks.metainfo.xml.in:111
-msgid "Performance improvements"
-msgstr "Mejoras en el rendimiento"
-
-#: data/tasks.metainfo.xml.in:119
-msgid "Fixes:"
-msgstr "Correcciones:"
-
-#: data/tasks.metainfo.xml.in:121
-msgid ""
-"Prevent account name headers from being displayed multiple times in the "
-"sidebar"
-msgstr ""
-"Se evita que las cabeceras de los nombres de las cuentas se muestren varias "
-"veces en la barra lateral"
-
-#: data/tasks.metainfo.xml.in:122
-msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr "Las descripciones largas se truncan al final en lugar de al principio"
-
-#: data/tasks.metainfo.xml.in:123
-msgid "Removing descriptions is now saved"
-msgstr "Ahora se guarda la eliminación de las descripciones"
-
-#: data/tasks.metainfo.xml.in:124
-msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
-"La colocación del cursor en las descripciones funciona de forma coherente"
-
-#: data/tasks.metainfo.xml.in:128
-msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
-"Se reemplaza la tecla de acceso directo de eliminar por Ctrl + Retroceso"
-
-#: data/tasks.metainfo.xml.in:129
-msgid "Add a confirmation dialog when deleting a task list"
-msgstr "Se agregó un diálogo de confirmación al eliminar una lista de tareas"
-
-#: data/tasks.metainfo.xml.in:130
-msgid "Improve performance in lists with lots of completed tasks"
-msgstr "Se mejora el rendimiento en listas con muchas tareas completadas"
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
@@ -148,6 +91,53 @@ msgstr "Cree y siga el progreso de sus tareas"
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "Pendientes;Recordatorios;Tareas;"
+
+#~ msgid "Drag and drop tasks between lists"
+#~ msgstr "Ahora se pueden arrastrar y soltar tareas entre listas"
+
+#~ msgid ""
+#~ "Follow email and web links in the task description with Control + Click"
+#~ msgstr ""
+#~ "Se pueden seguir los enlaces de correo electrónico y web en la "
+#~ "descripción de la tarea con Ctrl + Clic"
+
+#~ msgid "Improved time zone handling"
+#~ msgstr "Se ha mejorado la gestión de las zonas horarias"
+
+#~ msgid "Performance improvements"
+#~ msgstr "Mejoras en el rendimiento"
+
+#~ msgid "Fixes:"
+#~ msgstr "Correcciones:"
+
+#~ msgid ""
+#~ "Prevent account name headers from being displayed multiple times in the "
+#~ "sidebar"
+#~ msgstr ""
+#~ "Se evita que las cabeceras de los nombres de las cuentas se muestren "
+#~ "varias veces en la barra lateral"
+
+#~ msgid "Long descriptions are truncated at the end instead of the beginning"
+#~ msgstr ""
+#~ "Las descripciones largas se truncan al final en lugar de al principio"
+
+#~ msgid "Removing descriptions is now saved"
+#~ msgstr "Ahora se guarda la eliminación de las descripciones"
+
+#~ msgid "Placing the cursor in descriptions works consistently"
+#~ msgstr ""
+#~ "La colocación del cursor en las descripciones funciona de forma coherente"
+
+#~ msgid "Replace the Delete shortcut key with Ctrl + Backspace"
+#~ msgstr ""
+#~ "Se reemplaza la tecla de acceso directo de eliminar por Ctrl + Retroceso"
+
+#~ msgid "Add a confirmation dialog when deleting a task list"
+#~ msgstr ""
+#~ "Se agregó un diálogo de confirmación al eliminar una lista de tareas"
+
+#~ msgid "Improve performance in lists with lots of completed tasks"
+#~ msgstr "Se mejora el rendimiento en listas con muchas tareas completadas"
 
 #~ msgid "Fix crash on start with certain hardware"
 #~ msgstr "Se corrige un cierre inesperado en determinados PC"
