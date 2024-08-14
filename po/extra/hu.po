@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-24 17:59+0000\n"
-"PO-Revision-Date: 2023-01-20 00:25+0000\n"
+"PO-Revision-Date: 2024-08-15 16:16+0000\n"
 "Last-Translator: TomiOhl <ohlslager.tom@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.elementary.io/projects/tasks/extra/hu/"
 ">\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: data/tasks.metainfo.xml.in:51
 msgid "elementary, Inc."
-msgstr ""
+msgstr "elementary, Inc."
 
 #: data/tasks.metainfo.xml.in:59 data/tasks.metainfo.xml.in:71
 #: data/tasks.metainfo.xml.in:85
@@ -53,7 +53,7 @@ msgstr "Frissített Fordítások"
 
 #: data/tasks.metainfo.xml.in:73
 msgid "Fix minor visual issues in dark mode"
-msgstr ""
+msgstr "Néhány apróbb vizuális hiba javítva sötét témaszínnel"
 
 #: data/tasks.metainfo.xml.in:87
 msgid "New app icon"
@@ -68,12 +68,16 @@ msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
 msgstr ""
+"Az újonnan létrehozott feladatlisták offline-támogatása, ha fiókhoz van "
+"kapcsolva"
 
 #: data/tasks.metainfo.xml.in:101
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
 msgstr ""
+"A feladatlista automatikus szinkronizálása kiválasztáskor vagy a hálózathoz "
+"való újbóli csatlakozáskor"
 
 #: data/tasks.metainfo.xml.in:110
 msgid "Send a notification when a task is due"
@@ -85,4 +89,4 @@ msgstr "Hozzon létre feladatokat és kövesse az alakulásukat"
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "Teendők;Emlékeztetők;"
