@@ -8,14 +8,16 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-24 17:59+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-08-17 19:58+0000\n"
+"Last-Translator: André Lubawski <andrelubawski97@outlook.com>\n"
+"Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
+"tasks/tasks/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: src/Application.vala:134
 msgid ""
@@ -25,7 +27,7 @@ msgstr ""
 
 #: src/MainWindow.vala:30
 msgid "Tasks"
-msgstr ""
+msgstr "tarefas"
 
 #: src/MainWindow.vala:84
 msgid "Online Accounts Settings…"
