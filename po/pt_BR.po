@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-24 17:59+0000\n"
-"PO-Revision-Date: 2024-08-17 19:58+0000\n"
+"PO-Revision-Date: 2024-08-17 20:08+0000\n"
 "Last-Translator: José Rafael <jrafaeldesantana@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
 "tasks/tasks/pt_BR/>\n"
@@ -29,111 +29,117 @@ msgstr ""
 
 #: src/MainWindow.vala:30
 msgid "Tasks"
-msgstr "tarefas"
+msgstr "Tarefas"
 
 #: src/MainWindow.vala:84
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "Configurações de contas online…"
 
 #: src/MainWindow.vala:100
 msgid "Add Task List…"
-msgstr ""
+msgstr "Adicionar lista de tarefas…"
 
 #: src/MainWindow.vala:256
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Falha ao criar nova lista de tarefas"
 
 #: src/MainWindow.vala:257 src/MainWindow.vala:327
 #: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
+"O registro da lista de tarefas pode estar indisponível ou não permitir "
+"gravação."
 
 #: src/MainWindow.vala:262
 msgid "New list"
-msgstr ""
+msgstr "Nova lista"
 
 #: src/MainWindow.vala:306
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "Apagar “%s”?"
 
 #: src/MainWindow.vala:307
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"A lista e todas suas tarefas serão apagadas permanentemente. Se você "
+"compartilhou essa lista, outras pessoas não terão mais acesso."
 
 #: src/MainWindow.vala:315
 msgid "Delete Anyway"
-msgstr ""
+msgstr "Apagar mesmo assim"
 
 #: src/MainWindow.vala:326
 msgid "Deleting the task list failed"
-msgstr ""
+msgstr "Falha ao apagar lista"
 
 #: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:46
 msgid "Today"
-msgstr ""
+msgstr "Hoje"
 
 #: src/Util.vala:267
 msgid "Yesterday"
-msgstr ""
+msgstr "Ontem"
 
 #: src/Util.vala:269
 msgid "Tomorrow"
-msgstr ""
+msgstr "Amanhã"
 
 #: src/Widgets/EntryPopover/DateTime.vala:14
 msgid "Set Due"
-msgstr ""
+msgstr "Definir prazo"
 
 #: src/Widgets/EntryPopover/Generic.vala:50
 msgid "Remove"
-msgstr ""
+msgstr "Remover"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "Definir localização"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
-msgstr ""
+msgstr "Chegando"
 
 #: src/Widgets/EntryPopover/Location.vala:57
 msgid "Leaving"
-msgstr ""
+msgstr "Saindo"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "José Rafael OU Rua do Centro"
 
 #: src/Widgets/ListSettingsPopover.vala:81
 msgid "Show Completed"
-msgstr ""
+msgstr "Mostrar concluído"
 
 #: src/Widgets/ListSettingsPopover.vala:86
 msgid "Delete List…"
-msgstr ""
+msgstr "Apagar lista…"
 
 #: src/Widgets/ListSettingsPopover.vala:241
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "Não foi possível alterar a cor da lista de tarefas"
 
 #: src/Widgets/ListSettingsPopover.vala:242
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
+"O registro da lista de tarefas pode não estar disponível ou protegido contra "
+"gravações."
 
 #: src/Widgets/ScheduledRow.vala:11 src/Widgets/ScheduledTaskListBox.vala:61
 msgid "Scheduled"
-msgstr ""
+msgstr "Agendado"
 
 #: src/Widgets/SourceRow.vala:37
 msgid "Connecting…"
-msgstr ""
+msgstr "Conectando…"
 
 #: src/Widgets/SourceRow.vala:121
 msgid "Moving task failed"
-msgstr ""
+msgstr "Falha ao mover tarefa"
 
 #: src/Widgets/SourceRow.vala:122
 msgid "There was an error while moving the task to the desired list."
