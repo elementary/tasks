@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-24 17:59+0000\n"
-"PO-Revision-Date: 2024-08-17 19:58+0000\n"
+"PO-Revision-Date: 2024-08-17 20:08+0000\n"
 "Last-Translator: José Rafael <jrafaeldesantana@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
 "tasks/extra/pt_BR/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
-msgstr "tarefas"
+msgstr "Tarefas"
 
 #: data/tasks.metainfo.xml.in:11
 msgid "Synced tasks and reminders"
