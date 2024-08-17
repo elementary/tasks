@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2024-08-17 20:08+0000\n"
-"Last-Translator: José Rafael <jrafaeldesantana@gmail.com>\n"
+"Last-Translator: André Lubawski <andrelubawski97@outlook.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
 "tasks/tasks/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -143,7 +143,7 @@ msgstr "Falha ao mover tarefa"
 
 #: src/Widgets/SourceRow.vala:122
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "Ocorreu um erro durante a movimentação da tarefa para a lista desejada."
 
 #: src/Widgets/SourceRow.vala:183
 msgid "Waiting for login credentials"
