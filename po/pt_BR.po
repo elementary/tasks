@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-24 17:59+0000\n"
-"PO-Revision-Date: 2024-08-17 20:08+0000\n"
-"Last-Translator: André Lubawski <andrelubawski97@outlook.com>\n"
+"PO-Revision-Date: 2024-08-18 20:16+0000\n"
+"Last-Translator: José Rafael <jrafaeldesantana@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.elementary.io/projects/"
 "tasks/tasks/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -143,88 +143,89 @@ msgstr "Falha ao mover tarefa"
 
 #: src/Widgets/SourceRow.vala:122
 msgid "There was an error while moving the task to the desired list."
-msgstr "Ocorreu um erro durante a movimentação da tarefa para a lista desejada."
+msgstr "Ocorreu um erro ao mover a tarefa para a lista desejada."
 
 #: src/Widgets/SourceRow.vala:183
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "Aguardando credenciais de acesso"
 
 #: src/Widgets/SourceRow.vala:187
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr ""
+"Atualmente desconectado do armazenamento de dados (possivelmente remoto)"
 
 #: src/Widgets/SourceRow.vala:191
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "O certificado SSL foi rejeitado para a conexão"
 
 #: src/Widgets/ScheduledTaskListBox.vala:70 src/Widgets/TaskListGrid.vala:79
 msgid "No Tasks"
-msgstr ""
+msgstr "Nenhuma tarefa"
 
 #: src/Widgets/ScheduledTaskListBox.vala:202 src/Widgets/TaskListGrid.vala:281
 msgid "Completing task failed"
-msgstr ""
+msgstr "Falha ao concluir tarefa"
 
 #: src/Widgets/ScheduledTaskListBox.vala:203
 #: src/Widgets/ScheduledTaskListBox.vala:225
 #: src/Widgets/ScheduledTaskListBox.vala:247 src/Widgets/TaskListGrid.vala:282
 #: src/Widgets/TaskListGrid.vala:304 src/Widgets/TaskListGrid.vala:326
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "O registro de tarefas pode estar indisponível ou não pode ser gravado."
 
 #: src/Widgets/ScheduledTaskListBox.vala:224 src/Widgets/TaskListGrid.vala:303
 msgid "Updating task failed"
-msgstr ""
+msgstr "Falha ao atualizar a tarefa"
 
 #: src/Widgets/ScheduledTaskListBox.vala:246 src/Widgets/TaskListGrid.vala:325
 msgid "Removing task failed"
-msgstr ""
+msgstr "Falha ao remover a tarefa"
 
 #: src/Widgets/TaskListGrid.vala:41
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "Editar nome e aparência"
 
 #: src/Widgets/TaskListGrid.vala:63
 msgid "Adding task failed"
-msgstr ""
+msgstr "Falha ao adicionar tarefa"
 
 #: src/Widgets/TaskListGrid.vala:152
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "Falha ao renomear a lista de tarefas"
 
 #: src/Widgets/TaskRow.vala:113 src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:125
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s às %s"
 
 #: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "Chegando: %s"
 
 #: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "Saindo: %s"
 
 #: src/Widgets/TaskRow.vala:220
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/Widgets/TaskRow.vala:222
 msgid "Save Changes"
-msgstr ""
+msgstr "Salvar alterações"
 
 #: src/Widgets/TaskRow.vala:222
 msgid "Add Task"
-msgstr ""
+msgstr "Nova tarefa"
 
 #: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
-msgstr ""
+msgstr "Apagar tarefa"
