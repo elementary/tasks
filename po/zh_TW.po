@@ -8,212 +8,217 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-24 17:59+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-09-05 16:16+0000\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Chinese (Traditional) <https://l10n.elementary.io/projects/"
+"tasks/tasks/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: src/Application.vala:134
 msgid ""
 "Tasks will automatically start when this device turns on and run when its "
 "window is closed so that it can send notifications for due tasks."
-msgstr ""
+msgstr "《待辦事項》會在此裝置開機時自動啟動，並在其視窗關閉時繼續執行，以便為到期事"
+"項傳送通知。"
 
 #: src/MainWindow.vala:30
 msgid "Tasks"
-msgstr ""
+msgstr "待辦事項"
 
 #: src/MainWindow.vala:84
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "線上帳號設定…"
 
 #: src/MainWindow.vala:100
 msgid "Add Task List…"
-msgstr ""
+msgstr "新增待辦清單…"
 
 #: src/MainWindow.vala:256
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "無法建立新待辦清單"
 
 #: src/MainWindow.vala:257 src/MainWindow.vala:327
 #: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "待辦清單登錄元可能無法使用或是無法寫入。"
 
 #: src/MainWindow.vala:262
 msgid "New list"
-msgstr ""
+msgstr "新清單"
 
 #: src/MainWindow.vala:306
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "要刪除「%s」嗎？"
 
 #: src/MainWindow.vala:307
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
-msgstr ""
+msgstr "此清單和其中包含的所有待辦事項都會被永久刪除。如果您已分享此清單，其他人也將"
+"喪失存取。"
 
 #: src/MainWindow.vala:315
 msgid "Delete Anyway"
-msgstr ""
+msgstr "還是要刪除"
 
 #: src/MainWindow.vala:326
 msgid "Deleting the task list failed"
-msgstr ""
+msgstr "無法刪除待辦清單"
 
 #: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:46
 msgid "Today"
-msgstr ""
+msgstr "今天"
 
 #: src/Util.vala:267
 msgid "Yesterday"
-msgstr ""
+msgstr "昨天"
 
 #: src/Util.vala:269
 msgid "Tomorrow"
-msgstr ""
+msgstr "明天"
 
 #: src/Widgets/EntryPopover/DateTime.vala:14
 msgid "Set Due"
-msgstr ""
+msgstr "設定到期時間"
 
 #: src/Widgets/EntryPopover/Generic.vala:50
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "設定地點"
 
 #: src/Widgets/EntryPopover/Location.vala:56
 msgid "Arriving"
-msgstr ""
+msgstr "目的地"
 
 #: src/Widgets/EntryPopover/Location.vala:57
 msgid "Leaving"
-msgstr ""
+msgstr "出發地"
 
 #: src/Widgets/EntryPopover/Location.vala:60
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "人物或地點的名稱"
 
 #: src/Widgets/ListSettingsPopover.vala:81
 msgid "Show Completed"
-msgstr ""
+msgstr "顯示已完成的事項"
 
 #: src/Widgets/ListSettingsPopover.vala:86
 msgid "Delete List…"
-msgstr ""
+msgstr "刪除清單…"
 
 #: src/Widgets/ListSettingsPopover.vala:241
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "無法變更待辦清單色彩"
 
 #: src/Widgets/ListSettingsPopover.vala:242
 msgid "The task list registry may be unavailable or write-protected."
-msgstr ""
+msgstr "待辦清單登錄元可能無法使用或已受寫入保護。"
 
 #: src/Widgets/ScheduledRow.vala:11 src/Widgets/ScheduledTaskListBox.vala:61
 msgid "Scheduled"
-msgstr ""
+msgstr "已排程"
 
 #: src/Widgets/SourceRow.vala:37
 msgid "Connecting…"
-msgstr ""
+msgstr "連接中…"
 
 #: src/Widgets/SourceRow.vala:121
 msgid "Moving task failed"
-msgstr ""
+msgstr "無法移動待辦事項"
 
 #: src/Widgets/SourceRow.vala:122
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "將待辦事項移至指定清單時發生錯誤。"
 
 #: src/Widgets/SourceRow.vala:183
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "正在等待登入資訊"
 
 #: src/Widgets/SourceRow.vala:187
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "目前已從（可能是遠端的）資料儲存空間中斷連接"
 
 #: src/Widgets/SourceRow.vala:191
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "連線的 SSL 憑證信任被拒絕"
 
 #: src/Widgets/ScheduledTaskListBox.vala:70 src/Widgets/TaskListGrid.vala:79
 msgid "No Tasks"
-msgstr ""
+msgstr "沒有待辦事項"
 
 #: src/Widgets/ScheduledTaskListBox.vala:202 src/Widgets/TaskListGrid.vala:281
 msgid "Completing task failed"
-msgstr ""
+msgstr "無法將待辦事項標記為完成"
 
 #: src/Widgets/ScheduledTaskListBox.vala:203
 #: src/Widgets/ScheduledTaskListBox.vala:225
 #: src/Widgets/ScheduledTaskListBox.vala:247 src/Widgets/TaskListGrid.vala:282
 #: src/Widgets/TaskListGrid.vala:304 src/Widgets/TaskListGrid.vala:326
 msgid "The task registry may be unavailable or unable to be written to."
-msgstr ""
+msgstr "待辦事項登錄元可能無法使用或是無法寫入。"
 
 #: src/Widgets/ScheduledTaskListBox.vala:224 src/Widgets/TaskListGrid.vala:303
 msgid "Updating task failed"
-msgstr ""
+msgstr "無法更新待辦事項"
 
 #: src/Widgets/ScheduledTaskListBox.vala:246 src/Widgets/TaskListGrid.vala:325
 msgid "Removing task failed"
-msgstr ""
+msgstr "無法移除待辦事項"
 
 #: src/Widgets/TaskListGrid.vala:41
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "編輯名稱和外觀"
 
 #: src/Widgets/TaskListGrid.vala:63
 msgid "Adding task failed"
-msgstr ""
+msgstr "無法新增待辦事項"
 
 #: src/Widgets/TaskListGrid.vala:152
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "無法重新命名待辦清單"
 
 #: src/Widgets/TaskRow.vala:113 src/Widgets/TaskRow.vala:120
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:125
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s的%s"
 
 #: src/Widgets/TaskRow.vala:159
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "目的地：%s"
 
 #: src/Widgets/TaskRow.vala:162
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "出發地：%s"
 
 #: src/Widgets/TaskRow.vala:220
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: src/Widgets/TaskRow.vala:222
 msgid "Save Changes"
-msgstr ""
+msgstr "儲存變更"
 
 #: src/Widgets/TaskRow.vala:222
 msgid "Add Task"
-msgstr ""
+msgstr "新增待辦事項"
 
 #: src/Widgets/TaskRow.vala:292
 msgid "Delete Task"
-msgstr ""
+msgstr "刪除待辦事項"
