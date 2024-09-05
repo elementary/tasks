@@ -9,6 +9,8 @@ class Tasks.PopoverMenuitem : Gtk.Button {
             child = new Granite.AccelLabel (value) {
                 action_name = this.action_name
             };
+
+            get_accessible ().accessible_name = value;
         }
     }
 
