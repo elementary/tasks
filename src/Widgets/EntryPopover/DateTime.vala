@@ -42,7 +42,7 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             margin_top = 3
         };
 
-        var today_button = new Gtk.ModelButton () {
+        var today_button = new PopoverMenuitem () {
             text = _("Today")
         };
 
