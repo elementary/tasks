@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2023-06-16 00:07+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.elementary.io/projects/tasks/"
@@ -42,25 +42,25 @@ msgstr "Innstillinger for nettbaserte kontoer …"
 msgid "Add Task List…"
 msgstr "Legg til gjøremålsliste …"
 
-#: src/MainWindow.vala:254
+#: src/MainWindow.vala:256
 msgid "Creating a new task list failed"
 msgstr "Opprettelse av nytt gjøremål mislyktes"
 
-#: src/MainWindow.vala:255 src/MainWindow.vala:325
+#: src/MainWindow.vala:257 src/MainWindow.vala:327
 #: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Gjøremålsregisteret kan være utilgjengelig eller stengt for skriving."
 
-#: src/MainWindow.vala:260
+#: src/MainWindow.vala:262
 msgid "New list"
 msgstr "Ny liste"
 
-#: src/MainWindow.vala:304
+#: src/MainWindow.vala:306
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Slett «%s»?"
 
-#: src/MainWindow.vala:305
+#: src/MainWindow.vala:307
 #, fuzzy
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
@@ -69,11 +69,11 @@ msgstr ""
 "Listen og alle dens gjøremål vil bli slettet for godt. Hvis du har delt "
 "denne listen med andre vil de miste tilgang til den."
 
-#: src/MainWindow.vala:313
+#: src/MainWindow.vala:315
 msgid "Delete Anyway"
 msgstr "Slett uansett"
 
-#: src/MainWindow.vala:324
+#: src/MainWindow.vala:326
 msgid "Deleting the task list failed"
 msgstr "Kunne ikke slette gjøremålsliste"
 
@@ -93,7 +93,7 @@ msgstr "I morgen"
 msgid "Set Due"
 msgstr "Sett frist"
 
-#: src/Widgets/EntryPopover/Generic.vala:44
+#: src/Widgets/EntryPopover/Generic.vala:50
 msgid "Remove"
 msgstr "Fjern"
 

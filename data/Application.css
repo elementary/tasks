@@ -11,10 +11,6 @@ editable-label entry {
     padding: 0;
 }
 
-editable-label entry text {
-    padding: 0;
-}
-
 entry-popover > box {
     border-radius: 3px;
     background: @SILVER_300;

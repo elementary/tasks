@@ -7,127 +7,80 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:48+0000\n"
-"PO-Revision-Date: 2019-08-02 13:43-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
+"PO-Revision-Date: 2024-09-05 16:16+0000\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Chinese (Traditional) <https://l10n.elementary.io/projects/"
+"tasks/extra/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
-msgstr ""
+msgstr "待辦事項"
 
 #: data/tasks.metainfo.xml.in:11
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "支援同步的待辦事項和提醒"
 
 #: data/tasks.metainfo.xml.in:13
 msgid ""
 "Designed and built to help manage all of your tasks and reminders. Create "
 "and complete tasks, manage lists and sync them across your machines using "
 "CalDAV."
-msgstr ""
+msgstr "設計來為您管理所有待辦事項和提醒。建立並標記待辦事項為完成、管理清單，並利用 "
+"CalDAV 在您的裝置之間同步它們。"
 
-#: data/tasks.metainfo.xml.in:50
+#: data/tasks.metainfo.xml.in:51
 msgid "elementary, Inc."
-msgstr ""
+msgstr "elementary, Inc."
 
-#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
-#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
+#: data/tasks.metainfo.xml.in:59 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:85
 msgid "Improvements:"
-msgstr ""
+msgstr "改善："
 
-#: data/tasks.metainfo.xml.in:59
-msgid "Fix minor visual issues in dark mode"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
-#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
+#: data/tasks.metainfo.xml.in:61 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:88
 msgid "Updated translations"
-msgstr ""
+msgstr "翻譯更新"
 
 #: data/tasks.metainfo.xml.in:73
+msgid "Fix minor visual issues in dark mode"
+msgstr "修正深色模式中的一些輕微顯示問題"
+
+#: data/tasks.metainfo.xml.in:87
 msgid "New app icon"
-msgstr ""
+msgstr "新的應用程式圖示"
 
-#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
-#: data/tasks.metainfo.xml.in:103
+#: data/tasks.metainfo.xml.in:98 data/tasks.metainfo.xml.in:108
 msgid "Features:"
-msgstr ""
+msgstr "功能："
 
-#: data/tasks.metainfo.xml.in:86
+#: data/tasks.metainfo.xml.in:100
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
-msgstr ""
+msgstr "在為新的本地帳號新建立待辦清單時支援離線使用"
 
-#: data/tasks.metainfo.xml.in:87
+#: data/tasks.metainfo.xml.in:101
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:96
-msgid "Send a notification when a task is due"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:105
-msgid "Drag and drop tasks between lists"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:106
-msgid "Follow email and web links in the task description with Control + Click"
-msgstr ""
+msgstr "選擇待辦清單或是網路恢復連線時自動同步"
 
 #: data/tasks.metainfo.xml.in:110
-msgid "Improved time zone handling"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:111
-msgid "Performance improvements"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:119
-msgid "Fixes:"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:121
-msgid ""
-"Prevent account name headers from being displayed multiple times in the "
-"sidebar"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:122
-msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:123
-msgid "Removing descriptions is now saved"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:124
-msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:128
-msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:129
-msgid "Add a confirmation dialog when deleting a task list"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:130
-msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
+msgid "Send a notification when a task is due"
+msgstr "待辦事項到期時傳送通知"
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
-msgstr ""
+msgstr "建立待辦事項並管理其進度"
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "Todo;Reminders;待辦事項;提醒;工作;任務;"

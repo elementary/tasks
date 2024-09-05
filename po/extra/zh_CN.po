@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2022-01-28 16:26+0000\n"
 "Last-Translator: colindemian <colindemian@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://l10n.elementary.io/projects/"
@@ -36,100 +36,49 @@ msgstr ""
 "设计和构建，以帮助管理您的所有任务和提醒。使用CalDAV创建和完成任务，管理列表"
 "并在您的机器之间同步它们。"
 
-#: data/tasks.metainfo.xml.in:50
+#: data/tasks.metainfo.xml.in:51
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
-#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
+#: data/tasks.metainfo.xml.in:59 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:85
 msgid "Improvements:"
 msgstr "改进:"
 
-#: data/tasks.metainfo.xml.in:59
-msgid "Fix minor visual issues in dark mode"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
-#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
+#: data/tasks.metainfo.xml.in:61 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:88
 msgid "Updated translations"
 msgstr "更新的翻译"
 
 #: data/tasks.metainfo.xml.in:73
+msgid "Fix minor visual issues in dark mode"
+msgstr ""
+
+#: data/tasks.metainfo.xml.in:87
 msgid "New app icon"
 msgstr ""
 
-#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
-#: data/tasks.metainfo.xml.in:103
+#: data/tasks.metainfo.xml.in:98 data/tasks.metainfo.xml.in:108
 msgid "Features:"
 msgstr "功能："
 
-#: data/tasks.metainfo.xml.in:86
+#: data/tasks.metainfo.xml.in:100
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
 msgstr ""
 
-#: data/tasks.metainfo.xml.in:87
+#: data/tasks.metainfo.xml.in:101
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
 msgstr ""
 
-#: data/tasks.metainfo.xml.in:96
+#: data/tasks.metainfo.xml.in:110
 #, fuzzy
 #| msgid "Add a confirmation dialog when deleting a task list"
 msgid "Send a notification when a task is due"
 msgstr "添加删除任务列表确认对话框"
-
-#: data/tasks.metainfo.xml.in:105
-msgid "Drag and drop tasks between lists"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:106
-msgid "Follow email and web links in the task description with Control + Click"
-msgstr "按下 Control 并单击以查看待办事项描述中的邮件和链接"
-
-#: data/tasks.metainfo.xml.in:110
-msgid "Improved time zone handling"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:111
-msgid "Performance improvements"
-msgstr ""
-
-#: data/tasks.metainfo.xml.in:119
-msgid "Fixes:"
-msgstr "修复:"
-
-#: data/tasks.metainfo.xml.in:121
-msgid ""
-"Prevent account name headers from being displayed multiple times in the "
-"sidebar"
-msgstr "防止在侧边栏中多次显示帐户名称标题"
-
-#: data/tasks.metainfo.xml.in:122
-msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr "长描述在末尾而不是开头被截断"
-
-#: data/tasks.metainfo.xml.in:123
-msgid "Removing descriptions is now saved"
-msgstr "删除描述现在已保存"
-
-#: data/tasks.metainfo.xml.in:124
-msgid "Placing the cursor in descriptions works consistently"
-msgstr "描述中的光标效果保持一致"
-
-#: data/tasks.metainfo.xml.in:128
-msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr "用 Ctrl + Backspace 替换 Delete 快捷键"
-
-#: data/tasks.metainfo.xml.in:129
-msgid "Add a confirmation dialog when deleting a task list"
-msgstr "添加删除任务列表确认对话框"
-
-#: data/tasks.metainfo.xml.in:130
-msgid "Improve performance in lists with lots of completed tasks"
-msgstr "提高具有大量已完成任务的列表的性能"
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
@@ -138,6 +87,36 @@ msgstr "创建并跟踪待办事项进度"
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "待办;备忘;"
+
+#~ msgid ""
+#~ "Follow email and web links in the task description with Control + Click"
+#~ msgstr "按下 Control 并单击以查看待办事项描述中的邮件和链接"
+
+#~ msgid "Fixes:"
+#~ msgstr "修复:"
+
+#~ msgid ""
+#~ "Prevent account name headers from being displayed multiple times in the "
+#~ "sidebar"
+#~ msgstr "防止在侧边栏中多次显示帐户名称标题"
+
+#~ msgid "Long descriptions are truncated at the end instead of the beginning"
+#~ msgstr "长描述在末尾而不是开头被截断"
+
+#~ msgid "Removing descriptions is now saved"
+#~ msgstr "删除描述现在已保存"
+
+#~ msgid "Placing the cursor in descriptions works consistently"
+#~ msgstr "描述中的光标效果保持一致"
+
+#~ msgid "Replace the Delete shortcut key with Ctrl + Backspace"
+#~ msgstr "用 Ctrl + Backspace 替换 Delete 快捷键"
+
+#~ msgid "Add a confirmation dialog when deleting a task list"
+#~ msgstr "添加删除任务列表确认对话框"
+
+#~ msgid "Improve performance in lists with lots of completed tasks"
+#~ msgstr "提高具有大量已完成任务的列表的性能"
 
 #~ msgid "Fix crash on start with certain hardware"
 #~ msgstr "修复某些硬件启动时崩溃的问题"

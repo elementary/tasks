@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2023-06-16 00:07+0000\n"
 "Last-Translator: lenemter <lenemter@gmail.com>\n"
 "Language-Team: Russian <https://l10n.elementary.io/projects/tasks/tasks/ru/"
@@ -41,25 +41,25 @@ msgstr "Параметры онлайн-аккаунтов…"
 msgid "Add Task List…"
 msgstr "Добавить список задач…"
 
-#: src/MainWindow.vala:254
+#: src/MainWindow.vala:256
 msgid "Creating a new task list failed"
 msgstr "Не удалось создать список задач"
 
-#: src/MainWindow.vala:255 src/MainWindow.vala:325
+#: src/MainWindow.vala:257 src/MainWindow.vala:327
 #: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Журнал списка задач может быть недоступен или не может быть записан."
 
-#: src/MainWindow.vala:260
+#: src/MainWindow.vala:262
 msgid "New list"
 msgstr "Новый список"
 
-#: src/MainWindow.vala:304
+#: src/MainWindow.vala:306
 #, c-format
 msgid "Delete “%s”?"
 msgstr "Удалить «%s»?"
 
-#: src/MainWindow.vala:305
+#: src/MainWindow.vala:307
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -67,11 +67,11 @@ msgstr ""
 "Список и все задания в нём будут удалены навсегда. Если вы поделились этим "
 "списком с другими людьми, они потеряют к нему доступ."
 
-#: src/MainWindow.vala:313
+#: src/MainWindow.vala:315
 msgid "Delete Anyway"
 msgstr "Всё равно удалить"
 
-#: src/MainWindow.vala:324
+#: src/MainWindow.vala:326
 msgid "Deleting the task list failed"
 msgstr "Не удалось удалить список задач"
 
@@ -91,7 +91,7 @@ msgstr "Завтра"
 msgid "Set Due"
 msgstr "Установить срок"
 
-#: src/Widgets/EntryPopover/Generic.vala:44
+#: src/Widgets/EntryPopover/Generic.vala:50
 msgid "Remove"
 msgstr "Удалить"
 

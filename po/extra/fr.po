@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2023-08-02 09:08+0000\n"
 "Last-Translator: Nathan <bonnemainsnathan@gmail.com>\n"
 "Language-Team: French <https://l10n.elementary.io/projects/tasks/extra/fr/>\n"
@@ -36,34 +36,33 @@ msgstr ""
 "complétez des tâches, gérez des listes et synchronisez les entre vos "
 "différentes machine en utilisant CalDAV."
 
-#: data/tasks.metainfo.xml.in:50
+#: data/tasks.metainfo.xml.in:51
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
-#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
+#: data/tasks.metainfo.xml.in:59 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:85
 msgid "Improvements:"
 msgstr "Améliorations :"
 
-#: data/tasks.metainfo.xml.in:59
-msgid "Fix minor visual issues in dark mode"
-msgstr "Correction de problèmes visuels mineurs avec le thème sombre"
-
-#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
-#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
+#: data/tasks.metainfo.xml.in:61 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:88
 msgid "Updated translations"
 msgstr "Mise à jour des traductions"
 
 #: data/tasks.metainfo.xml.in:73
+msgid "Fix minor visual issues in dark mode"
+msgstr "Correction de problèmes visuels mineurs avec le thème sombre"
+
+#: data/tasks.metainfo.xml.in:87
 msgid "New app icon"
 msgstr "Nouvelle icône de l'application"
 
-#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
-#: data/tasks.metainfo.xml.in:103
+#: data/tasks.metainfo.xml.in:98 data/tasks.metainfo.xml.in:108
 msgid "Features:"
 msgstr "Fonctionnalités :"
 
-#: data/tasks.metainfo.xml.in:86
+#: data/tasks.metainfo.xml.in:100
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -71,7 +70,7 @@ msgstr ""
 "Ajout de la prise en charge hors ligne des listes de tâches nouvellement "
 "créées, si cette fonction est configurée sur le compte"
 
-#: data/tasks.metainfo.xml.in:87
+#: data/tasks.metainfo.xml.in:101
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -79,70 +78,9 @@ msgstr ""
 "Synchronisation automatique d'une liste de tâches dès qu'elle est "
 "sélectionnée ou que le réseau est de nouveau disponible"
 
-#: data/tasks.metainfo.xml.in:96
+#: data/tasks.metainfo.xml.in:110
 msgid "Send a notification when a task is due"
 msgstr "Envoi d'une notification lorsqu'une tâche est dûe"
-
-#: data/tasks.metainfo.xml.in:105
-msgid "Drag and drop tasks between lists"
-msgstr "Glissez-déposez les tâches entre les listes"
-
-#: data/tasks.metainfo.xml.in:106
-msgid "Follow email and web links in the task description with Control + Click"
-msgstr ""
-"Suivez les liens e-mail et Web dans la description des tâches avec Ctrl + "
-"Clic"
-
-#: data/tasks.metainfo.xml.in:110
-msgid "Improved time zone handling"
-msgstr "Amélioration de la gestion du fuseau horaire"
-
-#: data/tasks.metainfo.xml.in:111
-msgid "Performance improvements"
-msgstr "Amélioration des performances"
-
-#: data/tasks.metainfo.xml.in:119
-msgid "Fixes:"
-msgstr "Corrections :"
-
-#: data/tasks.metainfo.xml.in:121
-msgid ""
-"Prevent account name headers from being displayed multiple times in the "
-"sidebar"
-msgstr ""
-"Nous avons empêché le nom des comptes de s'afficher plusieurs fois dans la "
-"barre latérale"
-
-#: data/tasks.metainfo.xml.in:122
-msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr ""
-"Les descriptions longues sont désormais coupées à la fin plutôt qu'au début"
-
-#: data/tasks.metainfo.xml.in:123
-msgid "Removing descriptions is now saved"
-msgstr "La suppression de description est désormais enregistrée"
-
-#: data/tasks.metainfo.xml.in:124
-msgid "Placing the cursor in descriptions works consistently"
-msgstr ""
-"Placer le curseur au niveau de la description fonctionne désormais "
-"correctement"
-
-#: data/tasks.metainfo.xml.in:128
-msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr "Remplacement du raccourci de suppression par Ctrl + Effacer"
-
-#: data/tasks.metainfo.xml.in:129
-msgid "Add a confirmation dialog when deleting a task list"
-msgstr ""
-"Ajout d'une boîte de dialogue de confirmation lors de la suppression d'une "
-"liste de tâches"
-
-#: data/tasks.metainfo.xml.in:130
-msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
-"Amélioration des performances pour les listes avec de nombreuses tâches "
-"complétées"
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
@@ -151,6 +89,57 @@ msgstr "Créez des tâches et suivez leur progression"
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "Todo;Rappels;"
+
+#~ msgid "Drag and drop tasks between lists"
+#~ msgstr "Glissez-déposez les tâches entre les listes"
+
+#~ msgid ""
+#~ "Follow email and web links in the task description with Control + Click"
+#~ msgstr ""
+#~ "Suivez les liens e-mail et Web dans la description des tâches avec Ctrl + "
+#~ "Clic"
+
+#~ msgid "Improved time zone handling"
+#~ msgstr "Amélioration de la gestion du fuseau horaire"
+
+#~ msgid "Performance improvements"
+#~ msgstr "Amélioration des performances"
+
+#~ msgid "Fixes:"
+#~ msgstr "Corrections :"
+
+#~ msgid ""
+#~ "Prevent account name headers from being displayed multiple times in the "
+#~ "sidebar"
+#~ msgstr ""
+#~ "Nous avons empêché le nom des comptes de s'afficher plusieurs fois dans "
+#~ "la barre latérale"
+
+#~ msgid "Long descriptions are truncated at the end instead of the beginning"
+#~ msgstr ""
+#~ "Les descriptions longues sont désormais coupées à la fin plutôt qu'au "
+#~ "début"
+
+#~ msgid "Removing descriptions is now saved"
+#~ msgstr "La suppression de description est désormais enregistrée"
+
+#~ msgid "Placing the cursor in descriptions works consistently"
+#~ msgstr ""
+#~ "Placer le curseur au niveau de la description fonctionne désormais "
+#~ "correctement"
+
+#~ msgid "Replace the Delete shortcut key with Ctrl + Backspace"
+#~ msgstr "Remplacement du raccourci de suppression par Ctrl + Effacer"
+
+#~ msgid "Add a confirmation dialog when deleting a task list"
+#~ msgstr ""
+#~ "Ajout d'une boîte de dialogue de confirmation lors de la suppression "
+#~ "d'une liste de tâches"
+
+#~ msgid "Improve performance in lists with lots of completed tasks"
+#~ msgstr ""
+#~ "Amélioration des performances pour les listes avec de nombreuses tâches "
+#~ "complétées"
 
 #~ msgid "Fix crash on start with certain hardware"
 #~ msgstr "Correction d'un plantage au démarrage avec certains matériels"

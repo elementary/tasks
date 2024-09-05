@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2022-06-05 22:36+0000\n"
 "Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
 "Language-Team: Marathi <https://l10n.elementary.io/projects/tasks/tasks/mr/"
@@ -37,25 +37,25 @@ msgstr "ऑनलाइन खाती सेटिंग्ज …"
 msgid "Add Task List…"
 msgstr "कार्य यादी जोडा…"
 
-#: src/MainWindow.vala:254
+#: src/MainWindow.vala:256
 msgid "Creating a new task list failed"
 msgstr "नवीन कार्य सूची तयार करणे अयशस्वी झाले"
 
-#: src/MainWindow.vala:255 src/MainWindow.vala:325
+#: src/MainWindow.vala:257 src/MainWindow.vala:327
 #: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "कार्य सूची रेजिस्ट्री अनुपलब्ध किंवा लिहिण्यास अक्षम असू शकते."
 
-#: src/MainWindow.vala:260
+#: src/MainWindow.vala:262
 msgid "New list"
 msgstr "नवीन यादी"
 
-#: src/MainWindow.vala:304
+#: src/MainWindow.vala:306
 #, c-format
 msgid "Delete “%s”?"
 msgstr "“%s” हटवायचे?"
 
-#: src/MainWindow.vala:305
+#: src/MainWindow.vala:307
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
@@ -63,11 +63,11 @@ msgstr ""
 "सूची आणि त्याची सर्व कार्ये कायमची हटविली जातील. तुम्ही ही सूची शेअर केली असल्यास, इतर "
 "लोकांना यापुढे ही वापरायला मिळणार नाही."
 
-#: src/MainWindow.vala:313
+#: src/MainWindow.vala:315
 msgid "Delete Anyway"
 msgstr "तरीही हटवा"
 
-#: src/MainWindow.vala:324
+#: src/MainWindow.vala:326
 msgid "Deleting the task list failed"
 msgstr "कार्य सूची हटवणे अयशस्वी झाले"
 
@@ -87,7 +87,7 @@ msgstr "उद्या"
 msgid "Set Due"
 msgstr "अंतिम वेळ सेट करा"
 
-#: src/Widgets/EntryPopover/Generic.vala:44
+#: src/Widgets/EntryPopover/Generic.vala:50
 msgid "Remove"
 msgstr "काढा"
 

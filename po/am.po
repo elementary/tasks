@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-05 14:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2021-09-26 22:01+0000\n"
 "Last-Translator: carnage-mode <beta-stage@tutanota.com>\n"
 "Language-Team: Amharic <https://l10n.elementary.io/projects/tasks/tasks/am/"
@@ -37,25 +37,25 @@ msgstr "የኦንላይን አካውንት ሴቲንጎች…"
 msgid "Add Task List…"
 msgstr "የተግባር ዝርዝር ይጨምሩ…"
 
-#: src/MainWindow.vala:254
+#: src/MainWindow.vala:256
 msgid "Creating a new task list failed"
 msgstr "አዲስ የተግባር ዝርዝር መጨመር አልተቻለም"
 
-#: src/MainWindow.vala:255 src/MainWindow.vala:325
+#: src/MainWindow.vala:257 src/MainWindow.vala:327
 #: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "ምናልባት የትግባር ዝርዝር መዝገቡን ለጊዜው ማግኘት ወይም መለወጥ አልተቻለም።"
 
-#: src/MainWindow.vala:260
+#: src/MainWindow.vala:262
 msgid "New list"
 msgstr "አዲስ ዝርዝር"
 
-#: src/MainWindow.vala:304
+#: src/MainWindow.vala:306
 #, c-format
 msgid "Delete “%s”?"
 msgstr "“%s” ይጥፋ?"
 
-#: src/MainWindow.vala:305
+#: src/MainWindow.vala:307
 #, fuzzy
 #| msgid "The list and all its tasks will be permanently deleted."
 msgid ""
@@ -63,13 +63,13 @@ msgid ""
 "this list, other people will no longer have access."
 msgstr "ዝርዝሩ እንዲሁም ያሉት ተግባራት በቋሚነት ይጠፋሉ።"
 
-#: src/MainWindow.vala:313
+#: src/MainWindow.vala:315
 #, fuzzy
 #| msgid "Delete Task"
 msgid "Delete Anyway"
 msgstr "ተግባሩን ያስወግዱ"
 
-#: src/MainWindow.vala:324
+#: src/MainWindow.vala:326
 msgid "Deleting the task list failed"
 msgstr "የተግባር ዝርዝሩን ማስወገድ አልተቻለም"
 
@@ -89,7 +89,7 @@ msgstr "ነገ"
 msgid "Set Due"
 msgstr "ቀነ-ገደብ ያዘጋጁ"
 
-#: src/Widgets/EntryPopover/Generic.vala:44
+#: src/Widgets/EntryPopover/Generic.vala:50
 msgid "Remove"
 msgstr "ይወገድ"
 

@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-20 18:48+0000\n"
+"POT-Creation-Date: 2024-07-24 17:59+0000\n"
 "PO-Revision-Date: 2023-07-21 11:48+0000\n"
 "Last-Translator: lenemter <lenemter@gmail.com>\n"
-"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/extra/ru/>"
-"\n"
+"Language-Team: Russian <https://l10n.elementary.io/projects/tasks/extra/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,34 +38,33 @@ msgstr ""
 "и выполняйте задачи, управляйте списками и синхронизируйте их на своих "
 "машинах с помощью CalDAV."
 
-#: data/tasks.metainfo.xml.in:50
+#: data/tasks.metainfo.xml.in:51
 msgid "elementary, Inc."
 msgstr "elementary, Inc."
 
-#: data/tasks.metainfo.xml.in:57 data/tasks.metainfo.xml.in:71
-#: data/tasks.metainfo.xml.in:108 data/tasks.metainfo.xml.in:126
+#: data/tasks.metainfo.xml.in:59 data/tasks.metainfo.xml.in:71
+#: data/tasks.metainfo.xml.in:85
 msgid "Improvements:"
 msgstr "Улучшения:"
 
-#: data/tasks.metainfo.xml.in:59
-msgid "Fix minor visual issues in dark mode"
-msgstr "Исправлены небольшие визуальные проблемы в тёмном стиле"
-
-#: data/tasks.metainfo.xml.in:60 data/tasks.metainfo.xml.in:74
-#: data/tasks.metainfo.xml.in:112 data/tasks.metainfo.xml.in:131
+#: data/tasks.metainfo.xml.in:61 data/tasks.metainfo.xml.in:74
+#: data/tasks.metainfo.xml.in:88
 msgid "Updated translations"
 msgstr "Обновлены переводы"
 
 #: data/tasks.metainfo.xml.in:73
+msgid "Fix minor visual issues in dark mode"
+msgstr "Исправлены небольшие визуальные проблемы в тёмном стиле"
+
+#: data/tasks.metainfo.xml.in:87
 msgid "New app icon"
 msgstr "Новая иконка приложения"
 
-#: data/tasks.metainfo.xml.in:84 data/tasks.metainfo.xml.in:94
-#: data/tasks.metainfo.xml.in:103
+#: data/tasks.metainfo.xml.in:98 data/tasks.metainfo.xml.in:108
 msgid "Features:"
 msgstr "Функции:"
 
-#: data/tasks.metainfo.xml.in:86
+#: data/tasks.metainfo.xml.in:100
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
@@ -73,7 +72,7 @@ msgstr ""
 "Добавлена поддержка офлайн-режима для недавно созданных списков задач, если "
 "он настроен для учётной записи"
 
-#: data/tasks.metainfo.xml.in:87
+#: data/tasks.metainfo.xml.in:101
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
@@ -81,65 +80,9 @@ msgstr ""
 "Автоматическая синхронизация списка задач, если он выбран или сеть снова "
 "доступна"
 
-#: data/tasks.metainfo.xml.in:96
+#: data/tasks.metainfo.xml.in:110
 msgid "Send a notification when a task is due"
 msgstr "Отправка уведомления при достижении даты выполнения задачи"
-
-#: data/tasks.metainfo.xml.in:105
-msgid "Drag and drop tasks between lists"
-msgstr "Перетаскивание задач между списками"
-
-#: data/tasks.metainfo.xml.in:106
-msgid "Follow email and web links in the task description with Control + Click"
-msgstr ""
-"Переход по ссылкам электронной почты и в описании задач с помощью Ctrl + "
-"Щелчок"
-
-#: data/tasks.metainfo.xml.in:110
-msgid "Improved time zone handling"
-msgstr "Улучшена обработка часовых поясов"
-
-#: data/tasks.metainfo.xml.in:111
-msgid "Performance improvements"
-msgstr "Улучшения производительности"
-
-#: data/tasks.metainfo.xml.in:119
-msgid "Fixes:"
-msgstr "Исправления:"
-
-#: data/tasks.metainfo.xml.in:121
-msgid ""
-"Prevent account name headers from being displayed multiple times in the "
-"sidebar"
-msgstr ""
-"Предотвращение многократного отображения заголовков имён учётных записей в "
-"боковой панели"
-
-#: data/tasks.metainfo.xml.in:122
-msgid "Long descriptions are truncated at the end instead of the beginning"
-msgstr "Длинные описания укорачиваются в конце, а не в начале"
-
-#: data/tasks.metainfo.xml.in:123
-msgid "Removing descriptions is now saved"
-msgstr "Удаление описаний теперь сохраняется"
-
-#: data/tasks.metainfo.xml.in:124
-msgid "Placing the cursor in descriptions works consistently"
-msgstr "Курсор в описаниях размещается последовательно"
-
-#: data/tasks.metainfo.xml.in:128
-msgid "Replace the Delete shortcut key with Ctrl + Backspace"
-msgstr "Горячая клавиша Delete была заменена на Ctrl + Backspace"
-
-#: data/tasks.metainfo.xml.in:129
-msgid "Add a confirmation dialog when deleting a task list"
-msgstr "Добавлено диалоговое окно подтверждения при удалении списка задач"
-
-#: data/tasks.metainfo.xml.in:130
-msgid "Improve performance in lists with lots of completed tasks"
-msgstr ""
-"Улучшенна производительность в списках с большим количеством выполненных "
-"задач"
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
@@ -148,6 +91,51 @@ msgstr "Создавайте и отслеживайте прогресс вып
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
 msgstr "Todo;Reminders;Задачи;Напоминания;"
+
+#~ msgid "Drag and drop tasks between lists"
+#~ msgstr "Перетаскивание задач между списками"
+
+#~ msgid ""
+#~ "Follow email and web links in the task description with Control + Click"
+#~ msgstr ""
+#~ "Переход по ссылкам электронной почты и в описании задач с помощью Ctrl + "
+#~ "Щелчок"
+
+#~ msgid "Improved time zone handling"
+#~ msgstr "Улучшена обработка часовых поясов"
+
+#~ msgid "Performance improvements"
+#~ msgstr "Улучшения производительности"
+
+#~ msgid "Fixes:"
+#~ msgstr "Исправления:"
+
+#~ msgid ""
+#~ "Prevent account name headers from being displayed multiple times in the "
+#~ "sidebar"
+#~ msgstr ""
+#~ "Предотвращение многократного отображения заголовков имён учётных записей "
+#~ "в боковой панели"
+
+#~ msgid "Long descriptions are truncated at the end instead of the beginning"
+#~ msgstr "Длинные описания укорачиваются в конце, а не в начале"
+
+#~ msgid "Removing descriptions is now saved"
+#~ msgstr "Удаление описаний теперь сохраняется"
+
+#~ msgid "Placing the cursor in descriptions works consistently"
+#~ msgstr "Курсор в описаниях размещается последовательно"
+
+#~ msgid "Replace the Delete shortcut key with Ctrl + Backspace"
+#~ msgstr "Горячая клавиша Delete была заменена на Ctrl + Backspace"
+
+#~ msgid "Add a confirmation dialog when deleting a task list"
+#~ msgstr "Добавлено диалоговое окно подтверждения при удалении списка задач"
+
+#~ msgid "Improve performance in lists with lots of completed tasks"
+#~ msgstr ""
+#~ "Улучшенна производительность в списках с большим количеством выполненных "
+#~ "задач"
 
 #~ msgid "Fix crash on start with certain hardware"
 #~ msgstr "Исправлен вылет приложения на определённом оборудовании"
