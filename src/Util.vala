@@ -161,16 +161,18 @@ namespace Tasks.Util {
              * will always return a GLib.TimeZone, which will be UTC if parsing
              * fails for some reason.
              */
-            var prefix = "/freeassociation.sourceforge.net/";
-            if (tzid.has_prefix (prefix)) {
-                // TZID has prefix "/freeassociation.sourceforge.net/",
-                // indicating a libical TZID.
-                return new GLib.TimeZone (tzid.offset (prefix.length));
-            } else {
-                // TZID does not have libical prefix, potentially indicating an Olson
-                // standard city name.
-                return new GLib.TimeZone (tzid);
-            }
+            try {
+                var prefix = "/freeassociation.sourceforge.net/";
+                if (tzid.has_prefix (prefix)) {
+                    // TZID has prefix "/freeassociation.sourceforge.net/",
+                    // indicating a libical TZID.
+                    return new GLib.TimeZone.identifier (tzid.offset (prefix.length));
+                } else {
+                    // TZID does not have libical prefix, potentially indicating an Olson
+                    // standard city name.
+                    return new GLib.TimeZone.identifier (tzid);
+                }
+            } catch (Error e) {} // Fall through code deals with error
         }
         // If tzid fails, try ICal.Time.get_timezone ()
         unowned ICal.Timezone? timezone = null;
@@ -191,7 +193,11 @@ namespace Tasks.Util {
         var minutes = (interval % 3600) / 60;
         var hour_string = "%s%02d:%02d".printf (is_positive ? "+" : "-", hours, minutes);
 
-        return new GLib.TimeZone (hour_string);
+        try {
+            return new GLib.TimeZone.identifier (hour_string);
+        } catch (Error e) {
+            return new GLib.TimeZone.local ();
+        }
     }
 
     /**
