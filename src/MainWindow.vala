@@ -80,7 +80,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
         add_tasklist_buttonbox = new Gtk.Box (VERTICAL, 3);
 
-        var online_accounts_button = new Gtk.ModelButton () {
+        var online_accounts_button = new PopoverMenuitem () {
             text = _("Online Accounts Settings…")
         };
 
@@ -389,7 +389,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         }
         collection_sources.add (collection_source);
 
-        var source_button = new Gtk.ModelButton () {
+        var source_button = new PopoverMenuitem () {
             text = Util.get_esource_collection_display_name (collection_source),
             sensitive = Application.model.is_add_task_list_supported (collection_source)
         };
