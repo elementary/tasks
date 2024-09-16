@@ -32,7 +32,7 @@ tasks_deps = [
     dependency('champlain-gtk-0.12'),
     dependency('clutter-1.0'),
     dependency('clutter-gtk-1.0'),
-    dependency('glib-2.0'),
+    dependency('glib-2.0', version: '>=2.68'),
     dependency('gobject-2.0'),
     dependency('granite', version: '>=6.2.0'),
     dependency('gtk+-3.0'),
