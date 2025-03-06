@@ -31,11 +31,11 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
         };
 
         timepicker_revealer = new Gtk.Revealer () {
-            reveal_child = true,
-            child = timepicker
+            child = timepicker,
+            reveal_child = true
         };
 
-        var today_separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL) {
+        var today_separator = new Gtk.Separator (HORIZONTAL) {
             margin_bottom = 3,
             margin_top = 3
         };
@@ -44,7 +44,7 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             text = _("Today")
         };
 
-        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
+        var box = new Gtk.Box (VERTICAL, 0) {
             margin_top = 3
         };
         box.append (today_button);
