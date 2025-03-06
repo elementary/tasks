@@ -4,7 +4,7 @@
  */
 
 public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
-    public E.Source source { get; set; }
+    public E.Source source { get; construct set; }
 
     private Gtk.RadioButton color_button_red;
     private Gtk.RadioButton color_button_orange;
@@ -18,48 +18,72 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
     private Gtk.RadioButton color_button_slate;
     private Gtk.RadioButton color_button_none;
 
+    public ListSettingsPopover (E.Source source) {
+        Object (source: source);
+    }
+
     construct {
         color_button_blue = new Gtk.RadioButton (null);
         color_button_blue.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_blue.get_style_context ().add_class ("blue");
 
-        color_button_mint = new Gtk.RadioButton.from_widget (color_button_blue);
+        color_button_mint = new Gtk.RadioButton (null) {
+            group = color_button_blue
+        };
         color_button_mint.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_mint.get_style_context ().add_class ("mint");
 
-        color_button_green = new Gtk.RadioButton.from_widget (color_button_blue);
+        color_button_green = new Gtk.RadioButton (null) {
+            group = color_button_blue
+        };
         color_button_green.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_green.get_style_context ().add_class ("green");
 
-        color_button_yellow = new Gtk.RadioButton.from_widget (color_button_blue);
+        color_button_yellow = new Gtk.RadioButton (null) {
+            group = color_button_blue
+        };
         color_button_yellow.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_yellow.get_style_context ().add_class ("yellow");
 
-        color_button_orange = new Gtk.RadioButton.from_widget (color_button_blue);
+        color_button_orange = new Gtk.RadioButton (null) {
+            group = color_button_blue
+        };
         color_button_orange.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_orange.get_style_context ().add_class ("orange");
 
-        color_button_red = new Gtk.RadioButton.from_widget (color_button_blue);
+        color_button_red = new Gtk.RadioButton (null) {
+            group = color_button_blue
+        };
         color_button_red.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_red.get_style_context ().add_class ("red");
 
-        color_button_pink = new Gtk.RadioButton.from_widget (color_button_blue);
+        color_button_pink = new Gtk.RadioButton (null) {
+            group = color_button_blue
+        };
         color_button_pink.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_pink.get_style_context ().add_class ("pink");
 
-        color_button_purple = new Gtk.RadioButton.from_widget (color_button_blue);
+        color_button_purple = new Gtk.RadioButton (null) {
+            group = color_button_blue
+        };
         color_button_purple.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_purple.get_style_context ().add_class ("purple");
 
-        color_button_brown = new Gtk.RadioButton.from_widget (color_button_blue);
+        color_button_brown = new Gtk.RadioButton (null) {
+            group = color_button_blue
+        };
         color_button_brown.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_brown.get_style_context ().add_class ("brown");
 
-        color_button_slate = new Gtk.RadioButton.from_widget (color_button_blue);
+        color_button_slate = new Gtk.RadioButton (null) {
+            group = color_button_blue
+        };
         color_button_slate.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_slate.get_style_context ().add_class ("slate");
 
-        color_button_none = new Gtk.RadioButton.from_widget (color_button_blue);
+        color_button_none = new Gtk.RadioButton (null) {
+            group = color_button_blue
+        };
 
         var color_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             margin_top = 12,
@@ -98,7 +122,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
         box.add (delete_list_menuitem);
         box.show_all ();
 
-        add (box);
+        child = box;
 
         color_button_red.toggled.connect (() => {
             if (color_button_red.active) {
@@ -160,6 +184,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             }
         });
 
+        select_task_list_color (get_task_list_color (source));
         notify["source"].connect (() => {
             select_task_list_color (get_task_list_color (source));
         });
@@ -209,7 +234,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
 
     private string get_task_list_color (E.Source source) {
         if (source.has_extension (E.SOURCE_EXTENSION_TASK_LIST)) {
-            var task_list = (E.SourceTaskList) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+            unowned var task_list = (E.SourceTaskList) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
             return task_list.dup_color ();
         }
         return "";
@@ -239,7 +264,9 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             Gtk.ButtonsType.CLOSE
         );
         error_dialog.show_error_details (e.message);
-        error_dialog.run ();
-        error_dialog.destroy ();
+        error_dialog.present ();
+        error_dialog.response.connect (() => {
+            error_dialog.destroy ();
+        });
     }
 }

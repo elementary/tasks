@@ -31,7 +31,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         editable_title.get_style_context ().add_class (Granite.STYLE_CLASS_H1_LABEL);
         editable_title.get_style_context ().add_class (Granite.STYLE_CLASS_ACCENT);
 
-        var list_settings_popover = new Tasks.Widgets.ListSettingsPopover ();
+        var list_settings_popover = new Tasks.Widgets.ListSettingsPopover (source);
 
         var settings_button = new Gtk.MenuButton () {
             halign = END,
