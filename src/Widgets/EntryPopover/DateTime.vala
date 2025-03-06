@@ -32,12 +32,11 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
         };
 
         timepicker_revealer = new Gtk.Revealer () {
+            child = timepicker,
             reveal_child = true
         };
 
-        timepicker_revealer.add (timepicker);
-
-        var today_separator = new Gtk.Separator (Gtk.Orientation.HORIZONTAL) {
+        var today_separator = new Gtk.Separator (HORIZONTAL) {
             margin_bottom = 3,
             margin_top = 3
         };
@@ -46,7 +45,7 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             text = _("Today")
         };
 
-        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
+        var box = new Gtk.Box (VERTICAL, 0) {
             margin_top = 3
         };
         box.add (today_button);
@@ -55,11 +54,11 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
         box.add (timepicker_revealer);
         box.show_all ();
 
-        popover.add (box);
+        popover.child = box;
 
         popover.show.connect (on_popover_show);
 
-        today_button.button_release_event.connect (on_today_button_release_event);
+        today_button.clicked.connect (on_today_button_clicked);
         calendar.day_selected.connect (on_calendar_day_selected);
         timepicker.time_changed.connect (on_timepicker_time_changed);
     }
@@ -82,13 +81,11 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
         timepicker.time = selected_datetime;
     }
 
-    private bool on_today_button_release_event () {
+    private void on_today_button_clicked () {
         var now_local = new GLib.DateTime.now_local ();
 
         calendar.select_month (now_local.get_month () - 1, now_local.get_year ());
         calendar.select_day (now_local.get_day_of_month ());
-
-        return Gdk.EVENT_STOP;
     }
 
     private void on_calendar_day_selected () {
