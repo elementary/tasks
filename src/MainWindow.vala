@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public class Tasks.MainWindow : Hdy.ApplicationWindow {
+public class Tasks.MainWindow : Gtk.ApplicationWindow {
     public const string ACTION_GROUP_PREFIX = "win";
     public const string ACTION_PREFIX = ACTION_GROUP_PREFIX + ".";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
@@ -16,12 +16,12 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
     private static Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
 
-    private uint configure_id;
     private Gtk.ListBox listbox;
     private Gee.HashMap<E.Source, Tasks.Widgets.SourceRow>? source_rows;
     private Gee.Collection<E.Source>? collection_sources;
     private Gtk.Stack task_list_grid_stack;
     private Gtk.Box add_tasklist_buttonbox;
+    private Gtk.Popover add_tasklist_popover;
 
     public MainWindow (Gtk.Application application) {
         Object (
@@ -45,33 +45,29 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             );
         }
 
-        var sidebar_header = new Hdy.HeaderBar () {
-            has_subtitle = false,
-            show_close_button = true
+        var sidebar_header = new Gtk.HeaderBar () {
+            title_widget = new Gtk.Label (null),
+            show_title_buttons = false
         };
-        sidebar_header.get_style_context ().add_class ("default-decoration");
-        sidebar_header.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        sidebar_header.add_css_class (Granite.STYLE_CLASS_DEFAULT_DECORATION);
+        sidebar_header.add_css_class (Granite.STYLE_CLASS_FLAT);
+        sidebar_header.pack_start (new Gtk.WindowControls (Gtk.PackType.START));
 
-        var main_header = new Hdy.HeaderBar () {
-            has_subtitle = false,
-            show_close_button = true
+        var main_header = new Gtk.HeaderBar () {
+            title_widget = new Gtk.Label (null),
+            show_title_buttons = false
         };
-        main_header.get_style_context ().add_class ("default-decoration");
-        main_header.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
-
-        // Create a header group that automatically assigns the right decoration controls to the
-        // right headerbar automatically
-        var header_group = new Hdy.HeaderGroup ();
-        header_group.add_header_bar (sidebar_header);
-        header_group.add_header_bar (main_header);
+        main_header.add_css_class (Granite.STYLE_CLASS_DEFAULT_DECORATION);
+        main_header.add_css_class (Granite.STYLE_CLASS_FLAT);
+        main_header.pack_end (new Gtk.WindowControls (Gtk.PackType.END));
 
         listbox = new Gtk.ListBox ();
         listbox.set_sort_func (sort_function);
 
         var scheduled_row = new Tasks.Widgets.ScheduledRow ();
-        listbox.add (scheduled_row);
+        listbox.append (scheduled_row);
 
-        var scrolledwindow = new Gtk.ScrolledWindow (null, null) {
+        var scrolledwindow = new Gtk.ScrolledWindow () {
             child = listbox,
             hexpand = true,
             vexpand = true,
@@ -84,62 +80,69 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             text = _("Online Accounts Settings…")
         };
 
-        var add_tasklist_box = new Gtk.Box (VERTICAL, 3) {
-            margin_top = 3,
-            margin_bottom = 3
-        };
-        add_tasklist_box.add (add_tasklist_buttonbox);
-        add_tasklist_box.add (new Gtk.Separator (HORIZONTAL));
-        add_tasklist_box.add (online_accounts_button);
-        add_tasklist_box.show_all ();
+        var add_tasklist_box = new Gtk.Box (VERTICAL, 0);
+        add_tasklist_box.append (add_tasklist_buttonbox);
+        add_tasklist_box.append (new Gtk.Separator (HORIZONTAL));
+        add_tasklist_box.append (online_accounts_button);
 
-        var add_tasklist_popover = new Gtk.Popover (null) {
+        add_tasklist_popover = new Gtk.Popover () {
             child = add_tasklist_box
         };
+        add_tasklist_popover.add_css_class (Granite.STYLE_CLASS_MENU);
 
         var add_list_label = new Gtk.Label (_("Add Task List…"));
 
         var add_list_button_box = new Gtk.Box (HORIZONTAL, 0);
-        add_list_button_box.add (new Gtk.Image.from_icon_name ("list-add-symbolic", SMALL_TOOLBAR));
-        add_list_button_box.add (add_list_label);
+        add_list_button_box.append (new Gtk.Image.from_icon_name ("list-add-symbolic"));
+        add_list_button_box.append (add_list_label);
 
         var add_tasklist_button = new Gtk.MenuButton () {
             child = add_list_button_box,
-            popover = add_tasklist_popover
+            popover = add_tasklist_popover,
+            direction = UP
         };
 
         add_list_label.mnemonic_widget = add_tasklist_button;
 
         var actionbar = new Gtk.ActionBar ();
-        actionbar.add (add_tasklist_button);
-        actionbar.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        actionbar.add_css_class (Granite.STYLE_CLASS_FLAT);
+        actionbar.pack_start (add_tasklist_button);
 
         var sidebar = new Gtk.Box (VERTICAL, 0);
-        sidebar.get_style_context ().add_class (Gtk.STYLE_CLASS_SIDEBAR);
-        sidebar.add (sidebar_header);
-        sidebar.add (scrolledwindow);
-        sidebar.add (actionbar);
+        sidebar.add_css_class (Granite.STYLE_CLASS_SIDEBAR);
+        sidebar.append (sidebar_header);
+        sidebar.append (scrolledwindow);
+        sidebar.append (actionbar);
 
         task_list_grid_stack = new Gtk.Stack ();
 
         var main_box = new Gtk.Box (VERTICAL, 0);
-        main_box.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
-        main_box.add (main_header);
-        main_box.add (task_list_grid_stack);
+        main_box.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
+        main_box.append (main_header);
+        main_box.append (task_list_grid_stack);
 
-        var paned = new Gtk.Paned (HORIZONTAL);
-        paned.pack1 (sidebar, false, false);
-        paned.pack2 (main_box, true, false);
+        var paned = new Gtk.Paned (HORIZONTAL) {
+            start_child = sidebar,
+            end_child = main_box,
+            resize_start_child = false,
+            shrink_end_child = false,
+            shrink_start_child = false
+        };
 
         child = paned;
 
-        delete_event.connect (() => {
+        // We need to hide the title area for the split headerbar
+        titlebar = new Gtk.Grid () { visible = false };
+
+        close_request.connect (() => {
             ((Application)application).request_background.begin (() => destroy ());
 
             return Gdk.EVENT_STOP;
         });
 
         online_accounts_button.clicked.connect (() => {
+            add_tasklist_popover.popdown ();
+
             try {
                 AppInfo.launch_default_for_uri ("settings://accounts/online", null);
             } catch (Error e) {
@@ -189,9 +192,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         add_source (source);
 
                         if (last_selected_list == "" && default_task_list == source) {
+                            assert (source_rows[source] != null);
                             listbox.select_row (source_rows[source]);
 
                         } else if (last_selected_list == source.uid) {
+                            assert (source_rows[source] != null);
                             listbox.select_row (source_rows[source]);
                         }
                     }
@@ -313,7 +318,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             };
 
             unowned var trash_button = message_dialog.add_button (_("Delete Anyway"), Gtk.ResponseType.YES);
-            trash_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+            trash_button.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
             message_dialog.response.connect ((response) => {
                 if (response == Gtk.ResponseType.YES) {
@@ -335,9 +340,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             });
 
             message_dialog.present ();
-
         } else {
-            Gdk.beep ();
+            Gdk.Display.get_default ().beep ();
         }
     }
 
@@ -355,7 +359,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         }
 
         var header_label = new Granite.HeaderLabel (Util.get_esource_collection_display_name (row.source)) {
-            ellipsize = Pango.EllipsizeMode.MIDDLE,
             margin_start = 6
         };
 
@@ -395,11 +398,12 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         };
 
         source_button.clicked.connect (() => {
+            add_tasklist_popover.popdown ();
+
             add_new_list (collection_source);
         });
 
-        add_tasklist_buttonbox.add (source_button);
-        add_tasklist_buttonbox.show_all ();
+        add_tasklist_buttonbox.append (source_button);
     }
 
     private void add_source (E.Source source) {
@@ -411,11 +415,10 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         if (!source_rows.has_key (source)) {
             source_rows[source] = new Tasks.Widgets.SourceRow (source);
 
-            listbox.add (source_rows[source]);
+            listbox.append (source_rows[source]);
             Idle.add (() => {
                 listbox.invalidate_sort ();
                 listbox.invalidate_headers ();
-                listbox.show_all ();
 
                 return Source.REMOVE;
             });
@@ -459,30 +462,5 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             return Source.REMOVE;
         });
-    }
-
-    public override bool configure_event (Gdk.EventConfigure event) {
-        if (configure_id != 0) {
-            GLib.Source.remove (configure_id);
-        }
-
-        configure_id = Timeout.add (100, () => {
-            configure_id = 0;
-
-            if (is_maximized) {
-                Tasks.Application.settings.set_boolean ("window-maximized", true);
-            } else {
-                Tasks.Application.settings.set_boolean ("window-maximized", false);
-
-                Gdk.Rectangle rect;
-                get_allocation (out rect);
-                Tasks.Application.settings.set ("window-size", "(ii)", rect.width, rect.height);
-
-            }
-
-            return false;
-        });
-
-        return base.configure_event (event);
     }
 }

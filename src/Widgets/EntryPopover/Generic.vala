@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Box {
+public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Widget {
     public signal string? value_format (T value);
     public signal void value_changed (T value);
 
@@ -14,8 +14,6 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Box {
 
     private T value_on_popover_show;
 
-    private Gtk.EventControllerMotion motion_controller;
-
     protected Generic (string placeholder, string? icon_name = null) {
         Object (
             icon_name: icon_name,
@@ -25,31 +23,34 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Box {
 
     class construct {
         set_css_name ("entry-popover");
+        set_layout_manager_type (typeof (Gtk.BinLayout));
     }
 
     construct {
-        popover = new Gtk.Popover (null);
+        popover = new Gtk.Popover () {
+            autohide = true
+        };
 
         var label = new Gtk.Label (placeholder);
 
         var popover_button_box = new Gtk.Box (HORIZONTAL, 0);
         if (icon_name != null) {
-            popover_button_box.add (new Gtk.Image.from_icon_name (icon_name, BUTTON));
+            popover_button_box.append (new Gtk.Image.from_icon_name (icon_name));
         }
-        popover_button_box.add (label);
+        popover_button_box.append (label);
 
         var popover_button = new Gtk.MenuButton () {
             child = popover_button_box,
+            has_frame = false,
             popover = popover
         };
-        popover_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
 
         label.mnemonic_widget = popover_button;
 
-        var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic", BUTTON) {
+        var delete_button = new Gtk.Button.from_icon_name ("process-stop-symbolic") {
             tooltip_text = _("Remove")
         };
-        delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        delete_button.add_css_class ("delete-button");
 
         var delete_button_revealer = new Gtk.Revealer () {
             child = delete_button,
@@ -58,10 +59,9 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Box {
         };
 
         var button_box = new Gtk.Box (HORIZONTAL, 0);
-        button_box.add (popover_button);
-        button_box.add (delete_button_revealer);
-
-        add (button_box);
+        button_box.append (popover_button);
+        button_box.append (delete_button_revealer);
+        button_box.set_parent (this);
 
         delete_button.clicked.connect (() => {
             var value_has_changed = value != null;
@@ -71,7 +71,7 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Box {
             }
         });
 
-        popover_button.clicked.connect (() => {
+        popover_button.activate.connect (() => {
             if (delete_button_revealer.reveal_child) {
                 delete_button_revealer.reveal_child = false;
             }
@@ -91,9 +91,8 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Box {
             }
         });
 
-        motion_controller = new Gtk.EventControllerMotion (this) {
-            propagation_phase = CAPTURE
-        };
+        var motion_controller = new Gtk.EventControllerMotion ();
+        add_controller (motion_controller);
 
         motion_controller.enter.connect (() => {
             if (value_format (value) != null) {
@@ -122,5 +121,9 @@ public abstract class Tasks.Widgets.EntryPopover.Generic<T> : Gtk.Box {
                 return GLib.Source.REMOVE;
             });
         });
+    }
+
+    ~Generic () {
+        get_last_child ().unparent ();
     }
 }
