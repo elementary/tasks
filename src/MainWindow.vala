@@ -97,9 +97,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         add_list_button_box.append (add_list_label);
 
         var add_tasklist_button = new Gtk.MenuButton () {
+            child = add_list_button_box,
             popover = add_tasklist_popover,
-            direction = UP,
-            child = add_list_button_box
+            direction = UP
         };
 
         add_list_label.mnemonic_widget = add_tasklist_button;
@@ -359,6 +359,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         }
 
         var header_label = new Granite.HeaderLabel (Util.get_esource_collection_display_name (row.source)) {
+            ellipsize = Pango.EllipsizeMode.MIDDLE,
             margin_start = 6
         };
 
