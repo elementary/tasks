@@ -359,7 +359,6 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         }
 
         var header_label = new Granite.HeaderLabel (Util.get_esource_collection_display_name (row.source)) {
-            ellipsize = Pango.EllipsizeMode.MIDDLE,
             margin_start = 6
         };
 
