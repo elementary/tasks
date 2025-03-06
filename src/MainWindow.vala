@@ -76,8 +76,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         add_tasklist_buttonbox = new Gtk.Box (VERTICAL, 3);
 
-        var online_accounts_button = new Widgets.PopoverButton ();
-        online_accounts_button.append (new Gtk.Label (_("Online Accounts Settings…")));
+        var online_accounts_button = new PopoverMenuitem () {
+            text = _("Online Accounts Settings…")
+        };
 
         var add_tasklist_box = new Gtk.Box (VERTICAL, 0);
         add_tasklist_box.append (add_tasklist_buttonbox);
@@ -391,10 +392,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         }
         collection_sources.add (collection_source);
 
-        var source_button = new Widgets.PopoverButton () {
+        var source_button = new PopoverMenuitem () {
+            text = Util.get_esource_collection_display_name (collection_source),
             sensitive = Application.model.is_add_task_list_supported (collection_source)
         };
-        source_button.append (new Gtk.Label (Util.get_esource_collection_display_name (collection_source)));
 
         source_button.clicked.connect (() => {
             add_tasklist_popover.popdown ();

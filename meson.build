@@ -28,7 +28,7 @@ config_file = configure_file(
 libecal_dep = dependency('libecal-2.0')
 
 tasks_deps = [
-    dependency('glib-2.0'),
+    dependency('glib-2.0', version: '>=2.68'),
     dependency('gobject-2.0'),
     dependency('granite-7', version: '>=7.0.0'),
     dependency('gtk4', version: '>=4.12'),
@@ -70,7 +70,7 @@ executable(
     'src/Widgets/EntryPopover/Location.vala',
     'src/Widgets/EditableLabel.vala',
     'src/Widgets/ListSettingsPopover.vala',
-    'src/Widgets/PopoverButton.vala',
+    'src/Widgets/PopoverMenuitem.vala',
     'src/Widgets/ScheduledRow.vala',
     'src/Widgets/ScheduledTaskListBox.vala',
     'src/Widgets/SourceRow.vala',

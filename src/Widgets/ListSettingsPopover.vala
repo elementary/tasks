@@ -110,14 +110,11 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             margin_top = 3
         };
 
-        var delete_list_accel_label = new Granite.AccelLabel.from_action_name (
-            _("Delete List…"),
-            MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST
-        );
-
-        var delete_list_menuitem = new Widgets.PopoverButton ();
+        var delete_list_menuitem = new PopoverMenuitem () {
+            action_name = MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST,
+            text = _("Delete List…")
+        };
         delete_list_menuitem.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
-        delete_list_menuitem.append (delete_list_accel_label);
 
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_top = 3,

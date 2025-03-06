@@ -40,13 +40,14 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             margin_top = 3
         };
 
-        var today_box = new Widgets.PopoverButton ();
-        today_box.append (new Gtk.Label (_("Today")));
+        var today_button = new PopoverMenuitem () {
+            text = _("Today")
+        };
 
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_top = 3
         };
-        box.append (today_box);
+        box.append (today_button);
         box.append (today_separator);
         box.append (calendar);
         box.append (timepicker_revealer);
@@ -55,7 +56,7 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
 
         popover.show.connect (on_popover_show);
 
-        today_box.clicked.connect (on_today_button_clicked);
+        today_button.clicked.connect (on_today_button_clicked);
         calendar.day_selected.connect (on_calendar_day_selected);
         timepicker.time_changed.connect (on_timepicker_time_changed);
     }
