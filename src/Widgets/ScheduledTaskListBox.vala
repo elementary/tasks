@@ -70,7 +70,6 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
             margin_bottom = 24,
             xalign = 0
         };
-
         scheduled_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
         scheduled_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
 
