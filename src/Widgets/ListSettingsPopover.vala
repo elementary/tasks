@@ -39,7 +39,6 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
         color_button_green.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_green.add_css_class ("green");
 
-
         color_button_yellow = new Gtk.CheckButton () {
             group = color_button_blue
         };
