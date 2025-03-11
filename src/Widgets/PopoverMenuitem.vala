@@ -10,7 +10,7 @@ class Tasks.PopoverMenuitem : Gtk.Button {
                 action_name = this.action_name
             };
 
-            get_accessible ().accessible_name = value;
+            update_property (Gtk.AccessibleProperty.LABEL, value, -1);
         }
     }
 
@@ -19,7 +19,7 @@ class Tasks.PopoverMenuitem : Gtk.Button {
     }
 
     construct {
-        set_accessible_role (Atk.Role.MENU_ITEM);
+        accessible_role = MENU_ITEM;
 
         clicked.connect (() => {
             var popover = (Gtk.Popover) get_ancestor (typeof (Gtk.Popover));

@@ -70,13 +70,12 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
             margin_bottom = 24,
             xalign = 0
         };
-        scheduled_title.get_style_context ().add_class (Granite.STYLE_CLASS_H1_LABEL);
-        scheduled_title.get_style_context ().add_class (Granite.STYLE_CLASS_ACCENT);
+        scheduled_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
+        scheduled_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
 
         var placeholder = new Gtk.Label (_("No Tasks"));
-        placeholder.show ();
-        placeholder.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-        placeholder.get_style_context ().add_class (Granite.STYLE_CLASS_H2_LABEL);
+        placeholder.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+        placeholder.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
 
         task_list = new Gtk.ListBox () {
             selection_mode = MULTIPLE,
@@ -85,9 +84,9 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
         task_list.set_placeholder (placeholder);
         task_list.set_sort_func (sort_function);
         task_list.set_header_func (header_function);
-        task_list.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
+        task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
 
-        var scrolled_window = new Gtk.ScrolledWindow (null, null) {
+        var scrolled_window = new Gtk.ScrolledWindow () {
             child = task_list,
             hexpand = true,
             vexpand = true,
@@ -95,9 +94,8 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
         };
 
         orientation = VERTICAL;
-        add (scheduled_title);
-        add (scrolled_window);
-        show_all ();
+        append (scheduled_title);
+        append (scrolled_window);
 
         task_list.row_activated.connect (on_row_activated);
 
@@ -145,7 +143,7 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
         var task_row = (Tasks.Widgets.TaskRow) row;
         task_row.reveal_child_request (true);
 
-        unowned var main_window = (MainWindow) get_toplevel ();
+        unowned var main_window = (MainWindow) get_root ();
         if (main_window != null) {
             ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
         }
@@ -185,7 +183,7 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
             }
         }
 
-        var due_date_time = Util.ical_to_date_time_local (comp.get_due ());
+        var due_date_time = Tasks.Util.ical_to_date_time_local (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time)) {
             margin_start = 6
         };
@@ -257,14 +255,13 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
                     }
                 });
             });
-            task_list.add (task_row);
+            task_list.append (task_row);
 
             return true;
         });
 
         Idle.add (() => {
             task_list.invalidate_sort ();
-            task_list.show_all ();
 
             return Source.REMOVE;
         });

@@ -23,7 +23,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Tasks.Widgets.EntryPopover.Location location_popover;
     private Gtk.Revealer location_popover_revealer;
 
-    private Gtk.EventBox event_box;
     private Gtk.Stack state_stack;
     private Gtk.Image icon;
     private Gtk.CheckButton check;
@@ -35,7 +34,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Gtk.Revealer task_form_revealer;
     private Gtk.TextBuffer description_textbuffer;
 
-    private Gtk.EventControllerKey key_controller;
+    private Gtk.DragSource drag_source;
 
     private TaskRow (ECal.Component task, E.Source source) {
         Object (task: task, source: source);
@@ -53,7 +52,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
-        can_focus = false;
         created = calcomponent_created (task);
 
         // GTasks tasks only have date on due time, so only show the date
@@ -66,22 +64,22 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             warning ("unable to get the registry, assuming task is not from gtask");
         }
 
-        icon = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.MENU);
-        icon.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        icon = new Gtk.Image.from_icon_name ("list-add-symbolic");
+        icon.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         check = new Gtk.CheckButton () {
             valign = Gtk.Align.CENTER
         };
+        check.add_css_class ("task-row-check");
 
         state_stack = new Gtk.Stack () {
             transition_type = Gtk.StackTransitionType.CROSSFADE
         };
-        state_stack.add (icon);
-        state_stack.add (check);
+        state_stack.add_child (icon);
+        state_stack.add_child (check);
 
         summary_entry = new Gtk.Entry ();
-
-        summary_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        summary_entry.add_css_class (Granite.STYLE_CLASS_FLAT);
 
         due_datetime_popover = new Tasks.Widgets.EntryPopover.DateTime ();
 
@@ -97,13 +95,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         };
 
         due_datetime_popover.value_format.connect ((value) => {
-            due_datetime_popover.get_style_context ().remove_class ("error");
+            due_datetime_popover.remove_css_class ("error");
             if (value == null) {
                 return null;
             }
             var today = new GLib.DateTime.now_local ();
             if (today.compare (value) > 0 && !completed) {
-                due_datetime_popover.get_style_context ().add_class ("error");
+                due_datetime_popover.add_css_class ("error");
             }
 
             if (is_gtask) {
@@ -180,7 +178,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             lines = 1,
             ellipsize = Pango.EllipsizeMode.END
         };
-        description_label.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+        description_label.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         // Should not use a transition that varies the width else label aligning and ellipsizing is incorrect.
         description_label_revealer = new Gtk.Revealer () {
@@ -190,9 +188,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         };
 
         var task_box = new Gtk.Box (HORIZONTAL, 0);
-        task_box.add (due_datetime_popover_revealer);
-        task_box.add (location_popover_revealer);
-        task_box.add (description_label_revealer);
+        task_box.append (due_datetime_popover_revealer);
+        task_box.append (location_popover_revealer);
+        task_box.append (description_label_revealer);
 
         task_detail_revealer = new Gtk.Revealer () {
             child = task_box,
@@ -220,28 +218,28 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         var cancel_button = new Gtk.Button.with_label (_("Cancel"));
 
         var save_button = new Gtk.Button.with_label (created ? _("Save Changes") : _("Add Task"));
-        save_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+        save_button.add_css_class (Granite.STYLE_CLASS_SUGGESTED_ACTION);
 
         var right_buttons_box = new Gtk.Box (HORIZONTAL, 6) {
             hexpand = true,
             halign = END,
             homogeneous = true
         };
-        right_buttons_box.add (cancel_button);
-        right_buttons_box.add (save_button);
+        right_buttons_box.append (cancel_button);
+        right_buttons_box.append (save_button);
 
         var button_box = new Gtk.Box (HORIZONTAL, 6) {
             margin_top = 12
         };
-        button_box.get_style_context ().add_class ("button-box");
-        button_box.pack_end (right_buttons_box);
+        button_box.add_css_class ("button-box");
+        button_box.append (right_buttons_box);
 
         var form_box = new Gtk.Box (VERTICAL, 12) {
             margin_top = 6,
             margin_bottom = 6
         };
-        form_box.add (description_frame);
-        form_box.add (button_box);
+        form_box.append (description_frame);
+        form_box.append (button_box);
 
         task_form_revealer = new Gtk.Revealer () {
             child = form_box,
@@ -267,23 +265,12 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             transition_type = SLIDE_UP
         };
 
-        event_box = new Gtk.EventBox () {
-            hexpand = true,
-            vexpand = true,
-            above_child = false
-        };
-        event_box.add_events (
-            Gdk.EventMask.BUTTON_PRESS_MASK |
-            Gdk.EventMask.BUTTON_RELEASE_MASK
-        );
-        event_box.add (revealer);
-
-        child = event_box;
+        child = revealer;
         margin_start = 12;
         margin_end = 12;
 
-        get_style_context ().add_class ("task");
-        get_style_context ().add_class (Granite.STYLE_CLASS_ROUNDED);
+        add_css_class ("task");
+        add_css_class (Granite.STYLE_CLASS_ROUNDED);
 
         if (created) {
             check.show ();
@@ -292,9 +279,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             var delete_button = new Gtk.Button.with_label (_("Delete Task")) {
                 halign = START
             };
-            delete_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+            delete_button.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
-            button_box.pack_start (delete_button);
+            button_box.prepend (delete_button);
 
             delete_button.clicked.connect (() => {
                 end_editing ();
@@ -305,7 +292,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         build_drag_and_drop ();
 
-        key_controller = new Gtk.EventControllerKey (this);
+        var key_controller = new Gtk.EventControllerKey ();
+        add_controller (key_controller);
 
         check.toggled.connect (() => {
             if (task == null) {
@@ -321,7 +309,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             end_editing ();
         });
 
-        summary_entry.grab_focus.connect (() => {
+        var summary_entry_focus_controller = new Gtk.EventControllerFocus ();
+        summary_entry.add_controller (summary_entry_focus_controller);
+        summary_entry_focus_controller.enter.connect (() => {
             activate ();
         });
 
@@ -405,18 +395,20 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         task_details_reveal_request (!value);
 
         if (value) {
-            get_style_context ().add_class ("collapsed");
-            get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
+            add_css_class ("collapsed");
+            add_css_class (Granite.STYLE_CLASS_CARD);
 
         } else {
-            get_style_context ().remove_class (Granite.STYLE_CLASS_CARD);
-            get_style_context ().remove_class ("collapsed");
+            remove_css_class (Granite.STYLE_CLASS_CARD);
+            remove_css_class ("collapsed");
         }
     }
 
     public void update_request () {
         if (!is_scheduled_view) {
-            Tasks.Application.set_task_color (source, check);
+            // FIXME: check.get_first_child () is used because Gtk.StyleContext.add_provider works differently in Gtk4
+            // Also, it's deprecated now, so we need to use Gtk.StyleContext.add_provider_for_display
+            Tasks.Application.set_task_color (source, check.get_first_child ());
         }
 
         var default_due_datetime = new DateTime.now_local ().add_hours (1);
@@ -429,10 +421,10 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             completed = false;
             check.active = completed;
             summary_entry.text = "";
-            summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
-            summary_entry.get_style_context ().add_class ("add-task");
+            summary_entry.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+            summary_entry.add_css_class ("add-task");
             task_detail_revealer.reveal_child = false;
-            task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+            task_detail_revealer.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
             due_datetime_popover_revealer.reveal_child = false;
             location_popover_revealer.reveal_child = false;
@@ -454,14 +446,14 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             }
 
             summary_entry.text = ical_task.get_summary () == null ? "" : ical_task.get_summary ();
-            summary_entry.get_style_context ().remove_class ("add-task");
+            summary_entry.remove_css_class ("add-task");
 
             if (completed) {
-                summary_entry.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-                task_detail_revealer.get_style_context ().add_class (Gtk.STYLE_CLASS_DIM_LABEL);
+                summary_entry.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+                task_detail_revealer.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
             } else {
-                summary_entry.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
-                task_detail_revealer.get_style_context ().remove_class (Gtk.STYLE_CLASS_DIM_LABEL);
+                summary_entry.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+                task_detail_revealer.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
             }
 
             if (ical_task.get_due ().is_null_time ()) {
@@ -538,45 +530,55 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         if (!created || is_scheduled_view) {
             return;
         }
-        Gtk.drag_source_set (event_box, Gdk.ModifierType.BUTTON1_MASK, Application.DRAG_AND_DROP_TASK_DATA, Gdk.DragAction.MOVE);
 
-        event_box.drag_begin.connect (on_drag_begin);
-        event_box.drag_data_get.connect (on_drag_data_get);
-        event_box.drag_data_delete.connect (on_drag_data_delete);
+        drag_source = new Gtk.DragSource ();
+        add_controller (drag_source);
+
+        drag_source.prepare.connect (on_drag_prepare);
+        drag_source.drag_begin.connect (on_drag_begin);
+        drag_source.drag_cancel.connect (on_drag_cancel);
+        drag_source.drag_end.connect (on_drag_end);
     }
 
-    private void on_drag_begin (Gdk.DragContext context) {
-        Gtk.Allocation alloc;
-        get_allocation (out alloc);
+    private int drag_offset_x;
+    private int drag_offset_y;
+    private bool had_cards_class;
+    private bool is_canceled;
 
-        var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, alloc.width, alloc.height);
-        var cairo_context = new Cairo.Context (surface);
+    private Gdk.ContentProvider? on_drag_prepare (double x, double y) {
+        drag_offset_x = (int) x;
+        drag_offset_y = (int) y;
 
-        var had_cards_class = get_style_context ().has_class (Granite.STYLE_CLASS_CARD);
+        return new Gdk.ContentProvider.for_value ("task://%s/%s".printf (source.uid, task.get_uid ()));
+    }
 
-        get_style_context ().add_class ("drag-active");
+    private void on_drag_begin (Gdk.Drag drag) {
+        drag_source.set_icon (new Gtk.WidgetPaintable (this), drag_offset_x, drag_offset_y);
+
+        had_cards_class = has_css_class (Granite.STYLE_CLASS_CARD);
+        is_canceled = false;
+
+        add_css_class ("drag-active");
         if (had_cards_class) {
-            get_style_context ().remove_class (Granite.STYLE_CLASS_CARD);
+            remove_css_class (Granite.STYLE_CLASS_CARD);
         }
-        draw_to_cairo_context (cairo_context);
-        if (had_cards_class) {
-            get_style_context ().add_class (Granite.STYLE_CLASS_CARD);
-        }
-        get_style_context ().remove_class ("drag-active");
-
-        int drag_icon_x, drag_icon_y;
-        translate_coordinates (this, 0, 0, out drag_icon_x, out drag_icon_y);
-        surface.set_device_offset (-drag_icon_x, -drag_icon_y);
-
-        Gtk.drag_set_icon_surface (context, surface);
     }
 
-    private void on_drag_data_get (Gtk.Widget widget, Gdk.DragContext context, Gtk.SelectionData selection_data, uint target_type, uint time) {
-        var task_uri = "task://%s/%s".printf (source.uid, task.get_uid ());
-        selection_data.set_uris ({ task_uri });
+    private bool on_drag_cancel (Gdk.Drag drag, Gdk.DragCancelReason reason) {
+        is_canceled = true;
+
+        return true;
     }
 
-    private void on_drag_data_delete (Gdk.DragContext context) {
-        destroy ();
+    private void on_drag_end (Gdk.Drag drag, bool delete_data) {
+        if (is_canceled) {
+            remove_css_class ("drag-active");
+            if (had_cards_class) {
+                add_css_class (Granite.STYLE_CLASS_CARD);
+            }
+        } else {
+            ((Gtk.ListBox) parent).remove (this);
+            destroy ();
+        }
     }
 }
