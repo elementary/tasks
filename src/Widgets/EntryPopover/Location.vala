@@ -21,9 +21,9 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
     private GtkChamplain.Embed map_embed;
     private Gtk.SearchEntry search_entry;
     private GLib.Cancellable search_cancellable;
-    private Granite.Widgets.ModeButton location_mode;
     private Marker point;
-
+    private Gtk.RadioButton arriving_button;
+    private Gtk.RadioButton leaving_button;
 
     public Location () {
         Object (
@@ -52,9 +52,21 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
         var map_frame = new Gtk.Frame (null);
         map_frame.add (map_embed);
 
-        location_mode = new Granite.Widgets.ModeButton ();
-        location_mode.append_text (_("Arriving"));
-        location_mode.append_text (_("Leaving"));
+        arriving_button = new Gtk.RadioButton.with_label (null, _("Arriving")) {
+            hexpand = true
+        };
+        arriving_button.set_mode (false);
+
+        leaving_button = new Gtk.RadioButton.with_label (null, _("Leaving")) {
+            group = arriving_button,
+            hexpand = true
+        };
+        leaving_button.set_mode (false);
+
+        var mode_box = new Gtk.Box (HORIZONTAL, 0);
+        mode_box.add (arriving_button);
+        mode_box.add (leaving_button);
+        mode_box.get_style_context ().add_class (Gtk.STYLE_CLASS_LINKED);
 
         search_entry = new Gtk.SearchEntry () {
             placeholder_text = _("John Smith OR Example St."),
@@ -69,7 +81,7 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
         };
 
         box.add (search_entry);
-        box.add (location_mode);
+        box.add (mode_box);
         box.add (map_frame);
         box.show_all ();
 
@@ -79,7 +91,18 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
         notify["value"].connect (on_value_changed);
 
         search_entry.activate.connect (on_search_entry_activate);
-        location_mode.mode_changed.connect (on_location_mode_changed);
+
+        arriving_button.toggled.connect (() => {
+            if (arriving_button.active) {
+                on_location_mode_changed (ARRIVE);
+            }
+        });
+
+        leaving_button.toggled.connect (() => {
+            if (leaving_button.active) {
+                on_location_mode_changed (DEPART);
+            }
+        });
     }
 
     private void on_popover_show () {
@@ -105,14 +128,14 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
 
         switch (value.proximity) {
             case Tasks.LocationProximity.ARRIVE:
-                if (location_mode.selected != 0) {
-                    location_mode.selected = 0;
+                if (!arriving_button.active) {
+                    arriving_button.active = true;
                 }
                 break;
 
             default:
-                if (location_mode.selected != 1) {
-                    location_mode.selected = 1;
+                if (!leaving_button.active) {
+                    leaving_button.active = true;
                 }
                 break;
         }
@@ -148,15 +171,7 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
         };
     }
 
-    private void on_location_mode_changed () {
-        var proximity = (value == null ? Tasks.LocationProximity.DEPART : value.proximity);
-
-        switch (location_mode.selected) {
-            case 0: proximity = Tasks.LocationProximity.ARRIVE; break;
-            case 1: proximity = Tasks.LocationProximity.DEPART; break;
-            default: break;
-        }
-
+    private void on_location_mode_changed (Tasks.LocationProximity proximity) {
         value = Tasks.Location () {
             postal_address = (value == null ? search_entry.text : value.postal_address),
             display_name = (value == null ? search_entry.text : value.display_name),
