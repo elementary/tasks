@@ -33,6 +33,14 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
     }
 
     construct {
+        var registry = new Shumate.MapSourceRegistry.with_defaults ();
+
+        var map = new Shumate.SimpleMap () {
+            height_request = 140,
+            width_request = 260,
+            map_source = registry.get_by_id (Shumate.MAP_SOURCE_OSM_MAPNIK)
+        };
+
         //  map_embed = new GtkChamplain.Embed () {
         //      height_request = 140,
         //      width_request = 260
@@ -49,8 +57,9 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
         //  map_view.add_layer (marker_layer);
         //  map_view.center_on (point.latitude, point.longitude);
 
-        //  var map_frame = new Gtk.Frame (null);
-        //  map_frame.add (map_embed);
+        var map_frame = new Gtk.Frame (null) {
+            child = map
+        };
 
         //  location_mode = new Granite.Widgets.ModeButton ();
         //  location_mode.append_text (_("Arriving"));
@@ -70,18 +79,18 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
 
         box.append (search_entry);
         //  box.append (location_mode);
-        //  box.append (map_frame);
+        box.append (map_frame);
 
         popover.child = box;
-        //  popover.show.connect (on_popover_show);
+        popover.show.connect (on_popover_show);
 
-        //  notify["value"].connect (on_value_changed);
+        notify["value"].connect (on_value_changed);
 
-        //  search_entry.activate.connect (on_search_entry_activate);
-        //  location_mode.mode_changed.connect (on_location_mode_changed);
+        search_entry.activate.connect (on_search_entry_activate);
+        // location_mode.mode_changed.connect (on_location_mode_changed);
     }
 
-    //  private void on_popover_show () {
+     private void on_popover_show () {
     //      search_entry.text = (value == null ? "" : value.postal_address);
 
     //      if (search_entry.text != null && search_entry.text.strip ().length > 0) {
@@ -90,9 +99,9 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
     //          // Use geoclue to find approximate location
     //          discover_current_location.begin ();
     //      }
-    //  }
+     }
 
-    //  private void on_value_changed () {
+     private void on_value_changed () {
     //      if (value == null) {
     //          return;
     //      }
@@ -134,9 +143,9 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
         //          discover_current_location.begin ();
         //      }
         //  }
-    //  }
+     }
 
-    //  private void on_search_entry_activate () {
+     private void on_search_entry_activate () {
     //      value = Tasks.Location () {
     //          postal_address = search_entry.text,
     //          display_name = search_entry.text,
@@ -145,7 +154,7 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
     //          accuracy = (value == null ? Geocode.LocationAccuracy.UNKNOWN : value.accuracy),
     //          proximity = (value == null ? Tasks.LocationProximity.DEPART : value.proximity)
     //      };
-    //  }
+     }
 
     //  private void on_location_mode_changed () {
     //      var proximity = (value == null ? Tasks.LocationProximity.DEPART : value.proximity);
