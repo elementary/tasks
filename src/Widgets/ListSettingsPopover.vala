@@ -84,7 +84,6 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
         color_button_slate.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_slate.add_css_class ("slate");
 
-        // FIXME: this CheckButton is unused
         color_button_none = new Gtk.CheckButton () {
             group = color_button_blue
         };
@@ -93,7 +92,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             margin_top = 12,
             margin_bottom = 12,
             margin_start = 12,
-            margin_end = 12,
+            margin_end = 12
         };
         color_box.append (color_button_blue);
         color_box.append (color_button_mint);
@@ -187,13 +186,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             }
         });
 
-        delete_list_menuitem.clicked.connect (() => {
-            popdown ();
-
-            unowned var main_window = (Gtk.ApplicationWindow) get_root ();
-            ((SimpleAction) main_window.lookup_action (MainWindow.ACTION_DELETE_SELECTED_LIST)).activate (null);
-        });
-
+        select_task_list_color (get_task_list_color (source));
         notify["source"].connect (() => {
             select_task_list_color (get_task_list_color (source));
         });

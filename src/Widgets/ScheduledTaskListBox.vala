@@ -33,19 +33,16 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
     }
 
     private void remove_view (E.Source source) {
-        Gtk.Widget[] children_for_removal = {};
-        unowned var child = get_first_child ();
-        while (child != null) {
-            if (child is Tasks.Widgets.TaskRow && ((Tasks.Widgets.TaskRow) child).source == source) {
-                children_for_removal += child;
+        int index = 0;
+        unowned var row = task_list.get_row_at_index (0);
+        while (row != null) {
+            if (row is Tasks.Widgets.TaskRow && ((Tasks.Widgets.TaskRow) row).source == source) {
+                task_list.remove (row);
+            } else {
+                index++;
             }
 
-            child = child.get_next_sibling ();
-        }
-
-        for (int i = 0; i < children_for_removal.length; i++) {
-            remove (children_for_removal[i]);
-            children_for_removal[i].destroy ();
+            row = task_list.get_row_at_index (index);
         }
 
         lock (views) {
@@ -68,7 +65,7 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
         views = new Gee.HashMap<E.Source, ECal.ClientView> ();
 
         scheduled_title = new Gtk.Label (_("Scheduled")) {
-            ellipsize = Pango.EllipsizeMode.END,
+            ellipsize = END,
             margin_start = 24,
             margin_bottom = 24,
             xalign = 0
@@ -82,7 +79,7 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
         placeholder.add_css_class (Granite.STYLE_CLASS_H2_LABEL);
 
         task_list = new Gtk.ListBox () {
-            selection_mode = Gtk.SelectionMode.MULTIPLE,
+            selection_mode = MULTIPLE,
             activate_on_single_click = true
         };
         task_list.set_placeholder (placeholder);
@@ -91,13 +88,13 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
         task_list.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
 
         var scrolled_window = new Gtk.ScrolledWindow () {
+            child = task_list,
             hexpand = true,
             vexpand = true,
-            hscrollbar_policy = Gtk.PolicyType.NEVER,
-            child = task_list
+            hscrollbar_policy = NEVER
         };
 
-        orientation = Gtk.Orientation.VERTICAL;
+        orientation = VERTICAL;
         append (scheduled_title);
         append (scrolled_window);
 
@@ -190,7 +187,6 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
         var due_date_time = Tasks.Util.ical_to_date_time_local (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time)) {
             margin_start = 6
-            //  ellipsize = Pango.EllipsizeMode.MIDDLE
         };
 
         row.set_header (header_label);
