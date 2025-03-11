@@ -23,8 +23,6 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
     }
 
     construct {
-        autohide = true;
-
         color_button_blue = new Gtk.CheckButton ();
         color_button_blue.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
         color_button_blue.add_css_class ("blue");
@@ -124,6 +122,7 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
         box.append (show_completed_button);
         box.append (delete_list_menuitem);
 
+        autohide = true;
         child = box;
 
         color_button_red.toggled.connect (() => {
