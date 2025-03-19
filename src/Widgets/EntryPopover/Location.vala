@@ -18,9 +18,9 @@
 */
 
 public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
-    //  private GtkChamplain.Embed map_embed;
+    private Shumate.SimpleMap simple_map;
     private Gtk.SearchEntry search_entry;
-    //  private Marker point;
+    private Shumate.Marker point;
     private GLib.Cancellable search_cancellable;
     private Gtk.ToggleButton arriving_button;
     private Gtk.ToggleButton leaving_button;
@@ -35,25 +35,31 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
     construct {
         var registry = new Shumate.MapSourceRegistry.with_defaults ();
 
-        var map = new Shumate.SimpleMap () {
+        simple_map = new Shumate.SimpleMap () {
             height_request = 140,
             width_request = 260,
             map_source = registry.get_by_id (Shumate.MAP_SOURCE_OSM_MAPNIK)
         };
 
-        //  point = new Marker ();
+        point = new Shumate.Marker () {
+            child = new Gtk.Image.from_icon_name ("location-marker") {
+                icon_size = LARGE
+            }
+        };
 
-        //  var marker_layer = new Champlain.MarkerLayer.full (Champlain.SelectionMode.SINGLE);
-        //  marker_layer.add_marker (point);
+        var marker_layer = new Shumate.MarkerLayer.full (simple_map.viewport, SINGLE);
+        marker_layer.add_marker (point);
 
-        //  var map_view = map_embed.champlain_view;
-        //  map_view.zoom_level = 10;
-        //  map_view.goto_animation_duration = 500;
-        //  map_view.add_layer (marker_layer);
-        //  map_view.center_on (point.latitude, point.longitude);
+        var map_view = simple_map.viewport;
+        map_view.zoom_level = 10;
+
+        var map_map = simple_map.map;
+        map_map.go_to_duration = 500;
+        map_map.center_on (point.latitude, point.longitude);
+        map_map.add_layer (marker_layer);
 
         var map_frame = new Gtk.Frame (null) {
-            child = map
+            child = simple_map
         };
 
         arriving_button = new Gtk.ToggleButton.with_label (_("Arriving")) {
@@ -141,24 +147,24 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
                 break;
         }
 
-        //  bool need_relocation = true;
-        //  if (value.latitude >= Champlain.MIN_LATITUDE && value.longitude >= Champlain.MIN_LONGITUDE &&
-        //      value.latitude <= Champlain.MAX_LATITUDE && value.longitude <= Champlain.MAX_LONGITUDE) {
+         bool need_relocation = true;
+         if (value.latitude >= Shumate.MIN_LATITUDE && value.longitude >= Shumate.MIN_LONGITUDE &&
+             value.latitude <= Shumate.MAX_LATITUDE && value.longitude <= Shumate.MAX_LONGITUDE) {
 
-        //      point.latitude = value.latitude;
-        //      point.longitude = value.longitude;
+             point.latitude = value.latitude;
+             point.longitude = value.longitude;
 
-        //      need_relocation = (value.latitude == 0 && value.longitude == 0);
-        //  }
+             need_relocation = (value.latitude == 0 && value.longitude == 0);
+         }
 
-        //  if (need_relocation == true) {
-        //      if (value_has_postal_address) {
-        //          search_location.begin (value.postal_address);
-        //      } else {
-        //          // Use geoclue to find approximate location
-        //          discover_current_location.begin ();
-        //      }
-        //  }
+         if (need_relocation == true) {
+             if (value_has_postal_address) {
+                 search_location.begin (value.postal_address);
+             } else {
+                 // Use geoclue to find approximate location
+                 discover_current_location.begin ();
+             }
+         }
      }
 
     private void on_search_entry_activate () {
@@ -194,20 +200,20 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
             forward.set_answer_count (1);
             var places = yield forward.search_async (search_cancellable);
             foreach (var place in places) {
-                // point.latitude = place.location.latitude;
-                // point.longitude = place.location.longitude;
+                point.latitude = place.location.latitude;
+                point.longitude = place.location.longitude;
 
-                // if (value != null) {
-                //     value.latitude = place.location.latitude;
-                //     value.longitude = place.location.longitude;
-                // }
+                if (value != null) {
+                    value.latitude = place.location.latitude;
+                    value.longitude = place.location.longitude;
+                }
 
-                // Idle.add (() => {
-                //     if (search_cancellable.is_cancelled () == false) {
-                //         map_embed.champlain_view.go_to (point.latitude, point.longitude);
-                //     }
-                //     return GLib.Source.REMOVE;
-                // });
+                Idle.add (() => {
+                    if (search_cancellable.is_cancelled () == false) {
+                        simple_map.map.go_to (point.latitude, point.longitude);
+                    }
+                    return GLib.Source.REMOVE;
+                });
             }
 
             // search_entry.has_focus = true;
@@ -225,40 +231,19 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
         try {
             var simple = yield new GClue.Simple ("io.elementary.tasks", GClue.AccuracyLevel.CITY, null);
 
-            // point.latitude = simple.location.latitude;
-            // point.longitude = simple.location.longitude;
+            point.latitude = simple.location.latitude;
+            point.longitude = simple.location.longitude;
 
-            // Idle.add (() => {
-            //     if (search_cancellable.is_cancelled () == false) {
-            //     map_embed.champlain_view.go_to (point.latitude, point.longitude);
-            //     }
-            //     return GLib.Source.REMOVE;
-            // });
+            Idle.add (() => {
+                if (search_cancellable.is_cancelled () == false) {
+                    simple_map.map.go_to (point.latitude, point.longitude);
+                }
+                return GLib.Source.REMOVE;
+            });
         } catch (Error e) {
             warning ("Failed to connect to GeoClue2 service: %s", e.message);
             // Fallback to timezone location
             search_location.begin (ECal.util_get_system_timezone_location ());
         }
     }
-
-    //  private class Marker : Champlain.Marker {
-    //      public Marker () {
-    //          try {
-    //              weak Gtk.IconTheme icon_theme = Gtk.IconTheme.get_default ();
-    //              var pixbuf = icon_theme.load_icon ("location-marker", 32, Gtk.IconLookupFlags.GENERIC_FALLBACK);
-    //              Clutter.Image image = new Clutter.Image ();
-    //              image.set_data (pixbuf.get_pixels (),
-    //                            pixbuf.has_alpha ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGB_888,
-    //                            pixbuf.width,
-    //                            pixbuf.height,
-    //                            pixbuf.rowstride);
-    //              content = image;
-    //              set_size (pixbuf.width, pixbuf.height);
-    //              translation_x = -pixbuf.width / 2;
-    //              translation_y = -pixbuf.height;
-    //          } catch (Error e) {
-    //              critical (e.message);
-    //          }
-    //      }
-    //  }
 }
