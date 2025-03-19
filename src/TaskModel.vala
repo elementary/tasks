@@ -36,7 +36,6 @@ public class Tasks.TaskModel : Object {
     public delegate void TasksRemovedFunc (SList<ECal.ComponentId?> cids);
 
     private Gee.Future<E.SourceRegistry> registry;
-    //  private NetworkMonitor network_monitor;
     private HashTable<string, ECal.Client> task_list_client;
     private HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> task_list_client_views;
 
@@ -133,15 +132,13 @@ public class Tasks.TaskModel : Object {
     construct {
         task_list_client = new HashTable<string, ECal.Client> (str_hash, str_equal);
         task_list_client_views = new HashTable<ECal.Client, Gee.Collection<ECal.ClientView>> (direct_hash, direct_equal);  // vala-lint=line-length
-        // Failed to initialize portal (GNetworkMonitorPortal) for gio-network-monitor: Not using portals
-        //  network_monitor = NetworkMonitor.get_default ();
     }
 
     public async void start () {
         var promise = new Gee.Promise<E.SourceRegistry> ();
         registry = promise.future;
         yield init_registry (promise);
-        //  network_monitor.network_changed.connect (network_changed);
+        NetworkMonitor.get_default ().network_changed.connect (network_changed);
     }
 
     private async void init_registry (Gee.Promise<E.SourceRegistry> promise) {
@@ -240,8 +237,7 @@ public class Tasks.TaskModel : Object {
     }
 
     private async bool refresh_collection (E.Source collection_source, Cancellable? cancellable = null) throws Error {
-        //  if (network_monitor.network_available && registry.ready) {
-        if (registry.ready) {
+        if (NetworkMonitor.get_default ().network_available && registry.ready) {
             debug ("Scheduling collection refresh '%s'…", collection_source.dup_display_name ());
             return yield registry.value.refresh_backend (collection_source.dup_uid (), cancellable);
         }
@@ -250,8 +246,7 @@ public class Tasks.TaskModel : Object {
     }
 
     public async bool refresh_task_list (E.Source task_list, Cancellable? cancellable = null) throws Error {
-        //  if (network_monitor.network_available && task_list_client.contains (task_list.dup_uid ())) {
-        if (task_list_client.contains (task_list.dup_uid ())) {
+        if (NetworkMonitor.get_default ().network_available && task_list_client.contains (task_list.dup_uid ())) {
             var client = task_list_client.get (task_list.dup_uid ());
 
             if (client.check_refresh_supported ()) {
