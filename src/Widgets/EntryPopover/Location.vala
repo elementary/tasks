@@ -20,8 +20,8 @@
 public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
     private Shumate.SimpleMap simple_map;
     private Gtk.SearchEntry search_entry;
-    private Shumate.Marker point;
     private GLib.Cancellable search_cancellable;
+    private Shumate.Marker point;
     private Gtk.ToggleButton arriving_button;
     private Gtk.ToggleButton leaving_button;
 
@@ -53,10 +53,10 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
         var map_view = simple_map.viewport;
         map_view.zoom_level = 10;
 
-        var map_map = simple_map.map;
-        map_map.go_to_duration = 500;
-        map_map.center_on (point.latitude, point.longitude);
-        map_map.add_layer (marker_layer);
+        var map = simple_map.map;
+        map.go_to_duration = 500;
+        map.add_layer (marker_layer);
+        map.center_on (point.latitude, point.longitude);
 
         var map_frame = new Gtk.Frame (null) {
             child = simple_map
@@ -147,15 +147,15 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
                 break;
         }
 
-         bool need_relocation = true;
-         if (value.latitude >= Shumate.MIN_LATITUDE && value.longitude >= Shumate.MIN_LONGITUDE &&
-             value.latitude <= Shumate.MAX_LATITUDE && value.longitude <= Shumate.MAX_LONGITUDE) {
+        bool need_relocation = true;
+        if (value.latitude >= Shumate.MIN_LATITUDE && value.longitude >= Shumate.MIN_LONGITUDE &&
+            value.latitude <= Shumate.MAX_LATITUDE && value.longitude <= Shumate.MAX_LONGITUDE) {
 
-             point.latitude = value.latitude;
-             point.longitude = value.longitude;
+            point.latitude = value.latitude;
+            point.longitude = value.longitude;
 
-             need_relocation = (value.latitude == 0 && value.longitude == 0);
-         }
+            need_relocation = (value.latitude == 0 && value.longitude == 0);
+        }
 
          if (need_relocation == true) {
              if (value_has_postal_address) {
@@ -216,7 +216,7 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
                 });
             }
 
-            // search_entry.has_focus = true;
+            search_entry.grab_focus ();
         } catch (Error error) {
             debug (error.message);
         }
