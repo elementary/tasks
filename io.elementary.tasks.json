@@ -137,8 +137,7 @@
             "buildsystem": "meson",
             "config-opts": [
                 "-Ddemos=false",
-                "-Dgtk_doc=false",
-                "-Dvapi=false"
+                "-Dgtk_doc=false"
             ],
             "sources": [
                 {
