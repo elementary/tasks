@@ -29,6 +29,7 @@ public class Tasks.Application : Gtk.Application {
     public static bool run_in_background = false;
 
     private bool first_activation = true;
+
     public Application () {
         Object (
             application_id: "io.elementary.tasks",
