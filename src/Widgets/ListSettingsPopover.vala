@@ -6,82 +6,82 @@
 public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
     public E.Source source { get; construct set; }
 
-    private Gtk.RadioButton color_button_red;
-    private Gtk.RadioButton color_button_orange;
-    private Gtk.RadioButton color_button_yellow;
-    private Gtk.RadioButton color_button_green;
-    private Gtk.RadioButton color_button_mint;
-    private Gtk.RadioButton color_button_blue;
-    private Gtk.RadioButton color_button_purple;
-    private Gtk.RadioButton color_button_pink;
-    private Gtk.RadioButton color_button_brown;
-    private Gtk.RadioButton color_button_slate;
-    private Gtk.RadioButton color_button_none;
+    private Gtk.CheckButton color_button_red;
+    private Gtk.CheckButton color_button_orange;
+    private Gtk.CheckButton color_button_yellow;
+    private Gtk.CheckButton color_button_green;
+    private Gtk.CheckButton color_button_mint;
+    private Gtk.CheckButton color_button_blue;
+    private Gtk.CheckButton color_button_purple;
+    private Gtk.CheckButton color_button_pink;
+    private Gtk.CheckButton color_button_brown;
+    private Gtk.CheckButton color_button_slate;
+    private Gtk.CheckButton color_button_none;
 
     public ListSettingsPopover (E.Source source) {
         Object (source: source);
     }
 
     construct {
-        color_button_blue = new Gtk.RadioButton (null);
-        color_button_blue.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_blue.get_style_context ().add_class ("blue");
+        color_button_blue = new Gtk.CheckButton ();
+        color_button_blue.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_blue.add_css_class ("blue");
 
-        color_button_mint = new Gtk.RadioButton (null) {
+        color_button_mint = new Gtk.CheckButton () {
             group = color_button_blue
         };
-        color_button_mint.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_mint.get_style_context ().add_class ("mint");
+        color_button_mint.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_mint.add_css_class ("mint");
 
-        color_button_green = new Gtk.RadioButton (null) {
+        color_button_green = new Gtk.CheckButton () {
             group = color_button_blue
         };
-        color_button_green.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_green.get_style_context ().add_class ("green");
+        color_button_green.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_green.add_css_class ("green");
 
-        color_button_yellow = new Gtk.RadioButton (null) {
+        color_button_yellow = new Gtk.CheckButton () {
             group = color_button_blue
         };
-        color_button_yellow.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_yellow.get_style_context ().add_class ("yellow");
+        color_button_yellow.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_yellow.add_css_class ("yellow");
 
-        color_button_orange = new Gtk.RadioButton (null) {
+        color_button_orange = new Gtk.CheckButton () {
             group = color_button_blue
         };
-        color_button_orange.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_orange.get_style_context ().add_class ("orange");
+        color_button_orange.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_orange.add_css_class ("orange");
 
-        color_button_red = new Gtk.RadioButton (null) {
+        color_button_red = new Gtk.CheckButton () {
             group = color_button_blue
         };
-        color_button_red.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_red.get_style_context ().add_class ("red");
+        color_button_red.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_red.add_css_class ("red");
 
-        color_button_pink = new Gtk.RadioButton (null) {
+        color_button_pink = new Gtk.CheckButton () {
             group = color_button_blue
         };
-        color_button_pink.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_pink.get_style_context ().add_class ("pink");
+        color_button_pink.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_pink.add_css_class ("pink");
 
-        color_button_purple = new Gtk.RadioButton (null) {
+        color_button_purple = new Gtk.CheckButton () {
             group = color_button_blue
         };
-        color_button_purple.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_purple.get_style_context ().add_class ("purple");
+        color_button_purple.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_purple.add_css_class ("purple");
 
-        color_button_brown = new Gtk.RadioButton (null) {
+        color_button_brown = new Gtk.CheckButton () {
             group = color_button_blue
         };
-        color_button_brown.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_brown.get_style_context ().add_class ("brown");
+        color_button_brown.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_brown.add_css_class ("brown");
 
-        color_button_slate = new Gtk.RadioButton (null) {
+        color_button_slate = new Gtk.CheckButton () {
             group = color_button_blue
         };
-        color_button_slate.get_style_context ().add_class (Granite.STYLE_CLASS_COLOR_BUTTON);
-        color_button_slate.get_style_context ().add_class ("slate");
+        color_button_slate.add_css_class (Granite.STYLE_CLASS_COLOR_BUTTON);
+        color_button_slate.add_css_class ("slate");
 
-        color_button_none = new Gtk.RadioButton (null) {
+        color_button_none = new Gtk.CheckButton () {
             group = color_button_blue
         };
 
@@ -91,16 +91,16 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             margin_start = 12,
             margin_end = 12
         };
-        color_box.add (color_button_blue);
-        color_box.add (color_button_mint);
-        color_box.add (color_button_green);
-        color_box.add (color_button_yellow);
-        color_box.add (color_button_orange);
-        color_box.add (color_button_red);
-        color_box.add (color_button_pink);
-        color_box.add (color_button_purple);
-        color_box.add (color_button_brown);
-        color_box.add (color_button_slate);
+        color_box.append (color_button_blue);
+        color_box.append (color_button_mint);
+        color_box.append (color_button_green);
+        color_box.append (color_button_yellow);
+        color_box.append (color_button_orange);
+        color_box.append (color_button_red);
+        color_box.append (color_button_pink);
+        color_box.append (color_button_purple);
+        color_box.append (color_button_brown);
+        color_box.append (color_button_slate);
 
         var show_completed_button = new Granite.SwitchModelButton (_("Show Completed")) {
             margin_top = 3
@@ -110,18 +110,18 @@ public class Tasks.Widgets.ListSettingsPopover : Gtk.Popover {
             action_name = MainWindow.ACTION_PREFIX + MainWindow.ACTION_DELETE_SELECTED_LIST,
             text = _("Delete List…")
         };
-        delete_list_menuitem.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+        delete_list_menuitem.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
         var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 0) {
             margin_top = 3,
             margin_bottom = 3
         };
-        box.add (color_box);
-        box.add (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
-        box.add (show_completed_button);
-        box.add (delete_list_menuitem);
-        box.show_all ();
+        box.append (color_box);
+        box.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        box.append (show_completed_button);
+        box.append (delete_list_menuitem);
 
+        autohide = true;
         child = box;
 
         color_button_red.toggled.connect (() => {

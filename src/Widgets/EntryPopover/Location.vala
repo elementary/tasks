@@ -1,5 +1,5 @@
 /*
-* Copyright 2021 elementary, Inc. (https://elementary.io)
+* Copyright 2021-2023 elementary, Inc. (https://elementary.io)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
@@ -18,12 +18,12 @@
 */
 
 public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
-    private GtkChamplain.Embed map_embed;
+    private Shumate.SimpleMap simple_map;
     private Gtk.SearchEntry search_entry;
     private GLib.Cancellable search_cancellable;
-    private Marker point;
-    private Gtk.RadioButton arriving_button;
-    private Gtk.RadioButton leaving_button;
+    private Shumate.Marker point;
+    private Gtk.ToggleButton arriving_button;
+    private Gtk.ToggleButton leaving_button;
 
     public Location () {
         Object (
@@ -33,40 +33,48 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
     }
 
     construct {
-        map_embed = new GtkChamplain.Embed () {
+        var registry = new Shumate.MapSourceRegistry.with_defaults ();
+
+        simple_map = new Shumate.SimpleMap () {
             height_request = 140,
-            width_request = 260
+            width_request = 260,
+            map_source = registry.get_by_id (Shumate.MAP_SOURCE_OSM_MAPNIK)
         };
 
-        point = new Marker ();
+        point = new Shumate.Marker () {
+            child = new Gtk.Image.from_icon_name ("location-marker") {
+                icon_size = LARGE
+            }
+        };
 
-        var marker_layer = new Champlain.MarkerLayer.full (Champlain.SelectionMode.SINGLE);
+        var marker_layer = new Shumate.MarkerLayer.full (simple_map.viewport, SINGLE);
         marker_layer.add_marker (point);
 
-        var map_view = map_embed.champlain_view;
+        var map_view = simple_map.viewport;
         map_view.zoom_level = 10;
-        map_view.goto_animation_duration = 500;
-        map_view.add_layer (marker_layer);
-        map_view.center_on (point.latitude, point.longitude);
 
-        var map_frame = new Gtk.Frame (null);
-        map_frame.add (map_embed);
+        var map = simple_map.map;
+        map.go_to_duration = 500;
+        map.add_layer (marker_layer);
+        map.center_on (point.latitude, point.longitude);
 
-        arriving_button = new Gtk.RadioButton.with_label (null, _("Arriving")) {
+        var map_frame = new Gtk.Frame (null) {
+            child = simple_map
+        };
+
+        arriving_button = new Gtk.ToggleButton.with_label (_("Arriving")) {
             hexpand = true
         };
-        arriving_button.set_mode (false);
 
-        leaving_button = new Gtk.RadioButton.with_label (null, _("Leaving")) {
+        leaving_button = new Gtk.ToggleButton.with_label (_("Leaving")) {
             group = arriving_button,
             hexpand = true
         };
-        leaving_button.set_mode (false);
 
         var mode_box = new Gtk.Box (HORIZONTAL, 0);
-        mode_box.add (arriving_button);
-        mode_box.add (leaving_button);
-        mode_box.get_style_context ().add_class (Gtk.STYLE_CLASS_LINKED);
+        mode_box.append (arriving_button);
+        mode_box.append (leaving_button);
+        mode_box.add_css_class (Granite.STYLE_CLASS_LINKED);
 
         search_entry = new Gtk.SearchEntry () {
             placeholder_text = _("John Smith OR Example St."),
@@ -80,12 +88,11 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
             margin_end = 12
         };
 
-        box.add (search_entry);
-        box.add (mode_box);
-        box.add (map_frame);
-        box.show_all ();
+        box.append (search_entry);
+        box.append (mode_box);
+        box.append (map_frame);
 
-        popover.add (box);
+        popover.child = box;
         popover.show.connect (on_popover_show);
 
         notify["value"].connect (on_value_changed);
@@ -105,7 +112,7 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
         });
     }
 
-    private void on_popover_show () {
+     private void on_popover_show () {
         search_entry.text = (value == null ? "" : value.postal_address);
 
         if (search_entry.text != null && search_entry.text.strip ().length > 0) {
@@ -114,9 +121,9 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
             // Use geoclue to find approximate location
             discover_current_location.begin ();
         }
-    }
+     }
 
-    private void on_value_changed () {
+     private void on_value_changed () {
         if (value == null) {
             return;
         }
@@ -141,8 +148,8 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
         }
 
         bool need_relocation = true;
-        if (value.latitude >= Champlain.MIN_LATITUDE && value.longitude >= Champlain.MIN_LONGITUDE &&
-            value.latitude <= Champlain.MAX_LATITUDE && value.longitude <= Champlain.MAX_LONGITUDE) {
+        if (value.latitude >= Shumate.MIN_LATITUDE && value.longitude >= Shumate.MIN_LONGITUDE &&
+            value.latitude <= Shumate.MAX_LATITUDE && value.longitude <= Shumate.MAX_LONGITUDE) {
 
             point.latitude = value.latitude;
             point.longitude = value.longitude;
@@ -150,15 +157,15 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
             need_relocation = (value.latitude == 0 && value.longitude == 0);
         }
 
-        if (need_relocation == true) {
-            if (value_has_postal_address) {
-                search_location.begin (value.postal_address);
-            } else {
-                // Use geoclue to find approximate location
-                discover_current_location.begin ();
-            }
-        }
-    }
+         if (need_relocation == true) {
+             if (value_has_postal_address) {
+                 search_location.begin (value.postal_address);
+             } else {
+                 // Use geoclue to find approximate location
+                 discover_current_location.begin ();
+             }
+         }
+     }
 
     private void on_search_entry_activate () {
         value = Tasks.Location () {
@@ -203,13 +210,13 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
 
                 Idle.add (() => {
                     if (search_cancellable.is_cancelled () == false) {
-                        map_embed.champlain_view.go_to (point.latitude, point.longitude);
+                        simple_map.map.go_to (point.latitude, point.longitude);
                     }
                     return GLib.Source.REMOVE;
                 });
             }
 
-            search_entry.has_focus = true;
+            search_entry.grab_focus ();
         } catch (Error error) {
             debug (error.message);
         }
@@ -229,36 +236,14 @@ public class Tasks.Widgets.EntryPopover.Location : Generic<Tasks.Location?> {
 
             Idle.add (() => {
                 if (search_cancellable.is_cancelled () == false) {
-                    map_embed.champlain_view.go_to (point.latitude, point.longitude);
+                    simple_map.map.go_to (point.latitude, point.longitude);
                 }
                 return GLib.Source.REMOVE;
             });
-
         } catch (Error e) {
             warning ("Failed to connect to GeoClue2 service: %s", e.message);
             // Fallback to timezone location
             search_location.begin (ECal.util_get_system_timezone_location ());
-        }
-    }
-
-    private class Marker : Champlain.Marker {
-        public Marker () {
-            try {
-                weak Gtk.IconTheme icon_theme = Gtk.IconTheme.get_default ();
-                var pixbuf = icon_theme.load_icon ("location-marker", 32, Gtk.IconLookupFlags.GENERIC_FALLBACK);
-                Clutter.Image image = new Clutter.Image ();
-                image.set_data (pixbuf.get_pixels (),
-                              pixbuf.has_alpha ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGB_888,
-                              pixbuf.width,
-                              pixbuf.height,
-                              pixbuf.rowstride);
-                content = image;
-                set_size (pixbuf.width, pixbuf.height);
-                translation_x = -pixbuf.width / 2;
-                translation_y = -pixbuf.height;
-            } catch (Error e) {
-                critical (e.message);
-            }
         }
     }
 }
