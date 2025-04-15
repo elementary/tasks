@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
+public class Tasks.Widgets.TaskListGrid : Granite.Bin {
     public E.Source source { get; construct; }
     private ECal.ClientView? view = null;
 
@@ -26,7 +26,7 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         }
 
         editable_title = new EditableLabel () {
-            margin_start = 24
+            hexpand = true
         };
         editable_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
         editable_title.add_css_class (Granite.STYLE_CLASS_ACCENT);
@@ -36,7 +36,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         var settings_button = new Gtk.MenuButton () {
             halign = END,
             icon_name = "view-more-symbolic",
-            margin_end = 24,
             popover = list_settings_popover,
             tooltip_text = _("Edit Name and Appearance"),
             valign = CENTER
@@ -44,7 +43,6 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
         settings_button.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
         add_task_list = new Gtk.ListBox () {
-            margin_top = 24,
             selection_mode = SINGLE,
             activate_on_single_click = true
         };
@@ -95,11 +93,23 @@ public class Tasks.Widgets.TaskListGrid : Gtk.Grid {
             hscrollbar_policy = Gtk.PolicyType.NEVER
         };
 
-        column_spacing = 12;
-        attach (editable_title, 0, 0);
-        attach (settings_button, 1, 0);
-        attach (add_task_list, 0, 1, 2);
-        attach (scrolled_window, 0, 2, 2);
+        var header_box = new Gtk.Box (HORIZONTAL, 6) {
+            margin_top = 6,
+            margin_end = 6,
+            margin_bottom = 6,
+            margin_start = 24
+        };
+        header_box.append (editable_title);
+        header_box.append (settings_button);
+        header_box.append (new Gtk.WindowControls (END) { valign = START });
+
+        var toolbar_view = new Adw.ToolbarView () {
+            content = scrolled_window
+        };
+        toolbar_view.add_top_bar (header_box);
+        toolbar_view.add_top_bar (add_task_list);
+
+        child = toolbar_view;
 
         Application.settings.changed["show-completed"].connect (() => {
             on_show_completed_changed (Application.settings.get_boolean ("show-completed"));
