@@ -3,6 +3,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+box.titlebar {
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+}
+
 editable-label entry {
     background: transparent;
     border: none;
