@@ -96,7 +96,7 @@ public class Tasks.Widgets.ScheduledTaskListBox : Granite.Bin {
             margin_top = 6,
             margin_end = 6,
             margin_bottom = 6,
-            margin_start = 12
+            margin_start = 24
         };
         header_box.append (scheduled_title);
         header_box.append (new Gtk.WindowControls (END) { valign = START });
