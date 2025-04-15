@@ -42,7 +42,6 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         status_stack.add_named (spinner, "spinner");
 
         var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
-            margin_start = 12,
             margin_end = 6
         };
         box.append (source_color);
