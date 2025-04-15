@@ -5,7 +5,7 @@
 
 public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
     private Gtk.Calendar calendar;
-    private Granite.Widgets.TimePicker timepicker;
+    private Granite.TimePicker timepicker;
     private Gtk.Revealer timepicker_revealer;
 
     public DateTime () {
@@ -22,10 +22,9 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             margin_start = 6,
             margin_end = 6
         };
-        calendar.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
 
-        timepicker = new Granite.Widgets.TimePicker () {
-            margin_top = 0,
+        timepicker = new Granite.TimePicker () {
+            margin_top = 12,
             margin_bottom = 12,
             margin_start = 12,
             margin_end = 12
@@ -48,11 +47,10 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
         var box = new Gtk.Box (VERTICAL, 0) {
             margin_top = 3
         };
-        box.add (today_button);
-        box.add (today_separator);
-        box.add (calendar);
-        box.add (timepicker_revealer);
-        box.show_all ();
+        box.append (today_button);
+        box.append (today_separator);
+        box.append (calendar);
+        box.append (timepicker_revealer);
 
         popover.child = box;
 
@@ -76,16 +74,12 @@ public class Tasks.Widgets.EntryPopover.DateTime : Generic<GLib.DateTime?> {
             value = selected_datetime;
         }
 
-        calendar.select_month (selected_datetime.get_month () - 1, selected_datetime.get_year ());
-        calendar.select_day (selected_datetime.get_day_of_month ());
+        calendar.select_day (selected_datetime);
         timepicker.time = selected_datetime;
     }
 
     private void on_today_button_clicked () {
-        var now_local = new GLib.DateTime.now_local ();
-
-        calendar.select_month (now_local.get_month () - 1, now_local.get_year ());
-        calendar.select_day (now_local.get_day_of_month ());
+        calendar.select_day (new GLib.DateTime.now_local ());
     }
 
     private void on_calendar_day_selected () {

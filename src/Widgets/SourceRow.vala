@@ -20,7 +20,7 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         source_color = new Gtk.Grid () {
             valign = Gtk.Align.CENTER
         };
-        source_color.get_style_context ().add_class ("source-color");
+        source_color.add_css_class ("source-color");
 
         display_name_label = new Gtk.Label (source.display_name) {
             halign = Gtk.Align.START,
@@ -33,7 +33,7 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         };
 
         var spinner = new Gtk.Spinner () {
-            active = true,
+            spinning = true,
             tooltip_text = _("Connecting…")
         };
 
@@ -45,16 +45,16 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
             margin_start = 12,
             margin_end = 6
         };
-        box.add (source_color);
-        box.add (display_name_label);
-        box.add (status_stack);
+        box.append (source_color);
+        box.append (display_name_label);
+        box.append (status_stack);
 
         revealer = new Gtk.Revealer () {
-            reveal_child = true
+            reveal_child = true,
+            child = box
         };
-        revealer.add (box);
 
-        add (revealer);
+        child = revealer;
 
         build_drag_and_drop ();
 
@@ -62,31 +62,36 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     }
 
     private void build_drag_and_drop () {
-        Gtk.drag_dest_set (this, Gtk.DestDefaults.HIGHLIGHT | Gtk.DestDefaults.MOTION, Application.DRAG_AND_DROP_TASK_DATA, Gdk.DragAction.MOVE);
+        var drop_target = new Gtk.DropTarget (typeof (string), Gdk.DragAction.COPY);
+        add_controller (drop_target);
 
-        drag_motion.connect (on_drag_motion);
-        drag_drop.connect (on_drag_drop);
-        drag_data_received.connect (on_drag_data_received);
-        drag_leave.connect (on_drag_leave);
+        drop_target.accept.connect (on_drop_accept);
+        drop_target.drop.connect (on_drag_drop);
+        drop_target.enter.connect (on_drag_enter);
+        drop_target.leave.connect (on_drag_leave);
+
     }
 
-    private bool on_drag_motion (Gdk.DragContext context, int x, int y, uint time) {
-        if (!get_style_context ().has_class ("drop-hover")) {
-            get_style_context ().add_class ("drop-hover");
-        }
+    private bool on_drop_accept (Gdk.Drop drop) {
         return true;
     }
 
-    private void on_drag_leave (Gdk.DragContext context, uint time_) {
-        get_style_context ().remove_class ("drop-hover");
+    private Gdk.DragAction on_drag_enter (double x, double y) {
+        if (!has_css_class ("drop-hover")) {
+            add_css_class ("drop-hover");
+        }
+
+        return Gdk.DragAction.COPY;
+    }
+
+    private void on_drag_leave () {
+        remove_css_class ("drop-hover");
     }
 
     private Gee.HashMultiMap<string, string> received_drag_data;
 
-    private async bool on_drag_drop_move_tasks () throws Error {
+    private async void on_drag_drop_move_tasks () throws Error {
         E.SourceRegistry registry = yield Application.model.get_registry ();
-        var move_successful = true;
-
         var source_uids = received_drag_data.get_keys ();
         foreach (var source_uid in source_uids) {
             var src_source = registry.ref_source (source_uid);
@@ -94,28 +99,22 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
             var component_uids = received_drag_data.get (source_uid);
             foreach (var component_uid in component_uids) {
                 if (!yield Application.model.move_task (src_source, source, component_uid)) {
-                    move_successful = false;
+                    warning ("Couldn't move task %s to %s", component_uid, source.uid);
                 }
             }
         }
-        return move_successful;
     }
 
-    private bool on_drag_drop (Gdk.DragContext context, int x, int y, uint time) {
-        var target = Gtk.drag_dest_find_target (this, context, null);
-        if (target != Gdk.Atom.NONE) {
-            Gtk.drag_get_data (this, context, target, time);
-        }
+    private bool on_drag_drop (GLib.Value value, double x, double y) {
+        parse_data ((string) value);
 
         var drop_successful = false;
-        var move_successful = false;
         if (received_drag_data != null && received_drag_data.size > 0) {
             drop_successful = true;
 
             on_drag_drop_move_tasks.begin ((obj, res) => {
                 try {
-                    move_successful = on_drag_drop_move_tasks.end (res);
-
+                    on_drag_drop_move_tasks.end (res);
                 } catch (Error e) {
                     var error_dialog = new Granite.MessageDialog (
                         _("Moving task failed"),
@@ -124,11 +123,10 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
                         Gtk.ButtonsType.CLOSE
                     );
                     error_dialog.show_error_details (e.message);
-                    error_dialog.run ();
-                    error_dialog.destroy ();
-
-                } finally {
-                    Gtk.drag_finish (context, drop_successful, move_successful, time);
+                    error_dialog.present ();
+                    error_dialog.response.connect (() => {
+                        error_dialog.destroy ();
+                    });
                 }
             });
         }
@@ -136,34 +134,31 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         return drop_successful;
     }
 
-    private void on_drag_data_received (Gdk.DragContext context, int x, int y, Gtk.SelectionData selection_data, uint info, uint time) {
+    private void parse_data (string uri) {
         received_drag_data = new Gee.HashMultiMap<string,string> ();
 
         var uri_scheme = "task://";
-        var uris = selection_data.get_uris ();
 
-        foreach (var uri in uris) {
-            string? source_uid = null;
-            string? component_uid = null;
+        string? source_uid = null;
+        string? component_uid = null;
 
-            if (uri.has_prefix (uri_scheme)) {
-                var uri_parts = uri.substring (uri_scheme.length).split ("/");
+        if (uri.has_prefix (uri_scheme)) {
+            var uri_parts = uri.substring (uri_scheme.length).split ("/");
 
-                if (uri_parts.length == 2) {
-                    source_uid = uri_parts[0];
-                    component_uid = uri_parts[1];
-                }
+            if (uri_parts.length == 2) {
+                source_uid = uri_parts[0];
+                component_uid = uri_parts[1];
             }
+        }
 
-            if (source_uid == null || component_uid == null) {
-                warning ("Can't handle drop data: Unexpected uri format: %s", uri);
+        if (source_uid == null || component_uid == null) {
+            warning ("Can't handle drop data: Unexpected uri format: %s", uri);
 
-            } else if (source_uid == source.uid) {
-                debug ("Dropped task onto the same list, so we have nothing to do.");
+        } else if (source_uid == source.uid) {
+            debug ("Dropped task onto the same list, so we have nothing to do.");
 
-            } else {
-                received_drag_data.set (source_uid, component_uid);
-            }
+        } else {
+            received_drag_data.set (source_uid, component_uid);
         }
     }
 
@@ -201,7 +196,9 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     public void remove_request () {
         revealer.reveal_child = false;
         GLib.Timeout.add (revealer.transition_duration, () => {
+            ((Gtk.ListBox) parent).remove (this);
             destroy ();
+
             return GLib.Source.REMOVE;
         });
     }
