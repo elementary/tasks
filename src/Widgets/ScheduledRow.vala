@@ -16,7 +16,6 @@ public class Tasks.Widgets.ScheduledRow : Gtk.ListBoxRow {
         };
 
         var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
-            margin_start = 12,
             margin_end = 6
         };
         box.append (icon);

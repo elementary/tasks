@@ -45,21 +45,10 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
             );
         }
 
-        var sidebar_header = new Gtk.HeaderBar () {
-            title_widget = new Gtk.Label (null),
-            show_title_buttons = false
+        var sidebar_header = new Adw.HeaderBar () {
+            show_end_title_buttons = false,
+            show_title = false
         };
-        sidebar_header.add_css_class (Granite.STYLE_CLASS_DEFAULT_DECORATION);
-        sidebar_header.add_css_class (Granite.STYLE_CLASS_FLAT);
-        sidebar_header.pack_start (new Gtk.WindowControls (Gtk.PackType.START));
-
-        var main_header = new Gtk.HeaderBar () {
-            title_widget = new Gtk.Label (null),
-            show_title_buttons = false
-        };
-        main_header.add_css_class (Granite.STYLE_CLASS_DEFAULT_DECORATION);
-        main_header.add_css_class (Granite.STYLE_CLASS_FLAT);
-        main_header.pack_end (new Gtk.WindowControls (Gtk.PackType.END));
 
         listbox = new Gtk.ListBox ();
         listbox.set_sort_func (sort_function);
@@ -98,6 +87,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
         var add_tasklist_button = new Gtk.MenuButton () {
             child = add_list_button_box,
+            has_frame = false,
             popover = add_tasklist_popover,
             direction = UP
         };
@@ -105,25 +95,21 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         add_list_label.mnemonic_widget = add_tasklist_button;
 
         var actionbar = new Gtk.ActionBar ();
-        actionbar.add_css_class (Granite.STYLE_CLASS_FLAT);
         actionbar.pack_start (add_tasklist_button);
 
-        var sidebar = new Gtk.Box (VERTICAL, 0);
+        var sidebar = new Adw.ToolbarView () {
+            content = scrolledwindow,
+            bottom_bar_style = RAISED
+        };
+        sidebar.add_top_bar (sidebar_header);
+        sidebar.add_bottom_bar (actionbar);
         sidebar.add_css_class (Granite.STYLE_CLASS_SIDEBAR);
-        sidebar.append (sidebar_header);
-        sidebar.append (scrolledwindow);
-        sidebar.append (actionbar);
 
         task_list_grid_stack = new Gtk.Stack ();
 
-        var main_box = new Gtk.Box (VERTICAL, 0);
-        main_box.add_css_class (Granite.STYLE_CLASS_BACKGROUND);
-        main_box.append (main_header);
-        main_box.append (task_list_grid_stack);
-
         var paned = new Gtk.Paned (HORIZONTAL) {
             start_child = sidebar,
-            end_child = main_box,
+            end_child = task_list_grid_stack,
             resize_start_child = false,
             shrink_end_child = false,
             shrink_start_child = false
