@@ -92,14 +92,10 @@ public class Tasks.Widgets.ScheduledTaskListBox : Granite.Bin {
             hscrollbar_policy = NEVER
         };
 
-        var header_box = new Gtk.Box (HORIZONTAL, 6) {
-            margin_top = 6,
-            margin_end = 6,
-            margin_bottom = 6,
-            margin_start = 24
-        };
+        var header_box = new Gtk.Box (HORIZONTAL, 0);
         header_box.append (scheduled_title);
         header_box.append (new Gtk.WindowControls (END) { valign = START });
+        header_box.add_css_class ("titlebar");
 
         var toolbar_view = new Adw.ToolbarView () {
             content = scrolled_window
@@ -196,7 +192,7 @@ public class Tasks.Widgets.ScheduledTaskListBox : Granite.Bin {
 
         var due_date_time = Tasks.Util.ical_to_date_time_local (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time)) {
-            margin_start = 6
+            margin_start = 12
         };
 
         row.set_header (header_label);
