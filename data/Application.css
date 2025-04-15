@@ -29,33 +29,35 @@ entry-popover.error > box {
 }
 
 row.task {
+    padding: 0.5rem;
     transition: all 250ms ease-in-out;
 }
 
-row.task:focus:not(.card) {
-    background-color: shade(@base_color, 0.8);
-}
-
-row.task.card {
-    background-color: @base_color;
-    margin-bottom: 12px;
-    margin-top: 1px;
-    padding-top: 6px;
-}
-
-row.task entry.flat  {
+row.task:selected {
     background: transparent;
-    border-style: solid;
-    border-color: transparent;
-    padding: 0;
 }
 
-row.task entry.flat:focus {
-    opacity: 1;
+row.task > revealer > grid {
+    padding: 0 1rem;
 }
 
-row.task:not(.card) entry.add-task {
-    border-color: alpha(@text_color, 0.25);
+row.task .card {
+    background-color: @base_color;
+    padding-top: 1rem;
+    border-spacing: 0 0.5rem;
+}
+
+row.task .button-box {
+    margin-bottom: 1rem;
+}
+
+row.task > revealer > grid > revealer > box.vertical {
+    border-spacing: 1rem;
+}
+
+row.task entry.flat text {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 row.task.drag-active {

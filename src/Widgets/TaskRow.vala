@@ -23,6 +23,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     private Tasks.Widgets.EntryPopover.Location location_popover;
     private Gtk.Revealer location_popover_revealer;
 
+    private Gtk.Grid grid;
     private Gtk.Stack state_stack;
     private Gtk.Image icon;
     private Gtk.CheckButton check;
@@ -64,8 +65,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             warning ("unable to get the registry, assuming task is not from gtask");
         }
 
-        icon = new Gtk.Image.from_icon_name ("list-add-symbolic");
-        icon.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
+        icon = new Gtk.Image.from_icon_name ("list-add-symbolic") {
+            halign = START
+        };
 
         check = new Gtk.CheckButton () {
             valign = Gtk.Align.CENTER
@@ -78,8 +80,9 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         state_stack.add_child (icon);
         state_stack.add_child (check);
 
-        summary_entry = new Gtk.Entry ();
-        summary_entry.add_css_class (Granite.STYLE_CLASS_FLAT);
+        summary_entry = new Gtk.Entry () {
+            has_frame = false
+        };
 
         due_datetime_popover = new Tasks.Widgets.EntryPopover.DateTime ();
 
@@ -198,10 +201,10 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         };
 
         var description_textview = new Granite.HyperTextView () {
-            top_margin = 12,
-            right_margin = 12,
-            bottom_margin = 12,
-            left_margin = 12,
+            top_margin = 6,
+            right_margin = 6,
+            bottom_margin = 6,
+            left_margin = 6,
             height_request = 140,
             accepts_tab = false
         };
@@ -228,16 +231,11 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         right_buttons_box.append (cancel_button);
         right_buttons_box.append (save_button);
 
-        var button_box = new Gtk.Box (HORIZONTAL, 6) {
-            margin_top = 12
-        };
+        var button_box = new Gtk.Box (HORIZONTAL, 6);
         button_box.add_css_class ("button-box");
         button_box.append (right_buttons_box);
 
-        var form_box = new Gtk.Box (VERTICAL, 12) {
-            margin_top = 6,
-            margin_bottom = 6
-        };
+        var form_box = new Gtk.Box (VERTICAL, 0);
         form_box.append (description_frame);
         form_box.append (button_box);
 
@@ -246,13 +244,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             transition_type = SLIDE_DOWN
         };
 
-        var grid = new Gtk.Grid () {
-            margin_top = 6,
-            margin_bottom = 6,
-            margin_start = 12,
-            margin_end = 12,
+        grid = new Gtk.Grid () {
             column_spacing = 6,
-            row_spacing = 3
         };
         grid.attach (state_stack, 0, 0);
         grid.attach (summary_entry, 1, 0);
@@ -261,13 +254,12 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
         revealer = new Gtk.Revealer () {
             child = grid,
+            overflow = VISIBLE,
             reveal_child = true,
             transition_type = SLIDE_UP
         };
 
         child = revealer;
-        margin_start = 12;
-        margin_end = 12;
 
         add_css_class ("task");
         add_css_class (Granite.STYLE_CLASS_ROUNDED);
@@ -395,12 +387,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         task_details_reveal_request (!value);
 
         if (value) {
-            add_css_class ("collapsed");
-            add_css_class (Granite.STYLE_CLASS_CARD);
-
+            grid.add_css_class ("collapsed");
+            grid.add_css_class (Granite.STYLE_CLASS_CARD);
+            summary_entry.has_frame = true;
         } else {
-            remove_css_class (Granite.STYLE_CLASS_CARD);
-            remove_css_class ("collapsed");
+            grid.remove_css_class (Granite.STYLE_CLASS_CARD);
+            grid.remove_css_class ("collapsed");
+            summary_entry.has_frame = false;
         }
     }
 
@@ -422,7 +415,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             check.active = completed;
             summary_entry.text = "";
             summary_entry.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
-            summary_entry.add_css_class ("add-task");
+            summary_entry.has_frame = true;
             task_detail_revealer.reveal_child = false;
             task_detail_revealer.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
 
@@ -446,7 +439,6 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             }
 
             summary_entry.text = ical_task.get_summary () == null ? "" : ical_task.get_summary ();
-            summary_entry.remove_css_class ("add-task");
 
             if (completed) {
                 summary_entry.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
