@@ -193,7 +193,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
     private void on_listbox_row_selected (Gtk.ListBoxRow? row) {
         if (row != null) {
-            Tasks.Widgets.TaskListGrid? task_list_grid = null;
+            Tasks.ListView? task_list_grid = null;
 
             if (row is Tasks.Widgets.SourceRow) {
                 var source = ((Tasks.Widgets.SourceRow) row).source;
@@ -208,9 +208,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                     }
                 });
 
-                task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
+                task_list_grid = (Tasks.ListView) task_list_grid_stack.get_child_by_name (source_uid);
                 if (task_list_grid == null) {
-                    task_list_grid = new Tasks.Widgets.TaskListGrid (source);
+                    task_list_grid = new Tasks.ListView (source);
                     task_list_grid_stack.add_named (task_list_grid, source_uid);
                 }
 
@@ -219,9 +219,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                 ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
 
             } else if (row is Tasks.Widgets.ScheduledRow) {
-                var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListBox) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
+                var scheduled_task_list_grid = (Tasks.ScheduledView) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
                 if (scheduled_task_list_grid == null) {
-                    scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListBox (Tasks.Application.model);
+                    scheduled_task_list_grid = new Tasks.ScheduledView (Tasks.Application.model);
                     task_list_grid_stack.add_named (scheduled_task_list_grid, SCHEDULED_LIST_UID);
                 }
 
@@ -423,7 +423,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         } else {
             source_rows[source].update_request ();
 
-            unowned var task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_visible_child ();
+            unowned var task_list_grid = (Tasks.ListView) task_list_grid_stack.get_visible_child ();
             if (task_list_grid != null) {
                 task_list_grid.update_request ();
             }

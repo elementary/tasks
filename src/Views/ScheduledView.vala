@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public class Tasks.Widgets.ScheduledTaskListBox : Granite.Bin {
+public class Tasks.ScheduledView : Granite.Bin {
     private Gee.Map<E.Source, ECal.ClientView> views;
     private const string QUERY = "AND (NOT is-completed?) (has-start?)";
 
@@ -57,7 +57,7 @@ public class Tasks.Widgets.ScheduledTaskListBox : Granite.Bin {
     private Gtk.Label scheduled_title;
     private Gtk.ListBox task_list;
 
-    public ScheduledTaskListBox (Tasks.TaskModel model) {
+    public ScheduledView (Tasks.TaskModel model) {
         Object (model: model);
     }
 

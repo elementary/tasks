@@ -3,16 +3,16 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public class Tasks.Widgets.TaskListGrid : Granite.Bin {
+public class Tasks.ListView : Granite.Bin {
     public E.Source source { get; construct; }
     private ECal.ClientView? view = null;
 
-    private EditableLabel editable_title;
+    private Widgets.EditableLabel editable_title;
     private Gtk.ListBox add_task_list;
     private Gtk.ListBox task_list;
     private bool is_gtasks;
 
-    public TaskListGrid (E.Source source) {
+    public ListView (E.Source source) {
         Object (source: source);
     }
 
@@ -25,7 +25,7 @@ public class Tasks.Widgets.TaskListGrid : Granite.Bin {
             warning ("unable to get the registry, assuming task list is not from gtasks");
         }
 
-        editable_title = new EditableLabel () {
+        editable_title = new Widgets.EditableLabel () {
             hexpand = true
         };
         editable_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
