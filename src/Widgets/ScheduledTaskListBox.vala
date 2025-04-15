@@ -192,7 +192,7 @@ public class Tasks.Widgets.ScheduledTaskListBox : Granite.Bin {
 
         var due_date_time = Tasks.Util.ical_to_date_time_local (comp.get_due ());
         var header_label = new Granite.HeaderLabel (Tasks.Util.get_relative_date (due_date_time)) {
-            margin_start = 6
+            margin_start = 12
         };
 
         row.set_header (header_label);
