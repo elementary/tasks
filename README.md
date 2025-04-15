@@ -1,7 +1,7 @@
 # Tasks
 [![Translation status](https://l10n.elementary.io/widgets/tasks/-/svg-badge.svg)](https://l10n.elementary.io/engage/tasks/?utm_source=widget)
 
-![Screenshot](https://raw.githubusercontent.com/elementary/tasks/master/data/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/elementary/tasks/main/data/screenshot.png)
 
 ## Building and Installation
 
