@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
+public class Tasks.Widgets.ScheduledTaskListBox : Granite.Bin {
     private Gee.Map<E.Source, ECal.ClientView> views;
     private const string QUERY = "AND (NOT is-completed?) (has-start?)";
 
@@ -65,9 +65,8 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
         views = new Gee.HashMap<E.Source, ECal.ClientView> ();
 
         scheduled_title = new Gtk.Label (_("Scheduled")) {
+            hexpand = true,
             ellipsize = END,
-            margin_start = 24,
-            margin_bottom = 24,
             xalign = 0
         };
         scheduled_title.add_css_class (Granite.STYLE_CLASS_H1_LABEL);
@@ -93,9 +92,21 @@ public class Tasks.Widgets.ScheduledTaskListBox : Gtk.Box {
             hscrollbar_policy = NEVER
         };
 
-        orientation = VERTICAL;
-        append (scheduled_title);
-        append (scrolled_window);
+        var header_box = new Gtk.Box (HORIZONTAL, 6) {
+            margin_top = 6,
+            margin_end = 6,
+            margin_bottom = 6,
+            margin_start = 24
+        };
+        header_box.append (scheduled_title);
+        header_box.append (new Gtk.WindowControls (END) { valign = START });
+
+        var toolbar_view = new Adw.ToolbarView () {
+            content = scrolled_window
+        };
+        toolbar_view.add_top_bar (header_box);
+
+        child = toolbar_view;
 
         task_list.row_activated.connect (on_row_activated);
 
