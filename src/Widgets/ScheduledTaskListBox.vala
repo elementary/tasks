@@ -92,7 +92,7 @@ public class Tasks.Widgets.ScheduledTaskListBox : Granite.Bin {
             hscrollbar_policy = NEVER
         };
 
-        var header_box = new Granite.Box (HORIZONTAL) {
+        var header_box = new Gtk.Box (HORIZONTAL, 6) {
             margin_top = 6,
             margin_end = 6,
             margin_bottom = 6,
