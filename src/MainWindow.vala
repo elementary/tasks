@@ -19,7 +19,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
     private Gtk.ListBox listbox;
     private Gee.HashMap<E.Source, Tasks.Widgets.SourceRow>? source_rows;
     private Gee.Collection<E.Source>? collection_sources;
-    private Gtk.Stack task_list_grid_stack;
+    private Gtk.Stack list_view_stack;
     private Gtk.Box add_tasklist_buttonbox;
     private Gtk.Popover add_tasklist_popover;
 
@@ -105,11 +105,11 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         sidebar.add_bottom_bar (actionbar);
         sidebar.add_css_class (Granite.STYLE_CLASS_SIDEBAR);
 
-        task_list_grid_stack = new Gtk.Stack ();
+        list_view_stack = new Gtk.Stack ();
 
         var paned = new Gtk.Paned (HORIZONTAL) {
             start_child = sidebar,
-            end_child = task_list_grid_stack,
+            end_child = list_view_stack,
             resize_start_child = false,
             shrink_end_child = false,
             shrink_start_child = false
@@ -193,7 +193,7 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
 
     private void on_listbox_row_selected (Gtk.ListBoxRow? row) {
         if (row != null) {
-            Tasks.Widgets.TaskListGrid? task_list_grid = null;
+            Tasks.ListView? list_view = null;
 
             if (row is Tasks.Widgets.SourceRow) {
                 var source = ((Tasks.Widgets.SourceRow) row).source;
@@ -208,30 +208,30 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
                     }
                 });
 
-                task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
-                if (task_list_grid == null) {
-                    task_list_grid = new Tasks.Widgets.TaskListGrid (source);
-                    task_list_grid_stack.add_named (task_list_grid, source_uid);
+                list_view = (Tasks.ListView) list_view_stack.get_child_by_name (source_uid);
+                if (list_view == null) {
+                    list_view = new Tasks.ListView (source);
+                    list_view_stack.add_named (list_view, source_uid);
                 }
 
-                task_list_grid_stack.set_visible_child_name (source_uid);
+                list_view_stack.set_visible_child_name (source_uid);
                 Tasks.Application.settings.set_string ("selected-list", source_uid);
                 ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
 
             } else if (row is Tasks.Widgets.ScheduledRow) {
-                var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListBox) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
-                if (scheduled_task_list_grid == null) {
-                    scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListBox (Tasks.Application.model);
-                    task_list_grid_stack.add_named (scheduled_task_list_grid, SCHEDULED_LIST_UID);
+                var scheduled_view = (Tasks.ScheduledView) list_view_stack.get_child_by_name (SCHEDULED_LIST_UID);
+                if (scheduled_view == null) {
+                    scheduled_view = new Tasks.ScheduledView (Tasks.Application.model);
+                    list_view_stack.add_named (scheduled_view, SCHEDULED_LIST_UID);
                 }
 
-                task_list_grid_stack.set_visible_child_name (SCHEDULED_LIST_UID);
+                list_view_stack.set_visible_child_name (SCHEDULED_LIST_UID);
                 Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);
                 ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
             }
 
-            if (task_list_grid != null) {
-                task_list_grid.update_request ();
+            if (list_view != null) {
+                list_view.update_request ();
             }
 
         } else {
@@ -423,9 +423,9 @@ public class Tasks.MainWindow : Gtk.ApplicationWindow {
         } else {
             source_rows[source].update_request ();
 
-            unowned var task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_visible_child ();
-            if (task_list_grid != null) {
-                task_list_grid.update_request ();
+            unowned var list_view = (Tasks.ListView) list_view_stack.get_visible_child ();
+            if (list_view != null) {
+                list_view.update_request ();
             }
 
             Idle.add (() => {

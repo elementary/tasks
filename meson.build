@@ -66,6 +66,8 @@ executable(
     'src/TaskModel.vala',
     'src/TodayTaskMonitor.vala',
     'src/Util.vala',
+    'src/Views/ListView.vala',
+    'src/Views/ScheduledView.vala',
     'src/Widgets/EditableLabel.vala',
     'src/Widgets/EntryPopover/DateTime.vala',
     'src/Widgets/EntryPopover/Generic.vala',
@@ -73,9 +75,7 @@ executable(
     'src/Widgets/ListSettingsPopover.vala',
     'src/Widgets/PopoverMenuitem.vala',
     'src/Widgets/ScheduledRow.vala',
-    'src/Widgets/ScheduledTaskListBox.vala',
     'src/Widgets/SourceRow.vala',
-    'src/Widgets/TaskListGrid.vala',
     'src/Widgets/TaskRow.vala',
     dependencies: tasks_deps,
     install : true
