@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-24 17:59+0000\n"
+"POT-Creation-Date: 2025-04-15 19:55+0000\n"
 "PO-Revision-Date: 2021-01-26 16:07+0000\n"
 "Last-Translator: Marco De Paolini <marco.depaolini@gmail.com>\n"
 "Language-Team: Italian <https://l10n.elementary.io/projects/tasks/tasks/it/"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Application.vala:134
+#: src/Application.vala:129
 msgid ""
 "Tasks will automatically start when this device turns on and run when its "
 "window is closed so that it can send notifications for due tasks."
@@ -29,162 +29,91 @@ msgstr ""
 msgid "Tasks"
 msgstr "Attività"
 
-#: src/MainWindow.vala:84
+#: src/MainWindow.vala:69
 msgid "Online Accounts Settings…"
 msgstr ""
 
-#: src/MainWindow.vala:100
+#: src/MainWindow.vala:82
 msgid "Add Task List…"
 msgstr "Aggiungi un elenco attività…"
 
-#: src/MainWindow.vala:256
+#: src/MainWindow.vala:247
 msgid "Creating a new task list failed"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
 
-#: src/MainWindow.vala:257 src/MainWindow.vala:327
-#: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
+#: src/MainWindow.vala:248 src/MainWindow.vala:318 src/Views/ListView.vala:62
+#: src/Views/ListView.vala:157
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
 
-#: src/MainWindow.vala:262
+#: src/MainWindow.vala:253
 msgid "New list"
 msgstr "Nuovo elenco"
 
-#: src/MainWindow.vala:306
+#: src/MainWindow.vala:297
 #, c-format
 msgid "Delete “%s”?"
 msgstr ""
 
-#: src/MainWindow.vala:307
+#: src/MainWindow.vala:298
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
 
-#: src/MainWindow.vala:315
+#: src/MainWindow.vala:306
 #, fuzzy
 #| msgid "Delete Task"
 msgid "Delete Anyway"
 msgstr "Cancella attività"
 
-#: src/MainWindow.vala:326
+#: src/MainWindow.vala:317
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
 msgstr "Creazione di un nuovo elenco di attività non riuscita"
 
-#: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:46
+#: src/Util.vala:271 src/Widgets/EntryPopover/DateTime.vala:44
 msgid "Today"
 msgstr "Oggi"
 
-#: src/Util.vala:267
+#: src/Util.vala:273
 msgid "Yesterday"
 msgstr "Ieri"
 
-#: src/Util.vala:269
+#: src/Util.vala:275
 msgid "Tomorrow"
 msgstr "Domani"
 
-#: src/Widgets/EntryPopover/DateTime.vala:14
-msgid "Set Due"
-msgstr ""
+#: src/Views/ListView.vala:40
+msgid "Edit Name and Appearance"
+msgstr "Modifica nome e aspetto"
 
-#: src/Widgets/EntryPopover/Generic.vala:50
-msgid "Remove"
-msgstr ""
-
-#: src/Widgets/EntryPopover/Location.vala:31
-msgid "Set Location"
-msgstr ""
-
-#: src/Widgets/EntryPopover/Location.vala:56
-#, fuzzy
-#| msgid "Arriving: %s"
-msgid "Arriving"
-msgstr "Arrivo: %s"
-
-#: src/Widgets/EntryPopover/Location.vala:57
-#, fuzzy
-#| msgid "Leaving: %s"
-msgid "Leaving"
-msgstr "Partenza: %s"
-
-#: src/Widgets/EntryPopover/Location.vala:60
-msgid "John Smith OR Example St."
-msgstr ""
-
-#: src/Widgets/ListSettingsPopover.vala:81
-msgid "Show Completed"
-msgstr "Mostra quelle completate"
-
-#: src/Widgets/ListSettingsPopover.vala:86
-#, fuzzy
-#| msgid "Delete List"
-msgid "Delete List…"
-msgstr "Cancella elenco"
-
-#: src/Widgets/ListSettingsPopover.vala:241
-#, fuzzy
-#| msgid "Creating a new task list failed"
-msgid "Could not change the task list color"
-msgstr "Creazione di un nuovo elenco di attività non riuscita"
-
-#: src/Widgets/ListSettingsPopover.vala:242
-#, fuzzy
-#| msgid ""
-#| "The task list registry may be unavailable or unable to be written to."
-msgid "The task list registry may be unavailable or write-protected."
-msgstr ""
-"Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
-"può essere scritto."
-
-#: src/Widgets/ScheduledRow.vala:11 src/Widgets/ScheduledTaskListBox.vala:61
-msgid "Scheduled"
-msgstr "Programmate"
-
-#: src/Widgets/SourceRow.vala:37
-msgid "Connecting…"
-msgstr "Connessione in corso…"
-
-#: src/Widgets/SourceRow.vala:121
+#: src/Views/ListView.vala:61
 #, fuzzy
 #| msgid "Renaming task list failed"
-msgid "Moving task failed"
+msgid "Adding task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/Widgets/SourceRow.vala:122
-msgid "There was an error while moving the task to the desired list."
-msgstr ""
-
-#: src/Widgets/SourceRow.vala:183
-msgid "Waiting for login credentials"
-msgstr "In attesa delle credenziali di accesso"
-
-#: src/Widgets/SourceRow.vala:187
-msgid "Currently disconnected from the (possibly remote) data store"
-msgstr "Attualmente disconnesso dall'archivio dati (possibilmente remoto)"
-
-#: src/Widgets/SourceRow.vala:191
-msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
-"L'attendibilità del certificato SSL è stata rifiutata per la connessione"
-
-#: src/Widgets/ScheduledTaskListBox.vala:70 src/Widgets/TaskListGrid.vala:79
+#: src/Views/ListView.vala:77 src/Views/ScheduledView.vala:75
 msgid "No Tasks"
 msgstr "Nessuna attività"
 
-#: src/Widgets/ScheduledTaskListBox.vala:202 src/Widgets/TaskListGrid.vala:281
+#: src/Views/ListView.vala:156
+msgid "Renaming task list failed"
+msgstr "Cambio del nome dell'elenco di attività non riuscito"
+
+#: src/Views/ListView.vala:283 src/Views/ScheduledView.vala:212
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Completing task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/Widgets/ScheduledTaskListBox.vala:203
-#: src/Widgets/ScheduledTaskListBox.vala:225
-#: src/Widgets/ScheduledTaskListBox.vala:247 src/Widgets/TaskListGrid.vala:282
-#: src/Widgets/TaskListGrid.vala:304 src/Widgets/TaskListGrid.vala:326
+#: src/Views/ListView.vala:284 src/Views/ListView.vala:306
+#: src/Views/ListView.vala:328 src/Views/ScheduledView.vala:213
+#: src/Views/ScheduledView.vala:233 src/Views/ScheduledView.vala:253
 #, fuzzy
 #| msgid ""
 #| "The task list registry may be unavailable or unable to be written to."
@@ -193,66 +122,136 @@ msgstr ""
 "Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
 "può essere scritto."
 
-#: src/Widgets/ScheduledTaskListBox.vala:224 src/Widgets/TaskListGrid.vala:303
+#: src/Views/ListView.vala:305 src/Views/ScheduledView.vala:232
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Updating task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/Widgets/ScheduledTaskListBox.vala:246 src/Widgets/TaskListGrid.vala:325
+#: src/Views/ListView.vala:327 src/Views/ScheduledView.vala:252
 #, fuzzy
 #| msgid "Renaming task list failed"
 msgid "Removing task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/Widgets/TaskListGrid.vala:41
-msgid "Edit Name and Appearance"
-msgstr "Modifica nome e aspetto"
+#: src/Views/ScheduledView.vala:67 src/Widgets/ScheduledRow.vala:11
+msgid "Scheduled"
+msgstr "Programmate"
 
-#: src/Widgets/TaskListGrid.vala:63
+#: src/Widgets/EntryPopover/DateTime.vala:14
+msgid "Set Due"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Generic.vala:51
+msgid "Remove"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Location.vala:31
+msgid "Set Location"
+msgstr ""
+
+#: src/Widgets/EntryPopover/Location.vala:65
+#, fuzzy
+#| msgid "Arriving: %s"
+msgid "Arriving"
+msgstr "Arrivo: %s"
+
+#: src/Widgets/EntryPopover/Location.vala:69
+#, fuzzy
+#| msgid "Leaving: %s"
+msgid "Leaving"
+msgstr "Partenza: %s"
+
+#: src/Widgets/EntryPopover/Location.vala:80
+msgid "John Smith OR Example St."
+msgstr ""
+
+#: src/Widgets/ListSettingsPopover.vala:105
+msgid "Show Completed"
+msgstr "Mostra quelle completate"
+
+#: src/Widgets/ListSettingsPopover.vala:111
+#, fuzzy
+#| msgid "Delete List"
+msgid "Delete List…"
+msgstr "Cancella elenco"
+
+#: src/Widgets/ListSettingsPopover.vala:261
+#, fuzzy
+#| msgid "Creating a new task list failed"
+msgid "Could not change the task list color"
+msgstr "Creazione di un nuovo elenco di attività non riuscita"
+
+#: src/Widgets/ListSettingsPopover.vala:262
+#, fuzzy
+#| msgid ""
+#| "The task list registry may be unavailable or unable to be written to."
+msgid "The task list registry may be unavailable or write-protected."
+msgstr ""
+"Il registro dell'elenco delle attività potrebbe non essere disponibile o non "
+"può essere scritto."
+
+#: src/Widgets/SourceRow.vala:37
+msgid "Connecting…"
+msgstr "Connessione in corso…"
+
+#: src/Widgets/SourceRow.vala:119
 #, fuzzy
 #| msgid "Renaming task list failed"
-msgid "Adding task failed"
+msgid "Moving task failed"
 msgstr "Cambio del nome dell'elenco di attività non riuscito"
 
-#: src/Widgets/TaskListGrid.vala:152
-msgid "Renaming task list failed"
-msgstr "Cambio del nome dell'elenco di attività non riuscito"
+#: src/Widgets/SourceRow.vala:120
+msgid "There was an error while moving the task to the desired list."
+msgstr ""
 
-#: src/Widgets/TaskRow.vala:113 src/Widgets/TaskRow.vala:120
+#: src/Widgets/SourceRow.vala:177
+msgid "Waiting for login credentials"
+msgstr "In attesa delle credenziali di accesso"
+
+#: src/Widgets/SourceRow.vala:181
+msgid "Currently disconnected from the (possibly remote) data store"
+msgstr "Attualmente disconnesso dall'archivio dati (possibilmente remoto)"
+
+#: src/Widgets/SourceRow.vala:185
+msgid "SSL certificate trust was rejected for the connection"
+msgstr ""
+"L'attendibilità del certificato SSL è stata rifiutata per la connessione"
+
+#: src/Widgets/TaskRow.vala:114 src/Widgets/TaskRow.vala:121
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:125
+#: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
 msgstr "%s alle %s"
 
-#: src/Widgets/TaskRow.vala:159
+#: src/Widgets/TaskRow.vala:160
 #, c-format
 msgid "Arriving: %s"
 msgstr "Arrivo: %s"
 
-#: src/Widgets/TaskRow.vala:162
+#: src/Widgets/TaskRow.vala:163
 #, c-format
 msgid "Leaving: %s"
 msgstr "Partenza: %s"
 
-#: src/Widgets/TaskRow.vala:220
+#: src/Widgets/TaskRow.vala:221
 msgid "Cancel"
 msgstr "Annulla"
 
-#: src/Widgets/TaskRow.vala:222
+#: src/Widgets/TaskRow.vala:223
 msgid "Save Changes"
 msgstr "Salva modifiche"
 
-#: src/Widgets/TaskRow.vala:222
+#: src/Widgets/TaskRow.vala:223
 msgid "Add Task"
 msgstr "Aggiungi attività"
 
-#: src/Widgets/TaskRow.vala:292
+#: src/Widgets/TaskRow.vala:271
 msgid "Delete Task"
 msgstr "Cancella attività"
 
