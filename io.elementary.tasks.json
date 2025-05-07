@@ -1,7 +1,7 @@
 {
     "app-id": "io.elementary.tasks",
     "runtime": "io.elementary.Platform",
-    "runtime-version": "8",
+    "runtime-version": "8.1",
     "sdk": "io.elementary.Sdk",
     "command": "io.elementary.tasks",
     "finish-args": [
