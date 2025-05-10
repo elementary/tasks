@@ -37,7 +37,11 @@ public class Tasks.ListView : Granite.Bin {
             halign = END,
             icon_name = "view-more-symbolic",
             popover = list_settings_popover,
-            tooltip_text = _("Edit Name and Appearance"),
+            primary = true,
+            tooltip_markup = ("%s\n" + Granite.TOOLTIP_SECONDARY_TEXT_MARKUP).printf (
+                _("Edit Name and Appearance"),
+                "F10"
+            ),
             valign = CENTER
         };
         settings_button.add_css_class (Granite.STYLE_CLASS_DIM_LABEL);
