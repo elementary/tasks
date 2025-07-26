@@ -1,19 +1,16 @@
 # Tasks
 [![Translation status](https://l10n.elementary.io/widgets/tasks/-/svg-badge.svg)](https://l10n.elementary.io/engage/tasks/?utm_source=widget)
 
-![Screenshot](https://raw.githubusercontent.com/elementary/tasks/master/data/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/elementary/tasks/main/data/screenshot.png)
 
 ## Building and Installation
 
 You'll need the following dependencies:
+* libadwaita-1-dev
 * glib-2.0
 * gobject-2.0
-* granite >=6.2.0
-* gtk+-3.0
-* libchamplain-0.12-dev
-* libchamplain-gtk-0.12-dev
-* libclutter-1.0-dev
-* libclutter-gtk-1.0-dev
+* granite-7 >=7.0.0
+* gtk4 >=4.12
 * libecal-2.0
 * libedataserver-1.2
 * libgdata-dev
@@ -21,7 +18,8 @@ You'll need the following dependencies:
 * libgeocode-glib-dev
 * libhandy-1-dev >= 0.90.0
 * libportal-dev
-* libportal-gtk3-dev
+* libportal-gtk4-dev
+* libshumate-dev
 * libical
 * meson
 * valac

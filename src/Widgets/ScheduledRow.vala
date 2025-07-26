@@ -6,7 +6,7 @@
 public class Tasks.Widgets.ScheduledRow : Gtk.ListBoxRow {
 
     construct {
-        var icon = new Gtk.Image.from_icon_name ("appointment", Gtk.IconSize.MENU);
+        var icon = new Gtk.Image.from_icon_name ("appointment");
 
         var display_name_label = new Gtk.Label (_("Scheduled")) {
             ellipsize = Pango.EllipsizeMode.MIDDLE,
@@ -16,12 +16,11 @@ public class Tasks.Widgets.ScheduledRow : Gtk.ListBoxRow {
         };
 
         var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
-            margin_start = 12,
             margin_end = 6
         };
-        box.add (icon);
-        box.add (display_name_label);
+        box.append (icon);
+        box.append (display_name_label);
 
-        add (box);
+        child = box;
     }
 }

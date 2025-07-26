@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-24 17:59+0000\n"
+"POT-Creation-Date: 2025-04-15 19:55+0000\n"
 "PO-Revision-Date: 2021-03-12 08:54+0000\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <https://l10n.elementary.io/projects/tasks/tasks/sr/"
@@ -20,7 +20,7 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.4.2\n"
 
-#: src/Application.vala:134
+#: src/Application.vala:129
 msgid ""
 "Tasks will automatically start when this device turns on and run when its "
 "window is closed so that it can send notifications for due tasks."
@@ -30,67 +30,105 @@ msgstr ""
 msgid "Tasks"
 msgstr "Задаци"
 
-#: src/MainWindow.vala:84
+#: src/MainWindow.vala:69
 msgid "Online Accounts Settings…"
 msgstr ""
 
-#: src/MainWindow.vala:100
+#: src/MainWindow.vala:82
 msgid "Add Task List…"
 msgstr ""
 
-#: src/MainWindow.vala:256
+#: src/MainWindow.vala:247
 msgid "Creating a new task list failed"
 msgstr "Стварање новог списка заддатака није успело"
 
-#: src/MainWindow.vala:257 src/MainWindow.vala:327
-#: src/Widgets/TaskListGrid.vala:64 src/Widgets/TaskListGrid.vala:153
+#: src/MainWindow.vala:248 src/MainWindow.vala:318 src/Views/ListView.vala:62
+#: src/Views/ListView.vala:157
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr "Регистар списка задатака може бити недоступан или је немогућ упис у њ."
 
-#: src/MainWindow.vala:262
+#: src/MainWindow.vala:253
 msgid "New list"
 msgstr "Нови списак"
 
-#: src/MainWindow.vala:306
+#: src/MainWindow.vala:297
 #, c-format
 msgid "Delete “%s”?"
 msgstr ""
 
-#: src/MainWindow.vala:307
+#: src/MainWindow.vala:298
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
 
-#: src/MainWindow.vala:315
+#: src/MainWindow.vala:306
 #, fuzzy
 #| msgid "Delete Task"
 msgid "Delete Anyway"
 msgstr "Обриши задатак"
 
-#: src/MainWindow.vala:326
+#: src/MainWindow.vala:317
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Deleting the task list failed"
 msgstr "Стварање новог списка заддатака није успело"
 
-#: src/Util.vala:265 src/Widgets/EntryPopover/DateTime.vala:46
+#: src/Util.vala:271 src/Widgets/EntryPopover/DateTime.vala:44
 msgid "Today"
 msgstr "Данас"
 
-#: src/Util.vala:267
+#: src/Util.vala:273
 msgid "Yesterday"
 msgstr "Јуче"
 
-#: src/Util.vala:269
+#: src/Util.vala:275
 msgid "Tomorrow"
 msgstr "Сутра"
+
+#: src/Views/ListView.vala:40
+msgid "Edit Name and Appearance"
+msgstr "Измени назив и изглед"
+
+#: src/Views/ListView.vala:61
+msgid "Adding task failed"
+msgstr "Додавање задатка није успело"
+
+#: src/Views/ListView.vala:77 src/Views/ScheduledView.vala:75
+msgid "No Tasks"
+msgstr "Нема задатака"
+
+#: src/Views/ListView.vala:156
+msgid "Renaming task list failed"
+msgstr "Преименовање списка задатка није успело"
+
+#: src/Views/ListView.vala:283 src/Views/ScheduledView.vala:212
+msgid "Completing task failed"
+msgstr "Завршавање задатка није успело"
+
+#: src/Views/ListView.vala:284 src/Views/ListView.vala:306
+#: src/Views/ListView.vala:328 src/Views/ScheduledView.vala:213
+#: src/Views/ScheduledView.vala:233 src/Views/ScheduledView.vala:253
+msgid "The task registry may be unavailable or unable to be written to."
+msgstr "Регистар задатака може бити недоступан или није могуће писати у њега."
+
+#: src/Views/ListView.vala:305 src/Views/ScheduledView.vala:232
+msgid "Updating task failed"
+msgstr "Ажурирање задатка није успело"
+
+#: src/Views/ListView.vala:327 src/Views/ScheduledView.vala:252
+msgid "Removing task failed"
+msgstr "Уклањање задатка није успело"
+
+#: src/Views/ScheduledView.vala:67 src/Widgets/ScheduledRow.vala:11
+msgid "Scheduled"
+msgstr "Заказани"
 
 #: src/Widgets/EntryPopover/DateTime.vala:14
 msgid "Set Due"
 msgstr ""
 
-#: src/Widgets/EntryPopover/Generic.vala:50
+#: src/Widgets/EntryPopover/Generic.vala:51
 msgid "Remove"
 msgstr ""
 
@@ -98,144 +136,105 @@ msgstr ""
 msgid "Set Location"
 msgstr ""
 
-#: src/Widgets/EntryPopover/Location.vala:56
+#: src/Widgets/EntryPopover/Location.vala:65
 #, fuzzy
 #| msgid "Arriving: %s"
 msgid "Arriving"
 msgstr "Стижем: %s"
 
-#: src/Widgets/EntryPopover/Location.vala:57
+#: src/Widgets/EntryPopover/Location.vala:69
 #, fuzzy
 #| msgid "Leaving: %s"
 msgid "Leaving"
 msgstr "Напуштам: %s"
 
-#: src/Widgets/EntryPopover/Location.vala:60
+#: src/Widgets/EntryPopover/Location.vala:80
 msgid "John Smith OR Example St."
 msgstr ""
 
-#: src/Widgets/ListSettingsPopover.vala:81
+#: src/Widgets/ListSettingsPopover.vala:105
 msgid "Show Completed"
 msgstr "Прикажи завршене"
 
-#: src/Widgets/ListSettingsPopover.vala:86
+#: src/Widgets/ListSettingsPopover.vala:111
 #, fuzzy
 #| msgid "Delete List"
 msgid "Delete List…"
 msgstr "Обриши списак"
 
-#: src/Widgets/ListSettingsPopover.vala:241
+#: src/Widgets/ListSettingsPopover.vala:261
 #, fuzzy
 #| msgid "Creating a new task list failed"
 msgid "Could not change the task list color"
 msgstr "Стварање новог списка заддатака није успело"
 
-#: src/Widgets/ListSettingsPopover.vala:242
+#: src/Widgets/ListSettingsPopover.vala:262
 #, fuzzy
 #| msgid ""
 #| "The task list registry may be unavailable or unable to be written to."
 msgid "The task list registry may be unavailable or write-protected."
 msgstr "Регистар списка задатака може бити недоступан или је немогућ упис у њ."
 
-#: src/Widgets/ScheduledRow.vala:11 src/Widgets/ScheduledTaskListBox.vala:61
-msgid "Scheduled"
-msgstr "Заказани"
-
 #: src/Widgets/SourceRow.vala:37
 msgid "Connecting…"
 msgstr "Повезујем се…"
 
-#: src/Widgets/SourceRow.vala:121
+#: src/Widgets/SourceRow.vala:119
 #, fuzzy
 #| msgid "Removing task failed"
 msgid "Moving task failed"
 msgstr "Уклањање задатка није успело"
 
-#: src/Widgets/SourceRow.vala:122
+#: src/Widgets/SourceRow.vala:120
 msgid "There was an error while moving the task to the desired list."
 msgstr ""
 
-#: src/Widgets/SourceRow.vala:183
+#: src/Widgets/SourceRow.vala:177
 msgid "Waiting for login credentials"
 msgstr "Чекам на уверења пријављивања"
 
-#: src/Widgets/SourceRow.vala:187
+#: src/Widgets/SourceRow.vala:181
 msgid "Currently disconnected from the (possibly remote) data store"
 msgstr "Тренутно нисте повезани са (вероватно удаљеним) смештајем података"
 
-#: src/Widgets/SourceRow.vala:191
+#: src/Widgets/SourceRow.vala:185
 msgid "SSL certificate trust was rejected for the connection"
 msgstr "Поверење ССЛ уверења је одбачено за везу"
 
-#: src/Widgets/ScheduledTaskListBox.vala:70 src/Widgets/TaskListGrid.vala:79
-msgid "No Tasks"
-msgstr "Нема задатака"
-
-#: src/Widgets/ScheduledTaskListBox.vala:202 src/Widgets/TaskListGrid.vala:281
-msgid "Completing task failed"
-msgstr "Завршавање задатка није успело"
-
-#: src/Widgets/ScheduledTaskListBox.vala:203
-#: src/Widgets/ScheduledTaskListBox.vala:225
-#: src/Widgets/ScheduledTaskListBox.vala:247 src/Widgets/TaskListGrid.vala:282
-#: src/Widgets/TaskListGrid.vala:304 src/Widgets/TaskListGrid.vala:326
-msgid "The task registry may be unavailable or unable to be written to."
-msgstr "Регистар задатака може бити недоступан или није могуће писати у њега."
-
-#: src/Widgets/ScheduledTaskListBox.vala:224 src/Widgets/TaskListGrid.vala:303
-msgid "Updating task failed"
-msgstr "Ажурирање задатка није успело"
-
-#: src/Widgets/ScheduledTaskListBox.vala:246 src/Widgets/TaskListGrid.vala:325
-msgid "Removing task failed"
-msgstr "Уклањање задатка није успело"
-
-#: src/Widgets/TaskListGrid.vala:41
-msgid "Edit Name and Appearance"
-msgstr "Измени назив и изглед"
-
-#: src/Widgets/TaskListGrid.vala:63
-msgid "Adding task failed"
-msgstr "Додавање задатка није успело"
-
-#: src/Widgets/TaskListGrid.vala:152
-msgid "Renaming task list failed"
-msgstr "Преименовање списка задатка није успело"
-
-#: src/Widgets/TaskRow.vala:113 src/Widgets/TaskRow.vala:120
+#: src/Widgets/TaskRow.vala:114 src/Widgets/TaskRow.vala:121
 #, c-format
 msgid "%s"
 msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
-#: src/Widgets/TaskRow.vala:125
+#: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
 msgstr "%s у %s"
 
-#: src/Widgets/TaskRow.vala:159
+#: src/Widgets/TaskRow.vala:160
 #, c-format
 msgid "Arriving: %s"
 msgstr "Стижем: %s"
 
-#: src/Widgets/TaskRow.vala:162
+#: src/Widgets/TaskRow.vala:163
 #, c-format
 msgid "Leaving: %s"
 msgstr "Напуштам: %s"
 
-#: src/Widgets/TaskRow.vala:220
+#: src/Widgets/TaskRow.vala:221
 msgid "Cancel"
 msgstr "Откажи"
 
-#: src/Widgets/TaskRow.vala:222
+#: src/Widgets/TaskRow.vala:223
 msgid "Save Changes"
 msgstr "Сачувај измене"
 
-#: src/Widgets/TaskRow.vala:222
+#: src/Widgets/TaskRow.vala:223
 msgid "Add Task"
 msgstr "Додај задатак"
 
-#: src/Widgets/TaskRow.vala:292
+#: src/Widgets/TaskRow.vala:271
 msgid "Delete Task"
 msgstr "Обриши задатак"
 

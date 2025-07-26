@@ -4,15 +4,12 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
+public class Tasks.Widgets.EditableLabel : Gtk.Widget {
     public signal void changed ();
 
     private Gtk.Label title;
     private Gtk.Entry entry;
     private Gtk.Stack stack;
-
-    private Gtk.EventControllerMotion motion_controller;
-    private Gtk.GestureMultiPress click_gesture;
 
     public string text { get; set; default = ""; }
 
@@ -35,6 +32,7 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
     }
 
     class construct {
+        set_layout_manager_type (typeof (Gtk.BinLayout));
         set_css_name ("editable-label");
     }
 
@@ -54,29 +52,27 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
             hhomogeneous = false,
             transition_type = CROSSFADE
         };
-        stack.add (title);
-        stack.add (entry);
-
-        add (stack);
+        stack.add_child (title);
+        stack.add_child (entry);
+        stack.set_parent (this);
 
         bind_property ("text", title, "label");
 
-        motion_controller = new Gtk.EventControllerMotion (this) {
+        var motion_controller = new Gtk.EventControllerMotion () {
             propagation_phase = CAPTURE
         };
 
-        click_gesture = new Gtk.GestureMultiPress (this);
+        var click_gesture = new Gtk.GestureClick ();
+
+        add_controller (click_gesture);
+        add_controller (motion_controller);
 
         motion_controller.enter.connect (() => {
-            get_window ().set_cursor (
-                new Gdk.Cursor.from_name (Gdk.Display.get_default (), "text")
-            );
+            set_cursor (new Gdk.Cursor.from_name ("text", null));
         });
 
         motion_controller.leave.connect (() => {
-            get_window ().set_cursor (
-                new Gdk.Cursor.from_name (Gdk.Display.get_default (), "default")
-            );
+            set_cursor (new Gdk.Cursor.from_name ("default", null));
         });
 
         click_gesture.released.connect (() => {
@@ -89,16 +85,23 @@ public class Tasks.Widgets.EditableLabel : Gtk.EventBox {
             }
         });
 
-        entry.focus_out_event.connect ((event) => {
+        var focus_controller = new Gtk.EventControllerFocus ();
+        entry.add_controller (focus_controller);
+
+        focus_controller.leave.connect (() => {
             if (stack.visible_child == entry) {
                 editing = false;
             }
-
-            return Gdk.EVENT_PROPAGATE;
         });
     }
 
-    public override void grab_focus () {
+    ~EditableLabel () {
+        get_first_child ().unparent ();
+    }
+
+    public override bool grab_focus () {
         editing = true;
+
+        return Gdk.EVENT_STOP;
     }
 }

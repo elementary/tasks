@@ -93,87 +93,6 @@
             ]
         },
         {
-            "name": "clutter-gtk",
-            "cleanup": [
-                "/share/gtk-doc"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/clutter-gtk/1.8/clutter-gtk-1.8.4.tar.xz",
-                    "sha256": "521493ec038973c77edcb8bc5eac23eed41645117894aaee7300b2487cb42b06"
-                }
-            ],
-            "modules": [
-                {
-                    "name": "cogl",
-                    "config-opts": [
-                        "--disable-cogl-gst",
-                        "--disable-gtk-doc",
-                        "--enable-xlib-egl-platform",
-                        "--enable-wayland-egl-platform"
-                    ],
-                    "cleanup": [
-                        "/share/gtk-doc",
-                        "/share/cogl/examples-data"
-                    ],
-                    "sources": [
-                        {
-                            "type": "archive",
-                            "url": "https://download.gnome.org/sources/cogl/1.22/cogl-1.22.8.tar.xz",
-                            "sha256": "a805b2b019184710ff53d0496f9f0ce6dcca420c141a0f4f6fcc02131581d759"
-                        }
-                    ]
-                },
-                {
-                    "name": "clutter",
-                    "config-opts": [
-                        "--disable-gtk-doc",
-                        "--enable-egl-backend",
-                        "--enable-wayland-backend",
-                        "--enable-deprecated=no"
-                    ],
-                    "cleanup": [
-                        "/share/gtk-doc"
-                    ],
-                    "sources": [
-                        {
-                            "type": "archive",
-                            "url": "https://download.gnome.org/sources/clutter/1.26/clutter-1.26.4.tar.xz",
-                            "sha256": "8b48fac159843f556d0a6be3dbfc6b083fc6d9c58a20a49a6b4919ab4263c4e6"
-                        }
-                    ]
-                },
-                {
-                    "name": "clutter-gst",
-                    "config-opts": [
-                        "--disable-gtk-doc"
-                    ],
-                    "cleanup": [
-                        "/share/gtk-doc"
-                    ],
-                    "sources": [
-                        {
-                            "type": "archive",
-                            "url": "https://download.gnome.org/sources/clutter-gst/3.0/clutter-gst-3.0.27.tar.xz",
-                            "sha256": "fe69bd6c659d24ab30da3f091eb91cd1970026d431179b0724f13791e8ad9f9d"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "champlain",
-            "buildsystem": "meson",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/libchamplain/0.12/libchamplain-0.12.21.tar.xz",
-                    "sha256": "a915cd172a0c52944c5579fcb4683f8a878c571bf5e928254b5dafefc727e5a7"
-                }
-            ]
-        },
-        {
             "name": "geocode-glib-2.0",
             "buildsystem": "meson",
             "config-opts": [
@@ -194,17 +113,41 @@
             ]
         },
         {
-            "name": "libportal",
-            "buildsystem": "meson",
+            "name": "protobuf-c",
+            "buildsystem": "autotools",
             "config-opts": [
-                "-Ddocs=false",
-                "-Dbackends=['gtk3']"
+                "--disable-protoc"
             ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/flatpak/libportal/releases/download/0.6/libportal-0.6.tar.xz",
-                    "sha256": "88a12c3ba71bc31acff7238c280de697d609cebc50830c3766776ec35abc6566"
+                    "url": "https://github.com/protobuf-c/protobuf-c/releases/download/v1.5.2/protobuf-c-1.5.2.tar.gz",
+                    "sha256": "e2c86271873a79c92b58fef7ebf8de1aa0df4738347a8bd5d4e65a80a16d0d24",
+                    "x-checker-data": {
+                        "type": "json",
+                        "url": "https://api.github.com/repos/protobuf-c/protobuf-c/releases/latest",
+                        "version-query": ".tag_name | sub(\"^v\"; \"\")",
+                        "url-query": ".assets[] | select(.name==\"protobuf-c-\" + $version + \".tar.gz\") | .browser_download_url"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "libshumate",
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Ddemos=false",
+                "-Dgtk_doc=false"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/libshumate/1.4/libshumate-1.4.0.tar.xz",
+                    "sha256": "3984368e0259862b3810d1ddc86d2dadd6d372a2b32376ccf4aff7c2e48c6d30",
+                    "x-checker-data": {
+                        "type": "gnome",
+                        "name": "libshumate"
+                    }
                 }
             ]
         },

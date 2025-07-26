@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-public class Tasks.MainWindow : Hdy.ApplicationWindow {
+public class Tasks.MainWindow : Gtk.ApplicationWindow {
     public const string ACTION_GROUP_PREFIX = "win";
     public const string ACTION_PREFIX = ACTION_GROUP_PREFIX + ".";
     public const string ACTION_DELETE_SELECTED_LIST = "action-delete-selected-list";
@@ -16,12 +16,12 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
     private static Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
 
-    private uint configure_id;
     private Gtk.ListBox listbox;
     private Gee.HashMap<E.Source, Tasks.Widgets.SourceRow>? source_rows;
     private Gee.Collection<E.Source>? collection_sources;
-    private Gtk.Stack task_list_grid_stack;
+    private Gtk.Stack list_view_stack;
     private Gtk.Box add_tasklist_buttonbox;
+    private Gtk.Popover add_tasklist_popover;
 
     public MainWindow (Gtk.Application application) {
         Object (
@@ -45,33 +45,18 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             );
         }
 
-        var sidebar_header = new Hdy.HeaderBar () {
-            has_subtitle = false,
-            show_close_button = true
+        var sidebar_header = new Adw.HeaderBar () {
+            show_end_title_buttons = false,
+            show_title = false
         };
-        sidebar_header.get_style_context ().add_class ("default-decoration");
-        sidebar_header.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
-
-        var main_header = new Hdy.HeaderBar () {
-            has_subtitle = false,
-            show_close_button = true
-        };
-        main_header.get_style_context ().add_class ("default-decoration");
-        main_header.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
-
-        // Create a header group that automatically assigns the right decoration controls to the
-        // right headerbar automatically
-        var header_group = new Hdy.HeaderGroup ();
-        header_group.add_header_bar (sidebar_header);
-        header_group.add_header_bar (main_header);
 
         listbox = new Gtk.ListBox ();
         listbox.set_sort_func (sort_function);
 
         var scheduled_row = new Tasks.Widgets.ScheduledRow ();
-        listbox.add (scheduled_row);
+        listbox.append (scheduled_row);
 
-        var scrolledwindow = new Gtk.ScrolledWindow (null, null) {
+        var scrolledwindow = new Gtk.ScrolledWindow () {
             child = listbox,
             hexpand = true,
             vexpand = true,
@@ -84,62 +69,66 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             text = _("Online Accounts Settings…")
         };
 
-        var add_tasklist_box = new Gtk.Box (VERTICAL, 3) {
-            margin_top = 3,
-            margin_bottom = 3
-        };
-        add_tasklist_box.add (add_tasklist_buttonbox);
-        add_tasklist_box.add (new Gtk.Separator (HORIZONTAL));
-        add_tasklist_box.add (online_accounts_button);
-        add_tasklist_box.show_all ();
+        var add_tasklist_box = new Gtk.Box (VERTICAL, 0);
+        add_tasklist_box.append (add_tasklist_buttonbox);
+        add_tasklist_box.append (new Gtk.Separator (HORIZONTAL));
+        add_tasklist_box.append (online_accounts_button);
 
-        var add_tasklist_popover = new Gtk.Popover (null) {
+        add_tasklist_popover = new Gtk.Popover () {
             child = add_tasklist_box
         };
+        add_tasklist_popover.add_css_class (Granite.STYLE_CLASS_MENU);
 
         var add_list_label = new Gtk.Label (_("Add Task List…"));
 
         var add_list_button_box = new Gtk.Box (HORIZONTAL, 0);
-        add_list_button_box.add (new Gtk.Image.from_icon_name ("list-add-symbolic", SMALL_TOOLBAR));
-        add_list_button_box.add (add_list_label);
+        add_list_button_box.append (new Gtk.Image.from_icon_name ("list-add-symbolic"));
+        add_list_button_box.append (add_list_label);
 
         var add_tasklist_button = new Gtk.MenuButton () {
             child = add_list_button_box,
-            popover = add_tasklist_popover
+            has_frame = false,
+            popover = add_tasklist_popover,
+            direction = UP
         };
 
         add_list_label.mnemonic_widget = add_tasklist_button;
 
         var actionbar = new Gtk.ActionBar ();
-        actionbar.add (add_tasklist_button);
-        actionbar.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+        actionbar.pack_start (add_tasklist_button);
 
-        var sidebar = new Gtk.Box (VERTICAL, 0);
-        sidebar.get_style_context ().add_class (Gtk.STYLE_CLASS_SIDEBAR);
-        sidebar.add (sidebar_header);
-        sidebar.add (scrolledwindow);
-        sidebar.add (actionbar);
+        var sidebar = new Adw.ToolbarView () {
+            content = scrolledwindow,
+            bottom_bar_style = RAISED
+        };
+        sidebar.add_top_bar (sidebar_header);
+        sidebar.add_bottom_bar (actionbar);
+        sidebar.add_css_class (Granite.STYLE_CLASS_SIDEBAR);
 
-        task_list_grid_stack = new Gtk.Stack ();
+        list_view_stack = new Gtk.Stack ();
 
-        var main_box = new Gtk.Box (VERTICAL, 0);
-        main_box.get_style_context ().add_class (Gtk.STYLE_CLASS_BACKGROUND);
-        main_box.add (main_header);
-        main_box.add (task_list_grid_stack);
-
-        var paned = new Gtk.Paned (HORIZONTAL);
-        paned.pack1 (sidebar, false, false);
-        paned.pack2 (main_box, true, false);
+        var paned = new Gtk.Paned (HORIZONTAL) {
+            start_child = sidebar,
+            end_child = list_view_stack,
+            resize_start_child = false,
+            shrink_end_child = false,
+            shrink_start_child = false
+        };
 
         child = paned;
 
-        delete_event.connect (() => {
+        // We need to hide the title area for the split headerbar
+        titlebar = new Gtk.Grid () { visible = false };
+
+        close_request.connect (() => {
             ((Application)application).request_background.begin (() => destroy ());
 
             return Gdk.EVENT_STOP;
         });
 
         online_accounts_button.clicked.connect (() => {
+            add_tasklist_popover.popdown ();
+
             try {
                 AppInfo.launch_default_for_uri ("settings://accounts/online", null);
             } catch (Error e) {
@@ -189,9 +178,11 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                         add_source (source);
 
                         if (last_selected_list == "" && default_task_list == source) {
+                            assert (source_rows[source] != null);
                             listbox.select_row (source_rows[source]);
 
                         } else if (last_selected_list == source.uid) {
+                            assert (source_rows[source] != null);
                             listbox.select_row (source_rows[source]);
                         }
                     }
@@ -202,7 +193,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
     private void on_listbox_row_selected (Gtk.ListBoxRow? row) {
         if (row != null) {
-            Tasks.Widgets.TaskListGrid? task_list_grid = null;
+            Tasks.ListView? list_view = null;
 
             if (row is Tasks.Widgets.SourceRow) {
                 var source = ((Tasks.Widgets.SourceRow) row).source;
@@ -217,30 +208,30 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
                     }
                 });
 
-                task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_child_by_name (source_uid);
-                if (task_list_grid == null) {
-                    task_list_grid = new Tasks.Widgets.TaskListGrid (source);
-                    task_list_grid_stack.add_named (task_list_grid, source_uid);
+                list_view = (Tasks.ListView) list_view_stack.get_child_by_name (source_uid);
+                if (list_view == null) {
+                    list_view = new Tasks.ListView (source);
+                    list_view_stack.add_named (list_view, source_uid);
                 }
 
-                task_list_grid_stack.set_visible_child_name (source_uid);
+                list_view_stack.set_visible_child_name (source_uid);
                 Tasks.Application.settings.set_string ("selected-list", source_uid);
                 ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (Tasks.Application.model.is_remove_task_list_supported (source));
 
             } else if (row is Tasks.Widgets.ScheduledRow) {
-                var scheduled_task_list_grid = (Tasks.Widgets.ScheduledTaskListBox) task_list_grid_stack.get_child_by_name (SCHEDULED_LIST_UID);
-                if (scheduled_task_list_grid == null) {
-                    scheduled_task_list_grid = new Tasks.Widgets.ScheduledTaskListBox (Tasks.Application.model);
-                    task_list_grid_stack.add_named (scheduled_task_list_grid, SCHEDULED_LIST_UID);
+                var scheduled_view = (Tasks.ScheduledView) list_view_stack.get_child_by_name (SCHEDULED_LIST_UID);
+                if (scheduled_view == null) {
+                    scheduled_view = new Tasks.ScheduledView (Tasks.Application.model);
+                    list_view_stack.add_named (scheduled_view, SCHEDULED_LIST_UID);
                 }
 
-                task_list_grid_stack.set_visible_child_name (SCHEDULED_LIST_UID);
+                list_view_stack.set_visible_child_name (SCHEDULED_LIST_UID);
                 Tasks.Application.settings.set_string ("selected-list", SCHEDULED_LIST_UID);
                 ((SimpleAction) lookup_action (ACTION_DELETE_SELECTED_LIST)).set_enabled (false);
             }
 
-            if (task_list_grid != null) {
-                task_list_grid.update_request ();
+            if (list_view != null) {
+                list_view.update_request ();
             }
 
         } else {
@@ -313,7 +304,7 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             };
 
             unowned var trash_button = message_dialog.add_button (_("Delete Anyway"), Gtk.ResponseType.YES);
-            trash_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+            trash_button.add_css_class (Granite.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
             message_dialog.response.connect ((response) => {
                 if (response == Gtk.ResponseType.YES) {
@@ -335,9 +326,8 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
             });
 
             message_dialog.present ();
-
         } else {
-            Gdk.beep ();
+            Gdk.Display.get_default ().beep ();
         }
     }
 
@@ -355,7 +345,6 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         }
 
         var header_label = new Granite.HeaderLabel (Util.get_esource_collection_display_name (row.source)) {
-            ellipsize = Pango.EllipsizeMode.MIDDLE,
             margin_start = 6
         };
 
@@ -395,11 +384,12 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         };
 
         source_button.clicked.connect (() => {
+            add_tasklist_popover.popdown ();
+
             add_new_list (collection_source);
         });
 
-        add_tasklist_buttonbox.add (source_button);
-        add_tasklist_buttonbox.show_all ();
+        add_tasklist_buttonbox.append (source_button);
     }
 
     private void add_source (E.Source source) {
@@ -411,11 +401,10 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         if (!source_rows.has_key (source)) {
             source_rows[source] = new Tasks.Widgets.SourceRow (source);
 
-            listbox.add (source_rows[source]);
+            listbox.append (source_rows[source]);
             Idle.add (() => {
                 listbox.invalidate_sort ();
                 listbox.invalidate_headers ();
-                listbox.show_all ();
 
                 return Source.REMOVE;
             });
@@ -434,9 +423,9 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
         } else {
             source_rows[source].update_request ();
 
-            unowned var task_list_grid = (Tasks.Widgets.TaskListGrid) task_list_grid_stack.get_visible_child ();
-            if (task_list_grid != null) {
-                task_list_grid.update_request ();
+            unowned var list_view = (Tasks.ListView) list_view_stack.get_visible_child ();
+            if (list_view != null) {
+                list_view.update_request ();
             }
 
             Idle.add (() => {
@@ -459,30 +448,5 @@ public class Tasks.MainWindow : Hdy.ApplicationWindow {
 
             return Source.REMOVE;
         });
-    }
-
-    public override bool configure_event (Gdk.EventConfigure event) {
-        if (configure_id != 0) {
-            GLib.Source.remove (configure_id);
-        }
-
-        configure_id = Timeout.add (100, () => {
-            configure_id = 0;
-
-            if (is_maximized) {
-                Tasks.Application.settings.set_boolean ("window-maximized", true);
-            } else {
-                Tasks.Application.settings.set_boolean ("window-maximized", false);
-
-                Gdk.Rectangle rect;
-                get_allocation (out rect);
-                Tasks.Application.settings.set ("window-size", "(ii)", rect.width, rect.height);
-
-            }
-
-            return false;
-        });
-
-        return base.configure_event (event);
     }
 }

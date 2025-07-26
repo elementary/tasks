@@ -28,10 +28,6 @@ public class Tasks.Application : Gtk.Application {
     public static Tasks.TaskModel model;
     public static bool run_in_background = false;
 
-    public const Gtk.TargetEntry[] DRAG_AND_DROP_TASK_DATA = {
-        { "text/uri-list", Gtk.TargetFlags.SAME_APP | Gtk.TargetFlags.OTHER_WIDGET, 0 } // TODO: TEXT_URI
-    };
-
     private bool first_activation = true;
 
     public Application () {
@@ -58,7 +54,7 @@ public class Tasks.Application : Gtk.Application {
     protected override void startup () {
         base.startup ();
 
-        Hdy.init ();
+        Granite.init ();
 
         unowned var granite_settings = Granite.Settings.get_default ();
         unowned var gtk_settings = Gtk.Settings.get_default ();
@@ -68,11 +64,6 @@ public class Tasks.Application : Gtk.Application {
         granite_settings.notify["prefers-color-scheme"].connect ((obj, pspec) => {
             gtk_settings.gtk_application_prefer_dark_theme = ((Granite.Settings) obj).prefers_color_scheme == DARK;
         });
-
-        var css_provider = new Gtk.CssProvider ();
-        css_provider.load_from_resource ("io/elementary/tasks/Application.css");
-
-        Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         var quit_action = new SimpleAction ("quit", null);
         quit_action.activate.connect (() => {
@@ -105,15 +96,19 @@ public class Tasks.Application : Gtk.Application {
             var main_window = new MainWindow (this);
             add_window (main_window);
 
-            var rect = Gtk.Allocation ();
-            settings.get ("window-size", "(ii)", out rect.width, out rect.height);
-            main_window.set_allocation (rect);
+            /*
+            * This is very finicky. Bind size after present else set_titlebar gives us bad sizes
+            * Set maximize after height/width else window is min size on unmaximize
+            * Bind maximize as SET else get get bad sizes
+            */
+            settings.bind ("window-height", main_window, "default-height", DEFAULT);
+            settings.bind ("window-width", main_window, "default-width", DEFAULT);
 
             if (settings.get_boolean ("window-maximized")) {
                 main_window.maximize ();
             }
 
-            main_window.show_all ();
+            settings.bind ("window-maximized", main_window, "maximized", SET);
         }
 
         active_window.present ();
@@ -153,7 +148,7 @@ public class Tasks.Application : Gtk.Application {
         if (providers == null) {
             providers = new Gee.HashMap<string, Gtk.CssProvider> ();
         }
-        var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        unowned var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
         // Ensure we get a valid CSS color, not including FF
         var color = task_list.dup_color ().slice (0, 7);
         if (!providers.has_key (color)) {
@@ -162,21 +157,16 @@ public class Tasks.Application : Gtk.Application {
                 @define-color accent_color %s;
             """.printf (color, color);
 
-            try {
-                var style_provider = new Gtk.CssProvider ();
-                style_provider.load_from_data (style, style.length);
+            var style_provider = new Gtk.CssProvider ();
+            style_provider.load_from_string (style);
 
-                providers[color] = style_provider;
-            } catch (Error e) {
-                critical ("Unable to set color: %s", e.message);
-            }
+            providers[color] = style_provider;
         }
 
         widget.get_style_context ().add_provider (providers[color], Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     public static int main (string[] args) {
-        GtkClutter.init (ref args);
         var app = new Application ();
         int res = app.run (args);
         ICal.Object.free_global_objects ();

@@ -28,21 +28,18 @@ config_file = configure_file(
 libecal_dep = dependency('libecal-2.0')
 
 tasks_deps = [
-    dependency('champlain-0.12'),
-    dependency('champlain-gtk-0.12'),
-    dependency('clutter-1.0'),
-    dependency('clutter-gtk-1.0'),
     dependency('glib-2.0', version: '>=2.68'),
     dependency('gobject-2.0'),
-    dependency('granite', version: '>=6.2.0'),
-    dependency('gtk+-3.0'),
+    dependency('granite-7', version: '>=7.0.0'),
+    dependency('gtk4', version: '>=4.12'),
     libecal_dep,
+    dependency('libadwaita-1', version: '>=1.4'),
     dependency('libedataserver-1.2'),
     dependency('libgeoclue-2.0'),
-    dependency('libhandy-1', version: '>=0.90.0'),
+    dependency('shumate-1.0'),
     dependency('libical-glib'),
     dependency('libportal'),
-    dependency('libportal-gtk3')
+    dependency('libportal-gtk4')
 ]
 
 if libecal_dep.version().version_compare('>=3.46.0')
@@ -66,20 +63,20 @@ executable(
     'src/Application.vala',
     'src/Location.vala',
     'src/MainWindow.vala',
+    'src/TaskModel.vala',
     'src/TodayTaskMonitor.vala',
     'src/Util.vala',
+    'src/Views/ListView.vala',
+    'src/Views/ScheduledView.vala',
     'src/Widgets/EditableLabel.vala',
     'src/Widgets/EntryPopover/DateTime.vala',
     'src/Widgets/EntryPopover/Generic.vala',
     'src/Widgets/EntryPopover/Location.vala',
+    'src/Widgets/ListSettingsPopover.vala',
     'src/Widgets/PopoverMenuitem.vala',
     'src/Widgets/ScheduledRow.vala',
     'src/Widgets/SourceRow.vala',
-    'src/Widgets/ScheduledTaskListBox.vala',
-    'src/Widgets/TaskListGrid.vala',
     'src/Widgets/TaskRow.vala',
-    'src/Widgets/ListSettingsPopover.vala',
-    'src/TaskModel.vala',
     dependencies: tasks_deps,
     install : true
 )
