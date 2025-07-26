@@ -22,6 +22,9 @@
         "*.a",
         "*.la"
     ],
+    "build-options": {
+        "libdir": "/app/lib"
+    },
     "modules": [
         {
             "name": "libical",
@@ -31,7 +34,6 @@
             ],
             "config-opts": [
                 "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
-                "-DCMAKE_INSTALL_LIBDIR=/app/lib",
                 "-DBUILD_SHARED_LIBS=ON",
                 "-DICAL_GLIB=true",
                 "-DICAL_GLIB_VAPI=true",
