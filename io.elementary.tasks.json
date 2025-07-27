@@ -1,7 +1,7 @@
 {
-    "app-id": "io.elementary.tasks",
+    "id": "io.elementary.tasks",
     "runtime": "io.elementary.Platform",
-    "runtime-version": "8",
+    "runtime-version": "8.2",
     "sdk": "io.elementary.Sdk",
     "command": "io.elementary.tasks",
     "finish-args": [
@@ -22,6 +22,9 @@
         "*.a",
         "*.la"
     ],
+    "build-options": {
+        "libdir": "/app/lib"
+    },
     "modules": [
         {
             "name": "libical",
@@ -31,7 +34,6 @@
             ],
             "config-opts": [
                 "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
-                "-DCMAKE_INSTALL_LIBDIR=/app/lib",
                 "-DBUILD_SHARED_LIBS=ON",
                 "-DICAL_GLIB=true",
                 "-DICAL_GLIB_VAPI=true",
@@ -72,8 +74,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/evolution-data-server/3.52/evolution-data-server-3.52.4.tar.xz",
-                    "sha256": "1b36a839db1c8d898066e19be78b995930a0a2f2a886f149e4f64e1755f064f7"
+                    "url": "https://download.gnome.org/sources/evolution-data-server/3.56/evolution-data-server-3.56.2.tar.xz",
+                    "sha256": "df4ec29950f29a76eac6fbe0f814c48d2cef7d3fdb905002a4a883dd761ce93c"
                 }
             ],
             "modules": [
