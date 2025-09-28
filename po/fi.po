@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-15 19:55+0000\n"
-"PO-Revision-Date: 2021-10-04 14:41+0000\n"
+"PO-Revision-Date: 2025-09-29 16:11+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
-"Language-Team: Finnish <https://l10n.elementary.io/projects/tasks/tasks/fi/"
-">\n"
+"Language-Team: Finnish <https://l10n.elementaryos.org/projects/tasks/tasks/"
+"fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.2\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: src/Application.vala:129
 msgid ""
@@ -168,10 +168,8 @@ msgid "Connecting…"
 msgstr "Yhdistetään…"
 
 #: src/Widgets/SourceRow.vala:119
-#, fuzzy
-#| msgid "Removing task failed"
 msgid "Moving task failed"
-msgstr "Tehtävän poistaminen epäonnistui"
+msgstr "Tehtävän siirtäminen epäonnistui"
 
 #: src/Widgets/SourceRow.vala:120
 msgid "There was an error while moving the task to the desired list."
