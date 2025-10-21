@@ -8,22 +8,24 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-15 19:55+0000\n"
-"PO-Revision-Date: 2019-08-02 13:43-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-10-22 08:08+0000\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <https://l10n.elementaryos.org/projects/tasks/extra/"
+"sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: data/tasks.metainfo.xml.in:10 data/tasks.desktop.in:3
 msgid "Tasks"
-msgstr ""
+msgstr "Uppgifter"
 
 #: data/tasks.metainfo.xml.in:11
 msgid "Synced tasks and reminders"
-msgstr ""
+msgstr "Synkade uppgifter och påminnelser"
 
 #: data/tasks.metainfo.xml.in:13
 msgid ""
@@ -31,53 +33,60 @@ msgid ""
 "and complete tasks, manage lists and sync them across your machines using "
 "CalDAV."
 msgstr ""
+"Designad och byggd för att hjälpa till att hantera alla dina uppgifter och "
+"påminnelser. Skapa och slutför uppgifter, hantera listor och synkronisera "
+"dem mellan dina maskiner med hjälp av CalDAV."
 
 #: data/tasks.metainfo.xml.in:51
 msgid "elementary, Inc."
-msgstr ""
+msgstr "elementary, Inc."
 
 #: data/tasks.metainfo.xml.in:59 data/tasks.metainfo.xml.in:71
 #: data/tasks.metainfo.xml.in:85
 msgid "Improvements:"
-msgstr ""
+msgstr "Förbättringar:"
 
 #: data/tasks.metainfo.xml.in:61 data/tasks.metainfo.xml.in:74
 #: data/tasks.metainfo.xml.in:88
 msgid "Updated translations"
-msgstr ""
+msgstr "Uppdaterade översättningar"
 
 #: data/tasks.metainfo.xml.in:73
 msgid "Fix minor visual issues in dark mode"
-msgstr ""
+msgstr "Åtgärdat mindre visuella problem i mörkt läge"
 
 #: data/tasks.metainfo.xml.in:87
 msgid "New app icon"
-msgstr ""
+msgstr "Ny appikon"
 
 #: data/tasks.metainfo.xml.in:98 data/tasks.metainfo.xml.in:108
 msgid "Features:"
-msgstr ""
+msgstr "Funktioner:"
 
 #: data/tasks.metainfo.xml.in:100
 msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
 msgstr ""
+"Lägg till offlinestöd för nyskapade uppgiftslistor om det är konfigurerat "
+"för kontot"
 
 #: data/tasks.metainfo.xml.in:101
 msgid ""
 "Automatically synchronize a task list whenever it is selected or the network "
 "becomes available again"
 msgstr ""
+"Automatisk synkronisering av en uppgiftslista när den väljs eller när "
+"nätverket blir tillgängligt igen"
 
 #: data/tasks.metainfo.xml.in:110
 msgid "Send a notification when a task is due"
-msgstr ""
+msgstr "Skicka ett meddelande när en uppgift ska utföras"
 
 #: data/tasks.desktop.in:4
 msgid "Create and track the progress of tasks"
-msgstr ""
+msgstr "Skapa och följ upp uppgifternas förlopp"
 
 #: data/tasks.desktop.in:7
 msgid "Todo;Reminders;"
-msgstr ""
+msgstr "Attgöra;Påminnelser;"
