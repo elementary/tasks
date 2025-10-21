@@ -8,212 +8,221 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-15 19:55+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-10-22 08:07+0000\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <https://l10n.elementaryos.org/projects/tasks/tasks/"
+"sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: src/Application.vala:129
 msgid ""
 "Tasks will automatically start when this device turns on and run when its "
 "window is closed so that it can send notifications for due tasks."
 msgstr ""
+"Uppgifterna startar automatiskt när enheten slås på och körs när fönstret "
+"stängs, så att den kan skicka meddelanden om uppgifter som ska utföras."
 
 #: src/MainWindow.vala:30
 msgid "Tasks"
-msgstr ""
+msgstr "Uppgifter"
 
 #: src/MainWindow.vala:69
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "Inställningar för onlinekonton…"
 
 #: src/MainWindow.vala:82
 msgid "Add Task List…"
-msgstr ""
+msgstr "Lägg till uppgiftslista…"
 
 #: src/MainWindow.vala:247
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Skapandet av en ny uppgiftslista misslyckades"
 
 #: src/MainWindow.vala:248 src/MainWindow.vala:318 src/Views/ListView.vala:62
 #: src/Views/ListView.vala:157
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
+"Det kan hända att registret för uppgiftslistan inte är tillgängligt eller "
+"att det inte går att skriva till det."
 
 #: src/MainWindow.vala:253
 msgid "New list"
-msgstr ""
+msgstr "Ny lista"
 
 #: src/MainWindow.vala:297
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "Ta bort \"%s\"?"
 
 #: src/MainWindow.vala:298
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"Listan och alla dess uppgifter kommer att tas bort permanent. Om du har "
+"delat den här listan har andra personer inte längre tillgång till den."
 
 #: src/MainWindow.vala:306
 msgid "Delete Anyway"
-msgstr ""
+msgstr "Ta bort ändå"
 
 #: src/MainWindow.vala:317
 msgid "Deleting the task list failed"
-msgstr ""
+msgstr "Borttagning av uppgiftslistan misslyckades"
 
 #: src/Util.vala:271 src/Widgets/EntryPopover/DateTime.vala:44
 msgid "Today"
-msgstr ""
+msgstr "Idag"
 
 #: src/Util.vala:273
 msgid "Yesterday"
-msgstr ""
+msgstr "Igår"
 
 #: src/Util.vala:275
 msgid "Tomorrow"
-msgstr ""
+msgstr "I morgon"
 
 #: src/Views/ListView.vala:40
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "Redigera namn och utseende"
 
 #: src/Views/ListView.vala:61
 msgid "Adding task failed"
-msgstr ""
+msgstr "Tillägg av uppgift misslyckades"
 
 #: src/Views/ListView.vala:77 src/Views/ScheduledView.vala:75
 msgid "No Tasks"
-msgstr ""
+msgstr "Inga uppgifter"
 
 #: src/Views/ListView.vala:156
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "Namnbyte av uppgiftslista misslyckades"
 
 #: src/Views/ListView.vala:283 src/Views/ScheduledView.vala:212
 msgid "Completing task failed"
-msgstr ""
+msgstr "Slutförandet av uppgiften misslyckades"
 
 #: src/Views/ListView.vala:284 src/Views/ListView.vala:306
 #: src/Views/ListView.vala:328 src/Views/ScheduledView.vala:213
 #: src/Views/ScheduledView.vala:233 src/Views/ScheduledView.vala:253
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
+"Uppgiftsregistret kan vara otillgängligt eller omöjligt att skriva till."
 
 #: src/Views/ListView.vala:305 src/Views/ScheduledView.vala:232
 msgid "Updating task failed"
-msgstr ""
+msgstr "Uppdatering av uppgift misslyckades"
 
 #: src/Views/ListView.vala:327 src/Views/ScheduledView.vala:252
 msgid "Removing task failed"
-msgstr ""
+msgstr "Borttagning av uppgift misslyckades"
 
 #: src/Views/ScheduledView.vala:67 src/Widgets/ScheduledRow.vala:11
 msgid "Scheduled"
-msgstr ""
+msgstr "Schemalagd"
 
 #: src/Widgets/EntryPopover/DateTime.vala:14
 msgid "Set Due"
-msgstr ""
+msgstr "Ställ in förfallodag"
 
 #: src/Widgets/EntryPopover/Generic.vala:51
 msgid "Remove"
-msgstr ""
+msgstr "Ta bort"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "Ställ in plats"
 
 #: src/Widgets/EntryPopover/Location.vala:65
 msgid "Arriving"
-msgstr ""
+msgstr "Anländer"
 
 #: src/Widgets/EntryPopover/Location.vala:69
 msgid "Leaving"
-msgstr ""
+msgstr "Lämnar"
 
 #: src/Widgets/EntryPopover/Location.vala:80
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "Johan Svensson OR Exempelgata"
 
 #: src/Widgets/ListSettingsPopover.vala:105
 msgid "Show Completed"
-msgstr ""
+msgstr "Visa färdigställda"
 
 #: src/Widgets/ListSettingsPopover.vala:111
 msgid "Delete List…"
-msgstr ""
+msgstr "Ta bort lista…"
 
 #: src/Widgets/ListSettingsPopover.vala:261
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "Det gick inte att ändra färgen på uppgiftslistan"
 
 #: src/Widgets/ListSettingsPopover.vala:262
 msgid "The task list registry may be unavailable or write-protected."
-msgstr ""
+msgstr "Registret för uppgiftslistan kan vara otillgängligt eller skrivskyddat."
 
 #: src/Widgets/SourceRow.vala:37
 msgid "Connecting…"
-msgstr ""
+msgstr "Ansluter…"
 
 #: src/Widgets/SourceRow.vala:119
 msgid "Moving task failed"
-msgstr ""
+msgstr "Flytt av uppgiften misslyckades"
 
 #: src/Widgets/SourceRow.vala:120
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "Det uppstod ett fel när uppgiften flyttades till önskad lista."
 
 #: src/Widgets/SourceRow.vala:177
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "Väntar på inloggningsuppgifter"
 
 #: src/Widgets/SourceRow.vala:181
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "För närvarande frånkopplad från (eventuellt fjärr) datalagring"
 
 #: src/Widgets/SourceRow.vala:185
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "SSL-certifikatets tillförlitlighet avvisades för anslutningen"
 
 #: src/Widgets/TaskRow.vala:114 src/Widgets/TaskRow.vala:121
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s den %s"
 
 #: src/Widgets/TaskRow.vala:160
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "Anländer: %s"
 
 #: src/Widgets/TaskRow.vala:163
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "Lämnar: %s"
 
 #: src/Widgets/TaskRow.vala:221
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: src/Widgets/TaskRow.vala:223
 msgid "Save Changes"
-msgstr ""
+msgstr "Spara ändringar"
 
 #: src/Widgets/TaskRow.vala:223
 msgid "Add Task"
-msgstr ""
+msgstr "Lägg till uppgift"
 
 #: src/Widgets/TaskRow.vala:271
 msgid "Delete Task"
-msgstr ""
+msgstr "Ta bort uppgift"
