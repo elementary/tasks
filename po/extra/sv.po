@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extra\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-15 19:55+0000\n"
-"PO-Revision-Date: 2025-10-22 08:08+0000\n"
+"PO-Revision-Date: 2025-10-31 10:55+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <https://l10n.elementaryos.org/projects/tasks/extra/"
 "sv/>\n"
@@ -25,7 +25,7 @@ msgstr "Uppgifter"
 
 #: data/tasks.metainfo.xml.in:11
 msgid "Synced tasks and reminders"
-msgstr "Synkade uppgifter och påminnelser"
+msgstr "Synkroniserade uppgifter och påminnelser"
 
 #: data/tasks.metainfo.xml.in:13
 msgid ""
@@ -68,8 +68,8 @@ msgid ""
 "Add offline support for newly created task lists in case its configured for "
 "the account"
 msgstr ""
-"Lägg till offlinestöd för nyskapade uppgiftslistor om det är konfigurerat "
-"för kontot"
+"Lägg till frånkopplat stöd för nyskapade uppgiftslistor om det är "
+"konfigurerat för kontot"
 
 #: data/tasks.metainfo.xml.in:101
 msgid ""
