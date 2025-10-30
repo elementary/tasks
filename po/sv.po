@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-15 19:55+0000\n"
-"PO-Revision-Date: 2025-10-23 10:55+0000\n"
+"PO-Revision-Date: 2025-10-31 10:55+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <https://l10n.elementaryos.org/projects/tasks/tasks/"
 "sv/>\n"
@@ -172,7 +172,7 @@ msgstr "Ansluter…"
 
 #: src/Widgets/SourceRow.vala:119
 msgid "Moving task failed"
-msgstr "Flytt av uppgiften misslyckades"
+msgstr "Flytt av uppgift misslyckades"
 
 #: src/Widgets/SourceRow.vala:120
 msgid "There was an error while moving the task to the desired list."
@@ -184,11 +184,11 @@ msgstr "Väntar på inloggningsuppgifter"
 
 #: src/Widgets/SourceRow.vala:181
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr "För närvarande frånkopplad från (eventuellt fjärr) datalagring"
+msgstr "För närvarande frånkopplad från datalagring (eventuellt fjärrserver)"
 
 #: src/Widgets/SourceRow.vala:185
 msgid "SSL certificate trust was rejected for the connection"
-msgstr "SSL-certifikatets tillförlitlighet avvisades för anslutningen"
+msgstr "SSL-certifikatets pålitlighet avvisades för anslutningen"
 
 #: src/Widgets/TaskRow.vala:114 src/Widgets/TaskRow.vala:121
 #, c-format
@@ -199,7 +199,7 @@ msgstr "%s"
 #: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
-msgstr "%s den %s"
+msgstr "%s klockan %s"
 
 #: src/Widgets/TaskRow.vala:160
 #, c-format
