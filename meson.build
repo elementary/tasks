@@ -30,7 +30,7 @@ libecal_dep = dependency('libecal-2.0')
 tasks_deps = [
     dependency('glib-2.0', version: '>=2.68'),
     dependency('gobject-2.0'),
-    dependency('granite-7', version: '>=7.0.0'),
+    dependency('granite-7', version: '>=7.7.0'),
     dependency('gtk4', version: '>=4.12'),
     libecal_dep,
     dependency('libadwaita-1', version: '>=1.4'),
