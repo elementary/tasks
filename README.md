@@ -9,7 +9,7 @@ You'll need the following dependencies:
 * libadwaita-1-dev
 * glib-2.0
 * gobject-2.0
-* granite-7 >=7.0.0
+* granite-7 >=7.7.0
 * gtk4 >=4.12
 * libecal-2.0
 * libedataserver-1.2
