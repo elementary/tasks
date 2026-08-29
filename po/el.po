@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-15 19:55+0000\n"
-"PO-Revision-Date: 2026-07-26 19:01+0000\n"
+"PO-Revision-Date: 2026-08-30 19:01+0000\n"
 "Last-Translator: Jim Spentzos <jimspentzos2000@gmail.com>\n"
 "Language-Team: Greek <https://l10n.elementaryos.org/projects/tasks/tasks/el/>"
 "\n"
@@ -94,7 +94,7 @@ msgstr ""
 
 #: src/Views/ListView.vala:77 src/Views/ScheduledView.vala:75
 msgid "No Tasks"
-msgstr ""
+msgstr "Καμία εργασία"
 
 #: src/Views/ListView.vala:156
 msgid "Renaming task list failed"
@@ -124,7 +124,7 @@ msgstr ""
 
 #: src/Widgets/EntryPopover/DateTime.vala:14
 msgid "Set Due"
-msgstr ""
+msgstr "Ορισμός προθεσμίας"
 
 #: src/Widgets/EntryPopover/Generic.vala:51
 msgid "Remove"
