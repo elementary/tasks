@@ -6,7 +6,7 @@
 public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     public E.Source source { get; construct; }
 
-    private Gtk.Grid source_color;
+    private CircularProgressBar progress_circle;
     private Gtk.Image status_image;
     private Gtk.Label display_name_label;
     private Gtk.Stack status_stack;
@@ -17,10 +17,7 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     }
 
     construct {
-        source_color = new Gtk.Grid () {
-            valign = Gtk.Align.CENTER
-        };
-        source_color.add_css_class ("source-color");
+        progress_circle = new CircularProgressBar ();
 
         display_name_label = new Gtk.Label (source.display_name) {
             halign = Gtk.Align.START,
@@ -44,7 +41,7 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
         var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             margin_end = 6
         };
-        box.append (source_color);
+        box.append (progress_circle);
         box.append (display_name_label);
         box.append (status_stack);
 
@@ -162,7 +159,11 @@ public class Tasks.Widgets.SourceRow : Gtk.ListBoxRow {
     }
 
     public void update_request () {
-        Tasks.Application.set_task_color (source, source_color);
+        Tasks.Application.set_task_color (source, progress_circle);
+
+        unowned var task_list = (E.SourceTaskList?) source.get_extension (E.SOURCE_EXTENSION_TASK_LIST);
+        // Ensure we get a valid CSS color, not including FF
+        progress_circle.color = task_list.dup_color ().slice (0, 7);
 
         display_name_label.label = source.display_name;
 
