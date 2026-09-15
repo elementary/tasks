@@ -34,17 +34,19 @@
             ],
             "config-opts": [
                 "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
-                "-DBUILD_SHARED_LIBS=ON",
-                "-DICAL_GLIB=true",
-                "-DICAL_GLIB_VAPI=true",
-                "-DGOBJECT_INTROSPECTION=true",
-                "-DICAL_BUILD_DOCS=false"
+                "-DCMAKE_INSTALL_LIBDIR=/app/lib",
+                "-DLIBICAL_CXX_BINDINGS=false",
+                "-DLIBICAL_JAVA_BINDINGS=false",
+                "-DLIBICAL_GOBJECT_INTROSPECTION=true",
+                "-DLIBICAL_BUILD_DOCS=false",
+                "-DLIBICAL_GLIB_VAPI=true",
+                "-DLIBICAL_BUILD_TESTING=false"
             ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/libical/libical/releases/download/v3.0.20/libical-3.0.20.tar.gz",
-                    "sha256": "e73de92f5a6ce84c1b00306446b290a2b08cdf0a80988eca0a2c9d5c3510b4c2"
+                    "url": "https://github.com/libical/libical/releases/download/v4.0.5/libical-4.0.5.tar.gz",
+                    "sha256": "cc09a3ac41d60e6144e644bd3fcf97d47106d659c4a0b8965102581401e67c9c"
                 }
             ]
         },
@@ -74,8 +76,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/evolution-data-server/3.56/evolution-data-server-3.56.2.tar.xz",
-                    "sha256": "df4ec29950f29a76eac6fbe0f814c48d2cef7d3fdb905002a4a883dd761ce93c"
+                    "url": "https://download.gnome.org/sources/evolution-data-server/3.62/evolution-data-server-3.62.0.tar.xz",
+                    "sha256": "78be88e9a511f5afe7ff2e363eade84b622dd0282647fc576edb2d4ff2962cba"
                 }
             ],
             "modules": [

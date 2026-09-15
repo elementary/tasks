@@ -795,7 +795,11 @@ public class Tasks.TaskModel : Object {
             if (today.compare (start) > 0) {
                 start = today;
             }
+#if HAS_I_CAL_4_0_0
+            var end = ICal.Duration.extend (start, duration);
+#else
             var end = start.add (duration);
+#endif /* HAS_I_CAL_4_0_0 */
 
             ECal.RecurInstanceCb recur_instance_callback = (instance_comp, instance_start_timet, instance_end_timet, cancellable) => {
 

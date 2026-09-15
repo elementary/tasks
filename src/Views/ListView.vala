@@ -252,12 +252,20 @@ public class Tasks.ListView : Granite.Bin {
             } else {
                 var apple_sortorder_a = Util.get_apple_sortorder_property_value (row_a.task);
                 if (apple_sortorder_a == null) {
+#if HAS_I_CAL_4_0_0
+                    apple_sortorder_a = Util.get_apple_sortorder_default_value (row_a.task).as_seconds ().to_string ();
+#else
                     apple_sortorder_a = Util.get_apple_sortorder_default_value (row_a.task).as_int ().to_string ();
+#endif /* HAS_I_CAL_4_0_0 */
                 }
 
                 var apple_sortorder_b = Util.get_apple_sortorder_property_value (row_b.task);
                 if (apple_sortorder_b == null) {
+#if HAS_I_CAL_4_0_0
+                    apple_sortorder_b = Util.get_apple_sortorder_default_value (row_b.task).as_seconds ().to_string ();
+#else
                     apple_sortorder_b = Util.get_apple_sortorder_default_value (row_b.task).as_int ().to_string ();
+#endif /* HAS_I_CAL_4_0_0 */
                 }
 
                 return apple_sortorder_a.collate (apple_sortorder_b);
