@@ -323,7 +323,11 @@ namespace Tasks.Util {
     * order of tasks like we have on iOS devices.
     */
     public ICal.Duration get_apple_sortorder_default_value (ECal.Component ecalcomponent) {
+#if HAS_I_CAL_4_0_0
+        return ICal.Duration.from_times (ecalcomponent.get_created (), new ICal.Time.from_string ("20010101T000000Z"));
+#else
         return ecalcomponent.get_created ().subtract (new ICal.Time.from_string ("20010101T000000Z"));
+#endif /* HAS_I_CAL_4_0_0 */
     }
 
 

@@ -26,6 +26,7 @@ config_file = configure_file(
 )
 
 libecal_dep = dependency('libecal-2.0')
+libical_dep = dependency('libical-glib')
 
 tasks_deps = [
     dependency('glib-2.0', version: '>=2.68'),
@@ -37,7 +38,7 @@ tasks_deps = [
     dependency('libedataserver-1.2'),
     dependency('libgeoclue-2.0'),
     dependency('shumate-1.0'),
-    dependency('libical-glib'),
+    libical_dep,
     dependency('libportal'),
     dependency('libportal-gtk4')
 ]
@@ -54,6 +55,10 @@ if libecal_dep.version().version_compare('>=3.39.2')
     add_project_arguments('--define=HAS_EDS_3_40', language: 'vala')
 else
     tasks_deps += meson.get_compiler('vala').find_library('libecal-2.0-fixes', dirs: meson.current_source_dir() / 'vapi')
+endif
+
+if libical_dep.version().version_compare('>=4.0.0')
+    add_project_arguments('--define=HAS_I_CAL_4_0_0', language: 'vala')
 endif
 
 executable(
