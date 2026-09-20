@@ -1,7 +1,7 @@
 {
     "id": "io.elementary.tasks",
     "runtime": "io.elementary.Platform",
-    "runtime-version": "9",
+    "runtime-version": "daily",
     "sdk": "io.elementary.Sdk",
     "command": "io.elementary.tasks",
     "finish-args": [
