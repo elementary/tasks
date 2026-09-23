@@ -11,6 +11,7 @@ public class Tasks.ListView : Granite.Bin {
     private Gtk.ListBox add_task_list;
     private Gtk.ListBox task_list;
     private bool is_gtasks;
+    private bool show_completed { get; private set; default = false; }
 
     public ListView (E.Source source) {
         Object (source: source);
@@ -174,8 +175,10 @@ public class Tasks.ListView : Granite.Bin {
 
     private void on_show_completed_changed (bool show_completed) {
         if (show_completed) {
+            this.show_completed = true;
             set_view_for_query ("(contains? 'any' '')");
         } else {
+            this.show_completed = false;
             set_view_for_query ("NOT is-completed?");
         }
     }
@@ -348,10 +351,24 @@ public class Tasks.ListView : Granite.Bin {
         });
 
         Idle.add (() => {
+            remove_checked_items ();
             task_list.invalidate_sort ();
-
             return Source.REMOVE;
         });
+    }
+
+    private void remove_checked_items () {
+        unowned Tasks.Widgets.TaskRow? task_row = null;
+        var row_index = 0;
+        do {
+            task_row = (Tasks.Widgets.TaskRow) task_list.get_row_at_index (row_index);
+
+            if (task_row != null && task_row.completed && !show_completed) {
+                task_list.remove (task_row);
+            } else {
+                row_index++;
+            }
+        } while (task_row != null);
     }
 
     private void on_tasks_modified (Gee.Collection<ECal.Component> tasks) {
