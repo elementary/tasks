@@ -68,6 +68,7 @@ executable(
     'src/Util.vala',
     'src/Views/ListView.vala',
     'src/Views/ScheduledView.vala',
+    'src/Widgets/CircularProgressBar.vala',
     'src/Widgets/EditableLabel.vala',
     'src/Widgets/EntryPopover/DateTime.vala',
     'src/Widgets/EntryPopover/Generic.vala',
