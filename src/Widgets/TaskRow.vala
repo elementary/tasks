@@ -16,6 +16,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     public bool is_scheduled_view { get; construct; }
 
     private bool created;
+    // Set while the check state is synced from the backend, so we don't request a completion change in return
+    private bool syncing_check  { get; private set; default = false; }
 
     private Tasks.Widgets.EntryPopover.DateTime due_datetime_popover;
     private Gtk.Revealer due_datetime_popover_revealer;
@@ -53,6 +55,8 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
     }
 
     construct {
+
+
         created = calcomponent_created (task);
 
         // GTasks tasks only have date on due time, so only show the date
@@ -288,7 +292,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
         add_controller (key_controller);
 
         check.toggled.connect (() => {
-            if (task == null) {
+            if (task == null || syncing_check) {
                 return;
             }
             task_completed (task);
@@ -412,7 +416,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
             state_stack.set_visible_child (icon);
 
             completed = false;
-            check.active = completed;
+            set_check_active (completed);
             summary_entry.text = "";
             summary_entry.remove_css_class (Granite.STYLE_CLASS_DIM_LABEL);
             summary_entry.has_frame = true;
@@ -430,7 +434,7 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
             unowned ICal.Component ical_task = task.get_icalcomponent ();
             completed = ical_task.get_status () == ICal.PropertyStatus.COMPLETED;
-            check.active = completed;
+            set_check_active (completed);
 
             if (ical_task.get_description () != null) {
                 description_textbuffer.text = ical_task.get_description ();
@@ -482,6 +486,13 @@ public class Tasks.Widgets.TaskRow : Gtk.ListBoxRow {
 
             task_details_reveal_request (true);
         }
+    }
+
+    private void set_check_active (bool active) {
+
+        syncing_check = true;
+        check.active = active;
+        syncing_check = false;
     }
 
     private void task_details_reveal_request (bool value) {
