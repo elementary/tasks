@@ -8,211 +8,225 @@ msgstr ""
 "Project-Id-Version: io.elementary.reminders\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-15 19:55+0000\n"
-"PO-Revision-Date: 2019-08-02 13:42-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-11-26 20:05+0000\n"
+"Last-Translator: Davit Yedigaryan <davit.yedigaryan.1993@gmail.com>\n"
+"Language-Team: Armenian <https://l10n.elementaryos.org/projects/tasks/tasks/"
+"hy/>\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2026.5\n"
 
 #: src/Application.vala:129
 msgid ""
 "Tasks will automatically start when this device turns on and run when its "
 "window is closed so that it can send notifications for due tasks."
 msgstr ""
+"Tasks-ը ավտոմատ կմեկնարկի սարքը միացնելիս և կշարունակի աշխատել նույնիսկ "
+"պատուհանը փակելուց հետո՝ ժամկետը հասած առաջադրանքների մասին ծանուցումներ "
+"ուղարկելու համար։"
 
 #: src/MainWindow.vala:30
 msgid "Tasks"
-msgstr ""
+msgstr "Tasks"
 
 #: src/MainWindow.vala:69
 msgid "Online Accounts Settings…"
-msgstr ""
+msgstr "Առցանց հաշիվների կարգավորումներ…"
 
 #: src/MainWindow.vala:82
 msgid "Add Task List…"
-msgstr ""
+msgstr "Ավելացնել առաջադրանքների ցանկ…"
 
 #: src/MainWindow.vala:247
 msgid "Creating a new task list failed"
-msgstr ""
+msgstr "Չհաջողվեց ստեղծել նոր առաջադրանքների ցանկ"
 
 #: src/MainWindow.vala:248 src/MainWindow.vala:318 src/Views/ListView.vala:62
 #: src/Views/ListView.vala:157
 msgid "The task list registry may be unavailable or unable to be written to."
 msgstr ""
+"Առաջադրանքների ցանկերի գրանցամատյանը կարող է անհասանելի լինել կամ հնարավոր "
+"չլինել գրառումներ կատարել դրանում։"
 
 #: src/MainWindow.vala:253
 msgid "New list"
-msgstr ""
+msgstr "Նոր ցանկ"
 
 #: src/MainWindow.vala:297
 #, c-format
 msgid "Delete “%s”?"
-msgstr ""
+msgstr "Ջնջե՞լ «%s»-ը"
 
 #: src/MainWindow.vala:298
 msgid ""
 "The list and all its tasks will be permanently deleted. If you've shared "
 "this list, other people will no longer have access."
 msgstr ""
+"Ցանկը և նրա բոլոր առաջադրանքները կջնջվեն անվերադարձ։ Եթե կիսվել եք այս "
+"ցանկով, այլ մարդիկ այլևս հասանելիություն չեն ունենա։"
 
 #: src/MainWindow.vala:306
 msgid "Delete Anyway"
-msgstr ""
+msgstr "Այնուամենայնիվ ջնջել"
 
 #: src/MainWindow.vala:317
 msgid "Deleting the task list failed"
-msgstr ""
+msgstr "Չհաջողվեց ջնջել առաջադրանքների ցանկը"
 
 #: src/Util.vala:271 src/Widgets/EntryPopover/DateTime.vala:44
 msgid "Today"
-msgstr ""
+msgstr "Այսօր"
 
 #: src/Util.vala:273
 msgid "Yesterday"
-msgstr ""
+msgstr "Երեկ"
 
 #: src/Util.vala:275
 msgid "Tomorrow"
-msgstr ""
+msgstr "Վաղը"
 
 #: src/Views/ListView.vala:40
 msgid "Edit Name and Appearance"
-msgstr ""
+msgstr "Խմբագրել անունը և տեսքը"
 
 #: src/Views/ListView.vala:61
 msgid "Adding task failed"
-msgstr ""
+msgstr "Չհաջողվեց ավելացնել առաջադրանքը"
 
 #: src/Views/ListView.vala:77 src/Views/ScheduledView.vala:75
 msgid "No Tasks"
-msgstr ""
+msgstr "Առաջադրանքներ չկան"
 
 #: src/Views/ListView.vala:156
 msgid "Renaming task list failed"
-msgstr ""
+msgstr "Չհաջողվեց վերանվանել առաջադրանքների ցանկը"
 
 #: src/Views/ListView.vala:283 src/Views/ScheduledView.vala:212
 msgid "Completing task failed"
-msgstr ""
+msgstr "Չհաջողվեց ավարտել առաջադրանքը"
 
 #: src/Views/ListView.vala:284 src/Views/ListView.vala:306
 #: src/Views/ListView.vala:328 src/Views/ScheduledView.vala:213
 #: src/Views/ScheduledView.vala:233 src/Views/ScheduledView.vala:253
 msgid "The task registry may be unavailable or unable to be written to."
 msgstr ""
+"Առաջադրանքների գրանցամատյանը կարող է անհասանելի լինել կամ հնարավոր չլինել "
+"գրառումներ կատարել դրանում։"
 
 #: src/Views/ListView.vala:305 src/Views/ScheduledView.vala:232
 msgid "Updating task failed"
-msgstr ""
+msgstr "Չհաջողվեց թարմացնել առաջադրանքը"
 
 #: src/Views/ListView.vala:327 src/Views/ScheduledView.vala:252
 msgid "Removing task failed"
-msgstr ""
+msgstr "Չհաջողվեց հեռացնել առաջադրանքը"
 
 #: src/Views/ScheduledView.vala:67 src/Widgets/ScheduledRow.vala:11
 msgid "Scheduled"
-msgstr ""
+msgstr "Պլանավորված"
 
 #: src/Widgets/EntryPopover/DateTime.vala:14
 msgid "Set Due"
-msgstr ""
+msgstr "Սահմանել ժամկետ"
 
 #: src/Widgets/EntryPopover/Generic.vala:51
 msgid "Remove"
-msgstr ""
+msgstr "Հեռացնել"
 
 #: src/Widgets/EntryPopover/Location.vala:31
 msgid "Set Location"
-msgstr ""
+msgstr "Սահմանել վայրը"
 
 #: src/Widgets/EntryPopover/Location.vala:65
 msgid "Arriving"
-msgstr ""
+msgstr "Ժամանում"
 
 #: src/Widgets/EntryPopover/Location.vala:69
 msgid "Leaving"
-msgstr ""
+msgstr "Հեռացում"
 
 #: src/Widgets/EntryPopover/Location.vala:80
 msgid "John Smith OR Example St."
-msgstr ""
+msgstr "Ջոն Սմիթ կամ Օրինակի փող."
 
 #: src/Widgets/ListSettingsPopover.vala:105
 msgid "Show Completed"
-msgstr ""
+msgstr "Ցուցադրել կատարվածները"
 
 #: src/Widgets/ListSettingsPopover.vala:111
 msgid "Delete List…"
-msgstr ""
+msgstr "Ջնջել ցանկը…"
 
 #: src/Widgets/ListSettingsPopover.vala:261
 msgid "Could not change the task list color"
-msgstr ""
+msgstr "Չհաջողվեց փոխել առաջադրանքների ցանկի գույնը"
 
 #: src/Widgets/ListSettingsPopover.vala:262
 msgid "The task list registry may be unavailable or write-protected."
 msgstr ""
+"Առաջադրանքների ցանկերի գրանցամատյանը կարող է անհասանելի լինել կամ պաշտպանված "
+"լինել գրառումներից։"
 
 #: src/Widgets/SourceRow.vala:37
 msgid "Connecting…"
-msgstr ""
+msgstr "Միանում է…"
 
 #: src/Widgets/SourceRow.vala:119
 msgid "Moving task failed"
-msgstr ""
+msgstr "Չհաջողվեց տեղափոխել առաջադրանքը"
 
 #: src/Widgets/SourceRow.vala:120
 msgid "There was an error while moving the task to the desired list."
-msgstr ""
+msgstr "Առաջադրանքը ցանկալի ցանկ տեղափոխելիս սխալ առաջացավ։"
 
 #: src/Widgets/SourceRow.vala:177
 msgid "Waiting for login credentials"
-msgstr ""
+msgstr "Սպասում է մուտքի տվյալներին"
 
 #: src/Widgets/SourceRow.vala:181
 msgid "Currently disconnected from the (possibly remote) data store"
-msgstr ""
+msgstr "Այս պահին անջատված է տվյալների պահոցից (որը կարող է լինել հեռակա)"
 
 #: src/Widgets/SourceRow.vala:185
 msgid "SSL certificate trust was rejected for the connection"
-msgstr ""
+msgstr "Կապի համար SSL վկայագրի վստահությունը մերժվեց"
 
 #: src/Widgets/TaskRow.vala:114 src/Widgets/TaskRow.vala:121
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. TRANSLATORS: Represents due date and time of a task, e.g. "Tomorrow at 9:00 AM"
 #: src/Widgets/TaskRow.vala:126
 #, c-format
 msgid "%s at %s"
-msgstr ""
+msgstr "%s, ժամը %s"
 
 #: src/Widgets/TaskRow.vala:160
 #, c-format
 msgid "Arriving: %s"
-msgstr ""
+msgstr "Ժամանելիս՝ %s"
 
 #: src/Widgets/TaskRow.vala:163
 #, c-format
 msgid "Leaving: %s"
-msgstr ""
+msgstr "Հեռանալիս՝ %s"
 
 #: src/Widgets/TaskRow.vala:221
 msgid "Cancel"
-msgstr ""
+msgstr "Չեղարկել"
 
 #: src/Widgets/TaskRow.vala:223
 msgid "Save Changes"
-msgstr ""
+msgstr "Պահպանել փոփոխությունները"
 
 #: src/Widgets/TaskRow.vala:223
 msgid "Add Task"
-msgstr ""
+msgstr "Ավելացնել առաջադրանք"
 
 #: src/Widgets/TaskRow.vala:271
 msgid "Delete Task"
-msgstr ""
+msgstr "Ջնջել առաջադրանքը"
